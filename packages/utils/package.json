@@ -1,0 +1,21 @@
+{
+  "name": "@agile-ui/utils",
+  "version": "1.0.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "module": "src/index.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huijiewei/agile-ui.git",
+    "directory": "packages/utils"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

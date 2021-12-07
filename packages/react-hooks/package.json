@@ -1,0 +1,24 @@
+{
+  "name": "@agile-ui/react-hooks",
+  "version": "1.0.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "module": "src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huijiewei/agile-ui.git",
+    "directory": "packages/react-hooks"
+  },
+  "peerDependencies": {
+    "react": "^17 || ^18"
+  },
+  "dependencies": {
+    "@agile-ui/utils": "workspace:^"
+  },
+  "devDependencies": {
+    "react": "^17.0.2"
+  }
+}

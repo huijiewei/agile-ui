@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true
+  },
+  "references": [
+    {
+      "path": "@agile-ui/react-hooks"
+    },
+    {
+      "path": "@agile-ui/utils"
+    }
+  ]
+}

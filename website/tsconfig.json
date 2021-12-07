@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {},
+  "references": [
+    {
+      "path": "@agile-ui/react"
+    },
+    {
+      "path": "@agile-ui/react-hooks"
+    },
+    {
+      "path": "@agile-ui/utils"
+    }
+  ]
+}
