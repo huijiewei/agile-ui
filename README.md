@@ -13,14 +13,12 @@ React + TypeScript + Tailwind CSS Components
 
 [![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=flat&logo=babel&logoColor=white)](https://babeljs.io/)
 [![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=flat&logo=Webpack&logoColor=white)](https://webpack.js.org)
-[![Rollup](https://img.shields.io/badge/Rollup-E04E39?style=flat&logo=rollup.js&logoColor=white)](https://rollupjs.org/)
 [![ESLint](https://img.shields.io/badge/ESLint-3A33D1?style=flat&logo=eslint&logoColor=white)](https://eslint.org)
 [![Prettier](https://img.shields.io/badge/Prettier-1A2C34?style=flat&logo=prettier&logoColor=F7BA3E)](https://prettier.io)
 [![Jest](https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white)](https://jestjs.io/)
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com)
 [![GitHub license](https://img.shields.io/github/license/huijiewei/agile-ui)](https://github.com/huijiewei/agile-ui)
