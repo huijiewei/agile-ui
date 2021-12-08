@@ -15,12 +15,14 @@ module.exports = (env, argv) => {
   const assetsFileName = isProduction ? '[contenthash:8][ext]' : '[name][ext]';
 
   return {
-    entry: './src/main.tsx',
+    entry: {
+      website: './src/main.tsx',
+    },
     cache: {
       type: 'filesystem',
     },
     resolve: {
-      extensions: ['.jsx', '.js', '.tsx', '.ts'],
+      extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     output: {
       filename: fileName,
@@ -96,7 +98,7 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new VanillaExtractPlugin(),
+      new VanillaExtractPlugin({ identifiers: 'short' }),
       isProduction &&
         new MiniCssExtractPlugin({
           filename: cssFileName,
@@ -144,9 +146,9 @@ module.exports = (env, argv) => {
               },
               agile: {
                 name: 'agile',
-                test: /[\\/]node_modules[\\/](agile-ui)[\\/]/,
+                test: /[\\/]node_modules[\\/](@agile-ui)[\\/]/,
                 chunks: 'all',
-                priority: 20,
+                priority: 25,
                 enforce: true,
               },
               vendor: {

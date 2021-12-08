@@ -1,24 +1,25 @@
 import { ElementRef, forwardRef, ReactElement, ReactNode } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
+import * as styles from './Button.css';
+import clsx from 'clsx';
+import { ButtonVariants } from './Button.css';
 
 type ButtonElement = ElementRef<typeof Primitive.button>;
 type PrimitiveButtonProps = ComponentPropsWithoutRef<typeof Primitive.button>;
 
-export type ButtonProps = PrimitiveButtonProps & {
-  type?: 'button' | 'reset' | 'submit';
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
-  color?: 'gray' | 'blue' | 'green' | 'red' | 'yellow' | 'orange';
-  variant?: string;
-  active?: boolean;
-  disabled?: boolean;
-  loading?: boolean;
-  loadingText?: string;
-  fullWidth?: boolean;
-  startIcon?: ReactElement;
-  endIcon?: ReactElement;
-  children: ReactNode;
-};
+export type ButtonProps = PrimitiveButtonProps &
+  ButtonVariants & {
+    type?: 'button' | 'reset' | 'submit';
+    active?: boolean;
+    disabled?: boolean;
+    loading?: boolean;
+    loadingText?: string;
+    fullWidth?: boolean;
+    startIcon?: ReactElement;
+    endIcon?: ReactElement;
+    children: ReactNode;
+  };
 
 export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
   const {
@@ -30,16 +31,16 @@ export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
     loadingText,
     startIcon,
     endIcon,
-    size = 'base',
+    size = 'md',
+    level = 'primary',
     variant = 'solid',
-    color = 'blue',
     className,
     ...restProps
   } = props;
 
   return (
     <Primitive.button
-      className={className}
+      className={clsx(className, styles.variants({ size, level, variant }))}
       disabled={disabled || loading}
       data-active={dataAttr(active)}
       data-loading={dataAttr(loading)}

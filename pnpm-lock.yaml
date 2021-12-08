@@ -59,15 +59,23 @@ importers:
       '@testing-library/react': ^12.1.2
       '@vanilla-extract/babel-plugin': ^1.1.3
       '@vanilla-extract/css': ^1.6.8
+      '@vanilla-extract/dynamic': ^2.0.2
+      '@vanilla-extract/recipes': ^0.2.3
+      babel-plugin-optimize-clsx: ^2.6.2
+      clsx: ^1.1.1
       react: ^17.0.2
       react-dom: ^17.0.2
     dependencies:
       '@agile-ui/react-hooks': link:../react-hooks
       '@agile-ui/utils': link:../utils
+      clsx: 1.1.1
     devDependencies:
       '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
       '@vanilla-extract/babel-plugin': 1.1.3
       '@vanilla-extract/css': 1.6.8
+      '@vanilla-extract/dynamic': 2.0.2
+      '@vanilla-extract/recipes': 0.2.3_@vanilla-extract+css@1.6.8
+      babel-plugin-optimize-clsx: 2.6.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
 
@@ -81,7 +89,13 @@ importers:
       react: 17.0.2
 
   packages/utils:
-    specifiers: {}
+    specifiers:
+      '@types/lodash-es': ^4.17.5
+      lodash-es: ^4.17.21
+    dependencies:
+      lodash-es: 4.17.21
+    devDependencies:
+      '@types/lodash-es': 4.17.5
 
   website:
     specifiers:
@@ -1804,7 +1818,7 @@ packages:
       jest-regex-util: 27.4.0
       jest-util: 27.4.2
       micromatch: 4.0.4
-      pirates: 4.0.1
+      pirates: 4.0.4
       slash: 3.0.0
       source-map: 0.6.1
       write-file-atomic: 3.0.3
@@ -2064,6 +2078,16 @@ packages:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
     dev: true
 
+  /@types/lodash-es/4.17.5:
+    resolution: {integrity: sha512-SHBoI8/0aoMQWAgUHMQ599VM6ZiSKg8sh/0cFqqlQQMyY9uEplc0ULU5yQNzcvdR4ZKa0ey8+vFmahuRbOCT1A==}
+    dependencies:
+      '@types/lodash': 4.14.177
+    dev: true
+
+  /@types/lodash/4.14.177:
+    resolution: {integrity: sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw==}
+    dev: true
+
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
@@ -2259,6 +2283,12 @@ packages:
       outdent: 0.8.0
     dev: true
 
+  /@vanilla-extract/dynamic/2.0.2:
+    resolution: {integrity: sha512-U4nKaEQ8Kuz+exXEr51DUpyaOuzo24/S/k1YbDPQR06cYcNjQqvwFRnwWtZ+9ImocqM1wTKtzrdUgSTtLGIwAg==}
+    dependencies:
+      '@vanilla-extract/private': 1.0.3
+    dev: true
+
   /@vanilla-extract/integration/2.0.0:
     resolution: {integrity: sha512-ooJ3yj1jYzOBdIwZ9k3T7DD9w9hpZcUOnv98FB11pYCjbTjLEk4nOvEf+zqd+oUCQBZ42R4SKJwYm3n5KcyTiQ==}
     dependencies:
@@ -2274,6 +2304,14 @@ packages:
 
   /@vanilla-extract/private/1.0.3:
     resolution: {integrity: sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==}
+    dev: true
+
+  /@vanilla-extract/recipes/0.2.3_@vanilla-extract+css@1.6.8:
+    resolution: {integrity: sha512-RKCfW2nczXmHLSR8TJcLUOvfE941rJl397GdbJiIBU3DqTSJuqDDOr3bKFiLP28BohLHs3Hz8BAzjYldKqGhXg==}
+    peerDependencies:
+      '@vanilla-extract/css': ^1.0.0
+    dependencies:
+      '@vanilla-extract/css': 1.6.8
     dev: true
 
   /@vanilla-extract/webpack-plugin/2.1.4_webpack@5.65.0:
@@ -2967,7 +3005,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001285
-      electron-to-chromium: 1.4.12
+      electron-to-chromium: 1.4.13
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -3804,8 +3842,8 @@ packages:
     resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
     dev: true
 
-  /electron-to-chromium/1.4.12:
-    resolution: {integrity: sha512-zjfhG9Us/hIy8AlQ5OzfbR/C4aBv1Dg/ak4GX35CELYlJ4tDAtoEcQivXvyBdqdNQ+R6PhlgQqV8UNPJmhkJog==}
+  /electron-to-chromium/1.4.13:
+    resolution: {integrity: sha512-ih5tIhzEuf78pBY70FXLo+Pw73R5MPPPcXb4CGBMJaCQt/qo/IGIesKXmswpemVCKSE2Bulr5FslUv7gAWJoOw==}
     dev: true
 
   /emittery/0.8.1:
@@ -5923,6 +5961,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
     dev: true
@@ -6209,11 +6251,6 @@ packages:
 
   /node-int64/0.4.0:
     resolution: {integrity: sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=}
-    dev: true
-
-  /node-modules-regexp/1.0.0:
-    resolution: {integrity: sha1-jZ2+KJZKSsVxLpExZCEHxx6Q7EA=}
-    engines: {node: '>=0.10.0'}
     dev: true
 
   /node-releases/2.0.1:
@@ -6569,11 +6606,9 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pirates/4.0.1:
-    resolution: {integrity: sha512-WuNqLTbMI3tmfef2TKxlQmAiLHKtFhlsCZnPIpuv2Ow0RDVO8lfy1Opf4NUzlMXLjPl+Men7AuVdX6TA+s+uGA==}
+  /pirates/4.0.4:
+    resolution: {integrity: sha512-ZIrVPH+A52Dw84R0L3/VS9Op04PuQ2SEoJL6bkshmiTic/HldyW9Tf7oH5mhJZBK7NmDx27vSMrYEXPXclpDKw==}
     engines: {node: '>= 6'}
-    dependencies:
-      node-modules-regexp: 1.0.0
     dev: true
 
   /pkg-dir/4.2.0:
