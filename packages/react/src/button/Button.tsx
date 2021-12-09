@@ -1,9 +1,9 @@
 import { ElementRef, forwardRef, ReactElement, ReactNode } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
-import * as styles from './Button.css';
+import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
-import { ButtonVariants } from './Button.css';
+import { useButtonGroup } from './ButtonGroup';
 
 type ButtonElement = ElementRef<typeof Primitive.button>;
 type PrimitiveButtonProps = ComponentPropsWithoutRef<typeof Primitive.button>;
@@ -22,25 +22,27 @@ export type ButtonProps = PrimitiveButtonProps &
   };
 
 export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
+  const group = useButtonGroup();
+
   const {
     children,
     type = 'button',
     active,
-    disabled = false,
+    disabled = group?.disabled || false,
     loading = false,
     loadingText,
     startIcon,
     endIcon,
-    size = 'md',
-    level = 'primary',
-    variant = 'solid',
+    size = group?.size || 'md',
+    level = group?.level || 'primary',
+    variant = group?.variant || 'solid',
     className,
     ...restProps
   } = props;
 
   return (
     <Primitive.button
-      className={clsx(className, styles.variants({ size, level, variant }))}
+      className={clsx(className, variants({ size, level, variant, disabled }))}
       disabled={disabled || loading}
       data-active={dataAttr(active)}
       data-loading={dataAttr(loading)}

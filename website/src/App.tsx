@@ -7,8 +7,17 @@ export const App = () => {
   }, 500);
 
   return (
-    <div className={'container p-5 mx-auto'}>
-      <Button className={'1'}>中文按钮</Button>
-    </div>
+    <>
+      <div style={{ padding: '20px' }}>
+        <Button>中文按钮</Button>
+        &nbsp;&nbsp;
+        <Button>English Button</Button>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <Button level={'success'}>中文按钮</Button>
+        &nbsp;&nbsp;
+        <Button level={'success'}>English Button</Button>
+      </div>
+    </>
   );
 };

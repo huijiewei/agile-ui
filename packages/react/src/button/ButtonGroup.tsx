@@ -4,7 +4,7 @@ import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
 
 type ButtonGroupContextProps = ButtonVariants;
 
-const ButtonGroupContext = createContext<ButtonGroupContextProps>({});
+const ButtonGroupContext = createContext<ButtonGroupContextProps>(undefined);
 
 type PrimitiveButtonGroupProps = ComponentPropsWithoutRef<typeof Primitive.div>;
 
@@ -14,17 +14,13 @@ type ButtonGroupProps = PrimitiveButtonGroupProps &
   };
 
 export const useButtonGroup = (): ButtonGroupContextProps => {
-  const context = useContext(ButtonGroupContext);
-  if (context === undefined) {
-    throw new Error('useButtonGroup must be used within a ButtonGroup');
-  }
-  return context;
+  return useContext(ButtonGroupContext);
 };
 
 export const ButtonGroup = (props: ButtonGroupProps) => {
-  const { children, size, level, variant, ...rest } = props;
+  const { children, size, level, variant, disabled, ...rest } = props;
 
-  const context = useMemo(() => ({ size, level, variant }), [size, level, variant]);
+  const context = useMemo(() => ({ size, level, variant, disabled }), [size, level, variant, disabled]);
 
   return (
     <ButtonGroupContext.Provider value={context}>
