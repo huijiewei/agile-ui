@@ -26,57 +26,57 @@ const size = {
 
 const level = {
   primary: style({
-    borderColor: themeVars.color.primary['500'],
+    borderColor: themeVars.color.primary['600'],
     selectors: {
       '&:hover': {
-        borderColor: themeVars.color.primary['600'],
+        borderColor: themeVars.color.primary['700'],
       },
       '&:active': {
-        borderColor: themeVars.color.primary['700'],
+        borderColor: themeVars.color.primary['800'],
       },
     },
   }),
   success: style({
-    borderColor: themeVars.color.success['500'],
+    borderColor: themeVars.color.success['600'],
     selectors: {
       '&:hover': {
-        borderColor: themeVars.color.success['600'],
+        borderColor: themeVars.color.success['700'],
       },
       '&:active': {
-        borderColor: themeVars.color.success['700'],
+        borderColor: themeVars.color.success['800'],
       },
     },
   }),
   natural: style({
-    borderColor: themeVars.color.natural['500'],
+    borderColor: themeVars.color.natural['600'],
     selectors: {
       '&:hover': {
-        borderColor: themeVars.color.natural['600'],
+        borderColor: themeVars.color.natural['700'],
       },
       '&:active': {
-        borderColor: themeVars.color.natural['700'],
+        borderColor: themeVars.color.natural['800'],
       },
     },
   }),
   warning: style({
-    borderColor: themeVars.color.warning['500'],
+    borderColor: themeVars.color.warning['600'],
     selectors: {
       '&:hover': {
-        borderColor: themeVars.color.warning['600'],
+        borderColor: themeVars.color.warning['700'],
       },
       '&:active': {
-        borderColor: themeVars.color.warning['700'],
+        borderColor: themeVars.color.warning['800'],
       },
     },
   }),
   danger: style({
-    borderColor: themeVars.color.danger['500'],
+    borderColor: themeVars.color.danger['600'],
     selectors: {
       '&:hover': {
-        borderColor: themeVars.color.danger['600'],
+        borderColor: themeVars.color.danger['700'],
       },
       '&:active': {
-        borderColor: themeVars.color.danger['700'],
+        borderColor: themeVars.color.danger['800'],
       },
     },
   }),
@@ -114,10 +114,10 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        backgroundColor: themeVars.color.primary['500'],
+        backgroundColor: themeVars.color.primary['600'],
         selectors: {
           '&:hover': {
-            backgroundColor: themeVars.color.primary['600'],
+            backgroundColor: themeVars.color.primary['700'],
           },
           '&:active': {
             backgroundColor: themeVars.color.primary['800'],
@@ -131,7 +131,7 @@ export const variants = recipe({
         variant: 'outline',
       },
       style: {
-        color: themeVars.color.primary['500'],
+        color: themeVars.color.primary['600'],
         selectors: {
           '&:hover': {
             backgroundColor: themeVars.color.primary['50'],
@@ -148,13 +148,13 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        backgroundColor: themeVars.color.success['500'],
+        backgroundColor: themeVars.color.success['600'],
         selectors: {
           '&:hover': {
-            backgroundColor: themeVars.color.success['600'],
+            backgroundColor: themeVars.color.success['700'],
           },
           '&:active': {
-            backgroundColor: themeVars.color.primary['800'],
+            backgroundColor: themeVars.color.success['800'],
           },
         },
       },
@@ -165,7 +165,7 @@ export const variants = recipe({
         variant: 'outline',
       },
       style: {
-        color: themeVars.color.success['500'],
+        color: themeVars.color.success['600'],
         selectors: {
           '&:hover': {
             backgroundColor: themeVars.color.success['50'],
@@ -182,10 +182,10 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        backgroundColor: themeVars.color.natural['500'],
+        backgroundColor: themeVars.color.natural['600'],
         selectors: {
           '&:hover': {
-            backgroundColor: themeVars.color.natural['600'],
+            backgroundColor: themeVars.color.natural['700'],
           },
           '&:active': {
             backgroundColor: themeVars.color.natural['800'],
@@ -199,7 +199,7 @@ export const variants = recipe({
         variant: 'outline',
       },
       style: {
-        color: themeVars.color.natural['500'],
+        color: themeVars.color.natural['600'],
         selectors: {
           '&:hover': {
             backgroundColor: themeVars.color.natural['50'],
@@ -216,10 +216,10 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        backgroundColor: themeVars.color.warning['500'],
+        backgroundColor: themeVars.color.warning['600'],
         selectors: {
           '&:hover': {
-            backgroundColor: themeVars.color.warning['600'],
+            backgroundColor: themeVars.color.warning['700'],
           },
           '&:active': {
             backgroundColor: themeVars.color.warning['800'],
@@ -233,7 +233,7 @@ export const variants = recipe({
         variant: 'outline',
       },
       style: {
-        color: themeVars.color.warning['500'],
+        color: themeVars.color.warning['600'],
         selectors: {
           '&:hover': {
             backgroundColor: themeVars.color.warning['50'],
@@ -250,10 +250,10 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        backgroundColor: themeVars.color.danger['500'],
+        backgroundColor: themeVars.color.danger['600'],
         selectors: {
           '&:hover': {
-            backgroundColor: themeVars.color.danger['600'],
+            backgroundColor: themeVars.color.danger['700'],
           },
           '&:active': {
             backgroundColor: themeVars.color.danger['800'],
@@ -267,7 +267,7 @@ export const variants = recipe({
         variant: 'outline',
       },
       style: {
-        color: themeVars.color.danger['500'],
+        color: themeVars.color.danger['600'],
         selectors: {
           '&:hover': {
             backgroundColor: themeVars.color.danger['50'],
