@@ -1,15 +1,16 @@
-import { ElementRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { __DEV__ } from '@agile-ui/utils';
-import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
-import * as styles from './VisuallyHidden.css';
+import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
+import { root } from './VisuallyHidden.css';
 
-type VisuallyHiddenElement = ElementRef<typeof Primitive.span>;
-type PrimitiveSpanProps = ComponentPropsWithoutRef<typeof Primitive.span>;
+const DEFAULT_TAG = 'span';
 
-export type VisuallyHiddenProps = PrimitiveSpanProps;
+type VisuallyHiddenOwnProps = unknown;
 
-export const VisuallyHidden = forwardRef<VisuallyHiddenElement, VisuallyHiddenProps>((props, ref) => {
-  return <Primitive.span className={styles.root} ref={ref} {...props} />;
+const VisuallyHidden: PolymorphicComponent<VisuallyHiddenOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
+  const { as = DEFAULT_TAG, ...restProps } = props;
+
+  return <Primitive className={root} as={as} ref={ref} {...restProps} />;
 });
 
 if (__DEV__) {

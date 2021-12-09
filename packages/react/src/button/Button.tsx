@@ -1,30 +1,29 @@
-import { ElementRef, forwardRef, ReactElement, ReactNode } from 'react';
+import { forwardRef, ReactElement, ReactNode } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
-import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
+import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
 import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
 import { useButtonGroup } from './ButtonGroup';
 
-type ButtonElement = ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = ComponentPropsWithoutRef<typeof Primitive.button>;
+const DEFAULT_TAG = 'button';
 
-export type ButtonProps = PrimitiveButtonProps &
-  ButtonVariants & {
-    type?: 'button' | 'reset' | 'submit';
-    active?: boolean;
-    disabled?: boolean;
-    loading?: boolean;
-    loadingText?: string;
-    fullWidth?: boolean;
-    startIcon?: ReactElement;
-    endIcon?: ReactElement;
-    children: ReactNode;
-  };
+export type ButtonOwnProps = ButtonVariants & {
+  type?: 'button' | 'reset' | 'submit';
+  active?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  loadingText?: string;
+  fullWidth?: boolean;
+  startIcon?: ReactElement;
+  endIcon?: ReactElement;
+  children: ReactNode;
+};
 
-export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
+export const Button: PolymorphicComponent<ButtonOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
   const group = useButtonGroup();
 
   const {
+    as = DEFAULT_TAG,
     children,
     type = 'button',
     active,
@@ -41,7 +40,8 @@ export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
   } = props;
 
   return (
-    <Primitive.button
+    <Primitive
+      as={as}
       className={clsx(className, variants({ size, level, variant, disabled }))}
       disabled={disabled || loading}
       data-active={dataAttr(active)}
@@ -51,10 +51,10 @@ export const Button = forwardRef<ButtonElement, ButtonProps>((props, ref) => {
       ref={ref}
       {...restProps}
     >
-      {startIcon && !loading ? startIcon : null}
+      {startIcon && !loading && startIcon}
       {children}
-      {endIcon && !loading ? endIcon : null}
-    </Primitive.button>
+      {endIcon && !loading && endIcon}
+    </Primitive>
   );
 });
 

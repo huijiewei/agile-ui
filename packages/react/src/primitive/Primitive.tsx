@@ -1,31 +1,26 @@
-import { ComponentProps, ComponentPropsWithRef, ElementType, forwardRef, ForwardRefExoticComponent } from 'react';
-import { Slot } from '../slot/Slot';
+import { __DEV__, Merge } from '@agile-ui/utils';
+import { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType, forwardRef, ReactElement } from 'react';
 
-const NODES = ['a', 'button', 'div', 'h2', 'h3', 'img', 'li', 'nav', 'p', 'span', 'svg', 'ul'] as const;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type PropsWithoutRef<P> = P extends any ? ('ref' extends keyof P ? Pick<P, Exclude<keyof P, 'ref'>> : P) : P;
-type PrimitiveForwardRefComponent<E extends ElementType> = ForwardRefExoticComponent<PrimitivePropsWithRef<E>>;
-
-export type PrimitivePropsWithRef<E extends ElementType> = ComponentPropsWithRef<E> & {
-  asChild?: boolean;
+export type ExpandProps<T> = T extends object ? (T extends infer O ? { [K in keyof O]: O[K] } : never) : T;
+export type PropsWithAs<P, E extends ElementType> = P & { as?: E };
+export type PropsWithHtmlElement<P, E extends ElementType> = Merge<ComponentPropsWithoutRef<E>, P>;
+export type PolymorphicProps<P, E extends ElementType> = PropsWithAs<PropsWithHtmlElement<P, E>, E>;
+export type PolymorphicPropsWithRef<P, E extends ElementType> = PropsWithAs<Merge<ComponentPropsWithRef<E>, P>, E>;
+export type PolymorphicComponent<P, D extends ElementType> = (<E extends ElementType = D>(
+  props: PolymorphicPropsWithRef<P, E>
+) => ReactElement | null) & {
+  displayName?: string;
 };
-export type ComponentPropsWithoutRef<T extends ElementType> = PropsWithoutRef<ComponentProps<T>>;
 
-type Primitives = { [E in typeof NODES[number]]: PrimitiveForwardRefComponent<E> };
+const DEFAULT_TAG = 'div';
 
-export const Primitive = NODES.reduce(
-  (primitive, node) => ({
-    ...primitive,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any,react/display-name
-    [node]: forwardRef((props: PrimitivePropsWithRef<typeof node>, ref: any) => {
-      const { asChild, ...restProps } = props;
+type PrimitiveOwnProps = unknown;
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const Comp: any = asChild ? Slot : node;
+export const Primitive: PolymorphicComponent<PrimitiveOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
+  const { as: Comp = DEFAULT_TAG, ...restProps } = props;
+  return <Comp {...restProps} ref={ref} />;
+});
 
-      return <Comp {...restProps} ref={ref} />;
-    }),
-  }),
-  {} as Primitives
-);
+if (__DEV__) {
+  Primitive.displayName = 'Primitive';
+}

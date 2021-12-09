@@ -1,20 +1,20 @@
-import { ElementRef, forwardRef, PropsWithChildren, RefObject, useState } from 'react';
+import { forwardRef, PropsWithChildren, RefObject, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { __DEV__ } from '@agile-ui/utils';
 import { useIsomorphicEffect } from '@agile-ui/react-hooks';
-import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
+import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
 
 const MAX_Z_INDEX = 811223;
 
-type PortalElement = ElementRef<typeof Primitive.div>;
-type PrimitiveDivProps = ComponentPropsWithoutRef<typeof Primitive.div>;
+const DEFAULT_TAG = 'div';
 
-export type PortalProps = PrimitiveDivProps & {
+export type PortalOwnProps = {
   containerRef?: RefObject<HTMLElement>;
 };
 
-export const Portal = forwardRef<PortalElement, PortalProps>((props, ref) => {
-  const { containerRef, style, ...restProps } = props;
+export const Portal: PolymorphicComponent<PortalOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
+  const { as = DEFAULT_TAG, style, containerRef, ...restProps } = props;
+
   const hostElement = containerRef?.current ?? globalThis?.document?.body;
   const [, forceUpdate] = useState({});
 
@@ -24,7 +24,8 @@ export const Portal = forwardRef<PortalElement, PortalProps>((props, ref) => {
 
   if (hostElement) {
     return createPortal(
-      <Primitive.div
+      <Primitive
+        as={as}
         {...restProps}
         ref={ref}
         style={

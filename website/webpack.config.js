@@ -51,6 +51,15 @@ module.exports = (env, argv) => {
           ],
         },
         {
+          test: /\.mdx?$/,
+          use: [
+            {
+              loader: '@mdx-js/loader',
+              options: {},
+            },
+          ],
+        },
+        {
           test: /\.vanilla\.css$/i,
           use: [
             {
