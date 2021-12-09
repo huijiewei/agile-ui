@@ -14,7 +14,10 @@ export const App = () => {
         &nbsp;&nbsp;
         <Button>English Button</Button>
         &nbsp;&nbsp;
-        <Button to={''} as={Link}>
+        <Button disabled to={''} as={Link}>
+          Link
+        </Button>
+        <Button disabled as={'span'}>
           Link
         </Button>
       </div>

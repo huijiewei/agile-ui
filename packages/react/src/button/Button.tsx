@@ -1,9 +1,10 @@
-import { forwardRef, ReactElement, ReactNode } from 'react';
+import { ElementType, forwardRef, ReactElement, ReactNode, useCallback, useState } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
 import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
 import { useButtonGroup } from './ButtonGroup';
+import { useMergeRefs } from '@agile-ui/react-hooks';
 
 const DEFAULT_TAG = 'button';
 
@@ -19,13 +20,29 @@ export type ButtonOwnProps = ButtonVariants & {
   children: ReactNode;
 };
 
+const useButtonType = (value?: ElementType) => {
+  const [isButton, setIsButton] = useState(!value);
+
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    if (!node) {
+      return;
+    }
+
+    setIsButton(node.tagName === 'BUTTON');
+  }, []);
+
+  const type = isButton ? 'button' : undefined;
+
+  return { ref: refCallback, type } as const;
+};
+
 export const Button: PolymorphicComponent<ButtonOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
   const group = useButtonGroup();
 
   const {
     as = DEFAULT_TAG,
     children,
-    type = 'button',
+    type,
     active,
     disabled = group?.disabled || false,
     loading = false,
@@ -39,6 +56,8 @@ export const Button: PolymorphicComponent<ButtonOwnProps, typeof DEFAULT_TAG> = 
     ...restProps
   } = props;
 
+  const { ref: _ref, type: defaultType } = useButtonType(as);
+
   return (
     <Primitive
       as={as}
@@ -47,8 +66,9 @@ export const Button: PolymorphicComponent<ButtonOwnProps, typeof DEFAULT_TAG> = 
       data-active={dataAttr(active)}
       data-loading={dataAttr(loading)}
       aria-disabled={disabled}
-      type={type}
-      ref={ref}
+      type={type ?? defaultType}
+      ref={useMergeRefs(ref, _ref)}
+      {...restProps}
       {...restProps}
     >
       {startIcon && !loading && startIcon}
