@@ -25,16 +25,70 @@ const size = {
 };
 
 const level = {
-  primary: style({}),
-  success: style({}),
-  naturel: style({}),
-  warning: style({}),
-  danger: style({}),
+  primary: style({
+    borderColor: themeVars.color.primary['500'],
+    selectors: {
+      '&:hover': {
+        borderColor: themeVars.color.primary['600'],
+      },
+      '&:active': {
+        borderColor: themeVars.color.primary['700'],
+      },
+    },
+  }),
+  success: style({
+    borderColor: themeVars.color.success['500'],
+    selectors: {
+      '&:hover': {
+        borderColor: themeVars.color.success['600'],
+      },
+      '&:active': {
+        borderColor: themeVars.color.success['700'],
+      },
+    },
+  }),
+  natural: style({
+    borderColor: themeVars.color.natural['500'],
+    selectors: {
+      '&:hover': {
+        borderColor: themeVars.color.natural['600'],
+      },
+      '&:active': {
+        borderColor: themeVars.color.natural['700'],
+      },
+    },
+  }),
+  warning: style({
+    borderColor: themeVars.color.warning['500'],
+    selectors: {
+      '&:hover': {
+        borderColor: themeVars.color.warning['600'],
+      },
+      '&:active': {
+        borderColor: themeVars.color.warning['700'],
+      },
+    },
+  }),
+  danger: style({
+    borderColor: themeVars.color.danger['500'],
+    selectors: {
+      '&:hover': {
+        borderColor: themeVars.color.danger['600'],
+      },
+      '&:active': {
+        borderColor: themeVars.color.danger['700'],
+      },
+    },
+  }),
 };
 
 const variant = {
-  solid: style({}),
-  outline: style({}),
+  solid: style({
+    color: themeVars.color.white,
+  }),
+  outline: style({
+    backgroundColor: themeVars.color.white,
+  }),
   ghost: style({}),
   link: style({}),
 };
@@ -60,17 +114,30 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        borderColor: themeVars.color.primary['500'],
         backgroundColor: themeVars.color.primary['500'],
-        color: themeVars.color.white,
         selectors: {
           '&:hover': {
-            borderColor: themeVars.color.primary['600'],
             backgroundColor: themeVars.color.primary['600'],
           },
           '&:active': {
-            borderColor: themeVars.color.primary['800'],
             backgroundColor: themeVars.color.primary['800'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'primary',
+        variant: 'outline',
+      },
+      style: {
+        color: themeVars.color.primary['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.primary['50'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.primary['100'],
           },
         },
       },
@@ -81,17 +148,132 @@ export const variants = recipe({
         variant: 'solid',
       },
       style: {
-        borderColor: themeVars.color.success['500'],
         backgroundColor: themeVars.color.success['500'],
-        color: themeVars.color.white,
         selectors: {
           '&:hover': {
-            borderColor: themeVars.color.success['600'],
             backgroundColor: themeVars.color.success['600'],
           },
           '&:active': {
-            borderColor: themeVars.color.primary['800'],
             backgroundColor: themeVars.color.primary['800'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'success',
+        variant: 'outline',
+      },
+      style: {
+        color: themeVars.color.success['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.success['50'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.primary['100'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'natural',
+        variant: 'solid',
+      },
+      style: {
+        backgroundColor: themeVars.color.natural['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.natural['600'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.natural['800'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'natural',
+        variant: 'outline',
+      },
+      style: {
+        color: themeVars.color.natural['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.natural['50'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.natural['100'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'warning',
+        variant: 'solid',
+      },
+      style: {
+        backgroundColor: themeVars.color.warning['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.warning['600'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.warning['800'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'warning',
+        variant: 'outline',
+      },
+      style: {
+        color: themeVars.color.warning['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.warning['50'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.warning['100'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'danger',
+        variant: 'solid',
+      },
+      style: {
+        backgroundColor: themeVars.color.danger['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.danger['600'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.danger['800'],
+          },
+        },
+      },
+    },
+    {
+      variants: {
+        level: 'danger',
+        variant: 'outline',
+      },
+      style: {
+        color: themeVars.color.danger['500'],
+        selectors: {
+          '&:hover': {
+            backgroundColor: themeVars.color.danger['50'],
+          },
+          '&:active': {
+            backgroundColor: themeVars.color.danger['100'],
           },
         },
       },

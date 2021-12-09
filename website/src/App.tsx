@@ -10,21 +10,78 @@ export const App = () => {
   return (
     <>
       <div style={{ padding: '20px' }}>
-        <Button>中文按钮</Button>
+        <Button level={'primary'}>中文按钮</Button>
         &nbsp;&nbsp;
-        <Button>English Button</Button>
+        <Button level={'success'}>中文按钮</Button>
         &nbsp;&nbsp;
-        <Button disabled to={''} as={Link}>
-          Link
+        <Button level={'natural'}>中文按钮</Button>
+        &nbsp;&nbsp;
+        <Button level={'warning'}>中文按钮</Button>
+        &nbsp;&nbsp;
+        <Button level={'danger'}>中文按钮</Button>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <Button level={'primary'} variant={'outline'}>
+          中文按钮
         </Button>
-        <Button disabled as={'span'}>
-          Link
+        &nbsp;&nbsp;
+        <Button level={'success'} variant={'outline'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'natural'} variant={'outline'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'warning'} variant={'outline'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'danger'} variant={'outline'}>
+          中文按钮
         </Button>
       </div>
       <div style={{ padding: '20px' }}>
-        <Button level={'success'}>中文按钮</Button>
+        <Button level={'primary'} variant={'ghost'}>
+          中文按钮
+        </Button>
         &nbsp;&nbsp;
-        <Button level={'success'}>English Button</Button>
+        <Button level={'success'} variant={'ghost'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'natural'} variant={'ghost'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'warning'} variant={'ghost'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'danger'} variant={'ghost'}>
+          中文按钮
+        </Button>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <Button level={'primary'} variant={'link'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'success'} variant={'link'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'natural'} variant={'link'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'warning'} variant={'link'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'danger'} variant={'link'}>
+          中文按钮
+        </Button>
       </div>
     </>
   );

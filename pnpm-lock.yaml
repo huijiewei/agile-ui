@@ -26,6 +26,7 @@ importers:
       jest: ^27.4.3
       lint-staged: ^12.1.2
       prettier: ^2.5.1
+      react-docgen-typescript: ^2.2.1
       typescript: ^4.5.2
     devDependencies:
       '@babel/core': 7.16.0
@@ -50,6 +51,7 @@ importers:
       jest: 27.4.3
       lint-staged: 12.1.2
       prettier: 2.5.1
+      react-docgen-typescript: 2.2.1_typescript@4.5.2
       typescript: 4.5.2
 
   packages/react:
@@ -7766,6 +7768,14 @@ packages:
       http-errors: 1.7.2
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+    dev: true
+
+  /react-docgen-typescript/2.2.1_typescript@4.5.2:
+    resolution: {integrity: sha512-ycVaidV55GOeDOKRP6PCw1i1502dElQ1KG/IInj8sOg50imG+Pmv6LY6DG2xlAF0asd8zXLcyFlWNnICKWP1LA==}
+    peerDependencies:
+      typescript: '>= 4.3.x'
+    dependencies:
+      typescript: 4.5.2
     dev: true
 
   /react-dom/17.0.2_react@17.0.2:

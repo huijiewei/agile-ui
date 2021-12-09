@@ -1,5 +1,5 @@
 import { Mode } from './tokens/colors';
-import { createContext, PropsWithChildren, useEffect } from 'react';
+import { createContext, PropsWithChildren } from 'react';
 
 type ThemeContextValue = {
   mode: Mode;
@@ -19,15 +19,11 @@ export const ThemeProvider = ({
   resetCSS = true,
   children,
 }: PropsWithChildren<ThemeProviderProps>) => {
-  useEffect(() => {
-    if (resetCSS) {
-      import('./styles/reset.css');
-    }
-  }, [resetCSS]);
+  if (resetCSS) {
+    import('./styles/reset.css');
+  }
 
-  useEffect(() => {
-    import('./styles/global.css');
-  }, []);
+  import('./styles/global.css');
 
   return <ThemeContext.Provider value={{ mode: defaultMode }}>{children}</ThemeContext.Provider>;
 };
