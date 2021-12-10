@@ -1,9 +1,9 @@
 import { createThemeContract } from '@vanilla-extract/css';
 
-import { fonts, fontSizes, fontWeights, lineHeights } from '../tokens/typography';
-import { colors } from '../tokens/colors';
-import { radius } from '../tokens/radius';
-import { borders } from '../tokens/borders';
+import { fonts, fontSizes, fontWeights, lineHeights } from '@agile-ui/tokens';
+import { colors } from '@agile-ui/tokens';
+import { radius } from '@agile-ui/tokens';
+import { borders } from '@agile-ui/tokens';
 
 export const defaultTheme = {
   color: colors,

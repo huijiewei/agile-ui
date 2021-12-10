@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
-import { themeVars } from '../theme/styles/theme.css';
+import { themeVars } from '../theme/styles/vars.css';
 
 const base = style({
   cursor: 'pointer',

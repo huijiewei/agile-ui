@@ -57,27 +57,25 @@ importers:
   packages/react:
     specifiers:
       '@agile-ui/react-hooks': workspace:^
+      '@agile-ui/tokens': workspace:^
       '@agile-ui/utils': workspace:^
       '@testing-library/react': ^12.1.2
       '@vanilla-extract/babel-plugin': ^1.1.3
       '@vanilla-extract/css': ^1.6.8
-      '@vanilla-extract/dynamic': ^2.0.2
       '@vanilla-extract/recipes': ^0.2.3
-      babel-plugin-optimize-clsx: ^2.6.2
       clsx: ^1.1.1
       react: ^17.0.2
       react-dom: ^17.0.2
     dependencies:
       '@agile-ui/react-hooks': link:../react-hooks
+      '@agile-ui/tokens': link:../tokens
       '@agile-ui/utils': link:../utils
       clsx: 1.1.1
     devDependencies:
       '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
       '@vanilla-extract/babel-plugin': 1.1.3
       '@vanilla-extract/css': 1.6.8
-      '@vanilla-extract/dynamic': 2.0.2
       '@vanilla-extract/recipes': 0.2.3_@vanilla-extract+css@1.6.8
-      babel-plugin-optimize-clsx: 2.6.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
 
@@ -90,6 +88,9 @@ importers:
     devDependencies:
       react: 17.0.2
 
+  packages/tokens:
+    specifiers: {}
+
   packages/utils:
     specifiers: {}
 
@@ -97,7 +98,6 @@ importers:
     specifiers:
       '@agile-ui/react': workspace:^
       '@agile-ui/react-hooks': workspace:^
-      '@agile-ui/utils': workspace:^
       '@babel/runtime': ^7.16.3
       '@mdx-js/loader': ^2.0.0-rc.2
       '@mdx-js/mdx': ^2.0.0-rc.2
@@ -126,7 +126,6 @@ importers:
     dependencies:
       '@agile-ui/react': link:../packages/react
       '@agile-ui/react-hooks': link:../packages/react-hooks
-      '@agile-ui/utils': link:../packages/utils
       '@babel/runtime': 7.16.3
       clsx: 1.1.1
       react: 17.0.2
@@ -2371,12 +2370,6 @@ packages:
       deepmerge: 4.2.2
       escape-string-regexp: 4.0.0
       outdent: 0.8.0
-    dev: true
-
-  /@vanilla-extract/dynamic/2.0.2:
-    resolution: {integrity: sha512-U4nKaEQ8Kuz+exXEr51DUpyaOuzo24/S/k1YbDPQR06cYcNjQqvwFRnwWtZ+9ImocqM1wTKtzrdUgSTtLGIwAg==}
-    dependencies:
-      '@vanilla-extract/private': 1.0.3
     dev: true
 
   /@vanilla-extract/integration/2.0.0:

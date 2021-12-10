@@ -4,4 +4,4 @@ export * from './portal/Portal';
 export * from './button/Button';
 
 export * from './theme/ThemeProvider';
-export * from './theme/styles/theme.css';
+export * from './theme/styles/vars.css';

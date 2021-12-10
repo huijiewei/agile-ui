@@ -1,4 +1,4 @@
-import { Mode } from './tokens/colors';
+import { Mode } from '@agile-ui/tokens';
 import { createContext, PropsWithChildren } from 'react';
 
 type ThemeContextValue = {
