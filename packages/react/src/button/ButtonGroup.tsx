@@ -1,30 +1,36 @@
-import { createContext, ReactNode, useContext, useMemo } from 'react';
+import { createContext, forwardRef, ReactNode, useContext, useMemo } from 'react';
 import { ButtonVariants } from './Button.css';
-import { ComponentPropsWithoutRef, Primitive } from '../primitive/Primitive';
+import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
+import { __DEV__ } from '@agile-ui/utils';
 
 type ButtonGroupContextProps = ButtonVariants;
 
 const ButtonGroupContext = createContext<ButtonGroupContextProps>(undefined);
 
-type PrimitiveButtonGroupProps = ComponentPropsWithoutRef<typeof Primitive.div>;
-
-type ButtonGroupProps = PrimitiveButtonGroupProps &
-  ButtonGroupContextProps & {
-    children: ReactNode;
-  };
+type ButtonGroupOwnProps = ButtonGroupContextProps & {
+  children: ReactNode;
+};
 
 export const useButtonGroup = (): ButtonGroupContextProps => {
   return useContext(ButtonGroupContext);
 };
 
-export const ButtonGroup = (props: ButtonGroupProps) => {
-  const { children, size, level, variant, disabled, ...rest } = props;
+const DEFAULT_TAG = 'div';
+
+export const ButtonGroup: PolymorphicComponent<ButtonGroupOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
+  const { as = DEFAULT_TAG, children, size, level, variant, disabled, ...restProps } = props;
 
   const context = useMemo(() => ({ size, level, variant, disabled }), [size, level, variant, disabled]);
 
   return (
     <ButtonGroupContext.Provider value={context}>
-      <Primitive.div {...rest}>{children}</Primitive.div>
+      <Primitive ref={ref} as={as} {...restProps}>
+        {children}
+      </Primitive>
     </ButtonGroupContext.Provider>
   );
-};
+});
+
+if (__DEV__) {
+  ButtonGroup.displayName = 'ButtonGroup';
+}
