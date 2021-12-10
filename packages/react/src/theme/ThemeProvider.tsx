@@ -9,21 +9,13 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 type ThemeProviderProps = {
   defaultMode?: Mode;
-  resetCSS?: boolean;
-  cssVarsRoot?: string;
   theme?: string;
 };
 
-export const ThemeProvider = ({
-  defaultMode = 'light',
-  resetCSS = true,
-  children,
-}: PropsWithChildren<ThemeProviderProps>) => {
-  if (resetCSS) {
-    import('./styles/reset.css');
-  }
-
-  import('./styles/global.css');
-
+export const ThemeProvider = ({ defaultMode = 'light', children }: PropsWithChildren<ThemeProviderProps>) => {
   return <ThemeContext.Provider value={{ mode: defaultMode }}>{children}</ThemeContext.Provider>;
 };
+
+export const createTheme = (mode: Mode) => ({
+  mode,
+});
