@@ -13,7 +13,7 @@ export type PortalOwnProps = {
 };
 
 export const Portal = polymorphicComponent<typeof DEFAULT_TAG, PortalOwnProps>((props, ref) => {
-  const { as: Component = DEFAULT_TAG, style, containerRef, ...restProps } = props;
+  const { as: Component = DEFAULT_TAG, style, containerRef, ...rest } = props;
 
   const hostElement = containerRef?.current ?? globalThis?.document?.body;
   const [, forceUpdate] = useState({});
@@ -25,7 +25,7 @@ export const Portal = polymorphicComponent<typeof DEFAULT_TAG, PortalOwnProps>((
   if (hostElement) {
     return createPortal(
       <Component
-        {...restProps}
+        {...rest}
         ref={ref}
         style={
           hostElement === document.body

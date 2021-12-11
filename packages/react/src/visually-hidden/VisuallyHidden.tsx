@@ -5,9 +5,9 @@ import { polymorphicComponent } from '../polymorphic/Polymorphic';
 const DEFAULT_TAG = 'span';
 
 const VisuallyHidden = polymorphicComponent((props, ref) => {
-  const { as: Component = DEFAULT_TAG, ...restProps } = props;
+  const { as: Component = DEFAULT_TAG, ...rest } = props;
 
-  return <Component className={root} ref={ref} {...restProps} />;
+  return <Component {...rest} className={root} ref={ref} />;
 });
 
 if (__DEV__) {

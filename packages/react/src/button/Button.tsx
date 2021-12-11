@@ -1,4 +1,4 @@
-import { ElementType, ReactElement, ReactNode, useCallback, useState } from 'react';
+import { ElementType, ReactElement, useCallback, useState } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
@@ -11,13 +11,11 @@ const DEFAULT_TAG = 'button';
 export type ButtonOwnProps = ButtonVariants & {
   type?: 'button' | 'reset' | 'submit';
   active?: boolean;
-  disabled?: boolean;
   loading?: boolean;
   loadingText?: string;
   fullWidth?: boolean;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
-  children: ReactNode;
 };
 
 const useButtonType = (value?: ElementType) => {
@@ -53,13 +51,14 @@ export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((
     level = group?.level || 'primary',
     variant = group?.variant || 'solid',
     className,
-    ...restProps
+    ...rest
   } = props;
 
   const { ref: _ref, type: defaultType } = useButtonType(Component);
 
   return (
     <Component
+      {...rest}
       className={clsx(className, variants({ size, level, variant, disabled }))}
       disabled={disabled || loading}
       data-active={dataAttr(active)}
@@ -67,8 +66,6 @@ export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((
       aria-disabled={disabled}
       type={type ?? defaultType}
       ref={useMergeRefs(ref, _ref)}
-      {...restProps}
-      {...restProps}
     >
       {startIcon && !loading && startIcon}
       {children}
