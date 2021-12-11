@@ -1,8 +1,8 @@
-import { forwardRef, PropsWithChildren, RefObject, useState } from 'react';
+import { RefObject, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { __DEV__ } from '@agile-ui/utils';
 import { useIsomorphicEffect } from '@agile-ui/react-hooks';
-import { PolymorphicComponent, Primitive } from '../primitive/Primitive';
+import { polymorphicComponent } from '../polymorphic/Polymorphic';
 
 const MAX_Z_INDEX = 811223;
 
@@ -12,8 +12,8 @@ export type PortalOwnProps = {
   containerRef?: RefObject<HTMLElement>;
 };
 
-export const Portal: PolymorphicComponent<PortalOwnProps, typeof DEFAULT_TAG> = forwardRef((props, ref) => {
-  const { as = DEFAULT_TAG, style, containerRef, ...restProps } = props;
+export const Portal = polymorphicComponent<typeof DEFAULT_TAG, PortalOwnProps>((props, ref) => {
+  const { as: Component = DEFAULT_TAG, style, containerRef, ...restProps } = props;
 
   const hostElement = containerRef?.current ?? globalThis?.document?.body;
   const [, forceUpdate] = useState({});
@@ -24,8 +24,7 @@ export const Portal: PolymorphicComponent<PortalOwnProps, typeof DEFAULT_TAG> = 
 
   if (hostElement) {
     return createPortal(
-      <Primitive
-        as={as}
+      <Component
         {...restProps}
         ref={ref}
         style={
@@ -49,17 +48,4 @@ export const Portal: PolymorphicComponent<PortalOwnProps, typeof DEFAULT_TAG> = 
 
 if (__DEV__) {
   Portal.displayName = 'Portal';
-}
-
-export type UnstablePortalProps = {
-  container?: HTMLElement | null;
-};
-
-export const UnstablePortal = (props: PropsWithChildren<UnstablePortalProps>) => {
-  const { container = globalThis?.document?.body, children } = props;
-  return container ? createPortal(<>{children}</>, container) : null;
-};
-
-if (__DEV__) {
-  UnstablePortal.displayName = 'Portal';
 }

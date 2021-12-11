@@ -1,16 +1,25 @@
 import { Button } from '@agile-ui/react';
 import { useTimeout } from '@agile-ui/react-hooks';
 import { Link } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 export const App = () => {
   useTimeout(() => {
     document.getElementById('splash')?.remove();
   }, 500);
 
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    console.log(btnRef.current);
+  }, [btnRef]);
+
   return (
     <>
       <div style={{ padding: '20px' }}>
-        <Button level={'primary'}>中文按钮</Button>
+        <Button as={Link} to={''} ref={btnRef} level={'primary'}>
+          中文按钮
+        </Button>
         &nbsp;&nbsp;
         <Button level={'success'}>中文按钮</Button>
         &nbsp;&nbsp;

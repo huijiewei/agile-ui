@@ -1,6 +1,6 @@
 import { MutableRefObject, Ref, useCallback } from 'react';
 
-type PossibleRef<T> = Ref<T> | undefined;
+type PossibleRef<T> = Ref<T> | MutableRefObject<T> | undefined;
 
 export const mergeRefs = <T>(...refs: PossibleRef<T>[]) => {
   return (node: T) =>
