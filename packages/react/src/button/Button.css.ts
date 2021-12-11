@@ -102,6 +102,7 @@ export const variants = recipe({
     disabled: {
       true: {
         cursor: 'not-allowed',
+        pointerEvents: 'none',
         opacity: 0.5,
       },
       false: {},
