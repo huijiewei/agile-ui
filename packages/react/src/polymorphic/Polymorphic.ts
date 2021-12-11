@@ -1,6 +1,10 @@
 import { Merge } from '@agile-ui/utils';
 import { ComponentProps, ElementType, forwardRef, MutableRefObject, ReactElement, WeakValidationMap } from 'react';
 
+/*
+  From: https://github.com/Doist/reactist/blob/main/src/utils/polymorphism.ts
+*/
+
 type EmptyObject = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [K in any]: never;
