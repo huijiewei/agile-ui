@@ -1,14 +1,14 @@
-import { ElementType, ReactElement, useCallback, useState } from 'react';
+import { ElementType, forwardRef, ReactElement, useCallback, useState } from 'react';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
 import { useButtonGroup } from './ButtonGroup';
 import { useMergeRefs } from '@agile-ui/react-hooks';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
 
 const DEFAULT_TAG = 'button';
 
-export type ButtonOwnProps = ButtonVariants & {
+export type Props = ButtonVariants & {
   type?: 'button' | 'reset' | 'submit';
   active?: boolean;
   loading?: boolean;
@@ -18,23 +18,11 @@ export type ButtonOwnProps = ButtonVariants & {
   endIcon?: ReactElement;
 };
 
-const useButtonType = (value?: ElementType) => {
-  const [isButton, setIsButton] = useState(!value);
+export type ButtonProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
 
-  const refCallback = useCallback((node: HTMLElement | null) => {
-    if (!node) {
-      return;
-    }
+type ButtonComponent = <C extends ElementType = typeof Button>(props: ButtonProps<C>) => ReactElement | null;
 
-    setIsButton(node.tagName === 'BUTTON');
-  }, []);
-
-  const type = isButton ? 'button' : undefined;
-
-  return { ref: refCallback, type } as const;
-};
-
-export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((props, ref) => {
+export const Button: ButtonComponent & { displayName?: string } = forwardRef((props, ref) => {
   const group = useButtonGroup();
 
   const {
@@ -77,3 +65,19 @@ export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((
 if (__DEV__) {
   Button.displayName = 'Button';
 }
+
+const useButtonType = (value?: ElementType) => {
+  const [isButton, setIsButton] = useState(!value);
+
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    if (!node) {
+      return;
+    }
+
+    setIsButton(node.tagName === 'BUTTON');
+  }, []);
+
+  const type = isButton ? 'button' : undefined;
+
+  return { ref: refCallback, type } as const;
+};

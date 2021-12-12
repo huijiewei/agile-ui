@@ -1,13 +1,11 @@
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, ElementType, forwardRef, ReactElement, useContext, useMemo } from 'react';
 import { ButtonVariants } from './Button.css';
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
 
 type ButtonGroupContextProps = ButtonVariants;
 
 const ButtonGroupContext = createContext<ButtonGroupContextProps>(undefined);
-
-type ButtonGroupOwnProps = ButtonGroupContextProps;
 
 export const useButtonGroup = (): ButtonGroupContextProps => {
   return useContext(ButtonGroupContext);
@@ -15,7 +13,15 @@ export const useButtonGroup = (): ButtonGroupContextProps => {
 
 const DEFAULT_TAG = 'div';
 
-export const ButtonGroup = polymorphicComponent<typeof DEFAULT_TAG, ButtonGroupOwnProps>((props, ref) => {
+type Props = ButtonGroupContextProps;
+
+export type ButtonGroupProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
+
+type ButtonGroupComponent = <C extends ElementType = typeof DEFAULT_TAG>(
+  props: ButtonGroupProps<C>
+) => ReactElement | null;
+
+export const ButtonGroup: ButtonGroupComponent & { displayName?: string } = forwardRef((props, ref) => {
   const { as: Component = DEFAULT_TAG, children, size, level, variant, disabled, ...rest } = props;
 
   const context = useMemo(() => ({ size, level, variant, disabled }), [size, level, variant, disabled]);

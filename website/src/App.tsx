@@ -1,4 +1,4 @@
-import { Button } from '@agile-ui/react';
+import { Button, Stack } from '@agile-ui/react';
 import { useTimeout } from '@agile-ui/react-hooks';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
@@ -16,8 +16,8 @@ export const App = () => {
 
   return (
     <>
-      <div style={{ padding: '20px' }}>
-        <Button as={Link} to={''} ref={btnRef} level={'primary'}>
+      <Stack as={'span'} direction={'row'} style={{ padding: '20px' }}>
+        <Button to={''} as={Link} ref={btnRef} level={'primary'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
@@ -28,7 +28,7 @@ export const App = () => {
         <Button level={'warning'}>中文按钮</Button>
         &nbsp;&nbsp;
         <Button level={'danger'}>中文按钮</Button>
-      </div>
+      </Stack>
       <div style={{ padding: '20px' }}>
         <Button level={'primary'} variant={'outline'}>
           中文按钮
