@@ -1,6 +1,8 @@
 {
   "extends": "../tsconfig.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
   "references": [
     {
       "path": "@agile-ui/react"
