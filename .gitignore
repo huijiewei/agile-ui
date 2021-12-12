@@ -7,3 +7,4 @@ dist-ssr
 .idea
 .vscode
 .eslintcache
+.docgen
