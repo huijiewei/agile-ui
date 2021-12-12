@@ -1,7 +1,6 @@
 import './wdyr';
 
-import '@agile-ui/react/styles/reset.css';
-import '@agile-ui/react/styles/theme.css';
+import './styles/theme.css';
 
 import { StrictMode } from 'react';
 import { render } from 'react-dom';

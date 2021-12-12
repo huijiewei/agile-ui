@@ -7,4 +7,5 @@ globalStyle('body', {
   fontFamily: themeVars.font.body,
   fontSize: themeVars.fontSize.md,
   backgroundColor: themeVars.color.white,
+  color: themeVars.color.black,
 });
