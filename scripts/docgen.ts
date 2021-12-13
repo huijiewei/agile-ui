@@ -24,7 +24,13 @@ const docgenParser = withCustomConfig('tsconfig.json', {
       return false;
     }
 
-    return prop.name !== 'ref';
+    if (prop.name === 'ref') {
+      return false;
+    }
+
+    //log(prop);
+
+    return true;
   },
 });
 

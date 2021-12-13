@@ -25,7 +25,7 @@ const size = {
 };
 
 const level = {
-  primary: style({
+  primary: {
     borderColor: themeVars.color.primary['600'],
     selectors: {
       '&:hover': {
@@ -35,8 +35,8 @@ const level = {
         borderColor: themeVars.color.primary['800'],
       },
     },
-  }),
-  success: style({
+  },
+  success: {
     borderColor: themeVars.color.success['600'],
     selectors: {
       '&:hover': {
@@ -46,8 +46,8 @@ const level = {
         borderColor: themeVars.color.success['800'],
       },
     },
-  }),
-  natural: style({
+  },
+  natural: {
     borderColor: themeVars.color.natural['600'],
     selectors: {
       '&:hover': {
@@ -57,8 +57,8 @@ const level = {
         borderColor: themeVars.color.natural['800'],
       },
     },
-  }),
-  warning: style({
+  },
+  warning: {
     borderColor: themeVars.color.warning['600'],
     selectors: {
       '&:hover': {
@@ -68,8 +68,8 @@ const level = {
         borderColor: themeVars.color.warning['800'],
       },
     },
-  }),
-  danger: style({
+  },
+  danger: {
     borderColor: themeVars.color.danger['600'],
     selectors: {
       '&:hover': {
@@ -79,32 +79,42 @@ const level = {
         borderColor: themeVars.color.danger['800'],
       },
     },
-  }),
+  },
 };
 
 const variant = {
-  solid: style({
+  solid: {
     color: themeVars.color.white,
-  }),
-  outline: style({
+  },
+  outline: {
     backgroundColor: themeVars.color.white,
-  }),
-  ghost: style({}),
-  link: style({}),
+  },
+  ghost: {},
+  link: {},
 };
 
-export const variants = recipe({
+export const buttonRecipes = recipe({
   base,
   variants: {
     size,
     level,
     variant,
+    /**
+     * If `true`, the button will be disabled.
+     */
     disabled: {
       true: {
         cursor: 'not-allowed',
         pointerEvents: 'none',
         opacity: 0.5,
       },
+      false: {},
+    },
+    /**
+     * If `true`, the button will be styled in its active state.
+     */
+    active: {
+      true: {},
       false: {},
     },
   },
@@ -282,4 +292,4 @@ export const variants = recipe({
   ],
 });
 
-export type ButtonVariants = RecipeVariants<typeof variants>;
+export type ButtonVariants = RecipeVariants<typeof buttonRecipes>;

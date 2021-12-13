@@ -1,17 +1,18 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { createContext, useContext, useMemo } from 'react';
+import { useMemo } from 'react';
+import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { ButtonVariants } from './Button.css';
 
-type ButtonGroupContextProps = ButtonVariants;
+type ButtonGroupProps = Pick<ButtonVariants, 'disabled' | 'variant' | 'level' | 'size'>;
+//type ButtonGroupProps = Omit<ButtonVariants, 'active'>;
 
-const ButtonGroupContext = createContext<ButtonGroupContextProps>(undefined);
+const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
+  strict: false,
+  name: 'ButtonGroupContext',
+});
 
-export const useButtonGroup = (): ButtonGroupContextProps => {
-  return useContext(ButtonGroupContext);
-};
-
-type ButtonGroupProps = ButtonGroupContextProps;
+export { useButtonGroup };
 
 export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props, ref) => {
   const { as: Component = 'div', children, size, level, variant, disabled, ...rest } = props;
@@ -19,11 +20,11 @@ export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props,
   const context = useMemo(() => ({ size, level, variant, disabled }), [size, level, variant, disabled]);
 
   return (
-    <ButtonGroupContext.Provider value={context}>
+    <ButtonGroupProvider value={context}>
       <Component {...rest} ref={ref}>
         {children}
       </Component>
-    </ButtonGroupContext.Provider>
+    </ButtonGroupProvider>
   );
 });
 

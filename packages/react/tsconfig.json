@@ -1,5 +1,5 @@
 {
-  "include": ["src", "styles"],
+  "include": ["src/**/*", "styles"],
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",

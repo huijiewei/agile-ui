@@ -3,7 +3,7 @@ import { __DEV__, dataAttr } from '@agile-ui/utils';
 import clsx from 'clsx';
 import { ElementType, ReactElement, useCallback, useState } from 'react';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { ButtonVariants, variants } from './Button.css';
+import { buttonRecipes, ButtonVariants } from './Button.css';
 import { useButtonGroup } from './ButtonGroup';
 
 const useButtonType = (value?: ElementType) => {
@@ -22,9 +22,7 @@ const useButtonType = (value?: ElementType) => {
   return { ref: refCallback, type } as const;
 };
 
-const DEFAULT_TAG = 'button';
-
-export type ButtonOwnProps = ButtonVariants & {
+export type ButtonProps = ButtonVariants & {
   type?: 'button' | 'reset' | 'submit';
   active?: boolean;
   loading?: boolean;
@@ -34,11 +32,11 @@ export type ButtonOwnProps = ButtonVariants & {
   endIcon?: ReactElement;
 };
 
-export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((props, ref) => {
+export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) => {
   const group = useButtonGroup();
 
   const {
-    as: Component = DEFAULT_TAG,
+    as: Component = 'button',
     children,
     type,
     active,
@@ -59,7 +57,7 @@ export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((
   return (
     <Component
       {...rest}
-      className={clsx(className, variants({ size, level, variant, disabled }))}
+      className={clsx(className, buttonRecipes({ size, level, variant, disabled }))}
       disabled={disabled || loading}
       data-active={dataAttr(active)}
       data-loading={dataAttr(loading)}
