@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { polymorphicComponent } from '../utils/polymorphic';
 import { StackVariants, variants } from './Stack.css';
 
 const DEFAULT_TAG = 'div';

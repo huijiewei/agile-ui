@@ -1,4 +1,4 @@
-export * from './polymorphic/Polymorphic';
+export * from './utils/polymorphic';
 
 export * from './visually-hidden/VisuallyHidden';
 export * from './portal/Portal';

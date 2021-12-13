@@ -2,7 +2,7 @@ import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import clsx from 'clsx';
 import { ElementType, ReactElement, useCallback, useState } from 'react';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { polymorphicComponent } from '../utils/polymorphic';
 import { ButtonVariants, variants } from './Button.css';
 import { useButtonGroup } from './ButtonGroup';
 

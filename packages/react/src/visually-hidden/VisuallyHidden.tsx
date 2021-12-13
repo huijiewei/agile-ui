@@ -1,11 +1,9 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { polymorphicComponent } from '../utils/polymorphic';
 import { root } from './VisuallyHidden.css';
 
-const DEFAULT_TAG = 'span';
-
-const VisuallyHidden = polymorphicComponent<typeof DEFAULT_TAG>((props, ref) => {
-  const { as: Component = DEFAULT_TAG, ...rest } = props;
+const VisuallyHidden = polymorphicComponent<'span'>((props, ref) => {
+  const { as: Component = 'span', ...rest } = props;
 
   return <Component {...rest} className={root} ref={ref} />;
 });

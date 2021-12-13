@@ -1,7 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../polymorphic/Polymorphic';
-
-const DEFAULT_TAG = 'span';
+import { polymorphicComponent } from '../utils/polymorphic';
 
 type TextProps = {
   /**
@@ -38,8 +36,8 @@ type TextProps = {
   align?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end';
 };
 
-export const Text = polymorphicComponent<typeof DEFAULT_TAG, TextProps>((props, ref) => {
-  const { as: Component = DEFAULT_TAG, children, ...restProps } = props;
+export const Text = polymorphicComponent<'span', TextProps>((props, ref) => {
+  const { as: Component = 'span', children, ...restProps } = props;
   return (
     <Component {...restProps} ref={ref}>
       {children}
