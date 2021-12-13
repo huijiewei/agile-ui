@@ -4,8 +4,6 @@ import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { ButtonVariants } from './Button.css';
 
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-
 //type ButtonGroupProps = Pick<ButtonVariants, 'disabled' | 'variant' | 'level' | 'size'>;
 type ButtonGroupProps = Omit<ButtonVariants, 'active'>;
 
