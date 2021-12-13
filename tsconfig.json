@@ -1,12 +1,12 @@
 {
-  "include": ["src"],
+  "include": ["src", "scripts"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
     "lib": ["dom", "esnext"],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "rootDir": "./",
+    "baseUrl": "./",
     "paths": {
       "@agile-ui/*": ["packages/*/src"]
     }
