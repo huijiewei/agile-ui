@@ -1,6 +1,6 @@
 {
-  "include": ["src/**/*", "styles"],
   "extends": "../../tsconfig.json",
+  "include": ["src", "styles"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

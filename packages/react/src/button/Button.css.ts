@@ -1,20 +1,5 @@
-import { style } from '@vanilla-extract/css';
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { themeVars } from '../theme/styles/vars.css';
-
-const base = style({
-  cursor: 'pointer',
-  whiteSpace: 'nowrap',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: 0,
-  outline: 'none',
-  border: themeVars.border['1px'],
-  borderRadius: themeVars.radius.md,
-  lineHeight: themeVars.lineHeight.base,
-  padding: '0 16px',
-});
 
 const size = {
   xs: { fontSize: themeVars.fontSize.xs },
@@ -94,7 +79,19 @@ const variant = {
 };
 
 export const buttonRecipes = recipe({
-  base,
+  base: {
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 0,
+    outline: 'none',
+    border: themeVars.border['1px'],
+    borderRadius: themeVars.radius.md,
+    lineHeight: themeVars.lineHeight.base,
+    padding: '0 16px',
+  },
   variants: {
     size,
     level,
