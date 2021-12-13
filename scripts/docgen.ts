@@ -1,7 +1,10 @@
-import * as console from 'console';
-import * as glob from 'fast-glob';
-import * as path from 'path';
-import { withDefaultConfig } from 'react-docgen-typescript';
+import glob from 'fast-glob';
+import path from 'path';
+import { withCustomConfig } from 'react-docgen-typescript';
+
+const log = (...args: unknown[]) => {
+  console.info(`[props-docs]`, ...args);
+};
 
 const filePaths = [path.resolve(__dirname, '../packages/react/src')]
   .map((folderPath) => {
@@ -12,11 +15,10 @@ const filePaths = [path.resolve(__dirname, '../packages/react/src')]
   })
   .flat();
 
-console.log(filePaths);
+log(filePaths);
 
-const docgenParser = withDefaultConfig({
+const docgenParser = withCustomConfig('tsconfig.json', {
   savePropValueAsString: true,
-  shouldExtractLiteralValuesFromEnum: true,
   propFilter: (prop: { name: string }) => {
     if (prop.name === 'as') {
       return false;

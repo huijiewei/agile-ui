@@ -1,5 +1,5 @@
 {
-  "include": ["src", "scripts"],
+  "include": ["**/src", "scripts"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "target": "esnext",
@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@agile-ui/*": ["packages/*/src"]
     }

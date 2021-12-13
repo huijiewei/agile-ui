@@ -1,0 +1,12 @@
+{
+  "include": ["src", "styles"],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@agile-ui/react-hooks": ["../react-hooks/src"],
+      "@agile-ui/tokens": ["../tokens/src"],
+      "@agile-ui/utils": ["../utils/src"]
+    }
+  }
+}
