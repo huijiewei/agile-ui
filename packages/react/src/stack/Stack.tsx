@@ -1,17 +1,12 @@
-import { PolymorphicComponentProps } from '@agile-ui/react';
-import { ElementType, forwardRef, ReactElement } from 'react';
 import { __DEV__ } from '@agile-ui/utils';
+import { polymorphicComponent } from '../polymorphic/Polymorphic';
 import { StackVariants, variants } from './Stack.css';
 
 const DEFAULT_TAG = 'div';
 
-type Props = StackVariants;
+type StackProps = StackVariants;
 
-export type StackProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
-
-type StackComponent = <C extends ElementType = typeof DEFAULT_TAG>(props: StackProps<C>) => ReactElement | null;
-
-export const Stack: StackComponent & { displayName?: string } = forwardRef((props, ref) => {
+export const Stack = polymorphicComponent<typeof DEFAULT_TAG, StackProps>((props, ref) => {
   const { as: Component = DEFAULT_TAG, children, direction = 'column', ...rest } = props;
 
   return (

@@ -1,6 +1,5 @@
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
-import { themeVars } from '../theme/styles/vars.css';
 import { style } from '@vanilla-extract/css';
+import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 
 const base = style({
   display: 'flex',

@@ -1,22 +1,18 @@
-import { ElementType, forwardRef, ReactElement, RefObject, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { __DEV__ } from '@agile-ui/utils';
 import { useIsomorphicEffect } from '@agile-ui/react-hooks';
-import { PolymorphicComponentProps } from '@agile-ui/react';
+import { __DEV__ } from '@agile-ui/utils';
+import { RefObject, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { polymorphicComponent } from '../polymorphic/Polymorphic';
 
 const MAX_Z_INDEX = 811223;
 
 const DEFAULT_TAG = 'div';
 
-type Props = {
+type PortalProps = {
   containerRef?: RefObject<HTMLElement>;
 };
 
-export type PortalProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
-
-type PortalComponent = <C extends ElementType = typeof DEFAULT_TAG>(props: PortalProps<C>) => ReactElement | null;
-
-export const Portal: PortalComponent & { displayName?: string } = forwardRef((props, ref) => {
+export const Portal = polymorphicComponent<typeof DEFAULT_TAG, PortalProps>((props, ref) => {
   const { as: Component = DEFAULT_TAG, style, containerRef, ...rest } = props;
 
   const hostElement = containerRef?.current ?? globalThis?.document?.body;

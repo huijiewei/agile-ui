@@ -1,14 +1,30 @@
-import { ElementType, forwardRef, ReactElement, useCallback, useState } from 'react';
+import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
-import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
+import { ElementType, ReactElement, useCallback, useState } from 'react';
+import { polymorphicComponent } from '../polymorphic/Polymorphic';
+import { ButtonVariants, variants } from './Button.css';
 import { useButtonGroup } from './ButtonGroup';
-import { useMergeRefs } from '@agile-ui/react-hooks';
-import { PolymorphicComponentProps } from '@agile-ui/react';
+
+const useButtonType = (value?: ElementType) => {
+  const [isButton, setIsButton] = useState(!value);
+
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    if (!node) {
+      return;
+    }
+
+    setIsButton(node.tagName === 'BUTTON');
+  }, []);
+
+  const type = isButton ? 'button' : undefined;
+
+  return { ref: refCallback, type } as const;
+};
 
 const DEFAULT_TAG = 'button';
 
-export type Props = ButtonVariants & {
+export type ButtonOwnProps = ButtonVariants & {
   type?: 'button' | 'reset' | 'submit';
   active?: boolean;
   loading?: boolean;
@@ -18,11 +34,7 @@ export type Props = ButtonVariants & {
   endIcon?: ReactElement;
 };
 
-export type ButtonProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
-
-type ButtonComponent = <C extends ElementType = typeof Button>(props: ButtonProps<C>) => ReactElement | null;
-
-export const Button: ButtonComponent & { displayName?: string } = forwardRef((props, ref) => {
+export const Button = polymorphicComponent<typeof DEFAULT_TAG, ButtonOwnProps>((props, ref) => {
   const group = useButtonGroup();
 
   const {
@@ -53,7 +65,7 @@ export const Button: ButtonComponent & { displayName?: string } = forwardRef((pr
       data-loading={dataAttr(loading)}
       aria-disabled={disabled}
       type={type ?? defaultType}
-      ref={useMergeRefs(ref, _ref)}
+      ref={useMergedRef(ref, _ref)}
     >
       {startIcon && !loading && startIcon}
       {children}
@@ -65,19 +77,3 @@ export const Button: ButtonComponent & { displayName?: string } = forwardRef((pr
 if (__DEV__) {
   Button.displayName = 'Button';
 }
-
-const useButtonType = (value?: ElementType) => {
-  const [isButton, setIsButton] = useState(!value);
-
-  const refCallback = useCallback((node: HTMLElement | null) => {
-    if (!node) {
-      return;
-    }
-
-    setIsButton(node.tagName === 'BUTTON');
-  }, []);
-
-  const type = isButton ? 'button' : undefined;
-
-  return { ref: refCallback, type } as const;
-};

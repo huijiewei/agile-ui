@@ -1,10 +1,9 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { ElementType, forwardRef, ReactElement } from 'react';
-import { PolymorphicComponentProps } from '@agile-ui/react';
+import { polymorphicComponent } from '../polymorphic/Polymorphic';
 
 const DEFAULT_TAG = 'span';
 
-type Props = {
+type TextProps = {
   /**
    * The size of the text.
    *
@@ -39,11 +38,7 @@ type Props = {
   align?: 'left' | 'right' | 'center' | 'justify' | 'start' | 'end';
 };
 
-export type TextProps<C extends ElementType> = PolymorphicComponentProps<C, Props>;
-
-type TextComponent = <C extends ElementType = typeof DEFAULT_TAG>(props: TextProps<C>) => ReactElement | null;
-
-export const Text: TextComponent & { displayName?: string } = forwardRef((props, ref) => {
+export const Text = polymorphicComponent<typeof DEFAULT_TAG, TextProps>((props, ref) => {
   const { as: Component = DEFAULT_TAG, children, ...restProps } = props;
   return (
     <Component {...restProps} ref={ref}>
