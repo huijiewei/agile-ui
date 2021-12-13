@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.json",
   "include": ["src", "styles"],
   "compilerOptions": {
-    "strictNullChecks": false,
     "baseUrl": "./",
     "paths": {
       "@agile-ui/react-hooks": ["../react-hooks/src"],
