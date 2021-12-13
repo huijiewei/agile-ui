@@ -4,7 +4,7 @@ import { ButtonVariants, variants } from './Button.css';
 import clsx from 'clsx';
 import { useButtonGroup } from './ButtonGroup';
 import { useMergeRefs } from '@agile-ui/react-hooks';
-import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '@agile-ui/react';
 
 const DEFAULT_TAG = 'button';
 

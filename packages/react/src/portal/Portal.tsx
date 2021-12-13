@@ -2,7 +2,7 @@ import { ElementType, forwardRef, ReactElement, RefObject, useState } from 'reac
 import { createPortal } from 'react-dom';
 import { __DEV__ } from '@agile-ui/utils';
 import { useIsomorphicEffect } from '@agile-ui/react-hooks';
-import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '@agile-ui/react';
 
 const MAX_Z_INDEX = 811223;
 

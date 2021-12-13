@@ -1,7 +1,7 @@
 import { createContext, ElementType, forwardRef, ReactElement, useContext, useMemo } from 'react';
 import { ButtonVariants } from './Button.css';
 import { __DEV__ } from '@agile-ui/utils';
-import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '@agile-ui/react';
 
 type ButtonGroupContextProps = ButtonVariants;
 

@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, forwardRef, ReactElement } from 'react';
-import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '@agile-ui/react';
 
 const DEFAULT_TAG = 'span';
 

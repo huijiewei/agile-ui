@@ -1,4 +1,4 @@
-import { PolymorphicComponentProps } from '../polymorphic/Polymorphic';
+import { PolymorphicComponentProps } from '@agile-ui/react';
 import { ElementType, forwardRef, ReactElement } from 'react';
 import { __DEV__ } from '@agile-ui/utils';
 import { StackVariants, variants } from './Stack.css';
