@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@agile-ui/*": ["packages/*/src"]
     }
