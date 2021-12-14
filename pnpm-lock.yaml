@@ -231,7 +231,7 @@ packages:
       '@babel/compat-data': 7.16.4
       '@babel/core': 7.16.5
       '@babel/helper-validator-option': 7.14.5
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       semver: 6.3.0
     dev: true
 
@@ -3116,8 +3116,8 @@ packages:
     resolution: {integrity: sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==}
     dev: true
 
-  /browserslist/4.18.1:
-    resolution: {integrity: sha512-8ScCzdpPwR2wQh8IT82CA2VgDwjHyqMovPBZSNH54+tm4Jk2pCuv90gmAdH6J84OCRWi0b4gMe6O6XPXuJnjgQ==}
+  /browserslist/4.19.0:
+    resolution: {integrity: sha512-JGHzm73ei2OnAcobcQ61GXNnN6vDCg5Oz5MayudL+FyzjoLnCzUWnuLtDLMIYw8aXgQzzdCZMVky+fftD5jbtA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
@@ -3198,7 +3198,7 @@ packages:
   /caniuse-api/3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       caniuse-lite: 1.0.30001286
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -3495,7 +3495,7 @@ packages:
   /core-js-compat/3.19.3:
     resolution: {integrity: sha512-59tYzuWgEEVU9r+SRgceIGXSSUn47JknoiXW6Oq7RW8QHjXWz3/vp8pa7dbtuVu40sewz3OP3JmQEcDdztrLhA==}
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       semver: 7.0.0
     dev: true
 
@@ -7485,7 +7485,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       caniuse-api: 3.0.0
       colord: 2.9.1
       postcss: 8.4.5
@@ -7555,7 +7555,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       caniuse-api: 3.0.0
       cssnano-utils: 2.0.1_postcss@8.4.5
       postcss: 8.4.5
@@ -7591,7 +7591,7 @@ packages:
       postcss: ^8.2.15
     dependencies:
       alphanum-sort: 1.0.2
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       cssnano-utils: 2.0.1_postcss@8.4.5
       postcss: 8.4.5
       postcss-value-parser: 4.2.0
@@ -7717,7 +7717,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       postcss: 8.4.5
       postcss-value-parser: 4.2.0
     dev: true
@@ -7761,7 +7761,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       caniuse-api: 3.0.0
       postcss: 8.4.5
     dev: true
@@ -8843,7 +8843,7 @@ packages:
     peerDependencies:
       postcss: ^8.2.15
     dependencies:
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       postcss: 8.4.5
       postcss-selector-parser: 6.0.7
     dev: true
@@ -9584,7 +9584,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.1
       acorn: 8.6.0
       acorn-import-assertions: 1.8.0_acorn@8.6.0
-      browserslist: 4.18.1
+      browserslist: 4.19.0
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.8.3
       es-module-lexer: 0.9.3

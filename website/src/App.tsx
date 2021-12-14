@@ -1,7 +1,7 @@
 import { Button, Stack } from '@agile-ui/react';
 import { useTimeout } from '@agile-ui/react-hooks';
-import { Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 export const App = () => {
   useTimeout(() => {
@@ -28,6 +28,8 @@ export const App = () => {
         <Button level={'warning'}>中文按钮</Button>
         &nbsp;&nbsp;
         <Button level={'danger'}>中文按钮</Button>
+        &nbsp;&nbsp;
+        <Button disabled>禁用按钮</Button>
       </Stack>
       <div style={{ padding: '20px' }}>
         <Button level={'primary'} variant={'outline'}>
@@ -48,6 +50,10 @@ export const App = () => {
         &nbsp;&nbsp;
         <Button level={'danger'} variant={'outline'}>
           中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant={'outline'} disabled>
+          禁用按钮
         </Button>
       </div>
       <div style={{ padding: '20px' }}>
@@ -70,6 +76,10 @@ export const App = () => {
         <Button level={'danger'} variant={'ghost'}>
           中文按钮
         </Button>
+        &nbsp;&nbsp;
+        <Button variant={'ghost'} disabled>
+          禁用按钮
+        </Button>
       </div>
       <div style={{ padding: '20px' }}>
         <Button level={'primary'} variant={'link'}>
@@ -90,6 +100,10 @@ export const App = () => {
         &nbsp;&nbsp;
         <Button level={'danger'} variant={'link'}>
           中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant={'link'} disabled>
+          禁用按钮
         </Button>
       </div>
     </>

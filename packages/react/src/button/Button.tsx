@@ -3,8 +3,8 @@ import { __DEV__, dataAttr } from '@agile-ui/utils';
 import clsx from 'clsx';
 import { ElementType, ReactElement, useCallback, useState } from 'react';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { buttonRecipes, ButtonVariants } from './Button.css';
-import { useButtonGroup } from './ButtonGroup';
+import { buttonRecipes } from './Button.css';
+import { ButtonGroupProps, useButtonGroup } from './ButtonGroup';
 
 const useButtonType = (value?: ElementType) => {
   const [isButton, setIsButton] = useState(!value);
@@ -22,7 +22,7 @@ const useButtonType = (value?: ElementType) => {
   return { ref: refCallback, type } as const;
 };
 
-export type ButtonProps = ButtonVariants & {
+export type ButtonProps = ButtonGroupProps & {
   type?: 'button' | 'reset' | 'submit';
   active?: boolean;
   loading?: boolean;
@@ -61,7 +61,6 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       disabled={disabled || loading}
       data-active={dataAttr(active)}
       data-loading={dataAttr(loading)}
-      aria-disabled={disabled}
       type={type ?? defaultType}
       ref={useMergedRef(ref, _ref)}
     >

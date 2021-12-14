@@ -11,6 +11,8 @@ export const fontSizes = {
   xl: '1.5rem',
 };
 
+export type Size = keyof typeof fontSizes;
+
 export const fontWeights = {
   thin: '200',
   light: '300',

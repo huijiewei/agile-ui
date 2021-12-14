@@ -1,11 +1,15 @@
+import { ColorLevel, Size } from '@agile-ui/tokens';
 import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { ButtonVariants } from './Button.css';
 
-//type ButtonGroupProps = Pick<ButtonVariants, 'disabled' | 'variant' | 'level' | 'size'>;
-type ButtonGroupProps = Omit<ButtonVariants, 'active'>;
+export type ButtonGroupProps = {
+  disabled?: boolean;
+  variant?: 'solid' | 'outline' | 'ghost' | 'link';
+  level?: ColorLevel;
+  size?: Size;
+};
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
   strict: false,

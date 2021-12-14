@@ -67,3 +67,5 @@ export const colors = {
     900: '#C92A2A',
   },
 };
+
+export type ColorLevel = 'primary' | 'success' | 'natural' | 'warning' | 'danger';
