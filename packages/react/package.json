@@ -23,9 +23,9 @@
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@agile-ui/react-hooks": "workspace:^",
-    "@agile-ui/tokens": "workspace:^",
-    "@agile-ui/utils": "workspace:^",
+    "@agile-ui/react-hooks": "workspace:^1.0.0",
+    "@agile-ui/tokens": "workspace:^1.0.0",
+    "@agile-ui/utils": "workspace:^1.0.0",
     "clsx": "^1.1.1"
   },
   "devDependencies": {

@@ -9,8 +9,8 @@
     "analyze": "webpack build --mode production --env BUNDLE_ANALYZE=1"
   },
   "dependencies": {
-    "@agile-ui/react": "workspace:^",
-    "@agile-ui/react-hooks": "workspace:^",
+    "@agile-ui/react": "workspace:^1.0.0",
+    "@agile-ui/react-hooks": "workspace:^1.0.0",
     "@babel/runtime": "^7.16.5",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
