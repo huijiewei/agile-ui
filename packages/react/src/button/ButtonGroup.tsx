@@ -5,7 +5,6 @@ import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 
 export type ButtonGroupProps = {
-  disabled?: boolean;
   variant?: 'solid' | 'outline' | 'ghost' | 'link';
   level?: ColorLevel;
   size?: Size;
@@ -19,9 +18,9 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
 export { useButtonGroup };
 
 export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props, ref) => {
-  const { as: Component = 'div', children, size, level, variant, disabled, ...rest } = props;
+  const { as: Component = 'div', children, size, level, variant, ...rest } = props;
 
-  const context = useMemo(() => ({ size, level, variant, disabled }), [size, level, variant, disabled]);
+  const context = useMemo(() => ({ size, level, variant }), [size, level, variant]);
 
   return (
     <ButtonGroupProvider value={context}>

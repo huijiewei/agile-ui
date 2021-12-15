@@ -107,7 +107,7 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new VanillaExtractPlugin({ identifiers: 'short' }),
+      new VanillaExtractPlugin({ identifiers: isProduction ? 'short' : 'debug' }),
       isProduction &&
         new MiniCssExtractPlugin({
           filename: cssFileName,

@@ -1,5 +1,3 @@
-import { Dict } from './types';
-
 export const __DEV__ = process.env.NODE_ENV !== 'production';
 
 export const isBrowser = (): boolean => {
@@ -12,7 +10,7 @@ export const isArray = <T>(value: any): value is Array<T> => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isObject = (value: any): value is Dict => {
+export const isObject = (value: any): boolean => {
   const type = typeof value;
-  return value != null && (type === 'object' || type === 'function') && !isArray(value);
+  return !!value && (type == 'object' || type == 'function') && !isArray(value);
 };

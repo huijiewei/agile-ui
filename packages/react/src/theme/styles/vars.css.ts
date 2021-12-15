@@ -1,9 +1,5 @@
+import { borders, colors, fonts, fontSizes, fontWeights, lineHeights, radius } from '@agile-ui/tokens';
 import { createThemeContract } from '@vanilla-extract/css';
-
-import { fonts, fontSizes, fontWeights, lineHeights } from '@agile-ui/tokens';
-import { colors } from '@agile-ui/tokens';
-import { radius } from '@agile-ui/tokens';
-import { borders } from '@agile-ui/tokens';
 
 export const defaultTheme = {
   color: colors,
@@ -13,6 +9,17 @@ export const defaultTheme = {
   lineHeight: lineHeights,
   radius: radius,
   border: borders,
+  scrollArea: {
+    scrollbar: {
+      padding: '2px',
+      width: '6px',
+      height: '6px',
+    },
+    corner: {
+      width: '0',
+      height: '0',
+    },
+  },
 };
 
 export type Theme = typeof defaultTheme;

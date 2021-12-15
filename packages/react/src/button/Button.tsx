@@ -23,8 +23,9 @@ const useButtonType = (value?: ElementType) => {
 };
 
 export type ButtonProps = ButtonGroupProps & {
-  type?: 'button' | 'reset' | 'submit';
+  type?: 'submit' | 'reset' | 'button';
   active?: boolean;
+  disabled?: boolean;
   loading?: boolean;
   loadingText?: string;
   fullWidth?: boolean;
@@ -40,7 +41,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     children,
     type,
     active,
-    disabled = group?.disabled || false,
+    disabled = false,
     loading = false,
     loadingText,
     startIcon,

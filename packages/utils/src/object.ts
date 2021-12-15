@@ -2,14 +2,13 @@ import { Dict } from './types';
 
 // 从对象中排除属性后返回新对象
 export const omit = <T extends Dict, K extends keyof T>(object: T, keys: K[]) => {
-  const result: Dict = {};
-
-  Object.keys(object).forEach((key) => {
-    if (keys.includes(key as K)) return;
-    result[key] = object[key];
-  });
-
-  return result as Omit<T, K>;
+  return keys.reduce(
+    (acc, key) => {
+      delete acc[key];
+      return acc;
+    },
+    { ...object }
+  ) as Omit<T, K>;
 };
 
 // 从对象中拾取属性后返回新对象

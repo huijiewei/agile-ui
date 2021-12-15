@@ -1,4 +1,4 @@
-import { Button, Stack } from '@agile-ui/react';
+import { Button, Calendar, ScrollArea, Stack } from '@agile-ui/react';
 import { useTimeout } from '@agile-ui/react-hooks';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -105,6 +105,32 @@ export const App = () => {
         <Button variant={'link'} disabled>
           禁用按钮
         </Button>
+      </div>
+      <div>
+        <Calendar>1</Calendar>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <ScrollArea type={'always'} style={{ height: '200px' }}>
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+          <p>5</p>
+          <p>6</p>
+          <p>7</p>
+          <p>8</p>
+          <p>9</p>
+          <p>10</p>
+          <p>11</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+          <p>12</p>
+        </ScrollArea>
       </div>
     </>
   );
