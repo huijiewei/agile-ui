@@ -24,12 +24,12 @@ import { themeVars } from '../theme/styles/vars.css';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 import {
-  displayAbsoluteClass,
   scrollAreaClass,
   scrollAreaContentClass,
-  scrollAreaScrollbarClass,
+  scrollAreaCornerRecipe,
+  scrollAreaScrollbarRecipe,
   scrollAreaThumbClass,
-  scrollAreaViewportClass,
+  scrollAreaViewportRecipe,
   visibleHiddenClass,
   visibleVisibleClass,
 } from './ScrollArea.css';
@@ -77,7 +77,6 @@ const [ScrollAreaProvider, useScrollArea] = createContext<ScrollAreaContextValue
 type ScrollAreaProps = {
   type?: Type;
   direction?: Direction;
-  scrollbarSize?: number;
   scrollHideDelay?: number;
   viewportRef?: ForwardedRef<HTMLDivElement>;
 };
@@ -90,6 +89,7 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
     className,
     children,
     scrollHideDelay = 900,
+    viewportRef,
     style,
     ...rest
   } = props;
@@ -158,15 +158,15 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
           ...style,
         }}
       >
-        <ScrollAreaViewport>{children}</ScrollAreaViewport>
+        <ScrollAreaViewport ref={viewportRef}>{children}</ScrollAreaViewport>
         <ScrollAreaScrollbar
-          className={scrollAreaScrollbarClass({ orientation: 'horizontal', direction: computedDirection })}
+          className={scrollAreaScrollbarRecipe({ orientation: 'horizontal', direction: computedDirection })}
           orientation="horizontal"
         >
           <ScrollAreaThumb />
         </ScrollAreaScrollbar>
         <ScrollAreaScrollbar
-          className={scrollAreaScrollbarClass({ orientation: 'vertical', direction: computedDirection })}
+          className={scrollAreaScrollbarRecipe({ orientation: 'vertical', direction: computedDirection })}
           orientation="vertical"
         >
           <ScrollAreaThumb />
@@ -189,7 +189,7 @@ const ScrollAreaViewport = forwardRef<HTMLDivElement, ScrollAreaViewportProps>((
   return (
     <div
       {...rest}
-      className={scrollAreaViewportClass({
+      className={scrollAreaViewportRecipe({
         scrollbarXEnabled: context.scrollbarXEnabled,
         scrollbarYEnabled: context.scrollbarYEnabled,
       })}
@@ -335,7 +335,7 @@ const ScrollAreaScrollbarScroll = forwardRef<HTMLDivElement, ScrollAreaScrollbar
 
     const context = useScrollArea();
 
-    const isHorizontal = props.orientation === 'horizontal';
+    const isHorizontal = props.orientation == 'horizontal';
     const debounceScrollEnd = useDebounceCallback(() => send('SCROLL_END'), 100);
     const [state, send] = useStateMachine('hidden', {
       hidden: {
@@ -357,7 +357,7 @@ const ScrollAreaScrollbarScroll = forwardRef<HTMLDivElement, ScrollAreaScrollbar
     });
 
     useEffect(() => {
-      if (state === 'idle') {
+      if (state == 'idle') {
         const hideTimer = window.setTimeout(() => send('HIDE'), context.scrollHideDelay);
         return () => window.clearTimeout(hideTimer);
       }
@@ -371,7 +371,7 @@ const ScrollAreaScrollbarScroll = forwardRef<HTMLDivElement, ScrollAreaScrollbar
         let prevScrollPos = viewport[scrollDirection];
         const handleScroll = () => {
           const scrollPos = viewport[scrollDirection];
-          const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
+          const hasScrollInDirectionChanged = prevScrollPos != scrollPos;
           if (hasScrollInDirectionChanged) {
             send('SCROLL');
             debounceScrollEnd();
@@ -406,7 +406,7 @@ const ScrollAreaScrollbarAuto = forwardRef<HTMLDivElement, ScrollAreaScrollbarPr
 
   const context = useScrollArea();
   const [visible, setVisible] = useState(false);
-  const isHorizontal = props.orientation === 'horizontal';
+  const isHorizontal = props.orientation == 'horizontal';
 
   const handleResize = useDebounceCallback(() => {
     if (context.viewport) {
@@ -645,7 +645,6 @@ const ScrollAreaScrollbarImpl = forwardRef<HTMLDivElement, ScrollAreaScrollbarIm
       onDragScroll,
       onWheelScroll,
       onResize,
-      className,
       ...rest
     } = props;
 
@@ -703,10 +702,9 @@ const ScrollAreaScrollbarImpl = forwardRef<HTMLDivElement, ScrollAreaScrollbarIm
         <div
           {...rest}
           ref={composeRefs}
-          className={clsx(className, displayAbsoluteClass)}
           onPointerDown={mergeEventHandlers(props.onPointerDown, (event) => {
             const mainPointer = 0;
-            if (event.button === mainPointer) {
+            if (event.button == mainPointer) {
               const element = event.target as HTMLElement;
               element.setPointerCapture(event.pointerId);
 
@@ -791,14 +789,12 @@ if (__DEV__) {
 type ScrollAreaCornerImplProps = PrimitiveDivProps;
 type ScrollAreaCornerProps = ScrollAreaCornerImplProps;
 
-const ScrollAreaCorner = forwardRef<HTMLDivElement, ScrollAreaCornerProps>(
-  (props: ScrollAreaCornerProps, forwardedRef) => {
-    const context = useScrollArea();
-    const hasBothScrollbarsVisible = Boolean(context.scrollbarX && context.scrollbarY);
-    const hasCorner = context.type != 'scroll' && hasBothScrollbarsVisible;
-    return hasCorner ? <ScrollAreaCornerImpl {...props} ref={forwardedRef} /> : null;
-  }
-);
+const ScrollAreaCorner = forwardRef<HTMLDivElement, ScrollAreaCornerProps>((props: ScrollAreaCornerProps, ref) => {
+  const context = useScrollArea();
+  const hasBothScrollbarsVisible = Boolean(context.scrollbarX && context.scrollbarY);
+  const hasCorner = context.type != 'scroll' && hasBothScrollbarsVisible;
+  return hasCorner ? <ScrollAreaCornerImpl {...props} ref={ref} /> : null;
+});
 
 if (__DEV__) {
   ScrollAreaCorner.displayName = 'ScrollAreaCorner';
@@ -806,6 +802,7 @@ if (__DEV__) {
 
 const ScrollAreaCornerImpl = forwardRef<HTMLDivElement, ScrollAreaCornerImplProps>(
   (props: ScrollAreaCornerImplProps, ref) => {
+    const { className, ...rest } = props;
     const context = useScrollArea();
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -823,7 +820,9 @@ const ScrollAreaCornerImpl = forwardRef<HTMLDivElement, ScrollAreaCornerImplProp
       setWidth(width);
     });
 
-    return hasSize ? <div {...props} ref={ref} /> : null;
+    return hasSize ? (
+      <div className={clsx(className, scrollAreaCornerRecipe({ direction: context.direction }))} {...rest} ref={ref} />
+    ) : null;
   }
 );
 
@@ -852,7 +851,7 @@ const getScrollPositionFromPointer = (
   pointerPos: number,
   pointerOffset: number,
   sizes: Sizes,
-  dir: Direction = 'ltr'
+  direction: Direction = 'ltr'
 ) => {
   const thumbSizePx = getThumbSize(sizes);
   const thumbCenter = thumbSizePx / 2;
@@ -861,18 +860,18 @@ const getScrollPositionFromPointer = (
   const minPointerPos = sizes.scrollbar.paddingStart + offset;
   const maxPointerPos = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
   const maxScrollPos = sizes.content - sizes.viewport;
-  const scrollRange = dir === 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+  const scrollRange = direction == 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
   const interpolate = linearScale([minPointerPos, maxPointerPos], scrollRange as [number, number]);
   return interpolate(pointerPos);
 };
 
-const getThumbOffsetFromScroll = (scrollPos: number, sizes: Sizes, dir: Direction = 'ltr') => {
+const getThumbOffsetFromScroll = (scrollPos: number, sizes: Sizes, direction: Direction = 'ltr') => {
   const thumbSizePx = getThumbSize(sizes);
   const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
   const scrollbar = sizes.scrollbar.size - scrollbarPadding;
   const maxScrollPos = sizes.content - sizes.viewport;
   const maxThumbPos = scrollbar - thumbSizePx;
-  const scrollClampRange = dir === 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+  const scrollClampRange = direction == 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
   const scrollWithoutMomentum = clamp(scrollPos, scrollClampRange as [number, number]);
   const interpolate = linearScale([0, maxScrollPos], [0, maxThumbPos]);
   return interpolate(scrollWithoutMomentum);
@@ -880,7 +879,10 @@ const getThumbOffsetFromScroll = (scrollPos: number, sizes: Sizes, dir: Directio
 
 const linearScale = (input: readonly [number, number], output: readonly [number, number]) => {
   return (value: number) => {
-    if (input[0] === input[1] || output[0] === output[1]) return output[0];
+    if (input[0] == input[1] || output[0] == output[1]) {
+      return output[0];
+    }
+
     const ratio = (output[1] - output[0]) / (input[1] - input[0]);
     return output[0] + ratio * (value - input[0]);
   };
@@ -896,8 +898,8 @@ const addUnlinkedScrollListener = (node: HTMLElement, handler = () => {}) => {
   let rAF = 0;
   (function loop() {
     const position = { left: node.scrollLeft, top: node.scrollTop };
-    const isHorizontalScroll = prevPosition.left !== position.left;
-    const isVerticalScroll = prevPosition.top !== position.top;
+    const isHorizontalScroll = prevPosition.left != position.left;
+    const isVerticalScroll = prevPosition.top != position.top;
     if (isHorizontalScroll || isVerticalScroll) handler();
     prevPosition = position;
     rAF = window.requestAnimationFrame(loop);

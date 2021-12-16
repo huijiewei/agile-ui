@@ -6,11 +6,13 @@ export const scrollAreaClass = style({
   position: 'relative',
   overflow: 'hidden',
 });
-export const scrollAreaScrollbarClass = recipe({
+
+export const scrollAreaScrollbarRecipe = recipe({
   base: {
     display: 'flex',
     userSelect: 'none',
     touchAction: 'none',
+    position: 'absolute',
     padding: themeVars.scrollArea.scrollbar.padding,
     transition: 'background-color 150ms ease, opacity 150ms ease',
     ':hover': {
@@ -72,7 +74,7 @@ export const scrollAreaScrollbarClass = recipe({
   ],
 });
 
-export const scrollAreaViewportClass = recipe({
+export const scrollAreaViewportRecipe = recipe({
   base: {
     width: '100%',
     height: '100%',
@@ -118,7 +120,26 @@ export const scrollAreaThumbClass = style({
   borderRadius: themeVars.radius.md,
   transition: 'background-color 150ms ease, opacity 150ms ease',
   ':hover': {
-    backgroundColor: 'rgb(0, 0, 0, 0.5)',
+    backgroundColor: 'rgb(0, 0, 0, 0.39)',
+  },
+});
+
+export const scrollAreaCornerRecipe = recipe({
+  base: {
+    position: 'absolute',
+    bottom: 0,
+    width: themeVars.scrollArea.corner.width,
+    height: themeVars.scrollArea.corner.height,
+  },
+  variants: {
+    direction: {
+      rtl: {
+        left: 0,
+      },
+      ltr: {
+        right: 0,
+      },
+    },
   },
 });
 
@@ -128,8 +149,4 @@ export const visibleHiddenClass = style({
 
 export const visibleVisibleClass = style({
   visibility: 'visible',
-});
-
-export const displayAbsoluteClass = style({
-  position: 'absolute',
 });
