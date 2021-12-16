@@ -26,7 +26,7 @@ export const Portal = polymorphicComponent<'div', PortalProps>((props, ref) => {
         {...rest}
         ref={ref}
         style={
-          hostElement === document.body
+          hostElement == document.body
             ? {
                 position: 'absolute',
                 top: 0,

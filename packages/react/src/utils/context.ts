@@ -8,10 +8,10 @@ export type CreateContextOptions = {
 
 type CreateContextReturn<T> = [Provider<T>, () => T, Context<T>];
 
-export const createContext = <ContextType>(options: CreateContextOptions = {}) => {
+export const createContext = <ContextValueType>(options: CreateContextOptions = {}) => {
   const { strict = true, errorMessage = 'useContext must be used within a Provider', name } = options;
 
-  const Context = ReactCreateContext<ContextType | undefined>(undefined);
+  const Context = ReactCreateContext<ContextValueType | undefined>(undefined);
 
   Context.displayName = name;
 
@@ -25,5 +25,5 @@ export const createContext = <ContextType>(options: CreateContextOptions = {}) =
     return context;
   };
 
-  return [Context.Provider, useContext, Context] as CreateContextReturn<ContextType>;
+  return [Context.Provider, useContext, Context] as CreateContextReturn<ContextValueType>;
 };

@@ -11,12 +11,12 @@ export const Presence = (props: PresenceProps) => {
   const presence = usePresence(present);
 
   const child = (
-    typeof children === 'function' ? children({ present: presence.isPresent }) : Children.only(children)
+    typeof children == 'function' ? children({ present: presence.isPresent }) : Children.only(children)
   ) as ReactElement;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useMergedRef(presence.ref, (child as any).ref);
-  const forceMount = typeof children === 'function';
+  const forceMount = typeof children == 'function';
 
   return forceMount || presence.isPresent ? cloneElement(child, { ref }) : null;
 };
@@ -45,13 +45,13 @@ const usePresence = (present: boolean) => {
 
   useEffect(() => {
     const currentAnimationName = getAnimationName(stylesRef.current);
-    prevAnimationNameRef.current = state === 'mounted' ? currentAnimationName : 'none';
+    prevAnimationNameRef.current = state == 'mounted' ? currentAnimationName : 'none';
   }, [state]);
 
   useLayoutEffect(() => {
     const styles = stylesRef.current;
     const wasPresent = prevPresentRef.current;
-    const hasPresentChanged = wasPresent !== present;
+    const hasPresentChanged = wasPresent != present;
 
     if (hasPresentChanged) {
       const prevAnimationName = prevAnimationNameRef.current;
@@ -59,10 +59,10 @@ const usePresence = (present: boolean) => {
 
       if (present) {
         send('MOUNT');
-      } else if (currentAnimationName === 'none' || styles?.display === 'none') {
+      } else if (currentAnimationName == 'none' || styles?.display == 'none') {
         send('UNMOUNT');
       } else {
-        const isAnimating = prevAnimationName !== currentAnimationName;
+        const isAnimating = prevAnimationName != currentAnimationName;
 
         if (wasPresent && isAnimating) {
           send('ANIMATION_OUT');
@@ -80,12 +80,12 @@ const usePresence = (present: boolean) => {
       const handleAnimationEnd = (event: AnimationEvent) => {
         const currentAnimationName = getAnimationName(stylesRef.current);
         const isCurrentAnimation = currentAnimationName.includes(event.animationName);
-        if (event.target === node && isCurrentAnimation) {
+        if (event.target == node && isCurrentAnimation) {
           send('ANIMATION_END');
         }
       };
       const handleAnimationStart = (event: AnimationEvent) => {
-        if (event.target === node) {
+        if (event.target == node) {
           // if animation occurred, store its name as the previous animation.
           prevAnimationNameRef.current = getAnimationName(stylesRef.current);
         }

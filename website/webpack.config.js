@@ -143,7 +143,7 @@ module.exports = (env, argv) => {
               from: 'public',
               to: './',
               globOptions: {
-                ignore: ['.DS_Store', '**/index.html'],
+                ignore: ['**/.DS_Store', '**/index.html'],
               },
             },
           ],
