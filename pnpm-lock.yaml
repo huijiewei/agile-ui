@@ -25,6 +25,7 @@ importers:
       eslint-plugin-prettier: ^4.0.0
       eslint-plugin-react: ^7.27.1
       eslint-plugin-react-hooks: ^4.3.0
+      fast-glob: ^3.2.7
       fs-extra: ^10.0.0
       husky: ^7.0.4
       jest: ^27.4.5
@@ -54,6 +55,7 @@ importers:
       eslint-plugin-prettier: 4.0.0_90bd2ba582f6d1348d73031482d782e2
       eslint-plugin-react: 7.27.1_eslint@8.4.1
       eslint-plugin-react-hooks: 4.3.0_eslint@8.4.1
+      fast-glob: 3.2.7
       fs-extra: 10.0.0
       husky: 7.0.4
       jest: 27.4.5
