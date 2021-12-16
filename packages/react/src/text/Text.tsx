@@ -37,9 +37,9 @@ type TextProps = {
 };
 
 export const Text = polymorphicComponent<'span', TextProps>((props, ref) => {
-  const { as: Component = 'span', children, ...restProps } = props;
+  const { as: Component = 'span', children, ...rest } = props;
   return (
-    <Component {...restProps} ref={ref}>
+    <Component {...rest} ref={ref}>
       {children}
     </Component>
   );

@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../theme/styles/vars.css';
 
@@ -87,6 +88,14 @@ export const scrollAreaViewportRecipe = recipe({
     },
   },
   variants: {
+    offsetScrollbars: {
+      true: {},
+      false: {},
+    },
+    direction: {
+      rtl: {},
+      ltr: {},
+    },
     scrollbarXEnabled: {
       true: {
         overflowX: 'scroll',
@@ -104,6 +113,32 @@ export const scrollAreaViewportRecipe = recipe({
       },
     },
   },
+  compoundVariants: [
+    {
+      variants: {
+        offsetScrollbars: true,
+        direction: 'rtl',
+      },
+      style: {
+        paddingLeft: calc(themeVars.scrollArea.scrollbar.padding)
+          .multiply(2)
+          .add(themeVars.scrollArea.scrollbar.width)
+          .toString(),
+      },
+    },
+    {
+      variants: {
+        offsetScrollbars: true,
+        direction: 'ltr',
+      },
+      style: {
+        paddingRight: calc(themeVars.scrollArea.scrollbar.padding)
+          .multiply(2)
+          .add(themeVars.scrollArea.scrollbar.width)
+          .toString(),
+      },
+    },
+  ],
 });
 
 export const scrollAreaContentClass = style({
@@ -121,6 +156,19 @@ export const scrollAreaThumbClass = style({
   transition: 'background-color 150ms ease, opacity 150ms ease',
   ':hover': {
     backgroundColor: 'rgb(0, 0, 0, 0.39)',
+  },
+  selectors: {
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '100%',
+      height: '100%',
+      minWidth: 39,
+      minHeight: 39,
+    },
   },
 });
 

@@ -50,7 +50,7 @@ type Sizes = {
 type ScrollAreaContextValue = {
   type: Type;
   direction: Direction;
-  scrollbarSize?: number;
+  offsetScrollbars?: boolean;
   scrollHideDelay: number;
   scrollArea: HTMLDivElement | null;
   viewport: HTMLDivElement | null;
@@ -75,9 +75,38 @@ const [ScrollAreaProvider, useScrollArea] = createContext<ScrollAreaContextValue
 });
 
 type ScrollAreaProps = {
+  /**
+   * 描述了滚动条可见性的性质，类似于 macOS 中的滚动条偏好设置如何控制本地滚动条的可见性。
+   *
+   * "auto" 当内容在相应方向上溢出时，滚动条是可见的。
+   * "always" 无论内容是否溢出，滚动条都是可见的。
+   * "scroll" 当用户沿其相应方向滚动时，滚动条是可见的。
+   * "hover" 当用户沿着其相应的方向滚动以及在滚动区域上悬停时，滚动条是可见的。
+   *
+   * @default 'hover'
+   */
   type?: Type;
+  /**
+   * 滚动区的阅读方向。假定为 "ltr"（从左到右）阅读模式。
+   *
+   * @default 'ltr'
+   */
   direction?: Direction;
+  /**
+   * 如果类型被设置为 "scroll" 或 "hover"，这个属性决定了在用户停止与滚动条互动后隐藏滚动条的时间长度，以毫秒为单位。
+   *
+   * @default 600
+   */
   scrollHideDelay?: number;
+  /**
+   * 滚动条是否用 padding 进行偏移
+   *
+   * @default false
+   */
+  offsetScrollbars?: boolean;
+  /**
+   * The scroll area content.
+   */
   viewportRef?: ForwardedRef<HTMLDivElement>;
 };
 
@@ -88,7 +117,8 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
     direction,
     className,
     children,
-    scrollHideDelay = 900,
+    offsetScrollbars = false,
+    scrollHideDelay = 600,
     viewportRef,
     style,
     ...rest
@@ -113,6 +143,7 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
     () => ({
       type,
       direction: computedDirection,
+      offsetScrollbars,
       scrollHideDelay,
       scrollArea,
       viewport,
@@ -133,6 +164,7 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
     [
       computedDirection,
       content,
+      offsetScrollbars,
       scrollArea,
       scrollHideDelay,
       scrollbarX,
@@ -192,6 +224,8 @@ const ScrollAreaViewport = forwardRef<HTMLDivElement, ScrollAreaViewportProps>((
       className={scrollAreaViewportRecipe({
         scrollbarXEnabled: context.scrollbarXEnabled,
         scrollbarYEnabled: context.scrollbarYEnabled,
+        offsetScrollbars: context.offsetScrollbars,
+        direction: context.direction,
       })}
       ref={composedRefs}
     >
