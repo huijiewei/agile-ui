@@ -4,7 +4,7 @@ import path from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
 
 const log = (...args: unknown[]) => {
-  console.info(`[props-docs]`, ...args);
+  console.info(`[docgen]`, ...args);
 };
 
 const filePaths = [path.resolve(__dirname, '../packages/react/src')]
