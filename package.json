@@ -7,7 +7,7 @@
     "test": "jest",
     "docs-gen": "node -r esbuild-register scripts/docgen.ts",
     "website-start": "pnpm run start --filter=website",
-    "website-build": "pnpm run build --filter=website",
+    "website-build": "node -r esbuild-register scripts/docgen.ts && pnpm run build --filter=website",
     "website-analyze": "pnpm run analyze --filter=website",
     "prettier": "prettier --write .",
     "prettier:check": "prettier --check .",
@@ -44,10 +44,6 @@
     "prettier": "^2.5.1",
     "react-docgen-typescript": "^2.2.2",
     "typescript": "^4.5.4"
-  },
-  "engines": {
-    "node": ">=17",
-    "pnpm": ">=6"
   },
   "packageManager": "pnpm@6.23.6",
   "repository": {

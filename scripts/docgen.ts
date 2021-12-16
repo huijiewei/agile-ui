@@ -1,4 +1,5 @@
 import glob from 'fast-glob';
+import fs from 'fs-extra';
 import path from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
 
@@ -15,8 +16,6 @@ const filePaths = [path.resolve(__dirname, '../packages/react/src')]
   })
   .flat();
 
-log(filePaths);
-
 const docgenParser = withCustomConfig('tsconfig.json', {
   savePropValueAsString: true,
   propFilter: (prop: { name: string }) => {
@@ -28,12 +27,14 @@ const docgenParser = withCustomConfig('tsconfig.json', {
       return false;
     }
 
-    //log(prop);
-
     return true;
   },
 });
 
 const componentDocs = docgenParser.parse(filePaths);
 
-console.log(componentDocs);
+fs.ensureDirSync(path.join(__dirname, '../website/.docgen'));
+
+fs.writeJSONSync(path.join(__dirname, '../website/.docgen/docgen.json'), componentDocs, {
+  spaces: 2,
+});
