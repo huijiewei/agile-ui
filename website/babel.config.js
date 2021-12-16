@@ -1,3 +1,5 @@
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
   extends: '../babel.config.js',
   presets: [
@@ -5,8 +7,8 @@ module.exports = {
       '@babel/preset-react',
       {
         runtime: 'automatic',
-        development: process.env.NODE_ENV === 'development',
-        importSource: '@welldone-software/why-did-you-render',
+        development: isDevelopment,
+        importSource: isDevelopment ? '@welldone-software/why-did-you-render' : 'react',
       },
     ],
   ],

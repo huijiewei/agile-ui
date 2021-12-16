@@ -17,7 +17,6 @@ importers:
       '@types/react-dom': ^17.0.11
       '@typescript-eslint/eslint-plugin': ^5.7.0
       '@typescript-eslint/parser': ^5.7.0
-      '@welldone-software/why-did-you-render': ^6.2.3
       esbuild: ^0.14.5
       esbuild-register: ^3.2.1
       eslint: ^8.4.1
@@ -48,7 +47,6 @@ importers:
       '@types/react-dom': 17.0.11
       '@typescript-eslint/eslint-plugin': 5.7.0_915acdfead96f701b1277a1a723fc8d4
       '@typescript-eslint/parser': 5.7.0_eslint@8.4.1+typescript@4.5.4
-      '@welldone-software/why-did-you-render': 6.2.3
       esbuild: 0.14.5
       esbuild-register: 3.2.1_esbuild@0.14.5
       eslint: 8.4.1
@@ -125,9 +123,11 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.3
       '@vanilla-extract/css': ^1.6.8
       '@vanilla-extract/webpack-plugin': ^2.1.4
+      '@welldone-software/why-did-you-render': ^6.2.3
       babel-loader: ^8.2.3
       babel-plugin-optimize-clsx: ^2.6.2
       clsx: ^1.1.1
+      copy-webpack-plugin: ^10.1.0
       css-loader: ^6.5.1
       css-minimizer-webpack-plugin: ^3.2.0
       eslint-webpack-plugin: ^3.1.1
@@ -157,8 +157,10 @@ importers:
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.3_8e59b3f0e87318c463eedd29023ab4ad
       '@vanilla-extract/css': 1.6.8
       '@vanilla-extract/webpack-plugin': 2.1.4_webpack@5.65.0
+      '@welldone-software/why-did-you-render': 6.2.3_react@17.0.2
       babel-loader: 8.2.3_26251eab09162b25a254715ee98d7c5c
       babel-plugin-optimize-clsx: 2.6.2
+      copy-webpack-plugin: 10.1.0_webpack@5.65.0
       css-loader: 6.5.1_webpack@5.65.0
       css-minimizer-webpack-plugin: 3.2.0_esbuild@0.14.5+webpack@5.65.0
       eslint-webpack-plugin: 3.1.1_eslint@8.4.1+webpack@5.65.0
@@ -2627,12 +2629,13 @@ packages:
       webpack-dev-server: 4.6.0_webpack-cli@4.9.1+webpack@5.65.0
     dev: true
 
-  /@welldone-software/why-did-you-render/6.2.3:
+  /@welldone-software/why-did-you-render/6.2.3_react@17.0.2:
     resolution: {integrity: sha512-FQgi90jvC9uw2aALlonJfqaWOvU5UUBBVvdAnS2iryXwCc4YJkKsPJY5Y/LzaND3OIyk8XGUn1vTRn6hcem28Q==}
     peerDependencies:
       react: ^16 || ^17
     dependencies:
       lodash: 4.17.21
+      react: 17.0.2
     dev: true
 
   /@xtuc/ieee754/1.2.0:
@@ -2881,6 +2884,11 @@ packages:
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
+    dev: true
+
+  /array-union/3.0.1:
+    resolution: {integrity: sha512-1OvF9IbWwaeiM9VhzYXVQacMibxpXOMYVNIvMtKRyX9SImBXpKcFr8XvFDeEslCyuH/t6KRt7HEO94AlP8Iatw==}
+    engines: {node: '>=12'}
     dev: true
 
   /array.prototype.flatmap/1.2.5:
@@ -3541,6 +3549,21 @@ packages:
   /cookie/0.4.0:
     resolution: {integrity: sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==}
     engines: {node: '>= 0.6'}
+    dev: true
+
+  /copy-webpack-plugin/10.1.0_webpack@5.65.0:
+    resolution: {integrity: sha512-dPGo+zoW77wiF5LlwkQcZTY7FsrSm7dmovhLDHsjYyciiJ+ZhLFt2EQbw9LRUHJ586JXN0K1A70Kbudclvt00Q==}
+    engines: {node: '>= 12.20.0'}
+    peerDependencies:
+      webpack: ^5.1.0
+    dependencies:
+      fast-glob: 3.2.7
+      glob-parent: 6.0.2
+      globby: 12.0.2
+      normalize-path: 3.0.0
+      schema-utils: 4.0.0
+      serialize-javascript: 6.0.0
+      webpack: 5.65.0_esbuild@0.14.5+webpack-cli@4.9.1
     dev: true
 
   /core-js-compat/3.20.0:
@@ -5025,6 +5048,18 @@ packages:
       ignore: 5.1.9
       merge2: 1.4.1
       slash: 3.0.0
+    dev: true
+
+  /globby/12.0.2:
+    resolution: {integrity: sha512-lAsmb/5Lww4r7MM9nCCliDZVIKbZTavrsunAsHLr9oHthrZP1qi7/gAnHOsUs9bLvEt2vKVJhHmxuL7QbDuPdQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      array-union: 3.0.1
+      dir-glob: 3.0.1
+      fast-glob: 3.2.7
+      ignore: 5.1.9
+      merge2: 1.4.1
+      slash: 4.0.0
     dev: true
 
   /graceful-fs/4.2.8:
@@ -8565,6 +8600,11 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: true
+
+  /slash/4.0.0:
+    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
+    engines: {node: '>=12'}
     dev: true
 
   /slice-ansi/3.0.0:

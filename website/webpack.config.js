@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
@@ -135,6 +136,18 @@ module.exports = (env, argv) => {
             }
           : false,
       }),
+      isProduction &&
+        new CopyPlugin({
+          patterns: [
+            {
+              from: 'public',
+              to: './',
+              globOptions: {
+                ignore: ['.DS_Store', '**/index.html'],
+              },
+            },
+          ],
+        }),
       isProduction &&
         env['BUNDLE_ANALYZE'] === '1' &&
         new BundleAnalyzerPlugin({
