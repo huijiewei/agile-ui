@@ -9,17 +9,6 @@ export const defaultTheme = {
   lineHeight: lineHeights,
   radius: radius,
   border: borders,
-  scrollArea: {
-    scrollbar: {
-      padding: '2px',
-      width: '6px',
-      height: '6px',
-    },
-    corner: {
-      width: '0',
-      height: '0',
-    },
-  },
 };
 
 export type Theme = typeof defaultTheme;

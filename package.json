@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "docs-gen": "node -r esbuild-register scripts/docgen.ts",
-    "website-start": "pnpm run start --filter=website",
+    "website-dev": "pnpm run dev --filter=website",
     "website-build": "node -r esbuild-register scripts/docgen.ts && pnpm run build --filter=website",
     "website-analyze": "pnpm run analyze --filter=website",
     "prettier": "prettier --write .",

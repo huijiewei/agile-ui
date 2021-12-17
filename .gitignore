@@ -8,3 +8,4 @@ dist-ssr
 .vscode
 .eslintcache
 .docgen
+.next

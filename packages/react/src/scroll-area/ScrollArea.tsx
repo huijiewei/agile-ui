@@ -20,7 +20,6 @@ import {
   useState,
 } from 'react';
 import { Presence } from '../presence/Presence';
-import { themeVars } from '../theme/styles/vars.css';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 import {
@@ -29,6 +28,7 @@ import {
   scrollAreaCornerRecipe,
   scrollAreaScrollbarRecipe,
   scrollAreaThumbClass,
+  scrollAreaVars,
   scrollAreaViewportRecipe,
   visibleHiddenClass,
   visibleVisibleClass,
@@ -184,8 +184,8 @@ export const ScrollArea = polymorphicComponent<'div', ScrollAreaProps>((props, r
         ref={useMergedRef(ref, (node) => setScrollArea(node))}
         style={{
           ...assignInlineVars({
-            [themeVars.scrollArea.corner.width]: cornerWidth + 'px',
-            [themeVars.scrollArea.corner.height]: cornerHeight + 'px',
+            [scrollAreaVars.corner.width]: cornerWidth + 'px',
+            [scrollAreaVars.corner.height]: cornerHeight + 'px',
           }),
           ...style,
         }}
@@ -572,7 +572,7 @@ const ScrollAreaScrollbarX = forwardRef<HTMLDivElement, ScrollAreaScrollbarAxisP
         sizes={sizes}
         style={{
           ...assignInlineVars({
-            [themeVars.scrollArea.scrollbar.width]: getThumbSize(sizes) + 'px',
+            [scrollAreaVars.scrollbar.width]: getThumbSize(sizes) + 'px',
           }),
           ...style,
         }}
@@ -629,7 +629,7 @@ const ScrollAreaScrollbarY = forwardRef<HTMLDivElement, ScrollAreaScrollbarAxisP
         sizes={sizes}
         style={{
           ...assignInlineVars({
-            [themeVars.scrollArea.scrollbar.height]: getThumbSize(sizes) + 'px',
+            [scrollAreaVars.scrollbar.height]: getThumbSize(sizes) + 'px',
           }),
           ...style,
         }}

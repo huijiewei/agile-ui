@@ -1,9 +1,32 @@
-import { style } from '@vanilla-extract/css';
+import { assignVars, createThemeContract, style } from '@vanilla-extract/css';
 import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../theme/styles/vars.css';
 
+export const scrollAreaVars = createThemeContract({
+  scrollbar: {
+    padding: null,
+    width: null,
+    height: null,
+  },
+  corner: {
+    height: null,
+    width: null,
+  },
+});
+
 export const scrollAreaClass = style({
+  vars: assignVars(scrollAreaVars, {
+    scrollbar: {
+      padding: '2px',
+      width: '6px',
+      height: '6px',
+    },
+    corner: {
+      width: '0',
+      height: '0',
+    },
+  }),
   position: 'relative',
   overflow: 'hidden',
 });
@@ -14,7 +37,7 @@ export const scrollAreaScrollbarRecipe = recipe({
     userSelect: 'none',
     touchAction: 'none',
     position: 'absolute',
-    padding: themeVars.scrollArea.scrollbar.padding,
+    padding: scrollAreaVars.scrollbar.padding,
     transition: 'background-color 150ms ease, opacity 150ms ease',
     ':hover': {
       backgroundColor: 'rgb(0, 0, 0, 0.09)',
@@ -27,7 +50,7 @@ export const scrollAreaScrollbarRecipe = recipe({
       },
       vertical: {
         top: 0,
-        bottom: themeVars.scrollArea.corner.height,
+        bottom: scrollAreaVars.corner.height,
       },
     },
     direction: {
@@ -42,7 +65,7 @@ export const scrollAreaScrollbarRecipe = recipe({
         direction: 'rtl',
       },
       style: {
-        left: themeVars.scrollArea.corner.width,
+        left: scrollAreaVars.corner.width,
       },
     },
     {
@@ -51,7 +74,7 @@ export const scrollAreaScrollbarRecipe = recipe({
         direction: 'ltr',
       },
       style: {
-        right: themeVars.scrollArea.corner.width,
+        right: scrollAreaVars.corner.width,
       },
     },
     {
@@ -120,10 +143,7 @@ export const scrollAreaViewportRecipe = recipe({
         direction: 'rtl',
       },
       style: {
-        paddingLeft: calc(themeVars.scrollArea.scrollbar.padding)
-          .multiply(2)
-          .add(themeVars.scrollArea.scrollbar.width)
-          .toString(),
+        paddingLeft: calc(scrollAreaVars.scrollbar.padding).multiply(2).add(scrollAreaVars.scrollbar.width).toString(),
       },
     },
     {
@@ -132,10 +152,7 @@ export const scrollAreaViewportRecipe = recipe({
         direction: 'ltr',
       },
       style: {
-        paddingRight: calc(themeVars.scrollArea.scrollbar.padding)
-          .multiply(2)
-          .add(themeVars.scrollArea.scrollbar.width)
-          .toString(),
+        paddingRight: calc(scrollAreaVars.scrollbar.padding).multiply(2).add(scrollAreaVars.scrollbar.width).toString(),
       },
     },
   ],
@@ -150,8 +167,8 @@ export const scrollAreaThumbClass = style({
   flex: '1 1 0%',
   backgroundColor: 'rgb(0, 0, 0, 0.3)',
   position: 'relative',
-  width: themeVars.scrollArea.scrollbar.width,
-  height: themeVars.scrollArea.scrollbar.height,
+  width: scrollAreaVars.scrollbar.width,
+  height: scrollAreaVars.scrollbar.height,
   borderRadius: themeVars.radius.md,
   transition: 'background-color 150ms ease, opacity 150ms ease',
   ':hover': {
@@ -176,8 +193,8 @@ export const scrollAreaCornerRecipe = recipe({
   base: {
     position: 'absolute',
     bottom: 0,
-    width: themeVars.scrollArea.corner.width,
-    height: themeVars.scrollArea.corner.height,
+    width: scrollAreaVars.corner.width,
+    height: scrollAreaVars.corner.height,
   },
   variants: {
     direction: {
