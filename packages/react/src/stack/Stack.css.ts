@@ -1,26 +1,21 @@
-import { style } from '@vanilla-extract/css';
-import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
+import { recipe } from '@vanilla-extract/recipes';
 
-const base = style({
-  display: 'flex',
-  margin: 0,
-});
-
-export const variants = recipe({
-  base,
+export const stackRecipe = recipe({
+  base: {
+    display: 'flex',
+    margin: 0,
+  },
   variants: {
     /**
      * The direction to stack the items.
      */
     direction: {
-      row: {
+      horizontal: {
         flexDirection: 'row',
       },
-      column: {
+      vertical: {
         flexDirection: 'column',
       },
     },
   },
 });
-
-export type StackVariants = RecipeVariants<typeof variants>;

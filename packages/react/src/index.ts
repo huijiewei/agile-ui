@@ -10,5 +10,9 @@ export * from './scroll-area/ScrollArea';
 
 export * from './button/Button';
 
+export * from './layout/Layout';
+export * from './layout/LayoutAside';
+export * from './layout/LayoutContent';
+
 export * from './theme/ThemeProvider';
 export * from './theme/styles/vars.css';

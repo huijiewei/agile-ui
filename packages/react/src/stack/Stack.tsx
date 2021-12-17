@@ -1,14 +1,16 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { StackVariants, variants } from './Stack.css';
+import { stackRecipe } from './Stack.css';
 
-type StackProps = StackVariants;
+type StackProps = {
+  direction?: 'horizontal' | 'vertical';
+};
 
 export const Stack = polymorphicComponent<'div', StackProps>((props, ref) => {
-  const { as: Component = 'div', children, direction = 'column', ...rest } = props;
+  const { as: Component = 'div', children, direction = 'horizontal', ...rest } = props;
 
   return (
-    <Component {...rest} className={variants({ direction })} ref={ref}>
+    <Component {...rest} className={stackRecipe({ direction })} ref={ref}>
       {children}
     </Component>
   );
