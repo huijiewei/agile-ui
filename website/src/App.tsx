@@ -1,8 +1,25 @@
-import { Button, Calendar, Layout, LayoutAside, LayoutContent, ScrollArea, Stack } from '@agile-ui/react';
+import {
+  Button,
+  Calendar,
+  Layout,
+  LayoutAside,
+  LayoutContent,
+  LayoutFooter,
+  LayoutHeader,
+  ScrollArea,
+  Stack,
+} from '@agile-ui/react';
 import { useTimeout } from '@agile-ui/react-hooks';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { appAsideClass, appContentClass, height100vh } from './styles/app.css';
+import {
+  appAsideClass,
+  appAsideScrollAreaClass,
+  appContentClass,
+  appFooterClass,
+  appHeaderClass,
+  appMainClass,
+} from './styles/app.css';
 
 export const App = () => {
   useTimeout(() => {
@@ -18,7 +35,7 @@ export const App = () => {
   return (
     <Layout hasAside={true}>
       <LayoutAside className={appAsideClass} collapsed={false} collapsedWidth={60} width={200}>
-        <ScrollArea className={height100vh}>
+        <ScrollArea className={appAsideScrollAreaClass}>
           <Stack direction={'vertical'}>
             {[...Array(100).keys()].map((i) => {
               return <p key={i}>滚动条出来</p>;
@@ -26,7 +43,12 @@ export const App = () => {
           </Stack>
         </ScrollArea>
       </LayoutAside>
-      <Layout>
+      <Layout className={appMainClass}>
+        <LayoutHeader className={appHeaderClass}>
+          <p>Header</p>
+          <p>Searchbar</p>
+          <p>Tools</p>
+        </LayoutHeader>
         <LayoutContent className={appContentClass}>
           <Stack as={'span'} direction={'horizontal'} style={{ padding: '20px' }}>
             <Button to={''} as={Link} ref={btnRef} level={'primary'}>
@@ -163,6 +185,12 @@ export const App = () => {
             </ScrollArea>
           </div>
         </LayoutContent>
+        <LayoutFooter className={appFooterClass}>
+          <Button size={'sm'} variant={'outline'} level={'natural'} as={'a'}>
+            <img height={20} src={require('./assets/images/logo.png')} alt="AgileUI" />
+            Powered by AgileUI
+          </Button>
+        </LayoutFooter>
       </Layout>
     </Layout>
   );

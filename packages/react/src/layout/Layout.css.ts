@@ -36,3 +36,11 @@ export const layoutAsideClass = style({
 export const layoutContentClass = style({
   flex: '1',
 });
+
+export const layoutHeaderClass = style({
+  flex: '0 0 auto',
+});
+
+export const layoutFooterClass = style({
+  flex: '0 0 auto',
+});

@@ -3,11 +3,11 @@ import { recipe } from '@vanilla-extract/recipes';
 import { themeVars } from '../theme/styles/vars.css';
 
 const size = {
-  xs: { fontSize: themeVars.fontSize.xs },
-  sm: { fontSize: themeVars.fontSize.sm },
-  md: { fontSize: themeVars.fontSize.md, height: '33px' },
-  lg: { fontSize: themeVars.fontSize.lg },
-  xl: { fontSize: themeVars.fontSize.xl },
+  xs: { fontSize: themeVars.fontSize.xs, height: '24px', padding: '0 8px' },
+  sm: { fontSize: themeVars.fontSize.sm, height: '28px', padding: '0 12px' },
+  md: { fontSize: themeVars.fontSize.md, height: '32px', padding: '0 16px' },
+  lg: { fontSize: themeVars.fontSize.lg, height: '36px', padding: '0 20px' },
+  xl: { fontSize: themeVars.fontSize.xl, height: '40px', padding: '0 24px' },
 };
 
 const level = {
@@ -113,7 +113,6 @@ const baseStyle = style({
   border: themeVars.border['1px'],
   borderRadius: themeVars.radius.md,
   lineHeight: themeVars.lineHeight.base,
-  padding: '0 16px',
   textDecoration: 'none',
   fontWeight: themeVars.fontWeight.medium,
   userSelect: 'none',

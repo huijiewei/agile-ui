@@ -12,6 +12,8 @@ export * from './button/Button';
 
 export * from './layout/Layout';
 export * from './layout/LayoutAside';
+export * from './layout/LayoutHeader';
+export * from './layout/LayoutFooter';
 export * from './layout/LayoutContent';
 
 export * from './theme/ThemeProvider';
