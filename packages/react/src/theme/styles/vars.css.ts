@@ -11,6 +11,4 @@ export const defaultTheme = {
   border: borders,
 };
 
-export type Theme = typeof defaultTheme;
-
 export const themeVars = createThemeContract(defaultTheme);

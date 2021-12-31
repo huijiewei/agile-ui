@@ -2,6 +2,7 @@ import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import clsx from 'clsx';
 import { ElementType, ReactElement, useCallback, useState } from 'react';
+import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { buttonRecipes } from './Button.css';
 import { ButtonGroupProps, useButtonGroup } from './ButtonGroup';
@@ -37,7 +38,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   const group = useButtonGroup();
 
   const {
-    as: Component = 'button',
+    as = 'button',
     children,
     type,
     active,
@@ -53,10 +54,11 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     ...rest
   } = props;
 
-  const { ref: _ref, type: defaultType } = useButtonType(Component);
+  const { ref: _ref, type: defaultType } = useButtonType(as);
 
   return (
-    <Component
+    <Box
+      as={as}
       {...rest}
       className={clsx(className, buttonRecipes({ size, level, variant, disabled }))}
       disabled={disabled || loading}
@@ -68,7 +70,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       {startIcon && !loading && startIcon}
       {children}
       {endIcon && !loading && endIcon}
-    </Component>
+    </Box>
   );
 });
 

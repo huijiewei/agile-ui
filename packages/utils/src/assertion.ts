@@ -4,6 +4,10 @@ export const isBrowser = (): boolean => {
   return Boolean(globalThis?.document);
 };
 
+export const isNumber = (value: unknown): value is number => {
+  return typeof value === 'number';
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isArray = <T>(value: any): value is Array<T> => {
   return Array.isArray(value);

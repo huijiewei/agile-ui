@@ -5,11 +5,15 @@ const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 
 module.exports = (env, argv) => {
   process.env.NODE_ENV = argv.mode;
 
   const isProduction = argv.mode === 'production';
+
+  const publicPath = '';
 
   const fileName = `assets/js/${isProduction ? '[name].[contenthash:8].js' : '[name].js'}`;
   const cssFileName = `assets/css/${isProduction ? '[name].[contenthash:8].css' : '[name].css'}`;
@@ -28,12 +32,16 @@ module.exports = (env, argv) => {
     output: {
       filename: fileName,
       chunkFilename: fileName,
+      publicPath: publicPath + '/',
       assetModuleFilename: `assets/resource/${assetsFileName}`,
       pathinfo: false,
       clean: isProduction,
     },
     devServer: {
       headers: { 'Access-Control-Allow-Origin': '*' },
+      devMiddleware: {
+        publicPath: publicPath,
+      },
       historyApiFallback: true,
       port: 8010,
     },
@@ -111,6 +119,9 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
+      new EnvironmentPlugin({
+        PUBLIC_URL: publicPath,
+      }),
       new VanillaExtractPlugin({ identifiers: isProduction ? 'short' : 'debug' }),
       isProduction &&
         new MiniCssExtractPlugin({
@@ -123,9 +134,17 @@ module.exports = (env, argv) => {
             sockProtocol: 'ws',
           },
         }),
+      isProduction &&
+        new GenerateSW({
+          clientsClaim: true,
+          skipWaiting: true,
+        }),
       new HtmlWebpackPlugin({
         title: 'Agile UI',
         template: './public/index.html',
+        templateParameters: {
+          PUBLIC_URL: publicPath + '/',
+        },
         minify: isProduction
           ? {
               collapseWhitespace: true,

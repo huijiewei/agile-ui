@@ -4,19 +4,18 @@ import '@agile-ui/react/styles/theme.css';
 
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
+import './serviceWorker';
 import './styles/theme.css';
+
 import './wdyr';
 
 render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </StrictMode>,
   document.getElementById('root')
 );
