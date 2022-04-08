@@ -19,6 +19,6 @@
     "@agile-ui/utils": "workspace:^1.0.0"
   },
   "devDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.0.0"
   }
 }

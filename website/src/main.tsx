@@ -3,7 +3,7 @@ import '@agile-ui/react/styles/reset.css';
 import '@agile-ui/react/styles/theme.css';
 
 import { StrictMode } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
 import './serviceWorker';
@@ -11,11 +11,12 @@ import './styles/theme.css';
 
 import './wdyr';
 
-render(
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
       <App />
     </ThemeProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
