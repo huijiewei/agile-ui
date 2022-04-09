@@ -80,9 +80,6 @@ module.exports = (env, argv) => {
                 url: false,
               },
             },
-            {
-              loader: 'postcss-loader',
-            },
           ],
         },
         {
