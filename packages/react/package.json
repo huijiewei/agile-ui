@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": [
-    "styles/**/*",
-    "*.css.ts"
+    "tailwind/**/*"
   ],
   "module": "src/index.ts",
   "scripts": {
@@ -24,19 +23,12 @@
   },
   "dependencies": {
     "@agile-ui/react-hooks": "workspace:^1.0.0",
-    "@agile-ui/tokens": "workspace:^1.0.0",
     "@agile-ui/utils": "workspace:^1.0.0",
     "@floating-ui/react-dom": "^0.6.1",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
     "@testing-library/react": "^13.0.0",
-    "@vanilla-extract/babel-plugin": "^1.1.5",
-    "@vanilla-extract/css": "^1.6.8",
-    "@vanilla-extract/css-utils": "^0.1.2",
-    "@vanilla-extract/dynamic": "^2.0.2",
-    "@vanilla-extract/recipes": "^0.2.4",
-    "@vanilla-extract/sprinkles": "^1.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },

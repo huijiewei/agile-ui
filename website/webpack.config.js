@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const { EnvironmentPlugin } = require('webpack');
 
@@ -69,7 +68,7 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.vanilla\.css$/i,
+          test: /\.css$/i,
           use: [
             {
               loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
@@ -77,8 +76,11 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                url: false,
+                importLoaders: 1,
               },
+            },
+            {
+              loader: 'postcss-loader',
             },
           ],
         },
@@ -119,7 +121,6 @@ module.exports = (env, argv) => {
       new EnvironmentPlugin({
         PUBLIC_URL: publicPath,
       }),
-      new VanillaExtractPlugin({ identifiers: isProduction ? 'short' : 'debug' }),
       isProduction &&
         new MiniCssExtractPlugin({
           filename: cssFileName,
@@ -187,7 +188,7 @@ module.exports = (env, argv) => {
               },
               agile: {
                 name: 'agile',
-                test: /[\\/]node_modules[\\/](@agile-ui)[\\/]/,
+                test: /[\\/]packages[\\/]/,
                 chunks: 'all',
                 priority: 25,
                 enforce: true,

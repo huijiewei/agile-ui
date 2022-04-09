@@ -6,7 +6,6 @@ export * from './portal/Portal';
 export * from './stack/Stack';
 export * from './text/Text';
 export * from './calendar/Calendar';
-export * from './scroll-area/ScrollArea';
 
 export * from './button/Button';
 
@@ -17,4 +16,3 @@ export * from './layout/LayoutFooter';
 export * from './layout/LayoutContent';
 
 export * from './theme/ThemeProvider';
-export * from './theme/styles/vars.css';

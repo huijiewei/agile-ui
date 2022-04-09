@@ -9,7 +9,5 @@ export type CalendarBaseProps = {
 export const CalendarBase = polymorphicComponent<'div', CalendarBaseProps>((props, ref) => {
   const { as: Component = 'div', className, ...rest } = omit(props, ['children']);
 
-  console.log(rest);
-
   return <Component {...rest} className={clsx(className, '')} ref={ref} />;
 });
