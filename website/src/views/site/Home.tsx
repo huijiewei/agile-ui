@@ -19,6 +19,27 @@ const Home = () => {
         &nbsp;&nbsp;
         <Button disabled>禁用按钮</Button>
       </Stack>
+      <Stack as={'span'} direction={'horizontal'} style={{ padding: '20px' }}>
+        <Button size={'xs'} level={'primary'}>
+          按钮 Button
+        </Button>
+        &nbsp;&nbsp;
+        <Button size={'sm'} level={'primary'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button size={'md'} level={'primary'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button size={'lg'} level={'primary'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button size={'xl'} level={'primary'}>
+          中文按钮
+        </Button>
+      </Stack>
       <div style={{ padding: '20px' }}>
         <Button level={'primary'} variant={'outline'}>
           中文按钮
@@ -97,6 +118,41 @@ const Home = () => {
       <div>
         <Calendar>1</Calendar>
       </div>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
     </>
   );
 };

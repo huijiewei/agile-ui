@@ -24,11 +24,11 @@
   "dependencies": {
     "@agile-ui/react-hooks": "workspace:^1.0.0",
     "@agile-ui/utils": "workspace:^1.0.0",
-    "@floating-ui/react-dom": "^0.6.1",
+    "@floating-ui/react-dom": "^0.6.2",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^13.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
