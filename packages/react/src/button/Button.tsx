@@ -34,7 +34,7 @@ export type ButtonProps = ButtonGroupProps & {
 };
 
 export const ButtonStyles = {
-  base: 'inline-block rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
+  base: 'inline-block rounded focus:ring align-middle focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
   sizes: {
     xs: 'px-2 py-0.5 text-sm',
     sm: 'px-3 py-0.5 text-base',
@@ -56,6 +56,7 @@ export const ButtonStyles = {
       success: 'bg-green-600 hover:bg-green-700',
       warning: 'bg-yellow-600 hover:bg-yellow-700',
       danger: 'bg-red-600 hover:bg-red-700',
+      natural: 'bg-gray-800 hover:bg-gray-900',
     },
     outline: {
       base: 'bg-white border-current',
@@ -63,6 +64,7 @@ export const ButtonStyles = {
       success: 'text-green-600 hover:bg-green-50',
       warning: 'text-yellow-600 hover:bg-yellow-50',
       danger: 'text-red-600 hover:bg-red-50',
+      natural: 'text-gray-900 hover:bg-gray-50',
     },
     light: {
       base: 'border-transparent',
@@ -70,6 +72,7 @@ export const ButtonStyles = {
       success: 'text-green-600 bg-green-50 hover:bg-green-100',
       warning: 'text-yellow-600 bg-yellow-50 hover:bg-yellow-100',
       danger: 'text-red-600 bg-red-50 hover:bg-red-100',
+      natural: 'text-gray-900 bg-gray-50 hover:bg-gray-100',
     },
     subtle: {
       base: 'border-transparent bg-white',
@@ -77,13 +80,15 @@ export const ButtonStyles = {
       success: 'text-green-600 hover:bg-green-50',
       warning: 'text-yellow-600 hover:bg-yellow-50',
       danger: 'text-red-600 hover:bg-red-50',
+      natural: 'text-gray-900 hover:bg-gray-50',
     },
     link: {
-      base: '',
-      primary: 'text-white bg-blue-600 hover:bg-blue-700',
-      success: 'text-white bg-green-600 hover:bg-green-700',
-      warning: 'text-white bg-yellow-600 hover:bg-yellow-700',
-      danger: 'text-white bg-red-600 hover:bg-red-700',
+      base: 'border-transparent bg-white underline underline-offset-2',
+      primary: 'text-blue-600 hover:text-blue-900',
+      success: 'text-green-600 hover:text-green-900',
+      warning: 'text-yellow-600 hover:text-yellow-900',
+      danger: 'text-red-600 hover:text-red-900',
+      natural: 'text-gray-800 hover:text-black',
     },
   },
   fullWidth: 'w-full',
@@ -118,12 +123,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       {...rest}
       className={clsx(
         className,
-        ButtonStyles.base,
         ButtonStyles.sizes[size],
         ButtonStyles.levels[level],
         ButtonStyles.variants[variant].base,
         ButtonStyles.variants[variant][level],
-        fullWidth && ButtonStyles.fullWidth
+        fullWidth && ButtonStyles.fullWidth,
+        ButtonStyles.base
       )}
       disabled={disabled || loading}
       data-active={dataAttr(active)}

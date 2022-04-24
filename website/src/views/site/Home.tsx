@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <>
-      <Stack as={'span'} direction={'horizontal'} style={{ padding: '20px' }}>
+      <Stack as={'div'} direction={'horizontal'} style={{ padding: '20px' }}>
         <Button to={''} as={Link} level={'primary'}>
           中文按钮
         </Button>
@@ -18,27 +18,6 @@ const Home = () => {
         <Button level={'danger'}>中文按钮</Button>
         &nbsp;&nbsp;
         <Button disabled>禁用按钮</Button>
-      </Stack>
-      <Stack as={'span'} direction={'horizontal'} style={{ padding: '20px' }}>
-        <Button size={'xs'} level={'primary'}>
-          按钮 Button
-        </Button>
-        &nbsp;&nbsp;
-        <Button size={'sm'} level={'primary'}>
-          中文按钮
-        </Button>
-        &nbsp;&nbsp;
-        <Button size={'md'} level={'primary'}>
-          中文按钮
-        </Button>
-        &nbsp;&nbsp;
-        <Button size={'lg'} level={'primary'}>
-          中文按钮
-        </Button>
-        &nbsp;&nbsp;
-        <Button size={'xl'} level={'primary'}>
-          中文按钮
-        </Button>
       </Stack>
       <div style={{ padding: '20px' }}>
         <Button level={'primary'} variant={'outline'}>
