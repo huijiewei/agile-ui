@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src", "tailwind"],
+  "include": ["src", "styles"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {

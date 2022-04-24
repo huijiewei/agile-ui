@@ -4,7 +4,7 @@ import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 
 export type ButtonGroupProps = {
-  variant?: 'solid' | 'outline' | 'ghost' | 'link';
+  variant?: 'solid' | 'outline' | 'light' | 'subtle' | 'link';
   level?: 'primary' | 'success' | 'natural' | 'warning' | 'danger';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };

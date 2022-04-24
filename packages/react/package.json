@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": [
-    "tailwind/**/*"
+    "styles/*"
   ],
   "module": "src/index.ts",
   "scripts": {

@@ -66,27 +66,52 @@ const Home = () => {
         </Button>
       </div>
       <div style={{ padding: '20px' }}>
-        <Button level={'primary'} variant={'ghost'}>
+        <Button level={'primary'} variant={'light'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
-        <Button level={'success'} variant={'ghost'}>
+        <Button level={'success'} variant={'light'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
-        <Button level={'natural'} variant={'ghost'}>
+        <Button level={'natural'} variant={'light'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
-        <Button level={'warning'} variant={'ghost'}>
+        <Button level={'warning'} variant={'light'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
-        <Button level={'danger'} variant={'ghost'}>
+        <Button level={'danger'} variant={'light'}>
           中文按钮
         </Button>
         &nbsp;&nbsp;
-        <Button variant={'ghost'} disabled>
+        <Button variant={'light'} disabled>
+          禁用按钮
+        </Button>
+      </div>
+      <div style={{ padding: '20px' }}>
+        <Button level={'primary'} variant={'subtle'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'success'} variant={'subtle'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'natural'} variant={'subtle'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'warning'} variant={'subtle'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button level={'danger'} variant={'subtle'}>
+          中文按钮
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant={'subtle'} disabled>
           禁用按钮
         </Button>
       </div>

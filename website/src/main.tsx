@@ -8,7 +8,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import './serviceWorker';
 
-import './styles/agile.css';
+import '@agile-ui/react/styles/agile.css';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
