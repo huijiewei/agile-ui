@@ -23,6 +23,10 @@ const useButtonType = (value?: ElementType) => {
 };
 
 export type ButtonProps = ButtonGroupProps & {
+  /**
+   * The button's type.
+   * @default 'button'
+   */
   type?: 'submit' | 'reset' | 'button';
   active?: boolean;
   disabled?: boolean;
@@ -34,13 +38,13 @@ export type ButtonProps = ButtonGroupProps & {
 };
 
 export const ButtonStyles = {
-  base: 'inline-block rounded focus:ring align-middle focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
+  base: 'inline-flex align-middle items-center justify-center whitespace-nowrap select-none rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
   sizes: {
-    xs: 'px-2 py-0.5 text-sm',
-    sm: 'px-3 py-0.5 text-base',
-    md: 'px-4 py-1 text-base',
-    lg: 'px-5 py-1.5 text-base',
-    xl: 'px-5 py-1.5 text-lg',
+    xs: 'h-6 px-2 text-sm',
+    sm: 'h-7 px-2 text-base',
+    md: 'h-8 px-3 text-base',
+    lg: 'h-9 px-5 text-base',
+    xl: 'h-10 px-5 text-lg',
   },
   levels: {
     primary: 'ring-blue-200',
@@ -94,14 +98,17 @@ export const ButtonStyles = {
   fullWidth: 'w-full',
 };
 
+/**
+ * 按钮.
+ */
 export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) => {
   const group = useButtonGroup();
 
   const {
     as = 'button',
     children,
-    type,
-    active,
+    type = 'button',
+    active = false,
     disabled = false,
     loading = false,
     loadingText,
@@ -123,12 +130,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       {...rest}
       className={clsx(
         className,
+        ButtonStyles.base,
         ButtonStyles.sizes[size],
         ButtonStyles.levels[level],
         ButtonStyles.variants[variant].base,
         ButtonStyles.variants[variant][level],
-        fullWidth && ButtonStyles.fullWidth,
-        ButtonStyles.base
+        fullWidth && ButtonStyles.fullWidth
       )}
       disabled={disabled || loading}
       data-active={dataAttr(active)}

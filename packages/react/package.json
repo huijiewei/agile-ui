@@ -18,8 +18,8 @@
     "directory": "packages/react"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@agile-ui/react-hooks": "workspace:^1.0.0",
