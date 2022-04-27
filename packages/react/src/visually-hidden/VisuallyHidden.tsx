@@ -8,5 +8,5 @@ const VisuallyHidden = polymorphicComponent<'span'>((props, ref) => {
 });
 
 if (__DEV__) {
-  VisuallyHidden.displayName = 'VisuallyHidden';
+  VisuallyHidden.displayName = '@agile-ui/react/VisuallyHidden';
 }

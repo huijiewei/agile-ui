@@ -14,8 +14,5 @@ module.exports = {
     ],
     ['@babel/preset-typescript', { allowDeclareFields: true }],
   ],
-  plugins: [
-    '@babel/plugin-transform-runtime',
-    process.env.NODE_ENV === 'test' && '@vanilla-extract/babel-plugin',
-  ].filter(Boolean),
+  plugins: ['@babel/plugin-transform-runtime'].filter(Boolean),
 };

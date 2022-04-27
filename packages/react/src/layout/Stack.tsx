@@ -1,4 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
+import clsx from 'clsx';
+import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
 
 type StackProps = {
@@ -6,15 +8,15 @@ type StackProps = {
 };
 
 export const Stack = polymorphicComponent<'div', StackProps>((props, ref) => {
-  const { as: Component = 'div', children, direction = 'horizontal', ...rest } = props;
+  const { as, className, children, direction = 'horizontal', ...rest } = props;
 
   return (
-    <Component {...rest} className={''} ref={ref}>
+    <Box as={as} {...rest} className={clsx(className, '')} ref={ref}>
       {children}
-    </Component>
+    </Box>
   );
 });
 
 if (__DEV__) {
-  Stack.displayName = 'Stack';
+  Stack.displayName = '@agile-ui/react/Stack';
 }

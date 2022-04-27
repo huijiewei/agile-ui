@@ -3,24 +3,34 @@ import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 
-export type ButtonGroupProps = {
+export type ButtonBaseProps = {
   /**
-   * The button's variant.
+   * 形式
    * @default 'solid'
    */
   variant?: 'solid' | 'outline' | 'light' | 'subtle' | 'link';
 
   /**
-   * The button's level.
+   * 等级
    * @default 'primary'
    */
   level?: 'primary' | 'success' | 'natural' | 'warning' | 'danger';
 
   /**
-   * The button's size.
+   * 大小
    * @default 'md'
    */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+  /**
+   * 是否禁用
+   * @default false
+   */
+  disabled?: boolean;
+};
+
+export type ButtonGroupProps = ButtonBaseProps & {
+  vertical?: boolean;
 };
 
 const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({

@@ -28,9 +28,9 @@
     "clsx": "^1.1.1"
   },
   "devDependencies": {
-    "@testing-library/react": "^13.1.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "@agile-ui/test-utils": "workspace:^1.0.0"
   },
   "browserslist": [
     ">0.3%",

@@ -1,12 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { ReactNode } from 'react';
 import { polymorphicComponent } from '../utils/polymorphic';
 
-type BoxProps = {
-  children?: ReactNode;
-};
-
-export const Box = polymorphicComponent<'div', BoxProps>((props, ref) => {
+export const Box = polymorphicComponent<'div', unknown>((props, ref) => {
   const { as: Component = 'div', children, ...rest } = props;
 
   return (

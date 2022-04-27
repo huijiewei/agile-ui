@@ -1,14 +1,13 @@
-import { Mode } from '@agile-ui/tokens';
 import { createContext, PropsWithChildren } from 'react';
 
 type ThemeContextValue = {
-  mode: Mode;
+  mode: 'dark' | 'light';
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 type ThemeProviderProps = {
-  defaultMode?: Mode;
+  defaultMode?: 'dark' | 'light';
 };
 
 export const ThemeProvider = ({ defaultMode = 'light', children }: PropsWithChildren<ThemeProviderProps>) => {

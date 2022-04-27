@@ -1,10 +1,11 @@
 import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
 import clsx from 'clsx';
-import { ElementType, ReactElement, useCallback, useState } from 'react';
+import { ElementType, PropsWithChildren, ReactNode, useCallback, useState } from 'react';
 import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { ButtonGroupProps, useButtonGroup } from './ButtonGroup';
+import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
+import { ButtonIcon } from './ButtonIcon';
 
 const useButtonType = (value?: ElementType) => {
   const [isButton, setIsButton] = useState(!value);
@@ -22,22 +23,46 @@ const useButtonType = (value?: ElementType) => {
   return { ref: refCallback, type } as const;
 };
 
-export type ButtonProps = ButtonGroupProps & {
+export type ButtonProps = ButtonBaseProps & {
   /**
-   * The button's type.
+   * 类型.
    * @default 'button'
    */
   type?: 'submit' | 'reset' | 'button';
+
+  /**
+   * 是否激活
+   * @default false
+   */
   active?: boolean;
-  disabled?: boolean;
+
+  /**
+   * 是否加载中
+   * @default false
+   */
   loading?: boolean;
   loadingText?: string;
+
+  /**
+   * 是否全宽度
+   * @default false
+   */
   fullWidth?: boolean;
-  startIcon?: ReactElement;
-  endIcon?: ReactElement;
+
+  /**
+   * 内部开始图标
+   */
+  startIcon?: ReactNode;
+
+  /**
+   * 内部结束图标
+   */
+  endIcon?: ReactNode;
 };
 
-export const ButtonStyles = {
+type ButtonContentProps = Pick<ButtonProps, 'startIcon' | 'endIcon'>;
+
+const ButtonStyles = {
   base: 'inline-flex align-middle items-center justify-center whitespace-nowrap select-none rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
   sizes: {
     xs: 'h-6 px-2 text-sm',
@@ -98,6 +123,16 @@ export const ButtonStyles = {
   fullWidth: 'w-full',
 };
 
+const ButtonContent = ({ startIcon, endIcon, children }: PropsWithChildren<ButtonContentProps>) => {
+  return (
+    <>
+      {startIcon && <ButtonIcon className={'mr-1'}>{startIcon}</ButtonIcon>}
+      {children}
+      {endIcon && <ButtonIcon className={'ml-1'}>{endIcon}</ButtonIcon>}
+    </>
+  );
+};
+
 /**
  * 按钮.
  */
@@ -109,7 +144,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     children,
     type = 'button',
     active = false,
-    disabled = false,
+    disabled = group?.disabled || false,
     loading = false,
     loadingText,
     startIcon,
@@ -123,6 +158,8 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   } = props;
 
   const { ref: _ref, type: defaultType } = useButtonType(as);
+
+  const contentProps = { startIcon, endIcon, children };
 
   return (
     <Box
@@ -143,9 +180,15 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       type={type ?? defaultType}
       ref={useMergedRef(ref, _ref)}
     >
-      {startIcon && !loading && startIcon}
-      {children}
-      {endIcon && !loading && endIcon}
+      {loading ? (
+        loadingText || (
+          <span className={'opacity-0'}>
+            <ButtonContent {...contentProps} />
+          </span>
+        )
+      ) : (
+        <ButtonContent {...contentProps} />
+      )}
     </Box>
   );
 });
