@@ -11,7 +11,7 @@ export const Stack = polymorphicComponent<'div', StackProps>((props, ref) => {
   const { as, className, children, direction = 'horizontal', ...rest } = props;
 
   return (
-    <Box as={as} {...rest} className={clsx(className, '')} ref={ref}>
+    <Box as={as} {...rest} className={clsx(className, 'flex')} ref={ref}>
       {children}
     </Box>
   );

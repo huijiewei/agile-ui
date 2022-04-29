@@ -6,6 +6,7 @@ import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonIcon } from './ButtonIcon';
+import { ButtonSpinner } from './ButtonSpinner';
 
 const useButtonType = (value?: ElementType) => {
   const [isButton, setIsButton] = useState(!value);
@@ -58,12 +59,15 @@ export type ButtonProps = ButtonBaseProps & {
    * 内部结束图标
    */
   endIcon?: ReactNode;
+
+  spinner?: ReactNode;
+  spinnerPlacement?: 'start' | 'end';
 };
 
 type ButtonContentProps = Pick<ButtonProps, 'startIcon' | 'endIcon'>;
 
 const ButtonStyles = {
-  base: 'inline-flex align-middle items-center justify-center whitespace-nowrap select-none rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed border',
+  base: 'inline-flex align-middle items-center justify-center whitespace-nowrap select-none appearance-none border rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
   sizes: {
     xs: 'h-6 px-2 text-sm',
     sm: 'h-7 px-2 text-base',
@@ -71,7 +75,7 @@ const ButtonStyles = {
     lg: 'h-9 px-5 text-base',
     xl: 'h-10 px-5 text-lg',
   },
-  levels: {
+  colors: {
     primary: 'ring-blue-200',
     success: 'ring-green-200',
     warning: 'ring-yellow-200',
@@ -149,8 +153,10 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     loadingText,
     startIcon,
     endIcon,
+    spinner,
+    spinnerPlacement = 'start',
     size = group?.size || 'md',
-    level = group?.level || 'primary',
+    color = group?.color || 'primary',
     variant = group?.variant || 'solid',
     fullWidth = false,
     className,
@@ -169,9 +175,9 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
         className,
         ButtonStyles.base,
         ButtonStyles.sizes[size],
-        ButtonStyles.levels[level],
+        ButtonStyles.colors[color],
         ButtonStyles.variants[variant].base,
-        ButtonStyles.variants[variant][level],
+        ButtonStyles.variants[variant][color],
         fullWidth && ButtonStyles.fullWidth
       )}
       disabled={disabled || loading}
@@ -180,6 +186,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       type={type ?? defaultType}
       ref={useMergedRef(ref, _ref)}
     >
+      {loading && spinnerPlacement === 'start' && (
+        <ButtonSpinner size={size} label={loadingText} placement="start">
+          {spinner}
+        </ButtonSpinner>
+      )}
+
       {loading ? (
         loadingText || (
           <span className={'opacity-0'}>
@@ -188,6 +200,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
         )
       ) : (
         <ButtonContent {...contentProps} />
+      )}
+
+      {loading && spinnerPlacement === 'end' && (
+        <ButtonSpinner size={size} label={loadingText} placement="end">
+          {spinner}
+        </ButtonSpinner>
       )}
     </Box>
   );

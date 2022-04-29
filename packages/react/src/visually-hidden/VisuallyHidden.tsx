@@ -1,11 +1,16 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../utils/polymorphic';
+import clsx from 'clsx';
+import { ComponentPropsWithoutRef } from 'react';
 
-const VisuallyHidden = polymorphicComponent<'span'>((props, ref) => {
-  const { as: Component = 'span', ...rest } = props;
+export const VisuallyHidden = (props: ComponentPropsWithoutRef<'span'>) => {
+  const { children, className, ...rest } = props;
 
-  return <Component {...rest} className={'sr-only'} ref={ref} />;
-});
+  return (
+    <span {...rest} className={clsx(className, 'sr-only')}>
+      {children}
+    </span>
+  );
+};
 
 if (__DEV__) {
   VisuallyHidden.displayName = '@agile-ui/react/VisuallyHidden';

@@ -2,15 +2,17 @@ export * from './utils/context';
 export * from './utils/polymorphic';
 
 export * from './box/Box';
-export * from './visually-hidden/VisuallyHidden';
-export * from './portal/Portal';
 export * from './text/Text';
+export * from './portal/Portal';
+export * from './visually-hidden/VisuallyHidden';
 export * from './calendar/Calendar';
 
 export * from './button/Button';
 export * from './button/ButtonGroup';
 
 export * from './layout/Stack';
+
+export * from './spinner/Spinner';
 
 export * from './layout/Layout';
 export * from './layout/LayoutAside';

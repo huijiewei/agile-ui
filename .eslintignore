@@ -2,3 +2,4 @@ node_modules
 dist
 webpack.config.js
 next.config.js
+tailwind.config.js

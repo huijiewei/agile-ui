@@ -2,6 +2,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
+import { Size } from '../utils/types';
 
 export type ButtonBaseProps = {
   /**
@@ -11,16 +12,16 @@ export type ButtonBaseProps = {
   variant?: 'solid' | 'outline' | 'light' | 'subtle' | 'link';
 
   /**
-   * 等级
+   * 颜色
    * @default 'primary'
    */
-  level?: 'primary' | 'success' | 'natural' | 'warning' | 'danger';
+  color?: 'primary' | 'success' | 'natural' | 'warning' | 'danger';
 
   /**
    * 大小
    * @default 'md'
    */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: Size;
 
   /**
    * 是否禁用
@@ -41,9 +42,9 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
 export { useButtonGroup };
 
 export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props, ref) => {
-  const { as: Component = 'div', children, size = 'md', level = 'primary', variant = 'solid', ...rest } = props;
+  const { as: Component = 'div', children, size = 'md', color = 'primary', variant = 'solid', ...rest } = props;
 
-  const context = useMemo(() => ({ size, level, variant }), [size, level, variant]);
+  const context = useMemo(() => ({ size, color, variant }), [size, color, variant]);
 
   return (
     <ButtonGroupProvider value={context}>

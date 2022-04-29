@@ -1,8 +1,8 @@
 import { __DEV__ } from '@agile-ui/utils';
 import clsx from 'clsx';
-import { HTMLProps } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 
-export const ButtonIcon = (props: HTMLProps<HTMLSpanElement>) => {
+export const ButtonIcon = (props: ComponentPropsWithoutRef<'span'>) => {
   const { children, className, ...rest } = props;
 
   return (

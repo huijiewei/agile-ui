@@ -1,3 +1,6 @@
+const plugin = require('tailwindcss/plugin');
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
+
 module.exports = {
   theme: {
     screens: { mobile: '0', tablet: '768px', laptop: '1024px', desktop: '1280px' },
@@ -123,5 +126,24 @@ module.exports = {
       full: '9999px',
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          spinner: (value) => ({
+            borderTopColor: `${value}`,
+            borderRightColor: `${value}`,
+          }),
+          'spinner-empty': (value) => ({
+            borderLeftColor: `${value}`,
+            borderBottomColor: `${value}`,
+          }),
+        },
+        {
+          values: flattenColorPalette(theme('colors')),
+          type: 'color',
+        }
+      );
+    }),
+  ],
 };

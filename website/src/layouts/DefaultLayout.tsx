@@ -4,24 +4,24 @@ import { Outlet } from 'react-router-dom';
 export const DefaultLayout = () => {
   return (
     <div className={'container'}>
-      <header className={'fixed top-0 left-0 right-0 z-50 bg-white border-b border-b-gray-200'}>
-        <div className={'flex justify-between items-center mx-auto my-0 h-16'}>
+      <header className={'fixed inset-x-0 top-0 z-50 border-b border-b-gray-200 bg-white'}>
+        <div className={'mx-auto my-0 flex h-16 items-center justify-between'}>
           <div className={'flex'}>
-            <div className={'bg-black border-r-black w-52 text-white py-0 px-3 align-middle'}>
+            <div className={'w-52 border-r-black bg-black py-0 px-3 align-middle text-white'}>
               <img
-                className={'w-12 align-middle inline-block'}
+                className={'inline-block w-12 align-middle'}
                 alt={'Agile UI'}
                 src={require('../assets/images/logo.png')}
               />
-              <span className={'align-middle text-xl inline-block ml-1'}>Agile UI</span>
+              <span className={'ml-1 inline-block align-middle text-xl'}>Agile UI</span>
             </div>
             <button className={'h-16'}></button>
           </div>
           <div className={'flex'}></div>
         </div>
       </header>
-      <aside className={'w-52 z-50 bottom-0 border-r border-r-black bg-black fixed top-16 text-white'}>Aside</aside>
-      <section className={'overflow-hidden ml-52'}>
+      <aside className={'fixed bottom-0 top-16 z-50 w-52 border-r border-r-black bg-black text-white'}>Aside</aside>
+      <section className={'ml-52 overflow-hidden'}>
         <div className={'pt-20 pb-16'}>
           <div className={'w-full'}>
             <Suspense fallback={null}>
@@ -29,10 +29,8 @@ export const DefaultLayout = () => {
             </Suspense>
           </div>
         </div>
-        <footer
-          className={'bottom-0 py-3 px-3 absolute right-0 left-52 text-gray-600 bg-white border-t border-t-gray-200'}
-        >
-          <div className={'flex text-base justify-between'}>
+        <footer className={'absolute bottom-0 right-0 left-52 border-t border-t-gray-200 bg-white p-3 text-gray-600'}>
+          <div className={'flex justify-between text-base'}>
             <div>2022 © Agile.</div>
             <div>Design & Develop by Huijie.</div>
           </div>
