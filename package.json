@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest",
     "docs-gen": "node -r esbuild-register scripts/docgen.ts",
-    "website-dev": "npm run dev -w website",
-    "website-build": "node -r esbuild-register scripts/docgen.ts && npm run build -w website",
-    "website-analyze": "npm run analyze -w website",
+    "website-dev": "npm run dev --workspace=website",
+    "website-build": "node -r esbuild-register scripts/docgen.ts && npm run build --workspace=website",
+    "website-analyze": "npm run analyze --workspace=website",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
