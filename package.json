@@ -12,11 +12,7 @@
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "purge": "pnpm store prune",
     "prepare": "husky install"
-  },
-  "engines": {
-    "node": ">=14"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
