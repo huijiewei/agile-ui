@@ -14,5 +14,5 @@ module.exports = {
     ],
     ['@babel/preset-typescript', { allowDeclareFields: true }],
   ],
-  plugins: ['@babel/plugin-transform-runtime'].filter(Boolean),
+  plugins: ['@babel/plugin-transform-runtime'],
 };

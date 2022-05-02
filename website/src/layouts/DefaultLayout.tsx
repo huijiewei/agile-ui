@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import LogoImage from '../assets/images/logo.png';
 
 export const DefaultLayout = () => {
   return (
@@ -8,11 +9,7 @@ export const DefaultLayout = () => {
         <div className={'mx-auto my-0 flex h-16 items-center justify-between'}>
           <div className={'flex'}>
             <div className={'w-52 border-r-black bg-black py-0 px-3 align-middle text-white'}>
-              <img
-                className={'inline-block w-12 align-middle'}
-                alt={'Agile UI'}
-                src={require('../assets/images/logo.png')}
-              />
+              <img className={'inline-block w-12 align-middle'} alt={'Agile UI'} src={LogoImage} />
               <span className={'ml-1 inline-block align-middle text-xl'}>Agile UI</span>
             </div>
             <button className={'h-16'}></button>

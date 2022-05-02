@@ -9,7 +9,7 @@
 [![WebStorm](https://img.shields.io/badge/webstorm-143?style=flat&logo=webstorm)](https://jb.gg/OpenSourceSupport)
 [![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)](https://git-scm.com/)
 [![Sourcetree](https://img.shields.io/badge/Sourcetree-0052CC?style=flat&logo=Sourcetree&logoColor=white)](https://sourcetreeapp.com)
-[![PNPM](https://img.shields.io/badge/pnpm-f9ad01.svg?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSI3Ni41OSA0NCAxNjQuMDA4IDE2NCIgd2lkdGg9IjE2MC4wMSIgaGVpZ2h0PSIxNjAiPjxkZWZzPjxwYXRoIGQ9Ik0yMzcuNiA5NWgtNTBWNDVoNTB2NTB6IiBpZD0iYSIvPjxwYXRoIGQ9Ik0xODIuNTkgOTVoLTUwVjQ1aDUwdjUweiIgaWQ9ImIiLz48cGF0aCBkPSJNMTI3LjU5IDk1aC01MFY0NWg1MHY1MHoiIGlkPSJjIi8+PHBhdGggZD0iTTIzNy42IDE1MGgtNTB2LTUwaDUwdjUweiIgaWQ9ImQiLz48cGF0aCBkPSJNMTgyLjU5IDE1MGgtNTB2LTUwaDUwdjUweiIgaWQ9ImUiLz48cGF0aCBkPSJNMTgyLjU5IDIwNWgtNTB2LTUwaDUwdjUweiIgaWQ9ImYiLz48cGF0aCBkPSJNMjM3LjYgMjA1aC01MHYtNTBoNTB2NTB6IiBpZD0iZyIvPjxwYXRoIGQ9Ik0xMjcuNTkgMjA1aC01MHYtNTBoNTB2NTB6IiBpZD0iaCIvPjwvZGVmcz48dXNlIHhsaW5rOmhyZWY9IiNhIiBmaWxsPSIjZjlhZDAwIi8+PHVzZSB4bGluazpocmVmPSIjYiIgZmlsbD0iI2Y5YWQwMCIvPjx1c2UgeGxpbms6aHJlZj0iI2MiIGZpbGw9IiNmOWFkMDAiLz48dXNlIHhsaW5rOmhyZWY9IiNkIiBmaWxsPSIjZjlhZDAwIi8+PHVzZSB4bGluazpocmVmPSIjZSIgZmlsbD0iIzRlNGU0ZSIvPjx1c2UgeGxpbms6aHJlZj0iI2YiIGZpbGw9IiM0ZTRlNGUiLz48dXNlIHhsaW5rOmhyZWY9IiNnIiBmaWxsPSIjNGU0ZTRlIi8+PHVzZSB4bGluazpocmVmPSIjaCIgZmlsbD0iIzRlNGU0ZSIvPjwvc3ZnPg==&logoColor=white)](https://pnpm.io)
+[![NPM](https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white)](https://www.npmjs.com/)
 
 [![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=flat&logo=babel&logoColor=white)](https://babeljs.io/)
 [![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=flat&logo=Webpack&logoColor=white)](https://webpack.js.org)
@@ -30,5 +30,5 @@
 ### 安装
 
 ```bash
-pnpm install
+npm install
 ```
