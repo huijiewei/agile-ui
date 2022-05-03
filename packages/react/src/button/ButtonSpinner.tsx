@@ -16,10 +16,10 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
   return (
     <div
       className={twClsx(
-        className,
         'flex items-center',
         label ? 'relative' : 'absolute',
-        placement === 'start' ? (label ? `mr-1` : 'mr-0') : label ? `ml-1` : 'ml-0'
+        placement === 'start' ? (label ? `mr-1` : 'mr-0') : label ? `ml-1` : 'ml-0',
+        className
       )}
       {...rest}
     >
@@ -29,5 +29,5 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
 };
 
 if (__DEV__) {
-  ButtonSpinner.displayName = '@agile-ui/Button/ButtonSpinner';
+  ButtonSpinner.displayName = 'ButtonSpinner';
 }

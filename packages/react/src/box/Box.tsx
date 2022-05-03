@@ -12,5 +12,5 @@ export const Box = polymorphicComponent<'div', unknown>((props, ref) => {
 });
 
 if (__DEV__) {
-  Box.displayName = '@agile-ui/react/Box';
+  Box.displayName = 'Box';
 }

@@ -1,5 +1,5 @@
-import { Button, Calendar, Spinner, Stack } from '@agile-ui/react';
-import { AddMode, Camera, Config } from '@icon-park/react';
+import { Button, Calendar, Spinner, Stack, Text } from '@agile-ui/react';
+import { Camera } from '@icon-park/react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -22,19 +22,25 @@ const Home = () => {
         <Button color={'primary'} size={'xs'}>
           按钮 Button
         </Button>
-        <Button color={'primary'} size={'sm'}>
+        <Button active color={'primary'} size={'sm'}>
           中文按钮
         </Button>
-        <Button color={'primary'} size={'md'}>
+        <Button variant={'outline'} color={'primary'} size={'md'}>
+          <Camera className={'mr-1'} />
+          <Text>中文按钮</Text>
+        </Button>
+        <Button variant={'outline'} color={'primary'} size={'md'}>
+          <Camera className={'mr-1'} />
           中文按钮
         </Button>
-        <Button color={'primary'} size={'md'}>
-          钮
+        <Button className={'flex-col h-fit'} color={'primary'} size={'md'}>
+          <p>中文按钮</p>
+          <p>English Button</p>
         </Button>
-        <Button startIcon={<Camera />} color={'primary'} size={'lg'}>
+        <Button active color={'primary'} size={'lg'}>
           中文按钮
         </Button>
-        <Button loading color={'primary'} size={'xl'}>
+        <Button className={'rounded-lg'} loading color={'primary'} size={'xl'}>
           中文按钮
         </Button>
         <Button color={'primary'} size={'xl'}>
@@ -44,22 +50,22 @@ const Home = () => {
         <Spinner className={'spinner-blue-700 spinner-empty-gray-200'}>1</Spinner>
       </Stack>
       <Stack className={'space-x-2 p-3'}>
-        <Button startIcon={<AddMode />} color={'primary'} size={'xs'} variant={'outline'}>
+        <Button color={'primary'} size={'xs'} variant={'outline'}>
           按钮 Button
         </Button>
-        <Button loading startIcon={<AddMode />} color={'primary'} size={'xs'} variant={'outline'}>
+        <Button loading color={'primary'} size={'xs'} variant={'outline'}>
           按钮 Button
         </Button>
-        <Button loading={true} startIcon={<AddMode />} color={'primary'} size={'sm'} variant={'outline'}>
+        <Button loading={true} color={'primary'} size={'sm'} variant={'outline'}>
           中文按钮
         </Button>
-        <Button startIcon={<Camera />} color={'primary'} size={'md'} variant={'outline'}>
+        <Button color={'primary'} size={'md'} variant={'outline'}>
           中文按钮
         </Button>
-        <Button startIcon={<Config />} color={'primary'} size={'lg'} variant={'outline'}>
+        <Button color={'primary'} size={'lg'} variant={'outline'}>
           中文按钮
         </Button>
-        <Button startIcon={<Camera />} color={'primary'} size={'xl'} variant={'outline'}>
+        <Button color={'primary'} size={'xl'} variant={'outline'}>
           中文按钮
         </Button>
       </Stack>
@@ -67,7 +73,7 @@ const Home = () => {
         <Button color={'primary'} variant={'outline'}>
           按钮 Button
         </Button>
-        <Button startIcon={<Config />} color={'success'} variant={'outline'}>
+        <Button color={'success'} variant={'outline'}>
           中文按钮
         </Button>
         <Button color={'natural'} variant={'outline'}>
@@ -87,7 +93,7 @@ const Home = () => {
         <Button color={'primary'} variant={'light'}>
           按钮 Button
         </Button>
-        <Button startIcon={<Config />} color={'success'} variant={'light'}>
+        <Button color={'success'} variant={'light'}>
           中文按钮
         </Button>
         <Button color={'natural'} variant={'light'}>
@@ -107,7 +113,7 @@ const Home = () => {
         <Button color={'primary'} variant={'subtle'}>
           按钮 Button
         </Button>
-        <Button startIcon={<Config />} color={'success'} variant={'subtle'}>
+        <Button color={'success'} variant={'subtle'}>
           中文按钮
         </Button>
         <Button color={'natural'} variant={'subtle'}>
@@ -127,7 +133,7 @@ const Home = () => {
         <Button color={'primary'} variant={'link'}>
           按钮 Button
         </Button>
-        <Button startIcon={<Config />} color={'success'} variant={'link'}>
+        <Button color={'success'} variant={'link'}>
           中文按钮
         </Button>
         <Button color={'natural'} variant={'link'}>

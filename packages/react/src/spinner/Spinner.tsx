@@ -1,3 +1,4 @@
+import { __DEV__ } from '@agile-ui/utils';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { twClsx } from '../utils/tailwind';
 import { Size } from '../utils/types';
@@ -36,3 +37,7 @@ export const Spinner = polymorphicComponent<'div', SpinnerProps>((props, ref) =>
     </Component>
   );
 });
+
+if (__DEV__) {
+  Spinner.displayName = 'Spinner';
+}

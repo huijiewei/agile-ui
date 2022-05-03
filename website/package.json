@@ -24,7 +24,7 @@
     "@mdx-js/react": "^2.1.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
     "@welldone-software/why-did-you-render": "^7.0.1",
-    "autoprefixer": "^10.4.6",
+    "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-optimize-clsx": "^2.6.2",
     "copy-webpack-plugin": "^10.2.4",

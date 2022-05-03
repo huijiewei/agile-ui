@@ -1,11 +1,10 @@
 import { useMergedRef } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr } from '@agile-ui/utils';
-import clsx from 'clsx';
-import { ElementType, PropsWithChildren, ReactNode, useCallback, useState } from 'react';
+import { __DEV__ } from '@agile-ui/utils';
+import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
+import { twClsx } from '../utils/tailwind';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
-import { ButtonIcon } from './ButtonIcon';
 import { ButtonSpinner } from './ButtonSpinner';
 
 const useButtonType = (value?: ElementType) => {
@@ -42,6 +41,11 @@ export type ButtonProps = ButtonBaseProps & {
    * @default false
    */
   loading?: boolean;
+
+  /**
+   * 加载文本
+   * @default ''
+   */
   loadingText?: string;
 
   /**
@@ -50,24 +54,12 @@ export type ButtonProps = ButtonBaseProps & {
    */
   fullWidth?: boolean;
 
-  /**
-   * 内部开始图标
-   */
-  startIcon?: ReactNode;
-
-  /**
-   * 内部结束图标
-   */
-  endIcon?: ReactNode;
-
   spinner?: ReactNode;
   spinnerPlacement?: 'start' | 'end';
 };
 
-type ButtonContentProps = Pick<ButtonProps, 'startIcon' | 'endIcon'>;
-
 const ButtonStyles = {
-  base: 'inline-flex align-middle items-center justify-center whitespace-nowrap select-none appearance-none border rounded focus:ring focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+  base: 'inline-flex align-middle items-center transition-colors justify-center whitespace-nowrap select-none appearance-none border rounded disabled:opacity-50 disabled:cursor-not-allowed',
   sizes: {
     xs: 'h-6 px-2 text-sm',
     sm: 'h-7 px-2 text-base',
@@ -75,66 +67,73 @@ const ButtonStyles = {
     lg: 'h-9 px-5 text-base',
     xl: 'h-10 px-5 text-lg',
   },
-  colors: {
-    primary: 'ring-blue-200',
-    success: 'ring-green-200',
-    warning: 'ring-yellow-200',
-    danger: 'ring-red-200',
-    natural: 'ring-gray-200',
-  },
   variants: {
     solid: {
       base: 'text-white border-transparent',
-      primary: 'bg-blue-600 hover:bg-blue-700',
-      success: 'bg-green-600 hover:bg-green-700',
-      warning: 'bg-yellow-600 hover:bg-yellow-700',
-      danger: 'bg-red-600 hover:bg-red-700',
-      natural: 'bg-gray-800 hover:bg-gray-900',
+      primary: { base: '', normal: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800', active: 'bg-blue-800' },
+      success: { base: '', normal: 'bg-green-600 hover:bg-green-700 active:bg-green-800', active: 'bg-green-800' },
+      warning: { base: '', normal: 'bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-800', active: 'bg-yellow-800' },
+      danger: { base: '', normal: 'bg-red-600 hover:bg-red-700 active:bg-red-800', active: 'bg-red-800' },
+      natural: { base: '', normal: 'bg-gray-800 hover:bg-gray-900 active:bg-black', active: 'bg-black' },
     },
     outline: {
       base: 'bg-white border-current',
-      primary: 'text-blue-600 hover:bg-blue-50',
-      success: 'text-green-600 hover:bg-green-50',
-      warning: 'text-yellow-600 hover:bg-yellow-50',
-      danger: 'text-red-600 hover:bg-red-50',
-      natural: 'text-gray-900 hover:bg-gray-50',
+      primary: { base: 'text-blue-600', normal: 'hover:bg-blue-50 active:bg-blue-100', active: 'bg-blue-100' },
+      success: { base: 'text-green-600', normal: 'hover:bg-green-50 active:bg-green-100', active: 'bg-green-100' },
+      warning: { base: 'text-yellow-600 ', normal: 'hover:bg-yellow-50 active:bg-yellow-100', active: 'bg-yellow-100' },
+      danger: { base: 'text-red-600', normal: 'hover:bg-red-50 active:bg-red-100', active: 'bg-red-100' },
+      natural: { base: 'text-gray-900', normal: 'hover:bg-gray-50 active:bg-gray-100', active: 'bg-gray-100' },
     },
     light: {
       base: 'border-transparent',
-      primary: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
-      success: 'text-green-600 bg-green-50 hover:bg-green-100',
-      warning: 'text-yellow-600 bg-yellow-50 hover:bg-yellow-100',
-      danger: 'text-red-600 bg-red-50 hover:bg-red-100',
-      natural: 'text-gray-900 bg-gray-50 hover:bg-gray-100',
+      primary: {
+        base: 'text-blue-600',
+        normal: 'bg-blue-50 hover:bg-blue-100 active:bg-blue-200',
+        active: 'bg-blue-200',
+      },
+      success: {
+        base: 'text-green-600',
+        normal: 'bg-green-50 hover:bg-green-100 active:bg-green-200',
+        active: 'bg-green-200',
+      },
+      warning: {
+        base: 'text-yellow-600',
+        normal: 'bg-yellow-50 hover:bg-yellow-100 active:bg-yellow-200',
+        active: 'bg-blue-100',
+      },
+      danger: { base: 'text-red-600', normal: 'bg-red-50 hover:bg-red-100 active:bg-red-200', active: 'bg-red-200' },
+      natural: {
+        base: 'text-gray-900',
+        normal: 'bg-gray-50 hover:bg-gray-100 active:bg-gray-200',
+        active: 'bg-blue-100',
+      },
     },
     subtle: {
       base: 'border-transparent bg-white',
-      primary: 'text-blue-600 hover:bg-blue-50',
-      success: 'text-green-600 hover:bg-green-50',
-      warning: 'text-yellow-600 hover:bg-yellow-50',
-      danger: 'text-red-600 hover:bg-red-50',
-      natural: 'text-gray-900 hover:bg-gray-50',
+      primary: { base: 'text-blue-600', normal: 'hover:bg-blue-50 active:bg-blue-100', active: 'bg-blue-100' },
+      success: { base: 'text-green-600', normal: 'hover:bg-green-50 active:bg-green-100', active: 'bg-green-100' },
+      warning: { base: 'text-yellow-600', normal: 'hover:bg-yellow-50 active:bg-yellow-100', active: 'bg-yellow-100' },
+      danger: { base: 'text-red-600', normal: 'hover:bg-red-50 active:bg-red-100', active: 'bg-red-100' },
+      natural: { base: 'text-gray-900', normal: 'hover:bg-gray-50 active:bg-gray-100', active: 'bg-gray-100' },
     },
     link: {
       base: 'border-transparent bg-white underline underline-offset-2',
-      primary: 'text-blue-600 hover:text-blue-900',
-      success: 'text-green-600 hover:text-green-900',
-      warning: 'text-yellow-600 hover:text-yellow-900',
-      danger: 'text-red-600 hover:text-red-900',
-      natural: 'text-gray-800 hover:text-black',
+      primary: { base: '', normal: 'text-blue-600 hover:text-blue-800 active:text-blue-900', active: 'text-blue-900' },
+      success: {
+        base: '',
+        normal: 'text-green-600 hover:text-green-800 active:text-green-900',
+        active: 'text-green-900',
+      },
+      warning: {
+        base: '',
+        normal: 'text-yellow-600 hover:text-yellow-800 active:text-yellow-900',
+        active: 'text-yellow-900',
+      },
+      danger: { base: '', normal: 'text-red-600 hover:text-red-800 active:text-red-900', active: 'text-red-900' },
+      natural: { base: '', normal: 'text-gray-800 hover:text-gray-900 active:text-black', active: 'text-black' },
     },
   },
   fullWidth: 'w-full',
-};
-
-const ButtonContent = ({ startIcon, endIcon, children }: PropsWithChildren<ButtonContentProps>) => {
-  return (
-    <>
-      {startIcon && <ButtonIcon className={'mr-1'}>{startIcon}</ButtonIcon>}
-      {children}
-      {endIcon && <ButtonIcon className={'ml-1'}>{endIcon}</ButtonIcon>}
-    </>
-  );
 };
 
 /**
@@ -151,8 +150,6 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     disabled = group?.disabled || false,
     loading = false,
     loadingText,
-    startIcon,
-    endIcon,
     spinner,
     spinnerPlacement = 'start',
     size = group?.size || 'md',
@@ -165,24 +162,20 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
 
   const { ref: _ref, type: defaultType } = useButtonType(as);
 
-  const contentProps = { startIcon, endIcon, children };
-
   return (
     <Box
       as={as}
       {...rest}
-      className={clsx(
-        className,
+      className={twClsx(
         ButtonStyles.base,
         ButtonStyles.sizes[size],
-        ButtonStyles.colors[color],
         ButtonStyles.variants[variant].base,
-        ButtonStyles.variants[variant][color],
-        fullWidth && ButtonStyles.fullWidth
+        ButtonStyles.variants[variant][color].base,
+        active ? ButtonStyles.variants[variant][color].active : ButtonStyles.variants[variant][color].normal,
+        fullWidth && ButtonStyles.fullWidth,
+        className
       )}
       disabled={disabled || loading}
-      data-active={dataAttr(active)}
-      data-loading={dataAttr(loading)}
       type={type ?? defaultType}
       ref={useMergedRef(ref, _ref)}
     >
@@ -192,15 +185,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
         </ButtonSpinner>
       )}
 
-      {loading ? (
-        loadingText || (
-          <span className={'opacity-0'}>
-            <ButtonContent {...contentProps} />
-          </span>
-        )
-      ) : (
-        <ButtonContent {...contentProps} />
-      )}
+      {loading ? loadingText || <span className={'opacity-0'}>{children}</span> : children}
 
       {loading && spinnerPlacement === 'end' && (
         <ButtonSpinner size={size} label={loadingText} placement="end">
@@ -212,5 +197,5 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
 });
 
 if (__DEV__) {
-  Button.displayName = '@agile-ui/react/Button';
+  Button.displayName = 'Button';
 }
