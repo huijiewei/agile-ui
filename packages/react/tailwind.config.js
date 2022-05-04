@@ -72,7 +72,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      body: [
+      sans: [
         '-apple-system',
         'BlinkMacSystemFont',
         '"Segoe UI"',
@@ -83,7 +83,7 @@ module.exports = {
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
       ],
-      mono: ['SFMono-Regular', 'Consolas', '"Liberation Mono"', 'Menlo', 'Courier', 'monospace', '!default'],
+      mono: ['SFMono-Regular', 'Consolas', '"Liberation Mono"', 'Menlo', 'Courier', 'monospace'],
     },
     fontSize: {
       xs: ['0.50rem', { lineHeight: '1rem' }],

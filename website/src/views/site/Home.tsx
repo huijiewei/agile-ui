@@ -1,10 +1,29 @@
-import { Button, Calendar, Spinner, Stack, Text } from '@agile-ui/react';
+import { Box, Button, Calendar, Spinner, Stack, Text } from '@agile-ui/react';
 import { Camera } from '@icon-park/react';
 import { Link } from 'react-router-dom';
+import { ReactLiveBox } from '../../components/react-live/ReactLiveBox';
 
 const Home = () => {
   return (
     <>
+      <Box className={'p-5'}>
+        <ReactLiveBox
+          code={`
+<Stack className={'space-x-2'}>
+  <Button to={''} as={Link} color={'primary'}>
+    按钮 Button
+  </Button>
+  <Button color={'success'}>按钮 Button</Button>
+  <Button color={'natural'}>中文按钮</Button>
+  <Button color={'warning'}>中文按钮</Button>
+  <Button loading loadingText={'加载中...'} spinnerPlacement={'end'} color={'danger'}>
+    中文按钮
+  </Button>
+  <Button loading>中文按钮 English</Button>
+  <Button disabled>禁用按钮</Button>
+</Stack>`}
+        />
+      </Box>
       <Stack className={'space-x-2 p-3'}>
         <Button to={''} as={Link} color={'primary'}>
           按钮 Button
