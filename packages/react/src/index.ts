@@ -13,6 +13,8 @@ export * from './button/ButtonGroup';
 
 export * from './layout/Stack';
 
+export * from './swich/Switch';
+
 export * from './spinner/Spinner';
 
 export * from './layout/Layout';

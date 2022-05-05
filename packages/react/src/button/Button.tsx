@@ -62,9 +62,9 @@ const ButtonStyles = {
   base: 'inline-flex align-middle items-center transition-colors justify-center whitespace-nowrap select-none appearance-none border rounded disabled:opacity-50 disabled:cursor-not-allowed',
   sizes: {
     xs: 'h-6 px-2 text-sm',
-    sm: 'h-7 px-2 text-base',
-    md: 'h-8 px-3 text-base',
-    lg: 'h-9 px-5 text-base',
+    sm: 'h-7 px-2',
+    md: 'h-8 px-3',
+    lg: 'h-9 px-5',
     xl: 'h-10 px-5 text-lg',
   },
   variants: {

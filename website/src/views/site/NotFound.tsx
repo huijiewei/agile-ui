@@ -1,10 +1,10 @@
 import { Box } from '@agile-ui/react';
+import Image from '../../assets/images/404.svg';
 
 const NotFound = () => {
   return (
     <Box>
-      <h1>404</h1>
-      <p>Page not found</p>
+      <img alt={'404'} src={Image} />
     </Box>
   );
 };

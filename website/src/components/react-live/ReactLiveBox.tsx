@@ -13,7 +13,7 @@ export const ReactLiveBox = ({ code }: { code: string }) => {
     <LiveProvider code={editorCode} scope={scope}>
       <LivePreview className={'border border-gray-300 p-3 rounded mb-3'} />
       <div className={'relative'}>
-        <LiveEditor className={'bg-black rounded font-mono text-base'} />
+        <LiveEditor className={'bg-black rounded font-mono'} />
         <CopyButton content={editorCode} />
       </div>
       <LiveError />
