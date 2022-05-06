@@ -7,10 +7,10 @@ import { ReactLiveBox } from '../../components/react-live/ReactLiveBox';
 const Home = () => {
   return (
     <>
-      <Box className={'p-5'}>
+      <Box className={'pb-5'}>
         <Playground component={Button} defaultProps={{ children: '按钮' }} />
       </Box>
-      <Box className={'p-5'}>
+      <Box className={'pb-5'}>
         <ReactLiveBox
           code={`
 <Stack className={'space-x-2'}>

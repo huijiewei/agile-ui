@@ -1,5 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 import { DefaultLayout } from '../layouts/DefaultLayout';
+import { View } from '../views/components/View';
 
 import Home from '../views/site/Home';
 import NotFound from '../views/site/NotFound';
@@ -17,6 +18,11 @@ const routes = [
         path: 'home',
         title: '首页',
         element: <Home />,
+      },
+      {
+        path: 'components/:component',
+        title: '首页',
+        element: <View />,
       },
       {
         path: '*',

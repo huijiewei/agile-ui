@@ -12,5 +12,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['babel-plugin-optimize-clsx'],
+  plugins: ['babel-plugin-optimize-clsx', '@loadable/babel-plugin'],
 };

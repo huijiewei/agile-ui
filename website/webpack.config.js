@@ -61,10 +61,8 @@ module.exports = (env, argv) => {
         {
           test: /\.mdx?$/,
           use: [
-            {
-              loader: '@mdx-js/loader',
-              options: {},
-            },
+            { loader: 'babel-loader', options: {} },
+            { loader: '@mdx-js/loader', options: { providerImportSource: '@mdx-js/react' } },
           ],
         },
         {

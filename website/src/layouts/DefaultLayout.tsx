@@ -33,6 +33,10 @@ const navMenus = [
         path: '/components/button',
       },
       {
+        label: 'Spinner',
+        path: '/components/spinner',
+      },
+      {
         label: '输入框',
         path: '/components/input',
       },
@@ -42,107 +46,107 @@ const navMenus = [
       },
       {
         label: '复选框',
-        path: '/components/select',
+        path: '/components/checkbox',
       },
       {
         label: '单选框',
-        path: '/components/select',
+        path: '/components/radio',
       },
       {
         label: '链接',
-        path: '/components/select',
+        path: '/components/link',
       },
       {
         label: '导航',
-        path: '/components/select',
+        path: '/components/nav',
       },
       {
         label: '菜单',
-        path: '/components/select',
+        path: '/components/menu',
       },
       {
         label: '布局',
-        path: '/components/select',
+        path: '/components/layout',
       },
       {
         label: '表格',
-        path: '/components/select',
+        path: '/components/table',
       },
       {
         label: '排版',
-        path: '/components/select',
+        path: '/components/typography',
       },
       {
         label: '分割线',
-        path: '/components/select',
+        path: '/components/divider',
       },
       {
         label: '栅格',
-        path: '/components/select',
+        path: '/components/grid',
       },
       {
         label: '间距',
-        path: '/components/select',
+        path: '/components/spacing',
       },
       {
         label: '头像',
-        path: '/components/select',
+        path: '/components/avatar',
       },
       {
         label: '徽标',
-        path: '/components/select',
+        path: '/components/tag',
       },
       {
         label: '日历',
-        path: '/components/select',
+        path: '/components/calendar',
       },
       {
         label: '卡片',
-        path: '/components/select',
+        path: '/components/card',
       },
       {
         label: '图片轮播',
-        path: '/components/select',
+        path: '/components/carousel',
       },
       {
         label: '折叠面板',
-        path: '/components/select',
+        path: '/components/accordion',
       },
       {
         label: '评论',
-        path: '/components/select',
+        path: '/components/comment',
       },
       {
         label: '描述',
-        path: '/components/select',
+        path: '/components/description',
       },
       {
         label: '图片',
-        path: '/components/select',
+        path: '/components/image',
       },
       {
         label: '空状态',
-        path: '/components/select',
+        path: '/components/empty',
       },
       {
         label: '列表',
-        path: '/components/select',
+        path: '/components/list',
       },
       {
         label: '气泡卡片',
-        path: '/components/select',
+        path: '/components/popover',
       },
       {
         label: '数值显示',
-        path: '/components/select',
+        path: '/components/number',
       },
       {
         label: '标签',
-        path: '/components/select',
+        path: '/components/label',
       },
       {
         label: '标签页',
-        path: '/components/select',
+        path: '/components/tab',
       },
     ],
   },
@@ -207,12 +211,10 @@ export const DefaultLayout = () => {
           </div>
         </aside>
         <section className={'ml-52'}>
-          <div className={'pt-20 pb-16'}>
-            <div className={'w-full'}>
-              <Suspense fallback={null}>
-                <Outlet />
-              </Suspense>
-            </div>
+          <div className={'w-full p-5'}>
+            <Suspense fallback={null}>
+              <Outlet />
+            </Suspense>
           </div>
           <footer className={'border-t border-t-gray-200 bg-white p-3 text-gray-600'}>
             <div className={'flex justify-between text-sm'}>
