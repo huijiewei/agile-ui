@@ -8,3 +8,4 @@ export * from './use-callback-ref';
 export * from './use-debounce-callback';
 export * from './use-resize-observer';
 export * from './use-direction';
+export * from './use-clipboard';

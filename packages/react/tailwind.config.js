@@ -145,5 +145,80 @@ module.exports = {
         }
       );
     }),
+    plugin(function ({ addUtilities, matchUtilities, theme }) {
+      addUtilities({
+        '.scrollbar': {
+          '--scrollbar-thumb': '#cdcdcd',
+          '--scrollbar-track': '#f0f0f0',
+          '--scrollbar-corner': '#f0f0f0',
+          '--scrollbar-width': '9px',
+          'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track) var(--scrollbar-corner)',
+          '&::-webkit-scrollbar': {
+            width: 'var(--scrollbar-width)',
+            height: 'var(--scrollbar-width)',
+          },
+        },
+        '.scrollbar-thin': {
+          '--scrollbar-width': '6px',
+          'scrollbar-width': 'thin',
+        },
+      });
+
+      matchUtilities({
+        scrollbar: (value) => ({
+          '--scrollbar-width': value,
+        }),
+      });
+
+      matchUtilities(
+        {
+          'scrollbar-thumb': (value) => ({
+            '--scrollbar-thumb': value,
+            '&::-webkit-scrollbar-thumb': {
+              'background-color': value,
+            },
+          }),
+          'scrollbar-track': (value) => ({
+            '--scrollbar-track': value,
+            '&::-webkit-scrollbar-track': {
+              'background-color': value,
+            },
+          }),
+          'scrollbar-corner': (value) => ({
+            '--scrollbar-corner': value,
+            '&::-webkit-scrollbar-corner': {
+              'background-color': value,
+            },
+          }),
+        },
+        {
+          values: flattenColorPalette(theme('colors')),
+          type: 'color',
+        }
+      );
+
+      matchUtilities(
+        {
+          'scrollbar-track-rounded': (value) => ({
+            '&::-webkit-scrollbar-track': {
+              borderRadius: value,
+            },
+          }),
+          'scrollbar-thumb-rounded': (value) => ({
+            '&::-webkit-scrollbar-thumb': {
+              borderRadius: value,
+            },
+          }),
+          'scrollbar-corner-rounded': (value) => ({
+            '&::-webkit-scrollbar-corner': {
+              borderRadius: value,
+            },
+          }),
+        },
+        {
+          values: theme('borderRadius'),
+        }
+      );
+    }),
   ],
 };

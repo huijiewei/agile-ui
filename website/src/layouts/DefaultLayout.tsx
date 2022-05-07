@@ -165,7 +165,11 @@ export const DefaultLayout = () => {
         </div>
       </header>
       <div className={'container mx-auto'}>
-        <aside className={'fixed z-20 w-52 overflow-y-auto h-full pb-10'}>
+        <aside
+          className={
+            'fixed z-20 w-52 overflow-y-hidden hover:overflow-y-auto h-full pb-10 scrollbar scrollbar-thin scrollbar-thumb-rounded-sm scrollbar-thumb-gray-300'
+          }
+        >
           <div className={'px-3 py-3'}>
             <ul className={'space-y-3'}>
               {navMenus.map((menu) => (
