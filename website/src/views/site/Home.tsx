@@ -11,9 +11,7 @@ const Home = () => {
         <Playground component={Button} defaultProps={{ children: '按钮' }} />
       </Box>
       <Box className={'pb-5'}>
-        <ReactLiveBox
-          code={`
-<Stack className={'space-x-2'}>
+        <ReactLiveBox>{`<Stack className={'space-x-2'}>
   <Button to={''} as={Link} color={'primary'}>
     按钮 Button
   </Button>
@@ -25,8 +23,7 @@ const Home = () => {
   </Button>
   <Button loading>中文按钮 English</Button>
   <Button disabled>禁用按钮</Button>
-</Stack>`}
-        />
+  </Stack>`}</ReactLiveBox>
       </Box>
       <Stack className={'space-x-2 p-3'}>
         <Button to={''} as={Link} color={'primary'}>
@@ -56,7 +53,7 @@ const Home = () => {
           <Camera className={'mr-1'} />
           中文按钮
         </Button>
-        <Button className={'flex-col h-fit'} color={'primary'} size={'md'}>
+        <Button className={'h-fit flex-col'} color={'primary'} size={'md'}>
           <p>中文按钮</p>
           <p>English Button</p>
         </Button>

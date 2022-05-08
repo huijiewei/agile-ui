@@ -148,19 +148,21 @@ module.exports = {
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       addUtilities({
         '.scrollbar': {
-          '--scrollbar-thumb': '#cdcdcd',
-          '--scrollbar-track': '#f0f0f0',
-          '--scrollbar-corner': '#f0f0f0',
-          '--scrollbar-width': '9px',
-          'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track) var(--scrollbar-corner)',
-          '&::-webkit-scrollbar': {
+          '--scrollbar-width': '13px',
+          '--scrollbar-border': '3px',
+          '::-webkit-scrollbar': {
             width: 'var(--scrollbar-width)',
             height: 'var(--scrollbar-width)',
           },
+          '::-webkit-scrollbar-thumb': {
+            borderWidth: 'var(--scrollbar-border)',
+            borderStyle: 'solid',
+            borderColor: 'transparent',
+            backgroundClip: 'padding-box',
+          },
         },
         '.scrollbar-thin': {
-          '--scrollbar-width': '6px',
-          'scrollbar-width': 'thin',
+          '--scrollbar-width': '10px',
         },
       });
 
@@ -170,24 +172,27 @@ module.exports = {
         }),
       });
 
+      matchUtilities({
+        'scrollbar-border': (value) => ({
+          '--scrollbar-border': value,
+        }),
+      });
+
       matchUtilities(
         {
           'scrollbar-thumb': (value) => ({
-            '--scrollbar-thumb': value,
-            '&::-webkit-scrollbar-thumb': {
-              'background-color': value,
+            '::-webkit-scrollbar-thumb': {
+              backgroundColor: value,
             },
           }),
           'scrollbar-track': (value) => ({
-            '--scrollbar-track': value,
-            '&::-webkit-scrollbar-track': {
-              'background-color': value,
+            '::-webkit-scrollbar-track': {
+              backgroundColor: value,
             },
           }),
           'scrollbar-corner': (value) => ({
-            '--scrollbar-corner': value,
-            '&::-webkit-scrollbar-corner': {
-              'background-color': value,
+            '::-webkit-scrollbar-corner': {
+              backgroundColor: value,
             },
           }),
         },
@@ -200,17 +205,17 @@ module.exports = {
       matchUtilities(
         {
           'scrollbar-track-rounded': (value) => ({
-            '&::-webkit-scrollbar-track': {
+            ' ::-webkit-scrollbar-track': {
               borderRadius: value,
             },
           }),
           'scrollbar-thumb-rounded': (value) => ({
-            '&::-webkit-scrollbar-thumb': {
+            '::-webkit-scrollbar-thumb': {
               borderRadius: value,
             },
           }),
           'scrollbar-corner-rounded': (value) => ({
-            '&::-webkit-scrollbar-corner': {
+            '::-webkit-scrollbar-corner': {
               borderRadius: value,
             },
           }),

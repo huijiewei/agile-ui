@@ -137,7 +137,7 @@ const navMenus = [
         path: '/components/popover',
       },
       {
-        label: '数值显示',
+        label: '数值显示33333333333333333333333333333',
         path: '/components/number',
       },
       {
@@ -159,22 +159,18 @@ export const DefaultLayout = () => {
         <div className={'container mx-auto my-0 flex h-16 justify-between'}>
           <div className={'flex h-full w-52 items-center px-3'}>
             <img className={'inline-block w-9 align-middle'} alt={'Agile UI'} src={LogoImage} />
-            <span className={'ml-1.5 inline-block align-middle font-mono font-bold text-[20px]'}>Agile UI</span>
+            <span className={'ml-1.5 inline-block align-middle font-mono text-[20px] font-bold'}>Agile UI</span>
           </div>
           <div className={'flex'}>1233</div>
         </div>
       </header>
       <div className={'container mx-auto'}>
-        <aside
-          className={
-            'fixed z-20 w-52 overflow-y-hidden hover:overflow-y-auto h-full pb-10 scrollbar scrollbar-thin scrollbar-thumb-rounded-sm scrollbar-thumb-gray-300'
-          }
-        >
-          <div className={'px-3 py-3'}>
-            <ul className={'space-y-3'}>
+        <aside className={'relative scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-lg'}>
+          <div className={'fixed h-full w-52 overflow-y-hidden px-3 py-3 hover:overflow-y-auto'}>
+            <ul className={'w-full space-y-3'}>
               {navMenus.map((menu) => (
                 <li key={menu.label}>
-                  <h5 className={'font-medium mb-3'}>
+                  <h5 className={'mb-3 font-medium'}>
                     {menu.path ? (
                       <NavLink
                         className={({ isActive }) => {
@@ -195,9 +191,9 @@ export const DefaultLayout = () => {
                           <NavLink
                             className={({ isActive }) => {
                               return twClsx(
-                                'block -ml-px border-l border-transparent pl-4',
+                                '-ml-px block border-l border-transparent pl-4',
                                 isActive
-                                  ? 'text-blue-700 border-l-blue-600'
+                                  ? 'border-l-blue-600 text-blue-700'
                                   : 'text-gray-700 hover:border-l-gray-400 hover:text-gray-900'
                               );
                             }}
@@ -215,7 +211,7 @@ export const DefaultLayout = () => {
           </div>
         </aside>
         <section className={'ml-52'}>
-          <div className={'w-full p-5'}>
+          <div className={'w-full p-4'}>
             <Suspense fallback={null}>
               <Outlet />
             </Suspense>
