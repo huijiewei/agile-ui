@@ -24,7 +24,6 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom": "^0.6.3",
     "clsx": "^1.1.1",
     "tailwind-merge": "^1.2.1"
   },

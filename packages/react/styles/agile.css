@@ -4,6 +4,7 @@
 
 @layer base {
   body {
-    @apply text-base
+    @apply text-base antialiased
   }
 }
+

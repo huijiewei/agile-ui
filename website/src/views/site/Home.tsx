@@ -60,7 +60,8 @@ const Home = () => {
         <Button active color={'primary'} size={'lg'}>
           中文按钮
         </Button>
-        <Button className={'rounded-lg'} loading color={'primary'} size={'xl'}>
+        <Button color={'primary'} size={'xl'}>
+          <Camera className={'mr-1'} />
           中文按钮
         </Button>
         <Button color={'primary'} size={'xl'}>
