@@ -183,7 +183,7 @@ module.exports = (env, argv) => {
               },
               agile: {
                 name: 'agile',
-                test: /[\\/]packages[\\/]/,
+                test: /[\\/](packages|@floating-ui|tailwind-merge)[\\/]/,
                 chunks: 'all',
                 priority: 25,
                 enforce: true,

@@ -1,1 +1,7 @@
 @import "@agile-ui/react/styles/agile.css";
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}

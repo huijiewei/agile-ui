@@ -1,7 +1,7 @@
-import { useIsomorphicEffect } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { RefObject, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useIsomorphicLayoutEffect from 'use-isomorphic-layout-effect';
 import { polymorphicComponent } from '../utils/polymorphic';
 
 const MAX_Z_INDEX = 811223;
@@ -16,7 +16,7 @@ export const Portal = polymorphicComponent<'div', PortalProps>((props, ref) => {
   const hostElement = containerRef?.current ?? globalThis?.document?.body;
   const [, forceUpdate] = useState({});
 
-  useIsomorphicEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     forceUpdate({});
   }, []);
 

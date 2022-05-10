@@ -23,7 +23,7 @@ export const Playground = (props: PlaygroundProps) => {
       >
         <Component {...state} />
       </div>
-      <div className={'border-l border-l-gray-200 p-3 tablet:w-[250px]'}>
+      <div className={'border-t border-gray-200 p-3 tablet:w-[250px] tablet:border-l tablet:border-t-0'}>
         <div className={'flex flex-col space-y-2'}>
           <p>123</p>
           <p>456</p>

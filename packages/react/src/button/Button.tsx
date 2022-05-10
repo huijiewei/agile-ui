@@ -59,7 +59,7 @@ export type ButtonProps = ButtonBaseProps & {
 };
 
 const ButtonStyles = {
-  base: 'inline-flex align-middle items-center transition-colors justify-center whitespace-nowrap select-none appearance-none border rounded disabled:opacity-50 disabled:cursor-not-allowed',
+  base: 'inline-flex align-middle items-center w-auto transition-colors justify-center whitespace-nowrap select-none appearance-none border rounded disabled:opacity-50 disabled:cursor-not-allowed',
   sizes: {
     xs: 'h-6 px-2 text-sm',
     sm: 'h-7 px-2',

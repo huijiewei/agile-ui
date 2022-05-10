@@ -22,7 +22,7 @@ export const ReactLiveBox = (props: ReactLiveBoxProps) => {
       scope={{ ...scope, ...ReactLiveBoxScope }}
       {...rest}
     >
-      <LivePreview className={'mb-3 rounded border border-gray-300 p-3'} />
+      <LivePreview className={'mb-3 overflow-x-auto rounded border border-gray-300 p-3'} />
       <div className={'relative'}>
         <LiveEditor className={'rounded bg-black font-mono'} />
         <CopyButton content={editorCode} />
