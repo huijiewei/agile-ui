@@ -2,6 +2,9 @@ const plugin = require('tailwindcss/plugin');
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
 
 module.exports = {
+  experimental: {
+    optimizeUniversalDefaults: true,
+  },
   theme: {
     screens: { mobile: '640px', tablet: '768px', laptop: '1024px', desktop: '1280px' },
     colors: ({ colors }) => ({
@@ -97,11 +100,11 @@ module.exports = {
         '.scrollbar': {
           '--scrollbar-width': '12px',
           '--scrollbar-border': '3px',
-          ' ::-webkit-scrollbar': {
+          '&::-webkit-scrollbar': {
             width: 'var(--scrollbar-width)',
             height: 'var(--scrollbar-width)',
           },
-          ' ::-webkit-scrollbar-thumb': {
+          '&::-webkit-scrollbar-thumb': {
             borderWidth: 'var(--scrollbar-border)',
             borderStyle: 'solid',
             borderColor: 'transparent',
@@ -128,17 +131,17 @@ module.exports = {
       matchUtilities(
         {
           'scrollbar-thumb': (value) => ({
-            ' ::-webkit-scrollbar-thumb': {
+            '&::-webkit-scrollbar-thumb': {
               backgroundColor: value,
             },
           }),
           'scrollbar-track': (value) => ({
-            ' ::-webkit-scrollbar-track': {
+            '&::-webkit-scrollbar-track': {
               backgroundColor: value,
             },
           }),
           'scrollbar-corner': (value) => ({
-            ' ::-webkit-scrollbar-corner': {
+            '&::-webkit-scrollbar-corner': {
               backgroundColor: value,
             },
           }),
@@ -152,17 +155,17 @@ module.exports = {
       matchUtilities(
         {
           'scrollbar-track-rounded': (value) => ({
-            ' ::-webkit-scrollbar-track': {
+            '&::-webkit-scrollbar-track': {
               borderRadius: value,
             },
           }),
           'scrollbar-thumb-rounded': (value) => ({
-            ' ::-webkit-scrollbar-thumb': {
+            '&::-webkit-scrollbar-thumb': {
               borderRadius: value,
             },
           }),
           'scrollbar-corner-rounded': (value) => ({
-            ' ::-webkit-scrollbar-corner': {
+            '&::-webkit-scrollbar-corner': {
               borderRadius: value,
             },
           }),

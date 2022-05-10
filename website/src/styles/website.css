@@ -2,6 +2,6 @@
 
 @layer base {
   body {
-    @apply antialiased;
+    @apply antialiased
   }
 }

@@ -182,11 +182,15 @@ export const DefaultLayout = () => {
           </div>
         </div>
       </header>
-      <div>
+      <div className={'overflow-hidden'}>
         <div className={'mx-auto max-w-7xl'}>
-          <aside className={'hidden scrollbar scrollbar-thin scrollbar-thumb-gray-300 laptop:block'}>
-            <nav className={'fixed bottom-0 top-[3.8125rem] w-52 overflow-hidden hover:overflow-y-auto '}>
-              <ul className={'relative space-y-3 p-5'}>
+          <aside
+            className={
+              'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden border-r border-r-gray-200  scrollbar scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto laptop:block'
+            }
+          >
+            <nav className={'relative'}>
+              <ul className={'space-y-3 p-5'}>
                 {navMenus.map((menu) => (
                   <li key={menu.label}>
                     <h5 className={'mb-3 font-medium'}>
@@ -229,8 +233,8 @@ export const DefaultLayout = () => {
               </ul>
             </nav>
           </aside>
-          <div className={'laptop:pl-52'}>
-            <main className={'mx-auto p-5'}>
+          <div className={'laptop:pl-52 '}>
+            <main className={'mx-auto h-full p-5'}>
               <Suspense fallback={null}>
                 <Outlet />
               </Suspense>

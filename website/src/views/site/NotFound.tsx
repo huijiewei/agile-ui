@@ -1,12 +1,7 @@
-import { Box } from '@agile-ui/react';
-import Image from '../../assets/images/404.svg';
+import { Error } from '../../components/error/Error';
 
 const NotFound = () => {
-  return (
-    <Box className={'flex justify-center'}>
-      <img className={'w-2/3'} alt={'404'} src={Image} />
-    </Box>
-  );
+  return <Error title={'页面不存在'}></Error>;
 };
 
 export default NotFound;
