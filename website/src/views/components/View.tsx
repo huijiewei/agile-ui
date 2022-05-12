@@ -7,7 +7,7 @@ import { Error } from '../../components/error/Error';
 import { components } from '../../data/components';
 import { camelCase } from '../../utils/string';
 
-const AsyncPage = loadable((props: { page: unknown }) => import(`../../docs/${props.page}.mdx`));
+const AsyncPage = loadable((props: { page: unknown }) => import(`../../../docs/components/${props.page}.mdx`));
 
 const View = withErrorBoundary(() => {
   const [error] = useErrorBoundary();

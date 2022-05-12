@@ -24,15 +24,15 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
+    "@floating-ui/react-dom-interactions": "^0.5.0",
     "clsx": "^1.1.1",
     "tailwind-merge": "^1.2.1",
-    "@floating-ui/react-dom-interactions": "^0.5.0",
     "use-isomorphic-layout-effect": "^1.1.2"
   },
   "devDependencies": {
+    "@agile-ui/test-utils": "*",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "@agile-ui/test-utils": "*"
+    "react-dom": "^18.1.0"
   },
   "browserslist": [
     ">0.3%",

@@ -17,10 +17,10 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "jest-axe": "^6.0.0",
-    "@testing-library/react": "^13.2.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "@types/jest-axe": "^3.5.3"
+    "@testing-library/react": "^13.2.0",
+    "@types/jest-axe": "^3.5.3",
+    "jest-axe": "^6.0.0"
   },
   "devDependencies": {
     "react": "^18.1.0",

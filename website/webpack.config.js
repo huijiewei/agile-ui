@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
       type: 'filesystem',
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.jsx', '.js'],
+      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
     },
     output: {
       filename: fileName,
@@ -47,7 +47,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx|ts|tsx)$/,
+          test: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
           exclude: /node_modules/,
           use: [
             {
@@ -176,7 +176,7 @@ module.exports = (env, argv) => {
             cacheGroups: {
               react: {
                 name: 'react',
-                test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom|history|scheduler)[\\/]/,
+                test: /[\\/]node_modules[\\/](react|react-dom|react-is|react-router|react-router-dom|history|scheduler)[\\/]/,
                 chunks: 'all',
                 priority: 30,
                 enforce: true,
