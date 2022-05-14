@@ -20,7 +20,7 @@ const View = withErrorBoundary(() => {
     );
   }
 
-  return <>{mdx}</>;
+  return <section className={'flex flex-col gap-5'}>{mdx}</section>;
 });
 
 export default View;

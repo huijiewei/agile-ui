@@ -16,8 +16,10 @@ const useMDXComponent = (code: string, globals: Record<string, unknown> = {}): R
 };
 
 export const useMDX = (slug: string) => {
-  const componentDoc = allComponents.find((post) => post.frontmatter.slug === `/components/${slug}`);
+  const componentDoc = allComponents.find((post) => post.slug === `${slug}`);
 
-  const MDXComponent = useMDXComponent(componentDoc?.body.code || '');
+  const MDXComponent = useMDXComponent(componentDoc?.body.code || '', {
+    types: componentDoc?.types,
+  });
   return <MDXComponent components={components} />;
 };

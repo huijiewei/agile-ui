@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="<%= PUBLIC_URL %>icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-    <link href="<%= PUBLIC_URL %>icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-    <link href="<%= PUBLIC_URL %>icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+<html lang='zh-CN'>
+<head>
+    <meta charset='utf-8' />
+    <meta content='width=device-width, initial-scale=1' name='viewport' />
+    <link href='<%= PUBLIC_URL %>site.webmanifest' rel='manifest' />
+    <link href='<%= PUBLIC_URL %>icons/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180' />
+    <link href='<%= PUBLIC_URL %>icons/favicon-32x32.png' rel='icon' sizes='32x32' type='image/png' />
+    <link href='<%= PUBLIC_URL %>icons/favicon-16x16.png' rel='icon' sizes='16x16' type='image/png' />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link href="<%= PUBLIC_URL %>styles/splash.css" rel="stylesheet" />
-  </head>
-  <body>
-    <noscript>
-      <strong>请允许 JavaScript 运行</strong>
-    </noscript>
-    <div id="splash">
-      <div class="splash-status">
-        <div class="spinner"></div>
-      </div>
+    <link href='<%= PUBLIC_URL %>styles/splash.css' rel='stylesheet' />
+</head>
+<body>
+<noscript>
+    <strong>请允许 JavaScript 运行</strong>
+</noscript>
+<div id='splash'>
+    <div class='splash-status'>
+        <div class='spinner'></div>
     </div>
-    <div id="root"></div>
-  </body>
+</div>
+<div id='root'></div>
+</body>
 </html>

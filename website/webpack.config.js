@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
       type: 'filesystem',
     },
     resolve: {
-      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
+      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx', '.json'],
       alias: {
         'contentlayer/generated': path.resolve(__dirname, './.contentlayer/generated'),
       },
@@ -61,13 +61,15 @@ module.exports = (env, argv) => {
           },
         },
         {
-          test: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
+          test: /\.(js|mjs|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',
               options: {
                 plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+                cacheDirectory: true,
+                cacheCompression: false,
               },
             },
           ],
@@ -155,6 +157,8 @@ module.exports = (env, argv) => {
               removeStyleLinkTypeAttributes: true,
               useShortDoctype: true,
               minifyCSS: true,
+              minifyJS: true,
+              minifyURLs: true,
             }
           : false,
       }),
