@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 type ErrorProps = {
   title: string;
+  onBack?: () => void;
 };
 
 export const Error = (props: PropsWithChildren<ErrorProps>) => {
-  const { title, children } = props;
+  const { title, onBack, children } = props;
   const navigate = useNavigate();
 
   const handleBack = () => {
+    onBack && onBack();
     navigate(-1);
   };
   return (

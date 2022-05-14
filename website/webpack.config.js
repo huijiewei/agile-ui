@@ -6,6 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { GenerateSW } = require('workbox-webpack-plugin');
 const { EnvironmentPlugin } = require('webpack');
+const path = require('path');
 
 module.exports = (env, argv) => {
   process.env.NODE_ENV = argv.mode;
@@ -27,6 +28,12 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
+      alias: {
+        'contentlayer/generated': path.resolve(__dirname, './.contentlayer/generated'),
+      },
+    },
+    watchOptions: {
+      ignored: ['**/node_modules/!(.contentlayer)/**/*'],
     },
     output: {
       filename: fileName,
@@ -47,6 +54,13 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /\.m?js$/,
+          type: 'javascript/auto',
+          resolve: {
+            fullySpecified: false,
+          },
+        },
+        {
           test: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
           exclude: /node_modules/,
           use: [
@@ -56,13 +70,6 @@ module.exports = (env, argv) => {
                 plugins: [!isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
               },
             },
-          ],
-        },
-        {
-          test: /\.mdx?$/,
-          use: [
-            { loader: 'babel-loader', options: {} },
-            { loader: '@mdx-js/loader', options: { providerImportSource: '@mdx-js/react' } },
           ],
         },
         {
@@ -177,6 +184,13 @@ module.exports = (env, argv) => {
               react: {
                 name: 'react',
                 test: /[\\/]node_modules[\\/](react|react-dom|react-is|react-router|react-router-dom|history|scheduler)[\\/]/,
+                chunks: 'all',
+                priority: 30,
+                enforce: true,
+              },
+              'react-live': {
+                name: 'react-live',
+                test: /[\\/]node_modules[\\/](react-live|sucrase|prism-react-renderer)[\\/]/,
                 chunks: 'all',
                 priority: 30,
                 enforce: true,

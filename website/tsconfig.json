@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["src", ".contentlayer/generated"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@agile-ui/*": ["../packages/*/src"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    }
+  }
+}
