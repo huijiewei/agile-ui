@@ -11,7 +11,8 @@
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx,.mjs .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "contentlayer": "npm run contentlayer -w @agile-ui/website"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",

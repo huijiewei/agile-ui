@@ -1,4 +1,4 @@
-type Prop = {
+export type Prop = {
   name: string;
   description: string;
   defaultValue: {
@@ -11,9 +11,7 @@ type Prop = {
   };
 };
 
-export const MdxPropsTable = ({ types }: { types: Prop[] }) => {
-  const props = Object.values(types);
-
+export const MdxPropsTable = ({ componentProps }: { componentProps: Prop[] }) => {
   return (
     <table className={'w-full table-auto border-collapse border-collapse border border-slate-200'}>
       <thead>
@@ -26,13 +24,13 @@ export const MdxPropsTable = ({ types }: { types: Prop[] }) => {
         </tr>
       </thead>
       <tbody>
-        {props.map((prop) => (
+        {componentProps.map((prop) => (
           <tr key={prop.name}>
             <td className={'px-3 py-2 text-left'}>{prop.name}</td>
             <td className={'px-3 py-2 text-left'}>{prop.description || '-'}</td>
             <td className={'px-3 py-2 text-left'}>{prop.defaultValue?.value || '-'}</td>
             <td className={'px-3 py-2 text-left'}>{prop.required ? 'true' : 'false'}</td>
-            <td className={'px-3 py-2 text-left'}>{prop.type.raw || prop.type.name}</td>
+            <td className={'px-3 py-2 text-left'}>{prop.type.name}</td>
           </tr>
         ))}
       </tbody>

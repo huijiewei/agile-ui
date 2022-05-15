@@ -1,15 +1,18 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import { resolve } from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
+import remarkGfm from 'remark-gfm';
 import { slugify } from './src/utils/string';
 
 const docgenParser = withCustomConfig('tsconfig.json', {
-  shouldExtractValuesFromUnion: true,
+  savePropValueAsString: true,
+  skipChildrenPropWithoutDoc: false,
   shouldExtractLiteralValuesFromEnum: true,
+  shouldExtractValuesFromUnion: true,
   shouldRemoveUndefinedFromOptional: true,
   propFilter: {
-    skipPropsWithName: ['as', 'ref', 'children', 'className', 'style'],
-    skipPropsWithoutDoc: true,
+    skipPropsWithName: ['as', 'ref', 'style', 'className'],
+    skipPropsWithoutDoc: false,
   },
 });
 
@@ -19,19 +22,36 @@ const getComponentName = (filename: string) => {
   return filename.replace(/\.mdx$/, '');
 };
 
-const getTypes = (filename: string) => {
+const getComponentProps = (filename: string) => {
   const componentName = getComponentName(filename);
   const slug = slugify(componentName);
 
   const pathname = resolve(`../packages/react/src/${slug}/${componentName}.tsx`);
 
-  const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName === componentName);
+  const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName == componentName);
 
-  if (type) {
+  if (type?.props) {
     return Object.entries(type.props).map(([key, value]) => {
+      const type = {
+        name: value.type.name,
+      };
+
+      if (value.type.name == 'enum') {
+        if (!value.type.raw) {
+          type.name = value.type.name;
+        } else if (
+          value.type.raw.includes(' | ') ||
+          ['string', 'number', 'boolean', 'ReactNode'].includes(value.type.raw)
+        ) {
+          type.name = value.type.raw;
+        } else {
+          type.name = value.type.value.map((item: { value: string }) => item.value).join(' | ');
+        }
+      }
+
       return {
         name: key,
-        type: value.type,
+        type: type,
         required: value.required,
         description: value.description,
         defaultValue: value.defaultValue,
@@ -59,10 +79,10 @@ const Component = defineDocumentType(() => ({
       type: 'string',
       resolve: (doc) => getComponentName(doc._raw.sourceFileName),
     },
-    types: {
+    props: {
       type: 'json',
       resolve: (doc) => {
-        return getTypes(doc._raw.sourceFileName);
+        return getComponentProps(doc._raw.sourceFileName);
       },
     },
     docsLink: {
@@ -86,6 +106,9 @@ const Component = defineDocumentType(() => ({
 const contentLayerConfig = makeSource({
   contentDirPath: 'docs',
   documentTypes: [Component],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+  },
 });
 
 export default contentLayerConfig;

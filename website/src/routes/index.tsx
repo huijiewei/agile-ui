@@ -21,7 +21,7 @@ const routes = [
       },
       {
         path: 'components/:component',
-        title: '首页',
+        title: '组件',
         element: <View />,
       },
       {

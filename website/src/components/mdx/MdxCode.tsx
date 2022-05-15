@@ -10,5 +10,9 @@ export const MdxCode = (props: ComponentProps<'code'>) => {
       (isValidElement(el) && inlineElements.includes(el.props.mdxType))
   );
 
-  return shouldBeInline ? <code {...props} /> : <ReactLiveBox {...(props as ComponentProps<typeof ReactLiveBox>)} />;
+  return shouldBeInline ? (
+    <code className={'w-full rounded bg-slate-800 px-3 py-2 font-mono text-white'} {...props} />
+  ) : (
+    <ReactLiveBox {...(props as ComponentProps<typeof ReactLiveBox>)} />
+  );
 };

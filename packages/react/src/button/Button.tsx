@@ -25,7 +25,7 @@ const useButtonType = (value?: ElementType) => {
 
 export type ButtonProps = ButtonBaseProps & {
   /**
-   * 类型.
+   * 类型
    * @default 'button'
    */
   type?: 'submit' | 'reset' | 'button';
@@ -44,7 +44,6 @@ export type ButtonProps = ButtonBaseProps & {
 
   /**
    * 加载文本
-   * @default ''
    */
   loadingText?: string;
 
@@ -54,7 +53,15 @@ export type ButtonProps = ButtonBaseProps & {
    */
   fullWidth?: boolean;
 
+  /**
+   * 加载器
+   */
   spinner?: ReactNode;
+
+  /**
+   * 加载器位置
+   * @default 'start'
+   */
   spinnerPlacement?: 'start' | 'end';
 };
 

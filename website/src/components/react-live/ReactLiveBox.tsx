@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from '@agile-ui/react';
+import * as AgileUI from '@agile-ui/react';
 import { __DEV__ } from '@agile-ui/utils';
 import { LiveEditor, LiveError, LivePreview, LiveProvider, LiveProviderProps } from 'react-live';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,6 @@ import { CopyButton } from './CopyButton';
 type ReactLiveBoxProps = Omit<LiveProviderProps, 'ref'> & {
   children: string;
 };
-
-const ReactLiveBoxScope = { Button, Box, Stack, Link };
 
 export const ReactLiveBox = (props: ReactLiveBoxProps) => {
   const { children, transformCode, scope, ...rest } = props;
@@ -19,7 +17,7 @@ export const ReactLiveBox = (props: ReactLiveBoxProps) => {
     <LiveProvider
       code={editorCode}
       transformCode={transformCode || ((code) => `${code};`)}
-      scope={{ ...scope, ...ReactLiveBoxScope }}
+      scope={{ ...scope, ...AgileUI, Link }}
       {...rest}
     >
       <LivePreview className={'mb-3 overflow-x-auto rounded border border-gray-300 p-3'} />

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "INIT_CWD=$PWD contentlayer dev & webpack serve --mode development --open",
     "build": "INIT_CWD=$PWD contentlayer build && webpack build --mode production",
-    "analyze": "INIT_CWD=$PWD contentlayer build && webpack build --mode production --env BUNDLE_ANALYZE=1"
+    "analyze": "INIT_CWD=$PWD contentlayer build && webpack build --mode production --env BUNDLE_ANALYZE=1",
+    "contentlayer": "INIT_CWD=$PWD contentlayer dev"
   },
   "dependencies": {
     "@agile-ui/react": "*",
@@ -45,7 +46,8 @@
     "webpack-dev-server": "^4.9.0",
     "workbox-webpack-plugin": "^6.5.3",
     "contentlayer": "^0.2.5",
-    "react-docgen-typescript": "^2.2.2"
+    "react-docgen-typescript": "^2.2.2",
+    "remark-gfm": "^3.0.1"
   },
   "browserslist": [
     ">0.3%",
