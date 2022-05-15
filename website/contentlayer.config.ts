@@ -1,7 +1,7 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import { slugify } from './src/utils/string';
+import { resolve } from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
-import glob from 'fast-glob';
+import { slugify } from './src/utils/string';
 
 const docgenParser = withCustomConfig('tsconfig.json', {
   shouldExtractValuesFromUnion: true,
@@ -23,10 +23,8 @@ const getTypes = (filename: string) => {
   const componentName = getComponentName(filename);
   const slug = slugify(componentName);
 
-  const pathname = glob.sync(`../packages/react/src/${slug}/${componentName}.tsx`, {
-    cwd: process.cwd(),
-    absolute: true,
-  });
+  const pathname = resolve(`../packages/react/src/${slug}/${componentName}.tsx`);
+
   const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName === componentName);
 
   if (type) {

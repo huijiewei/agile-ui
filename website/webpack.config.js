@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx', '.json'],
       alias: {
-        'contentlayer/generated': path.resolve(__dirname, './.contentlayer/generated'),
+        'contentlayer/generated': path.resolve(__dirname, '.contentlayer/generated'),
       },
     },
     watchOptions: {

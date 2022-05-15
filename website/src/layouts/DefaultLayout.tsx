@@ -186,7 +186,7 @@ export const DefaultLayout = () => {
         <div className={'mx-auto max-w-7xl'}>
           <aside
             className={
-              'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden border-r border-r-gray-200  scrollbar scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto laptop:block'
+              'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden border-r border-r-gray-200 scrollbar scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto laptop:block'
             }
           >
             <nav className={'relative'}>

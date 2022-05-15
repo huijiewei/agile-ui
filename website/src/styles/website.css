@@ -2,6 +2,6 @@
 
 @layer base {
   body {
-    @apply antialiased
+    @apply antialiased overflow-y-scroll scrollbar scrollbar-thumb-gray-300;
   }
 }

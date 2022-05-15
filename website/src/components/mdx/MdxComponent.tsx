@@ -11,15 +11,19 @@ const getMDXComponent = (code: string, globals: Record<string, unknown> = {}): R
   return fn(...Object.values(scope)).default;
 };
 
-const useMDXComponent = (code: string, globals: Record<string, unknown> = {}): React.ComponentType<any> => {
+export const useMDXComponent = (code: string, globals: Record<string, unknown> = {}): React.ComponentType<any> => {
   return React.useMemo(() => getMDXComponent(code, globals), [code, globals]);
 };
 
 export const useMDX = (slug: string) => {
   const componentDoc = allComponents.find((post) => post.slug === `${slug}`);
 
-  const MDXComponent = useMDXComponent(componentDoc?.body.code || '', {
-    types: componentDoc?.types,
+  if (!componentDoc) {
+    throw new Error(`组件不存在: ${slug}`);
+  }
+
+  const MDXComponent = useMDXComponent(componentDoc.body.code || '', {
+    types: componentDoc.types,
   });
   return <MDXComponent components={components} />;
 };
