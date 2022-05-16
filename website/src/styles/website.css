@@ -5,3 +5,15 @@
     @apply antialiased overflow-y-scroll scrollbar scrollbar-thumb-gray-300;
   }
 }
+
+.mdx-content h2:hover a.anchor, .mdx-content h3:hover a.anchor, .mdx-content h4:hover a.anchor {
+  @apply opacity-100;
+}
+
+.mdx-content a.anchor {
+  @apply opacity-0 transition-opacity mx-3 text-green-600;
+}
+
+.mdx-content a.anchor:before {
+  content: '#';
+}

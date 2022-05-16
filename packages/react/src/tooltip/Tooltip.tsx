@@ -24,15 +24,17 @@ type TooltipProps = ComponentProps<'div'> & {
   style?: 'dark' | 'light' | 'auto';
   animation?: false | `duration-${number}`;
   arrow?: boolean;
+  arrowClassName?: string;
 };
 
 export const Tooltip = (props: TooltipProps) => {
   const {
     className,
+    arrowClassName,
     children,
     content,
     placement = 'auto',
-    animation = 'duration-300',
+    animation = 'duration-200',
     trigger = 'hover',
     style = 'auto',
     arrow = true,
@@ -82,7 +84,7 @@ export const Tooltip = (props: TooltipProps) => {
       <div
         {...getFloatingProps({
           className: twClsx(
-            'absolute inline-block rounded py-2 px-3 text-sm font-medium shadow-sm',
+            'absolute inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm',
             animation !== false && `transition-opacity ${animation}`,
             {
               'invisible opacity-0': !open,
@@ -110,6 +112,7 @@ export const Tooltip = (props: TooltipProps) => {
             arrowX={arrowX}
             arrowY={arrowY}
             placement={floatingTooltip.placement}
+            className={arrowClassName}
           />
         )}
       </div>
@@ -132,12 +135,14 @@ const TooltipArrow = ({
   arrowX,
   arrowY,
   placement,
+  className,
 }: {
   style: 'dark' | 'light' | 'auto';
   arrowRef: RefObject<HTMLDivElement>;
   arrowX?: number;
   arrowY?: number;
   placement: Placement;
+  className?: string;
 }) => {
   const arrowPlacement = floatingArrowPlacement({ placement });
 
@@ -150,7 +155,8 @@ const TooltipArrow = ({
           'border-gray-200 bg-white': style === 'light',
           'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-700': style === 'auto',
         },
-        tooltipArrowStyles[arrowPlacement]
+        tooltipArrowStyles[arrowPlacement],
+        className
       )}
       ref={arrowRef}
       style={{

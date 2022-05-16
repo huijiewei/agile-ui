@@ -47,7 +47,10 @@
     "workbox-webpack-plugin": "^6.5.3",
     "contentlayer": "^0.2.5",
     "react-docgen-typescript": "^2.2.2",
-    "remark-gfm": "^3.0.1"
+    "remark-gfm": "^3.0.1",
+    "rehype-slug": "^5.0.1",
+    "rehype-autolink-headings": "^6.1.1",
+    "remark-mdx-code-meta": "^1.0.0"
   },
   "browserslist": [
     ">0.3%",

@@ -157,7 +157,7 @@ export const DefaultLayout = () => {
     <>
       <header
         className={
-          'sticky top-0 z-30 w-full flex-none border-b border-slate-200 bg-white bg-opacity-90 py-3 backdrop-blur laptop:z-50'
+          'sticky top-0 z-30 w-full border-b border-slate-200 bg-white bg-opacity-90 py-3 backdrop-blur laptop:z-50'
         }
       >
         <div className={'mx-auto flex max-w-7xl justify-between px-5'}>
@@ -239,10 +239,16 @@ export const DefaultLayout = () => {
                 <Outlet />
               </Suspense>
             </main>
-            <footer className={'border-t border-t-gray-200 bg-white p-3 text-gray-600'}>
-              <div className={'flex justify-between text-sm'}>
-                <div>2022 © Agile.</div>
-                <div>Design & Develop by Huijie.</div>
+            <footer className={'border-t border-t-gray-200 bg-white py-3 px-5 text-slate-600'}>
+              <div className={'flex justify-between text-[13px] font-medium'}>
+                <div>Copyright © 2022, Agile Studio</div>
+                <div>
+                  Proudly made in{' '}
+                  <span aria-label="China" role="img">
+                    🇨🇳
+                  </span>{' '}
+                  by Huijie Wei
+                </div>
               </div>
             </footer>
           </div>

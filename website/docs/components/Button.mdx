@@ -1,20 +1,26 @@
 ---
-title: 按钮 Button
+title: 按钮
 description: 按钮是由用户使用鼠标、键盘、手指、语音指令或其他辅助技术激活的交互式组件。一旦被激活，它就会执行一个可编程的操作，例如提交一个表单或打开一个对话框。
 ---
 
 ## 使用
-`
-import { Button } from '@agile-ui/react';
-`
+`import { Button } from '@agile-ui/react';`
 
 <Showcase component={'Button'} componentProps={componentProps} />
 
-## 参数
-<PropsTable componentProps={componentProps} />
+## 形式
+```tsx live editable
+<Stack className={'space-x-2'}>
+    <Button>按钮</Button>
+    <Button variant={'outline'}>按钮</Button>
+    <Button variant={'light'}>按钮</Button>
+    <Button variant={'subtle'}>按钮</Button>
+    <Button variant={'link'}>按钮</Button>
+</Stack>
+```
 
-### 颜色
-```tsx
+## 样式
+```tsx live editable
 <Stack className={'space-x-2'}>
     <Button>按钮</Button>
     <Button color={'success'}>按钮</Button>
@@ -24,3 +30,16 @@ import { Button } from '@agile-ui/react';
 </Stack>
 ```
 
+## 状态
+```tsx live editable
+<Stack className={'space-x-2'}>
+    <Button>按钮</Button>
+    <Button color={'success'}>按钮</Button>
+    <Button color={'natural'}>按钮</Button>
+    <Button color={'warning'}>按钮</Button>
+    <Button color={'danger'}>按钮</Button>
+</Stack>
+```
+
+## 属性
+<PropsTable componentProps={componentProps} />

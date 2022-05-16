@@ -1,8 +1,12 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import { resolve } from 'path';
 import { withCustomConfig } from 'react-docgen-typescript';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { slugify } from './src/utils/string';
+import slugger from 'github-slugger';
 
 const docgenParser = withCustomConfig('tsconfig.json', {
   savePropValueAsString: true,
@@ -34,6 +38,8 @@ const getComponentProps = (filename: string) => {
     return Object.entries(type.props).map(([key, value]) => {
       const type = {
         name: value.type.name,
+        values: null,
+        control: value.type.name,
       };
 
       if (value.type.name == 'enum') {
@@ -44,8 +50,17 @@ const getComponentProps = (filename: string) => {
           ['string', 'number', 'boolean', 'ReactNode'].includes(value.type.raw)
         ) {
           type.name = value.type.raw;
+          type.control = value.type.raw;
+
+          if (value.type.raw.includes(' | ')) {
+            type.values = value.type.value.map((item: { value: string }) => item.value);
+            type.control = 'select';
+          }
         } else {
-          type.name = value.type.value.map((item: { value: string }) => item.value).join(' | ');
+          const values = value.type.value.map((item: { value: string }) => item.value);
+          type.values = values;
+          type.name = values.join(' | ');
+          type.control = 'select';
         }
       }
 
@@ -85,6 +100,31 @@ const Component = defineDocumentType(() => ({
         return getComponentProps(doc._raw.sourceFileName);
       },
     },
+    headings: {
+      type: 'json',
+      resolve: (doc) => {
+        const text: string = doc.body.raw;
+
+        const regexp = new RegExp(/^(### |## )(.*)\n/, 'gm');
+        const headings = [...text.matchAll(regexp)];
+
+        if (headings.length) {
+          return headings.map((heading) => {
+            const headingText = heading[2].trim();
+            const headingType = heading[1].trim() === '##' ? 'h2' : 'h3';
+            const headingLink = slugger.slug(headingText, false);
+
+            return {
+              text: headingText,
+              id: headingLink,
+              level: headingType,
+            };
+          });
+        }
+
+        return [];
+      },
+    },
     docsLink: {
       type: 'string',
       resolve: (doc) => {
@@ -107,7 +147,18 @@ const contentLayerConfig = makeSource({
   contentDirPath: 'docs',
   documentTypes: [Component],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkMdxCodeMeta],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'append',
+          test: ['h2', 'h3', 'h4'],
+          properties: { className: ['anchor'] },
+        },
+      ],
+    ],
   },
 });
 
