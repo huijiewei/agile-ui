@@ -1,13 +1,83 @@
+import { CopyIcon, twClsx } from '@agile-ui/react';
 import { ElementType, ReactNode, useState } from 'react';
+import { LiveEditor } from 'react-live';
 import { camelCase } from '../../utils/string';
 import { Prop } from '../mdx/MdxPropsTable';
 
-type PropValue = string | number | boolean | ReactNode;
+export type PropValue = string | number | boolean | ReactNode;
 
 type PlaygroundProps = {
   component: ElementType;
   componentProps: Prop[];
   defaultProps?: Record<string, PropValue>;
+  includeCode?: boolean;
+  codePropsMultiline?: boolean;
+  codeTemplate: (props: string, children?: PropValue) => string;
+};
+
+const getOffset = (value: boolean | number) => {
+  if (typeof value === 'boolean') {
+    return '\n  ';
+  }
+
+  return `\n${Array(value).fill('  ').join('')}`;
+};
+
+const propToString = ({
+  name,
+  type,
+  value,
+  defaultValue,
+}: {
+  name: string;
+  type: string;
+  value: PropValue;
+  defaultValue: PropValue;
+}) => {
+  if (name === 'children' || !value) {
+    return '';
+  }
+
+  if (type == 'select' || type == 'number' || type == 'string') {
+    if (value && value.toString() != defaultValue?.toString().slice(1, -1)) {
+      return `${name}={'${value}'}`;
+    }
+
+    return '';
+  }
+
+  if (type == 'boolean') {
+    if (value && defaultValue && value.toString() != defaultValue.toString().slice(1, -1)) {
+      return value ? name : `${name}={false}`;
+    }
+
+    return '';
+  }
+
+  return `${name}="${value}"`;
+};
+
+const propsToString = ({
+  props,
+  values,
+  multiline,
+}: {
+  props: Prop[];
+  values: Record<string, PropValue>;
+  multiline: boolean;
+}) => {
+  return props
+    .map((prop) =>
+      propToString({
+        name: prop.name,
+        type: prop.type.control,
+        value: values[prop.name],
+        defaultValue: prop.defaultValue?.value,
+      })
+    )
+    .filter(Boolean)
+    .join(multiline ? getOffset(multiline) : ' ')
+    .trim();
 };
 
 const ComponentPropControl = ({
@@ -60,60 +130,98 @@ const ComponentPropControl = ({
 };
 
 export const Playground = (props: PlaygroundProps) => {
-  const { component: Component, componentProps, defaultProps = {} } = props;
+  const {
+    component: Component,
+    includeCode = true,
+    codeTemplate,
+    codePropsMultiline = false,
+    componentProps,
+    defaultProps = {},
+  } = props;
 
   const [state, setState] = useState(
     Object.fromEntries(Object.entries(defaultProps).map(([key, value]) => [key, value]))
   );
 
+  const propsCode = propsToString({
+    props: componentProps,
+    values: state,
+    multiline: codePropsMultiline,
+  });
+
+  const code = codeTemplate(propsCode.length > 0 ? ` ${propsCode}` : propsCode, state.children).trim();
+
   return (
-    <div className={'flex min-h-[20em] flex-col rounded border border-slate-200 tablet:flex-row'}>
+    <div>
       <div
-        className={
-          'flex flex-1 items-center justify-center rounded bg-slate-50 bg-gradient-radial-dot from-slate-200 to-transparent bg-[length:16px_16px] p-3'
-        }
+        className={twClsx(
+          'flex min-h-[20em] flex-col rounded border border-slate-200 tablet:flex-row',
+          includeCode && 'rounded-b-none border-b-0'
+        )}
       >
-        <Component {...state} />
-      </div>
-      <div className={'border-t border-gray-200 p-3 tablet:w-[260px] tablet:border-l tablet:border-t-0'}>
-        <div className={'flex flex-col space-y-3'}>
-          {componentProps.map((prop) => (
-            <ComponentPropControl
-              key={prop.name}
-              prop={prop}
-              defaultValue={state[prop.name] ? state[prop.name] : prop.defaultValue?.value}
-              onChange={(value) => setState((current) => ({ ...current, [prop.name]: value }))}
-            />
-          ))}
-          {Object.keys(state).map((key) => {
-            if (componentProps.find((prop) => prop.name == key)) {
-              return null;
-            }
+        <div
+          className={
+            'flex flex-1 items-center justify-center rounded bg-slate-50 bg-gradient-radial-dot from-slate-200 to-transparent bg-[length:16px_16px] p-3'
+          }
+        >
+          <Component {...state} />
+        </div>
+        <div className={'border-t border-gray-200 p-3 tablet:w-[260px] tablet:border-l tablet:border-t-0'}>
+          <div className={'flex flex-col space-y-3'}>
+            {componentProps.map((prop) => {
+              if (prop.type.name == 'ReactNode') {
+                return null;
+              }
+              return (
+                <ComponentPropControl
+                  key={prop.name}
+                  prop={prop}
+                  defaultValue={state[prop.name] ? state[prop.name] : prop.defaultValue?.value}
+                  onChange={(value) => setState((current) => ({ ...current, [prop.name]: value }))}
+                />
+              );
+            })}
+            {Object.keys(state).map((key) => {
+              if (componentProps.find((prop) => prop.name == key)) {
+                return null;
+              }
 
-            const value = state[key];
-            const type = defaultProps[key];
+              const value = state[key];
+              const type = defaultProps[key];
 
-            return (
-              <ComponentPropControl
-                key={key}
-                prop={{
-                  name: key,
-                  required: false,
-                  description: key == 'children' ? '内容' : camelCase(key),
-                  defaultValue: { value: value?.toString() || '' },
-                  type: {
-                    name: typeof type,
-                    control: typeof type,
-                    values: null,
-                  },
-                }}
-                defaultValue={value}
-                onChange={(value) => setState((current) => ({ ...current, [key]: value }))}
-              />
-            );
-          })}
+              return (
+                <ComponentPropControl
+                  key={key}
+                  prop={{
+                    name: key,
+                    required: false,
+                    description: key == 'children' ? '内容' : camelCase(key),
+                    defaultValue: { value: value?.toString() || '' },
+                    type: {
+                      name: typeof type,
+                      control: typeof type,
+                      values: null,
+                    },
+                  }}
+                  defaultValue={value}
+                  onChange={(value) => setState((current) => ({ ...current, [key]: value }))}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
+      {includeCode && (
+        <div className={'relative'}>
+          <LiveEditor
+            disabled
+            code={code}
+            className={'rounded rounded-t-none bg-slate-700 font-mono text-[13px]'}
+            language={'tsx'}
+          />
+          <CopyIcon content={code} />
+        </div>
+      )}
     </div>
   );
 };

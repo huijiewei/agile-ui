@@ -21,9 +21,11 @@ export const MdxTableContent = ({ headings }: { headings: { id: string; text: st
           <li key={id}>
             <a
               className={twClsx(
-                '-ml-px block border-l',
+                '-ml-px block border-l py-1',
                 level == 'h3' ? 'pl-10' : 'pl-5',
-                activeId === id ? 'border-l-blue-300 text-blue-600' : 'border-l-transparent hover:border-l-slate-200'
+                activeId === id
+                  ? 'border-l-blue-300 bg-blue-50 text-blue-600'
+                  : 'border-l-transparent hover:border-l-slate-200'
               )}
               aria-current={id === activeId ? 'location' : undefined}
               href={`#${id}`}

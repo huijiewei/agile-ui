@@ -25,4 +25,7 @@ export * from './layout/LayoutHeader';
 export * from './layout/LayoutFooter';
 export * from './layout/LayoutContent';
 
+export * from './prism/CopyIcon';
+export * from './prism/Prism';
+
 export * from './theme/ThemeProvider';
