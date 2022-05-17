@@ -7,20 +7,6 @@ module.exports = {
   },
   theme: {
     screens: { mobile: '640px', tablet: '768px', laptop: '1024px', desktop: '1280px' },
-    colors: ({ colors }) => ({
-      inherit: colors.inherit,
-      current: colors.current,
-      transparent: colors.transparent,
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      slate: colors.slate,
-      neutral: colors.neutral,
-      red: colors.red,
-      yellow: colors.yellow,
-      green: colors.green,
-      blue: colors.blue,
-    }),
     fontFamily: {
       sans: [
         '-apple-system',

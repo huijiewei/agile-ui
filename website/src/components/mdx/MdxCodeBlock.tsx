@@ -18,16 +18,16 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
 
   return (
     <LiveProvider code={code} scope={{ ...AgileUI, Link }} {...rest}>
-      <div className={'text-[13px]'}>
+      <div>
         {live && <LivePreview className={'overflow-x-auto rounded-t border border-b-0 border-slate-300 p-3'} />}
         <div className={'relative'}>
           <LiveEditor
             disabled={!editable}
-            className={twClsx('bg-slate-700 font-mono', live ? 'rounded-b' : 'rounded')}
+            className={twClsx('bg-slate-700 font-mono text-[13px] leading-5', live ? 'rounded-b' : 'rounded')}
           />
           <CopyIcon content={code} />
         </div>
-        {live && <LiveError className={'mt-1 rounded bg-red-400 px-2 py-1 font-mono text-white'} />}
+        {live && <LiveError className={'mt-1 rounded bg-red-400 px-2 py-1 font-mono text-[13px] text-white'} />}
       </div>
     </LiveProvider>
   );

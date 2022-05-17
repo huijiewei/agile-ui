@@ -111,7 +111,7 @@ const Component = defineDocumentType(() => ({
         if (headings.length) {
           return headings.map((heading) => {
             const headingText = heading[2].trim();
-            const headingType = heading[1].trim() === '##' ? 'h2' : 'h3';
+            const headingType = heading[1].trim() == '##' ? 'h2' : 'h3';
             const headingLink = slugger.slug(headingText, false);
 
             return {

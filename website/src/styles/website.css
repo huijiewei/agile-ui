@@ -9,6 +9,9 @@
 .mdx-content h2:hover a.anchor, .mdx-content h3:hover a.anchor, .mdx-content h4:hover a.anchor {
   @apply opacity-100;
 }
+.mdx-content h2, .mdx-content h3, .mdx-content h4 {
+  @apply scroll-mt-[6rem];
+}
 
 .mdx-content a.anchor {
   @apply opacity-0 transition-opacity mx-3 text-green-600;

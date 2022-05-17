@@ -1,18 +1,6 @@
-export type Prop = {
-  name: string;
-  description: string;
-  defaultValue: {
-    value: string;
-  };
-  required: boolean;
-  type: {
-    name: string;
-    values: string[] | null;
-    control: string;
-  };
-};
+import { ComponentProp } from '../playground/PlaygroundHelper';
 
-export const MdxPropsTable = ({ componentProps }: { componentProps: Prop[] }) => {
+export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentProp[] }) => {
   return (
     <div className={'rounded border border-slate-200'}>
       <table className={'w-full table-auto'}>

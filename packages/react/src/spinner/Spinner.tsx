@@ -5,7 +5,16 @@ import { Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
 export type SpinnerProps = {
+  /**
+   * 大小
+   * @default 'md'
+   */
   size?: Size;
+
+  /**
+   * 提示文本
+   * @default '加载中…'
+   */
   label?: string;
 };
 

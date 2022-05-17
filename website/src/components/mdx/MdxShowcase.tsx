@@ -1,8 +1,8 @@
 import { Button, Spinner } from '@agile-ui/react';
-import { Playground, PropValue } from '../playground/Playground';
-import { Prop } from './MdxPropsTable';
+import { Playground } from '../playground/Playground';
+import { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
 
-const ButtonShowcase = (componentProps: Prop[]) => (
+const ButtonShowcase = (componentProps: ComponentProp[]) => (
   <Playground
     codeTemplate={(props: string, children?: PropValue) => `
 import { Button } from '@agile-ui/react';
@@ -21,7 +21,7 @@ const Demo = () => {
   />
 );
 
-const SpinnerShowcase = (componentProps: Prop[]) => (
+const SpinnerShowcase = (componentProps: ComponentProp[]) => (
   <Playground
     codeTemplate={(props: string) => `
 import { Spinner } from '@agile-ui/react';
@@ -32,7 +32,6 @@ const Demo = () => {
 }
 `}
     component={Spinner}
-    defaultProps={{ size: 'lg' }}
     componentProps={componentProps}
   />
 );
@@ -42,6 +41,6 @@ const showcases = {
   Spinner: SpinnerShowcase,
 };
 
-export const MdxShowcase = ({ component, componentProps }: { component: string; componentProps: Prop[] }) => {
+export const MdxShowcase = ({ component, componentProps }: { component: string; componentProps: ComponentProp[] }) => {
   return showcases[component as keyof typeof showcases](componentProps);
 };
