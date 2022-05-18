@@ -1,6 +1,6 @@
 import { Edit, Github } from '@icon-park/react';
-import { allComponents } from 'contentlayer/generated';
-import { useMemo } from 'react';
+import { Component } from 'contentlayer/generated';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Image500 from '../../assets/images/500.png';
 import { Error } from '../../components/error/Error';
@@ -11,7 +11,25 @@ import { camelCase } from '../../utils/string';
 const View = () => {
   const component = camelCase(useParams().component || '');
 
-  const componentDoc = allComponents.find((post) => post.slug === component);
+  const [error, setError] = useState<boolean>();
+  const [componentDoc, setComponentDoc] = useState<Component>();
+
+  useEffect(() => {
+    import(
+      /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
+      {
+        assert: { type: 'json' },
+      }
+    )
+      .then((doc) => {
+        setError(false);
+        setComponentDoc(doc.default);
+      })
+      .catch(() => {
+        setError(true);
+        setComponentDoc(undefined);
+      });
+  }, [component]);
 
   const MdxComponent = useMemo(() => {
     if (!componentDoc) {
@@ -23,12 +41,16 @@ const View = () => {
     });
   }, [componentDoc]);
 
-  if (MdxComponent == null) {
+  if (error) {
     return (
       <Error title={'组件文档不存在'}>
         <img className={'w-[320px] items-center'} src={Image500} alt={'组件文档不存在'}></img>
       </Error>
     );
+  }
+
+  if (MdxComponent == null) {
+    return null;
   }
 
   return (

@@ -25,6 +25,7 @@ const SpinnerShowcase = (componentProps: ComponentProp[]) => (
   <Playground
     codeTemplate={(props: string) => `
 import { Spinner } from '@agile-ui/react';
+
 const Demo = () => {
   return (
     <Spinner${props} />

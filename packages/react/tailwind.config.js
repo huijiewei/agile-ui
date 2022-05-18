@@ -81,6 +81,20 @@ module.exports = {
         }
       );
     }),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          tooltip: (value) => ({
+            borderColor: `${value}`,
+            backgroundColor: `${value}`,
+          }),
+        },
+        {
+          values: flattenColorPalette(theme('colors')),
+          type: 'color',
+        }
+      );
+    }),
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       addUtilities({
         '.scrollbar': {

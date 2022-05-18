@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
       type: 'filesystem',
     },
     resolve: {
-      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx', '.json'],
+      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
       alias: {
         'contentlayer/generated': path.resolve(__dirname, '.contentlayer/generated'),
       },
@@ -53,13 +53,6 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
-        {
-          test: /\.m?js$/,
-          type: 'javascript/auto',
-          resolve: {
-            fullySpecified: false,
-          },
-        },
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           exclude: /node_modules/,
@@ -118,6 +111,10 @@ module.exports = (env, argv) => {
               maxSize: 256,
             },
           },
+        },
+        {
+          test: /\.json$/,
+          type: 'json',
         },
       ],
     },
