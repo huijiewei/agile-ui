@@ -1,6 +1,7 @@
 import './wdyr';
 
 import { ThemeProvider } from '@agile-ui/react';
+import { HelmetProvider } from 'react-helmet-async';
 
 import './styles/website.css';
 
@@ -10,12 +11,13 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import './serviceWorker';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-createRoot(document.getElementById('root')).render(
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </HelmetProvider>
   </StrictMode>
 );

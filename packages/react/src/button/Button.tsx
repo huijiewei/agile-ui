@@ -1,7 +1,6 @@
 import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
-import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { twClsx } from '../utils/tailwind';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
@@ -150,7 +149,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   const group = useButtonGroup();
 
   const {
-    as = 'button',
+    as: Component = 'button',
     children,
     type = 'button',
     active = false,
@@ -167,11 +166,10 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     ...rest
   } = props;
 
-  const { ref: _ref, type: defaultType } = useButtonType(as);
+  const { ref: _ref, type: defaultType } = useButtonType(Component);
 
   return (
-    <Box
-      as={as}
+    <Component
       {...rest}
       className={twClsx(
         ButtonStyles.base,
@@ -199,7 +197,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
           {spinner}
         </ButtonSpinner>
       )}
-    </Box>
+    </Component>
   );
 });
 

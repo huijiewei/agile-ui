@@ -23,7 +23,10 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
         <div className={'relative'}>
           <LiveEditor
             disabled={!editable}
-            className={twClsx('bg-slate-700 font-mono text-[13px] leading-5', live ? 'rounded-b' : 'rounded')}
+            className={twClsx(
+              'overflow-x-auto bg-slate-700 font-mono text-[13px] leading-5',
+              live ? 'rounded-b' : 'rounded'
+            )}
           />
           <CopyIcon content={code} />
         </div>

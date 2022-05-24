@@ -1,5 +1,6 @@
 import { useTimeout } from '@agile-ui/react-hooks';
 import { BrowserRouter } from 'react-router-dom';
+import { AppHelmet } from './AppHelmet';
 import { AppRoutes } from './routes';
 
 export const App = () => {
@@ -9,6 +10,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
+      <AppHelmet />
       <AppRoutes />
     </BrowserRouter>
   );

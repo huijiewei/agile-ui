@@ -24,7 +24,7 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom-interactions": "^0.6.0",
+    "@floating-ui/react-dom-interactions": "^0.6.1",
     "clsx": "^1.1.1",
     "tailwind-merge": "^1.2.1",
     "use-isomorphic-layout-effect": "^1.1.2",

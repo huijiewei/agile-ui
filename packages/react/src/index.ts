@@ -11,6 +11,8 @@ export * from './calendar/Calendar';
 export * from './button/Button';
 export * from './button/ButtonGroup';
 
+export * from './input/Input';
+
 export * from './layout/Stack';
 
 export * from './swich/Switch';

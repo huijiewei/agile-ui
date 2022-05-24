@@ -139,7 +139,6 @@ module.exports = (env, argv) => {
           skipWaiting: true,
         }),
       new HtmlWebpackPlugin({
-        title: 'Agile UI',
         template: './public/index.html',
         templateParameters: {
           PUBLIC_URL: publicPath + '/',

@@ -182,7 +182,7 @@ const floatingMiddleware = ({
   const middleware = [];
 
   middleware.push(offset(8));
-  middleware.push(placement === 'auto' ? autoPlacement() : flip());
+  middleware.push(placement == 'auto' ? autoPlacement() : flip());
   middleware.push(shift({ padding: 8 }));
 
   if (arrowRef.current) {
