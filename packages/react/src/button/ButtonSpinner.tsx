@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { ComponentPropsWithoutRef } from 'react';
+import { tx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
-import { twClsx } from '../utils/tailwind';
 import { Size } from '../utils/types';
 
 export type ButtonSpinnerProps = ComponentPropsWithoutRef<'div'> & {
@@ -15,7 +15,7 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
 
   return (
     <div
-      className={twClsx(
+      className={tx(
         'flex items-center',
         label ? 'relative' : 'absolute',
         placement === 'start' ? (label ? `mr-1` : 'mr-0') : label ? `ml-1` : 'ml-0',

@@ -1,12 +1,12 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { ComponentPropsWithoutRef } from 'react';
-import { twClsx } from '../utils/tailwind';
+import { tx } from 'twind';
 
 export const VisuallyHidden = (props: ComponentPropsWithoutRef<'span'>) => {
   const { children, className, ...rest } = props;
 
   return (
-    <span {...rest} className={twClsx('sr-only', className)}>
+    <span {...rest} className={tx('sr-only', className)}>
       {children}
     </span>
   );

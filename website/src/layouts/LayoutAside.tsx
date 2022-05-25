@@ -1,5 +1,5 @@
-import { twClsx } from '@agile-ui/react';
 import { NavLink } from 'react-router-dom';
+import { tx } from 'twind';
 
 const navMenus = [
   {
@@ -153,9 +153,10 @@ const navMenus = [
 export const LayoutAside = () => {
   return (
     <aside
-      className={
-        'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden overscroll-contain border-r border-r-slate-200 scrollbar scrollbar-thin scrollbar-thumb-gray-300 hover:overflow-y-auto laptop:block'
-      }
+      className={tx(
+        'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden overscroll-contain border-r border-r-slate-200 hover:overflow-y-auto laptop:block',
+        '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300)'
+      )}
     >
       <nav className={'relative'}>
         <ul className={'space-y-3 p-5'}>
@@ -165,7 +166,7 @@ export const LayoutAside = () => {
                 {menu.path ? (
                   <NavLink
                     className={({ isActive }) => {
-                      return twClsx('hover:text-gray-700', isActive && 'text-blue-700');
+                      return tx('hover:text-gray-700', isActive && 'text-blue-700');
                     }}
                     to={menu.path}
                   >
@@ -181,7 +182,7 @@ export const LayoutAside = () => {
                     <li key={child.label}>
                       <NavLink
                         className={({ isActive }) => {
-                          return twClsx(
+                          return tx(
                             '-ml-px block border-l border-transparent pl-4',
                             isActive
                               ? 'border-l-blue-600 text-blue-700'

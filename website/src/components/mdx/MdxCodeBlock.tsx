@@ -1,9 +1,10 @@
 import * as AgileUI from '@agile-ui/react';
-import { CopyIcon, twClsx } from '@agile-ui/react';
+import { CopyIcon } from '@agile-ui/react';
 import { __DEV__ } from '@agile-ui/utils';
 import { ComponentProps } from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Link } from 'react-router-dom';
+import { tx } from 'twind';
 
 export type MdxCodeBlockProps = Omit<ComponentProps<'code'>, 'ref'> & {
   children?: string;
@@ -23,7 +24,7 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
         <div className={'relative'}>
           <LiveEditor
             disabled={!editable}
-            className={twClsx(
+            className={tx(
               'overflow-x-auto bg-slate-700 font-mono text-[13px] leading-5',
               live ? 'rounded-b' : 'rounded'
             )}

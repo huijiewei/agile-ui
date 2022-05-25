@@ -76,9 +76,6 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
             },
-            {
-              loader: 'postcss-loader',
-            },
           ],
         },
         {
@@ -178,7 +175,13 @@ module.exports = (env, argv) => {
     ].filter(Boolean),
     optimization: isProduction
       ? {
-          minimizer: [new CssMinimizerPlugin(), '...'],
+          minimizer: [
+            '...',
+            new CssMinimizerPlugin({
+              parallel: true,
+              minify: CssMinimizerPlugin.parcelCssMinify,
+            }),
+          ],
           splitChunks: {
             cacheGroups: {
               react: {
@@ -195,9 +198,16 @@ module.exports = (env, argv) => {
                 priority: 30,
                 enforce: true,
               },
+              twind: {
+                name: 'twind',
+                test: /[\\/]node_modules[\\/](twind|@twind)[\\/]/,
+                chunks: 'all',
+                priority: 30,
+                enforce: true,
+              },
               agile: {
                 name: 'agile',
-                test: /[\\/](packages|@floating-ui|tailwind-merge)[\\/]/,
+                test: /[\\/](packages|@floating-ui)[\\/]/,
                 chunks: 'all',
                 priority: 25,
                 enforce: true,

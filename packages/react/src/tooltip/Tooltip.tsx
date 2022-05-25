@@ -15,7 +15,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import { ComponentProps, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
-import { twClsx } from '../utils/tailwind';
+import { tx } from 'twind';
 
 type TooltipProps = ComponentProps<'div'> & {
   content: ReactNode;
@@ -83,7 +83,7 @@ export const Tooltip = (props: TooltipProps) => {
       </div>
       <div
         {...getFloatingProps({
-          className: twClsx(
+          className: tx(
             'absolute inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm',
             animation !== false && `transition-opacity ${animation}`,
             {
@@ -148,7 +148,7 @@ const TooltipArrow = ({
 
   return (
     <div
-      className={twClsx(
+      className={tx(
         'absolute z-10 h-2 w-2 rotate-45',
         {
           'border-gray-900 bg-gray-900 dark:border-gray-700 dark:bg-gray-700': style === 'dark',

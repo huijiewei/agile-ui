@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
+import { tx } from 'twind';
 import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { twClsx } from '../utils/tailwind';
 
 type StackProps = {
   direction?: 'row' | 'col';
@@ -14,11 +14,7 @@ export const Stack = polymorphicComponent<'div', StackProps>((props, ref) => {
     <Box
       as={as}
       {...rest}
-      className={twClsx(
-        'flex items-center',
-        direction == 'row' ? 'flex-row space-x-2' : 'flex-col space-y-2',
-        className
-      )}
+      className={tx('flex items-center', direction == 'row' ? 'flex-row space-x-2' : 'flex-col space-y-2', className)}
       ref={ref}
     >
       {children}

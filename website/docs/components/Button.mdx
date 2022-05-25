@@ -6,7 +6,7 @@ description: 按钮是由用户使用鼠标、键盘、手指、语音指令或�
 ## 用法
 <Showcase component={'Button'} componentProps={componentProps} />
 
-## 形式
+## 样式
 ```tsx live editable
 <Stack className={'space-x-3'}>
     <Button>按钮</Button>
@@ -17,14 +17,14 @@ description: 按钮是由用户使用鼠标、键盘、手指、语音指令或�
 </Stack>
 ```
 
-## 样式
+## 颜色
 ```tsx live editable
 <Stack className={'space-x-3'}>
     <Button>按钮</Button>
-    <Button color={'success'}>按钮</Button>
-    <Button color={'natural'}>按钮</Button>
-    <Button color={'warning'}>按钮</Button>
-    <Button color={'danger'}>按钮</Button>
+    <Button color={'green'}>按钮</Button>
+    <Button color={'yellow'}>按钮</Button>
+    <Button color={'red'}>按钮</Button>
+    <Button color={'slate'}>按钮</Button>
 </Stack>
 ```
 
@@ -32,7 +32,7 @@ description: 按钮是由用户使用鼠标、键盘、手指、语音指令或�
 ```tsx live editable
 <Stack className={'space-x-3'}>
     <Button>按钮</Button>
-    <Button as={'span'} color={'success'}>按钮</Button>
+    <Button as={'span'} disabled color={'red'}>按钮</Button>
     <Button color={'natural'}>按钮</Button>
     <Button color={'warning'}>按钮</Button>
     <Button color={'danger'}>按钮</Button>

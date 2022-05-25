@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
+import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { twClsx } from '../utils/tailwind';
 import { Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
@@ -16,6 +16,18 @@ export type SpinnerProps = {
    * @default '加载中…'
    */
   label?: string;
+
+  /**
+   * 颜色
+   * @default 'current'
+   */
+
+  color?: string;
+
+  /**
+   * 空白区域颜色
+   */
+  emptyColor?: string;
 };
 
 const SpinnerStyles = {
@@ -30,13 +42,21 @@ const SpinnerStyles = {
 };
 
 export const Spinner = polymorphicComponent<'div', SpinnerProps>((props, ref) => {
-  const { as: Component = 'div', label = '加载中…', className, size = 'md', ...rest } = props;
+  const {
+    as: Component = 'div',
+    label = '加载中…',
+    className,
+    color = 'current',
+    emptyColor = 'transparent',
+    size = 'md',
+    ...rest
+  } = props;
   return (
     <Component
-      className={twClsx(
+      className={tx(
         SpinnerStyles.base,
         SpinnerStyles.sizes[size],
-        'spinner-current spinner-empty-transparent',
+        `border-t-${color} border-r-${color} border-b-${emptyColor} border-l-${emptyColor}`,
         className
       )}
       ref={ref}

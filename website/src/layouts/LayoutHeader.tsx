@@ -1,21 +1,22 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
+import { tw } from 'twind';
 import LogoImage from '../assets/images/logo.png';
 
 export const LayoutHeader = () => {
   return (
     <header
-      className={
+      className={tw(
         'sticky top-0 z-30 w-full border-b border-slate-200 bg-white bg-opacity-90 py-3 backdrop-blur laptop:z-50'
-      }
+      )}
     >
-      <div className={'mx-auto flex max-w-7xl items-center justify-between px-5'}>
+      <div className={tw('mx-auto flex max-w-7xl items-center justify-between px-5')}>
         <div className={'flex flex-row items-center'}>
           <img className={'inline-block w-9 align-middle'} alt={'Agile UI'} src={LogoImage} />
           <span className={'ml-1.5 inline-block align-middle text-[22px] font-bold'}>Agile UI</span>
           <span
-            className={
-              'ml-3 inline-block rounded-sm bg-orange-100 px-1.5 py-0.5 align-middle text-sm font-bold text-orange-600'
-            }
+            className={tw(
+              'ml-3 inline-block rounded-sm bg-orange-100 px-1.5 py-0.5 align-middle text-xs font-bold text-orange-600'
+            )}
           >
             ALPHA
           </span>

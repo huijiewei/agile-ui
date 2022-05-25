@@ -1,6 +1,7 @@
-import { CopyIcon, twClsx } from '@agile-ui/react';
+import { CopyIcon } from '@agile-ui/react';
 import { ElementType, useState } from 'react';
 import { LiveEditor } from 'react-live';
+import { tx } from 'twind';
 import { camelCase } from '../../utils/string';
 import { PlaygroundControl } from './PlaygroundControl';
 import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';
@@ -39,14 +40,14 @@ export const Playground = (props: PlaygroundProps) => {
   return (
     <div>
       <div
-        className={twClsx(
+        className={tx(
           'flex min-h-[20em] flex-col rounded border border-slate-200 tablet:flex-row',
           includeCode && 'rounded-b-none border-b-0'
         )}
       >
         <div
           className={
-            'flex flex-1 items-center justify-center rounded bg-slate-50 bg-gradient-radial-dot from-slate-200 to-transparent bg-[length:16px_16px] p-3'
+            'bg-[16px_16px] flex flex-1 items-center justify-center rounded bg-slate-50 bg-gradient-radial-dot from-slate-200 to-transparent p-3'
           }
         >
           <Component {...state} />

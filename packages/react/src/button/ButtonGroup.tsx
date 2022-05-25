@@ -1,4 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
+import { DefaultTheme } from '@twind/preset-tailwind/defaultTheme';
 import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
@@ -13,9 +14,9 @@ export type ButtonBaseProps = {
 
   /**
    * 颜色
-   * @default 'primary'
+   * @default 'blue'
    */
-  color?: 'primary' | 'success' | 'natural' | 'warning' | 'danger';
+  color?: keyof DefaultTheme['colors'];
 
   /**
    * 大小
@@ -42,7 +43,7 @@ const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
 export { useButtonGroup };
 
 export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props, ref) => {
-  const { as: Component = 'div', children, size = 'md', color = 'primary', variant = 'solid', ...rest } = props;
+  const { as: Component = 'div', children, size = 'md', color = 'blue', variant = 'solid', ...rest } = props;
 
   const context = useMemo(() => ({ size, color, variant }), [size, color, variant]);
 

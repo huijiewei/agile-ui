@@ -1,6 +1,6 @@
-import { twClsx } from '@agile-ui/react';
 import { MindmapList } from '@icon-park/react';
 import { useEffect, useRef, useState } from 'react';
+import { tx } from 'twind';
 
 type Heading = { id: string; text: string; level: string };
 
@@ -55,7 +55,7 @@ export const MdxTableContent = ({ headings }: { headings: Heading[] }) => {
         {headings.map(({ id, text, level }: Heading, index) => (
           <li key={id}>
             <a
-              className={twClsx(
+              className={tx(
                 '-ml-px block border-l py-1',
                 level == 'h3' ? 'pl-10' : 'pl-5',
                 index == active

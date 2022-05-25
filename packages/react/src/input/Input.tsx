@@ -1,5 +1,5 @@
+import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { twClsx } from '../utils/tailwind';
 import { Size } from '../utils/types';
 
 export type InputVariant = 'outline' | 'filled' | 'flushed' | 'unstyled';
@@ -47,6 +47,6 @@ export const Input = polymorphicComponent<'input', InputProps>((props, ref) => {
     ...rest
   } = props;
   return (
-    <Component className={twClsx('px-2 py-1', className)} disabled={disabled} readOnly={readOnly} {...rest} ref={ref} />
+    <Component className={tx('px-2 py-1', className)} disabled={disabled} readOnly={readOnly} {...rest} ref={ref} />
   );
 });

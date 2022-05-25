@@ -2,7 +2,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import type { Language } from 'prism-react-renderer';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { ComponentPropsWithRef, forwardRef } from 'react';
-import { twClsx } from '../utils/tailwind';
+import { tx } from 'twind';
 import { CopyIcon } from './CopyIcon';
 
 type PrismProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & {
@@ -19,7 +19,7 @@ export const Prism = forwardRef<HTMLDivElement, PrismProps>((props, ref) => {
   const code = trim ? children.trim() : children;
 
   return (
-    <div className={twClsx('relative', className)} ref={ref} {...rest}>
+    <div className={tx('relative', className)} ref={ref} {...rest}>
       {showCopyIcon && <CopyIcon content={code} />}
       <Highlight {...defaultProps} code={code} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (

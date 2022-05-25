@@ -1,8 +1,8 @@
 import { useMergedRef } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
+import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { twClsx } from '../utils/tailwind';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonSpinner } from './ButtonSpinner';
 
@@ -64,82 +64,22 @@ export type ButtonProps = ButtonBaseProps & {
   spinnerPlacement?: 'start' | 'end';
 };
 
-const ButtonStyles = {
-  base: 'inline-flex align-middle items-center w-auto transition-colors justify-center whitespace-nowrap select-none appearance-none border rounded disabled:opacity-50 disabled:cursor-not-allowed',
-  sizes: {
-    xs: 'h-6 px-2 text-sm',
-    sm: 'h-7 px-2',
-    md: 'h-8 px-3',
-    lg: 'h-9 px-5',
-    xl: 'h-10 px-5 text-lg',
-  },
-  variants: {
-    solid: {
-      base: 'text-white border-transparent',
-      primary: { base: '', normal: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800', active: 'bg-blue-800' },
-      success: { base: '', normal: 'bg-green-600 hover:bg-green-700 active:bg-green-800', active: 'bg-green-800' },
-      warning: { base: '', normal: 'bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-800', active: 'bg-yellow-800' },
-      danger: { base: '', normal: 'bg-red-600 hover:bg-red-700 active:bg-red-800', active: 'bg-red-800' },
-      natural: { base: '', normal: 'bg-gray-800 hover:bg-gray-900 active:bg-black', active: 'bg-black' },
-    },
-    outline: {
-      base: 'bg-white border-current',
-      primary: { base: 'text-blue-600', normal: 'hover:bg-blue-50 active:bg-blue-100', active: 'bg-blue-100' },
-      success: { base: 'text-green-600', normal: 'hover:bg-green-50 active:bg-green-100', active: 'bg-green-100' },
-      warning: { base: 'text-yellow-600 ', normal: 'hover:bg-yellow-50 active:bg-yellow-100', active: 'bg-yellow-100' },
-      danger: { base: 'text-red-600', normal: 'hover:bg-red-50 active:bg-red-100', active: 'bg-red-100' },
-      natural: { base: 'text-gray-900', normal: 'hover:bg-gray-50 active:bg-gray-100', active: 'bg-gray-100' },
-    },
-    light: {
-      base: 'border-transparent',
-      primary: {
-        base: 'text-blue-600',
-        normal: 'bg-blue-50 hover:bg-blue-100 active:bg-blue-200',
-        active: 'bg-blue-200',
-      },
-      success: {
-        base: 'text-green-600',
-        normal: 'bg-green-50 hover:bg-green-100 active:bg-green-200',
-        active: 'bg-green-200',
-      },
-      warning: {
-        base: 'text-yellow-600',
-        normal: 'bg-yellow-50 hover:bg-yellow-100 active:bg-yellow-200',
-        active: 'bg-blue-100',
-      },
-      danger: { base: 'text-red-600', normal: 'bg-red-50 hover:bg-red-100 active:bg-red-200', active: 'bg-red-200' },
-      natural: {
-        base: 'text-gray-900',
-        normal: 'bg-gray-50 hover:bg-gray-100 active:bg-gray-200',
-        active: 'bg-blue-100',
-      },
-    },
-    subtle: {
-      base: 'border-transparent bg-white',
-      primary: { base: 'text-blue-600', normal: 'hover:bg-blue-50 active:bg-blue-100', active: 'bg-blue-100' },
-      success: { base: 'text-green-600', normal: 'hover:bg-green-50 active:bg-green-100', active: 'bg-green-100' },
-      warning: { base: 'text-yellow-600', normal: 'hover:bg-yellow-50 active:bg-yellow-100', active: 'bg-yellow-100' },
-      danger: { base: 'text-red-600', normal: 'hover:bg-red-50 active:bg-red-100', active: 'bg-red-100' },
-      natural: { base: 'text-gray-900', normal: 'hover:bg-gray-50 active:bg-gray-100', active: 'bg-gray-100' },
-    },
-    link: {
-      base: 'border-transparent bg-white underline underline-offset-2',
-      primary: { base: '', normal: 'text-blue-600 hover:text-blue-800 active:text-blue-900', active: 'text-blue-900' },
-      success: {
-        base: '',
-        normal: 'text-green-600 hover:text-green-800 active:text-green-900',
-        active: 'text-green-900',
-      },
-      warning: {
-        base: '',
-        normal: 'text-yellow-600 hover:text-yellow-800 active:text-yellow-900',
-        active: 'text-yellow-900',
-      },
-      danger: { base: '', normal: 'text-red-600 hover:text-red-800 active:text-red-900', active: 'text-red-900' },
-      natural: { base: '', normal: 'text-gray-800 hover:text-gray-900 active:text-black', active: 'text-black' },
-    },
-  },
-  fullWidth: 'w-full',
+const buttonSizes = {
+  xs: 'h-6 px-2 text-sm',
+  sm: 'h-7 px-2',
+  md: 'h-8 px-3',
+  lg: 'h-9 px-5',
+  xl: 'h-10 px-5 text-lg',
+};
+
+const buttonVariants = (color: string) => {
+  return {
+    solid: `text-white border-transparent bg-${color}-(600 hover:700 active:800)`,
+    outline: `bg-white border-current text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
+    light: `border-transparent text-${color}-600 bg-${color}-50 hover:bg-${color}-100 active:bg-${color}-200`,
+    subtle: `border-transparent bg-white text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
+    link: `border-transparent bg-white underline underline-offset-2 text-${color}(600 hover:800 active:900)`,
+  };
 };
 
 /**
@@ -159,7 +99,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     spinner,
     spinnerPlacement = 'start',
     size = group?.size || 'md',
-    color = group?.color || 'primary',
+    color = group?.color || 'blue',
     variant = group?.variant || 'solid',
     fullWidth = false,
     className,
@@ -171,13 +111,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   return (
     <Component
       {...rest}
-      className={twClsx(
-        ButtonStyles.base,
-        ButtonStyles.sizes[size],
-        ButtonStyles.variants[variant].base,
-        ButtonStyles.variants[variant][color].base,
-        active ? ButtonStyles.variants[variant][color].active : ButtonStyles.variants[variant][color].normal,
-        fullWidth && ButtonStyles.fullWidth,
+      className={tx(
+        'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap rounded border align-middle transition-colors',
+        fullWidth ? 'w-full' : 'w-auto',
+        disabled && 'cursor-not-allowed opacity-50',
+        buttonSizes[size],
+        buttonVariants(color)[variant],
         className
       )}
       disabled={disabled || loading}
