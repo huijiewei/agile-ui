@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Size } from '../utils/types';
+import { Color, ColorWithLevel, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
 export type SpinnerProps = {
@@ -22,12 +22,12 @@ export type SpinnerProps = {
    * @default 'current'
    */
 
-  color?: string;
+  color?: ColorWithLevel;
 
   /**
    * 空白区域颜色
    */
-  emptyColor?: string;
+  emptyColor?: ColorWithLevel;
 };
 
 const SpinnerStyles = {

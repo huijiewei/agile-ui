@@ -9,6 +9,7 @@ export const PlaygroundControl = ({
   defaultValue: PropValue;
   onChange: (value: PropValue) => void;
 }) => {
+  console.log(prop);
   return (
     <label className={'inline-flex items-center justify-between gap-3'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>
@@ -28,23 +29,24 @@ export const PlaygroundControl = ({
           onChange={(e) => onChange(e.target.value)}
         />
       )}
-      {prop.type.control == 'select' && (
-        <select
-          onChange={(e) => onChange(e.target.value)}
-          className={'rounded-sm border border-slate-300 px-1.5 py-0.5'}
-          defaultValue={defaultValue?.toString()}
-        >
-          {prop.type.values?.map((value) => {
-            const valueString = value.toString().slice(1, -1);
+      {prop.type.control == 'select' &&
+        (prop.type.name == 'color' ? null : (
+          <select
+            onChange={(e) => onChange(e.target.value)}
+            className={'rounded-sm border border-slate-300 px-1.5 py-0.5'}
+            defaultValue={defaultValue?.toString()}
+          >
+            {prop.type.values?.map((value) => {
+              const valueString = value.toString().slice(1, -1);
 
-            return (
-              <option value={valueString} key={valueString}>
-                {valueString}
-              </option>
-            );
-          })}
-        </select>
-      )}
+              return (
+                <option value={valueString} key={valueString}>
+                  {valueString}
+                </option>
+              );
+            })}
+          </select>
+        ))}
     </label>
   );
 };

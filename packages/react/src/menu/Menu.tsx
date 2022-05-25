@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { useMemo } from 'react';
+import { tx } from 'twind';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
 
@@ -22,7 +22,7 @@ export const Menu = polymorphicComponent<'menu', MenuProps>((props, ref) => {
   const menuContextValue = useMemo(() => ({ mode }), [mode]);
 
   return (
-    <Component {...rest} className={clsx(className, '')} ref={ref}>
+    <Component {...rest} className={tx(className, '')} ref={ref}>
       <MenuProvider value={menuContextValue}>{children}</MenuProvider>
     </Component>
   );

@@ -1,9 +1,8 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { DefaultTheme } from '@twind/preset-tailwind/defaultTheme';
 import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Size } from '../utils/types';
+import { Size, Color } from '../utils/types';
 
 export type ButtonBaseProps = {
   /**
@@ -16,7 +15,7 @@ export type ButtonBaseProps = {
    * 颜色
    * @default 'blue'
    */
-  color?: keyof DefaultTheme['colors'];
+  color?: Color;
 
   /**
    * 大小

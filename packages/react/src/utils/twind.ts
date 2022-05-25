@@ -1,6 +1,44 @@
+import {
+  black,
+  blue,
+  current,
+  gray,
+  green,
+  inherit,
+  lime,
+  orange,
+  red,
+  rose,
+  sky,
+  slate,
+  transparent,
+  white,
+  yellow,
+} from '@twind/preset-tailwind/colors';
 import { autoDarkColor, Preset } from 'twind';
 
+export const Colors = {
+  inherit,
+  current,
+  transparent,
+
+  black,
+  white,
+
+  slate,
+  gray,
+  blue,
+  sky,
+  green,
+  lime,
+  red,
+  rose,
+  yellow,
+  orange,
+};
+
 const presetAgile = {
+  darkMode: 'class',
   darkColor: autoDarkColor,
   preflight: {
     html: { fontFamily: `theme(fontFamily.sans)` },
@@ -32,6 +70,7 @@ const presetAgile = {
       lg: ['1rem', '1.75rem'],
       xl: ['1.5rem', '1.75rem'],
     },
+    colors: Colors,
   },
 };
 

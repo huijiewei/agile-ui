@@ -26,8 +26,7 @@ const getComponentName = (filename: string) => {
   return filename.replace(/\.mdx$/, '');
 };
 
-const getComponentProps = (filename: string) => {
-  const componentName = getComponentName(filename);
+const getComponentProps = (componentName: string) => {
   const slug = slugify(componentName);
 
   const pathname = resolve(`../packages/react/src/${slug}/${componentName}.tsx`);
@@ -97,7 +96,7 @@ const Component = defineDocumentType(() => ({
     props: {
       type: 'json',
       resolve: (doc) => {
-        return getComponentProps(doc._raw.sourceFileName);
+        return getComponentProps(getComponentName(doc._raw.sourceFileName));
       },
     },
     headings: {
@@ -155,7 +154,6 @@ const contentLayerConfig = makeSource({
         {
           behavior: 'append',
           test: ['h2', 'h3', 'h4'],
-          properties: { className: ['anchor'] },
         },
       ],
     ],

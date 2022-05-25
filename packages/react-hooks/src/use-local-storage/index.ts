@@ -6,8 +6,6 @@ export const useLocalStorage = <T>(
   options?: Partial<{
     serializer: (object: T | undefined) => string;
     parser: (val: string) => T | undefined;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    logger: (error: any) => void;
     syncData: boolean;
   }>
 ) => {
