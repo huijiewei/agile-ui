@@ -1,12 +1,12 @@
 import { useTimeout } from '@agile-ui/react-hooks';
-import presetAgile from '@agile-ui/react/src/utils/twind';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
 import { BrowserRouter } from 'react-router-dom';
-import { injectGlobal, setup } from 'twind';
+import { defineConfig, injectGlobal, setup } from 'twind';
 import { AppHelmet } from './AppHelmet';
 import { AppRoutes } from './routes';
+import { presetAgile } from '@agile-ui/react';
 
 setup({
   presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],

@@ -23,6 +23,9 @@ module.exports = (env, argv) => {
     entry: {
       website: './src/main.tsx',
     },
+    experiments: {
+      lazyCompilation: !isProduction,
+    },
     cache: {
       type: 'filesystem',
     },

@@ -9,7 +9,6 @@ export const PlaygroundControl = ({
   defaultValue: PropValue;
   onChange: (value: PropValue) => void;
 }) => {
-  console.log(prop);
   return (
     <label className={'inline-flex items-center justify-between gap-3'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>

@@ -11,11 +11,17 @@ export const LayoutHeader = () => {
     >
       <div className={tw('mx-auto flex max-w-7xl items-center justify-between px-5')}>
         <div className={'flex flex-row items-center'}>
-          <img className={'inline-block w-9 align-middle'} alt={'Agile UI'} src={LogoImage} />
+          <img
+            width={'36'}
+            height={'36'}
+            className={'inline-block w-9 align-middle'}
+            alt={'Agile UI'}
+            src={LogoImage}
+          />
           <span className={'ml-1.5 inline-block align-middle text-[22px] font-bold'}>Agile UI</span>
           <span
             className={tw(
-              'ml-3 inline-block rounded-sm bg-orange-100 px-1.5 py-0.5 align-middle text-xs font-bold text-orange-600'
+              'ml-3 inline-block rounded-sm bg-slate-100 px-1.5 py-0.5 align-middle text-xs font-bold text-orange-700'
             )}
           >
             ALPHA
