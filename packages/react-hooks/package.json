@@ -19,6 +19,7 @@
     "@agile-ui/utils": "*"
   },
   "devDependencies": {
-    "react": "^18.1.0"
+    "react": "^18.1.0",
+    "typescript": "^4.7.2"
   }
 }

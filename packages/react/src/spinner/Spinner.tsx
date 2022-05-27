@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Color, ColorWithLevel, Size } from '../utils/types';
+import type { ColorWithLevel, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
 export type SpinnerProps = {

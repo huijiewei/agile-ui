@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/huijiewei/agile-ui#readme",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,cjs,mjs,ts,tsx}": [
       "eslint --cache --fix",
       "prettier --write"
     ],

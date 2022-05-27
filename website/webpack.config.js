@@ -23,14 +23,11 @@ module.exports = (env, argv) => {
     entry: {
       website: './src/main.tsx',
     },
-    experiments: {
-      lazyCompilation: !isProduction,
-    },
     cache: {
       type: 'filesystem',
     },
     resolve: {
-      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
+      extensions: ['.mjs', '.cjs', '.js', '.tsx', '.ts', '.jsx'],
       alias: {
         'contentlayer/generated': path.resolve(__dirname, '.contentlayer/generated'),
       },

@@ -1,5 +1,5 @@
-import { Placement, Strategy } from '@floating-ui/react-dom-interactions';
-import { MutableRefObject } from 'react';
+import type { Placement, Strategy } from '@floating-ui/react-dom-interactions';
+import type { MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
 
 type PopoverContextProps = {

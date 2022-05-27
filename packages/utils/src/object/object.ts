@@ -1,4 +1,4 @@
-import { Dict } from '../types/types';
+import type { Dict } from '../types/types';
 
 // 从对象中排除属性后返回新对象
 export const omit = <T extends Dict, K extends keyof T>(object: T, keys: K[]) => {

@@ -1,4 +1,4 @@
-import { Merge } from '@agile-ui/utils';
+import type { Merge } from '@agile-ui/utils';
 import { ComponentProps, ElementType, forwardRef, MutableRefObject, ReactElement, WeakValidationMap } from 'react';
 
 /*

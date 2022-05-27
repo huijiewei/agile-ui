@@ -13,5 +13,7 @@
     "directory": "packages/utils"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
 }

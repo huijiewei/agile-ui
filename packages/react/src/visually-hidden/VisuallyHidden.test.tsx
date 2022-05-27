@@ -1,9 +1,9 @@
 import { testA11y } from '@agile-ui/test-utils';
-import { render } from '@testing-library/react';
+import { testRender } from '@agile-ui/test-utils';
 import { VisuallyHidden } from './VisuallyHidden';
 
 test('should render correctly', async () => {
-  const { getByText } = render(<VisuallyHidden>Click me</VisuallyHidden>);
+  const { getByText } = testRender(<VisuallyHidden>Click me</VisuallyHidden>);
 
   expect(getByText(/Click me/i)).toBeInTheDocument();
 });

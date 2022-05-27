@@ -3,7 +3,7 @@ import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
 import { BrowserRouter } from 'react-router-dom';
-import { defineConfig, injectGlobal, setup } from 'twind';
+import { injectGlobal, setup } from 'twind';
 import { AppHelmet } from './AppHelmet';
 import { AppRoutes } from './routes';
 import { presetAgile } from '@agile-ui/react';

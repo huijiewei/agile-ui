@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/extend-expect';
 import { render, RenderOptions } from '@testing-library/react';
 import { isValidElement, ReactElement } from 'react';
 import { axe, JestAxeConfigureOptions, toHaveNoViolations } from 'jest-axe';

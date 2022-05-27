@@ -2,7 +2,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
 import { createContext } from '../utils/context';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Size, Color } from '../utils/types';
+import type { Size, Color } from '../utils/types';
 
 export type ButtonBaseProps = {
   /**

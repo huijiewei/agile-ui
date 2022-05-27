@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { Box } from '../box/Box';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Color, Size } from '../utils/types';
+import type { Color, Size } from '../utils/types';
 
 type SwitchProps = {
   color?: Color;

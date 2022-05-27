@@ -1,8 +1,8 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { tx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
-import { Size } from '../utils/types';
+import type { Size } from '../utils/types';
 
 export type ButtonSpinnerProps = ComponentPropsWithoutRef<'div'> & {
   size: Size;

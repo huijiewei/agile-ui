@@ -13,7 +13,7 @@ module.exports = {
     ],
   ],
   plugins: [
-    ['babel-plugin-optimize-clsx', { libraries: ['twind', 'clsx'], functionNames: ['clsx', 'tx'] }],
+    ['babel-plugin-optimize-clsx', { libraries: ['twind'], functionNames: ['tx'] }],
     '@babel/plugin-syntax-import-assertions',
   ],
 };

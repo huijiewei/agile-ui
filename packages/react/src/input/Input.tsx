@@ -1,6 +1,6 @@
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
-import { Size } from '../utils/types';
+import type { Size } from '../utils/types';
 
 export type InputVariant = 'outline' | 'filled' | 'flushed' | 'unstyled';
 

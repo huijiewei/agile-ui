@@ -1,4 +1,4 @@
-import { Booleanish } from '../types/types';
+import type { Booleanish } from '../types/types';
 
 export const isBrowser = (): boolean => {
   return Boolean(globalThis?.document);

@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { ComponentPropsWithoutRef } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { tx } from 'twind';
 
 export const VisuallyHidden = (props: ComponentPropsWithoutRef<'span'>) => {
