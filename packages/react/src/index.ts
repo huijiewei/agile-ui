@@ -1,6 +1,5 @@
 export * from './utils/context';
 export * from './utils/polymorphic';
-export * from './utils/twind';
 
 export * from './box/Box';
 export * from './text/Text';

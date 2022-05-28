@@ -7,7 +7,7 @@ import { injectGlobal, setup } from 'twind';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
-import { presetAgile } from '@agile-ui/react';
+import { presetAgile } from '@agile-ui/twind';
 
 import { App } from './App';
 import './serviceWorker';

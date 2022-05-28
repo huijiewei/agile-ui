@@ -17,15 +17,12 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18",
-    "twind": "next",
-    "@twind/preset-autoprefix": "next",
-    "@twind/preset-tailwind": "next",
-    "@twind/preset-ext": "next"
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
+    "@agile-ui/twind": "*",
     "@floating-ui/react-dom-interactions": "^0.6.1",
     "@icon-park/react": "^1.4.0",
     "prism-react-renderer": "^1.3.3"
@@ -33,11 +30,5 @@
   "devDependencies": {
     "@agile-ui/test-utils": "*",
     "typescript": "^4.7.2"
-  },
-  "browserslist": [
-    ">0.3%",
-    "not ie 11",
-    "not dead",
-    "not op_mini all"
-  ]
+  }
 }

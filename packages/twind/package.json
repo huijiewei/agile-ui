@@ -1,0 +1,25 @@
+{
+  "name": "@agile-ui/twind",
+  "version": "1.0.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "module": "src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huijiewei/agile-ui.git",
+    "directory": "packages/twind"
+  },
+  "peerDependencies": {
+    "twind": "next",
+    "@twind/preset-autoprefix": "next",
+    "@twind/preset-tailwind": "next",
+    "@twind/preset-ext": "next"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}

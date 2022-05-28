@@ -1,3 +1,2 @@
-Agile UI
+Agile UI React Components
 
-## 自定义主题

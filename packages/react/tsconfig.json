@@ -6,7 +6,8 @@
     "paths": {
       "@agile-ui/utils": ["../utils/src"],
       "@agile-ui/react-hooks": ["../react-hooks/src"],
-      "@agile-ui/test-utils": ["../test-utils/src"]
+      "@agile-ui/test-utils": ["../test-utils/src"],
+      "@agile-ui/twind": ["../twind/src"]
     }
   }
 }
