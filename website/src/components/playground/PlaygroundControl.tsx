@@ -1,4 +1,4 @@
-import { ComponentProp, PropValue } from './PlaygroundHelper';
+import type { ComponentProp, PropValue } from './PlaygroundHelper';
 
 export const PlaygroundControl = ({
   prop,

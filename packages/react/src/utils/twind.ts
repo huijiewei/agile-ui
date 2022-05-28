@@ -71,6 +71,5 @@ export const presetAgile = () => {
       },
       colors,
     },
-    hash: true,
   };
 };

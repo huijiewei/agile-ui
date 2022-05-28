@@ -17,7 +17,11 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "twind": "next",
+    "@twind/preset-autoprefix": "next",
+    "@twind/preset-tailwind": "next",
+    "@twind/preset-ext": "next"
   },
   "dependencies": {
     "@agile-ui/react-hooks": "*",

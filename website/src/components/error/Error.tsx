@@ -1,5 +1,5 @@
 import { Button } from '@agile-ui/react';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type ErrorProps = {

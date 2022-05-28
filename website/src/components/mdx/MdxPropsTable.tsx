@@ -1,4 +1,4 @@
-import { ComponentProp } from '../playground/PlaygroundHelper';
+import type { ComponentProp } from '../playground/PlaygroundHelper';
 
 export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentProp[] }) => {
   return (

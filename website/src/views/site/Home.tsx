@@ -1,9 +1,10 @@
 const Home = () => {
   return (
     <div className={'flex flex-col gap-3'}>
-      <h1 className={'text-xl font-bold text-sky-600'}>Agile UI - React + TypeScript + Twind UI Components</h1>
+      <h1 className={'text-xl font-bold text-sky-600 text-center'}>Agile UI</h1>
+      <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
       <hr />
-      <p className={'flex flex-row gap-1'}>
+      <p className={'flex flex-row gap-1 justify-center'}>
         <a
           target={'_blank'}
           href="https://www.intel.com/content/www/us/en/products/sku/134896/intel-core-i59600k-processor-9m-cache-up-to-4-60-ghz/specifications.html"
@@ -45,7 +46,7 @@ const Home = () => {
           />
         </a>
       </p>
-      <p className={'flex flex-row gap-1'}>
+      <p className={'flex flex-row gap-1 justify-center'}>
         <a target={'_blank'} href="https://www.apple.com/macos" rel="noreferrer">
           <img
             width={67}
@@ -92,7 +93,7 @@ const Home = () => {
           />
         </a>
       </p>
-      <p className={'flex flex-row gap-1'}>
+      <p className={'flex flex-row gap-1 justify-center'}>
         <a target={'_blank'} href="https://babeljs.io/" rel="noreferrer">
           <img
             width={59}
@@ -139,7 +140,7 @@ const Home = () => {
           />
         </a>
       </p>
-      <p className={'flex flex-row gap-1'}>
+      <p className={'flex flex-row gap-1 justify-center'}>
         <a target={'_blank'} href="https://typescriptlang.org" rel="noreferrer">
           <img
             width={87}
@@ -177,7 +178,7 @@ const Home = () => {
           />
         </a>
       </p>
-      <p className={'flex flex-row gap-1'}>
+      <p className={'flex flex-row gap-1 justify-center'}>
         <a target={'_blank'} href="https://github.com" rel="noreferrer">
           <img
             width={65}
@@ -208,12 +209,17 @@ const Home = () => {
       </p>
       <hr />
       <h2 className={'text-lg font-bold'}>特点</h2>
-      <ol className={'list-decimal px-5'} start={1}>
-        <li>最新的 React 18</li>
-        <li>使用 Twind CSS-IN-JS</li>
-        <li>源代码发布</li>
-        <li>尽力保证最佳实践和技术前沿</li>
-      </ol>
+      <ul className={'list-disc px-5'}>
+        <li>React 18 - 用于构建用户界面的JavaScript 库。</li>
+        <li>Tailwind CSS 3 - 一个功能类优先的CSS 框架，用于快速构建定制的用户界面。</li>
+        <li>Twind - 最小、最快、功能最完整的 tailwind-in-js 解决方案</li>
+        <li>Webpack 5 - Webpack 是一个开源的前端打包工具。</li>
+        <li>Typescript - TypeScript 是具有类型语法的 JavaScript。</li>
+        <li>Jest - Jest 是一款优雅、简洁的 JavaScript 测试框架。</li>
+        <li>ESLint - ESLint 静态分析你的代码以快速发现问题。</li>
+        <li>Prettier - 一个“有态度”的代码格式化工具</li>
+        <li>Husky & Lint Staged - 在提交暂存文件之前，运行脚本</li>
+      </ul>
       <hr />
       <p className={'p-1 pl-3 border-l-2 border-l-slate-300 bg-slate-50'}>正在开发中, 目前仅供参考学习</p>
     </div>

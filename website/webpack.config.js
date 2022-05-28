@@ -26,6 +26,10 @@ module.exports = (env, argv) => {
     cache: {
       type: 'filesystem',
     },
+    experiments: {
+      layers: true,
+      cacheUnaffected: true,
+    },
     resolve: {
       extensions: ['.mjs', '.cjs', '.js', '.tsx', '.ts', '.jsx'],
       alias: {
@@ -52,6 +56,9 @@ module.exports = (env, argv) => {
       port: 8010,
     },
     module: {
+      parser: {
+        javascript: { url: 'relative' },
+      },
       rules: [
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -117,6 +124,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new EnvironmentPlugin({
+        NODE_ENV: argv.mode,
         PUBLIC_URL: publicPath,
       }),
       isProduction &&

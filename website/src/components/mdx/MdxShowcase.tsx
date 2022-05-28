@@ -1,6 +1,6 @@
 import { Button, Input, Spinner } from '@agile-ui/react';
 import { Playground } from '../playground/Playground';
-import { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
+import type { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
 
 const ButtonShowcase = (componentProps: ComponentProp[]) => (
   <Playground

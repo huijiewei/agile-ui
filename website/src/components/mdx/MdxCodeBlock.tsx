@@ -1,7 +1,7 @@
 import * as AgileUI from '@agile-ui/react';
 import { CopyIcon } from '@agile-ui/react';
 import { __DEV__ } from '@agile-ui/utils';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Link } from 'react-router-dom';
 import { tx } from 'twind';

@@ -1,4 +1,6 @@
-## React + TypeScript + Twind UI Components
+<div style='text-align: center;'>
+<h1>Agile UI</h1>
+<p>React + TypeScript + Twind UI Components</p>
 
 [![Intel](https://img.shields.io/badge/Intel-Core_i5_9600K-0071C5?style=flat&logo=intel&logoColor=white)](https://www.intel.com/content/www/us/en/products/sku/134896/intel-core-i59600k-processor-9m-cache-up-to-4-60-ghz/specifications.html)
 [![Asrock](https://img.shields.io/badge/Z390M--ITX/ac-000.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAUCAMAAABMHminAAAAjVBMVEUAAACGwiaFwiaGwyeGwyaFwSaDwiaFwyaGwiaFwiWEwiaEwiaEwyeFwiaFwiaFwiaFwyaFwiaFwiaFwiaGwiWEwiaFwiWFwiaLyySFwiaGwiWDwCWFwiaFwiWFwiaFwiaGwiWGwiaDwx6GwiWFwyaFwiWFwiaFwiWFwiaMximFwyWEwyWHwCaFwiaFwiaMZ9zAAAAALnRSTlMAqowzIpkTqWVcn7VV+/iId+/nf0xDOywD80gN4dvXyaVUCNK/r5J6cwaDbRrDyeGVrgAAAe1JREFUOMvtk+lyozAMgBXABlPucBVycIYcrd//8VYyLpvOBDqz+7ffTGIP0vizkIBf/pOPe7Mjaij27k5jCr1xJwvWyDB+Vbui+8GRyBkeyr9UxrINHrCCg1GbNvk13ZbYUiPka4n0i58klsg3HSYmvu9P+O/iccLU1Cg5R1HkksXBvM6scg4Llpm13lVLOs/z+JbkjQ5R/4OUJ1gw0ErrESMpWE1AtnM792KMJWFoCcnaDUeO8cNNSRj+9h6SWqWS9GEYjhSvW1IkPpVbAqfkJ0npYDTYqmTAvMdcT4G5moOHEo3/ZlFkyJ1qT9coP+npmBacO/Sq+3cajq1CMrphN0u6NJYL3iIZa8DGxDmeNdm4UfNx1Y3X+BlscMaMSHfmBlxEhIHn9Sg5NTgPuNSYNVAVR0fNB+Uukvjo00WLdUdKWfUi+eKCT+fGCzrhMuILpNQGH/pkk9XTCHMbl89VR9nTSwYtsTRmdcQ5miWqNQkJDGHfqwBFPKFOPOpFArcDrqulCErnWvIdoSWmJP2F3pU7YFknDnmi2pD051CPMIXFWiH0DYTwSsJASzqJmCAOkggYXYlfYvntO5nUiL7G3DWMfajttHvCNnKAljF1uTt+LBZeKIuMu+Bf1zOdKWTMY4w5NKO4ZvDLP/IHwbpgg9Ud2r0AAAAASUVORK5CYII=&labelColor=333&label=Asrock&color=green)](https://www.asrock.com/mb/Intel/Z390M-ITXac/index.asp)
@@ -25,14 +27,20 @@
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com)
 [![GitHub license](https://img.shields.io/github/license/huijiewei/agile-ui)](https://github.com/huijiewei/agile-ui)
 [![GitHub issues](https://img.shields.io/github/issues/huijiewei/agile-ui)](https://GitHub.com/huijiewei/agile-ui/issues)
+</div>
 
-### 特点
-1. 最新的 React 18
-2. 使用 Twind CSS-IN-JS
-3. 源代码发布
-4. 尽力保证最佳实践和技术前沿
+## 特点
+- React 18 - 用于构建用户界面的JavaScript 库。
+- Tailwind CSS 3 - 一个功能类优先的CSS 框架，用于快速构建定制的用户界面。
+- Twind - 最小、最快、功能最完整的 tailwind-in-js 解决方案
+- Webpack 5 - Webpack 是一个开源的前端打包工具。
+- Typescript - TypeScript 是具有类型语法的 JavaScript。
+- Jest - Jest 是一款优雅、简洁的 JavaScript 测试框架。
+- ESLint - ESLint 静态分析你的代码以快速发现问题。
+- Prettier - 一个“有态度”的代码格式化工具
+- Husky & Lint Staged - 在提交暂存文件之前，运行脚本
 
-### 在线文档
+### 文档
 https://agile-ui.vercel.app
 
 ### 本地运行

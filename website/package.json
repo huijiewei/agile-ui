@@ -54,9 +54,10 @@
     "@parcel/css": "^1.9.0"
   },
   "browserslist": [
-    ">0.3%",
-    "not ie 11",
-    "not dead",
-    "not op_mini all"
+    "chrome 61",
+    "edge 16",
+    "firefox 60",
+    "opera 48",
+    "safari 11"
   ]
 }
