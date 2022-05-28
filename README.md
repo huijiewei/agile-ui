@@ -1,4 +1,4 @@
-<div style='text-align: center;'>
+<div align="center">
 <h1>Agile UI</h1>
 <p>React + TypeScript + Twind UI Components</p>
 
