@@ -10,7 +10,7 @@ const animations = {
 export const Fade = ({
   children,
   className = '',
-  duration = 3.5,
+  duration = 0.5,
 }: {
   children: ReactNode;
   className?: string;

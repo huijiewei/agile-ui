@@ -109,8 +109,6 @@ const View = () => {
     let isActive = true;
 
     (async () => {
-      await sleep(2000);
-
       const [error, doc] = await to(
         import(
           /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
