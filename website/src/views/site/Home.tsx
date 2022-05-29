@@ -1,8 +1,6 @@
-import { Fade } from '../../components/transition/Fade';
-
 const Home = () => {
   return (
-    <Fade className={'flex flex-col gap-3'}>
+    <div className={'flex flex-col gap-3'}>
       <h1 className={'text-xl font-bold text-sky-600 text-center'}>Agile UI</h1>
       <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
       <hr />
@@ -224,7 +222,7 @@ const Home = () => {
       </ul>
       <hr />
       <p className={'p-1 pl-3 border-l-2 border-l-slate-300 bg-slate-50'}>正在开发中, 目前仅供参考学习</p>
-    </Fade>
+    </div>
   );
 };
 

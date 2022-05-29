@@ -1,5 +1,4 @@
 import { useTimeout } from '@agile-ui/react-hooks';
-import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { AppHelmet } from './AppHelmet';
@@ -14,9 +13,7 @@ export const App = () => {
     <HelmetProvider>
       <BrowserRouter>
         <AppHelmet />
-        <AnimatePresence exitBeforeEnter>
-          <AppRoutes />
-        </AnimatePresence>
+        <AppRoutes />
       </BrowserRouter>
     </HelmetProvider>
   );
