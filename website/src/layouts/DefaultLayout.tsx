@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { tw } from 'twind';
+import { Loader } from '../components/loader/Loader';
 import { LayoutAside } from './LayoutAside';
 import { LayoutFooter } from './LayoutFooter';
 import { LayoutHeader } from './LayoutHeader';
@@ -13,7 +14,7 @@ export const DefaultLayout = () => {
         <LayoutAside />
         <div className={'laptop:pl-52'}>
           <main className={'mx-auto h-full p-5'}>
-            <Suspense fallback={null}>
+            <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
           </main>

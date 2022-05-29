@@ -1,3 +1,4 @@
+import { to } from '@agile-ui/utils';
 import { Edit, Github } from '@icon-park/react';
 import type { Component } from 'contentlayer/generated';
 import { useEffect, useMemo, useState } from 'react';
@@ -6,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { tw, tx } from 'twind';
 import Image500 from '../../assets/images/500.png';
 import { Error } from '../../components/error/Error';
+import { Loader } from '../../components/loader/Loader';
 import { components, getMdxComponent } from '../../components/mdx/MdxComponent';
 import { MdxTableContent } from '../../components/mdx/MdxTableContent';
 import { camelCase } from '../../utils/string';
@@ -13,24 +15,38 @@ import { camelCase } from '../../utils/string';
 const View = () => {
   const component = camelCase(useParams().component || '');
 
-  const [error, setError] = useState<boolean>();
-  const [componentDoc, setComponentDoc] = useState<Component>();
+  const [error, setError] = useState<boolean>(false);
+  const [componentDoc, setComponentDoc] = useState<Component | null>(null);
 
   useEffect(() => {
-    import(
-      /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
-      {
-        assert: { type: 'json' },
+    let isActive = true;
+
+    (async () => {
+      const [error, doc] = await to(
+        import(
+          /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
+          { assert: { type: 'json' } }
+        )
+      );
+
+      if (!isActive) {
+        return;
       }
-    )
-      .then((doc) => {
-        setError(false);
-        setComponentDoc(doc.default);
-      })
-      .catch(() => {
+
+      if (error) {
         setError(true);
-        setComponentDoc(undefined);
-      });
+      }
+
+      if (doc) {
+        setComponentDoc(doc.default);
+      }
+    })();
+
+    return () => {
+      isActive = false;
+      setError(false);
+      setComponentDoc(null);
+    };
   }, [component]);
 
   const MdxComponent = useMemo(() => {
@@ -47,15 +63,15 @@ const View = () => {
     return (
       <>
         <Helmet title={'文档不存在'}></Helmet>
-        <Error title={`组件 ${component} 文档不存在`}>
-          <img className={'w-[320px] items-center'} src={Image500} alt={`组件 ${component} 文档不存在`}></img>
+        <Error title={`组件文档不存在`}>
+          <img className={'w-[320px] items-center'} src={Image500} alt={`组件文档不存在`}></img>
         </Error>
       </>
     );
   }
 
   if (MdxComponent == null) {
-    return null;
+    return <Loader className={'h-72'} />;
   }
 
   return (

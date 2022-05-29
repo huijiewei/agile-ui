@@ -3,7 +3,7 @@ import { DefaultLayout } from '../layouts/DefaultLayout';
 
 import Home from '../views/site/Home';
 import NotFound from '../views/site/NotFound';
-import View from '../views/components/View';
+import ComponentView from '../views/components/View';
 
 export const routes = [
   {
@@ -22,7 +22,7 @@ export const routes = [
       {
         path: 'components/:component',
         title: '组件',
-        element: <View />,
+        element: <ComponentView />,
       },
       {
         path: '*',
