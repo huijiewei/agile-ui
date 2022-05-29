@@ -1,4 +1,4 @@
-import { sleep, to } from '@agile-ui/utils';
+import { to } from '@agile-ui/utils';
 import { Edit, Github } from '@icon-park/react';
 import type { Component } from 'contentlayer/generated';
 import { useEffect, useMemo, useState } from 'react';
@@ -12,18 +12,43 @@ import { components, getMdxComponent } from '../../components/mdx/MdxComponent';
 import { MdxTableContent } from '../../components/mdx/MdxTableContent';
 import { camelCase } from '../../utils/string';
 
-const ViewError = () => {
-  return (
-    <>
-      <Helmet title={'文档不存在'}></Helmet>
-      <Error title={`组件文档不存在`}>
-        <img className={'w-[320px] items-center'} src={Image500} alt={`组件文档不存在`}></img>
-      </Error>
-    </>
-  );
-};
+const View = () => {
+  const component = camelCase(useParams().component || '');
 
-const ViewComponent = ({ componentDoc }: { componentDoc: Component | null }) => {
+  const [error, setError] = useState<boolean>(false);
+  const [componentDoc, setComponentDoc] = useState<Component | null>(null);
+
+  useEffect(() => {
+    let isActive = true;
+
+    (async () => {
+      const [error, doc] = await to(
+        import(
+          /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
+          { assert: { type: 'json' } }
+        )
+      );
+
+      if (!isActive) {
+        return;
+      }
+
+      if (error) {
+        setError(true);
+      }
+
+      if (doc) {
+        setComponentDoc(doc.default);
+      }
+    })();
+
+    return () => {
+      isActive = false;
+      setError(false);
+      setComponentDoc(null);
+    };
+  }, [component]);
+
   const MdxComponent = useMemo(() => {
     if (!componentDoc) {
       return null;
@@ -34,7 +59,22 @@ const ViewComponent = ({ componentDoc }: { componentDoc: Component | null }) => 
     });
   }, [componentDoc]);
 
-  return componentDoc ? (
+  if (error) {
+    return (
+      <>
+        <Helmet title={'文档不存在'}></Helmet>
+        <Error title={`组件文档不存在`}>
+          <img className={'w-[320px] items-center'} src={Image500} alt={`组件文档不存在`}></img>
+        </Error>
+      </>
+    );
+  }
+
+  if (MdxComponent == null) {
+    return <Loader className={'h-72'} />;
+  }
+
+  return (
     <>
       <Helmet title={componentDoc?.title}></Helmet>
       <div className={'relative max-w-[52rem]'}>
@@ -84,49 +124,7 @@ const ViewComponent = ({ componentDoc }: { componentDoc: Component | null }) => 
         </div>
       </div>
     </>
-  ) : (
-    <Loader className={'h-72'} />
   );
-};
-
-const View = () => {
-  const component = camelCase(useParams().component || '');
-
-  const [error, setError] = useState<boolean>(false);
-  const [componentDoc, setComponentDoc] = useState<Component | null>(null);
-
-  useEffect(() => {
-    let isActive = true;
-
-    (async () => {
-      const [error, doc] = await to(
-        import(
-          /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
-          { assert: { type: 'json' } }
-        )
-      );
-
-      if (!isActive) {
-        return;
-      }
-
-      if (error) {
-        setError(true);
-      }
-
-      if (doc) {
-        setComponentDoc(doc.default);
-      }
-    })();
-
-    return () => {
-      isActive = false;
-      setError(false);
-      setComponentDoc(null);
-    };
-  }, [component]);
-
-  return error ? <ViewError /> : <ViewComponent componentDoc={componentDoc} />;
 };
 
 export default View;
