@@ -4,6 +4,6 @@ export const sleep = (delay: number): Promise<null> => {
   });
 };
 
-export const to = <T, E>(promise: Promise<T>): Promise<{ data: T | undefined; error: E | undefined }> => {
-  return promise.then((data) => ({ data, error: undefined })).catch((error) => ({ data: undefined, error }));
+export const to = <T, E = Error>(promise: Promise<T>): Promise<[E, undefined] | [null, T]> => {
+  return promise.then<[null, T]>((data) => [null, data]).catch<[E, undefined]>((error: E) => [error, undefined]);
 };
