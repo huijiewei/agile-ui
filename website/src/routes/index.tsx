@@ -1,4 +1,4 @@
-import { Location, matchRoutes, Navigate, RouteObject, To, useLocation, useRoutes } from 'react-router-dom';
+import { Location, matchRoutes, Navigate, RouteObject, To, useRoutes } from 'react-router-dom';
 import { DefaultLayout } from '../layouts/DefaultLayout';
 import ComponentView from '../views/components/View';
 
@@ -33,18 +33,8 @@ export const routes = [
   },
 ];
 
-export const Routes = ({
-  location,
-}: {
-  location: string | Partial<Location> | undefined;
-}): ReturnType<typeof useRoutes> => {
-  return useRoutes(routes, location);
-};
-
 export const AppRoutes = () => {
-  const location = useLocation();
-
-  return <Routes key={location.pathname} location={location} />;
+  return useRoutes(routes);
 };
 
 export type RouteMatch = {
