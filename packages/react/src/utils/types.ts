@@ -8,4 +8,4 @@ export type Color = keyof Omit<Colors, ColorSole>;
 
 export type ColorLevel = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 
-export type ColorWithLevel = `${Color}-${ColorLevel}` & ColorSole;
+export type ColorWithLevel = `${Color}-${ColorLevel}` | ColorSole;
