@@ -91,7 +91,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   const {
     as: Component = 'button',
     children,
-    type = 'button',
+    type,
     active = false,
     disabled = group?.disabled || false,
     loading = false,

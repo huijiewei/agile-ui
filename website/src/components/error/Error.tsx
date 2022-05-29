@@ -16,7 +16,7 @@ export const Error = (props: PropsWithChildren<ErrorProps>) => {
     navigate(-1);
   };
   return (
-    <div className={'flex min-h-[calc(100vh_-_10rem)] flex-auto flex-col items-center justify-center p-4 text-center'}>
+    <div className={'flex py-32 flex-auto flex-col items-center justify-center p-4 text-center'}>
       <h1 className={'text-xl'}>{title}</h1>
       {children && <div className={'mx-auto mt-5 w-fit'}>{children}</div>}
       <div className={'mt-5'}>
