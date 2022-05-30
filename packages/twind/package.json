@@ -13,6 +13,7 @@
     "directory": "packages/twind"
   },
   "peerDependencies": {
+    "@agile-ui/utils": "*",
     "twind": "next",
     "@twind/preset-autoprefix": "next",
     "@twind/preset-tailwind": "next",

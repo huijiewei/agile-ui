@@ -1,4 +1,4 @@
-import { useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
+import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
 import { useEffect, useRef } from 'react';
 
 export const useTimeout = (callback: () => void, delay: number | null) => {

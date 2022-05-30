@@ -1,4 +1,4 @@
-#splash {
+#index-splash {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,10 +6,10 @@
   bottom: 0;
   background-color: #f5f5f5;
   z-index: 9999999;
-  transition: opacity 1s;
+  animation: index-spinner-fade 0.5s ease 1s;
 }
 
-#splash .splash-status {
+#index-splash-status {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -18,7 +18,7 @@
   margin: -20px 0 0 -20px;
 }
 
-#splash .spinner {
+#index-splash-spinner {
   position: absolute;
   width: 78px;
   height: 78px;
@@ -27,7 +27,7 @@
   margin-top: -39px;
 }
 
-#splash .spinner:before {
+#index-splash-spinner:before {
   content: '';
   position: absolute;
   width: 45px;
@@ -41,10 +41,10 @@
   border-color: #67a8e4 rgba(103, 168, 228, 0.3);
   border-radius: 50%;
   box-sizing: border-box;
-  animation: spinner-spin 3.45s infinite;
+  animation: index-spinner-spin 3.45s infinite;
 }
 
-#splash .spinner:after {
+#index-splash-spinner:after {
   content: '';
   position: absolute;
   width: 12px;
@@ -56,10 +56,19 @@
   background-color: #67a8e4;
   border-radius: 50%;
   box-sizing: border-box;
-  animation: spinner-pulse 6.9s infinite, spinner-border-pulse 6.9s infinite;
+  animation: index-spinner-pulse 6.9s infinite, index-spinner-border-pulse 6.9s infinite;
 }
 
-@keyframes spinner-spin {
+@keyframes index-spinner-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes index-spinner-spin {
   0% {
     transform: rotate(0deg);
   }
@@ -71,7 +80,7 @@
   }
 }
 
-@keyframes spinner-pulse {
+@keyframes index-spinner-pulse {
   0% {
     background-color: rgba(103, 168, 228, 0.2);
   }
@@ -104,7 +113,7 @@
   }
 }
 
-@keyframes spinner-border-pulse {
+@keyframes index-spinner-border-pulse {
   0% {
     box-shadow: 0 0 0 0 white, 0 0 0 1px rgba(103, 168, 228, 0.8);
   }

@@ -1,17 +1,20 @@
 import './wdyr';
-import { __DEV__ } from '@agile-ui/utils';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { injectGlobal, setup } from 'twind';
+
+import { __DEV__ } from '@agile-ui/utils';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
+
 import { presetAgile } from '@agile-ui/twind';
+import { injectGlobal, setup } from 'twind';
 
 import { App } from './App';
-import './serviceWorker';
 import { disableReactDevTools } from './utils/misc';
+
+import './serviceWorker';
 
 if (!__DEV__) {
   disableReactDevTools();
@@ -25,6 +28,8 @@ setup({
       { backgroundImage: 'radial-gradient(circle, var(--tw-gradient-from) 1px, var(--tw-gradient-to) 1px)' },
     ],
   ],
+  ignorelist: [/^index-splash-/],
+  hash: true,
 });
 
 injectGlobal`

@@ -30,7 +30,6 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/github-slugger": "^1.3.0",
     "@welldone-software/why-did-you-render": "^7.0.1",
-    "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-optimize-clsx": "^2.6.2",
     "contentlayer": "^0.2.5",

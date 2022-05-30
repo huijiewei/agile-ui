@@ -1,5 +1,5 @@
-import { useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
-import { RefObject, useEffect, useRef } from 'react';
+import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
+import { useEffect, useRef } from 'react';
 
 export const useEventListener = <
   KW extends keyof WindowEventMap,
@@ -7,24 +7,24 @@ export const useEventListener = <
   T extends HTMLElement = HTMLDivElement
 >(
   event: KW | KH,
-  listener: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
-  element?: RefObject<T>,
+  handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
+  element?: T | null,
   options?: boolean | AddEventListenerOptions
 ) => {
-  const savedListener = useRef(listener);
+  const savedHandler = useRef(handler);
 
   useIsomorphicLayoutEffect(() => {
-    savedListener.current = listener;
-  }, [listener]);
+    savedHandler.current = handler;
+  }, [handler]);
 
   useEffect(() => {
-    const targetElement: T | Window = element?.current || window;
+    const targetElement: T | Window = element || window;
 
     if (!(targetElement && targetElement.addEventListener)) {
       return;
     }
 
-    const eventListener: typeof listener = (event) => savedListener.current(event);
+    const eventListener: typeof handler = (event) => savedHandler.current(event);
 
     targetElement.addEventListener(event, eventListener, options);
     return () => targetElement.removeEventListener(event, eventListener, options);
