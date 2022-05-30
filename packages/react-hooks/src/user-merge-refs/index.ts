@@ -12,7 +12,7 @@ export const mergeRefs = <T>(...refs: Ref<T>[]) => {
   return (node: T) => refs.forEach((ref) => assignRef(ref, node));
 };
 
-export const useMergedRef = <T>(...refs: Ref<T>[]): RefCallback<T> => {
+export const useMergedRefs = <T>(...refs: Ref<T>[]): RefCallback<T> => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(mergeRefs(...refs), refs);
 };

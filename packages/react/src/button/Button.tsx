@@ -1,4 +1,4 @@
-import { useMergedRef } from '@agile-ui/react-hooks';
+import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { tx } from 'twind';
@@ -121,7 +121,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       )}
       disabled={disabled || loading}
       type={type ?? defaultType}
-      ref={useMergedRef(ref, _ref)}
+      ref={useMergedRefs(ref, _ref)}
     >
       {loading && spinnerPlacement === 'start' && (
         <ButtonSpinner size={size} label={loadingText} placement="start">

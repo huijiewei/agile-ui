@@ -4,7 +4,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@agile-ui/utils": ["../utils/src"]
+      "@agile-ui/utils": ["../utils/src"],
+      "@agile-ui/test-utils": ["../test-utils/src"]
     }
   }
 }

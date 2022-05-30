@@ -1,11 +1,18 @@
-import { useFirstRender } from '@agile-ui/react-hooks';
-import { DependencyList, EffectCallback, useEffect } from 'react';
+import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
 export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) => {
-  const first = useFirstRender();
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (!first) {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+    } else {
       return effect();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

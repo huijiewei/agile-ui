@@ -1,4 +1,4 @@
-import { useEventListener } from '@agile-ui/react-hooks/src/use-event-listener';
+import { useEventListener } from '@agile-ui/react-hooks';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { AppHelmet } from './AppHelmet';
@@ -12,7 +12,7 @@ export const App = () => {
     () => {
       splash?.remove();
     },
-    splash
+    { target: splash }
   );
 
   return (
