@@ -1,9 +1,6 @@
-const Home = () => {
+const Badges = () => {
   return (
-    <div className={'flex flex-col gap-3'}>
-      <h1 className={'text-xl font-bold text-sky-600 text-center'}>Agile UI</h1>
-      <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
-      <hr />
+    <>
       <p className={'flex flex-row gap-1 justify-center'}>
         <a
           target={'_blank'}
@@ -207,6 +204,17 @@ const Home = () => {
           />
         </a>
       </p>
+    </>
+  );
+};
+
+const Home = () => {
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <h1 className={'text-xl font-bold text-sky-600 text-center'}>Agile UI</h1>
+      <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
+      <hr />
+      <Badges />
       <hr />
       <h2 className={'text-lg font-bold'}>特点</h2>
       <ul className={'list-disc px-5'}>
@@ -222,6 +230,7 @@ const Home = () => {
       </ul>
       <hr />
       <p className={'p-1 pl-3 border-l-2 border-l-slate-300 bg-slate-50'}>正在开发中, 目前仅供参考学习</p>
+      <p></p>
     </div>
   );
 };

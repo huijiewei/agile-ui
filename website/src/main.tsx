@@ -34,7 +34,7 @@ setup({
 
 injectGlobal`
 body {
-    @apply antialiased overflow-y-scroll &::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300);
+    @apply text-gray-900 bg-gray-50 antialiased overflow-y-scroll &::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300);
 }
 `;
 

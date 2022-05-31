@@ -10,7 +10,7 @@ export const DefaultLayout = () => {
   return (
     <>
       <LayoutHeader />
-      <div className={tw('mx-auto max-w-7xl')}>
+      <div className={tw('text-slate-900 mx-auto max-w-7xl')}>
         <LayoutAside />
         <div className={'laptop:pl-52'}>
           <main className={'mx-auto h-full p-5'}>

@@ -1,13 +1,12 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
 import { tw } from 'twind';
 import LogoImage from '../assets/images/logo.png';
+import { ThemeSwitcher } from '../components/theme-switcher/ThemeSwicher';
 
 export const LayoutHeader = () => {
   return (
     <header
-      className={tw(
-        'sticky top-0 z-30 w-full border-b border-slate-200 bg-white bg-opacity-90 py-3 backdrop-blur laptop:z-50'
-      )}
+      className={tw('sticky top-0 z-30 w-full border-b border-slate-200 bg-opacity-90 py-3 backdrop-blur laptop:z-50')}
     >
       <div className={tw('mx-auto flex max-w-7xl items-center justify-between px-5')}>
         <div className={'flex flex-row items-center'}>
@@ -27,17 +26,18 @@ export const LayoutHeader = () => {
             ALPHA
           </span>
         </div>
-        <div className={'flex flex-row items-center'}>
+        <div className={'flex flex-row items-center gap-2'}>
+          <ThemeSwitcher />
           <Tooltip placement={'bottom'} content={'Github 上的 Agile UI'}>
             <a
-              className={'block text-slate-500 hover:text-slate-700'}
+              className={'block border-slate-300 rounded p-1 border text-slate-500 hover:text-slate-700'}
               rel="noreferrer"
               href="https://github.com/huijiewei/agile-ui"
               target="_blank"
             >
               <VisuallyHidden>Github 上的 Agile UI</VisuallyHidden>
-              <svg viewBox="0 0 16 16" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className={'h-5 w-5'} viewBox="0 0 24 24">
+                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
               </svg>
             </a>
           </Tooltip>

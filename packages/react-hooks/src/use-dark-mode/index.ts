@@ -7,23 +7,23 @@ const COLOR_SCHEME_QUERY = '(prefers-color-scheme: dark)';
 export const useDarkMode = (
   defaultValue?: boolean
 ): {
-  isDarkMode: boolean;
+  darkMode: boolean;
   toggle: () => void;
   enable: () => void;
   disable: () => void;
 } => {
   const isDarkOS = useMediaQuery(COLOR_SCHEME_QUERY);
 
-  const [isDarkMode, setIsDarkMode] = useLocalStorage<boolean>('agile-ui-dark-mode', defaultValue ?? isDarkOS ?? false);
+  const [darkMode, setDarkMode] = useLocalStorage<boolean>('agile-ui-dark-mode', defaultValue ?? isDarkOS ?? false);
 
   useUpdateEffect(() => {
-    setIsDarkMode(isDarkOS);
+    setDarkMode(isDarkOS);
   }, [isDarkOS]);
 
   return {
-    isDarkMode,
-    toggle: () => setIsDarkMode((prev) => !prev),
-    enable: () => setIsDarkMode(true),
-    disable: () => setIsDarkMode(false),
+    darkMode,
+    toggle: () => setDarkMode((prev) => !prev),
+    enable: () => setDarkMode(true),
+    disable: () => setDarkMode(false),
   };
 };

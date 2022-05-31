@@ -49,14 +49,21 @@
     "webpack": "^5.72.1",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0",
+    "webpack-dev-server": "^4.9.1",
     "workbox-webpack-plugin": "^6.5.3"
   },
-  "browserslist": [
-    "chrome 61",
-    "edge 16",
-    "firefox 60",
-    "opera 48",
-    "safari 11"
-  ]
+  "browserslist": {
+    "production": [
+      "chrome 61",
+      "edge 16",
+      "firefox 60",
+      "opera 48",
+      "safari 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
