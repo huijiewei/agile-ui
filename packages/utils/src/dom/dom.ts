@@ -2,7 +2,7 @@ import type { MutableRefObject } from 'react';
 import type { Booleanish } from '../types/types';
 
 export const isBrowser = (): boolean => {
-  return Boolean(globalThis?.document);
+  return typeof window !== 'undefined';
 };
 
 export const dataAttr = (condition: boolean | undefined) => (condition ? '' : undefined) as Booleanish;

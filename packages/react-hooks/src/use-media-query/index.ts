@@ -1,21 +1,25 @@
+import { isBrowser } from '@agile-ui/utils';
 import { useEffect, useState } from 'react';
 
 export const useMediaQuery = (query: string) => {
-  const getMatches = (query: string): boolean => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia(query).matches;
+  const [matches, setMatches] = useState<boolean>(() => {
+    if (!isBrowser()) {
+      return false;
     }
-    return false;
-  };
 
-  const [matches, setMatches] = useState<boolean>(getMatches(query));
-
-  const handleChange = () => {
-    setMatches(getMatches(query));
-  };
+    return window.matchMedia(query).matches;
+  });
 
   useEffect(() => {
+    if (!isBrowser()) {
+      return;
+    }
+
     const matchMedia = window.matchMedia(query);
+
+    const handleChange = () => {
+      setMatches(matchMedia.matches);
+    };
 
     handleChange();
 
@@ -24,7 +28,6 @@ export const useMediaQuery = (query: string) => {
     return () => {
       matchMedia.removeEventListener('change', handleChange);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return matches;

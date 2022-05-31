@@ -1,6 +1,6 @@
 export * from './use-local-storage';
 export * from './use-timeout';
-export * from './user-merge-refs';
+export * from './use-merge-refs';
 export * from './use-interval';
 export * from './use-state-machine';
 export * from './use-callback-ref';
