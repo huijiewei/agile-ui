@@ -31,7 +31,7 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
           />
           <CopyIcon content={code} />
         </div>
-        {live && <LiveError className={'mt-1 rounded bg-red-400 px-2 py-1 font-mono text-[13px] text-white'} />}
+        {live && <LiveError className={'mt-1 rounded bg-red-400 px-2 py-1 font-mono text-[13px]'} />}
       </div>
     </LiveProvider>
   );

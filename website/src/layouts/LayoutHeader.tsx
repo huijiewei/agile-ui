@@ -1,6 +1,6 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
 import { tw } from 'twind';
-import LogoImage from '../assets/images/logo.png';
+import LogoImage from '../assets/images/logo.svg';
 import { ThemeSwitcher } from '../components/theme-switcher/ThemeSwicher';
 
 export const LayoutHeader = () => {
@@ -11,9 +11,9 @@ export const LayoutHeader = () => {
       <div className={tw('mx-auto flex max-w-7xl items-center justify-between px-5')}>
         <div className={'flex flex-row items-center'}>
           <img
-            width={'36'}
-            height={'36'}
-            className={'inline-block w-9 align-middle'}
+            width={'32'}
+            height={'32'}
+            className={'inline-block align-middle mt-[1px] -mb-[1px]'}
             alt={'Agile UI'}
             src={LogoImage}
           />
@@ -28,7 +28,7 @@ export const LayoutHeader = () => {
         </div>
         <div className={'flex flex-row items-center gap-2'}>
           <ThemeSwitcher />
-          <Tooltip placement={'bottom'} content={'Github 上的 Agile UI'}>
+          <Tooltip content={'Github 上的 Agile UI'}>
             <a
               className={'block border-slate-300 rounded p-1 border text-slate-500 hover:text-slate-700'}
               rel="noreferrer"

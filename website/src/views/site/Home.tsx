@@ -1,3 +1,5 @@
+import LogoImage from '../../assets/images/logo.svg';
+
 const Badges = () => {
   return (
     <>
@@ -211,7 +213,16 @@ const Badges = () => {
 const Home = () => {
   return (
     <div className={'flex flex-col gap-3'}>
-      <h1 className={'text-xl font-bold text-sky-600 text-center'}>Agile UI</h1>
+      <h1 className={'text-[36px] font-bold text-sky-600 text-center'}>
+        <img
+          width={'50'}
+          height={'50'}
+          className={'inline-block align-middle -mt-[3px] mb-[3px]'}
+          alt={'Agile UI'}
+          src={LogoImage}
+        />{' '}
+        Agile UI
+      </h1>
       <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
       <hr />
       <Badges />

@@ -155,7 +155,7 @@ export const LayoutAside = () => {
     <aside
       className={tx(
         'fixed bottom-0 top-[3.8125rem] z-20 hidden w-52 overflow-hidden overscroll-contain border-r border-r-slate-200 hover:overflow-y-auto laptop:block',
-        '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300)'
+        '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px])'
       )}
     >
       <nav className={'relative'}>

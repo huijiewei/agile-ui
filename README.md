@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Agile UI</h1>
+<h1><img src="https://raw.githubusercontent.com/huijiewei/agile-ui/main/website/src/assets/images/logo.png" alt="React + TypeScript + Twind UI Components." width="36"> Agile UI</h1>
 <p>React + TypeScript + Twind UI Components</p>
 
 [![Intel](https://img.shields.io/badge/Intel-Core_i5_9600K-0071C5?style=flat&logo=intel&logoColor=white)](https://www.intel.com/content/www/us/en/products/sku/134896/intel-core-i59600k-processor-9m-cache-up-to-4-60-ghz/specifications.html)

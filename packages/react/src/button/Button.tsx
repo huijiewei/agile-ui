@@ -74,11 +74,11 @@ const buttonSizes = {
 
 const buttonVariants = (color: string) => {
   return {
-    solid: `text-white border-transparent bg-${color}-(600 hover:700 active:800)`,
-    outline: `bg-white border-current text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
+    solid: `text-white dark:text-black border-transparent bg-${color}-(600 hover:700 active:800)`,
+    outline: `border-current bg-white dark:bg-black text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
     light: `border-transparent text-${color}-600 bg-${color}-50 hover:bg-${color}-100 active:bg-${color}-200`,
-    subtle: `border-transparent bg-white text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
-    link: `border-transparent bg-white underline underline-offset-2 text-${color}(600 hover:800 active:900)`,
+    subtle: `border-transparent bg-${color}-50} text-${color}-600 hover:bg-${color}-50 active:bg-${color}-100`,
+    link: `border-transparent bg-${color}-50} underline underline-offset-2 text-${color}(600 hover:800 active:900)`,
   };
 };
 
