@@ -22,6 +22,5 @@ export const presetAgile = () => {
       fontSize,
       colors,
     },
-    hash: !__DEV__,
   };
 };

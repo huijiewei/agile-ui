@@ -29,7 +29,6 @@ setup({
     ],
   ],
   ignorelist: [/^index-splash-/],
-  hash: true,
 });
 
 injectGlobal`
