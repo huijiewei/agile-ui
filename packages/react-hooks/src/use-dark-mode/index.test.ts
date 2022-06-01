@@ -28,13 +28,13 @@ describe('useDarkMode', () => {
   test('should have a default value(1)', () => {
     mockMatchMedia(false);
     const { result } = renderHook(() => useDarkMode(false));
-    expect(result.current.isDarkMode).toBe(false);
+    expect(result.current.darkMode).toBe(false);
   });
 
   test('should initiate correctly', () => {
     mockMatchMedia(true);
     const { result } = renderHook(() => useDarkMode());
-    expect(typeof result.current.isDarkMode).toBe('boolean');
+    expect(typeof result.current.darkMode).toBe('boolean');
     expect(typeof result.current.disable).toBe('function');
     expect(typeof result.current.toggle).toBe('function');
     expect(typeof result.current.enable).toBe('function');
@@ -43,7 +43,7 @@ describe('useDarkMode', () => {
   test('should have a default value(2)', () => {
     mockMatchMedia(true);
     const { result } = renderHook(() => useDarkMode(true));
-    expect(result.current.isDarkMode).toBe(true);
+    expect(result.current.darkMode).toBe(true);
   });
 
   test('should toggle dark mode (1)', () => {
@@ -53,7 +53,7 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.toggle();
     });
-    expect(result.current.isDarkMode).toBe(false);
+    expect(result.current.darkMode).toBe(false);
   });
 
   test('should toggle dark mode (2)', () => {
@@ -61,7 +61,7 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.toggle();
     });
-    expect(result.current.isDarkMode).toBe(true);
+    expect(result.current.darkMode).toBe(true);
   });
 
   test('should enable dark mode (1)', () => {
@@ -69,7 +69,7 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.enable();
     });
-    expect(result.current.isDarkMode).toBe(true);
+    expect(result.current.darkMode).toBe(true);
   });
 
   test('should enable dark mode (2)', () => {
@@ -77,7 +77,7 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.enable();
     });
-    expect(result.current.isDarkMode).toBe(true);
+    expect(result.current.darkMode).toBe(true);
   });
 
   test('should disable dark mode (1)', () => {
@@ -85,7 +85,7 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.disable();
     });
-    expect(result.current.isDarkMode).toBe(false);
+    expect(result.current.darkMode).toBe(false);
   });
 
   test('should disable dark mode (2)', () => {
@@ -93,6 +93,6 @@ describe('useDarkMode', () => {
     act(() => {
       result.current.disable();
     });
-    expect(result.current.isDarkMode).toBe(false);
+    expect(result.current.darkMode).toBe(false);
   });
 });

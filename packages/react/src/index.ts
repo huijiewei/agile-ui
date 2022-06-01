@@ -18,6 +18,3 @@ export * from './swich/Switch';
 export * from './tooltip/Tooltip';
 
 export * from './spinner/Spinner';
-
-export * from './prism/CopyIcon';
-export * from './prism/Prism';

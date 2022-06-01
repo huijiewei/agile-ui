@@ -1,5 +1,5 @@
 import { Tooltip } from '@agile-ui/react';
-import { useDarkMode } from '@agile-ui/react-hooks/src/use-dark-mode';
+import { useDarkMode } from '@agile-ui/react-hooks';
 import { useEffect } from 'react';
 
 export const ThemeSwitcher = () => {
