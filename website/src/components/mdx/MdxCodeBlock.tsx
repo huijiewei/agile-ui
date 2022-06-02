@@ -1,3 +1,4 @@
+import { useDarkModeState } from '@agile-ui/react';
 import * as AgileUI from '@agile-ui/react';
 import { CopyIcon } from '../copy-icon/CopyIcon';
 import { __DEV__ } from '@agile-ui/utils';
@@ -5,7 +6,8 @@ import type { ComponentProps } from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Link } from 'react-router-dom';
 import { tx } from 'twind';
-import prismTheme from 'prism-react-renderer/themes/vsDark';
+import vsLight from 'prism-react-renderer/themes/vsLight';
+import vsDark from 'prism-react-renderer/themes/vsDark';
 
 export type MdxCodeBlockProps = Omit<ComponentProps<'code'>, 'ref'> & {
   children?: string;
@@ -14,12 +16,14 @@ export type MdxCodeBlockProps = Omit<ComponentProps<'code'>, 'ref'> & {
 };
 
 export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
+  const darkMode = useDarkModeState();
+
   const { children, live, editable, ...rest } = props;
 
   const code = children?.replace(/\n$/, '') || '';
 
   return (
-    <LiveProvider theme={prismTheme} code={code} scope={{ ...AgileUI, Link }} {...rest}>
+    <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, Link }} {...rest}>
       <div className={'flex flex-col'}>
         {live && <LivePreview className={'overflow-x-auto rounded-t border border-slate-300 p-3'} />}
         <div className={tx('relative border border-t-0 border-slate-300', live ? 'rounded-b' : 'rounded')}>

@@ -1,11 +1,9 @@
-import { CopyIcon } from '../copy-icon/CopyIcon';
 import { ElementType, useState } from 'react';
-import { LiveEditor } from 'react-live';
 import { tx } from 'twind';
 import { camelCase } from '../../utils/string';
+import { PlaygroundCode } from './PlaygroundCode';
 import { PlaygroundControl } from './PlaygroundControl';
 import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';
-import prismTheme from 'prism-react-renderer/themes/vsDark';
 
 type PlaygroundProps = {
   component: ElementType;
@@ -98,18 +96,7 @@ export const Playground = (props: PlaygroundProps) => {
           </div>
         </div>
       </div>
-      {includeCode && (
-        <div className={'relative border border-slate-200 rounded rounded-t-none'}>
-          <LiveEditor
-            disabled
-            theme={prismTheme}
-            code={code}
-            className={'rounded rounded-t-none overflow-x-auto font-mono text-[13px] leading-5'}
-            language={'tsx'}
-          />
-          <CopyIcon content={code} />
-        </div>
-      )}
+      {includeCode && <PlaygroundCode code={code} />}
     </div>
   );
 };

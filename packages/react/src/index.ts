@@ -18,3 +18,5 @@ export * from './swich/Switch';
 export * from './tooltip/Tooltip';
 
 export * from './spinner/Spinner';
+
+export * from './theme/DarkModeProvider';

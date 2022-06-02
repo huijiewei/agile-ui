@@ -1,9 +1,9 @@
-import { Tooltip } from '@agile-ui/react';
-import { useDarkMode } from '@agile-ui/react-hooks';
+import { Tooltip, useDarkModeDispatch, useDarkModeState } from '@agile-ui/react';
 import { useEffect } from 'react';
 
 export const ThemeSwitcher = () => {
-  const { darkMode, toggle } = useDarkMode();
+  const darkMode = useDarkModeState();
+  const darkModeDispatch = useDarkModeDispatch();
 
   useEffect(() => {
     if (darkMode) {
@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
   return (
     <Tooltip content={darkMode ? '进入亮色模式' : '进入暗色模式'}>
       <button
-        onClick={toggle}
+        onClick={() => darkModeDispatch((prev) => !prev)}
         className={'block border-slate-300 rounded p-1 border text-slate-500 hover:text-slate-700'}
       >
         {darkMode ? (
