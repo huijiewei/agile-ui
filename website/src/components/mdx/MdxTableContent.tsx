@@ -36,7 +36,7 @@ export const MdxTableContent = ({ headings }: { headings: Heading[] }) => {
   }, [headings]);
 
   useEffect(() => {
-    setActive(getActiveElement(slugs.current.map((d) => d.getBoundingClientRect())));
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

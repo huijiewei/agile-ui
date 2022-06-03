@@ -1,3 +1,4 @@
+import { __DEV__ } from '@agile-ui/utils';
 import {
   arrow,
   autoPlacement,
@@ -8,6 +9,7 @@ import {
   Placement,
   shift,
   useClick,
+  useDismiss,
   useFloating,
   useFocus,
   useHover,
@@ -16,58 +18,68 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import { ComponentProps, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 import { tx } from 'twind';
+import { Animation } from '../animation/Animation';
+import { polymorphicComponent } from '../utils/polymorphic';
+import type { Color } from '../utils/types';
 
 type TooltipProps = ComponentProps<'div'> & {
   content: ReactNode;
   placement?: 'auto' | Placement;
   trigger?: 'hover' | 'click';
-  style?: 'dark' | 'light' | 'auto';
-  animation?: false | `duration-${number}`;
+  animation?: {
+    duration?: number;
+    enter?: string;
+    exit?: string;
+  };
   arrow?: boolean;
-  arrowClassName?: string;
+  color?: Color;
 };
 
 export const Tooltip = (props: TooltipProps) => {
   const {
     className,
-    arrowClassName,
     children,
     content,
     placement = 'auto',
-    animation = 'duration-200',
+    animation = {
+      duration: 300,
+      enter: 'opacity-100',
+      exit: 'opacity-0',
+    },
     trigger = 'hover',
-    style = 'auto',
     arrow = true,
+    color = 'slate',
     ...rest
   } = props;
   const arrowRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState(false);
 
-  const floatingTooltip = useFloating<HTMLElement>({
+  const {
+    x,
+    y,
+    reference,
+    floating,
+    strategy,
+    context,
+    refs,
+    update,
+    placement: placementState,
+    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+  } = useFloating<HTMLElement>({
     middleware: floatingMiddleware({ arrowRef, placement }),
     open,
     onOpenChange: setOpen,
     placement: placement === 'auto' ? undefined : placement,
+    strategy: 'absolute',
   });
 
-  const {
-    context,
-    floating,
-    middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
-    reference,
-    refs,
-    strategy,
-    update,
-    x,
-    y,
-  } = floatingTooltip;
-
   const { getFloatingProps, getReferenceProps } = useInteractions([
-    useClick(context, { enabled: trigger === 'click' }),
-    useFocus(context),
-    useHover(context, { enabled: trigger === 'hover' }),
     useRole(context, { role: 'tooltip' }),
+    useDismiss(context),
+    useClick(context, { enabled: trigger == 'click' }),
+    useHover(context, { enabled: trigger == 'hover' }),
+    useFocus(context),
   ]);
 
   useEffect(() => {
@@ -76,49 +88,46 @@ export const Tooltip = (props: TooltipProps) => {
     }
   }, [open, refs.floating, refs.reference, update]);
 
+  console.log(open);
+
   return (
     <>
       <div className={'w-fit'} {...getReferenceProps({ ref: reference })}>
         {children}
       </div>
-      <div
+      <Animation
+        show={open}
+        {...animation}
+        className={tx(
+          `${strategy} top-[${y}px] left-[${x}px]`,
+          'inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm border',
+          `border-${color}-200 bg-${color}-50 text-${color}-900`,
+          className
+        )}
         {...getFloatingProps({
-          className: tx(
-            'absolute inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm',
-            animation !== false && `transition-opacity ${animation}`,
-            {
-              'invisible opacity-0': !open,
-              'border bg-gray-900 border-gray-900 text-white dark:border-gray-700 dark:bg-gray-700': style === 'dark',
-              'border border-gray-200 bg-white text-gray-900': style === 'light',
-              'border border-gray-200 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-700 dark:text-white':
-                style === 'auto',
-            },
-            className
-          ),
           ref: floating,
-          style: {
-            position: strategy,
-            top: y ?? '',
-            left: open ? x ?? '' : 0,
-          },
           ...rest,
         })}
       >
-        <div className="relative z-20">{content}</div>
+        {content}
         {arrow && (
           <TooltipArrow
-            style={style}
-            arrowRef={arrowRef}
+            ref={arrowRef}
             arrowX={arrowX}
             arrowY={arrowY}
-            placement={floatingTooltip.placement}
-            className={arrowClassName}
+            strategy={strategy}
+            placement={placementState}
+            className={tx(`border-${color}-200 bg-${color}-50 text-${color}-900`)}
           />
         )}
-      </div>
+      </Animation>
     </>
   );
 };
+
+if (__DEV__) {
+  Tooltip.displayName = 'Tooltip';
+}
 
 type TooltipArrowPlacement = 'top' | 'left' | 'bottom' | 'right';
 
@@ -129,48 +138,40 @@ const tooltipArrowStyles = {
   left: 'border-b border-l',
 };
 
-const TooltipArrow = ({
-  style,
-  arrowRef,
-  arrowX,
-  arrowY,
-  placement,
-  className,
-}: {
-  style: 'dark' | 'light' | 'auto';
-  arrowRef: RefObject<HTMLDivElement>;
+type TooltipArrowProps = {
   arrowX?: number;
   arrowY?: number;
+  strategy: 'fixed' | 'absolute';
   placement: Placement;
   className?: string;
-}) => {
+};
+
+const TooltipArrow = polymorphicComponent<'span', TooltipArrowProps>((props, ref) => {
+  const { as: Component = 'span', arrowX, arrowY, strategy, placement, className, ...rest } = props;
   const arrowPlacement = floatingArrowPlacement({ placement });
 
   return (
-    <div
+    <Component
       className={tx(
-        'absolute z-10 h-2 w-2 rotate-45',
-        {
-          'border-gray-900 bg-gray-900 dark:border-gray-700 dark:bg-gray-700': style === 'dark',
-          'border-gray-200 bg-white': style === 'light',
-          'border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-700': style === 'auto',
-        },
+        `${strategy}`,
+        arrowX && `left-[${arrowX}px] `,
+        arrowY && `top-[${arrowY}px] `,
+        `-${arrowPlacement}-[4px]`,
+        'h-[8px] w-[8px] rotate-45',
         tooltipArrowStyles[arrowPlacement],
         className
       )}
-      ref={arrowRef}
-      style={{
-        top: arrowY ?? '',
-        left: arrowX ?? '',
-        right: '',
-        bottom: '',
-        [arrowPlacement]: '-4px',
-      }}
+      ref={ref}
+      {...rest}
     >
       &nbsp;
-    </div>
+    </Component>
   );
-};
+});
+
+if (__DEV__) {
+  TooltipArrow.displayName = 'TooltipArrow';
+}
 
 const floatingMiddleware = ({
   arrowRef,

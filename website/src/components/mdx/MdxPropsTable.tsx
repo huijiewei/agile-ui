@@ -14,8 +14,8 @@ export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentPro
           </tr>
         </thead>
         <tbody>
-          {componentProps.map((prop) => (
-            <tr key={prop.name}>
+          {componentProps.map((prop, i) => (
+            <tr key={`${prop.name}-${i}`}>
               <td className={'px-3 py-2 text-left whitespace-nowrap'}>{prop.name}</td>
               <td className={'px-3 py-2 text-left whitespace-nowrap'}>{prop.description || '-'}</td>
               <td className={'px-3 py-2 text-left whitespace-nowrap'}>{prop.defaultValue?.value || '-'}</td>
