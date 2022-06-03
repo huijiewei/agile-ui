@@ -8,12 +8,12 @@ export const PlaygroundCode = ({ code }: { code: string }) => {
   const darkMode = useDarkModeState();
 
   return (
-    <div className={'relative border border-slate-200 rounded rounded-t-none'}>
+    <div className={'relative'}>
       <LiveEditor
         disabled
         code={code}
         theme={darkMode ? vsDark : vsLight}
-        className={'rounded rounded-t-none overflow-x-auto font-mono text-[13px] leading-5'}
+        className={'rounded rounded-t-none border border-slate-200 overflow-x-auto font-mono text-[13px] leading-5'}
         language={'tsx'}
       />
       <CopyIcon content={code} />

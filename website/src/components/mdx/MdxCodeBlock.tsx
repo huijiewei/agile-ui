@@ -26,10 +26,13 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
     <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, Link }} {...rest}>
       <div className={'flex flex-col'}>
         {live && <LivePreview className={'overflow-x-auto rounded-t border border-slate-300 p-3'} />}
-        <div className={tx('relative border border-t-0 border-slate-300', live ? 'rounded-b' : 'rounded')}>
+        <div className={'relative'}>
           <LiveEditor
             disabled={!editable}
-            className={tx('overflow-x-auto font-mono text-[13px] leading-5', live ? 'rounded-b' : 'rounded')}
+            className={tx(
+              'overflow-x-auto border border-t-0 border-slate-300 font-mono text-[13px] leading-5',
+              live ? 'rounded-b' : 'rounded'
+            )}
           />
           <CopyIcon content={code} />
         </div>

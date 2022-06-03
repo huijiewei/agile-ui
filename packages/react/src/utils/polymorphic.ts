@@ -42,7 +42,12 @@ export type PolymorphicComponent<ComponentType extends ElementType, OwnProps> = 
   displayName?: string;
 };
 
-export const polymorphicComponent = <ComponentType extends ElementType = 'div', OwnProps = Record<string, never>>(
+export const polymorphicComponent = <
+  ComponentType extends ElementType = 'div',
+  OwnProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }
+>(
   render: ForwardRefFunction<ComponentType, OwnProps>
 ) => {
   return forwardRef(render) as PolymorphicComponent<ComponentType, OwnProps>;
