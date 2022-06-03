@@ -1,6 +1,8 @@
 export * from './utils/context';
 export * from './utils/polymorphic';
 
+export * from './animation/Animation';
+
 export * from './box/Box';
 export * from './text/Text';
 export * from './portal/Portal';
