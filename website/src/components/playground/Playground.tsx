@@ -64,7 +64,7 @@ export const Playground = (props: PlaygroundProps) => {
           <Component {...state} />
         </div>
         <div className={'border-t border-gray-200 p-3 tablet:w-[260px] tablet:border-l tablet:border-t-0'}>
-          <div className={'flex flex-col space-y-3'}>
+          <div className={'flex flex-col gap-2'}>
             {componentProps.map((prop) => {
               if (prop.type.name == 'ReactNode') {
                 return null;

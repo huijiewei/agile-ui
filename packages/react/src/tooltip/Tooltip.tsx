@@ -90,8 +90,6 @@ export const Tooltip = (props: TooltipProps) => {
     }
   }, [open, refs.floating, refs.reference, update]);
 
-  console.log(x, y);
-
   return (
     <>
       <div className={'w-fit'} {...getReferenceProps({ ref: reference })}>

@@ -27,12 +27,14 @@ export type InputProps = {
    * @default false
    */
   readOnly?: boolean;
+};
 
-  /**
-   * 是否全宽度
-   * @default false
-   */
-  fullWidth?: boolean;
+const inputSizes = {
+  xs: 'h-6 leading-6 px-2 text-sm',
+  sm: 'h-7 leading-7 px-2',
+  md: 'h-8 leading-8 px-3',
+  lg: 'h-9 leading-9 px-3',
+  xl: 'h-10 leading-10 px-3 text-lg',
 };
 
 export const Input = polymorphicComponent<'input', InputProps>((props, ref) => {
@@ -42,13 +44,20 @@ export const Input = polymorphicComponent<'input', InputProps>((props, ref) => {
     disabled = false,
     required = false,
     readOnly = false,
-    fullWidth = false,
     className,
     ...rest
   } = props;
   return (
     <Component
-      className={tx('px-2 py-1 border border-slate-300 rounded', className)}
+      className={tx(
+        'border border-slate-300 rounded outline-none appearance-none resize-none w-full text-left',
+        'bg-white dark:bg-slate-900',
+        'focus:border-blue-500',
+        'transition-[border-color]',
+        inputSizes[size],
+        disabled && 'opacity-60 cursor-not-allowed',
+        className
+      )}
       disabled={disabled}
       readOnly={readOnly}
       {...rest}

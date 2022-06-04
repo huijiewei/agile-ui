@@ -1,3 +1,5 @@
+import { CheckSmall } from '@icon-park/react';
+import { tx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
 
 export const PlaygroundControl = ({
@@ -10,7 +12,7 @@ export const PlaygroundControl = ({
   onChange: (value: PropValue) => void;
 }) => {
   return (
-    <label className={'inline-flex items-center justify-between gap-3'}>
+    <label className={'inline-flex items-center justify-between gap-2'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>
       {prop.type.control == 'boolean' && (
         <input
@@ -22,24 +24,44 @@ export const PlaygroundControl = ({
       )}
       {(prop.type.control == 'string' || prop.type.control == 'ReactNode' || prop.type.control == 'ColorWithLevel') && (
         <input
-          className={'rounded-sm border border-slate-300 px-1.5 py-0.5'}
+          className={'rounded-sm border bg-white dark:bg-slate-900 border-slate-300 px-1.5 py-0.5'}
           defaultValue={defaultValue?.toString()}
           type="text"
+          size={15}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
       {prop.type.control == 'select' &&
-        (prop.type.name == 'color' ? null : (
+        (prop.description == '颜色' ? (
+          <div className={'inline-flex flex-row w-36 flex-wrap gap-1 justify-right'}>
+            {prop.type.values?.map((value, i) => {
+              const valueString = value.toString().slice(1, -1);
+              return (
+                <button
+                  title={valueString}
+                  key={`${valueString}-${i}`}
+                  className={tx(
+                    'rounded-sm h-6 text-slate-50 w-6 outline-none justify-center flex items-center leading-6',
+                    `bg-${valueString}-600`
+                  )}
+                  onClick={() => onChange(valueString)}
+                >
+                  {defaultValue?.toString() == valueString ? <CheckSmall /> : ' '}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
           <select
             onChange={(e) => onChange(e.target.value)}
-            className={'rounded-sm border border-slate-300 px-1.5 py-0.5'}
+            className={'rounded-sm border bg-white dark:bg-slate-900 border-slate-300 px-1.5 py-0.5'}
             defaultValue={defaultValue?.toString()}
           >
-            {prop.type.values?.map((value) => {
+            {prop.type.values?.map((value, i) => {
               const valueString = value.toString().slice(1, -1);
 
               return (
-                <option value={valueString} key={valueString}>
+                <option value={valueString} key={`${valueString}-${i}`}>
                   {valueString}
                 </option>
               );
