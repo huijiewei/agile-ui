@@ -27,6 +27,7 @@ type TooltipProps = ComponentProps<'div'> & {
   placement?: 'auto' | Placement;
   trigger?: 'hover' | 'click';
   animation?: {
+    transition?: string;
     duration?: number;
     enter?: string;
     exit?: string;
@@ -42,6 +43,7 @@ export const Tooltip = (props: TooltipProps) => {
     content,
     placement = 'auto',
     animation = {
+      transition: 'transition-opacity',
       duration: 300,
       enter: 'opacity-100',
       exit: 'opacity-0',
@@ -88,7 +90,7 @@ export const Tooltip = (props: TooltipProps) => {
     }
   }, [open, refs.floating, refs.reference, update]);
 
-  console.log(open);
+  console.log(x, y);
 
   return (
     <>
@@ -99,7 +101,9 @@ export const Tooltip = (props: TooltipProps) => {
         show={open}
         {...animation}
         className={tx(
-          `${strategy} top-[${y}px] left-[${x}px]`,
+          `${strategy}`,
+          y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
+          x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
           'inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm border',
           `border-${color}-200 bg-${color}-50 text-${color}-900`,
           className
@@ -154,8 +158,8 @@ const TooltipArrow = polymorphicComponent<'span', TooltipArrowProps>((props, ref
     <Component
       className={tx(
         `${strategy}`,
-        arrowX && `left-[${arrowX}px] `,
-        arrowY && `top-[${arrowY}px] `,
+        arrowX != null && `left-[${arrowX}px] `,
+        arrowY != null && `top-[${arrowY}px] `,
         `-${arrowPlacement}-[4px]`,
         'h-[8px] w-[8px] rotate-45',
         tooltipArrowStyles[arrowPlacement],

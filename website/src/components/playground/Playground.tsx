@@ -14,6 +14,18 @@ type PlaygroundProps = {
   codeTemplate: (props: string, children?: PropValue) => string;
 };
 
+const getDescription = (key: string) => {
+  if (key == 'children') {
+    return '内容';
+  }
+
+  if (key == 'placeholder') {
+    return '占位符';
+  }
+
+  return camelCase(key);
+};
+
 export const Playground = (props: PlaygroundProps) => {
   const {
     component: Component,
@@ -80,7 +92,7 @@ export const Playground = (props: PlaygroundProps) => {
                   prop={{
                     name: key,
                     required: false,
-                    description: key == 'children' ? '内容' : camelCase(key),
+                    description: getDescription(key),
                     defaultValue: { value: value?.toString() || '' },
                     type: {
                       name: typeof type,

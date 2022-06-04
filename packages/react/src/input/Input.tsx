@@ -47,6 +47,12 @@ export const Input = polymorphicComponent<'input', InputProps>((props, ref) => {
     ...rest
   } = props;
   return (
-    <Component className={tx('px-2 py-1', className)} disabled={disabled} readOnly={readOnly} {...rest} ref={ref} />
+    <Component
+      className={tx('px-2 py-1 border border-slate-300 rounded', className)}
+      disabled={disabled}
+      readOnly={readOnly}
+      {...rest}
+      ref={ref}
+    />
   );
 });

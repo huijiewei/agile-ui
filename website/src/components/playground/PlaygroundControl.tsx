@@ -20,7 +20,7 @@ export const PlaygroundControl = ({
           onChange={(e) => onChange(e.target.checked)}
         />
       )}
-      {(prop.type.control == 'string' || prop.type.control == 'ReactNode') && (
+      {(prop.type.control == 'string' || prop.type.control == 'ReactNode' || prop.type.control == 'ColorWithLevel') && (
         <input
           className={'rounded-sm border border-slate-300 px-1.5 py-0.5'}
           defaultValue={defaultValue?.toString()}

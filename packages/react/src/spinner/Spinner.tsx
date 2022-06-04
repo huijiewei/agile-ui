@@ -26,6 +26,7 @@ export type SpinnerProps = {
 
   /**
    * 空白区域颜色
+   * @default 'transparent'
    */
   emptyColor?: ColorWithLevel;
 };

@@ -1,9 +1,10 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { autoDarkColor, css } from 'twind';
 import fontFamily from './presets/font-family';
 import fontSize from './presets/font-size';
 import screens from './presets/screens';
 import colors from './presets/colors';
+import fontWeight from './presets/font-weight';
+import borderRadius from './presets/border-radius';
 
 export type Colors = typeof colors;
 
@@ -21,6 +22,8 @@ export const presetAgile = () => {
       fontFamily,
       fontSize,
       colors,
+      fontWeight,
+      borderRadius,
     },
   };
 };

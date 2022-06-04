@@ -8,10 +8,11 @@ export type TransitionProps = {
   enter?: string;
   exit?: string;
   duration?: number;
+  transition?: string;
 };
 
 export const Animation = polymorphicComponent<'div', TransitionProps>((props, ref) => {
-  const { as: Component = 'div', show, className, enter, exit, duration, children, ...rest } = props;
+  const { as: Component = 'div', show, className, enter, exit, duration, transition, children, ...rest } = props;
   const { stage, shouldMount } = useAnimation(show, duration as number);
 
   if (!shouldMount) {
@@ -19,7 +20,11 @@ export const Animation = polymorphicComponent<'div', TransitionProps>((props, re
   }
 
   return (
-    <Component className={tx(className, `duration-${duration}`, stage == 'enter' ? enter : exit)} ref={ref} {...rest}>
+    <Component
+      className={tx(className, `duration-${duration} ${transition}`, stage == 'enter' ? enter : exit)}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </Component>
   );
