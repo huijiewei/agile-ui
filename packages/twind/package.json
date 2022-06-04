@@ -20,7 +20,5 @@
     "@twind/preset-ext": "next"
   },
   "dependencies": {},
-  "devDependencies": {
-    "typescript": "^4.7.2"
-  }
+  "devDependencies": {}
 }

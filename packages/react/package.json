@@ -27,7 +27,6 @@
     "@icon-park/react": "^1.4.0"
   },
   "devDependencies": {
-    "@agile-ui/test-utils": "*",
-    "typescript": "^4.7.2"
+    "@agile-ui/test-utils": "*"
   }
 }

@@ -8,13 +8,8 @@ export const CopyIcon = ({ content }: { content: string }) => {
 
   return (
     <div className={'absolute right-1.5 top-1.5'}>
-      <Tooltip
-        className={copied ? 'border-green-700 bg-green-100 text-green-900' : ''}
-        arrowClassName={copied ? 'border-green-700 bg-green-100' : ''}
-        placement={'left'}
-        content={copied ? '已复制' : '复制代码'}
-      >
-        <button type={'button'} className={'appearance-none px-2 py-0.5 font-bold'} onClick={() => onCopy(content)}>
+      <Tooltip color={copied ? 'green' : undefined} placement={'left'} content={copied ? '已复制' : '复制代码'}>
+        <button type={'button'} className={'appearance-none p-1 font-bold'} onClick={() => onCopy(content)}>
           {copied ? <Check /> : <Clipboard />}
         </button>
       </Tooltip>
