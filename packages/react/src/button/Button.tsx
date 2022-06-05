@@ -1,7 +1,7 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
-import { tx, cx } from 'twind';
+import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonSpinner } from './ButtonSpinner';
@@ -74,31 +74,31 @@ const buttonSizes = {
 
 const buttonVariants = (color: string, disabled: boolean, active: boolean) => {
   return {
-    solid: cx(
+    solid: [
       `text-white dark:text-black border-transparent`,
       active ? `bg-${color}-800` : `bg-${color}-600`,
-      !disabled && !active && `hover:bg-${color}-700 active:bg-${color}-800`
-    ),
-    outline: cx(
+      !disabled && !active && `hover:bg-${color}-700 active:bg-${color}-800`,
+    ],
+    outline: [
       `border-current text-${color}-600`,
       active ? `bg-${color}-100` : `bg-white dark:bg-black `,
-      !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`
-    ),
-    light: cx(
+      !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`,
+    ],
+    light: [
       `border-transparent text-${color}-700`,
       active ? `bg-${color}-200` : `bg-${color}-50`,
-      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`
-    ),
-    subtle: cx(
-      `border-transparent text-${color}-600`,
-      active ? `bg-${color}-100` : `bg-${color}-50`,
-      !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`
-    ),
-    link: cx(
-      `border-transparent bg-${color}-50} underline underline-offset-2`,
+      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
+    ],
+    subtle: [
+      `border-transparent text-${color}-700`,
+      active ? `bg-${color}-200` : ``,
+      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
+    ],
+    link: [
+      `border-transparent underline underline-offset-2`,
       active ? `text-${color}-900` : `text-${color}-600`,
-      !disabled && !active && ` hover:text-${color}-900 active:text-${color}-900`
-    ),
+      !disabled && !active && ` hover:text-${color}-900 active:text-${color}-900`,
+    ],
   };
 };
 

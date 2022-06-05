@@ -21,7 +21,7 @@ export const Animation = polymorphicComponent<'div', TransitionProps>((props, re
 
   return (
     <Component
-      className={tx(className, `duration-${duration} ${transition}`, stage == 'enter' ? enter : exit)}
+      className={tx(className, `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
       ref={ref}
       {...rest}
     >
