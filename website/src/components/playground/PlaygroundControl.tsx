@@ -1,4 +1,4 @@
-import { Check, CheckSmall } from '@agile-ui/react-icons';
+import { Check } from '@agile-ui/react-icons';
 import { tx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
 

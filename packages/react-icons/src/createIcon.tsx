@@ -32,17 +32,16 @@ type CreateIconOptions = {
   path?: ReactElement | ReactElement[];
   d?: string;
   displayName?: string;
+  defaultProps?: IconProps;
 };
 
 export const createIcon = (options: CreateIconOptions) => {
-  const { viewBox, d, displayName } = options;
-
-  const path = Children.toArray(options.path);
+  const { viewBox, d, displayName, defaultProps, path } = options;
 
   const Component = forwardRef<SVGSVGElement, IconProps>((props, ref) => {
     return (
-      <Icon viewBox={viewBox} {...props} ref={ref}>
-        {path.length ? path : <path fill="currentColor" d={d} />}
+      <Icon viewBox={viewBox} {...defaultProps} {...props} ref={ref}>
+        {path ? path : <path fill="currentColor" d={d} />}
       </Icon>
     );
   });

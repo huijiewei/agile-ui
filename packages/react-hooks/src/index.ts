@@ -13,4 +13,5 @@ export * from './use-isomorphic-layout-effect';
 export * from './use-update-effect';
 export * from './use-media-query';
 export * from './use-event-listener';
-export * from './use-animation';
+export * from './use-animation/useAnimation';
+export * from './use-animation/useSwitchAnimation';

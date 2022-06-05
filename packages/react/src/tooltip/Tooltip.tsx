@@ -96,7 +96,7 @@ export const Tooltip = (props: TooltipProps) => {
           y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
           x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
           'inline-block rounded py-1 px-2 text-sm font-medium shadow-sm border',
-          `border-${color}-800 bg-${color}-800 text-${color}-50`,
+          `border-${color}-700 bg-${color}-700 text-${color}-50`,
           className
         )}
         {...getFloatingProps({
@@ -112,7 +112,7 @@ export const Tooltip = (props: TooltipProps) => {
             arrowY={arrowY}
             strategy={strategy}
             placement={placementState}
-            className={tx(`border-${color}-800 bg-${color}-800 text-${color}-50`)}
+            className={tx(`border-${color}-700 bg-${color}-700 text-${color}-50`)}
           />
         )}
       </Animation>
