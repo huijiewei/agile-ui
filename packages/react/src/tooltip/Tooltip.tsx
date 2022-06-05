@@ -16,7 +16,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { ComponentProps, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import { ComponentProps, ReactNode, RefObject, useRef, useState } from 'react';
 import { tx } from 'twind';
 import { Animation } from '../animation/Animation';
 import { polymorphicComponent } from '../utils/polymorphic';
@@ -64,8 +64,6 @@ export const Tooltip = (props: TooltipProps) => {
     floating,
     strategy,
     context,
-    refs,
-    update,
     placement: placementState,
     middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
   } = useFloating<HTMLElement>({
@@ -74,6 +72,7 @@ export const Tooltip = (props: TooltipProps) => {
     onOpenChange: setOpen,
     placement: placement === 'auto' ? undefined : placement,
     strategy: 'absolute',
+    whileElementsMounted: autoUpdate,
   });
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
@@ -83,12 +82,6 @@ export const Tooltip = (props: TooltipProps) => {
     useHover(context, { enabled: trigger == 'hover' }),
     useFocus(context),
   ]);
-
-  useEffect(() => {
-    if (refs.reference.current && refs.floating.current && open) {
-      return autoUpdate(refs.reference.current, refs.floating.current, update);
-    }
-  }, [open, refs.floating, refs.reference, update]);
 
   return (
     <>
@@ -102,8 +95,8 @@ export const Tooltip = (props: TooltipProps) => {
           `${strategy}`,
           y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
           x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
-          'inline-block rounded py-1.5 px-2.5 text-sm font-medium shadow-sm border',
-          `border-${color}-200 bg-${color}-50 text-${color}-900`,
+          'inline-block rounded py-1 px-2 text-sm font-medium shadow-sm border',
+          `border-${color}-800 bg-${color}-800 text-${color}-50`,
           className
         )}
         {...getFloatingProps({
@@ -119,7 +112,7 @@ export const Tooltip = (props: TooltipProps) => {
             arrowY={arrowY}
             strategy={strategy}
             placement={placementState}
-            className={tx(`border-${color}-200 bg-${color}-50 text-${color}-900`)}
+            className={tx(`border-${color}-800 bg-${color}-800 text-${color}-50`)}
           />
         )}
       </Animation>
