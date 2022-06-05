@@ -12,8 +12,8 @@
   "dependencies": {
     "@agile-ui/react": "*",
     "@agile-ui/react-hooks": "*",
+    "@agile-ui/react-icons": "*",
     "@babel/runtime": "^7.18.3",
-    "@icon-park/react": "^1.4.0",
     "@twind/preset-autoprefix": "next",
     "@twind/preset-ext": "next",
     "@twind/preset-tailwind": "next",
@@ -61,9 +61,7 @@
       "safari 11"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 chrome version"
     ]
   }
 }

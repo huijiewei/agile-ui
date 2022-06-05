@@ -1,4 +1,4 @@
-import { CheckSmall } from '@icon-park/react';
+import { Check, CheckSmall } from '@agile-ui/react-icons';
 import { tx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
 
@@ -46,7 +46,7 @@ export const PlaygroundControl = ({
                   )}
                   onClick={() => onChange(valueString)}
                 >
-                  {defaultValue?.toString() == valueString ? <CheckSmall /> : ' '}
+                  {defaultValue?.toString() == valueString ? <Check className={'h-3 w-3'} /> : ' '}
                 </button>
               );
             })}

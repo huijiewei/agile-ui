@@ -31,7 +31,7 @@ module.exports = (env, argv) => {
       cacheUnaffected: true,
     },
     resolve: {
-      extensions: ['.mjs', '.cjs', '.js', '.tsx', '.ts', '.jsx'],
+      extensions: ['.mjs', '.js', '.tsx', '.ts', '.jsx'],
       alias: {
         'contentlayer/generated': path.resolve(__dirname, '.contentlayer/generated'),
       },

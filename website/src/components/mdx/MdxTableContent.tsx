@@ -1,4 +1,3 @@
-import { MindmapList } from '@icon-park/react';
 import { useEffect, useRef, useState } from 'react';
 import { tx } from 'twind';
 
@@ -35,22 +34,18 @@ export const MdxTableContent = ({ headings }: { headings: Heading[] }) => {
     slugs.current = headings.map((heading) => document.getElementById(heading.id) as HTMLDivElement);
   }, [headings]);
 
+  const handleScroll = () => {
+    setActive(getActiveElement(slugs.current.map((d) => d.getBoundingClientRect())));
+  };
+
   useEffect(() => {
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScroll = () => {
-    setActive(getActiveElement(slugs.current.map((d) => d.getBoundingClientRect())));
-  };
-
   return (
     <>
-      <h3 className={'inline-flex items-center font-bold'}>
-        <MindmapList className={'mr-1'} />
-        目录
-      </h3>
       <ul className={'mt-2 space-y-1 border-l border-l-slate-100'}>
         {headings.map(({ id, text, level }: Heading, index) => (
           <li key={id}>

@@ -1,5 +1,6 @@
 import { useDarkModeState } from '@agile-ui/react';
 import * as AgileUI from '@agile-ui/react';
+import * as AgileIcons from '@agile-ui/react-icons';
 import { CopyIcon } from '../copy-icon/CopyIcon';
 import { __DEV__ } from '@agile-ui/utils';
 import type { ComponentProps } from 'react';
@@ -23,7 +24,7 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
   const code = children?.replace(/\n$/, '') || '';
 
   return (
-    <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, Link }} {...rest}>
+    <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, ...AgileIcons, Link }} {...rest}>
       <div className={'flex flex-col'}>
         {live && <LivePreview className={'overflow-x-auto rounded-t border border-slate-300 p-3'} />}
         <div className={'relative'}>

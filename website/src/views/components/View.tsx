@@ -1,5 +1,5 @@
+import { Edit, Github } from '@agile-ui/react-icons';
 import { to } from '@agile-ui/utils';
-import { Edit, Github } from '@icon-park/react';
 import type { Component } from 'contentlayer/generated';
 import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
