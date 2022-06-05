@@ -1,31 +1,24 @@
 {
-  "name": "@agile-ui/react",
+  "name": "@agile-ui/react-icons",
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": false,
   "module": "src/index.ts",
-  "scripts": {
-    "test": "jest"
-  },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
-    "directory": "packages/react"
+    "directory": "packages/react-icons"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": ">=18"
   },
   "dependencies": {
-    "@agile-ui/react-hooks": "*",
-    "@agile-ui/utils": "*",
-    "@agile-ui/twind": "*",
-    "@floating-ui/react-dom-interactions": "^0.6.3"
+    "@agile-ui/utils": "*"
   },
   "devDependencies": {
-    "@agile-ui/test-utils": "*"
+    "react": "^18.1.0"
   }
 }
