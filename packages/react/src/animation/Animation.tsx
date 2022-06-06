@@ -3,7 +3,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/polymorphic';
 
-export type TransitionProps = {
+export type AnimationProps = {
   show: boolean;
   enter?: string;
   exit?: string;
@@ -11,7 +11,7 @@ export type TransitionProps = {
   transition?: string;
 };
 
-export const Animation = polymorphicComponent<'div', TransitionProps>((props, ref) => {
+export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref) => {
   const { as: Component = 'div', show, className, enter, exit, duration, transition, children, ...rest } = props;
   const { stage, shouldMount } = useAnimation(show, duration as number);
 

@@ -4,7 +4,7 @@ import { tx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
 import type { Size } from '../utils/types';
 
-export type ButtonSpinnerProps = ComponentPropsWithoutRef<'div'> & {
+export type ButtonSpinnerProps = ComponentPropsWithoutRef<'span'> & {
   size: Size;
   label?: string;
   placement?: 'start' | 'end';
@@ -14,7 +14,7 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
   const { label, size, placement, className, children = <Spinner size={size} />, ...rest } = props;
 
   return (
-    <div
+    <span
       className={tx(
         'flex items-center',
         label ? 'relative' : 'absolute',
@@ -24,7 +24,7 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
       {...rest}
     >
       {children}
-    </div>
+    </span>
   );
 };
 

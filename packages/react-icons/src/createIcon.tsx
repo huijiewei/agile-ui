@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { Children, forwardRef, SVGAttributes } from 'react';
+import { forwardRef, SVGAttributes } from 'react';
 import type { ReactElement } from 'react';
 
 type IconProps = SVGAttributes<SVGElement> & { size?: number | string };
