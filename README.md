@@ -19,6 +19,7 @@
 [![ESLint](https://img.shields.io/badge/ESLint-3A33D1?style=flat&logo=eslint&logoColor=white)](https://eslint.org)
 [![Prettier](https://img.shields.io/badge/Prettier-1A2C34?style=flat&logo=prettier&logoColor=F7BA3E)](https://prettier.io)
 [![Jest](https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white)](https://jestjs.io/)
+[![Contentlayer](https://img.shields.io/badge/Contentlayer-7C3AED?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyMiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjQzLjkyM2ExLjk5MSAxLjk5MSAwIDAgMSAyLjM5LjAyM2w3LjE3MyA1LjQ5NmExLjk3NSAxLjk3NSAwIDAgMSAwIDMuMTM4bC0yLjczNiAyLjA5NiAyLjc4IDIuMjI4YTEuOTc1IDEuOTc1IDAgMCAxLS4wNTQgMy4xMjhsLTcuMzYzIDUuNDgzYTEuOTkgMS45OSAwIDAgMS0yLjUxMS0uMTA5TDQuMzQ4IDE3LjI4bC0uODA2LS42OUMtLjA1MyAxMy41MTEuMzkgNy44NCA0LjQxMiA1LjM1MkwxMC40My45MjJ6bTUuNzY1IDkuOTAybC0zLjM0NC0yLjY3OGExLjk5IDEuOTkgMCAwIDAtMi40NTQtLjAyN2wtMi40NzQgMS44OTZhMS45NzUgMS45NzUgMCAwIDAgMCAzLjEzOGwyLjQ5MiAxLjkxYTEuOTkxIDEuOTkxIDAgMCAwIDIuNDIxIDBsMy4zNDEtMi41NiAzLjAzMiAyLjQyOGEuNjU4LjY1OCAwIDAgMS0uMDE5IDEuMDQzbC03LjM2MyA1LjQ4NGEuNjY0LjY2NCAwIDAgMS0uODM2LS4wMzdsLTUuNzY2LTUuMTMtLjgyLS43MDNjLTIuOTIyLTIuNTAyLTIuNTU2LTcuMTE2LjcyNi05LjEyOGwuMDI0LS4wMTUgNi4wNjEtNC40NjJhLjY2NC42NjQgMCAwIDEgLjc5Ny4wMDhsNy4xNzMgNS40OTZhLjY1OC42NTggMCAwIDEgMCAxLjA0NmwtMi45OSAyLjI5MXptLTEuMDguODI4bC0zLjA4NiAyLjM2NWEuNjYzLjY2MyAwIDAgMS0uODA3IDBsLTIuNDkyLTEuOTFhLjY1OC42NTggMCAwIDEgMC0xLjA0NmwyLjQ3NC0xLjg5NmEuNjY0LjY2NCAwIDAgMSAuODE4LjAwOWwzLjA5NCAyLjQ3OHoiIGZpbGw9IiM3QzNBRUQiIHN0cm9rZT0iIzdDM0FFRCIgc3Ryb2tlLXdpZHRoPSIuNSIvPjwvc3ZnPg==&logoColor=white)](https://www.contentlayer.dev/)
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org)
@@ -38,6 +39,7 @@
 - Webpack 5 - Webpack 是一个开源的前端打包工具。
 - Typescript - TypeScript 是具有类型语法的 JavaScript。
 - Jest - Jest 是一款优雅、简洁的 JavaScript 测试框架。
+- Contentlayer - 验证内容并将其转换为类型安全的 JSON 数据。
 - ESLint - ESLint 静态分析你的代码以快速发现问题。
 - Prettier - 一个“有态度”的代码格式化工具
 - Husky & Lint Staged - 在提交暂存文件之前，运行脚本
