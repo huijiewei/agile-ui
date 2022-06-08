@@ -1,7 +1,7 @@
 import { useAnimation } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
-import { polymorphicComponent } from '../utils/polymorphic';
+import { polymorphicComponent } from '../utils/component';
 
 export type AnimationProps = {
   show: boolean;

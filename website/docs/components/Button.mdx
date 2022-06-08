@@ -10,48 +10,48 @@ description: 按钮是由用户使用鼠标、键盘、手指、语音指令或�
 ## 样式
 
 ```tsx live editable
-<Stack className={'space-x-3'}>
+<div className={'flex flex-row gap-3'}>
   <Button>按钮</Button>
   <Button variant={'outline'}>按钮</Button>
   <Button variant={'light'}>按钮</Button>
   <Button variant={'subtle'}>按钮</Button>
   <Button variant={'link'}>按钮</Button>
-</Stack>
+</div>
 ```
 
 ## 颜色
 
 ```tsx live editable
-<Stack className={'space-x-3'}>
+<div className={'flex flex-row gap-3'}>
   <Button>按钮</Button>
   <Button color={'green'}>按钮</Button>
   <Button color={'yellow'}>按钮</Button>
   <Button color={'red'}>按钮</Button>
   <Button color={'slate'}>按钮</Button>
-</Stack>
+</div>
 ```
 
 ## 图标按钮
 
 ```tsx live editable
-<Stack className={'space-x-3'}>
+<div className={'flex flex-row gap-3'}>
   <Button className={'!px-0 aspect-square'}><Config /></Button>
   <Button className={'!px-0 aspect-square'} variant={'outline'} color={'slate'}><Github /></Button>
   <Button className={'!px-0 aspect-square rounded-full'} color={'yellow'}><Github /></Button>
   <Button className={'!px-0 aspect-square'} variant={'light'} color={'red'}><Sun /></Button>
   <Button className={'!px-0 aspect-square'} variant={'subtle'} color={'lime'}><Moon /></Button>
-</Stack>
+</div>
 ```
 
 ## 状态
 
 ```tsx live editable
-<Stack className={'space-x-3'}>
+<div className={'flex flex-row gap-3'}>
   <Button disabled>按钮</Button>
   <Button loading>按钮</Button>
   <Button active>按钮</Button>
   <Button fullWidth>按钮</Button>
-</Stack>
+</div>
 ```
 
 ## 属性

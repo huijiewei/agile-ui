@@ -2,7 +2,7 @@ import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { tx } from 'twind';
-import { polymorphicComponent } from '../utils/polymorphic';
+import { polymorphicComponent } from '../utils/component';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonSpinner } from './ButtonSpinner';
 

@@ -19,7 +19,7 @@ import {
 import { ComponentProps, ReactNode, RefObject, useRef, useState } from 'react';
 import { tx } from 'twind';
 import { Animation } from '../animation/Animation';
-import { polymorphicComponent } from '../utils/polymorphic';
+import { polymorphicComponent } from '../utils/component';
 import type { Color } from '../utils/types';
 
 type TooltipProps = ComponentProps<'div'> & {

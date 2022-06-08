@@ -1,6 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { Box } from '../box/Box';
-import { polymorphicComponent } from '../utils/polymorphic';
+import { polymorphicComponent } from '../utils/component';
 import type { Color, Size } from '../utils/types';
 
 type SwitchProps = {
@@ -11,9 +10,9 @@ type SwitchProps = {
 export const Switch = polymorphicComponent<'input', SwitchProps>((props, ref) => {
   const { color, size, ...rest } = props;
   return (
-    <Box>
+    <label>
       <input type="checkbox" ref={ref} {...rest} />
-    </Box>
+    </label>
   );
 });
 

@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { polymorphicComponent } from '../utils/polymorphic';
+import { polymorphicComponent } from '../utils/component';
 
 export const Box = polymorphicComponent<'div'>((props, ref) => {
   const { as: Component = 'div', children, ...rest } = props;

@@ -1,3 +1,4 @@
+import { Input } from '@agile-ui/react';
 import { Check } from '@agile-ui/react-icons';
 import { tx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
@@ -23,11 +24,11 @@ export const PlaygroundControl = ({
         />
       )}
       {(prop.type.control == 'string' || prop.type.control == 'ReactNode' || prop.type.control == 'ColorWithLevel') && (
-        <input
-          className={'rounded-sm border bg-white dark:bg-slate-900 border-slate-300 px-1.5 py-0.5'}
+        <Input
           defaultValue={defaultValue?.toString()}
           type="text"
-          size={15}
+          size={'sm'}
+          className={'w-1/2'}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
