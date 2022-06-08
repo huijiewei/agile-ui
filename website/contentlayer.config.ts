@@ -1,6 +1,6 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import { resolve } from 'path';
-import { withCustomConfig } from 'react-docgen-typescript';
+import { PropItem, withCustomConfig } from 'react-docgen-typescript';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
@@ -14,9 +14,20 @@ const docgenParser = withCustomConfig('tsconfig.json', {
   shouldExtractLiteralValuesFromEnum: true,
   shouldExtractValuesFromUnion: true,
   shouldRemoveUndefinedFromOptional: true,
-  propFilter: {
-    skipPropsWithName: ['as', 'ref', 'style', 'className'],
-    skipPropsWithoutDoc: false,
+  propFilter: (prop: PropItem) => {
+    if (['as', 'ref', 'style', 'className'].includes(prop.name)) {
+      return false;
+    }
+
+    if (prop.declarations !== undefined && prop.declarations.length > 0) {
+      const hasPropAdditionalDescription = prop.declarations.find((declaration) => {
+        return !declaration.fileName.includes('node_modules');
+      });
+
+      return Boolean(hasPropAdditionalDescription);
+    }
+
+    return true;
   },
 });
 
@@ -32,6 +43,8 @@ const getComponentProps = (componentName: string) => {
   const pathname = resolve(`../packages/react/src/${slug}/${componentName}.tsx`);
 
   const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName == componentName);
+
+  console.log(type?.props);
 
   if (type?.props) {
     return Object.entries(type.props).map(([key, value]) => {

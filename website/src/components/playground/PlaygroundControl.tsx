@@ -13,7 +13,7 @@ export const PlaygroundControl = ({
   onChange: (value: PropValue) => void;
 }) => {
   return (
-    <label className={'inline-flex items-center justify-between gap-2'}>
+    <label className={'inline-flex items-center justify-between gap-1'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>
       {prop.type.control == 'boolean' && (
         <input
