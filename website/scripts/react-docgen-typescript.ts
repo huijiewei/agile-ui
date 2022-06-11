@@ -1,7 +1,7 @@
 import { PropItem, withCustomConfig } from 'react-docgen-typescript';
 import { getComponentPathName } from './contentlayer-helper';
 
-const docgenParser = withCustomConfig('../tsconfig.json', {
+const docgenParser = withCustomConfig('tsconfig.json', {
   savePropValueAsString: true,
   skipChildrenPropWithoutDoc: false,
   shouldExtractLiteralValuesFromEnum: true,
