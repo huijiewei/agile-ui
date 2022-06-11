@@ -1,93 +1,12 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import { resolve } from 'path';
-import { PropItem, withCustomConfig } from 'react-docgen-typescript';
+import slugger from 'github-slugger';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
+import { getComponentName, gitHubUrl } from './scripts/contentlayer-helper';
+import { getComponentPropsByReactDocgenTypescript } from './scripts/react-docgen-typescript';
 import { slugify } from './src/utils/string';
-import slugger from 'github-slugger';
-
-const docgenParser = withCustomConfig('tsconfig.json', {
-  savePropValueAsString: true,
-  skipChildrenPropWithoutDoc: false,
-  shouldExtractLiteralValuesFromEnum: true,
-  shouldExtractValuesFromUnion: true,
-  shouldRemoveUndefinedFromOptional: true,
-  propFilter: (prop: PropItem) => {
-    if (['as', 'ref', 'style', 'className'].includes(prop.name)) {
-      return false;
-    }
-
-    if (prop.declarations !== undefined && prop.declarations.length > 0) {
-      const hasPropAdditionalDescription = prop.declarations.find((declaration) => {
-        return !declaration.fileName.includes('node_modules');
-      });
-
-      return Boolean(hasPropAdditionalDescription);
-    }
-
-    return true;
-  },
-});
-
-const gitHubUrl = 'https://github.com/huijiewei/agile-ui/blob/main';
-
-const getComponentName = (filename: string) => {
-  return filename.replace(/\.mdx$/, '');
-};
-
-const getComponentProps = (componentName: string) => {
-  const slug = slugify(componentName);
-
-  const pathname = resolve(`../packages/react/src/${slug}/${componentName}.tsx`);
-
-  const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName == componentName);
-
-  console.log(type?.props);
-
-  if (type?.props) {
-    return Object.entries(type.props).map(([key, value]) => {
-      const type = {
-        name: value.type.name,
-        values: null,
-        control: value.type.name,
-      };
-
-      if (value.type.name == 'enum') {
-        if (!value.type.raw) {
-          type.name = value.type.name;
-        } else if (
-          value.type.raw.includes(' | ') ||
-          ['string', 'number', 'boolean', 'ReactNode', 'ColorWithLevel'].includes(value.type.raw)
-        ) {
-          type.name = value.type.raw;
-          type.control = value.type.raw;
-
-          if (value.type.raw.includes(' | ')) {
-            type.values = value.type.value.map((item: { value: string }) => item.value);
-            type.control = 'select';
-          }
-        } else {
-          const values = value.type.value.map((item: { value: string }) => item.value);
-          type.values = values;
-          type.name = values.join(' | ');
-          type.control = 'select';
-        }
-      }
-
-      return {
-        name: key,
-        type: type,
-        required: value.required,
-        description: value.description,
-        defaultValue: value.defaultValue,
-      };
-    });
-  }
-
-  return {};
-};
 
 const Component = defineDocumentType(() => ({
   name: 'Component',
@@ -109,7 +28,7 @@ const Component = defineDocumentType(() => ({
     props: {
       type: 'json',
       resolve: (doc) => {
-        return getComponentProps(getComponentName(doc._raw.sourceFileName));
+        return getComponentPropsByReactDocgenTypescript(getComponentName(doc._raw.sourceFileName));
       },
     },
     headings: {

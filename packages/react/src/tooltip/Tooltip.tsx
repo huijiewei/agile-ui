@@ -16,38 +16,58 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { ComponentProps, ReactNode, RefObject, useRef, useState } from 'react';
+import { ReactNode, RefObject, useRef, useState } from 'react';
 import { tx } from 'twind';
-import { Animation } from '../animation/Animation';
-import { polymorphicComponent } from '../utils/component';
+import { Animation, AnimationBaseProps } from '../animation/Animation';
+import { polymorphicComponent, primitiveComponent } from '../utils/component';
 import type { Color } from '../utils/types';
 
-type TooltipProps = ComponentProps<'div'> & {
+type TooltipProps = {
+  /**
+   * 提示内容
+   */
   content: ReactNode;
+
+  /**
+   * 放置位置
+   * @default 'auto'
+   */
   placement?: 'auto' | Placement;
+
+  /**
+   * 触发方式
+   * @default 'hover'
+   */
   trigger?: 'hover' | 'click';
-  animation?: {
-    transition?: string;
-    duration?: number;
-    enter?: string;
-    exit?: string;
-  };
+
+  /**
+   * 动画
+   */
+  animation?: AnimationBaseProps;
+
+  /**
+   * 显示箭头
+   * @default true
+   */
   arrow?: boolean;
+
+  /**
+   * 颜色
+   * @default 'slate'
+   */
   color?: Color;
 };
 
-export const Tooltip = (props: TooltipProps) => {
+/**
+ * 工具提示
+ */
+export const Tooltip = primitiveComponent<'div', TooltipProps>((props) => {
   const {
     className,
     children,
     content,
     placement = 'auto',
-    animation = {
-      transition: 'transition-opacity',
-      duration: 300,
-      enter: 'opacity-100',
-      exit: 'opacity-0',
-    },
+    animation,
     trigger = 'hover',
     arrow = true,
     color = 'slate',
@@ -118,7 +138,7 @@ export const Tooltip = (props: TooltipProps) => {
       </Animation>
     </>
   );
-};
+});
 
 if (__DEV__) {
   Tooltip.displayName = 'Tooltip';

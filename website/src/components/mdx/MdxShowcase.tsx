@@ -1,4 +1,4 @@
-import { Button, Input, Spinner } from '@agile-ui/react';
+import { Button, Input, Spinner, Tooltip } from '@agile-ui/react';
 import { Playground } from '../playground/Playground';
 import type { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
 
@@ -54,10 +54,28 @@ const Demo = () => {
   />
 );
 
+const TooltipShowcase = (componentProps: ComponentProp[]) => (
+  <Playground
+    codeTemplate={(props: string) => `
+import { Tooltip, Button } from '@agile-ui/react';
+
+const Demo = () => {
+  return (
+    <Tooltip${props} />
+  );
+}
+`}
+    component={Tooltip}
+    defaultProps={{ content: '工具提示', children: <Button>测试</Button> }}
+    componentProps={componentProps}
+  />
+);
+
 const showcases = {
   Button: ButtonShowcase,
   Spinner: SpinnerShowcase,
   Input: InputShowcase,
+  Tooltip: TooltipShowcase,
 };
 
 export const MdxShowcase = ({ component, componentProps }: { component: string; componentProps: ComponentProp[] }) => {

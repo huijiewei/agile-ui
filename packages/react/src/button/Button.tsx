@@ -103,7 +103,7 @@ const buttonVariants = (color: string, disabled: boolean, active: boolean) => {
 };
 
 /**
- * 按钮.
+ * 按钮
  */
 export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) => {
   const group = useButtonGroup();

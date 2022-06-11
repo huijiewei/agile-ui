@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["src", ".contentlayer/generated", "contentlayer.config.ts"],
+  "include": ["src", "scripts", ".contentlayer/generated", "contentlayer.config.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {

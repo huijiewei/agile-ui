@@ -1,16 +1,16 @@
 import { __DEV__ } from '@agile-ui/utils';
-import type { ComponentPropsWithoutRef } from 'react';
 import { tx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
+import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
 
-export type ButtonSpinnerProps = ComponentPropsWithoutRef<'span'> & {
+export type ButtonSpinnerProps = {
   size: Size;
   label?: string;
   placement?: 'start' | 'end';
 };
 
-export const ButtonSpinner = (props: ButtonSpinnerProps) => {
+export const ButtonSpinner = primitiveComponent<'span', ButtonSpinnerProps>((props) => {
   const { label, size, placement, className, children = <Spinner size={size} />, ...rest } = props;
 
   return (
@@ -26,7 +26,7 @@ export const ButtonSpinner = (props: ButtonSpinnerProps) => {
       {children}
     </span>
   );
-};
+});
 
 if (__DEV__) {
   ButtonSpinner.displayName = 'ButtonSpinner';

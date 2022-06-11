@@ -42,6 +42,9 @@ const SpinnerStyles = {
   },
 };
 
+/**
+ * 加载器
+ */
 export const Spinner = polymorphicComponent<'div', SpinnerProps>((props, ref) => {
   const {
     as: Component = 'div',

@@ -3,16 +3,48 @@ import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 
-export type AnimationProps = {
-  show: boolean;
-  enter?: string;
-  exit?: string;
-  duration?: number;
+export type AnimationBaseProps = {
+  /**
+   * 动画过渡
+   * @default 'transition-opacity'
+   */
   transition?: string;
+
+  /**
+   * 动画过渡
+   * @default 200
+   */
+  duration?: number;
+
+  /**
+   * 进入效果
+   * @default 'opacity-100'
+   */
+  enter?: string;
+
+  /**
+   * 离开效果
+   * @default 'opacity-0'
+   */
+  exit?: string;
+};
+
+export type AnimationProps = AnimationBaseProps & {
+  show: boolean;
 };
 
 export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref) => {
-  const { as: Component = 'div', show, className, enter, exit, duration, transition, children, ...rest } = props;
+  const {
+    as: Component = 'div',
+    show,
+    className,
+    enter = 'opacity-100',
+    exit = 'opacity-0',
+    duration = 200,
+    transition = 'transition-opacity',
+    children,
+    ...rest
+  } = props;
   const { stage, shouldMount } = useAnimation(show, duration as number);
 
   if (!shouldMount) {

@@ -43,6 +43,9 @@ const inputSizes = {
   xl: 'h-10 leading-10 px-3 text-lg',
 };
 
+/**
+ * 输入框
+ */
 export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   const {
     size = 'md',

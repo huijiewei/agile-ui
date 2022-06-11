@@ -146,6 +146,10 @@ const navMenus = [
         label: '标签页',
         path: '/components/tab',
       },
+      {
+        label: '工具提示',
+        path: '/components/tooltip',
+      },
     ],
   },
 ];
