@@ -4,9 +4,11 @@ import {
   autoPlacement,
   autoUpdate,
   flip,
+  FloatingPortal,
   Middleware,
   offset,
   Placement,
+  safePolygon,
   shift,
   useClick,
   useDismiss,
@@ -42,6 +44,7 @@ type TooltipProps = {
 
   /**
    * 动画
+   * @default 'hover'
    */
   animation?: AnimationBaseProps;
 
@@ -61,7 +64,7 @@ type TooltipProps = {
 /**
  * 工具提示
  */
-export const Tooltip = primitiveComponent<'div', TooltipProps>((props) => {
+export const Tooltip = primitiveComponent<'div', TooltipProps>((props, ref) => {
   const {
     className,
     children,
@@ -90,7 +93,7 @@ export const Tooltip = primitiveComponent<'div', TooltipProps>((props) => {
     middleware: floatingMiddleware({ arrowRef, placement }),
     open,
     onOpenChange: setOpen,
-    placement: placement === 'auto' ? undefined : placement,
+    placement: placement == 'auto' ? undefined : placement,
     strategy: 'absolute',
     whileElementsMounted: autoUpdate,
   });
@@ -99,7 +102,7 @@ export const Tooltip = primitiveComponent<'div', TooltipProps>((props) => {
     useRole(context, { role: 'tooltip' }),
     useDismiss(context),
     useClick(context, { enabled: trigger == 'click' }),
-    useHover(context, { enabled: trigger == 'hover' }),
+    useHover(context, { enabled: trigger == 'hover', handleClose: safePolygon() }),
     useFocus(context),
   ]);
 
@@ -108,34 +111,37 @@ export const Tooltip = primitiveComponent<'div', TooltipProps>((props) => {
       <div className={'w-fit'} {...getReferenceProps({ ref: reference })}>
         {children}
       </div>
-      <Animation
-        show={open}
-        {...animation}
-        className={tx(
-          `${strategy}`,
-          y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
-          x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
-          'inline-block rounded py-1 px-2 text-sm font-medium shadow-sm border',
-          `border-${color}-700 bg-${color}-700 text-${color}-50`,
-          className
-        )}
-        {...getFloatingProps({
-          ref: floating,
-          ...rest,
-        })}
-      >
-        {content}
-        {arrow && (
-          <TooltipArrow
-            ref={arrowRef}
-            arrowX={arrowX}
-            arrowY={arrowY}
-            strategy={strategy}
-            placement={placementState}
-            className={tx(`border-${color}-700 bg-${color}-700 text-${color}-50`)}
-          />
-        )}
-      </Animation>
+      <FloatingPortal>
+        <Animation
+          ref={ref}
+          show={open}
+          {...animation}
+          className={tx(
+            `${strategy}`,
+            y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
+            x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
+            'inline-block rounded py-1 px-2 text-sm font-medium shadow-sm border z-50',
+            `border-${color}-700 bg-${color}-700 text-${color}-50`,
+            className
+          )}
+          {...getFloatingProps({
+            ref: floating,
+            ...rest,
+          })}
+        >
+          {content}
+          {arrow && (
+            <TooltipArrow
+              ref={arrowRef}
+              arrowX={arrowX}
+              arrowY={arrowY}
+              strategy={strategy}
+              placement={placementState}
+              className={tx(`border-${color}-700 bg-${color}-700 text-${color}-50`)}
+            />
+          )}
+        </Animation>
+      </FloatingPortal>
     </>
   );
 });
@@ -163,7 +169,7 @@ type TooltipArrowProps = {
 
 const TooltipArrow = polymorphicComponent<'span', TooltipArrowProps>((props, ref) => {
   const { as: Component = 'span', arrowX, arrowY, strategy, placement, className, ...rest } = props;
-  const arrowPlacement = floatingArrowPlacement({ placement });
+  const arrowPlacement = floatingArrowPlacement(placement);
 
   return (
     <Component
@@ -208,7 +214,7 @@ const floatingMiddleware = ({
   return middleware;
 };
 
-const floatingArrowPlacement = ({ placement }: { placement: Placement }): TooltipArrowPlacement => {
+const floatingArrowPlacement = (placement: Placement): TooltipArrowPlacement => {
   return {
     top: 'bottom',
     right: 'left',

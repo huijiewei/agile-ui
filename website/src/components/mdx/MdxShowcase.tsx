@@ -57,11 +57,13 @@ const Demo = () => {
 const TooltipShowcase = (componentProps: ComponentProp[]) => (
   <Playground
     codeTemplate={(props: string) => `
-import { Tooltip, Button } from '@agile-ui/react';
+import { Tooltip } from '@agile-ui/react';
 
 const Demo = () => {
   return (
-    <Tooltip${props} />
+    <Tooltip${props}>
+      <Button>测试</Button>
+    </Tooltip>
   );
 }
 `}

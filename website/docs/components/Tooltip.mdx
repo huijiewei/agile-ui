@@ -6,13 +6,60 @@ description: 工具提示是用户与元素交互时出现的简短、信息丰�
 ## 用法
 <Showcase component={'Tooltip'} componentProps={componentProps} />
 
-## 大小
+## 放置位置
 ```tsx live editable
-<div className={'flex flex-col gap-3'}>
-
+<div className={'flex flex-col gap-7'}>
+  <div className={'flex flex-row gap-20 justify-center'}>
+    <Tooltip content="上左提示框" placement={'top-start'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>上左</span>
+    </Tooltip>
+    <Tooltip content="上提示框" placement={'top'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>上</span>
+    </Tooltip>
+    <Tooltip content="上右提示框" placement={'top-end'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>上右</span>
+    </Tooltip>
+  </div>
+  <div className={'flex flex-row gap-20 justify-center'}>
+    <Tooltip content="左上提示框" placement={'left-start'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>左上</span>
+    </Tooltip>
+    <span className={'w-20'}></span>
+    <Tooltip content="右上提示框" placement={'right-start'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>右上</span>
+    </Tooltip>
+  </div>
+  <div className={'flex flex-row gap-20 justify-center'}>
+    <Tooltip content="左提示框" placement={'left'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>左</span>
+    </Tooltip>
+    <span className={'w-20'}></span>
+    <Tooltip content="右提示框" placement={'right'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>右</span>
+    </Tooltip>
+  </div>
+  <div className={'flex flex-row gap-20 justify-center'}>
+    <Tooltip content="左下提示框" placement={'left-end'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>左下</span>
+    </Tooltip>
+    <span className={'w-20'}></span>
+    <Tooltip content="右下提示框士大夫撒范德萨地方萨芬萨法" placement={'right-end'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>右下</span>
+    </Tooltip>
+  </div>
+  <div className={'flex flex-row gap-20 justify-center'}>
+    <Tooltip content="下左提示框" placement={'bottom-start'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>下左</span>
+    </Tooltip>
+    <Tooltip content="下提示框" placement={'bottom'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>下</span>
+    </Tooltip>
+    <Tooltip content="下右提示框" placement={'bottom-end'}>
+      <span className={'bg-slate-200 py-1 px-2 rounded'}>下右</span>
+    </Tooltip>
+  </div>
 </div>
 ```
 
 ## 属性
-
 <PropsTable componentProps={componentProps} />

@@ -10,11 +10,12 @@ export type ButtonSpinnerProps = {
   placement?: 'start' | 'end';
 };
 
-export const ButtonSpinner = primitiveComponent<'span', ButtonSpinnerProps>((props) => {
+export const ButtonSpinner = primitiveComponent<'span', ButtonSpinnerProps>((props, ref) => {
   const { label, size, placement, className, children = <Spinner size={size} />, ...rest } = props;
 
   return (
     <span
+      ref={ref}
       className={tx(
         'flex items-center',
         label ? 'relative' : 'absolute',

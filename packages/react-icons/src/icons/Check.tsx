@@ -2,7 +2,7 @@ import { createIcon } from '../createIcon';
 
 export const Check = createIcon({
   displayName: 'CheckIcon',
-  path: <path d="M4 12l6 6L20 6" />,
+  path: <path d="M5 13l4 4L19 7" />,
   defaultProps: {
     stroke: 'currentColor',
     strokeWidth: 2,
