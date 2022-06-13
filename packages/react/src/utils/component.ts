@@ -78,6 +78,13 @@ export const polymorphicComponent = <
   return forwardRef(render) as unknown as PolymorphicComponent<C, Props>;
 };
 
+export type PrimitiveComponentProps<
+  C extends ElementType = 'div',
+  Props = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }
+> = Merge<ComponentPropsWithoutRef<C>, Props>;
+
 export const primitiveComponent = <
   C extends ElementType = 'div',
   Props = {

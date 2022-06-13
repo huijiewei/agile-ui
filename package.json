@@ -15,8 +15,8 @@
     "contentlayer": "npm run contentlayer -w @agile-ui/website"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-transform-runtime": "^7.18.2",
+    "@babel/core": "^7.18.5",
+    "@babel/plugin-transform-runtime": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
@@ -37,7 +37,7 @@
     "jest-environment-jsdom": "^28.1.1",
     "lint-staged": "^13.0.1",
     "prettier": "^2.6.2",
-    "tailwindcss": "^3.1.1",
+    "tailwindcss": "^3.1.2",
     "typescript": "^4.7.3"
   },
   "workspaces": [

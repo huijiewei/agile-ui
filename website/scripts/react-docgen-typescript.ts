@@ -7,18 +7,13 @@ const docgenParser = withCustomConfig('tsconfig.json', {
   shouldExtractLiteralValuesFromEnum: true,
   shouldExtractValuesFromUnion: true,
   shouldRemoveUndefinedFromOptional: true,
-  shouldIncludePropTagMap: true,
   propFilter: (prop: PropItem) => {
     if (['as', 'ref', 'style', 'className'].includes(prop.name)) {
       return false;
     }
 
     if (prop.declarations !== undefined && prop.declarations.length > 0) {
-      const hasPropAdditionalDescription = prop.declarations.find((declaration) => {
-        return !declaration.fileName.includes('node_modules/@types/react');
-      });
-
-      return Boolean(hasPropAdditionalDescription);
+      return Boolean(prop.declarations.find((declaration) => !declaration.fileName.includes('node_modules')));
     }
 
     return true;
@@ -37,10 +32,6 @@ export const getComponentPropsByReactDocgenTypescript = (componentName: string) 
         values: null,
         control: value.type.name,
       };
-
-      if (componentName == 'Tooltip') {
-        console.log(value.type.value);
-      }
 
       if (value.type.name == 'enum') {
         if (!value.type.raw) {

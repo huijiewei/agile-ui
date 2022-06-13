@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
-import { primitiveComponent } from '../utils/component';
+import type { PrimitiveComponentProps } from '../utils/component';
 import type { Size } from '../utils/types';
 
 export type ButtonSpinnerProps = {
@@ -10,12 +10,11 @@ export type ButtonSpinnerProps = {
   placement?: 'start' | 'end';
 };
 
-export const ButtonSpinner = primitiveComponent<'span', ButtonSpinnerProps>((props, ref) => {
+export const ButtonSpinner = (props: PrimitiveComponentProps<'span', ButtonSpinnerProps>) => {
   const { label, size, placement, className, children = <Spinner size={size} />, ...rest } = props;
 
   return (
     <span
-      ref={ref}
       className={tx(
         'flex items-center',
         label ? 'relative' : 'absolute',
@@ -27,7 +26,7 @@ export const ButtonSpinner = primitiveComponent<'span', ButtonSpinnerProps>((pro
       {children}
     </span>
   );
-});
+};
 
 if (__DEV__) {
   ButtonSpinner.displayName = 'ButtonSpinner';
