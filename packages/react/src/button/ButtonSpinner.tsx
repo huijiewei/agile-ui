@@ -10,8 +10,16 @@ export type ButtonSpinnerProps = {
   placement?: 'start' | 'end';
 };
 
+const SpinnerSizes: Record<string, Size> = {
+  xs: 'xs',
+  sm: 'sm',
+  md: 'sm',
+  lg: 'md',
+  xl: 'lg',
+};
+
 export const ButtonSpinner = (props: PrimitiveComponentProps<'span', ButtonSpinnerProps>) => {
-  const { label, size, placement, className, children = <Spinner size={size} />, ...rest } = props;
+  const { label, size, placement, className, children = <Spinner size={SpinnerSizes[size]} />, ...rest } = props;
 
   return (
     <span

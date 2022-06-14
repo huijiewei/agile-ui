@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
-import type { ColorWithLevel, Size } from '../utils/types';
+import type { Color, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
 export type SpinnerProps = {
@@ -19,48 +19,35 @@ export type SpinnerProps = {
 
   /**
    * 颜色
-   * @default 'current'
    */
 
-  color?: ColorWithLevel;
-
-  /**
-   * 空白区域颜色
-   * @default 'transparent'
-   */
-  emptyColor?: ColorWithLevel;
+  color?: Color;
 };
 
 const SpinnerStyles = {
-  base: 'inline-block animate-spin rounded-full border-2',
+  base: 'inline-block animate-spin rounded-full',
   sizes: {
-    xs: 'h-2 w-2',
-    sm: 'h-3 w-3',
-    md: 'h-4 w-4',
-    lg: 'h-5 w-5',
-    xl: 'h-6 w-6',
+    xs: 'h-3 w-3 border-2',
+    sm: 'h-4 w-4 border-2',
+    md: 'h-5 w-5 border-2',
+    lg: 'h-6 w-6 border-[3px]',
+    xl: 'h-7 w-7 border-[3px]',
   },
 };
 
 /**
  * 加载器
  */
-export const Spinner = polymorphicComponent<'div', SpinnerProps>((props, ref) => {
-  const {
-    as: Component = 'div',
-    label = '加载中…',
-    className,
-    color = 'current',
-    emptyColor = 'transparent',
-    size = 'md',
-    ...rest
-  } = props;
+export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) => {
+  const { as: Component = 'span', label = '加载中…', className, color, size = 'md', ...rest } = props;
   return (
     <Component
       className={tx(
         SpinnerStyles.base,
         SpinnerStyles.sizes[size],
-        `border-t-${color} border-r-${color} border-b-${emptyColor} border-l-${emptyColor}`,
+        color
+          ? `border-t-${color}-700 border-r-${color}-700 border-b-${color}-100 border-l-${color}-100`
+          : 'border-t-current border-r-current border-b-transparent border-l-transparent',
         className
       )}
       ref={ref}
