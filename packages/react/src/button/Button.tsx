@@ -134,7 +134,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       className={tx(
         'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap rounded border align-middle transition-colors',
         fullWidth ? 'w-full' : 'w-auto',
-        disabled && 'cursor-not-allowed opacity-60',
+        (disabled || loading) && 'cursor-not-allowed opacity-60',
         buttonSizes[size],
         buttonVariants(color, disabled || loading, active)[variant],
         className
