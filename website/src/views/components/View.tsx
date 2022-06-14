@@ -1,5 +1,5 @@
 import { Edit, Github } from '@agile-ui/react-icons';
-import { to } from '@agile-ui/utils';
+import { pascalCase, to } from '@agile-ui/utils';
 import type { Component } from 'contentlayer/generated';
 import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -10,10 +10,9 @@ import { Error } from '../../components/error/Error';
 import { Loader } from '../../components/loader/Loader';
 import { components, getMdxComponent } from '../../components/mdx/MdxComponent';
 import { MdxTableContent } from '../../components/mdx/MdxTableContent';
-import { camelCase } from '../../utils/string';
 
 const View = () => {
-  const component = camelCase(useParams().component || '');
+  const component = pascalCase(useParams().component || '');
 
   const [error, setError] = useState<boolean>(false);
   const [componentDoc, setComponentDoc] = useState<Component | null>(null);

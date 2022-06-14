@@ -12,7 +12,7 @@ export type AnimationBaseProps = {
 
   /**
    * 动画过渡
-   * @default 200
+   * @default 300
    */
   duration?: number;
 
@@ -40,7 +40,7 @@ export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref
     className,
     enter = 'opacity-100',
     exit = 'opacity-0',
-    duration = 200,
+    duration = 300,
     transition = 'transition-opacity',
     children,
     ...rest

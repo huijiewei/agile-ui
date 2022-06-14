@@ -1,5 +1,5 @@
 import { PropItem, withCustomConfig } from 'react-docgen-typescript';
-import { getComponentPathName } from './contentlayer-helper';
+import { getComponentName, getComponentPathName } from './contentlayer-helper';
 
 const docgenParser = withCustomConfig('tsconfig.json', {
   savePropValueAsString: true,
@@ -20,10 +20,12 @@ const docgenParser = withCustomConfig('tsconfig.json', {
   },
 });
 
-export const getComponentPropsByReactDocgenTypescript = (componentName: string) => {
-  const pathname = getComponentPathName(componentName);
+export const getComponentPropsByReactDocgenTypescript = (filename: string) => {
+  const componentName = getComponentName(filename);
 
-  const type = docgenParser.parse(pathname).find((item: { displayName: string }) => item.displayName == componentName);
+  const type = docgenParser
+    .parse(getComponentPathName(componentName))
+    .find((item: { displayName: string }) => item.displayName == componentName);
 
   if (type?.props) {
     return Object.entries(type.props).map(([key, value]) => {

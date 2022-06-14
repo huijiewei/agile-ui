@@ -4,9 +4,6 @@
   "license": "MIT",
   "sideEffects": false,
   "module": "src/index.ts",
-  "scripts": {
-    "test": "jest"
-  },
   "publishConfig": {
     "access": "public"
   },

@@ -1,6 +1,6 @@
+import { pascalCase } from '@agile-ui/utils';
 import { ElementType, useState } from 'react';
 import { tx } from 'twind';
-import { camelCase } from '../../utils/string';
 import { PlaygroundCode } from './PlaygroundCode';
 import { PlaygroundControl } from './PlaygroundControl';
 import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';
@@ -23,7 +23,7 @@ const getDescription = (key: string) => {
     return '占位符';
   }
 
-  return camelCase(key);
+  return pascalCase(key);
 };
 
 export const Playground = (props: PlaygroundProps) => {

@@ -4,9 +4,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
-import { getComponentName, gitHubUrl } from './scripts/contentlayer-helper';
+import { getComponentDocLink, getComponentName, getComponentSourceLink } from './scripts/contentlayer-helper';
 import { getComponentPropsByReactDocgenTypescript } from './scripts/react-docgen-typescript';
-import { slugify } from './src/utils/string';
 
 const Component = defineDocumentType(() => ({
   name: 'Component',
@@ -27,9 +26,7 @@ const Component = defineDocumentType(() => ({
     },
     props: {
       type: 'json',
-      resolve: (doc) => {
-        return getComponentPropsByReactDocgenTypescript(getComponentName(doc._raw.sourceFileName));
-      },
+      resolve: (doc) => getComponentPropsByReactDocgenTypescript(doc._raw.sourceFileName),
     },
     headings: {
       type: 'json',
@@ -58,18 +55,11 @@ const Component = defineDocumentType(() => ({
     },
     docsLink: {
       type: 'string',
-      resolve: (doc) => {
-        const name = getComponentName(doc._raw.sourceFileName);
-        return `${gitHubUrl}/website/docs/components/${name}.mdx`;
-      },
+      resolve: (doc) => getComponentDocLink(doc._raw.sourceFileName),
     },
     sourceLink: {
       type: 'string',
-      resolve: (doc) => {
-        const name = getComponentName(doc._raw.sourceFileName);
-        const slug = slugify(name);
-        return `${gitHubUrl}/packages/react/src/${slug}/${name}.tsx`;
-      },
+      resolve: (doc) => getComponentSourceLink(doc._raw.sourceFileName),
     },
   },
 }));
