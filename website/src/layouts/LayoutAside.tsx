@@ -147,6 +147,10 @@ const navMenus = [
         path: '/components/tab',
       },
       {
+        label: '覆盖层',
+        path: '/components/overlay',
+      },
+      {
         label: '工具提示',
         path: '/components/tooltip',
       },

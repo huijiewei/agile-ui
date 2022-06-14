@@ -17,4 +17,6 @@ export * from './tooltip/Tooltip';
 
 export * from './spinner/Spinner';
 
+export * from './overlay/Overlay';
+
 export * from './theme/DarkModeProvider';
