@@ -1,15 +1,22 @@
-import { Tooltip, VisuallyHidden } from '@agile-ui/react';
-import { Github } from '@agile-ui/react-icons';
+import { Tooltip, useDarkModeDispatch, useDarkModeState, VisuallyHidden } from '@agile-ui/react';
+import { Close, Github, Menu } from '@agile-ui/react-icons';
 import { tw } from 'twind';
 import LogoImage from '../assets/images/logo.svg';
 import { ThemeSwitcher } from '../components/theme-switcher/ThemeSwicher';
+import { useLayerDispatch, useLayerState } from './DefaultLayout';
 
 export const LayoutHeader = () => {
+  const layer = useLayerState();
+  const layerDispatch = useLayerDispatch();
+
   return (
     <header
       className={tw('sticky top-0 z-30 w-full border-b border-slate-200 bg-opacity-90 py-3 backdrop-blur laptop:z-50')}
     >
-      <div className={tw('mx-auto flex max-w-7xl items-center justify-between px-5')}>
+      <div className={tw('mx-auto flex max-w-7xl items-center justify-between pl-1 pr-3 tablet:px-5')}>
+        <button onClick={() => layerDispatch((prev) => !prev)} className={'block tablet:hidden p-2'} type={'button'}>
+          {layer ? <Close className={'h-5 w-5'} /> : <Menu className={'h-5 w-5'} />}
+        </button>
         <div className={'flex flex-row items-center'}>
           <img
             width={'36'}
@@ -21,7 +28,7 @@ export const LayoutHeader = () => {
           <span className={'ml-1.5 inline-block align-middle text-[22px] font-bold'}>Agile UI</span>
           <span
             className={tw(
-              'ml-3 inline-block rounded-sm bg-slate-100 px-1.5 py-0.5 align-middle text-xs font-bold text-orange-700'
+              'ml-3 hidden tablet:inline-block rounded-sm bg-slate-100 px-1.5 py-0.5 align-middle text-xs font-bold text-orange-700'
             )}
           >
             ALPHA
