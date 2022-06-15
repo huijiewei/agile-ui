@@ -1,4 +1,4 @@
-import { Button, Input, Spinner, Tooltip } from '@agile-ui/react';
+import { Button, Checkbox, Input, Spinner, Tooltip } from '@agile-ui/react';
 import { Playground } from '../playground/Playground';
 import type { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
 
@@ -54,6 +54,23 @@ const Demo = () => {
   />
 );
 
+const CheckboxShowcase = (componentProps: ComponentProp[]) => (
+  <Playground
+    codeTemplate={(props: string) => `
+import { Checkbox } from '@agile-ui/react';
+
+const Demo = () => {
+  return (
+    <Checkbox${props} />
+  );
+}
+`}
+    component={Checkbox}
+    defaultProps={{ children: '复选框' }}
+    componentProps={componentProps}
+  />
+);
+
 const TooltipShowcase = (componentProps: ComponentProp[]) => (
   <Playground
     codeTemplate={(props: string) => `
@@ -78,6 +95,7 @@ const showcases = {
   Spinner: SpinnerShowcase,
   Input: InputShowcase,
   Tooltip: TooltipShowcase,
+  Checkbox: CheckboxShowcase,
 };
 
 export const MdxShowcase = ({ component, componentProps }: { component: string; componentProps: ComponentProp[] }) => {
