@@ -1,7 +1,8 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
+import { tx } from 'twind';
 import { createContext } from '../utils/context';
-import { polymorphicComponent } from '../utils/component';
+import { primitiveComponent } from '../utils/component';
 import type { Size, Color } from '../utils/types';
 
 export type ButtonBaseProps = {
@@ -34,23 +35,40 @@ export type ButtonGroupProps = ButtonBaseProps & {
   vertical?: boolean;
 };
 
-const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps>({
+const [ButtonGroupProvider, useButtonGroup] = createContext<ButtonGroupProps | undefined>({
   strict: false,
   name: 'ButtonGroupContext',
 });
 
 export { useButtonGroup };
 
-export const ButtonGroup = polymorphicComponent<'div', ButtonGroupProps>((props, ref) => {
-  const { as: Component = 'div', children, size = 'md', color = 'blue', variant = 'solid', ...rest } = props;
+export const ButtonGroup = primitiveComponent<'div', ButtonGroupProps>((props, ref) => {
+  const {
+    children,
+    vertical = false,
+    size = 'md',
+    disabled,
+    color = 'blue',
+    variant = 'solid',
+    className,
+    ...rest
+  } = props;
 
-  const context = useMemo(() => ({ size, color, variant }), [size, color, variant]);
+  const context = useMemo(
+    () => ({ size, color, variant, disabled, vertical }),
+    [size, color, variant, disabled, vertical]
+  );
 
   return (
     <ButtonGroupProvider value={context}>
-      <Component {...rest} ref={ref}>
+      <div
+        role={'group'}
+        className={tx('inline-flex', vertical ? 'flex-col' : 'flex-row', className)}
+        {...rest}
+        ref={ref}
+      >
         {children}
-      </Component>
+      </div>
     </ButtonGroupProvider>
   );
 });

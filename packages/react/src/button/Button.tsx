@@ -72,22 +72,25 @@ const buttonSizes = {
   xl: 'h-10 px-5 text-lg',
 };
 
-const buttonVariants = (color: string, disabled: boolean, active: boolean) => {
+const buttonVariants = (color: string, disabled: boolean, active: boolean, group?: { vertical: boolean }) => {
   return {
     solid: [
       `text-white dark:text-black border-transparent`,
       active ? `bg-${color}-800` : `bg-${color}-600`,
       !disabled && !active && `hover:bg-${color}-700 active:bg-${color}-800`,
+      group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-current)`,
     ],
     outline: [
       `border-current text-${color}-600`,
       active ? `bg-${color}-100` : `bg-white dark:bg-black `,
       !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`,
+      group && `not-first-child:(-m${group.vertical ? 't' : 'l'}-[1px])`,
     ],
     light: [
       `border-transparent text-${color}-700`,
       active ? `bg-${color}-200` : `bg-${color}-50`,
       !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
+      group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-${color}-100)`,
     ],
     subtle: [
       `border-transparent text-${color}-700`,
@@ -132,11 +135,16 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     <Component
       {...rest}
       className={tx(
-        'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap rounded border align-middle transition-colors',
+        'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap border align-middle duration-300 transition-colors',
+        group
+          ? `first:(${group.vertical ? 'rounded-tl rounded-tr' : 'rounded-tl rounded-bl'}) last:(${
+              group.vertical ? 'rounded-bl rounded-br' : 'rounded-tr rounded-br'
+            })`
+          : 'rounded',
         fullWidth ? 'w-full' : 'w-auto',
         (disabled || loading) && 'cursor-not-allowed opacity-60',
         buttonSizes[size],
-        buttonVariants(color, disabled || loading, active)[variant],
+        buttonVariants(color, disabled || loading, active, group && { vertical: group.vertical || false })[variant],
         className
       )}
       disabled={disabled || loading}

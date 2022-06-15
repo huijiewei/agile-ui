@@ -35,6 +35,9 @@ description: 按钮组件用于触发动作或事件，例如提交表单、打�
 
 ```tsx live editable
 <div className={'flex flex-row gap-3'}>
+  <Button>
+    <Config className={'mr-1'} /> 设置
+  </Button>
   <Button className={'!px-0 aspect-square'}>
     <Config />
   </Button>
@@ -61,6 +64,67 @@ description: 按钮组件用于触发动作或事件，例如提交表单、打�
   <Button loading>按钮</Button>
   <Button active>按钮</Button>
   <Button fullWidth>按钮</Button>
+</div>
+```
+
+## 按钮组
+
+```tsx live editable
+<div className={'flex flex-row gap-3 items-center'}>
+  <ButtonGroup>
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup disabled>
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button>保存</Button>
+    <Button variant="outline" className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup>
+    <Button>保存</Button>
+    <Button color={'slate'} className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup variant="outline">
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup variant="light">
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup vertical>
+    <Button>保存</Button>
+    <Button color={'lime'} className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup vertical variant="outline">
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
+  <ButtonGroup vertical variant="light">
+    <Button>保存</Button>
+    <Button className={'!px-0 aspect-square'}>
+      <Plus />
+    </Button>
+  </ButtonGroup>
 </div>
 ```
 
