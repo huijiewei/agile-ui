@@ -26,7 +26,14 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
   return (
     <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, ...AgileIcons, Link }} {...rest}>
       <div className={'flex flex-col'}>
-        {live && <LivePreview className={'overflow-x-auto rounded-t border border-slate-300 p-3'} />}
+        {live && (
+          <LivePreview
+            className={tx(
+              'overflow-x-auto rounded-t border border-slate-300 p-3',
+              '&::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px])'
+            )}
+          />
+        )}
         <div className={'relative'}>
           <LiveEditor
             disabled={!editable}
