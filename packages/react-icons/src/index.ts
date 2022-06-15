@@ -8,3 +8,4 @@ export * from './icons/Clipboard';
 export * from './icons/ClipboardCheck';
 export * from './icons/Moon';
 export * from './icons/Sun';
+export * from './icons/Plus';
