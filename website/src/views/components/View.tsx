@@ -76,7 +76,7 @@ const View = () => {
   return (
     <>
       <Helmet title={componentDoc?.title}></Helmet>
-      <div className={'relative max-w-[52rem]'}>
+      <div className={'relative laptop:mr-44'}>
         <article
           className={tx(
             'flex flex-col gap-5',
@@ -116,11 +116,11 @@ const View = () => {
             </a>
           </p>
         </article>
-        <div
+        <nav
           className={'laptop:z-50 laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] z-20 hidden w-40'}
         >
           <MdxTableContent headings={componentDoc?.headings} />
-        </div>
+        </nav>
       </div>
     </>
   );

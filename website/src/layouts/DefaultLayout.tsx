@@ -34,7 +34,7 @@ export const DefaultLayout = () => {
       <LayoutHeader />
       <div className={tw('text-slate-900 mx-auto max-w-7xl')}>
         <LayoutAside />
-        <div className={'laptop:pl-52'}>
+        <div className={'tablet:pl-52'}>
           <main className={'mx-auto h-full p-5'}>
             <Suspense fallback={<Loader className={'h-72'} />}>
               <Outlet />

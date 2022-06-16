@@ -21,10 +21,16 @@ export type CheckboxProps = {
    * @default false
    */
   disabled?: boolean;
+
+  /**
+   * 不定状态
+   * @default false
+   */
+  indeterminate?: boolean;
 };
 
 export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) => {
-  const { className, size, children, ...rest } = props;
+  const { className, size, checked, indeterminate, children, ...rest } = props;
 
   return (
     <label className={tx('', className)}>
