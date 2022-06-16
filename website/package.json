@@ -21,7 +21,9 @@
     "react-helmet-async": "^1.3.0",
     "react-live": "^3.1.1",
     "react-router-dom": "^6.3.0",
-    "twind": "next"
+    "twind": "next",
+    "react-turbo": "^0.1.16",
+    "web-vitals": "^3.0.0-beta.2"
   },
   "devDependencies": {
     "@babel/plugin-syntax-import-assertions": "^7.17.12",
@@ -31,6 +33,7 @@
     "@welldone-software/why-did-you-render": "^7.0.1",
     "babel-loader": "^8.2.5",
     "babel-plugin-optimize-clsx": "^2.6.2",
+    "babel-plugin-react-turbo": "^0.1.23",
     "contentlayer": "^0.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
