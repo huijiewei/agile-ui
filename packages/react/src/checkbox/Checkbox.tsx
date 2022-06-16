@@ -30,12 +30,12 @@ export type CheckboxProps = {
 };
 
 export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) => {
-  const { className, size, checked, indeterminate, children, ...rest } = props;
+  const { className, size, checked, defaultChecked, value, disabled = false, indeterminate, children, ...rest } = props;
 
   return (
-    <label className={tx('', className)}>
-      <input ref={ref} className={tx('')} type="checkbox" {...rest} />
-      <span>{children}</span>
+    <label className={tx('relative inline-flex items-center gap-1', disabled && 'cursor-not-allowed', className)}>
+      <input disabled={disabled} ref={ref} className={tx('')} type="checkbox" {...rest} />
+      <span className={tx(disabled && 'opacity-40')}>{children}</span>
     </label>
   );
 });
