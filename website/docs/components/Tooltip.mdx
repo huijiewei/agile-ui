@@ -10,8 +10,18 @@ description: 工具提示是用户与元素交互时出现的简短、信息丰�
 ## 放置位置
 
 ```tsx live editable
-function TooltipPlacementsDemo() {
-  const placements = [
+<div
+  className={'grid gap-2 mx-auto w-fit'}
+  style={{
+    gridTemplateAreas:
+      '".           top-start     top         top-end       .            "' +
+      '"left-start  .             .           .             right-start  "' +
+      '"left        .             center      .             right        "' +
+      '"left-end    .             .           .             right-end    "' +
+      '".           bottom-start  bottom      bottom-end    .            "',
+  }}
+>
+  {[
     ['top-start', '上左'],
     ['top', '上'],
     ['top-end', '上右'],
@@ -25,33 +35,17 @@ function TooltipPlacementsDemo() {
     ['bottom-start', '下左'],
     ['bottom', '下'],
     ['bottom-end', '下右'],
-  ];
-
-  return (
-    <div
-      className={'grid gap-2 mx-auto w-fit'}
-      style={{
-        gridTemplateAreas:
-          '".           top-start     top         top-end       .            "' +
-          '"left-start  .             .           .             right-start  "' +
-          '"left        .             center        .             right        "' +
-          '"left-end    .             .           .             right-end    "' +
-          '".           bottom-start  bottom      bottom-end    .            "',
-      }}
-    >
-      {placements.map(([placement, name]) => (
-        <Tooltip key={placement} placement={placement} content={`${name}提示框`}>
-          <span
-            style={{ gridArea: placement == 'auto' ? 'center' : placement }}
-            className={'flex justify-center w-12 h-12 items-center bg-slate-200 rounded cursor-default'}
-          >
-            {name}
-          </span>
-        </Tooltip>
-      ))}
-    </div>
-  );
-}
+  ].map(([placement, name]) => (
+    <Tooltip key={placement} placement={placement} content={`${name}提示框`}>
+      <span
+        style={{ gridArea: placement == 'auto' ? 'center' : placement }}
+        className={'flex justify-center w-12 h-12 items-center bg-slate-200 rounded cursor-default'}
+      >
+        {name}
+      </span>
+    </Tooltip>
+  ))}
+</div>
 ```
 
 ## 属性
