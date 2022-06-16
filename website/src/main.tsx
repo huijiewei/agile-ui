@@ -12,6 +12,7 @@ import { presetAgile } from '@agile-ui/twind';
 import { injectGlobal, setup } from 'twind';
 
 import { App } from './App';
+import reportWebVitals from './reportWebVitals';
 import { disableReactDevTools } from './utils/misc';
 
 import './serviceWorker';
@@ -43,3 +44,5 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>
 );
+
+reportWebVitals();
