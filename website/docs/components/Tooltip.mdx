@@ -10,57 +10,48 @@ description: 工具提示是用户与元素交互时出现的简短、信息丰�
 ## 放置位置
 
 ```tsx live editable
-<div className={'flex flex-col gap-7'}>
-  <div className={'flex flex-row gap-20 justify-center'}>
-    <Tooltip content="上左提示框" placement={'top-start'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>上左</span>
-    </Tooltip>
-    <Tooltip content="上提示框" placement={'top'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>上</span>
-    </Tooltip>
-    <Tooltip content="上右提示框" placement={'top-end'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>上右</span>
-    </Tooltip>
-  </div>
-  <div className={'flex flex-row gap-20 justify-center'}>
-    <Tooltip content="左上提示框" placement={'left-start'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>左上</span>
-    </Tooltip>
-    <span className={'w-20'}></span>
-    <Tooltip content="右上提示框" placement={'right-start'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>右上</span>
-    </Tooltip>
-  </div>
-  <div className={'flex flex-row gap-20 justify-center'}>
-    <Tooltip content="左提示框" placement={'left'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>左</span>
-    </Tooltip>
-    <span className={'w-20'}></span>
-    <Tooltip content="右提示框" placement={'right'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>右</span>
-    </Tooltip>
-  </div>
-  <div className={'flex flex-row gap-20 justify-center'}>
-    <Tooltip content="左下提示框" placement={'left-end'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>左下</span>
-    </Tooltip>
-    <span className={'w-20'}></span>
-    <Tooltip content="右下提示框" placement={'right-end'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>右下</span>
-    </Tooltip>
-  </div>
-  <div className={'flex flex-row gap-20 justify-center'}>
-    <Tooltip content="下左提示框" placement={'bottom-start'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>下左</span>
-    </Tooltip>
-    <Tooltip content="下提示框" placement={'bottom'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>下</span>
-    </Tooltip>
-    <Tooltip content="下右提示框" placement={'bottom-end'}>
-      <span className={'bg-slate-200 py-1 px-2 rounded cursor-default'}>下右</span>
-    </Tooltip>
-  </div>
-</div>
+function TooltipPlacementsDemo() {
+  const placements = [
+    ['top-start', '上左'],
+    ['top', '上'],
+    ['top-end', '上右'],
+    ['left-start', '左上'],
+    ['left', '左'],
+    ['left-end', '左下'],
+    ['auto', '自动'],
+    ['right-start', '右上'],
+    ['right', '右'],
+    ['right-end', '右下'],
+    ['bottom-start', '下左'],
+    ['bottom', '下'],
+    ['bottom-end', '下右'],
+  ];
+
+  return (
+    <div
+      className={'grid gap-2 mx-auto w-fit'}
+      style={{
+        gridTemplateAreas:
+          '".           top-start     top         top-end       .            "' +
+          '"left-start  .             .           .             right-start  "' +
+          '"left        .             center        .             right        "' +
+          '"left-end    .             .           .             right-end    "' +
+          '".           bottom-start  bottom      bottom-end    .            "',
+      }}
+    >
+      {placements.map(([placement, name]) => (
+        <Tooltip key={placement} placement={placement} content={`${name}提示框`}>
+          <span
+            style={{ gridArea: placement == 'auto' ? 'center' : placement }}
+            className={'flex justify-center w-12 h-12 items-center bg-slate-200 rounded cursor-default'}
+          >
+            {name}
+          </span>
+        </Tooltip>
+      ))}
+    </div>
+  );
+}
 ```
 
 ## 属性
