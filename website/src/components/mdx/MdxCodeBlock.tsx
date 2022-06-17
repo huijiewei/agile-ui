@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { tx } from 'twind';
 import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
+import { FormDemo } from '../form-demo/FormDemo';
 
 export type MdxCodeBlockProps = Omit<ComponentProps<'code'>, 'ref'> & {
   children?: string;
@@ -24,7 +25,12 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
   const code = children?.replace(/\n$/, '') || '';
 
   return (
-    <LiveProvider theme={darkMode ? vsDark : vsLight} code={code} scope={{ ...AgileUI, ...AgileIcons, Link }} {...rest}>
+    <LiveProvider
+      theme={darkMode ? vsDark : vsLight}
+      code={code}
+      scope={{ ...AgileUI, ...AgileIcons, FormDemo, Link }}
+      {...rest}
+    >
       <div className={'flex flex-col'}>
         {live && (
           <LivePreview
@@ -38,8 +44,8 @@ export const MdxCodeBlock = (props: MdxCodeBlockProps) => {
           <LiveEditor
             disabled={!editable}
             className={tx(
-              'overflow-x-auto border border-t-0 border-slate-300 font-mono text-[13px] leading-5',
-              live ? 'rounded-b' : 'rounded'
+              'overflow-x-auto border border-slate-300 font-mono text-[13px] leading-5',
+              live ? 'rounded-b border-t-0' : 'rounded'
             )}
           />
           <CopyIcon content={code} />

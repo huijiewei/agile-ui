@@ -16,8 +16,8 @@ export * from './swich/Switch';
 
 export * from './tooltip/Tooltip';
 
-export * from './spinner/Spinner';
-
 export * from './overlay/Overlay';
+export * from './spinner/Spinner';
+export * from './spinner-overlay/SpinnerOverlay';
 
 export * from './theme/DarkModeProvider';

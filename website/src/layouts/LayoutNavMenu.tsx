@@ -152,6 +152,10 @@ const navMenus = [
         path: '/components/overlay',
       },
       {
+        label: '覆盖层加载',
+        path: '/components/spinner-overlay',
+      },
+      {
         label: '工具提示',
         path: '/components/tooltip',
       },
