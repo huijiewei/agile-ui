@@ -37,7 +37,7 @@ export const FormDemo = () => {
       </div>
       <div>
         <label className={'flex items-center'}>
-          <input checked className={'mr-2'} type={'checkbox'} />
+          <input defaultChecked={true} className={'mr-2'} type={'checkbox'} />
           <span>同意用户协议和隐私策略</span>
         </label>
       </div>
