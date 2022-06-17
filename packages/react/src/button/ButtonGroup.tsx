@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { tx } from 'twind';
 import { createContext } from '../utils/context';
 import { primitiveComponent } from '../utils/component';
-import type { Size, Color } from '../utils/types';
+import type { Size, ScaleColor } from '../utils/types';
 
 export type ButtonBaseProps = {
   /**
@@ -16,7 +16,7 @@ export type ButtonBaseProps = {
    * 颜色
    * @default 'blue'
    */
-  color?: Color;
+  color?: ScaleColor;
 
   /**
    * 大小

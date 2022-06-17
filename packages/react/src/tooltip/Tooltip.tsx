@@ -18,7 +18,7 @@ import { cloneElement, ReactElement, ReactNode, useState } from 'react';
 import { tx } from 'twind';
 import { Animation, AnimationBaseProps } from '../animation/Animation';
 import type { PrimitiveComponentProps } from '../utils/component';
-import type { Color } from '../utils/types';
+import type { ScaleColor } from '../utils/types';
 
 type TooltipProps = {
   /**
@@ -48,7 +48,7 @@ type TooltipProps = {
    * 颜色
    * @default 'slate'
    */
-  color?: Color;
+  color?: ScaleColor;
 };
 
 /**
@@ -126,7 +126,7 @@ const tooltipArrowStyles = {
 
 type TooltipArrowProps = {
   placement: Placement;
-  color?: Color;
+  color?: ScaleColor;
   visible?: boolean;
 };
 

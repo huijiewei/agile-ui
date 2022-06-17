@@ -40,7 +40,7 @@ export const getComponentPropsByReactDocgenTypescript = (filename: string) => {
           type.name = value.type.name;
         } else if (
           value.type.raw.includes(' | ') ||
-          ['string', 'number', 'boolean', 'ReactNode', 'ColorWithLevel'].includes(value.type.raw)
+          ['string', 'number', 'boolean', 'ReactNode'].includes(value.type.raw)
         ) {
           type.name = value.type.raw;
           type.control = value.type.raw;

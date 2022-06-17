@@ -1,9 +1,9 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { polymorphicComponent } from '../utils/component';
-import type { Color, Size } from '../utils/types';
+import type { ScaleColor, Size } from '../utils/types';
 
 type SwitchProps = {
-  color?: Color;
+  color?: ScaleColor;
   size?: Size;
 };
 

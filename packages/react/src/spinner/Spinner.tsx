@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
-import type { Color, Size } from '../utils/types';
+import type { ScaleColor, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
 
 export type SpinnerProps = {
@@ -21,7 +21,7 @@ export type SpinnerProps = {
    * 颜色
    */
 
-  color?: Color;
+  color?: ScaleColor;
 };
 
 const SpinnerStyles = {
@@ -46,7 +46,7 @@ export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) =
         SpinnerStyles.base,
         SpinnerStyles.sizes[size],
         color
-          ? `border-t-${color}-700 border-r-${color}-700 border-b-${color}-100 border-l-${color}-100`
+          ? `border-t-${color}-700 border-r-${color}-700 border-b-${color}-200 border-l-${color}-200`
           : 'border-t-current border-r-current border-b-transparent border-l-transparent',
         className
       )}

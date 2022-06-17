@@ -2,10 +2,8 @@ import type { Colors } from '@agile-ui/twind';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export type ColorSole = 'current' | 'transparent' | 'white' | 'black' | 'inherit';
+export type BaseColor = 'white' | 'black';
 
-export type Color = keyof Omit<Colors, ColorSole>;
+export type ScaleColor = keyof Omit<Colors, 'current' | 'transparent' | 'inherit' | 'white' | 'black'>;
 
-export type ColorLevel = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-
-export type ColorWithLevel = `${Color}-${ColorLevel}` | ColorSole;
+export type Color = BaseColor | ScaleColor;

@@ -23,7 +23,7 @@ export const PlaygroundControl = ({
           onChange={(e) => onChange(e.target.checked)}
         />
       )}
-      {(prop.type.control == 'string' || prop.type.control == 'ReactNode' || prop.type.control == 'ColorWithLevel') && (
+      {(prop.type.control == 'string' || prop.type.control == 'ReactNode') && (
         <Input
           defaultValue={defaultValue?.toString()}
           type="text"

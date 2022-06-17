@@ -1,7 +1,7 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { tx } from 'twind';
 import { primitiveComponent } from '../utils/component';
-import type { Color, Size } from '../utils/types';
+import type { ScaleColor, Size } from '../utils/types';
 
 export type CheckboxProps = {
   /**
@@ -14,7 +14,7 @@ export type CheckboxProps = {
    * 颜色
    * @default 'blue'
    */
-  color?: Color;
+  color?: ScaleColor;
 
   /**
    * 是否禁用
