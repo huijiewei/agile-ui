@@ -1,10 +1,10 @@
 import { Button, Checkbox, Input, Spinner, Tooltip } from '@agile-ui/react';
 import { Playground } from '../playground/Playground';
-import type { ComponentProp, PropValue } from '../playground/PlaygroundHelper';
+import type { ComponentProp } from '../playground/PlaygroundHelper';
 
 const ButtonShowcase = (componentProps: ComponentProp[]) => (
   <Playground
-    codeTemplate={(props: string, children?: PropValue) => `
+    codeTemplate={(props, children?) => `
 import { Button } from '@agile-ui/react';
 
 const Demo = () => {
@@ -18,6 +18,7 @@ const Demo = () => {
     component={Button}
     defaultProps={{ children: '按钮' }}
     componentProps={componentProps}
+    ignoreProps={['spinner']}
   />
 );
 
@@ -56,12 +57,14 @@ const Demo = () => {
 
 const CheckboxShowcase = (componentProps: ComponentProp[]) => (
   <Playground
-    codeTemplate={(props: string) => `
+    codeTemplate={(props, children?) => `
 import { Checkbox } from '@agile-ui/react';
 
 const Demo = () => {
   return (
-    <Checkbox${props} />
+    <Checkbox${props}>
+      ${children}
+    </Checkbox>
   );
 }
 `}
@@ -73,7 +76,7 @@ const Demo = () => {
 
 const TooltipShowcase = (componentProps: ComponentProp[]) => (
   <Playground
-    codeTemplate={(props: string) => `
+    codeTemplate={(props) => `
 import { Tooltip } from '@agile-ui/react';
 
 const Demo = () => {
@@ -87,6 +90,7 @@ const Demo = () => {
     component={Tooltip}
     defaultProps={{ content: '工具提示', children: <Button>测试</Button> }}
     componentProps={componentProps}
+    ignoreProps={['children']}
   />
 );
 

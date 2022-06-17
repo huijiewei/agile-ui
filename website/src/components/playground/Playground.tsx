@@ -8,6 +8,7 @@ import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';
 type PlaygroundProps = {
   component: ElementType;
   componentProps: ComponentProp[];
+  ignoreProps?: string[];
   defaultProps?: Record<string, PropValue>;
   includeCode?: boolean;
   codePropsMultiline?: boolean;
@@ -33,6 +34,7 @@ export const Playground = (props: PlaygroundProps) => {
     codeTemplate,
     codePropsMultiline = false,
     componentProps,
+    ignoreProps = [],
     defaultProps = {},
   } = props;
 
@@ -66,9 +68,10 @@ export const Playground = (props: PlaygroundProps) => {
         <div className={'border-t border-gray-200 p-3 tablet:w-[260px] tablet:border-l tablet:border-t-0'}>
           <div className={'flex flex-col gap-2'}>
             {componentProps.map((prop) => {
-              if (prop.type.name == 'ReactNode') {
+              if (ignoreProps.includes(prop.name)) {
                 return null;
               }
+
               return (
                 <PlaygroundControl
                   key={prop.name}
@@ -80,6 +83,10 @@ export const Playground = (props: PlaygroundProps) => {
             })}
             {Object.keys(state).map((key) => {
               if (componentProps.find((prop) => prop.name == key)) {
+                return null;
+              }
+
+              if (ignoreProps.includes(key)) {
                 return null;
               }
 
