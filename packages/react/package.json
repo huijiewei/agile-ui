@@ -23,6 +23,8 @@
     "@floating-ui/react-dom-interactions": "^0.6.4"
   },
   "devDependencies": {
-    "@agile-ui/test-utils": "*"
+    "@agile-ui/test-utils": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

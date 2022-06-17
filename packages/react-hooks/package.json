@@ -19,7 +19,7 @@
     "@agile-ui/utils": "*"
   },
   "devDependencies": {
-    "react": "^18.1.0",
+    "react": "^18.2.0",
     "@agile-ui/test-utils": "*"
   }
 }
