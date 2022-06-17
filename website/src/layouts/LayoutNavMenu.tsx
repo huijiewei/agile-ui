@@ -93,7 +93,7 @@ const navMenus = [
       },
       {
         label: '徽标',
-        path: '/components/tag',
+        path: '/components/badge',
       },
       {
         label: '日历',

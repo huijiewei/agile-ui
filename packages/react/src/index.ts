@@ -6,12 +6,13 @@ export * from './animation/Animation';
 
 export * from './visually-hidden/VisuallyHidden';
 
+export * from './badge/Badge';
+
 export * from './button/Button';
 export * from './button/ButtonGroup';
 
 export * from './input/Input';
 export * from './checkbox/Checkbox';
-
 export * from './swich/Switch';
 
 export * from './tooltip/Tooltip';

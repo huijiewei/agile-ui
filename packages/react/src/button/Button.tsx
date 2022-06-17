@@ -82,7 +82,7 @@ const buttonVariants = (color: string, disabled: boolean, active: boolean, group
     ],
     outline: [
       `border-current text-${color}-600`,
-      active ? `bg-${color}-100` : `bg-white dark:bg-black `,
+      active ? `bg-${color}-100` : `bg-white dark:bg-black`,
       !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`,
       group && `not-first-child:(-m${group.vertical ? 't' : 'l'}-[1px])`,
     ],

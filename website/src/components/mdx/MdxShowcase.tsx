@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, Spinner, Tooltip } from '@agile-ui/react';
+import { Button, Checkbox, Input, Spinner, Tooltip, Badge } from '@agile-ui/react';
 import { Playground } from '../playground/Playground';
 import type { ComponentProp } from '../playground/PlaygroundHelper';
 
@@ -19,6 +19,25 @@ const Demo = () => {
     defaultProps={{ children: '按钮' }}
     componentProps={componentProps}
     ignoreProps={['spinner']}
+  />
+);
+
+const BadgeShowcase = (componentProps: ComponentProp[]) => (
+  <Playground
+    codeTemplate={(props, children?) => `
+import { Badge } from '@agile-ui/react';
+
+const Demo = () => {
+  return (
+    <Badge${props}>
+      ${children}
+    </Badge>
+  );
+}
+`}
+    component={Badge}
+    defaultProps={{ children: '徽标' }}
+    componentProps={componentProps}
   />
 );
 
@@ -96,6 +115,7 @@ const Demo = () => {
 
 const showcases = {
   Button: ButtonShowcase,
+  Badge: BadgeShowcase,
   Spinner: SpinnerShowcase,
   Input: InputShowcase,
   Tooltip: TooltipShowcase,

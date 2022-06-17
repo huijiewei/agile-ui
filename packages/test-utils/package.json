@@ -19,13 +19,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.0",
-    "@types/jest-axe": "^3.5.3",
+    "@testing-library/user-event": "^14.2.1",
+    "@types/jest-axe": "^3.5.4",
     "jest-axe": "^6.0.0",
     "twind": "next"
   },
   "devDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
