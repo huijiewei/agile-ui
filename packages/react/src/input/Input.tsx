@@ -59,7 +59,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   return (
     <input
       className={tx(
-        'border border-slate-300 rounded outline-none appearance-none resize-none text-left',
+        'border border-slate-300 rounded outline-none appearance-none resize-none text-left leading-none',
         'bg-white dark:bg-slate-900',
         'focus:border-blue-500',
         'transition-[border-color]',

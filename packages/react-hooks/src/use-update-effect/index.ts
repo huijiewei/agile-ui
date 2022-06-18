@@ -1,6 +1,6 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
-export const useUpdateEffect = (effect: EffectCallback, dependencies?: DependencyList) => {
+export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) => {
   const mounted = useRef(false);
 
   useEffect(() => {
@@ -16,5 +16,5 @@ export const useUpdateEffect = (effect: EffectCallback, dependencies?: Dependenc
       mounted.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencies);
+  }, deps);
 };
