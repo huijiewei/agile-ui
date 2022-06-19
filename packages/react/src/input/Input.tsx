@@ -10,6 +10,8 @@ export type InputProps = {
    */
   size?: Size;
 
+  invalid?: boolean;
+
   /**
    * 是否禁用
    * @default false
@@ -49,6 +51,7 @@ const inputSizes = {
 export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   const {
     size = 'md',
+    invalid = false,
     disabled = false,
     required = false,
     readOnly = false,
@@ -68,6 +71,10 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
         disabled && 'opacity-60 cursor-not-allowed',
         className
       )}
+      aria-invalid={invalid}
+      aria-readonly={readOnly}
+      aria-required={required}
+      required={required}
       disabled={disabled}
       readOnly={readOnly}
       {...rest}

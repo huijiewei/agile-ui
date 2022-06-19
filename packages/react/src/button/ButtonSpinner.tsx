@@ -26,7 +26,7 @@ export const ButtonSpinner = (props: PrimitiveComponentProps<'span', ButtonSpinn
       className={tx(
         'flex items-center',
         label ? 'relative' : 'absolute',
-        placement === 'start' ? (label ? `mr-1` : 'mr-0') : label ? `ml-1` : 'ml-0',
+        placement === 'start' ? label && 'mr-2' : label && 'ml-2',
         className
       )}
       {...rest}

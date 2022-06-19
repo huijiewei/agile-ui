@@ -30,6 +30,14 @@ const checkboxSizes = {
   xl: 'h-6 w-6',
 };
 
+const checkboxFontSizes = {
+  xs: 'text-sm',
+  sm: '',
+  md: '',
+  lg: 'text-lg',
+  xl: 'text-lg',
+};
+
 export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) => {
   const group = useCheckboxGroup();
 
@@ -40,6 +48,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     spacing = 2,
     className,
     checked,
+    defaultChecked,
     value,
     indeterminate,
     children,
@@ -62,7 +71,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
           ref={ref}
           disabled={disabled}
           className={tx(
-            'appearance-none border rounded transition-colors duration-200',
+            'appearance-none border rounded transition-colors duration-150',
             disabled
               ? `checked:(bg-slate-300) bg-slate-100 border-slate-400 `
               : `border-slate-400 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600)`,
@@ -106,7 +115,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
           </svg>
         )}
       </span>
-      <span className={tx('leading-none', disabled && 'opacity-40')}>{children}</span>
+      <span className={tx('leading-none', checkboxFontSizes[size], disabled && 'opacity-40')}>{children}</span>
     </label>
   );
 });
