@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { testRenderHook } from '@agile-ui/test-utils';
 import { useTimeout } from './index';
 
 describe('useTimeout', () => {
@@ -11,7 +11,7 @@ describe('useTimeout', () => {
   test('should call the callback after 10 seconds', () => {
     const callback = jest.fn();
 
-    renderHook(() => useTimeout(callback, 600));
+    testRenderHook(() => useTimeout(callback, 600));
 
     expect(callback).not.toBeCalled();
     jest.advanceTimersByTime(600);
@@ -21,7 +21,7 @@ describe('useTimeout', () => {
   test('should not do anything if "delay" is null', () => {
     const callback = jest.fn();
 
-    renderHook(() => useTimeout(callback, null));
+    testRenderHook(() => useTimeout(callback, null));
 
     jest.advanceTimersByTime(50);
     expect(callback).toHaveBeenCalledTimes(0);

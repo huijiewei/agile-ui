@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { testRenderHook } from '@agile-ui/test-utils';
 import { useEventListener } from './index';
 
 describe('useEventListener', () => {
@@ -24,7 +24,7 @@ describe('useEventListener', () => {
       state++;
     };
 
-    const { rerender, unmount } = renderHook(() => useEventListener('click', onClick, { target: container }));
+    const { rerender, unmount } = testRenderHook(() => useEventListener('click', onClick, { target: container }));
 
     document.body.click();
     expect(state).toEqual(0);

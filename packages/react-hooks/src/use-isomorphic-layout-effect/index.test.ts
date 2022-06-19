@@ -1,5 +1,5 @@
+import { testRenderHook } from '@agile-ui/test-utils';
 import { useIsomorphicLayoutEffect } from './index';
-import { renderHook } from '@testing-library/react';
 
 describe('useIsomorphicLayoutEffect', () => {
   test('should be defined', () => {
@@ -7,7 +7,7 @@ describe('useIsomorphicLayoutEffect', () => {
   });
 
   const callback = jest.fn();
-  const { result } = renderHook(() => useIsomorphicLayoutEffect(callback));
+  const { result } = testRenderHook(() => useIsomorphicLayoutEffect(callback));
 
   test('check return value', () => {
     expect(result.current).toBeUndefined();

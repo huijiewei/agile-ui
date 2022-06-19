@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { testRenderHook, act } from '@agile-ui/test-utils';
 import { useLocalStorage } from './index';
 
 describe('useLocalStorage', () => {
@@ -7,25 +7,25 @@ describe('useLocalStorage', () => {
   });
 
   test('initial state is in the returned state', () => {
-    const { result } = renderHook(() => useLocalStorage('key', 'value'));
+    const { result } = testRenderHook(() => useLocalStorage('key', 'value'));
 
     expect(result.current[0]).toBe('value');
   });
 
   test('Initial state is a callback function', () => {
-    const { result } = renderHook(() => useLocalStorage('key', () => 'value'));
+    const { result } = testRenderHook(() => useLocalStorage('key', () => 'value'));
 
     expect(result.current[0]).toBe('value');
   });
 
   test('Initial state is an array', () => {
-    const { result } = renderHook(() => useLocalStorage('digits', [1, 2]));
+    const { result } = testRenderHook(() => useLocalStorage('digits', [1, 2]));
 
     expect(result.current[0]).toEqual([1, 2]);
   });
 
   test('Update the state', () => {
-    const { result } = renderHook(() => useLocalStorage('key', 'value'));
+    const { result } = testRenderHook(() => useLocalStorage('key', 'value'));
 
     act(() => {
       const setState = result.current[1];
@@ -36,7 +36,7 @@ describe('useLocalStorage', () => {
   });
 
   test('Update the state writes localStorage', () => {
-    const { result } = renderHook(() => useLocalStorage('key', 'value'));
+    const { result } = testRenderHook(() => useLocalStorage('key', 'value'));
 
     act(() => {
       const setState = result.current[1];
@@ -47,7 +47,7 @@ describe('useLocalStorage', () => {
   });
 
   test('Update the state with undefined', () => {
-    const { result } = renderHook(() => useLocalStorage<string | undefined>('key', 'value'));
+    const { result } = testRenderHook(() => useLocalStorage<string | undefined>('key', 'value'));
 
     act(() => {
       const setState = result.current[1];
@@ -58,7 +58,7 @@ describe('useLocalStorage', () => {
   });
 
   test('Update the state with a callback function', () => {
-    const { result } = renderHook(() => useLocalStorage('count', 2));
+    const { result } = testRenderHook(() => useLocalStorage('count', 2));
 
     act(() => {
       const setState = result.current[1];
