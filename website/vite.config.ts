@@ -4,6 +4,7 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxFrontmatter } from 'remark-mdx-frontmatter';
+import { remarkMdxToc } from 'remark-mdx-toc';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import react from '@vitejs/plugin-react';
@@ -15,7 +16,7 @@ export default defineConfig({
   },
   plugins: [
     mdx({
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm, remarkMdxCodeMeta],
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm, remarkMdxCodeMeta, remarkMdxToc],
       rehypePlugins: [rehypeSlug],
     }),
     react(),

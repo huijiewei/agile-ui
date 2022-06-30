@@ -8,50 +8,62 @@ type Props = Record<string, unknown> & { children?: ReactNode };
 
 export const components = {
   h1: (props: Props) => {
-    const { children, className, ...rest } = props;
+    const { children, ...rest } = props;
     return (
-      <h1 className={`text-lg font-bold ${className}`} {...rest}>
+      <h1 className={`text-lg font-bold`} {...rest}>
         {children}
       </h1>
     );
   },
   h2: (props: Props) => {
-    const { children, className, ...rest } = props;
+    const { children, ...rest } = props;
     return (
-      <h2 className={`text-lg font-bold ${className}`} {...rest}>
+      <h2 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
-        <a aria-hidden={true} href={`#${props.id}`}>
+        <a
+          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          aria-hidden={true}
+          href={`#${props.id}`}
+        >
           #
         </a>
       </h2>
     );
   },
   h3: (props: Props) => {
-    const { children, className, ...rest } = props;
+    const { children, ...rest } = props;
     return (
-      <h3 className={`text-lg font-bold ${className}`} {...rest}>
+      <h3 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
-        <a aria-hidden={true} href={`#${props.id}`}>
+        <a
+          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          aria-hidden={true}
+          href={`#${props.id}`}
+        >
           #
         </a>
       </h3>
     );
   },
   h4: (props: Props) => {
-    const { children, className, ...rest } = props;
+    const { children, ...rest } = props;
     return (
-      <h4 className={`text-lg font-bold ${className}`} {...rest}>
+      <h4 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
-        <a aria-hidden={true} href={`#${props.id}`}>
+        <a
+          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          aria-hidden={true}
+          href={`#${props.id}`}
+        >
           #
         </a>
       </h4>
     );
   },
   h5: (props: Props) => {
-    const { children, className, ...rest } = props;
+    const { children, ...rest } = props;
     return (
-      <h5 className={`text-lg font-bold ${className}`} {...rest}>
+      <h5 className={`text-lg font-bold`} {...rest}>
         {children}
       </h5>
     );

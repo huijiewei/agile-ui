@@ -31,7 +31,7 @@ export const DefaultLayout = () => {
   return (
     <LayerProvider>
       <LayoutHeader />
-      <div className={'text-slate-800 mx-auto max-w-7xl'}>
+      <div className={'mx-auto max-w-7xl'}>
         <LayoutAside />
         <div className={'tablet:pl-52'}>
           <main className={'mx-auto h-full p-5'}>

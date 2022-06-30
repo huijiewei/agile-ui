@@ -8,6 +8,8 @@ import { cx } from 'twind';
 import Image500 from '../../assets/images/500.png';
 import { Error } from '../../components/error/Error';
 import { Loader } from '../../components/loader/Loader';
+import { MdxToc } from '../../components/mdx-toc/MdxToc';
+import type { Toc } from '../../components/mdx-toc/MdxToc';
 import { components } from '../../data/components';
 
 type Mdx = {
@@ -16,6 +18,7 @@ type Mdx = {
   sourceLink: string;
   documentLink: string;
   Component: MDXContent;
+  toc: Toc[];
 };
 
 const githubUrl = 'https://github.com/huijiewei/agile-solid/blob/main';
@@ -38,6 +41,7 @@ const View = () => {
           sourceLink: `${githubUrl}/packages/react/src/${componentSlug}/${componentName}.tsx`,
           documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
           Component: mdx.default,
+          toc: mdx.toc,
         });
         setError(false);
       })
@@ -71,15 +75,7 @@ const View = () => {
     <>
       <Helmet title={mdx.title}></Helmet>
       <div className={'relative laptop:mr-44'}>
-        <article
-          className={cx(
-            'flex flex-col gap-5',
-            '&>h2:scroll-mt-[6rem] &>h3:scroll-mt-6 &>h4:scroll-mt-6',
-            '&>h2>a:(opacity-0 text-green-600 ml-2 transition-opacity) &>h3>a:(opacity-0 text-green-600 ml-2 transition-opacity) &>h4>a:(opacity-0 text-green-600 ml-2 transition-opacity)',
-            '&>h2:hover:&>a:opacity-100 &>h3:hover&>a:opacity-100 &>h4:hover&>a:group-hover:opacity-100',
-            '&>h2>a:before:content-["#"] &>h3>a:before:content-["#"] &>h4>a:before:content-["#"]'
-          )}
-        >
+        <article className={'flex flex-col gap-5'}>
           <div className={'flex flex-row items-center justify-between'}>
             <h1 className={'text-xl font-bold'}>{mdx.title}</h1>
             <a className={'inline-flex flex-row items-center'} target={'_blank'} href={mdx.sourceLink} rel="noreferrer">
@@ -103,7 +99,9 @@ const View = () => {
         </article>
         <nav
           className={'laptop:z-50 laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] z-20 hidden w-40'}
-        ></nav>
+        >
+          <MdxToc toc={mdx.toc}></MdxToc>
+        </nav>
       </div>
     </>
   );

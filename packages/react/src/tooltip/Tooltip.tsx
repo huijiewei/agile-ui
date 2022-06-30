@@ -92,12 +92,14 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
           {...animation}
           {...rest}
           className={cx(
-            y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
-            x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
             'absolute inline-block rounded py-1 px-2 text-sm border z-50',
             `border-${color}-700 bg-${color}-700 text-${color}-50`,
             className
           )}
+          style={{
+            top: y ? `${y}px` : '',
+            left: x ? `${x}px` : '',
+          }}
           {...getFloatingProps({
             ref: floating,
           })}

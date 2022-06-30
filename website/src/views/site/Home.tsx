@@ -38,10 +38,8 @@ const Home = () => {
         <li>React 18 - 用于构建用户界面的JavaScript 库。</li>
         <li>Tailwind CSS 3 - 一个功能类优先的CSS 框架，用于快速构建定制的用户界面。</li>
         <li>Twind - 最小、最快、功能最完整的 tailwind-in-js 解决方案</li>
-        <li>Webpack 5 - Webpack 是一个开源的前端打包工具。</li>
+        <li>Vite - 下一代的前端工具链，为开发提供极速响应。</li>
         <li>Typescript - TypeScript 是具有类型语法的 JavaScript。</li>
-        <li>Jest - Jest 是一款优雅、简洁的 JavaScript 测试框架。</li>
-        <li>Contentlayer - 验证内容并将其转换为类型安全的 JSON 数据。</li>
         <li>ESLint - ESLint 静态分析你的代码以快速发现问题。</li>
         <li>Prettier - 一个“有态度”的代码格式化工具</li>
         <li>Husky & Lint Staged - 在提交暂存文件之前，运行脚本</li>
