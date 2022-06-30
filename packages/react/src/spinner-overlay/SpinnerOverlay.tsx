@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { cloneElement, ReactElement } from 'react';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { Animation } from '../animation/Animation';
 import { Overlay } from '../overlay/Overlay';
 import { Spinner } from '../spinner/Spinner';
@@ -54,7 +54,7 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
       duration={duration}
       show={visible}
       ref={ref}
-      className={tx('absolute inset-0 z-30 flex items-center justify-center overflow-hidden', className)}
+      className={cx('absolute inset-0 z-30 flex items-center justify-center overflow-hidden', className)}
       {...rest}
     >
       {cloneElement(spinner, { className: 'z-50' })}

@@ -1,4 +1,4 @@
-export * from './createIcon';
+export * from './Icon';
 
 export * from './icons/Config';
 export * from './icons/Github';

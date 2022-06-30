@@ -1,4 +1,4 @@
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { useLayerState } from './DefaultLayout';
 import { LayoutNavMenu } from './LayoutNavMenu';
 
@@ -8,10 +8,11 @@ export const LayoutAside = () => {
   return (
     <aside
       role={layer ? 'dialog' : undefined}
-      className={tx(
-        layer ? 'block w-full bg-white' : 'hidden',
-        'tablet:block',
-        'fixed bottom-0 top-[3.8125rem] z-20 w-52 overscroll-contain border-r border-r-slate-200 overflow-y-auto',
+      className={cx(
+        layer ? 'w-full translate-x-0 bg-white dark:bg-slate-900' : 'translate-x-[-100%]',
+        'tablet:(translate-x-0 w-52) transition-transform duration-300',
+        'fixed bottom-0 top-16 z-30 border-r border-r-slate-200',
+        'overscroll-contain overflow-y-auto overflow-x-hidden',
         '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px])'
       )}
     >

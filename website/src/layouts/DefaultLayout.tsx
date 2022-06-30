@@ -1,7 +1,6 @@
 import { createContext } from '@agile-ui/react';
 import { Dispatch, ReactNode, SetStateAction, Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { tw } from 'twind';
 import { Loader } from '../components/loader/Loader';
 import { LayoutAside } from './LayoutAside';
 import { LayoutFooter } from './LayoutFooter';
@@ -32,11 +31,11 @@ export const DefaultLayout = () => {
   return (
     <LayerProvider>
       <LayoutHeader />
-      <div className={tw('text-slate-900 mx-auto max-w-7xl')}>
+      <div className={'text-slate-800 mx-auto max-w-7xl'}>
         <LayoutAside />
         <div className={'tablet:pl-52'}>
           <main className={'mx-auto h-full p-5'}>
-            <Suspense fallback={<Loader className={'h-72'} />}>
+            <Suspense fallback={<Loader className={'h-96'} />}>
               <Outlet />
             </Suspense>
           </main>

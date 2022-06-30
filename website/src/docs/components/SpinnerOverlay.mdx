@@ -1,0 +1,71 @@
+---
+title: 覆盖层加载
+description: 覆盖层加载。
+---
+
+## 导入
+
+```tsx
+import { SpinnerOverlay } from '@agile-ui/react';
+```
+
+## 用法
+
+```tsx preview editable
+function SpinnerOverlayDemo() {
+  const [visible, setVisible] = React.useState(false);
+
+  return (
+    <>
+      <div className={'relative w-fit mx-auto p-5 shadow-md'}>
+        <SpinnerOverlay visible={visible} />
+        <FormDemo />
+      </div>
+
+      <div className={'flex mt-3 justify-center'}>
+        <Button onClick={() => setVisible((v) => !v)}>切换覆盖层</Button>
+      </div>
+    </>
+  );
+}
+```
+
+## 自定义加载器
+
+```tsx preview editable
+<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+  <SpinnerOverlay visible={true}>
+    <Spinner color={'green'} size={'xl'} />
+  </SpinnerOverlay>
+  <FormDemo />
+</div>
+```
+
+## 圆角
+
+```tsx preview editable
+<div className={'relative w-fit p-5 mx-auto shadow-md rounded'}>
+  <SpinnerOverlay visible={true} radius />
+  <FormDemo />
+</div>
+```
+
+## 颜色
+
+```tsx preview editable
+<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+  <SpinnerOverlay visible={true} color={'yellow'} />
+  <FormDemo />
+</div>
+```
+
+## 模糊
+
+```tsx preview editable
+<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+  <SpinnerOverlay visible={true} blur={1} />
+  <FormDemo />
+</div>
+```
+
+## 属性

@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 
 export type InputGroupProps = {
@@ -10,7 +10,7 @@ export const InputGroup = primitiveComponent<'div', InputGroupProps>((props, ref
   const { className, size, children, ...rest } = props;
 
   return (
-    <div ref={ref} className={tx('w-full relative flex', className)} {...rest}>
+    <div ref={ref} className={cx('w-full relative flex', className)} {...rest}>
       {children}
     </div>
   );

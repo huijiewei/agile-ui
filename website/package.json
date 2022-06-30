@@ -3,16 +3,15 @@
   "private": true,
   "author": "Huijie Wei <huijeiwei@outlook.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "dev": "INIT_CWD=$PWD contentlayer dev & webpack serve --mode development --open",
-    "build": "INIT_CWD=$PWD contentlayer build && webpack build --mode production",
-    "analyze": "INIT_CWD=$PWD contentlayer build && webpack build --mode production --env BUNDLE_ANALYZE=1",
-    "contentlayer": "INIT_CWD=$PWD contentlayer dev"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@agile-ui/react": "*",
     "@agile-ui/react-icons": "*",
-    "@babel/runtime": "^7.18.3",
     "@twind/preset-autoprefix": "next",
     "@twind/preset-ext": "next",
     "@twind/preset-tailwind": "next",
@@ -21,49 +20,17 @@
     "react-helmet-async": "^1.3.0",
     "react-live": "^3.1.1",
     "react-router-dom": "^6.3.0",
-    "twind": "next",
-    "react-turbo": "^0.1.16",
-    "web-vitals": "^3.0.0-beta.2"
+    "twind": "next"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-import-assertions": "^7.17.12",
-    "@parcel/css": "^1.10.1",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
-    "@types/github-slugger": "^1.3.0",
-    "@welldone-software/why-did-you-render": "^7.0.1",
-    "babel-loader": "^8.2.5",
-    "babel-plugin-optimize-clsx": "^2.6.2",
-    "babel-plugin-react-turbo": "^0.1.23",
-    "contentlayer": "^0.2.5",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.1",
-    "css-minimizer-webpack-plugin": "^4.0.0",
-    "eslint-webpack-plugin": "^3.1.1",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.1",
-    "react-docgen-typescript": "^2.2.2",
-    "react-refresh": "^0.13.0",
-    "rehype-autolink-headings": "^6.1.1",
+    "@mdx-js/rollup": "^2.1.2",
+    "@types/mdx": "^2.0.2",
     "rehype-slug": "^5.0.1",
+    "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
     "remark-mdx-code-meta": "^1.0.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.73.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.2",
-    "workbox-webpack-plugin": "^6.5.3"
-  },
-  "browserslist": {
-    "production": [
-      "chrome 61",
-      "edge 16",
-      "firefox 60",
-      "opera 48",
-      "safari 11"
-    ],
-    "development": [
-      "last 1 chrome version"
-    ]
+    "remark-mdx-frontmatter": "^1.1.1",
+    "vite-plugin-pwa": "^0.12.0",
+    "workbox-window": "^6.5.3"
   }
 }

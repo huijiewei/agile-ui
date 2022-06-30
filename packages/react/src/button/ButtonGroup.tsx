@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { createContext } from '../utils/context';
 import { primitiveComponent } from '../utils/component';
 import type { Size, ScaleColor } from '../utils/types';
@@ -63,7 +63,7 @@ export const ButtonGroup = primitiveComponent<'div', ButtonGroupProps>((props, r
     <ButtonGroupProvider value={context}>
       <div
         role={'group'}
-        className={tx('inline-flex', vertical ? 'flex-col' : 'flex-row', className)}
+        className={cx('inline-flex', vertical ? 'flex-col' : 'flex-row', className)}
         {...rest}
         ref={ref}
       >

@@ -17,6 +17,7 @@ export const ThemeSwitcher = () => {
   return (
     <Tooltip placement={'bottom'} content={darkMode ? '进入亮色模式' : '进入暗色模式'}>
       <button
+        aria-label={darkMode ? '黑暗模式' : '亮色模式'}
         onClick={() => darkModeDispatch((prev) => !prev)}
         className={'block border-slate-300 rounded select-none p-1 border text-slate-500 hover:text-slate-700'}
       >

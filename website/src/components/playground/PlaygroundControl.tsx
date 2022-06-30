@@ -1,6 +1,6 @@
 import { Input } from '@agile-ui/react';
 import { Check } from '@agile-ui/react-icons';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
 
 export const PlaygroundControl = ({
@@ -41,7 +41,7 @@ export const PlaygroundControl = ({
                 <button
                   title={valueString}
                   key={`${valueString}-${i}`}
-                  className={tx(
+                  className={cx(
                     'rounded-sm h-6 text-slate-50 w-6 outline-none justify-center flex items-center leading-6',
                     `bg-${valueString}-600`
                   )}

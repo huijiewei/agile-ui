@@ -1,12 +1,9 @@
-import { createIcon } from '../createIcon';
+import { type IconProps, Icon } from '../Icon';
 
-export const Menu = createIcon({
-  displayName: 'PlusIcon',
-  path: <path d="M4 6h16M4 12h16M4 18h16" />,
-  defaultProps: {
-    stroke: 'currentColor',
-    strokeWidth: 2,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-  },
-});
+export const Menu = (props: IconProps) => {
+  return (
+    <Icon {...props}>
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </Icon>
+  );
+};

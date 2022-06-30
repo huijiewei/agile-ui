@@ -1,62 +1,56 @@
 import { Edit, Github } from '@agile-ui/react-icons';
-import { pascalCase, to } from '@agile-ui/utils';
-import type { Component } from 'contentlayer/generated';
-import { useEffect, useMemo, useState } from 'react';
+import { kebabCase, pascalCase } from '@agile-ui/utils';
+import type { MDXContent } from 'mdx/types';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { tw, tx } from 'twind';
+import { cx } from 'twind';
 import Image500 from '../../assets/images/500.png';
 import { Error } from '../../components/error/Error';
 import { Loader } from '../../components/loader/Loader';
-import { components, getMdxComponent } from '../../components/mdx/MdxComponent';
-import { MdxTableContent } from '../../components/mdx/MdxTableContent';
+import { components } from '../../data/components';
+
+type Mdx = {
+  title?: string;
+  description?: string;
+  sourceLink: string;
+  documentLink: string;
+  Component: MDXContent;
+};
+
+const githubUrl = 'https://github.com/huijiewei/agile-solid/blob/main';
 
 const View = () => {
   const component = pascalCase(useParams().component || '');
 
+  const [mdx, setMdx] = useState<Mdx>();
   const [error, setError] = useState<boolean>(false);
-  const [componentDoc, setComponentDoc] = useState<Component | null>(null);
 
   useEffect(() => {
-    let isActive = true;
+    const componentName = pascalCase(component);
+    const componentSlug = kebabCase(componentName);
 
-    (async () => {
-      const [error, doc] = await to(
-        import(
-          /* webpackChunkName: 'docs_[index]' */ `contentlayer/generated/Component/components__${component}.mdx.json`,
-          { assert: { type: 'json' } }
-        )
-      );
-
-      if (!isActive) {
-        return;
-      }
-
-      if (error) {
+    import(`../../docs/components/${componentName}.mdx`)
+      .then((mdx) => {
+        setMdx({
+          title: mdx.title,
+          description: mdx.description,
+          sourceLink: `${githubUrl}/packages/react/src/${componentSlug}/${componentName}.tsx`,
+          documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
+          Component: mdx.default,
+        });
+        setError(false);
+      })
+      .catch((reason) => {
+        console.log(reason);
         setError(true);
-      }
-
-      if (doc) {
-        setComponentDoc(doc.default);
-      }
-    })();
+      });
 
     return () => {
-      isActive = false;
+      setMdx(undefined);
       setError(false);
-      setComponentDoc(null);
     };
   }, [component]);
-
-  const MdxComponent = useMemo(() => {
-    if (!componentDoc) {
-      return null;
-    }
-
-    return getMdxComponent(componentDoc.body.code, {
-      componentProps: componentDoc.props,
-    });
-  }, [componentDoc]);
 
   if (error) {
     return (
@@ -69,16 +63,16 @@ const View = () => {
     );
   }
 
-  if (MdxComponent == null) {
-    return <Loader className={'h-72'} />;
+  if (!mdx) {
+    return <Loader className={'h-96'}></Loader>;
   }
 
   return (
     <>
-      <Helmet title={componentDoc?.title}></Helmet>
+      <Helmet title={mdx.title}></Helmet>
       <div className={'relative laptop:mr-44'}>
         <article
-          className={tx(
+          className={cx(
             'flex flex-col gap-5',
             '&>h2:scroll-mt-[6rem] &>h3:scroll-mt-6 &>h4:scroll-mt-6',
             '&>h2>a:(opacity-0 text-green-600 ml-2 transition-opacity) &>h3>a:(opacity-0 text-green-600 ml-2 transition-opacity) &>h4>a:(opacity-0 text-green-600 ml-2 transition-opacity)',
@@ -86,29 +80,20 @@ const View = () => {
             '&>h2>a:before:content-["#"] &>h3>a:before:content-["#"] &>h4>a:before:content-["#"]'
           )}
         >
-          <div className={tw('flex flex-row items-center justify-between')}>
-            <h1 className={tw('text-xl font-bold')}>{componentDoc?.title}</h1>
-            {componentDoc?.sourceLink ? (
-              <a
-                className={tw('inline-flex flex-row items-center')}
-                target={'_blank'}
-                href={componentDoc?.sourceLink}
-                rel="noreferrer"
-              >
-                <Github className={'mr-1'} />
-                查看源代码
-              </a>
-            ) : (
-              <div />
-            )}
+          <div className={'flex flex-row items-center justify-between'}>
+            <h1 className={'text-xl font-bold'}>{mdx.title}</h1>
+            <a className={'inline-flex flex-row items-center'} target={'_blank'} href={mdx.sourceLink} rel="noreferrer">
+              <Github className={'mr-1'} />
+              查看源代码
+            </a>
           </div>
-          <p className={''}>{componentDoc?.description}</p>
-          {MdxComponent && <MdxComponent components={components} />}
+          <p>{mdx.description}</p>
+          <mdx.Component components={components} />
           <p>
             <a
               className={'inline-flex flex-row items-center'}
               target={'_blank'}
-              href={componentDoc?.docsLink}
+              href={mdx.documentLink}
               rel="noreferrer"
             >
               <Edit className={'mr-1'} />
@@ -118,9 +103,7 @@ const View = () => {
         </article>
         <nav
           className={'laptop:z-50 laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] z-20 hidden w-40'}
-        >
-          <MdxTableContent headings={componentDoc?.headings} />
-        </nav>
+        ></nav>
       </div>
     </>
   );

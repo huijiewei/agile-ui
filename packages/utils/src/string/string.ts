@@ -8,7 +8,7 @@ export const pascalCase = (str: string): string =>
 
 /* 短横线隔开命名法，每个单词首字母小写。 */
 export const kebabCase = (str: string): string =>
-  str.replace(/\B([A-Z])(?=[a-z])|(?<=[a-z0-9])([A-Z])/g, '-$1$2').toLowerCase();
+  (str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g) || []).join('-').toLowerCase();
 
 export const slugify = (str: string): string => {
   return str

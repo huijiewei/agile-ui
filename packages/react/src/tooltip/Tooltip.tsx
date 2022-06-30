@@ -15,7 +15,7 @@ import {
   FloatingPortal,
 } from '@floating-ui/react-dom-interactions';
 import { cloneElement, ReactElement, ReactNode, useState } from 'react';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { Animation, AnimationBaseProps } from '../animation/Animation';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
@@ -91,7 +91,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
           show={open}
           {...animation}
           {...rest}
-          className={tx(
+          className={cx(
             y != null && (y >= 0 ? `top-[${y}px]` : `-top-[${-y}px]`),
             x != null && (x >= 0 ? `left-[${x}px]` : `-left-[${-x}px]`),
             'absolute inline-block rounded py-1 px-2 text-sm border z-50',
@@ -144,7 +144,7 @@ const TooltipArrow = (props: PrimitiveComponentProps<'span', TooltipArrowProps>)
 
   return (
     <span
-      className={tx(
+      className={cx(
         'absolute h-[8px] w-[8px] rotate-45',
         `-${opposites[side]}-[4px]`,
         position == 'center'

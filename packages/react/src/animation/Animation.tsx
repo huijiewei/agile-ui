@@ -1,6 +1,6 @@
 import { useAnimation } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 
 export type AnimationBaseProps = {
@@ -53,7 +53,7 @@ export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref
 
   return (
     <Component
-      className={tx(className, `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
+      className={cx(className, `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
       ref={ref}
       {...rest}
     >

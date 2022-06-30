@@ -1,0 +1,124 @@
+#appSplash {
+  z-index: 19811223;
+  background-color: #f5f5f5;
+  animation: appSplashFade 0.2s 0.5s;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+@media (prefers-color-scheme: dark) {
+  #appSplash {
+    background-color: #1f2937;
+  }
+}
+#appSplashStatus {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+#appSplashSpinner {
+  width: 78px;
+  height: 78px;
+  margin-top: -39px;
+  margin-left: -39px;
+  position: absolute;
+  left: 50%;
+}
+#appSplashSpinner:before {
+  content: '';
+  width: 45px;
+  height: 45px;
+  box-sizing: border-box;
+  border: 2px solid #67a8e4;
+  border-left: 1px solid #67a8e44d;
+  border-right: 1px solid #67a8e44d;
+  border-radius: 50%;
+  margin-top: -23px;
+  margin-left: -23px;
+  animation: appSplashSpin 3.45s infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+#appSplashSpinner:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  background-color: #67a8e4;
+  border-radius: 50%;
+  margin-top: -6px;
+  margin-left: -6px;
+  animation: appSplashPulse 6.9s infinite, appSplashBorderPulse 6.9s infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes appSplashFade {
+  0% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes appSplashSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(1080deg);
+  }
+}
+@keyframes appSplashPulse {
+  0% {
+    background-color: #67a8e433;
+  }
+  13% {
+    background-color: #67a8e433;
+  }
+  15% {
+    background-color: #67a8e4e6;
+  }
+  28% {
+    background-color: #67a8e4e6;
+  }
+  30% {
+    background-color: #67a8e433;
+  }
+  43% {
+    background-color: #67a8e433;
+  }
+  45% {
+    background-color: #67a8e4e6;
+  }
+  70% {
+    background-color: #67a8e4e6;
+  }
+  74% {
+    background-color: #67a8e433;
+  }
+  to {
+    background-color: #67a8e4e6;
+  }
+}
+@keyframes appSplashBorderPulse {
+  0% {
+    box-shadow: 0 0 #fff, 0 0 0 1px #67a8e4cc;
+  }
+  40% {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 2px #67a8e4cc;
+  }
+  80% {
+    box-shadow: 0 0 0 3px #fff, 0 0 1px 3px #67a8e4cc;
+  }
+}

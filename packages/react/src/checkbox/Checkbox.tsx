@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { CheckboxBaseProps, useCheckboxGroup } from './CheckboxGroup';
 
@@ -65,12 +65,12 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     : {};
 
   return (
-    <label className={tx('inline-flex items-center', `gap-${spacing}`, disabled && 'cursor-not-allowed', className)}>
-      <span className={tx('relative flex items-center justify-center', sizeClass)}>
+    <label className={cx('inline-flex items-center', `gap-${spacing}`, disabled && 'cursor-not-allowed', className)}>
+      <span className={cx('relative flex items-center justify-center', sizeClass)}>
         <input
           ref={ref}
           disabled={disabled}
-          className={tx(
+          className={cx(
             'appearance-none border rounded transition-colors duration-150',
             disabled
               ? `checked:(bg-slate-300) bg-slate-100 border-slate-400 `
@@ -86,7 +86,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         {indeterminate ? (
           <svg
             viewBox="0 0 24 24"
-            className={tx(
+            className={cx(
               'absolute z-10 w-3/5 pointer-events-none',
               disabled ? 'text-slate-100' : 'text-white dark:text-black'
             )}
@@ -100,7 +100,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         ) : (
           <svg
             viewBox="0 0 12 10"
-            className={tx(
+            className={cx(
               'absolute z-10 w-3/5 pointer-events-none',
               disabled ? 'text-slate-100' : 'text-white dark:text-black'
             )}
@@ -115,7 +115,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
           </svg>
         )}
       </span>
-      <span className={tx('leading-none', checkboxFontSizes[size], disabled && 'opacity-40')}>{children}</span>
+      <span className={cx('leading-none', checkboxFontSizes[size], disabled && 'opacity-40')}>{children}</span>
     </label>
   );
 });

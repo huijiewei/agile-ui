@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
 
@@ -45,7 +45,7 @@ export const Badge = primitiveComponent<'span', BadgeProps>((props, ref) => {
   return (
     <span
       ref={ref}
-      className={tx(
+      className={cx(
         'inline-block align-middle border whitespace-nowrap rounded font-bold uppercase',
         badgeSizes[size],
         badgeVariants(color)[variant],

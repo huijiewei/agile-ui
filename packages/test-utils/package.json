@@ -3,9 +3,23 @@
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": false,
-  "module": "src/index.ts",
+  "type": "module",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
+  },
+  "scripts": {
+    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --skipLibCheck --target esnext --moduleResolution node --outDir dist",
+    "build": "vite build && npm run dts"
+  },
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -17,7 +31,6 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",
     "@types/jest-axe": "^3.5.4",

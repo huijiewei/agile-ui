@@ -1,7 +1,7 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonSpinner } from './ButtonSpinner';
@@ -134,7 +134,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   return (
     <Component
       {...rest}
-      className={tx(
+      className={cx(
         'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap border align-middle duration-300 transition-colors',
         group
           ? `first:(${group.vertical ? 'rounded-tl rounded-tr' : 'rounded-tl rounded-bl'}) last:(${

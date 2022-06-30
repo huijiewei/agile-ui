@@ -8,7 +8,7 @@ import borderRadius from './presets/border-radius';
 
 export type Colors = typeof colors;
 
-export const presetAgile = () => {
+export default () => {
   return {
     darkMode: 'class',
     darkColor: autoDarkColor,

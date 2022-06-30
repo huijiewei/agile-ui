@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';
@@ -42,7 +42,7 @@ export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) =
   const { as: Component = 'span', label = '加载中…', className, color, size = 'md', ...rest } = props;
   return (
     <Component
-      className={tx(
+      className={cx(
         SpinnerStyles.base,
         SpinnerStyles.sizes[size],
         color

@@ -1,12 +1,9 @@
-import { createIcon } from '../createIcon';
+import { Icon, IconProps } from '../Icon';
 
-export const Check = createIcon({
-  displayName: 'CheckIcon',
-  path: <path d="M5 13l4 4L19 7" />,
-  defaultProps: {
-    stroke: 'currentColor',
-    strokeWidth: 2,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-  },
-});
+export const Check = (props: IconProps) => {
+  return (
+    <Icon {...props}>
+      <path d="M5 13l4 4L19 7" />
+    </Icon>
+  );
+};

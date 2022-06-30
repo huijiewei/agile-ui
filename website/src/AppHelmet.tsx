@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
-import { getMatchRoutes } from './routes';
+import { getMatchRoutes } from './data/routes';
 
 export const AppHelmet = () => {
   const location = useLocation();

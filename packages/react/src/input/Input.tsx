@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
 
@@ -61,7 +61,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   } = props;
   return (
     <input
-      className={tx(
+      className={cx(
         'border border-slate-300 rounded outline-none appearance-none resize-none text-left leading-none',
         'bg-white dark:bg-slate-900',
         'focus:border-blue-500',

@@ -1,6 +1,6 @@
 import { pascalCase } from '@agile-ui/utils';
 import { ElementType, useState } from 'react';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { PlaygroundCode } from './PlaygroundCode';
 import { PlaygroundControl } from './PlaygroundControl';
 import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';
@@ -53,7 +53,7 @@ export const Playground = (props: PlaygroundProps) => {
   return (
     <div>
       <div
-        className={tx(
+        className={cx(
           'flex min-h-[20em] flex-col rounded border border-slate-200 tablet:flex-row',
           includeCode && 'rounded-b-none border-b-0'
         )}

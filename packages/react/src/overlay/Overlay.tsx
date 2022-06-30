@@ -1,5 +1,5 @@
 import { __DEV__, isBoolean, isNumber } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { Color, ScaleColor } from '../utils/types';
 
@@ -52,7 +52,7 @@ export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
     return (
       <div
         ref={ref}
-        className={tx(
+        className={cx(
           'absolute inset-0 z-20',
           colorClass,
           opacity > 1 ? `opacity-${opacity}` : `opacity-[${opacity}]`,
@@ -67,7 +67,7 @@ export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
   if (blur) {
     return (
       <div
-        className={tx(
+        className={cx(
           'absolute inset-0 z-10',
           `backdrop-blur-[${blur}px]`,
           isNumber(radius) ? `rounded-[${radius}px]` : `rounded-${radius}`,

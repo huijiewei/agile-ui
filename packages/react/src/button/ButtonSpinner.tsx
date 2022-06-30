@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { tx } from 'twind';
+import { cx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { Size } from '../utils/types';
@@ -23,7 +23,7 @@ export const ButtonSpinner = (props: PrimitiveComponentProps<'span', ButtonSpinn
 
   return (
     <span
-      className={tx(
+      className={cx(
         'flex items-center',
         label ? 'relative' : 'absolute',
         placement === 'start' ? label && 'mr-2' : label && 'ml-2',
