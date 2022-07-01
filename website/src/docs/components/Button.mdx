@@ -25,7 +25,19 @@ description: 按钮组件用于触发动作或事件，例如提交表单、打�
   <Button color={'green'}>按钮</Button>
   <Button color={'yellow'}>按钮</Button>
   <Button color={'red'}>按钮</Button>
-  <Button color={'slate'}>按钮</Button>
+  <Button color={'gray'}>按钮</Button>
+</div>
+```
+
+## 大小
+
+```tsx preview editable
+<div className={'flex flex-row gap-3'}>
+  <Button size={'xs'}>按钮</Button>
+  <Button size={'sm'}>按钮</Button>
+  <Button>按钮</Button>
+  <Button size={'lg'}>按钮</Button>
+  <Button size={'xl'}>按钮</Button>
 </div>
 ```
 
@@ -39,7 +51,7 @@ description: 按钮组件用于触发动作或事件，例如提交表单、打�
   <Button className={'!px-0 aspect-square'}>
     <Config />
   </Button>
-  <Button className={'!px-0 aspect-square'} variant={'outline'} color={'slate'}>
+  <Button className={'!px-0 aspect-square'} variant={'outline'} color={'gray'}>
     <Github />
   </Button>
   <Button className={'!px-0 aspect-square rounded-full'} color={'yellow'}>
@@ -89,7 +101,7 @@ description: 按钮组件用于触发动作或事件，例如提交表单、打�
   </ButtonGroup>
   <ButtonGroup>
     <Button>保存</Button>
-    <Button color={'slate'} className={'!px-0 aspect-square'}>
+    <Button color={'gray'} className={'!px-0 aspect-square'}>
       <Plus />
     </Button>
   </ButtonGroup>

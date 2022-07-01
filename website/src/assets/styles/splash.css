@@ -1,6 +1,6 @@
 #appSplash {
   z-index: 19811223;
-  background-color: #f5f5f5;
+  background-color: #f1f3f5;
   animation: appSplashFade 0.2s 0.5s;
   position: fixed;
   top: 0;
@@ -10,7 +10,7 @@
 }
 @media (prefers-color-scheme: dark) {
   #appSplash {
-    background-color: #1f2937;
+    background-color: #343a40;
   }
 }
 #appSplashStatus {

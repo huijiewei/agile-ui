@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { cx } from 'twind';
 import { menus } from '../data/menus';
 import { LayoutNavLink } from './LayoutNavLink';
@@ -13,7 +12,10 @@ export const LayoutNavMenu = () => {
               {menu.path ? (
                 <LayoutNavLink
                   className={({ isActive }) => {
-                    return cx('hover:text-slate-500', isActive && 'text-blue-700');
+                    return cx(
+                      'hover:text-gray-500 dark:(hover:text-gray-300)',
+                      isActive && 'text-blue-800 dark:(text-blue-400)'
+                    );
                   }}
                   to={menu.path}
                 >
@@ -24,7 +26,7 @@ export const LayoutNavMenu = () => {
               )}
             </h5>
             {menu.children && (
-              <ul className={'space-y-2 border-l border-l-slate-200'}>
+              <ul className={'space-y-2 border-l border-l-gray-200 dark:border-l-gray-600'}>
                 {menu.children.map((child) => (
                   <li key={child.label}>
                     <LayoutNavLink
@@ -32,8 +34,8 @@ export const LayoutNavMenu = () => {
                         return cx(
                           '-ml-px block border-l border-transparent pl-4 font-medium',
                           isActive
-                            ? 'border-l-blue-600 text-blue-700'
-                            : 'text-slate-500 hover:border-l-slate-600 hover:text-slate-700'
+                            ? 'border-l-blue-600 text-blue-800 dark:(text-blue-400)'
+                            : 'hover:(border-l-gray-400 text-gray-800) dark:(text-gray-300 hover:(text-gray-100))'
                         );
                       }}
                       to={child.path}

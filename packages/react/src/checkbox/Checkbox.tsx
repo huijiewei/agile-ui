@@ -73,8 +73,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
           className={cx(
             'appearance-none border rounded transition-colors duration-150',
             disabled
-              ? `checked:(bg-slate-300) bg-slate-100 border-slate-400 `
-              : `border-slate-400 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600)`,
+              ? `checked:(bg-gray-300) bg-gray-100 border-gray-400 `
+              : `border-gray-400 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600)`,
             sizeClass
           )}
           value={value}
@@ -88,7 +88,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
             viewBox="0 0 24 24"
             className={cx(
               'absolute z-10 w-3/5 pointer-events-none',
-              disabled ? 'text-slate-100' : 'text-white dark:text-black'
+              disabled ? 'text-gray-100' : 'text-white dark:text-black'
             )}
             stroke={'currentColor'}
             strokeWidth={4}
@@ -102,7 +102,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
             viewBox="0 0 12 10"
             className={cx(
               'absolute z-10 w-3/5 pointer-events-none',
-              disabled ? 'text-slate-100' : 'text-white dark:text-black'
+              disabled ? 'text-gray-100' : 'text-white dark:text-black'
             )}
             fill={'none'}
             strokeWidth={2}

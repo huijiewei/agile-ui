@@ -5,7 +5,7 @@ import Highlight, { Prism } from 'prism-react-renderer';
 export const CodeBlock = (props: EditorProps) => {
   return (
     <div
-      className={cx('overflow-x-auto border border-slate-300 font-mono text-[93%] leading-snug', props.className)}
+      className={cx('overflow-x-auto border border-gray-300 font-mono text-[93%] leading-snug', props.className)}
       style={props.style}
     >
       <Highlight

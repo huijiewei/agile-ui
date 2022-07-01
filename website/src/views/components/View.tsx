@@ -77,7 +77,12 @@ const View = () => {
         <article className={'flex flex-col gap-5'}>
           <div className={'flex flex-row items-center justify-between'}>
             <h1 className={'text-xl font-bold'}>{mdx.title}</h1>
-            <a className={'inline-flex flex-row items-center'} target={'_blank'} href={mdx.sourceLink} rel="noreferrer">
+            <a
+              className={'inline-flex flex-row items-center hover:(underline underline-offset-2)'}
+              target={'_blank'}
+              href={mdx.sourceLink}
+              rel="noreferrer"
+            >
               <Github className={'mr-1'} />
               查看源代码
             </a>
@@ -86,7 +91,7 @@ const View = () => {
           <mdx.Component components={components} />
           <p>
             <a
-              className={'inline-flex flex-row items-center'}
+              className={'inline-flex flex-row items-center hover:(underline underline-offset-2)'}
               target={'_blank'}
               href={mdx.documentLink}
               rel="noreferrer"

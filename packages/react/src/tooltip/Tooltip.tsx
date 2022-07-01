@@ -46,7 +46,7 @@ type TooltipProps = {
 
   /**
    * 颜色
-   * @default 'slate'
+   * @default 'gray'
    */
   color?: ScaleColor;
 };
@@ -55,7 +55,7 @@ type TooltipProps = {
  * 工具提示
  */
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
-  const { className, children, content, placement = 'auto', animation, arrow = true, color = 'slate', ...rest } = props;
+  const { className, children, content, placement = 'auto', animation, arrow = true, color = 'gray', ...rest } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -93,7 +93,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
           {...rest}
           className={cx(
             'absolute inline-block rounded py-1 px-2 text-sm border z-50',
-            `border-${color}-700 bg-${color}-700 text-${color}-50`,
+            `border-${color}-700 bg-${color}-700 text-${color}-50 dark:(border-${color}-300 bg-${color}-300 text-${color}-900)`,
             className
           )}
           style={{
@@ -155,7 +155,7 @@ const TooltipArrow = (props: PrimitiveComponentProps<'span', TooltipArrowProps>)
           ? `${horizontal ? 'top' : 'left'}-[8px]`
           : `${horizontal ? 'bottom' : 'right'}-[8px]`,
         tooltipArrowStyles[side],
-        `border-${color}-700 bg-${color}-700 text-${color}-50`,
+        `border-${color}-700 bg-${color}-700 text-${color}-50 dark:(border-${color}-300 bg-${color}-300 text-${color}-900)`,
         className
       )}
       {...rest}

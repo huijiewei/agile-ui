@@ -1,7 +1,7 @@
 import { __DEV__, isBoolean, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
-import type { Color, ScaleColor } from '../utils/types';
+import type { Color } from '../utils/types';
 
 export type OverlayProps = {
   /**
@@ -27,25 +27,17 @@ export type OverlayProps = {
    * @default false
    */
   radius?: number | string | boolean;
-
-  /**
-   * 反色效果
-   * @default false
-   */
-  inverse?: boolean;
 };
 
 export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
-  const { className, opacity = 60, color = 'black', inverse = false, radius = false, blur = 0, ...rest } = props;
+  const { className, opacity = 75, color = 'black', radius = false, blur = 0, ...rest } = props;
 
   const colorClass =
     color == 'white'
       ? 'bg-white dark:bg-black'
       : color == 'black'
-      ? 'bg-black dark:bg-white'
-      : inverse
-      ? `bg-${color}-100`
-      : `bg-${color}-500`;
+      ? 'bg-gray-600'
+      : `bg-${color}-50 dark:(bg-${color}-600/20)`;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const overlay = (other?: Record<string, any>) => {

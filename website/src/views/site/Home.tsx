@@ -47,7 +47,9 @@ const Home = () => {
           <li>Husky & Lint Staged - 在提交暂存文件之前，运行脚本</li>
         </ul>
         <hr />
-        <p className={'p-1 pl-3 border-l-2 border-l-slate-300 bg-slate-50'}>正在开发中, 目前仅供参考学习</p>
+        <p className={'p-1 pl-3 border-l-2 border-l-gray-300 bg-gray-50 dark:(border-l-gray-600 bg-gray-800)'}>
+          正在开发中, 目前仅供参考学习
+        </p>
         <p></p>
       </div>
     </>

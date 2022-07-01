@@ -69,7 +69,7 @@ export const components = {
     );
   },
   code: (props: Props) => {
-    return <code className={'m-0 px-[0.4em] py-[0.2em] bg-slate-100 rounded text-sm'} {...props} />;
+    return <code className={'m-0 px-[0.4em] py-[0.2em] bg-gray-100 rounded text-sm'} {...props} />;
   },
   pre: (props: Props) => {
     const { children, ...rest } = props;

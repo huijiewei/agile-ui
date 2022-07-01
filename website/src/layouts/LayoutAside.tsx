@@ -9,9 +9,9 @@ export const LayoutAside = () => {
     <aside
       role={layer ? 'dialog' : undefined}
       className={cx(
-        layer ? 'w-full translate-x-0 bg-white dark:bg-slate-900' : 'translate-x-[-100%]',
+        layer ? 'w-full translate-x-0 bg-white dark:bg-gray-900' : 'translate-x-[-100%]',
         'tablet:(translate-x-0 w-52) transition-transform duration-300',
-        'fixed bottom-0 top-16 z-30 border-r border-r-slate-200',
+        'fixed bottom-0 top-16 z-30 border-r border-r-gray-200 dark:border-r-gray-700',
         'overscroll-contain overflow-y-auto overflow-x-hidden',
         '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px])'
       )}

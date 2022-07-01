@@ -1,4 +1,4 @@
-import { autoDarkColor, css } from 'twind';
+import { css } from 'twind';
 import fontFamily from './presets/font-family';
 import fontSize from './presets/font-size';
 import screens from './presets/screens';
@@ -11,7 +11,6 @@ export type Colors = typeof colors;
 export default () => {
   return {
     darkMode: 'class',
-    darkColor: autoDarkColor,
     preflight: css`
       body {
         @apply text-base;

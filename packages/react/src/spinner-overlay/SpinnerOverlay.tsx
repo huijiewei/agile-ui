@@ -5,7 +5,7 @@ import { Animation } from '../animation/Animation';
 import { Overlay } from '../overlay/Overlay';
 import { Spinner } from '../spinner/Spinner';
 import { primitiveComponent } from '../utils/component';
-import type { Color, ScaleColor } from '../utils/types';
+import type { Color } from '../utils/types';
 
 export type SpinnerOverlayProps = {
   /**
@@ -58,7 +58,7 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
       {...rest}
     >
       {cloneElement(spinner, { className: 'z-50' })}
-      <Overlay radius={radius} inverse={true} opacity={opacity} color={color} blur={blur}></Overlay>
+      <Overlay radius={radius} opacity={opacity} color={color} blur={blur}></Overlay>
     </Animation>
   );
 });

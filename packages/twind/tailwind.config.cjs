@@ -4,16 +4,11 @@ const {
   transparent,
   black,
   white,
-  slate,
   gray,
   blue,
-  sky,
   green,
-  lime,
   red,
-  rose,
   yellow,
-  orange,
 } = require('@twind/preset-tailwind/colors');
 
 module.exports = {
@@ -25,16 +20,11 @@ module.exports = {
       transparent,
       black,
       white,
-      slate,
       gray,
       blue,
-      sky,
       green,
-      lime,
       red,
-      rose,
       yellow,
-      orange,
     },
     fontFamily: {
       sans: [
@@ -46,7 +36,6 @@ module.exports = {
         'sans-serif',
         '"Apple Color Emoji"',
         '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
       ],
       mono: ['SFMono-Regular', 'Consolas', '"Liberation Mono"', 'Menlo', 'Courier', 'monospace'],
     },

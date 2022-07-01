@@ -9,7 +9,7 @@ export default {
   presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
   preflight: css`
     body {
-      @apply antialiased text-slate-700 bg-white dark:(bg-slate-900) overflow-y-scroll;
+      @apply antialiased text-gray-800 bg-white dark:(bg-gray-900 text-gray-100) overflow-y-scroll;
     }
   `,
   rules: [

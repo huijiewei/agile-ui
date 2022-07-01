@@ -32,7 +32,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
           theme={darkMode ? darkTheme : lightTheme}
           code={code}
           language={lang}
-          className={'overflow-x-auto border border-slate-300 font-mono text-[93%] leading-snug'}
+          className={'overflow-x-auto border border-gray-300 font-mono text-[93%] leading-snug'}
         ></CodeBlock>
         <CopyIcon content={code} />
       </div>
@@ -49,13 +49,13 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
       >
         <LivePreview
           className={cx(
-            'overflow-x-auto rounded-t border border-slate-300 p-3',
+            'overflow-x-auto rounded-t border border-gray-300 p-3',
             '&::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px])'
           )}
         />
         <div className={'relative'}>
           <LiveEditor
-            className={'overflow-x-auto border border-slate-300 font-mono text-[93%] leading-snug rounded-b border-t-0'}
+            className={'overflow-x-auto border border-gray-300 font-mono text-[93%] leading-snug rounded-b border-t-0'}
             disabled={!editable}
           />
           <CopyIcon content={code} />
