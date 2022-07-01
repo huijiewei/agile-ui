@@ -9,9 +9,7 @@ export default {
   presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
   preflight: css`
     body {
-      @apply antialiased text-slate-700 bg-white dark:(bg-slate-900) overflow-y-scroll
-      &::-webkit-scrollbar:(w-[12px] h-[12px])
-      &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-300 rounded-[5px]);
+      @apply antialiased text-slate-700 bg-white dark:(bg-slate-900) overflow-y-scroll;
     }
   `,
   rules: [

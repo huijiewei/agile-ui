@@ -33,8 +33,6 @@
   "dependencies": {
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",
-    "@types/jest-axe": "^3.5.4",
-    "jest-axe": "^6.0.0",
     "twind": "next"
   },
   "devDependencies": {

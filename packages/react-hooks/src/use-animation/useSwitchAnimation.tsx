@@ -1,6 +1,6 @@
 import { Dispatch, Fragment, MutableRefObject, ReactNode, SetStateAction, useEffect, useRef, useState } from 'react';
-import type { Canceller, Stage } from './helper';
-import { clearAnimationFrameTimeout, setAnimationFrameTimeout } from './helper';
+import type { Canceller, Stage } from './utils';
+import { clearAnimationFrameTimeout, setAnimationFrameTimeout } from './utils';
 
 export type Mode = 'default' | 'out-in' | 'in-out';
 

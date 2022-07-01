@@ -1,34 +1,20 @@
-import { isBrowser } from '@agile-ui/utils';
-import { useEffect, useState } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 
 export const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState<boolean>(() => {
-    if (!isBrowser()) {
-      return false;
-    }
+  const [getSnapshot, subscribe] = useMemo(() => {
+    const mediaQueryList = window.matchMedia(query);
 
-    return window.matchMedia(query).matches;
-  });
+    return [
+      () => mediaQueryList.matches,
 
-  useEffect(() => {
-    if (!isBrowser()) {
-      return;
-    }
-
-    const matchMedia = window.matchMedia(query);
-
-    const handleChange = () => {
-      setMatches(matchMedia.matches);
-    };
-
-    handleChange();
-
-    matchMedia.addEventListener('change', handleChange);
-
-    return () => {
-      matchMedia.removeEventListener('change', handleChange);
-    };
+      (callback: () => void) => {
+        mediaQueryList.addEventListener('change', callback);
+        return () => {
+          mediaQueryList.removeEventListener('change', callback);
+        };
+      },
+    ];
   }, [query]);
 
-  return matches;
+  return useSyncExternalStore(subscribe, getSnapshot, () => false);
 };

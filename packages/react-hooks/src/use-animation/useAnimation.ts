@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { clearAnimationFrameTimeout, setAnimationFrameTimeout } from './helper';
-import type { Canceller, Stage } from './helper';
+import { clearAnimationFrameTimeout, setAnimationFrameTimeout } from './utils';
+import type { Canceller, Stage } from './utils';
 
 export const useAnimation = (state: boolean, timeout: number) => {
   // the stage of animation - 'from' | 'enter' | 'leave'

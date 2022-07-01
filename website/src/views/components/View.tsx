@@ -4,7 +4,6 @@ import type { MDXContent } from 'mdx/types';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { cx } from 'twind';
 import Image500 from '../../assets/images/500.png';
 import { Error } from '../../components/error/Error';
 import { Loader } from '../../components/loader/Loader';
@@ -59,7 +58,7 @@ const View = () => {
   if (error) {
     return (
       <>
-        <Helmet title={'文档不存在'}></Helmet>
+        <Helmet title={'文档不存在 - 组件'}></Helmet>
         <Error title={`组件文档不存在`}>
           <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={`组件文档不存在`}></img>
         </Error>
@@ -73,7 +72,7 @@ const View = () => {
 
   return (
     <>
-      <Helmet title={mdx.title}></Helmet>
+      <Helmet title={`${mdx.title} - 组件`}></Helmet>
       <div className={'relative laptop:mr-44'}>
         <article className={'flex flex-col gap-5'}>
           <div className={'flex flex-row items-center justify-between'}>
