@@ -1,3 +1,5 @@
+import mdx from '@mdx-js/rollup';
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
@@ -5,10 +7,9 @@ import remarkGfm from 'remark-gfm';
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxFrontmatter } from 'remark-mdx-frontmatter';
 import { remarkMdxToc } from 'remark-mdx-toc';
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import react from '@vitejs/plugin-react';
-import mdx from '@mdx-js/rollup';
+import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
 
 export default defineConfig({
   optimizeDeps: {
@@ -16,11 +17,17 @@ export default defineConfig({
   },
   plugins: [
     mdx({
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm, remarkMdxCodeMeta, remarkMdxToc],
+      remarkPlugins: [
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        remarkGfm,
+        remarkMdxCodeMeta,
+        remarkMdxToc,
+        [remarkMdxDocgen, { sourceRootPath: resolve(__dirname, '../packages/react/src') }],
+      ],
       rehypePlugins: [rehypeSlug],
     }),
     react(),
-    splitVendorChunkPlugin(),
     VitePWA({
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png', 'safari-pinned-tab.svg'],
       registerType: 'autoUpdate',
@@ -46,29 +53,39 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          if (
-            id.includes('node_modules/sucrase') ||
-            id.includes('node_modules/prismjs') ||
-            id.includes('node_modules/react-live') ||
-            id.includes('node_modules/prism-react-renderer') ||
-            id.includes('node_modules/use-editable')
-          ) {
-            return 'react-live';
-          }
+          if (id.includes('/node_modules/')) {
+            if (
+              id.includes('/node_modules/sucrase/') ||
+              id.includes('/node_modules/prismjs/') ||
+              id.includes('/node_modules/react-live/') ||
+              id.includes('/node_modules/prism-react-renderer/') ||
+              id.includes('/node_modules/use-editable/')
+            ) {
+              return 'react-live';
+            }
 
-          if (
-            id.includes('node_modules/twind') ||
-            id.includes('node_modules/@twind') ||
-            id.includes('node_modules/style-vendorizer')
-          ) {
-            return 'twind';
-          }
+            if (
+              id.includes('/node_modules/twind') ||
+              id.includes('/node_modules/@twind') ||
+              id.includes('/node_modules/style-vendorizer')
+            ) {
+              return 'twind';
+            }
 
-          if (id.includes('node_modules')) {
+            if (
+              id.includes('/node_modules/react/') ||
+              id.includes('/node_modules/react-dom/') ||
+              id.includes('/node_modules/react-is/') ||
+              id.includes('/node_modules/scheduler/') ||
+              id.includes('/node_modules/prop-types/')
+            ) {
+              return 'react';
+            }
+
             return 'vendor';
           }
 
-          if (id.includes('packages')) {
+          if (id.includes('/packages/')) {
             return 'agile';
           }
         },

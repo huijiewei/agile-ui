@@ -1,7 +1,7 @@
+import { Tooltip } from '@agile-ui/react';
 import { useClipboard } from '@agile-ui/react-hooks';
 import { Clipboard, ClipboardCheck } from '@agile-ui/react-icons';
 import { __DEV__ } from '@agile-ui/utils';
-import { Tooltip } from '@agile-ui/react';
 
 export const CopyIcon = ({ content }: { content: string }) => {
   const { copied, onCopy } = useClipboard();
@@ -10,7 +10,11 @@ export const CopyIcon = ({ content }: { content: string }) => {
     <div className={'absolute right-1.5 top-1.5'}>
       <Tooltip color={copied ? 'green' : undefined} content={copied ? '已复制' : '复制代码'}>
         <button type={'button'} className={'appearance-none p-1 font-medium relative'} onClick={() => onCopy(content)}>
-          {copied ? <ClipboardCheck className={'text-green-700'} /> : <Clipboard className={'text-gray-700'} />}
+          {copied ? (
+            <ClipboardCheck className={'text-green-700 dark:text-green-400'} />
+          ) : (
+            <Clipboard className={'text-gray-700 dark:text-gray-300'} />
+          )}
         </button>
       </Tooltip>
     </div>

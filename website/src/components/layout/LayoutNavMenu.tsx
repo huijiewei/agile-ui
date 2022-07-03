@@ -1,5 +1,5 @@
 import { cx } from 'twind';
-import { menus } from '../data/menus';
+import { menus } from '../../data/menus';
 import { LayoutNavLink } from './LayoutNavLink';
 
 export const LayoutNavMenu = () => {
@@ -26,7 +26,7 @@ export const LayoutNavMenu = () => {
               )}
             </h5>
             {menu.children && (
-              <ul className={'space-y-2 border-l border-l-gray-200 dark:border-l-gray-600'}>
+              <ul className={'space-y-2 border-l border-l-gray-100 dark:border-l-gray-700'}>
                 {menu.children.map((child) => (
                   <li key={child.label}>
                     <LayoutNavLink
@@ -35,7 +35,7 @@ export const LayoutNavMenu = () => {
                           '-ml-px block border-l border-transparent pl-4 font-medium',
                           isActive
                             ? 'border-l-blue-600 text-blue-800 dark:(text-blue-400)'
-                            : 'hover:(border-l-gray-400 text-gray-800) dark:(text-gray-300 hover:(text-gray-100))'
+                            : 'text-gray-500 hover:(border-l-gray-300 text-gray-800) dark:(text-gray-300 hover:(text-gray-100))'
                         );
                       }}
                       to={child.path}

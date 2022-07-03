@@ -1,6 +1,6 @@
 import { useDarkModeState } from '@agile-ui/react';
-import { LiveEditor } from 'react-live';
-import { CopyIcon } from '../copy-icon/CopyIcon';
+import { CodeBlock } from '../code/CodeBlock';
+import { CopyIcon } from '../code/CopyIcon';
 import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
 
@@ -9,7 +9,7 @@ export const PlaygroundCode = ({ code }: { code: string }) => {
 
   return (
     <div className={'relative'}>
-      <LiveEditor
+      <CodeBlock
         disabled
         code={code}
         theme={darkMode ? vsDark : vsLight}

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import type { NavLinkProps } from 'react-router-dom';
-import { useLayerDispatch } from './DefaultLayout';
+import { useLayerDispatch } from './Layout';
 
 export const LayoutNavLink = (props: NavLinkProps) => {
   const layerDispatch = useLayerDispatch();

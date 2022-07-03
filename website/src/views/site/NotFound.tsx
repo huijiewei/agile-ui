@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Error } from '../../components/error/Error';
+import { Error } from '../../components/shared/Error';
 import Image404 from '../../assets/images/404.png';
 
 const NotFound = () => {

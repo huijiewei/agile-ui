@@ -5,22 +5,18 @@
   "sideEffects": false,
   "type": "module",
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx preserve --jsxImportSource solid-js --skipLibCheck --target esnext --moduleResolution node --outDir dist",
-    "build": "vite build && npm run dts"
+    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react-jsx --skipLibCheck --target esnext --moduleResolution node --outDir dist",
+    "prod": "vite build && npm run dts"
   },
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
@@ -35,9 +31,10 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom-interactions": "^0.6.4"
+    "@floating-ui/react-dom-interactions": "^0.6.6"
   },
   "devDependencies": {
+    "@agile-ui/twind": "*",
     "@agile-ui/test-utils": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

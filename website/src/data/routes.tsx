@@ -1,5 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import { DefaultLayout } from '../layouts/DefaultLayout';
+import { Layout } from '../components/layout/Layout';
 import ComponentView from '../views/components/View';
 
 import Home from '../views/site/Home';
@@ -8,7 +8,7 @@ import NotFound from '../views/site/NotFound';
 export const routes = [
   {
     path: '/',
-    element: <DefaultLayout />,
+    element: <Layout />,
     children: [
       {
         index: true,

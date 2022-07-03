@@ -1,7 +1,7 @@
 import { createContext } from '@agile-ui/react';
 import { Dispatch, ReactNode, SetStateAction, Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Loader } from '../components/loader/Loader';
+import { Loader } from '../shared/Loader';
 import { LayoutAside } from './LayoutAside';
 import { LayoutFooter } from './LayoutFooter';
 import { LayoutHeader } from './LayoutHeader';
@@ -27,7 +27,7 @@ export const LayerProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const DefaultLayout = () => {
+export const Layout = () => {
   return (
     <LayerProvider>
       <LayoutHeader />

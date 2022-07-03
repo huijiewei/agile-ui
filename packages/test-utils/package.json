@@ -5,22 +5,18 @@
   "sideEffects": false,
   "type": "module",
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --skipLibCheck --target esnext --moduleResolution node --outDir dist",
-    "build": "vite build && npm run dts"
+    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react-jsx --skipLibCheck --target esnext --moduleResolution node --outDir dist",
+    "prod": "vite build && npm run dts"
   },
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",

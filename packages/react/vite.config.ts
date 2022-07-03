@@ -1,7 +1,6 @@
+import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
 import pkg from './package.json';
 
 export default defineConfig({
@@ -19,8 +18,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@agile-solid/utils': resolve(__dirname, '../packages/utils/src'),
-      '@agile-solid/hooks': resolve(__dirname, '../packages/hooks/src'),
+      '@agile-ui/utils': resolve(__dirname, '../utils/src'),
+      '@agile-ui/react-hooks': resolve(__dirname, '../react-hooks/src'),
     },
   },
 });

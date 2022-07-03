@@ -19,7 +19,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@agile-ui/utils': resolve(__dirname, '../packages/utils/src'),
+      '@agile-ui/utils': resolve(__dirname, '../utils/src'),
     },
   },
 });

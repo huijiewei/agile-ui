@@ -18,7 +18,7 @@ export const Error = (props: PropsWithChildren<ErrorProps>) => {
   return (
     <div className={'flex py-32 flex-auto flex-col items-center justify-center p-4 text-center'}>
       <h1 className={'text-xl'}>{title}</h1>
-      {children && <div className={'mx-auto mt-5 w-fit'}>{children}</div>}
+      {children}
       <div className={'mt-5'}>
         <Button variant={'outline'} onClick={handleBack}>
           返回

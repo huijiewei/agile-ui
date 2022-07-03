@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.1.2",
-    "@types/mdx": "^2.0.2",
     "rehype-slug": "^5.0.1",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
@@ -32,6 +31,7 @@
     "remark-mdx-frontmatter": "^1.1.1",
     "remark-mdx-toc": "^0.1.0",
     "vite-plugin-pwa": "^0.12.2",
-    "workbox-window": "^6.5.3"
+    "workbox-window": "^6.5.3",
+    "react-docgen-typescript": "^2.2.2"
   }
 }

@@ -2,7 +2,8 @@ import * as AgileReact from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
-import { CodeLive } from '../components/code-live/CodeLive';
+import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
+import { MdxPropsTable, MdxPropsTableProps } from '../components/mdx/MdxPropsTable';
 
 type Props = Record<string, unknown> & { children?: ReactNode };
 
@@ -74,10 +75,12 @@ export const components = {
   pre: (props: Props) => {
     const { children, ...rest } = props;
     const childrenProps = isValidElement(children) && children.props;
-    return <CodeLive {...{ ...rest, ...childrenProps }} />;
+    return <MdxCodeLive {...{ ...rest, ...childrenProps }} />;
   },
   Showcase: () => <div></div>,
-  PropsTable: () => <div></div>,
+  PropsTable: (props: MdxPropsTableProps) => {
+    return <MdxPropsTable {...props}></MdxPropsTable>;
+  },
   ...AgileReact,
   ...AgileReactIcons,
 } as unknown as MDXComponents;

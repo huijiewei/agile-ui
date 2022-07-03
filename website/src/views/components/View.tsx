@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Image500 from '../../assets/images/500.png';
-import { Error } from '../../components/error/Error';
-import { Loader } from '../../components/loader/Loader';
-import { MdxToc } from '../../components/mdx-toc/MdxToc';
-import type { Toc } from '../../components/mdx-toc/MdxToc';
+import type { Toc } from '../../components/mdx/MdxToc';
+import { MdxToc } from '../../components/mdx/MdxToc';
+import { Error } from '../../components/shared/Error';
+import { Loader } from '../../components/shared/Loader';
 import { components } from '../../data/components';
 
 type Mdx = {
@@ -16,8 +16,9 @@ type Mdx = {
   description?: string;
   sourceLink: string;
   documentLink: string;
-  Component: MDXContent;
+  default: MDXContent;
   toc: Toc[];
+  propsTables: Record<string, any>;
 };
 
 const githubUrl = 'https://github.com/huijiewei/agile-solid/blob/main';
@@ -26,32 +27,34 @@ const View = () => {
   const component = pascalCase(useParams().component || '');
 
   const [mdx, setMdx] = useState<Mdx>();
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
-    const componentName = pascalCase(component);
-    const componentSlug = kebabCase(componentName);
+    let mounted = true;
 
-    import(`../../docs/components/${componentName}.mdx`)
-      .then((mdx) => {
-        setMdx({
-          title: mdx.title,
-          description: mdx.description,
-          sourceLink: `${githubUrl}/packages/react/src/${componentSlug}/${componentName}.tsx`,
-          documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
-          Component: mdx.default,
-          toc: mdx.toc,
+    if (mounted) {
+      const componentName = pascalCase(component);
+      const componentSlug = kebabCase(componentName);
+
+      import(/* webpackChunkName: 'docs' */ `../../docs/components/${componentName}.mdx`)
+        .then((mdx) => {
+          setMdx({
+            ...mdx,
+            sourceLink: `${githubUrl}/packages/react/src/${componentSlug}/${componentName}.tsx`,
+            documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
+          });
+          setError(undefined);
+        })
+        .catch((error) => {
+          console.log(error.stack);
+          setError(error.message);
         });
-        setError(false);
-      })
-      .catch((reason) => {
-        console.log(reason);
-        setError(true);
-      });
+    }
 
     return () => {
+      mounted = false;
       setMdx(undefined);
-      setError(false);
+      setError(undefined);
     };
   }, [component]);
 
@@ -60,7 +63,8 @@ const View = () => {
       <>
         <Helmet title={'文档不存在 - 组件'}></Helmet>
         <Error title={`组件文档不存在`}>
-          <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={`组件文档不存在`}></img>
+          <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={error}></img>
+          <p>{error}</p>
         </Error>
       </>
     );
@@ -88,7 +92,7 @@ const View = () => {
             </a>
           </div>
           <p>{mdx.description}</p>
-          <mdx.Component components={components} />
+          {mdx.default({ components })}
           <p>
             <a
               className={'inline-flex flex-row items-center hover:(underline underline-offset-2)'}

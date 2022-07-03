@@ -74,7 +74,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
             'appearance-none border rounded transition-colors duration-150',
             disabled
               ? `checked:(bg-gray-300) bg-gray-100 border-gray-400 `
-              : `border-gray-400 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600)`,
+              : `border-gray-300 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600) dark:(checked:(bg-${color}-300 border-${color}-300))`,
             sizeClass
           )}
           value={value}

@@ -1,8 +1,8 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
 import { Close, Github, Menu } from '@agile-ui/react-icons';
-import LogoImage from '../assets/images/logo.svg';
-import { ThemeSwitcher } from '../components/theme-switcher/ThemeSwicher';
-import { useLayerDispatch, useLayerState } from './DefaultLayout';
+import LogoImage from '../../assets/images/logo.svg';
+import { ThemeSwitcher } from '../shared/ThemeSwicher';
+import { useLayerDispatch, useLayerState } from './Layout';
 
 export const LayoutHeader = () => {
   const layer = useLayerState();

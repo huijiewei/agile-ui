@@ -1,0 +1,225 @@
+import { normalizePath } from '@rollup/pluginutils';
+import { parse as parseImports } from 'es-module-lexer';
+import MagicString from 'magic-string';
+import type { GetModuleInfo } from 'rollup';
+import type { Plugin } from 'vite';
+import { basename, extname } from 'path';
+
+type moduleImporterMap = {
+  [moduleId: string]: {
+    name?: string;
+    chunkNames: Set<string>;
+  };
+};
+
+const APP_ROOT_PATH = normalizePath(process.cwd());
+const CHUNK_NAME_TAG = 'chunkName';
+
+const appPathRegex = new RegExp(APP_ROOT_PATH, 'i');
+const filePathRegex = new RegExp(APP_ROOT_PATH + '/(?!node_modules).*\\.([tj]s[x]?)$', 'i');
+const chunkNameRegex = /(webpackC|c)hunkName:\s*["']([\w-/.[\]]+)["']/;
+const nodeModuleRegex = /node_modules\/((@[^/]+\/)?[^/]+)/g;
+
+let __moduleDeps: moduleImporterMap;
+const moduleDeps = {
+  get(id: string) {
+    return __moduleDeps[id];
+  },
+  set(v: moduleImporterMap) {
+    __moduleDeps = v;
+  },
+};
+
+let __appDepMap: moduleImporterMap;
+
+const appModuleIdChunkNamesMap = {
+  get(id: string) {
+    return __appDepMap[id];
+  },
+  set(v: moduleImporterMap) {
+    __appDepMap = v;
+  },
+};
+
+export const manualChunkNamePlugin = (): Plugin => {
+  const appModuleIdSets: Set<string> = new Set();
+  const nodeModuleIdSets: Set<string> = new Set();
+
+  return {
+    name: 'manualNameChunksPlugin',
+    apply: 'build',
+    load(id) {
+      if (id.includes('node_modules')) {
+        nodeModuleIdSets.add(id);
+      } else if (appPathRegex.test(id)) {
+        appModuleIdSets.add(id);
+      }
+
+      return null;
+    },
+    transform(source, id) {
+      if (filePathRegex.test(id) && chunkNameRegex.test(source)) {
+        const str = new MagicString(source);
+
+        parseImports(source)[0].forEach(({ ss, se, s, e, n }) => {
+          const matched = chunkNameRegex.exec(source.slice(ss, se));
+
+          if (matched) {
+            const chunkName = matched[2].replace(/\//g, '.').replace('[index]', '').replace('[request]', '');
+
+            if (!/^[\w-.]+\w$/.test(chunkName)) {
+              console.error('错误的 webpackChunkName 命名->', matched[2], '. in id = ', id);
+              return process.exit();
+            }
+
+            const quoteChar = source.slice(s, s + 1);
+
+            const rawValue =
+              n ||
+              source
+                .slice(s + 1, e)
+                .trim()
+                .slice(0, -1);
+
+            const newValue = `${quoteChar}${rawValue}?${CHUNK_NAME_TAG}=${chunkName}${quoteChar}`;
+
+            str.overwrite(s, e, newValue);
+          }
+        });
+
+        return {
+          code: str.toString(),
+        };
+      }
+    },
+    buildEnd() {
+      const appModuleIdMap = appModuleIdToChunkNamesMap(appModuleIdSets, this.getModuleInfo);
+      appModuleIdChunkNamesMap.set(appModuleIdMap);
+
+      const nodeModuleIdMap = nodeModuleIdToIssuerMap(nodeModuleIdSets, this.getModuleInfo);
+      moduleDeps.set(nodeModuleIdMap);
+    },
+    config(userConfig) {
+      if (!userConfig?.build?.rollupOptions?.output) {
+        return;
+      }
+    },
+  };
+};
+
+const getNodeModulesName = (id: string) => {
+  let name = '';
+  let matched = null;
+
+  while ((matched = nodeModuleRegex.exec(id))) {
+    name = matched[1];
+  }
+
+  return name;
+};
+
+const appModuleIdToChunkNamesMap = (idSets: Set<string>, getModuleInfo: GetModuleInfo) => {
+  const depMaps: moduleImporterMap = {};
+
+  for (const id of idSets) {
+    if (depMaps[id]) {
+      continue;
+    }
+
+    const rootNames = getImportersChunkNames(id, getModuleInfo, depMaps);
+
+    depMaps[id] = {
+      chunkNames: rootNames,
+    };
+  }
+
+  return depMaps;
+};
+
+function getImportersChunkNames(id: string, getModuleInfo: GetModuleInfo, depMaps: moduleImporterMap): Set<string> {
+  const ids = [id];
+  const resSets = new Set<string>();
+  for (const sid of ids) {
+    const info = depMaps[sid];
+    if (info) {
+      info.chunkNames.forEach((item) => resSets.add(item));
+    } else {
+      const moduleInfo = getModuleInfo(sid);
+
+      if (moduleInfo?.isEntry) {
+        resSets.add('common');
+      } else if (!moduleInfo?.importers || moduleInfo?.importers.length === 0) {
+        const name = getDynamicModuleName(sid);
+        depMaps[sid] = {
+          chunkNames: new Set([name]),
+        };
+        resSets.add(name);
+      } else {
+        moduleInfo.importers.forEach((item) => {
+          if (ids.indexOf(item) === -1) {
+            ids.push(item);
+          }
+        });
+      }
+    }
+  }
+  return resSets;
+}
+
+const dynamicNameCache = new Map<string, number>();
+
+function getDynamicModuleName(moduleId: string): string {
+  const chunkNameRes = chunkNameRegex.exec(moduleId);
+
+  if (chunkNameRes) {
+    return chunkNameRes[1];
+  }
+
+  const fileName = getFileName(moduleId);
+
+  if (dynamicNameCache.has(fileName)) {
+    const count = dynamicNameCache.get(fileName) || 0;
+    dynamicNameCache.set(fileName, count + 1);
+    return `${fileName}-${count}`;
+  }
+
+  dynamicNameCache.set(fileName, 1);
+
+  return fileName;
+}
+
+const getFileName = (filePath: string) => {
+  return basename(filePath, extname(filePath));
+};
+
+function nodeModuleIdToIssuerMap(idSets: Set<string>, getModuleInfo: GetModuleInfo) {
+  const depMaps: moduleImporterMap = {};
+
+  for (const id of idSets) {
+    if (!depMaps[id]) {
+      const moduleName = getNodeModulesName(id);
+      depMaps[id] = {
+        chunkNames: new Set([moduleName]),
+        name: moduleName,
+      };
+    }
+    const moduleInfo = getModuleInfo(id);
+
+    const depSets: Set<string> = new Set(moduleInfo?.importedIds);
+
+    for (const importedId of depSets) {
+      if (!depMaps[importedId]) {
+        depMaps[importedId] = {
+          chunkNames: new Set(),
+          name: getNodeModulesName(importedId),
+        };
+      }
+
+      [...depMaps[id].chunkNames].forEach((mid) => depMaps[importedId].chunkNames.add(mid));
+
+      getModuleInfo(importedId)?.importedIds.forEach((mid: string) => depSets.add(mid));
+    }
+  }
+
+  return depMaps;
+}
