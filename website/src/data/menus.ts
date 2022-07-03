@@ -52,8 +52,8 @@ export const menus = [
         path: '/components/link',
       },
       {
-        label: '导航',
-        path: '/components/nav',
+        label: '警告框',
+        path: '/components/alert',
       },
       {
         label: '菜单',

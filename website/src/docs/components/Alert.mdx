@@ -1,0 +1,66 @@
+---
+title: 警告提示
+description: 向用户显示警告的信息时，通过警告提示，展现需要关注的信息。
+---
+
+## 用法
+
+## 样式
+
+```tsx preview editable
+<div className={'flex flex-row gap-3 justify-center'}>
+  <Alert className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+  <Alert variant={'solid'} className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+  <Alert variant={'outline'} className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+</div>
+```
+
+## 颜色
+
+```tsx preview editable
+<div className={'flex flex-row gap-3 justify-center'}>
+  <Alert color={'green'} className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+  <Alert color={'yellow'} className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+  <Alert color={'red'} className={'w-full'}>
+    <AlertIcon>
+      <Info />
+    </AlertIcon>
+    <AlertTitle>警告框</AlertTitle>
+    <AlertDescription>警告框内容</AlertDescription>
+  </Alert>
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Alert" />

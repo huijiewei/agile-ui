@@ -29,14 +29,14 @@ const getActiveElement = (rects: DOMRect[]) => {
   return closest.index;
 };
 
-export const MdxToc = (props: { toc: Toc[] }) => {
+export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
   const [active, setActive] = useState(0);
 
   const slugs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    slugs.current = props.toc.map((toc) => document.getElementById(toc.value) as HTMLDivElement);
-  }, [props.toc]);
+    slugs.current = toc.map((item) => document.getElementById(item.value) as HTMLDivElement);
+  }, [toc]);
 
   const handleScroll = () => {
     setActive(getActiveElement(slugs.current.map((d) => d.getBoundingClientRect())));
@@ -51,14 +51,14 @@ export const MdxToc = (props: { toc: Toc[] }) => {
   return (
     <>
       <ul className={'mt-2 space-y-2 border-l border-l-gray-100 dark:(border-l-gray-700)'}>
-        {props.toc.map(({ value, depth }, index) => (
+        {toc.map(({ value, depth }, index) => (
           <li key={value}>
             <a
               className={cx(
                 '-ml-px block border-l py-1',
                 depth == 3 ? 'pl-10' : 'pl-5',
                 index == active
-                  ? 'border-l-blue-300 bg-blue-50 text-blue-600 dark:(border-l-blue-600 bg-blue-600/30 text-blue-400)'
+                  ? 'border-l-blue-300 bg-blue-50 text-blue-400 dark:(border-l-blue-600 bg-blue-600/30)'
                   : 'border-l-transparent text-gray-600 hover:(border-l-gray-300 text-gray-800) dark:(text-gray-300 hover:(text-gray-100))'
               )}
               aria-current={index == active ? 'location' : undefined}

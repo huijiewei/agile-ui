@@ -1,6 +1,7 @@
 export * from './utils/context';
 export * from './utils/component';
 
+export * from './alert/Alert';
 export * from './box/Box';
 export * from './animation/Animation';
 
