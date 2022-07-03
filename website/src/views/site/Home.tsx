@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <div className={'flex flex-col gap-3'}>
-        <h1 className={'text-[36px] font-bold text-sky-600 text-center'}>
+        <h1 className={'text-[36px] font-bold text-blue-800 text-center'}>
           <img
             width={'50'}
             height={'50'}

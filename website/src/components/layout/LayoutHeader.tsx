@@ -11,7 +11,7 @@ export const LayoutHeader = () => {
   return (
     <header
       className={
-        'sticky h-16 top-0 z-30 w-full border-b border-gray-200 dark:border-gray-700 bg-opacity-70 py-3 backdrop-blur'
+        'sticky h-16 top-0 z-30 w-full border-b border-gray-100 dark:border-gray-700 bg-opacity-70 py-3 backdrop-blur'
       }
     >
       <div className={'mx-auto flex max-w-7xl items-center justify-between px-3 tablet:px-5'}>
