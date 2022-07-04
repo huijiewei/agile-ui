@@ -12,6 +12,7 @@
   "dependencies": {
     "@agile-ui/react": "*",
     "@agile-ui/react-icons": "*",
+    "@agile-ui/twind": "*",
     "@twind/preset-autoprefix": "next",
     "@twind/preset-ext": "next",
     "@twind/preset-tailwind": "next",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.1.2",
+    "fast-glob": "^3.2.11",
     "rehype-slug": "^5.0.1",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",

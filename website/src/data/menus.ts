@@ -48,8 +48,8 @@ export const menus = [
         path: '/components/radio',
       },
       {
-        label: '链接',
-        path: '/components/link',
+        label: '进度条',
+        path: '/components/progress-bar',
       },
       {
         label: '警告框',

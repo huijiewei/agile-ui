@@ -21,7 +21,7 @@ type Mdx = {
   propsTables: Record<string, any>;
 };
 
-const githubUrl = 'https://github.com/huijiewei/agile-solid/blob/main';
+const githubUrl = 'https://github.com/huijiewei/agile-ui/blob/main';
 
 const View = () => {
   const component = pascalCase(useParams().component || '');
@@ -34,19 +34,17 @@ const View = () => {
 
     if (mounted) {
       const componentName = pascalCase(component);
-      const componentSlug = kebabCase(componentName);
 
       import(/* webpackChunkName: 'docs' */ `../../docs/components/${componentName}.mdx`)
         .then((mdx) => {
           setMdx({
             ...mdx,
-            sourceLink: `${githubUrl}/packages/react/src/${componentSlug}/${componentName}.tsx`,
+            sourceLink: `${githubUrl}/packages/react/src${mdx.sourcePath}`,
             documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
           });
           setError(undefined);
         })
         .catch((error) => {
-          console.log(error.stack);
           setError(error.message);
         });
     }
@@ -64,7 +62,6 @@ const View = () => {
         <Helmet title={'文档不存在 - 组件'}></Helmet>
         <Error title={`组件文档不存在`}>
           <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={error}></img>
-          <p>{error}</p>
         </Error>
       </>
     );

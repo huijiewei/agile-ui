@@ -22,4 +22,6 @@ export * from './overlay/Overlay';
 export * from './spinner/Spinner';
 export * from './spinner-overlay/SpinnerOverlay';
 
+export * from './progress/ProgressBar';
+
 export * from './theme/DarkModeProvider';
