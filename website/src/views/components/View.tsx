@@ -36,7 +36,7 @@ const View = () => {
     if (mounted) {
       const componentName = pascalCase(component);
 
-      import(/* webpackChunkName: 'docs' */ `../../docs/components/${componentName}.mdx`)
+      import(`../../docs/components/${componentName}.mdx`)
         .then((mdx) => {
           setMdx({
             ...mdx,

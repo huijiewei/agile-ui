@@ -10,6 +10,7 @@ import { remarkMdxToc } from 'remark-mdx-toc';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
+import { viteHtmlMinify } from './scripts/vite-html-minify';
 import { viteReactDevtools } from './scripts/vite-react-devtools';
 
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
     include: ['react/jsx-runtime'],
   },
   plugins: [
+    react(),
     mdx({
       remarkPlugins: [
         remarkFrontmatter,
@@ -28,7 +30,6 @@ export default defineConfig({
       ],
       rehypePlugins: [rehypeSlug],
     }),
-    react(),
     VitePWA({
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png', 'safari-pinned-tab.svg'],
       registerType: 'autoUpdate',
@@ -50,9 +51,10 @@ export default defineConfig({
       },
     }),
     viteReactDevtools(),
-    //viteHtmlMinify(),
+    viteHtmlMinify(),
   ],
   build: {
+    target: 'esnext',
     rollupOptions: {
       output: {
         manualChunks: (id) => {

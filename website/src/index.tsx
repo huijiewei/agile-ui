@@ -8,8 +8,7 @@ import twindConfig from './twind.config';
 
 setup(twindConfig);
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-createRoot(document.getElementById('app')!).render(
+createRoot(document.getElementById('app') as HTMLElement).render(
   <StrictMode>
     <App />
   </StrictMode>
