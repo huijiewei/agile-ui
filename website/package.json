@@ -26,7 +26,6 @@
   "devDependencies": {
     "@mdx-js/rollup": "^2.1.2",
     "fast-glob": "^3.2.11",
-    "@minify-html/js": "^0.8.1",
     "rehype-slug": "^5.0.1",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",

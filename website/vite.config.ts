@@ -10,7 +10,6 @@ import { remarkMdxToc } from 'remark-mdx-toc';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
-import { viteHtmlMinify } from './scripts/vite-html-minify';
 import { viteReactDevtools } from './scripts/vite-react-devtools';
 
 export default defineConfig({
@@ -51,7 +50,6 @@ export default defineConfig({
       },
     }),
     viteReactDevtools(),
-    viteHtmlMinify(),
   ],
   build: {
     target: 'esnext',
