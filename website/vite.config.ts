@@ -10,6 +10,7 @@ import { remarkMdxToc } from 'remark-mdx-toc';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
+import { reactDevtools } from './scripts/vite-react-devtools';
 
 export default defineConfig({
   optimizeDeps: {
@@ -48,6 +49,7 @@ export default defineConfig({
         display: 'standalone',
       },
     }),
+    reactDevtools(),
   ],
   build: {
     rollupOptions: {
