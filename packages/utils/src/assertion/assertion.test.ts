@@ -1,4 +1,5 @@
 import { isArray, isBoolean, isFunction, isNumber, isObject, isString, isUndefined } from './assertion';
+import { describe, test, expect } from 'vitest';
 
 describe('utils/assertion', () => {
   test('isBoolean', () => {

@@ -1,4 +1,5 @@
 import { omit, pick, split } from './object';
+import { describe, test, expect } from 'vitest';
 
 const obj = { a: 1, b: 2, c: { d: 3 } };
 

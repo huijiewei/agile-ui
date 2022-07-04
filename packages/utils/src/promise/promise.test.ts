@@ -1,4 +1,5 @@
 import { sleep, to } from './promise';
+import { describe, test, expect } from 'vitest';
 
 describe('utils/misc', () => {
   test('async await', async () => {
@@ -7,7 +8,7 @@ describe('utils/misc', () => {
     expect(performance.now() - start).toBeGreaterThanOrEqual(19);
   });
 
-  it('should return a value when resolved', async () => {
+  test('should return a value when resolved', async () => {
     const testInput = 41;
     const promise = Promise.resolve(testInput);
 
@@ -17,7 +18,7 @@ describe('utils/misc', () => {
     expect(data).toEqual(testInput);
   });
 
-  it('should return an error when promise is rejected', async () => {
+  test('should return an error when promise is rejected', async () => {
     const promise = Promise.reject('Error');
 
     const [err, data] = await to<number>(promise);
@@ -26,7 +27,7 @@ describe('utils/misc', () => {
     expect(data).toBeUndefined();
   });
 
-  it('should receive the type of the parent if no type was passed', async () => {
+  test('should receive the type of the parent if no type was passed', async () => {
     const [, user] = await to<{ name: string }>(Promise.resolve({ name: 'userName' }));
 
     expect(user?.name).toEqual('userName');

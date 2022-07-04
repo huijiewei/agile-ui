@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
 
-export const reactDevtools = (): Plugin => {
+export const viteReactDevtools = (): Plugin => {
   return {
     name: 'reactDevtoolsPlugin',
     enforce: 'pre',

@@ -1,4 +1,5 @@
 import { camelCase, pascalCase, slugify } from './string';
+import { describe, test, expect } from 'vitest';
 
 describe('utils/string', () => {
   test('camelCase', () => {

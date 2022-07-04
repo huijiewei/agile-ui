@@ -4,19 +4,7 @@
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react-jsx --skipLibCheck --target esnext --moduleResolution node --outDir dist",
-    "prod": "vite build && npm run dts"
-  },
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
@@ -27,6 +15,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "axe-core": "^4.4.2",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.1",
     "twind": "next"

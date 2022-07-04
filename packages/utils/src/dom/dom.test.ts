@@ -1,4 +1,5 @@
 import { ariaAttr, dataAttr } from './dom';
+import { describe, test, expect } from 'vitest';
 
 describe('utils/dom', () => {
   test('should return data attribute value from boolean', () => {
