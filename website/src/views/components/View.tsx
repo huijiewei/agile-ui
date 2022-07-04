@@ -1,5 +1,5 @@
 import { Edit, Github } from '@agile-ui/react-icons';
-import { kebabCase, pascalCase } from '@agile-ui/utils';
+import { pascalCase } from '@agile-ui/utils';
 import type { MDXContent } from 'mdx/types';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -18,6 +18,7 @@ type Mdx = {
   documentLink: string;
   default: MDXContent;
   toc: Toc[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propsTables: Record<string, any>;
 };
 

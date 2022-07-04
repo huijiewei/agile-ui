@@ -18,9 +18,6 @@ type RemarkMdxDocgenOptions = {
   sourcePathName?: string;
 };
 
-export const kebabCase = (str: string): string =>
-  (str.match(/[A-Z]{2,}(?=[A-Z][a-z]+\d*|\b)|[A-Z]?[a-z]+\d*|[A-Z]|\d+/g) || []).join('-').toLowerCase();
-
 export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
   const propsTablesName = options.propsTablesName || 'propsTables';
   const sourcePathName = options.sourcePathName || 'sourcePath';
@@ -69,7 +66,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
           const nodeComponentDoc = getComponentDoc(options.sourceRootPath, nodeComponentName);
 
           if (nodeComponentDoc) {
-            propsTables[nodeComponentName] = getComponentDoc(options.sourceRootPath, nodeComponentName);
+            propsTables[nodeComponentName] = nodeComponentDoc.propsTable;
           }
         }
 
