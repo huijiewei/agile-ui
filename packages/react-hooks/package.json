@@ -11,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "dts": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react-jsx --skipLibCheck --target esnext --moduleResolution node --outDir dist",
+    "dts": "tsc --project tsconfig.dts.json",
     "prod": "vite build && npm run dts"
   },
   "main": "./dist/index.cjs.js",

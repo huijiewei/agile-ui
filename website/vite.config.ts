@@ -52,7 +52,6 @@ export default defineConfig({
     viteReactDevtools(),
   ],
   build: {
-    target: 'esnext',
     rollupOptions: {
       output: {
         manualChunks: (id) => {
@@ -94,6 +93,9 @@ export default defineConfig({
         },
       },
     },
+  },
+  server: {
+    open: true,
   },
   resolve: {
     alias: {

@@ -5,8 +5,8 @@
     "noFallthroughCasesInSwitch": true,
 
     // Modules
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
 
     // Emit
@@ -22,11 +22,11 @@
     "isolatedModules": true,
 
     // Language and Environment
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "esnext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ESNext",
+    "jsx": "react-jsx",
 
     // Completeness
-    "skipLibCheck": true,
-    "jsx": "react-jsx"
+    "skipLibCheck": true
   }
 }

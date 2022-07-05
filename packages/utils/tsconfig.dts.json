@@ -1,0 +1,13 @@
+{
+  "include": ["src"],
+  "exclude": ["**/*.test.tsx", "**/*.test.ts"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "Node",
+    "paths": {}
+  }
+}

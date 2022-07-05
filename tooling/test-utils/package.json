@@ -2,13 +2,13 @@
   "name": "@agile-ui/test-utils",
   "version": "1.0.0",
   "license": "MIT",
-  "sideEffects": false,
+  "private": true,
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
-    "directory": "packages/test-utils"
+    "directory": "tooling/test-utils"
   },
   "peerDependencies": {
     "react": ">=18",

@@ -6,7 +6,7 @@ import colors from './presets/colors';
 import fontWeight from './presets/font-weight';
 import borderRadius from './presets/border-radius';
 
-export type Colors = typeof colors;
+export * from './types/Color';
 
 export default () => {
   return {

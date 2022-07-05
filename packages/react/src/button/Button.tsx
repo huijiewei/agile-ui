@@ -1,8 +1,9 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, isNumber } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
+import type { NumberSize } from '../utils/types';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';
 import { ButtonSpinner } from './ButtonSpinner';
 
@@ -23,6 +24,11 @@ const useButtonType = (value?: ElementType) => {
 };
 
 export type ButtonProps = ButtonBaseProps & {
+  /**
+   * 边框圆角
+   */
+  radius?: NumberSize;
+
   /**
    * 类型
    * @default 'button'
@@ -123,6 +129,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     as: Component = 'button',
     children,
     type,
+    radius,
     active = false,
     disabled = group?.disabled || false,
     loading = false,
@@ -137,6 +144,8 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     ...rest
   } = props;
 
+  const rounded = radius ? (isNumber(radius) ? `-[${radius}px]` : `-${radius}`) : '';
+
   const { ref: _ref, type: defaultType } = useButtonType(Component);
 
   return (
@@ -145,10 +154,12 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       className={cx(
         'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap border align-middle duration-300 transition-colors',
         group
-          ? `first:(${group.vertical ? 'rounded-tl rounded-tr' : 'rounded-tl rounded-bl'}) last:(${
-              group.vertical ? 'rounded-bl rounded-br' : 'rounded-tr rounded-br'
+          ? `first:(${
+              group.vertical ? `rounded-tl${rounded} rounded-tr${rounded}` : `rounded-tl${rounded} rounded-bl${rounded}`
+            }) last:(${
+              group.vertical ? `rounded-bl${rounded} rounded-br${rounded}` : `rounded-tr${rounded} rounded-br${rounded}`
             })`
-          : 'rounded',
+          : `rounded${rounded}`,
         fullWidth ? 'w-full' : 'w-auto',
         (disabled || loading) && 'cursor-not-allowed opacity-60',
         buttonSizes[size],
