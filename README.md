@@ -51,7 +51,7 @@ https://agile-ui.vercel.app
 
 ```shell
 npm install
-npm run dev
+npm run website:dev
 ```
 
 > 正在开发中, 目前仅供参考学习

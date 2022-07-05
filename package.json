@@ -6,10 +6,10 @@
   "scripts": {
     "prepare": "husky install",
     "test": "vitest",
-    "build": "npm run build -w packages/**",
-    "website:dev": "npm run dev -w @agile-ui/website",
-    "website:build": "npm run build -w @agile-ui/website",
-    "website:preview": "npm run preview -w @agile-ui/website"
+    "build": "npm run build --workspace packages",
+    "website:dev": "npm run dev --workspace website",
+    "website:build": "npm run build --workspace website",
+    "website:preview": "npm run preview --workspace website"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",
