@@ -5,16 +5,16 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "dev": "npm run dev -w @agile-ui/website",
     "test": "vitest",
-    "prod": "npm run prod --workspaces --if-present",
-    "build": "npm run build -w @agile-ui/website",
-    "preview": "npm run preview -w @agile-ui/website"
+    "build": "npm run build -w packages/**",
+    "website:dev": "npm run dev -w @agile-ui/website",
+    "website:build": "npm run build -w @agile-ui/website",
+    "website:preview": "npm run preview -w @agile-ui/website"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",
     "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "@vitejs/plugin-react": "^1.3.2",

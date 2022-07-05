@@ -11,7 +11,8 @@
     "dist"
   ],
   "scripts": {
-    "prod": "tsup src/index.ts --format cjs,esm --dts --minify --clean"
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
+    "prepublishOnly": "npm run build"
   },
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
