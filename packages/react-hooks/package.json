@@ -11,12 +11,18 @@
     "dist"
   ],
   "scripts": {
-    "dts": "tsc --project tsconfig.dts.json",
-    "prod": "vite build && npm run dts"
+    "prod": "tsup src/index.ts --format cjs,esm --dts --minify --clean"
   },
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
