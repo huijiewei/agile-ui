@@ -9,3 +9,4 @@ export * from './use-media-query';
 export * from './use-event-listener';
 export * from './use-animation/useAnimation';
 export * from './use-animation/useSwitchAnimation';
+export * from './use-timeout';

@@ -1,20 +1,25 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
 export const useUpdateEffect = (effect: EffectCallback, deps?: DependencyList) => {
-  const mounted = useRef(false);
+  const renderCycleRef = useRef(false);
+  const effectCycleRef = useRef(false);
 
   useEffect(() => {
-    return () => {
-      mounted.current = false;
-    };
-  }, []);
+    const isMounted = renderCycleRef.current;
+    const shouldRun = isMounted && effectCycleRef.current;
 
-  useEffect(() => {
-    if (mounted.current) {
+    if (shouldRun) {
       return effect();
-    } else {
-      mounted.current = true;
     }
+
+    effectCycleRef.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
+
+  useEffect(() => {
+    renderCycleRef.current = true;
+    return () => {
+      renderCycleRef.current = false;
+    };
+  }, []);
 };
