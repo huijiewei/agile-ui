@@ -12,19 +12,26 @@ import {
   useHover,
   useInteractions,
   useRole,
-  FloatingPortal,
 } from '@floating-ui/react-dom-interactions';
 import { cloneElement, ReactElement, ReactNode, useState } from 'react';
 import { cx } from 'twind';
 import { Animation, AnimationBaseProps } from '../animation/Animation';
+import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
+import { TooltipArrow } from './TooltipArrow';
 
 type TooltipProps = {
   /**
    * 提示内容
    */
   content: ReactNode;
+
+  /**
+   * 颜色
+   * @default 'gray'
+   */
+  color?: ScaleColor;
 
   /**
    * 放置位置
@@ -37,25 +44,13 @@ type TooltipProps = {
    * @default 'hover'
    */
   animation?: AnimationBaseProps;
-
-  /**
-   * 显示箭头
-   * @default true
-   */
-  arrow?: boolean;
-
-  /**
-   * 颜色
-   * @default 'gray'
-   */
-  color?: ScaleColor;
 };
 
 /**
  * 工具提示
  */
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
-  const { className, children, content, placement = 'auto', animation, arrow = true, color = 'gray', ...rest } = props;
+  const { className, children, content, placement = 'auto', animation, color = 'gray', ...rest } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -86,7 +81,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
   return (
     <>
       {cloneElement(target, getReferenceProps({ ref: reference, ...target.props }))}
-      <FloatingPortal>
+      <Portal>
         <Animation
           show={open}
           {...animation}
@@ -105,66 +100,13 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
           })}
         >
           {content}
-          <TooltipArrow visible={arrow} color={color} placement={placementState} />
+          <TooltipArrow color={color} placement={placementState} />
         </Animation>
-      </FloatingPortal>
+      </Portal>
     </>
   );
 };
 
 if (__DEV__) {
   Tooltip.displayName = 'Tooltip';
-}
-
-type TooltipArrowSide = 'top' | 'left' | 'bottom' | 'right';
-type TooltipArrowPosition = 'center' | 'start' | 'end';
-
-const tooltipArrowStyles = {
-  top: 'border-t border-l',
-  right: 'border-t border-r',
-  bottom: 'border-b border-r',
-  left: 'border-b border-l',
-};
-
-type TooltipArrowProps = {
-  placement: Placement;
-  color?: ScaleColor;
-  visible?: boolean;
-};
-
-const opposites = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' };
-
-const TooltipArrow = (props: PrimitiveComponentProps<'span', TooltipArrowProps>) => {
-  const { placement, visible, className, color, ...rest } = props;
-
-  if (!visible) {
-    return null;
-  }
-
-  const [side, position = 'center'] = placement.split('-') as [TooltipArrowSide, TooltipArrowPosition];
-  const horizontal = side == 'left' || side == 'right';
-
-  return (
-    <span
-      className={cx(
-        'absolute h-[8px] w-[8px] rotate-45',
-        `-${opposites[side]}-[4px]`,
-        position == 'center'
-          ? `${horizontal ? 'top' : 'left'}-[calc(50%-4px)]`
-          : position == 'start'
-          ? `${horizontal ? 'top' : 'left'}-[8px]`
-          : `${horizontal ? 'bottom' : 'right'}-[8px]`,
-        tooltipArrowStyles[side],
-        `border-${color}-800 bg-${color}-800 text-${color}-50 dark:(border-${color}-200 bg-${color}-200 text-${color}-900)`,
-        className
-      )}
-      {...rest}
-    >
-      &nbsp;
-    </span>
-  );
-};
-
-if (__DEV__) {
-  TooltipArrow.displayName = 'TooltipArrow';
 }
