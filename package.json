@@ -12,8 +12,8 @@
     "website:preview": "npm run preview --workspace website"
   },
   "devDependencies": {
-    "@types/node": "^18.0.1",
-    "@types/react": "^18.0.14",
+    "@types/node": "^18.0.2",
+    "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
