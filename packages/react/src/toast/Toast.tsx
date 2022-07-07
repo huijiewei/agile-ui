@@ -1,3 +1,4 @@
+import { Icon } from '@agile-ui/react-icons';
 import { __DEV__ } from '@agile-ui/utils';
 import { cloneElement, ReactElement } from 'react';
 import type { ReactNode } from 'react';
@@ -12,7 +13,7 @@ export type ToastProps = {
   /**
    * 图标
    */
-  icon?: ReactElement;
+  icon?: JSX.Element;
 
   /**
    * 标题
