@@ -29,7 +29,7 @@ export type AlertProps = AlertContextValue;
 const alertVariants = (color: string) => {
   return {
     solid: `text-white border-transparent bg-${color}-600`,
-    outline: `border-${color}-600 text-${color}-600 dark:(border-${color}-600/50 text-${color}-300)`,
+    outline: `border-${color}-600 text-${color}-600 bg-white dark:(border-${color}-600/50 bg-gray-800 text-${color}-300)`,
     light: `border-transparent bg-${color}-50 text-${color}-600 dark:(bg-${color}-500/30 text-${color}-200)`,
   };
 };

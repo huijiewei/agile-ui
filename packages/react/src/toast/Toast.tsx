@@ -1,7 +1,6 @@
-import { Icon } from '@agile-ui/react-icons';
 import { __DEV__ } from '@agile-ui/utils';
-import { cloneElement, ReactElement } from 'react';
 import type { ReactNode } from 'react';
+import { cloneElement } from 'react';
 import { cx } from 'twind';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
 import { primitiveComponent } from '../utils/component';
@@ -29,7 +28,7 @@ export type ToastProps = {
    * 样式
    * @default 'light'
    */
-  variant?: 'solid' | 'light';
+  variant?: 'solid' | 'light' | 'outline';
 
   /**
    * 颜色
