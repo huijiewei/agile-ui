@@ -1,5 +1,5 @@
+import { useColorModeState } from '@agile-ui/react';
 import * as AgileReact from '@agile-ui/react';
-import { useDarkModeState } from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
 import type { Language } from 'prism-react-renderer';
 import darkTheme from 'prism-react-renderer/themes/nightOwl';
@@ -21,12 +21,12 @@ type CodeLiveProps = {
 export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   const { code, preview = false, editable = false, language = 'tsx', className, ...rest } = props;
 
-  const darkMode = useDarkModeState();
+  const colorModeState = useColorModeState();
 
   if (!preview) {
     return (
       <div className={`relative`} {...rest}>
-        <CodeBlock theme={darkMode ? darkTheme : lightTheme} code={code} language={language}></CodeBlock>
+        <CodeBlock theme={colorModeState ? darkTheme : lightTheme} code={code} language={language}></CodeBlock>
         <CopyIcon content={code} />
       </div>
     );
@@ -35,7 +35,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   return (
     <div className={cx('flex flex-col', className)} {...rest}>
       <LiveProvider
-        theme={darkMode ? darkTheme : lightTheme}
+        theme={colorModeState ? darkTheme : lightTheme}
         code={code}
         language={language}
         scope={{ ...AgileReact, ...AgileReactIcons, FormDemo }}

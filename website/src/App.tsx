@@ -1,4 +1,4 @@
-import { DarkModeProvider } from '@agile-ui/react';
+import { AgileProvider } from '@agile-ui/react';
 import { useEventListener } from '@agile-ui/react-hooks';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
@@ -22,9 +22,9 @@ export const App = () => {
     <HelmetProvider>
       <BrowserRouter>
         <Helmet defaultTitle={'Agile UI'} titleTemplate={'%s - Agile UI'} />
-        <DarkModeProvider>
+        <AgileProvider>
           <AppRoutes />
-        </DarkModeProvider>
+        </AgileProvider>
       </BrowserRouter>
     </HelmetProvider>
   );

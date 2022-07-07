@@ -31,6 +31,7 @@ export type AnimationBaseProps = {
 
 export type AnimationProps = AnimationBaseProps & {
   show: boolean;
+  onExit?: () => void;
 };
 
 export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref) => {
@@ -43,9 +44,10 @@ export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref
     duration = 300,
     transition = 'transition-opacity',
     children,
+    onExit,
     ...rest
   } = props;
-  const { stage, shouldMount } = useAnimation(show, duration as number);
+  const { stage, shouldMount } = useAnimation(show, duration as number, onExit);
 
   if (!shouldMount) {
     return null;

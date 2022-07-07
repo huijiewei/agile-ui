@@ -2,14 +2,14 @@ import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent, PrimitiveComponentProps } from '../utils/component';
 import { createContext } from '../utils/context';
-import type { Color } from '../utils/types';
+import type { ScaleColor } from '../utils/types';
 
 type AlertContextValue = {
   /**
    * 颜色
    * @default 'blue'
    */
-  color?: Color;
+  color?: ScaleColor;
 
   /**
    * 形式
@@ -42,7 +42,11 @@ export const Alert = primitiveComponent<'div', AlertProps>((props, ref) => {
       <div
         role="alert"
         ref={ref}
-        className={cx('relative rounded p-3 border', alertVariants(color)[variant], className)}
+        className={cx(
+          'relative flex rounded p-3 border overflow-hidden items-center gap-2',
+          alertVariants(color)[variant],
+          className
+        )}
         {...rest}
       >
         {children}
@@ -79,5 +83,5 @@ if (__DEV__) {
 export const AlertIcon = (props: PrimitiveComponentProps<'span'>) => {
   const { className, ...rest } = props;
 
-  return <span {...rest} className={cx(``, className)} />;
+  return <span {...rest} className={cx(`shrink-0`, className)} />;
 };

@@ -22,7 +22,7 @@ export const LayoutHeader = () => {
           }
           type={'button'}
         >
-          {layer ? <Close className={'h-5 w-5'} /> : <Menu className={'h-5 w-5'} />}
+          {layer ? <Close size={5} /> : <Menu size={5} />}
         </button>
         <div className={'flex flex-row items-center'}>
           <img

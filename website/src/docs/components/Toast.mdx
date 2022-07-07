@@ -1,0 +1,132 @@
+---
+title: 通知提醒
+description: 全局展示通知提醒，将信息及时有效的传达给用户。
+---
+
+## 用法
+
+## 颜色
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  return (
+    <div className={'flex gap-2 justify-center'}>
+      {[
+        ['gray', '灰色'],
+        ['blue', '蓝色'],
+        ['green', '绿色'],
+        ['red', '红色'],
+        ['yellow', '黄色'],
+      ].map(([color, name]) => {
+        return (
+          <Button
+            color={color}
+            key={color}
+            onClick={() =>
+              toast({
+                icon: <Info />,
+                color: color,
+                title: '通知提醒',
+                description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+              })
+            }
+          >
+            提醒{name}
+          </Button>
+        );
+      })}
+    </div>
+  );
+}
+```
+
+## 样式
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  return (
+    <div className={'flex gap-2 justify-center'}>
+      {[
+        ['solid', '实心'],
+        ['light', '浅色'],
+      ].map(([variant, name]) => {
+        return (
+          <Button
+            variant={variant}
+            key={variant}
+            onClick={() =>
+              toast({
+                icon: <Info />,
+                variant: variant,
+                title: '通知提醒',
+                description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+              })
+            }
+          >
+            提醒{name}
+          </Button>
+        );
+      })}
+    </div>
+  );
+}
+```
+
+## 放置位置
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  return (
+    <div
+      className={'grid gap-2 mx-auto w-fit'}
+      style={{
+        gridTemplateAreas:
+          '"top-left     top         top-right"' +
+          '".            center     ."' +
+          '"bottom-left  bottom      bottom-right"',
+      }}
+    >
+      {[
+        ['top-left', '上左'],
+        ['top', '上'],
+        ['top-right', '上右'],
+        ['center', '自动'],
+        ['bottom-left', '下左'],
+        ['bottom', '下'],
+        ['bottom-right', '下右'],
+      ].map(([placement, name]) => {
+        return placement == 'center' ? (
+          <Button key={placement} style={{ gridArea: placement }} onClick={() => toast.clean()}>
+            全部清除
+          </Button>
+        ) : (
+          <Button
+            key={placement}
+            style={{ gridArea: placement }}
+            onClick={() =>
+              toast({
+                position: placement,
+                icon: <Info />,
+                title: '通知提醒',
+                description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+              })
+            }
+          >
+            提醒{name}
+          </Button>
+        );
+      })}
+    </div>
+  );
+}
+```
+
+## 属性
+
+<PropsTable componentName="Toast" />

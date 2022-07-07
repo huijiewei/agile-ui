@@ -1,6 +1,7 @@
+import { isNumber } from '@agile-ui/utils';
 import type { SVGAttributes } from 'react';
 
-export type IconProps = SVGAttributes<SVGElement>;
+export type IconProps = SVGAttributes<SVGElement> & { size?: number | string };
 
 export const Icon = (props: IconProps) => {
   const {
@@ -11,13 +12,16 @@ export const Icon = (props: IconProps) => {
     strokeLinecap = 'round',
     strokeLinejoin = 'round',
     children,
+    className = '',
+    size = '1rem',
     ...rest
   } = props;
 
+  const sizeClassName = isNumber(size) ? `h-${size} w-${size}` : `h-[${size}] w-[${size}]`;
+
   return (
     <svg
-      width={'1rem'}
-      height={'1rem'}
+      className={`${sizeClassName} ${className}`}
       xmlns="http://www.w3.org/2000/svg"
       fill={fill}
       viewBox={viewBox}

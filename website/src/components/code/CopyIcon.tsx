@@ -13,7 +13,7 @@ export const CopyIcon = ({ content }: { content: string }) => {
           {copied ? (
             <ClipboardCheck className={'text-green-700 dark:text-green-400'} />
           ) : (
-            <Clipboard className={'text-gray-700 dark:text-gray-300'} />
+            <Clipboard className={'text-gray-700 hover:text-gray-500 dark:(text-gray-300 hover:text-gray-500)'} />
           )}
         </button>
       </Tooltip>

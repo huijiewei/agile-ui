@@ -56,8 +56,8 @@ export const menus = [
         path: '/components/alert',
       },
       {
-        label: '菜单',
-        path: '/components/menu',
+        label: '通知提醒',
+        path: '/components/toast',
       },
       {
         label: '布局',

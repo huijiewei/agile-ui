@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { clearAnimationFrameTimeout, setAnimationFrameTimeout } from './utils';
 import type { Canceller, Stage } from './utils';
 
-export const useAnimation = (state: boolean, timeout: number) => {
-  // the stage of animation - 'from' | 'enter' | 'leave'
+export const useAnimation = (state: boolean, timeout: number, onExit?: () => void) => {
   const [stage, setStage] = useState<Stage>(state ? 'enter' : 'from');
 
   const timer = useRef<Canceller>({});
@@ -22,13 +21,14 @@ export const useAnimation = (state: boolean, timeout: number) => {
       setStage('leave');
       timer.current = setAnimationFrameTimeout(() => {
         setShouldMount(false);
+        onExit && onExit();
       }, timeout);
     }
 
     return () => {
       clearAnimationFrameTimeout(timer.current);
     };
-  }, [state, timeout]);
+  }, [state, timeout, onExit]);
 
   return {
     stage,
