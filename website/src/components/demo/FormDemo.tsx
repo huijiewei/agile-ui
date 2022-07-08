@@ -8,32 +8,32 @@ export const FormDemo = () => {
           <label htmlFor={'demoFormFirstName'} className={''}>
             姓 <span className={'text-red-500'}>*</span>
           </label>
-          <Input placeholder={'姓'} id={'demoFormFirstName'} />
+          <Input className={'w-full'} placeholder={'姓'} id={'demoFormFirstName'} />
         </div>
         <div className={'flex flex-col'}>
           <label htmlFor={'demoFormLastName'} className={''}>
             名 <span className={'text-red-500'}>*</span>
           </label>
-          <Input placeholder={'名'} id={'demoFormLastName'} />
+          <Input className={'w-full'} placeholder={'名'} id={'demoFormLastName'} />
         </div>
       </div>
       <div className={'flex flex-col'}>
         <label htmlFor={'demoFormEmail'} className={''}>
           电子邮箱 <span className={'text-red-500'}>*</span>
         </label>
-        <Input placeholder={'电子邮箱'} id={'demoFormEmail'} />
+        <Input className={'w-full'} placeholder={'电子邮箱'} id={'demoFormEmail'} />
       </div>
       <div className={'flex flex-col'}>
         <label htmlFor={'demoFormPassword'} className={''}>
           密码 <span className={'text-red-500'}>*</span>
         </label>
-        <Input placeholder={'密码'} id={'demoFormPassword'} />
+        <Input className={'w-full'} placeholder={'密码'} id={'demoFormPassword'} />
       </div>
       <div className={'flex flex-col'}>
         <label htmlFor={'demoFormPasswordRepeat'} className={''}>
           确认密码 <span className={'text-red-500'}>*</span>
         </label>
-        <Input placeholder={'确认密码'} id={'demoFormPasswordRepeat'} />
+        <Input className={'w-full'} placeholder={'确认密码'} id={'demoFormPasswordRepeat'} />
       </div>
       <div>
         <label className={'flex items-center'}>
