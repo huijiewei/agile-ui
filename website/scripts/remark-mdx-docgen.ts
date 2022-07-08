@@ -1,8 +1,7 @@
 import { name as isIdentifierName } from 'estree-util-is-identifier-name';
 import { valueToEstree } from 'estree-util-value-to-estree';
 import type { Root } from 'mdast';
-import type { MdxjsEsm } from 'mdast-util-mdx';
-import type { MdxJsxAttribute, MdxJsxFlowElement } from 'mdast-util-mdx-jsx';
+import type { MdxjsEsm, MdxJsxAttribute, MdxJsxFlowElement } from 'mdast-util-mdx';
 import { ComponentDoc, PropItem, withCustomConfig } from 'react-docgen-typescript';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';

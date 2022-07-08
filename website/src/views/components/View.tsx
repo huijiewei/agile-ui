@@ -99,7 +99,7 @@ const View = () => {
               rel="noreferrer"
             >
               <Edit className={'mr-1'} />
-              编辑这个页面
+              建议更改此页面
             </a>
           </p>
         </article>

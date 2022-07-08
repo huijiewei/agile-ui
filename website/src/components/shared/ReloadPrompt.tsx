@@ -20,12 +20,12 @@ export const ReloadPrompt = () => {
 
   return (
     <Portal>
-      <Animation show={needRefresh} className={'fixed z-50 right-2 bottom-2'}>
-        <Alert className={'flex-col items-start'} variant={'outline'} color={'gray'}>
-          <AlertDescription className={''}>新内容可用，单击重载按钮进行更新。</AlertDescription>
+      <Animation show={needRefresh} className={'fixed z-50 right-5 bottom-5 shadow-md'}>
+        <Alert className={'flex-col items-start p-4 gap-3'} variant={'outline'} color={'gray'}>
+          <AlertDescription className={'text-lg'}>新内容可用，单击重新加载按钮进行更新。</AlertDescription>
           <div className={'flex gap-2'}>
-            <Button onClick={handleReload} size={'sm'} variant={'outline'}>
-              重载
+            <Button onClick={handleReload} size={'sm'}>
+              重新加载
             </Button>
             <Button size={'sm'} onClick={handleClose} variant={'outline'} color={'gray'}>
               关闭

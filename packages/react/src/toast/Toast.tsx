@@ -8,7 +8,12 @@ import type { ScaleColor } from '../utils/types';
 import type { ToastId } from './ToastTypes';
 
 export type ToastProps = {
+  /**
+   * Id
+   */
+
   id?: ToastId;
+
   /**
    * 图标
    */
@@ -43,7 +48,7 @@ export type ToastProps = {
   closeable?: boolean;
 
   /**
-   * 关闭事件
+   * 关闭
    */
   onClose?: () => void;
 };

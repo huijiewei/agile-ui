@@ -19,8 +19,8 @@ export const ToastContainer = (props: ToastOptions) => {
     setDelay(duration);
   }, [duration]);
 
-  const onMouseEnter = () => setDelay(null);
-  const onMouseLeave = () => setDelay(duration);
+  const handleMouseEnter = () => setDelay(null);
+  const handleMouseLeave = () => setDelay(duration);
 
   const handleClose = () => {
     setShow(false);
@@ -44,8 +44,8 @@ export const ToastContainer = (props: ToastOptions) => {
       as={'li'}
       show={show}
       onExit={handleExit}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={'flex flex-col items-center'}
       role="status"
       aria-atomic="true"
