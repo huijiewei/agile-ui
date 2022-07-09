@@ -9,18 +9,12 @@ import { ToastContainer } from './ToastContainer';
 
 export type ToastPosition = 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 
-export type ToastOptions = Omit<ToastProps, 'duration' | 'progress'> & {
+export type ToastOptions = ToastProps & {
   /**
-   * 自动关闭延迟, 设置为 `null` 通知不会自动关闭.
+   * 自动关闭延迟, 设置为 `null` 不会自动关闭.
    * @default 5000
    */
   duration: number | null;
-
-  /**
-   * 显示进度条
-   * @default true
-   */
-  progress?: boolean;
 
   /**
    * 显示位置

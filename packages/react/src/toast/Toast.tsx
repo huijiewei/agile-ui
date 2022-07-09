@@ -51,16 +51,6 @@ export type ToastProps = {
    * 关闭通知的回调
    */
   onClose?: () => void;
-
-  /**
-   * @ignore
-   */
-  duration?: number | null;
-
-  /**
-   * @ignore
-   */
-  progress?: boolean;
 };
 
 export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
@@ -71,8 +61,6 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
     color = 'blue',
     variant = 'light',
     closeable = true,
-    duration,
-    progress,
     onClose,
     description,
     className,
@@ -115,14 +103,6 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-      )}
-      {duration != null && progress && (
-        <div
-          role={'progressbar'}
-          onAnimationEnd={onClose}
-          onTransitionEnd={onClose}
-          className={`absolute left-0 w-full bottom-0 origin-left h-1 bg-${color}-600`}
-        />
       )}
     </Alert>
   );

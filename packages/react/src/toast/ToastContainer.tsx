@@ -8,7 +8,7 @@ import type { ToastOptions } from './ToastProvider';
 type ToastContainerProps = Omit<ToastOptions, 'position'>;
 
 export const ToastContainer = (props: ToastContainerProps) => {
-  const { id, duration = 5000, progress = false, remove, onRemove, onClose, ...rest } = props;
+  const { id, duration = 5000, remove, onRemove, onClose, ...rest } = props;
 
   const [show, setShow] = useState(false);
   const [delay, setDelay] = useState(duration);
@@ -36,8 +36,9 @@ export const ToastContainer = (props: ToastContainerProps) => {
   useEffect(() => {
     if (remove) {
       setShow(false);
+      onClose && onClose();
     }
-  }, [remove]);
+  }, [onClose, remove]);
 
   useTimeout(handleClose, delay);
 
@@ -52,14 +53,7 @@ export const ToastContainer = (props: ToastContainerProps) => {
       role="status"
       aria-atomic="true"
     >
-      <Toast
-        id={id}
-        duration={duration}
-        progress={progress}
-        onClose={handleClose}
-        className={'pointer-events-auto'}
-        {...rest}
-      ></Toast>
+      <Toast id={id} onClose={handleClose} className={'pointer-events-auto'} {...rest}></Toast>
     </Animation>
   );
 };
