@@ -42,15 +42,13 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
       >
         <LivePreview
           className={cx(
-            'overflow-x-auto rounded-t border border-gray-200 dark:border-gray-700 p-3',
+            'overflow-x-auto rounded-t border border-gray-200 p-3',
             '&::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
           )}
         />
         <div className={'relative'}>
           <LiveEditor
-            className={
-              'overflow-x-auto border border-gray-200 dark:border-gray-700 font-mono text-[92%] leading-snug rounded-b border-t-0'
-            }
+            className={'overflow-x-auto border border-gray-200 font-mono text-[92%] leading-snug rounded-b border-t-0'}
             disabled={!editable}
           />
           <CopyIcon content={code} />

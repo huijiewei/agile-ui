@@ -63,7 +63,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     <input
       className={cx(
         'border border-gray-300 rounded outline-none appearance-none resize-none text-left leading-none',
-        'bg-white dark:bg-gray-900',
+        'bg-white',
         'focus:border-blue-500',
         'transition-[border-color]',
         fullWidth ? 'w-full' : '',

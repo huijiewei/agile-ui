@@ -11,9 +11,9 @@ export const CopyIcon = ({ content }: { content: string }) => {
       <Tooltip color={copied ? 'green' : undefined} content={copied ? '已复制' : '复制代码'}>
         <button type={'button'} className={'appearance-none p-1 font-medium relative'} onClick={() => onCopy(content)}>
           {copied ? (
-            <ClipboardCheck className={'text-green-700 dark:text-green-400'} />
+            <ClipboardCheck className={'text-green-700'} />
           ) : (
-            <Clipboard className={'text-gray-700 hover:text-gray-500 dark:(text-gray-300 hover:text-gray-500)'} />
+            <Clipboard className={'text-gray-700 hover:text-gray-500'} />
           )}
         </button>
       </Tooltip>

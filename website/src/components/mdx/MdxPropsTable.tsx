@@ -7,9 +7,9 @@ export type MdxPropsTableProps = {
 
 export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentProp[] }) => {
   return (
-    <table className={'w-full table-auto border-separate rounded border border-gray-200 dark:border-gray-600'}>
+    <table className={'w-full table-auto border-separate rounded border border-gray-200'}>
       <thead>
-        <tr className={'bg-gray-50 dark:bg-gray-800'}>
+        <tr className={'bg-gray-50'}>
           <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>参数名</th>
           <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>描述</th>
           <th className={'p-2 text-center whitespace-nowrap hidden tablet:table-cell'}>默认值</th>

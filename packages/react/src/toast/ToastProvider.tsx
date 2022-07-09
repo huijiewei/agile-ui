@@ -1,23 +1,39 @@
 import { __DEV__, isNumber } from '@agile-ui/utils';
 import type { PropsWithChildren } from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { createContext } from '../utils/context';
+import type { ToastId, ToastProps } from './Toast';
 import { ToastContainer } from './ToastContainer';
-import type { ToastId, ToastOptions, ToastPosition, ToastState } from './ToastTypes';
-import type { UseToastOptions } from './useToast';
+
+export type ToastPosition = 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+
+export type ToastOptions = Omit<ToastProps, 'id'> & {
+  id: ToastId;
+  duration: number | null;
+  position: ToastPosition;
+
+  remove: boolean;
+  onRemove?: () => void;
+};
+
+type ToastState = {
+  [K in ToastPosition]: Omit<ToastOptions, 'position'>[];
+};
+
+type ToastDispatch = {
+  notify: (options: Partial<ToastOptions>) => ToastId;
+  update: (id: ToastId, options: Omit<ToastProps, 'id'>) => void;
+  close: (id: ToastId) => void;
+  clean: (options?: { positions?: ToastPosition[] }) => void;
+};
 
 export type ToastProviderProps = {
   spacing?: string | null;
 };
 
-const [ToastContextProvider, useToastContext] = createContext<{
-  notify: (options: Partial<Pick<ToastOptions, 'id' | 'duration' | 'position' | 'onClose'>>) => ToastId;
-  update: (id: ToastId, options: Omit<UseToastOptions, 'id'>) => void;
-  close: (id: ToastId) => void;
-  clean: (options?: { positions?: ToastPosition[] }) => void;
-}>({
+const [ToastContextProvider, useToastContext] = createContext<ToastDispatch>({
   name: 'ToastContext',
   strict: true,
 });
@@ -36,93 +52,105 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
     'bottom-right': [],
   });
 
-  const notify = (options: Partial<Pick<ToastOptions, 'id' | 'duration' | 'position' | 'onRemove'>>) => {
-    const toastId = options.id ?? (`toast-${Math.random().toString(36).slice(2, 9)}` as ToastId);
-    const { position = 'bottom', ...toast } = options;
+  const value = useMemo(() => {
+    const notify: ToastDispatch['notify'] = (options) => {
+      const toastId = options.id ?? (`toast-${Math.random().toString(36).slice(2, 9)}` as ToastId);
 
-    toast.id = toastId;
+      const { position = 'bottom', ...toast } = options;
 
-    toast.onRemove = () => {
-      setState((prevState) => ({
-        ...prevState,
-        [position]: prevState[position].filter((toast) => toast.id != toastId),
-      }));
+      toast.id = toastId;
+
+      toast.onRemove = () => {
+        setState((prevState) => ({
+          ...prevState,
+          [position]: prevState[position].filter((toast) => toast.id != toastId),
+        }));
+      };
+
+      setState((prevToasts) => {
+        const toasts = position.includes('top')
+          ? [toast, ...(prevToasts[position] ?? [])]
+          : [...(prevToasts[position] ?? []), toast];
+
+        return {
+          ...prevToasts,
+          [position]: toasts,
+        };
+      });
+
+      return toastId;
     };
 
-    setState((prevToasts) => {
-      const toasts = position.includes('top')
-        ? [toast, ...(prevToasts[position] ?? [])]
-        : [...(prevToasts[position] ?? []), toast];
+    const update = (id: ToastId, options: Omit<ToastProps, 'id'>) => {
+      if (!id) return;
 
-      return {
-        ...prevToasts,
-        [position]: toasts,
-      };
-    });
+      setState((prevState) => {
+        const nextState = { ...prevState };
+        const { position, index } = findToast(nextState, id);
 
-    return toastId;
-  };
+        if (position && index !== -1) {
+          nextState[position][index] = {
+            ...nextState[position][index],
+            ...options,
+          };
+        }
 
-  const update = (id: ToastId, options: Omit<UseToastOptions, 'id'>) => {
-    if (!id) return;
+        return nextState;
+      });
+    };
 
-    setState((prevState) => {
-      const nextState = { ...prevState };
-      const { position, index } = findToast(nextState, id);
+    const close = (id: ToastId) => {
+      setState((prevState) => {
+        const position = getToastPosition(prevState, id);
 
-      if (position && index !== -1) {
-        nextState[position][index] = {
-          ...nextState[position][index],
-          ...options,
+        if (!position) return prevState;
+
+        return {
+          ...prevState,
+          [position]: prevState[position].map((toast) => {
+            if (toast.id == id) {
+              return {
+                ...toast,
+                remove: true,
+              };
+            }
+
+            return toast;
+          }),
         };
-      }
+      });
+    };
 
-      return nextState;
-    });
-  };
+    const clean = (options?: { positions?: ToastPosition[] }) => {
+      setState((prev) => {
+        const positions = options?.positions || [
+          'bottom',
+          'bottom-right',
+          'bottom-left',
+          'top',
+          'top-left',
+          'top-right',
+        ];
 
-  const close = (id: ToastId) => {
-    setState((prevState) => {
-      const position = getToastPosition(prevState, id);
-
-      if (!position) return prevState;
-
-      return {
-        ...prevState,
-        [position]: prevState[position].map((toast) => {
-          if (toast.id == id) {
-            return {
+        return positions.reduce(
+          (acc, position) => {
+            acc[position] = prev[position].map((toast) => ({
               ...toast,
               remove: true,
-            };
-          }
+            }));
 
-          return toast;
-        }),
-      };
-    });
-  };
+            return acc;
+          },
+          { ...prev } as ToastState
+        );
+      });
+    };
 
-  const clean = (options?: { positions?: ToastPosition[] }) => {
-    setState((prev) => {
-      const positions = options?.positions || ['bottom', 'bottom-right', 'bottom-left', 'top', 'top-left', 'top-right'];
-
-      return positions.reduce(
-        (acc, position) => {
-          acc[position] = prev[position].map((toast) => ({
-            ...toast,
-            remove: true,
-          }));
-
-          return acc;
-        },
-        { ...prev } as ToastState
-      );
-    });
-  };
+    return { notify, update, close, clean };
+  }, []);
 
   return (
-    <ToastContextProvider value={{ notify, update, close, clean }}>
+    <ToastContextProvider value={value}>
       {children}
       <Portal>
         {Object.keys(state).map((position) => {
@@ -190,7 +218,11 @@ const findToast = (toasts: ToastState, id: ToastId) => {
 };
 
 const getToastPosition = (toasts: ToastState, id: ToastId) => {
-  return Object.values(toasts)
-    .flat()
-    .find((toast) => toast.id === id)?.position;
+  return Object.keys(toasts).find((key) => {
+    return (
+      toasts[key as ToastPosition].findIndex((toast) => {
+        return toast.id == id;
+      }) > -1
+    );
+  }) as ToastPosition;
 };

@@ -47,11 +47,7 @@ const Home = () => {
           <li>Husky & Lint Staged - 在提交暂存文件之前，运行脚本。</li>
         </ul>
         <hr />
-        <p
-          className={
-            'p-2 pl-3 font-bold border-l-2 border-l-yellow-300 bg-yellow-50 dark:(border-l-yellow-800 bg-yellow-800/30)'
-          }
-        >
+        <p className={'p-2 pl-3 font-bold border-l-2 border-l-yellow-300 bg-yellow-50'}>
           正在开发中, 目前仅供参考学习!
         </p>
         <p></p>

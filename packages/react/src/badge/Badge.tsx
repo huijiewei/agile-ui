@@ -33,9 +33,9 @@ const badgeSizes = {
 
 const badgeVariants = (color: string) => {
   return {
-    solid: [`text-white dark:text-black border-transparent bg-${color}-600`],
-    outline: [`border-current text-${color}-600 bg-white dark:bg-black`],
-    light: [`border-transparent text-${color}-700 bg-${color}-100`],
+    solid: [`text-white border-transparent bg-${color}-500`],
+    outline: [`border-current text-${color}-500 bg-white`],
+    light: [`border-transparent text-${color}-500 bg-${color}-100`],
   };
 };
 

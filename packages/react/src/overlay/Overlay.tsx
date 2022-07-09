@@ -32,12 +32,7 @@ export type OverlayProps = {
 export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
   const { className, opacity = 75, color = 'black', radius = false, blur = 0, ...rest } = props;
 
-  const colorClass =
-    color == 'white'
-      ? 'bg-white dark:bg-black'
-      : color == 'black'
-      ? 'bg-gray-600'
-      : `bg-${color}-50 dark:(bg-${color}-600/20)`;
+  const colorClass = color == 'white' ? 'bg-white' : color == 'black' ? 'bg-black' : `bg-${color}-50`;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const overlay = (other?: Record<string, any>) => {

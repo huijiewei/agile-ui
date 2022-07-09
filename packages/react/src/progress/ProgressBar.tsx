@@ -47,7 +47,7 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
         {...rest}
         className={cx(
           'rounded h-full',
-          color == 'white' || color == 'black' ? `bg-${color}` : `bg-${color}-600`,
+          color == 'white' || color == 'black' ? `bg-${color}` : `bg-${color}-500`,
           className
         )}
         style={{ width: `${value}%` }}

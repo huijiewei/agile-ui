@@ -3,10 +3,12 @@ import { __DEV__ } from '@agile-ui/utils';
 import { useEffect, useState } from 'react';
 import { Animation } from '../animation/Animation';
 import { Toast } from './Toast';
-import type { ToastOptions } from './ToastTypes';
+import type { ToastOptions } from './ToastProvider';
 
-export const ToastContainer = (props: ToastOptions) => {
-  const { id, remove, onClose, onRemove, duration = 5000, ...rest } = props;
+type ToastContainerProps = Omit<ToastOptions, 'position'>;
+
+export const ToastContainer = (props: ToastContainerProps) => {
+  const { id, duration, remove, onRemove, onClose, ...rest } = props;
 
   const [show, setShow] = useState(false);
   const [delay, setDelay] = useState(duration);

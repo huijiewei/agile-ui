@@ -82,39 +82,31 @@ const buttonVariants = (color: string, disabled: boolean, active: boolean, group
   return {
     solid: [
       `text-white border-transparent`,
-      active ? `bg-${color}-800` : `bg-${color}-600`,
-      !disabled && !active && `hover:bg-${color}-700 active:bg-${color}-800`,
+      active ? `bg-${color}-700` : `bg-${color}-500`,
+      !disabled && !active && `hover:bg-${color}-600 active:bg-${color}-700`,
       group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-current)`,
     ],
     outline: [
-      `border-current text-${color}-600 dark:text-${color}-400`,
+      `border-current text-${color}-500`,
       active ? `bg-${color}-100 active:bg-${color}-500/20` : 'bg-transparent',
-      !disabled &&
-        !active &&
-        `hover:bg-${color}-50 active:bg-${color}-100 dark:(hover:bg-${color}-500/10 active:bg-${color}-500/20)`,
+      !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`,
       group && `not-first-child:(-m${group.vertical ? 't' : 'l'}-[1px])`,
     ],
     light: [
-      `border-transparent text-${color}-600 dark:text-${color}-200`,
-      active ? `bg-${color}-200 dark:bg-${color}-700/40` : `bg-${color}-50 dark:bg-${color}-800/20`,
-      !disabled &&
-        !active &&
-        `hover:bg-${color}-100 active:bg-${color}-200 dark:(hover:bg-${color}-700/30 active:bg-${color}-700/40)`,
+      `border-transparent text-${color}-500`,
+      active ? `bg-${color}-200` : `bg-${color}-50`,
+      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
       group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-${color}-100)`,
     ],
     subtle: [
-      `border-transparent text-${color}-600 dark:text-${color}-200`,
-      active ? `bg-${color}-200 dark:bg-${color}-800/30` : 'bg-transparent',
-      !disabled &&
-        !active &&
-        `hover:bg-${color}-100 active:bg-${color}-200 dark:(hover:bg-${color}-800/20 active:bg-${color}-800/30)`,
+      `border-transparent text-${color}-500`,
+      active ? `bg-${color}-200` : 'bg-transparent',
+      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
     ],
     link: [
       `border-transparent underline underline-offset-2`,
-      active ? `text-${color}-900 dark:text-${color}-400` : `text-${color}-600 dark:text-${color}-200`,
-      !disabled &&
-        !active &&
-        `hover:text-${color}-800 active:text-${color}-900 dark:(hover:text-${color}-300 active:text-${color}-400)`,
+      active ? `text-${color}-700` : `text-${color}-500`,
+      !disabled && !active && `hover:text-${color}-600 active:text-${color}-700`,
     ],
   };
 };

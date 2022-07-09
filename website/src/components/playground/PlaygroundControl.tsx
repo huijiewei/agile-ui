@@ -55,7 +55,7 @@ export const PlaygroundControl = ({
         ) : (
           <select
             onChange={(e) => onChange(e.target.value)}
-            className={'rounded-sm border bg-white dark:bg-slate-900 border-slate-300 px-1.5 py-0.5'}
+            className={'rounded-sm border bg-white border-gray-300 px-1.5 py-0.5'}
             defaultValue={defaultValue?.toString()}
           >
             {prop.type.values?.map((value, i) => {

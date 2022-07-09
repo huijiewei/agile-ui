@@ -1,6 +1,5 @@
-import type { ToastProps } from './Toast';
-import { useToastContext } from './ToastProvider';
-import type { ToastId, ToastPosition } from './ToastTypes';
+import type { ToastId, ToastProps } from './Toast';
+import { ToastPosition, useToastContext } from './ToastProvider';
 
 export type UseToastOptions = ToastProps & {
   /**

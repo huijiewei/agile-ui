@@ -23,8 +23,8 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
   }, [darkOS]);
 
   return (
-    <ColorModeStateProvider value={state}>
-      <ColorModeDispatchProvider value={setState}>{children}</ColorModeDispatchProvider>
-    </ColorModeStateProvider>
+    <ColorModeDispatchProvider value={setState}>
+      <ColorModeStateProvider value={state}>{children}</ColorModeStateProvider>
+    </ColorModeDispatchProvider>
   );
 };

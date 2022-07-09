@@ -12,10 +12,7 @@ export const LayoutNavMenu = () => {
               {menu.path ? (
                 <LayoutNavLink
                   className={({ isActive }) => {
-                    return cx(
-                      'hover:text-gray-500 dark:(hover:text-gray-300)',
-                      isActive && 'text-blue-800 dark:(text-blue-400)'
-                    );
+                    return cx('hover:text-gray-500', isActive && 'text-blue-800');
                   }}
                   to={menu.path}
                 >
@@ -26,7 +23,7 @@ export const LayoutNavMenu = () => {
               )}
             </h5>
             {menu.children && (
-              <ul className={'space-y-2 border-l border-l-gray-100 dark:border-l-gray-700'}>
+              <ul className={'space-y-2 border-l border-l-gray-100'}>
                 {menu.children.map((child) => (
                   <li key={child.label}>
                     <LayoutNavLink
@@ -34,8 +31,8 @@ export const LayoutNavMenu = () => {
                         return cx(
                           '-ml-px block border-l border-transparent pl-4 font-medium',
                           isActive
-                            ? 'border-l-blue-600 text-blue-800 dark:(text-blue-400)'
-                            : 'text-gray-500 hover:(border-l-gray-300 text-gray-800) dark:(text-gray-300 hover:(text-gray-100))'
+                            ? 'border-l-blue-600 text-blue-800'
+                            : 'text-gray-500 hover:(border-l-gray-300 text-gray-800)'
                         );
                       }}
                       to={child.path}

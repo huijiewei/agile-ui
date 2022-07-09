@@ -28,9 +28,9 @@ export type AlertProps = AlertContextValue;
 
 const alertVariants = (color: string) => {
   return {
-    solid: `text-white border-transparent bg-${color}-600`,
-    outline: `border-${color}-600 text-${color}-600 bg-white dark:(border-${color}-600/60 bg-gray-800/80 text-${color}-300)`,
-    light: `border-transparent bg-${color}-50 text-${color}-600 dark:(bg-${color}-600/50 text-${color}-200)`,
+    solid: `text-white border-transparent bg-${color}-500`,
+    outline: `border-${color}-500 text-${color}-500 bg-white`,
+    light: `border-transparent bg-${color}-50 text-${color}-500`,
   };
 };
 
@@ -73,7 +73,7 @@ export const AlertDescription = primitiveComponent<'div'>((props, ref) => {
   const { variant } = useAlertContext();
   const { className, ...rest } = props;
 
-  return <div className={cx(variant != 'solid' && 'text-black dark:text-white', className)} ref={ref} {...rest} />;
+  return <div className={cx(variant != 'solid' && 'text-black', className)} ref={ref} {...rest} />;
 });
 
 if (__DEV__) {

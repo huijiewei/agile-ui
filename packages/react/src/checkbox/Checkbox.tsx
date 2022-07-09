@@ -74,7 +74,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
             'appearance-none border rounded transition-colors duration-150',
             disabled
               ? `checked:(bg-gray-300) bg-gray-100 border-gray-400 `
-              : `border-gray-300 bg-white dark:bg-black checked:(bg-${color}-600 border-${color}-600) dark:(checked:(bg-${color}-300 border-${color}-300))`,
+              : `border-gray-300 bg-white checked:(bg-${color}-600 border-${color}-600)`,
             sizeClass
           )}
           value={value}
@@ -86,10 +86,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         {indeterminate ? (
           <svg
             viewBox="0 0 24 24"
-            className={cx(
-              'absolute z-10 w-3/5 pointer-events-none',
-              disabled ? 'text-gray-100' : 'text-white dark:text-black'
-            )}
+            className={cx('absolute z-10 w-3/5 pointer-events-none', disabled ? 'text-gray-100' : 'text-white')}
             stroke={'currentColor'}
             strokeWidth={4}
             opacity={1}
@@ -100,10 +97,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         ) : (
           <svg
             viewBox="0 0 12 10"
-            className={cx(
-              'absolute z-10 w-3/5 pointer-events-none',
-              disabled ? 'text-gray-100' : 'text-white dark:text-black'
-            )}
+            className={cx('absolute z-10 w-3/5 pointer-events-none', disabled ? 'text-gray-100' : 'text-white')}
             fill={'none'}
             strokeWidth={2}
             stroke={'currentColor'}

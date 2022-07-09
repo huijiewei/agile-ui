@@ -5,7 +5,8 @@ import { cx } from 'twind';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
-import type { ToastId } from './ToastTypes';
+
+export type ToastId = string | number;
 
 export type ToastProps = {
   /**
@@ -89,9 +90,7 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
           onClick={onClose}
           className={cx(
             'absolute top-1 right-1 p-0.5 rounded',
-            variant == 'solid'
-              ? `hover:bg-${color}-700`
-              : `hover:bg-${color}-100 text-black dark:(text-white hover:bg-${color}-600/30)`
+            variant == 'solid' ? `hover:bg-${color}-700` : `hover:bg-${color}-100 text-black`
           )}
         >
           <svg

@@ -1,16 +1,26 @@
-import { css } from 'twind';
+import { css, TwindPresetConfig } from 'twind';
+import borderRadius from './presets/border-radius';
+import colors from './presets/colors';
 import fontFamily from './presets/font-family';
 import fontSize from './presets/font-size';
-import screens from './presets/screens';
-import colors from './presets/colors';
 import fontWeight from './presets/font-weight';
-import borderRadius from './presets/border-radius';
+import screens from './presets/screens';
 
 export * from './types/Color';
 
 export default () => {
   return {
     darkMode: 'class',
+    darkColor: (section, key, { theme }) => {
+      key =
+        key == 'white'
+          ? 'black'
+          : key == 'black'
+          ? 'white'
+          : key.replace(/\d+$/, (shade) => ((8 - ~~(parseInt(shade, 10) / 100) || 0.5) * 100) as any);
+
+      return theme(section as 'colors', key);
+    },
     preflight: css`
       body {
         @apply text-base;
@@ -24,5 +34,5 @@ export default () => {
       fontWeight,
       borderRadius,
     },
-  };
+  } as TwindPresetConfig;
 };
