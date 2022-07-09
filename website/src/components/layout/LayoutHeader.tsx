@@ -29,7 +29,7 @@ export const LayoutHeader = () => {
           <span className={'ml-1.5 inline-block align-middle text-[1.5rem] font-bold'}>Agile UI</span>
           <span
             className={
-              'ml-3 hidden tablet:inline-block rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-red-900'
+              'ml-3 hidden tablet:inline-block rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-red-700'
             }
           >
             ALPHA
