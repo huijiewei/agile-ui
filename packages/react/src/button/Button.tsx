@@ -71,11 +71,11 @@ export type ButtonProps = ButtonBaseProps & {
 };
 
 const buttonSizes = {
-  xs: 'h-6 px-2 text-sm',
-  sm: 'h-7 px-2',
-  md: 'h-8 px-3',
-  lg: 'h-9 px-5',
-  xl: 'h-10 px-5 text-lg',
+  xs: 'h-6 px-3 text-sm',
+  sm: 'h-7 px-4',
+  md: 'h-8 px-5',
+  lg: 'h-9 px-6',
+  xl: 'h-10 px-7 text-lg',
 };
 
 const buttonVariants = (color: string, disabled: boolean, active: boolean, group?: { vertical: boolean }) => {
