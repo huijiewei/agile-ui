@@ -23,16 +23,16 @@ export const LayoutNavMenu = () => {
               )}
             </h5>
             {menu.children && (
-              <ul className={'space-y-2 border-l border-l-gray-100'}>
+              <ul className={'space-y-1 border-l border-l-gray-100'}>
                 {menu.children.map((child) => (
                   <li key={child.label}>
                     <LayoutNavLink
                       className={({ isActive }) => {
                         return cx(
-                          '-ml-px block border-l border-transparent pl-4 font-medium',
+                          '-ml-px block border-l border-transparent pl-4 py-1 font-medium',
                           isActive
-                            ? 'border-l-blue-600 text-blue-800'
-                            : 'text-gray-500 hover:(border-l-gray-300 text-gray-800)'
+                            ? 'border-l-blue-300 bg-blue-50 text-blue-500'
+                            : 'text-gray-500 hover:(border-l-gray-300 text-gray-700)'
                         );
                       }}
                       to={child.path}

@@ -54,10 +54,10 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
       duration={duration}
       show={visible}
       ref={ref}
-      className={cx('absolute inset-0 z-30 flex items-center justify-center overflow-hidden', className)}
+      className={cx('absolute inset-0 z-10 flex items-center justify-center overflow-hidden', className)}
       {...rest}
     >
-      {cloneElement(spinner, { className: 'z-50' })}
+      {cloneElement(spinner, { className: 'z-30' })}
       <Overlay radius={radius} opacity={opacity} color={color} blur={blur}></Overlay>
     </Animation>
   );

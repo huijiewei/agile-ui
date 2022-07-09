@@ -22,7 +22,7 @@ export const components = {
       <h2 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
-          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}
         >
@@ -37,7 +37,7 @@ export const components = {
       <h3 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
-          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}
         >
@@ -52,7 +52,7 @@ export const components = {
       <h4 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
-          className={'group-hover:opacity-100 opacity-0 text-green-600 ml-2 transition-opacity'}
+          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}
         >

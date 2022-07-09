@@ -38,7 +38,7 @@ export const TooltipArrow = (props: PrimitiveComponentProps<'span', TooltipArrow
           ? `${horizontal ? 'top' : 'left'}-[8px]`
           : `${horizontal ? 'bottom' : 'right'}-[8px]`,
         tooltipArrowStyles[side],
-        `border-${color}-700 bg-${color}-700 text-${color}-50`,
+        `border-${color}-600 bg-${color}-600 text-${color}-50`,
         className
       )}
       {...rest}

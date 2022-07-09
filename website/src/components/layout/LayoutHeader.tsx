@@ -39,7 +39,7 @@ export const LayoutHeader = () => {
           <ThemeSwitcher />
           <Tooltip placement={'bottom'} content={'Github 上的 Agile UI'}>
             <a
-              className={'block border-gray-300 rounded p-1 border text-gray-500 select-none hover:text-gray-700'}
+              className={'block border-gray-300 rounded p-1 border text-gray-400 select-none hover:text-gray-500'}
               rel="noreferrer"
               href="https://github.com/huijiewei/agile-ui"
               target="_blank"

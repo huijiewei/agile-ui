@@ -50,16 +50,16 @@ export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
 
   return (
     <>
-      <ul className={'mt-2 space-y-2 border-l border-l-gray-100'}>
+      <ul className={'space-y-1 border-l border-l-gray-100'}>
         {toc.map(({ value, depth }, index) => (
           <li key={value}>
             <a
               className={cx(
-                '-ml-px block border-l py-1',
+                '-ml-px block border-l py-1 text-sm',
                 depth == 3 ? 'pl-10' : 'pl-5',
                 index == active
-                  ? 'border-l-blue-300 bg-blue-50 text-blue-400'
-                  : 'border-l-transparent text-gray-600 hover:(border-l-gray-300 text-gray-800)'
+                  ? 'border-l-blue-300 bg-blue-50 text-blue-500'
+                  : 'border-l-transparent text-gray-500 hover:(border-l-gray-300 text-gray-700)'
               )}
               aria-current={index == active ? 'location' : undefined}
               href={`#${value}`}

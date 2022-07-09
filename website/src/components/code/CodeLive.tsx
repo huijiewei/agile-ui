@@ -53,7 +53,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
           />
           <CopyIcon content={code} />
         </div>
-        <LiveError className={'mt-1 rounded bg-red-300 px-2 py-1 font-mono text-[90%]'} />
+        <LiveError className={'mt-1 rounded bg-red-200 px-2 py-1 font-mono text-[90%]'} />
       </LiveProvider>
     </div>
   );

@@ -1,6 +1,6 @@
 export const LayoutFooter = () => {
   return (
-    <footer className={'border-t border-t-gray-100 py-3 px-5 text-gray-600'}>
+    <footer className={'border-t border-t-gray-100 py-3 px-5 text-gray-500'}>
       <div className={'flex justify-between text-[13px] font-medium'}>
         <div>Copyright © 2022</div>
         <div>

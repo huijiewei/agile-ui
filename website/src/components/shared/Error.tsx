@@ -11,7 +11,7 @@ export const Error = (props: PropsWithChildren<ErrorProps>) => {
   const { title, onBack, children } = props;
   const navigate = useNavigate();
 
-  const handleBack = () => {
+  const handleClick = () => {
     onBack && onBack();
     navigate(-1);
   };
@@ -20,7 +20,7 @@ export const Error = (props: PropsWithChildren<ErrorProps>) => {
       <h1 className={'text-xl'}>{title}</h1>
       {children}
       <div className={'mt-5'}>
-        <Button variant={'outline'} onClick={handleBack}>
+        <Button variant={'outline'} onClick={handleClick}>
           返回
         </Button>
       </div>
