@@ -12,7 +12,7 @@ export const LayoutNavMenu = () => {
               {menu.path ? (
                 <LayoutNavLink
                   className={({ isActive }) => {
-                    return cx('hover:text-gray-500', isActive && 'text-blue-800');
+                    return cx('block hover:text-gray-500', isActive && 'text-blue-500');
                   }}
                   to={menu.path}
                 >

@@ -26,6 +26,7 @@ const useButtonType = (value?: ElementType) => {
 export type ButtonProps = ButtonBaseProps & {
   /**
    * 边框圆角
+   * @default 'md'
    */
   radius?: NumberSize;
 
