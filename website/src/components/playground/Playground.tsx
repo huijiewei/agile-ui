@@ -54,13 +54,13 @@ export const Playground = (props: PlaygroundProps) => {
     <div>
       <div
         className={cx(
-          'flex min-h-[20em] flex-col rounded border border-slate-200 tablet:flex-row',
+          'flex min-h-[20em] flex-col rounded border border-gray-200 tablet:flex-row',
           includeCode && 'rounded-b-none border-b-0'
         )}
       >
         <div
           className={
-            'bg-[16px_16px] flex flex-1 items-center justify-center rounded bg-slate-50 bg-gradient-radial-dot from-slate-200 to-transparent p-3'
+            'bg-[16px_16px] flex flex-1 items-center justify-center rounded bg-gray-50 bg-gradient-radial-dot from-gray-100 to-transparent p-3'
           }
         >
           <Component {...state} />

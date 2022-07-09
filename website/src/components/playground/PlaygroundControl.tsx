@@ -17,13 +17,13 @@ export const PlaygroundControl = ({
       <div className={'whitespace-nowrap'}>{prop.description}</div>
       {prop.type.control == 'boolean' && (
         <input
-          className={'rounded-sm border border-slate-300'}
+          className={'rounded-sm border border-gray-200'}
           defaultChecked={defaultValue?.toString() == 'true'}
           type="checkbox"
           onChange={(e) => onChange(e.target.checked)}
         />
       )}
-      {(prop.type.control == 'string' || prop.type.control == 'ReactNode') && (
+      {(prop.type.control == 'string' || prop.type.control == 'number' || prop.type.control == 'ReactNode') && (
         <Input
           defaultValue={defaultValue?.toString()}
           type="text"
@@ -42,12 +42,12 @@ export const PlaygroundControl = ({
                   title={valueString}
                   key={`${valueString}-${i}`}
                   className={cx(
-                    'rounded-sm h-6 text-slate-50 w-6 outline-none justify-center flex items-center leading-6',
-                    `bg-${valueString}-600`
+                    'rounded-sm h-6 text-gray-50 w-6 outline-none justify-center flex items-center leading-6',
+                    valueString == 'black' || valueString == 'white' ? `bg-${valueString}` : `bg-${valueString}-500`
                   )}
                   onClick={() => onChange(valueString)}
                 >
-                  {defaultValue?.toString() == valueString ? <Check className={'h-3 w-3'} /> : ' '}
+                  {defaultValue?.toString() == valueString ? <Check className={'h-4 w-4'} /> : ' '}
                 </button>
               );
             })}

@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { primitiveComponent } from '../utils/component';
-import type { Color, Size } from '../utils/types';
+import type { ScaleColor, Size } from '../utils/types';
 import { cx } from 'twind';
 
 export type ProgressProps = {
@@ -8,18 +8,37 @@ export type ProgressProps = {
    * 颜色
    * @default 'blue'
    */
-  color?: Color;
+  color?: ScaleColor;
 
+  /**
+   * 值
+   */
   value?: number;
 
+  /**
+   * 大小
+   * @default 'md'
+   */
   size?: Size;
 
+  /**
+   * 条纹
+   */
   striped?: boolean;
 
+  /**
+   * 动画
+   */
   animate?: boolean;
 
+  /**
+   * 不明确
+   */
   indeterminate?: boolean;
 
+  /**
+   * 标签
+   */
   label?: string;
 };
 
@@ -38,18 +57,15 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
   } = props;
 
   return (
-    <div className="relative bg-gray-100 overflow-hidden h-2 rounded">
+    <div className="relative bg-gray-100 w-full overflow-hidden h-2 rounded">
       <div
+        ref={ref}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={value}
         role="progressbar"
         {...rest}
-        className={cx(
-          'rounded h-full',
-          color == 'white' || color == 'black' ? `bg-${color}` : `bg-${color}-500`,
-          className
-        )}
+        className={cx('rounded h-full transition-[width]', `bg-${color}-500`, className)}
         style={{ width: `${value}%` }}
       >
         {children}

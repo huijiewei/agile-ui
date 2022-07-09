@@ -7,6 +7,7 @@ import fontWeight from './presets/font-weight';
 import screens from './presets/screens';
 
 export * from './types/Color';
+export * from './types/Tuple';
 
 export default () => {
   return {

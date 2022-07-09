@@ -4,6 +4,7 @@ import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
 import { MdxPropsTable, MdxPropsTableProps } from '../components/mdx/MdxPropsTable';
+import { MdxShowcase } from '../components/mdx/MdxShowcase';
 
 type Props = Record<string, unknown> & { children?: ReactNode };
 
@@ -77,10 +78,8 @@ export const components = {
     const childrenProps = isValidElement(children) && children.props;
     return <MdxCodeLive {...{ ...rest, ...childrenProps }} />;
   },
-  Showcase: () => <div></div>,
-  PropsTable: (props: MdxPropsTableProps) => {
-    return <MdxPropsTable {...props}></MdxPropsTable>;
-  },
+  Showcase: MdxShowcase,
+  PropsTable: MdxPropsTable,
   ...AgileReact,
   ...AgileReactIcons,
 } as unknown as MDXComponents;

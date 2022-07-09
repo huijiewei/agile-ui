@@ -19,8 +19,8 @@ export type SpinnerProps = {
 
   /**
    * 颜色
+   * @default 'blue'
    */
-
   color?: ScaleColor;
 };
 
@@ -39,7 +39,7 @@ const SpinnerStyles = {
  * 加载器
  */
 export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) => {
-  const { as: Component = 'span', label = '加载中…', className, color, size = 'md', ...rest } = props;
+  const { as: Component = 'span', label = '加载中…', className, color = 'blue', size = 'md', ...rest } = props;
   return (
     <Component
       className={cx(

@@ -9,13 +9,7 @@ export const PlaygroundCode = ({ code }: { code: string }) => {
 
   return (
     <div className={'relative'}>
-      <CodeBlock
-        disabled
-        code={code}
-        theme={darkMode ? vsDark : vsLight}
-        className={'rounded rounded-t-none border border-slate-200 overflow-x-auto font-mono text-[13px] leading-5'}
-        language={'tsx'}
-      />
+      <CodeBlock disabled code={code} theme={darkMode ? vsDark : vsLight} language={'tsx'} />
       <CopyIcon content={code} />
     </div>
   );

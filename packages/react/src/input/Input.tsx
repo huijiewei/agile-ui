@@ -10,8 +10,6 @@ export type InputProps = {
    */
   size?: Size;
 
-  invalid?: boolean;
-
   /**
    * 是否禁用
    * @default false
@@ -23,6 +21,12 @@ export type InputProps = {
    * @default false
    */
   required?: boolean;
+
+  /**
+   * 是否未通过验证
+   * @default false
+   */
+  invalid?: boolean;
 
   /**
    * 是否只读

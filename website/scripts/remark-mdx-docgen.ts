@@ -1,15 +1,15 @@
 import { name as isIdentifierName } from 'estree-util-is-identifier-name';
 import { valueToEstree } from 'estree-util-value-to-estree';
+import fs from 'fast-glob';
 import type { Root } from 'mdast';
+import { fromMarkdown } from 'mdast-util-from-markdown';
 import type { MdxjsEsm, MdxJsxAttribute, MdxJsxFlowElement } from 'mdast-util-mdx';
+import { mdxFromMarkdown } from 'mdast-util-mdx';
+import { mdxjs } from 'micromark-extension-mdxjs';
+import path from 'path';
 import { ComponentDoc, PropItem, withCustomConfig } from 'react-docgen-typescript';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import { fromMarkdown } from 'mdast-util-from-markdown';
-import { mdxjs } from 'micromark-extension-mdxjs';
-import { mdxFromMarkdown } from 'mdast-util-mdx';
-import fs from 'fast-glob';
-import path from 'path';
 
 type RemarkMdxDocgenOptions = {
   sourceRootPath: string;
@@ -53,7 +53,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
     visit(mdast, 'mdxJsxFlowElement', (node, index, parent) => {
       const elem = node as MdxJsxFlowElement;
 
-      if (elem.name == 'PropsTable') {
+      if (elem.name == 'PropsTable' || elem.name == 'Showcase') {
         const nodeComponentName = elem.attributes?.find((attr) => (attr as MdxJsxAttribute).name == 'componentName')
           ?.value as string;
 
