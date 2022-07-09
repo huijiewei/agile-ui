@@ -12,3 +12,4 @@ export * from './icons/Plus';
 export * from './icons/Menu';
 export * from './icons/Close';
 export * from './icons/Info';
+export * from './icons/Error';

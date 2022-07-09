@@ -10,7 +10,7 @@ export const Loader = (props: HTMLProps<HTMLDivElement>) => {
       className={cx('justify-center text-lg transition-opacity text-gray-500 flex h-32 items-center w-full', className)}
       {...rest}
     >
-      <Spinner className={'mr-2'} />
+      <Spinner color={'gray'} className={'mr-2'} />
       正在加载...
     </div>
   );

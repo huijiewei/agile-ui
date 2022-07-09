@@ -1,4 +1,4 @@
-import { __DEV__, isNumber } from '@agile-ui/utils';
+import { __DEV__, isNumber, MaybeFunction, runIfFn } from '@agile-ui/utils';
 import type { PropsWithChildren } from 'react';
 import { useMemo, useState } from 'react';
 import { cx } from 'twind';
@@ -9,10 +9,24 @@ import { ToastContainer } from './ToastContainer';
 
 export type ToastPosition = 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
 
-export type ToastOptions = Omit<ToastProps, 'id'> & {
-  id: ToastId;
+export type ToastOptions = Omit<ToastProps, 'duration' | 'progress'> & {
+  /**
+   * 自动关闭延迟, 设置为 `null` 通知不会自动关闭.
+   * @default 5000
+   */
   duration: number | null;
-  position: ToastPosition;
+
+  /**
+   * 显示进度条
+   * @default true
+   */
+  progress?: boolean;
+
+  /**
+   * 显示位置
+   * @default 'bottom'
+   */
+  position?: ToastPosition;
 
   remove: boolean;
   onRemove?: () => void;
@@ -22,9 +36,20 @@ type ToastState = {
   [K in ToastPosition]: Omit<ToastOptions, 'position'>[];
 };
 
+type ToastCreateOptions = Partial<ToastOptions>;
+type ToastUpdateOptions = Omit<ToastCreateOptions, 'id' | 'position' | 'remove' | 'onRemove'>;
+
 type ToastDispatch = {
-  notify: (options: Partial<ToastOptions>) => ToastId;
-  update: (id: ToastId, options: Omit<ToastProps, 'id'>) => void;
+  notify: (options: ToastCreateOptions) => ToastId;
+  update: (id: ToastId, options: ToastUpdateOptions) => void;
+  promise: <T = unknown, E extends Error = Error>(
+    promise: MaybeFunction<Promise<T>>,
+    options: {
+      pending: ToastCreateOptions;
+      success: MaybeFunction<ToastUpdateOptions, [T]>;
+      error: MaybeFunction<ToastUpdateOptions, [E]>;
+    }
+  ) => void;
   close: (id: ToastId) => void;
   clean: (options?: { positions?: ToastPosition[] }) => void;
 };
@@ -81,7 +106,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       return toastId;
     };
 
-    const update = (id: ToastId, options: Omit<ToastProps, 'id'>) => {
+    const update: ToastDispatch['update'] = (id, options) => {
       if (!id) return;
 
       setState((prevState) => {
@@ -99,7 +124,19 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       });
     };
 
-    const close = (id: ToastId) => {
+    const promise: ToastDispatch['promise'] = (promise, options) => {
+      const toastId = notify({ ...options.pending, duration: null, closeable: false });
+
+      runIfFn(promise)
+        .then((data) => {
+          update(toastId, { duration: 5000, ...runIfFn(options.success, data) });
+        })
+        .catch((error) => {
+          update(toastId, { duration: 5000, ...runIfFn(options.error, error) });
+        });
+    };
+
+    const close: ToastDispatch['close'] = (id) => {
       setState((prevState) => {
         const position = getToastPosition(prevState, id);
 
@@ -121,7 +158,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       });
     };
 
-    const clean = (options?: { positions?: ToastPosition[] }) => {
+    const clean: ToastDispatch['clean'] = (options?) => {
       setState((prev) => {
         const positions = options?.positions || [
           'bottom',
@@ -146,7 +183,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       });
     };
 
-    return { notify, update, close, clean };
+    return { notify, update, promise, close, clean };
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import { isBrowser, isFunction } from '@agile-ui/utils';
+import { isBrowser, runIfFn } from '@agile-ui/utils';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useEventListener } from '../use-event-listener';
 
@@ -14,7 +14,7 @@ export const useLocalStorage = <T>(name: string, initialValue: (() => T) | T): [
       console.warn(`Error reading localStorage key “${name}”:`, error);
     }
 
-    return isFunction(initialValue) ? initialValue() : initialValue;
+    return runIfFn(initialValue);
   });
 
   useEffect(() => {

@@ -24,15 +24,12 @@ export type SpinnerProps = {
   color?: ScaleColor;
 };
 
-const SpinnerStyles = {
-  base: 'inline-block animate-spin rounded-full',
-  sizes: {
-    xs: 'h-3 w-3 border-2',
-    sm: 'h-4 w-4 border-2',
-    md: 'h-5 w-5 border-2',
-    lg: 'h-6 w-6 border-[3px]',
-    xl: 'h-7 w-7 border-[3px]',
-  },
+const SpinnerSizes = {
+  xs: 'h-3 w-3 border-2',
+  sm: 'h-4 w-4 border-2',
+  md: 'h-5 w-5 border-2',
+  lg: 'h-6 w-6 border-[3px]',
+  xl: 'h-7 w-7 border-[3px]',
 };
 
 /**
@@ -43,8 +40,8 @@ export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) =
   return (
     <Component
       className={cx(
-        SpinnerStyles.base,
-        SpinnerStyles.sizes[size],
+        'inline-block animate-spin rounded-full',
+        SpinnerSizes[size],
         color
           ? `border-t-${color}-500 border-r-${color}-500 border-b-${color}-100 border-l-${color}-100`
           : 'border-t-current border-r-current border-b-transparent border-l-transparent',

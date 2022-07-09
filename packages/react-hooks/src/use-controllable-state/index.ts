@@ -1,4 +1,4 @@
-import { isFunction } from '@agile-ui/utils';
+import { runIfFn } from '@agile-ui/utils';
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { useCallbackRef } from '../use-callback-ref';
 
@@ -39,7 +39,7 @@ export const useControllableState = <T>(props: UseControllableStateProps<T>) => 
   const setState: Dispatch<SetStateAction<T | undefined>> = useCallback(
     (nextValue) => {
       if (isControlled) {
-        const state = isFunction(nextValue) ? nextValue(value) : nextValue;
+        const state = runIfFn(nextValue, value);
 
         if (state != value) {
           handleChange(state as T);

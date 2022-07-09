@@ -1,38 +1,26 @@
-import type { ToastId, ToastProps } from './Toast';
-import { ToastPosition, useToastContext } from './ToastProvider';
+import { __DEV__ } from '@agile-ui/utils';
+import { ToastOptions, useToastContext } from './ToastProvider';
 
-export type UseToastOptions = ToastProps & {
-  /**
-   * 显示位置
-   * @default false
-   */
-  position?: ToastPosition;
+export type UseToastOptions = Omit<ToastOptions, 'remove' | 'onRemove'>;
 
-  /**
-   * 自动关闭延迟
-   * 如果设置为 `null`, 通知将不会自动关闭.
-   * @default 5000
-   */
-  duration?: number | null;
-};
 export const useToast = (defaultOptions?: UseToastOptions) => {
-  const normalizeToastOptions = (options?: UseToastOptions) => ({
-    ...defaultOptions,
-    ...options,
-  });
-
   const context = useToastContext();
 
   const toast = (options: UseToastOptions) => {
-    return context.notify(normalizeToastOptions(options));
+    return context.notify({
+      ...defaultOptions,
+      ...options,
+    });
   };
 
-  toast.update = (id: ToastId, options: Omit<UseToastOptions, 'id'>) => {
-    context.update(id, normalizeToastOptions(options));
-  };
-
+  toast.update = context.update;
+  toast.promise = context.promise;
   toast.close = context.close;
   toast.clean = context.clean;
 
   return toast;
 };
+
+if (__DEV__) {
+  useToast.displayName = 'useToast';
+}

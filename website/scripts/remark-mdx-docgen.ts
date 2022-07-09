@@ -61,7 +61,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
           throw new Error(`Invalid componentName for PropsTable.`);
         }
 
-        if (!propsTables[componentName]) {
+        if (!propsTables[nodeComponentName]) {
           const nodeComponentDoc = getComponentDoc(options.sourceRootPath, nodeComponentName);
 
           if (nodeComponentDoc) {

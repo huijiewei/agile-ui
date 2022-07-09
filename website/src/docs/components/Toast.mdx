@@ -3,7 +3,11 @@ title: 通知提醒
 description: 全局展示通知提醒，将信息及时有效的传达给用户。
 ---
 
-## 用法
+## 导入
+
+```tsx
+import { useToast } from '@agile-ui/react';
+```
 
 ## 颜色
 
@@ -12,7 +16,7 @@ function ToastDemo() {
   const toast = useToast();
 
   return (
-    <div className={'flex gap-2 justify-center'}>
+    <div className={'flex gap-2'}>
       {[
         ['gray', '灰色'],
         ['blue', '蓝色'],
@@ -26,7 +30,7 @@ function ToastDemo() {
             key={color}
             onClick={() =>
               toast({
-                icon: <Info />,
+                icon: <Info size={6} />,
                 color: color,
                 title: '通知提醒',
                 description: '全局展示通知提醒，将信息及时有效的传达给用户。',
@@ -49,7 +53,7 @@ function ToastDemo() {
   const toast = useToast();
 
   return (
-    <div className={'flex gap-2 justify-center'}>
+    <div className={'flex gap-2'}>
       {[
         ['solid', '实心'],
         ['light', '浅色'],
@@ -61,7 +65,7 @@ function ToastDemo() {
             key={variant}
             onClick={() =>
               toast({
-                icon: <Info />,
+                icon: <Info size={6} />,
                 variant: variant,
                 title: '通知提醒',
                 description: '全局展示通知提醒，将信息及时有效的传达给用户。',
@@ -72,6 +76,140 @@ function ToastDemo() {
           </Button>
         );
       })}
+    </div>
+  );
+}
+```
+
+## 持续时间
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  return (
+    <div className={'flex gap-2'}>
+      <Button
+        onClick={() =>
+          toast({
+            icon: <Info size={6} />,
+            title: '通知提醒',
+            description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+            duration: 10000,
+          })
+        }
+      >
+        提醒持续10秒
+      </Button>
+      <Button
+        onClick={() =>
+          toast({
+            icon: <Info size={6} />,
+            title: '通知提醒',
+            description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+            duration: null,
+          })
+        }
+      >
+        提醒不会自动关闭
+      </Button>
+    </div>
+  );
+}
+```
+
+## 更新提醒内容
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+  const toastId = React.useRef();
+
+  const notify = () => {
+    toastId.current = toast({
+      icon: <Info />,
+      title: '通知提醒',
+      description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+    });
+  };
+
+  const update = () => {
+    toast.update(toastId.current, { color: 'green', description: '通知提醒的内容更新了.' });
+  };
+
+  return (
+    <div className={'flex gap-2'}>
+      <Button onClick={() => notify()}>提醒</Button>
+      <Button onClick={() => update()}>更新内容</Button>
+    </div>
+  );
+}
+```
+
+## 关闭回调
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  return (
+    <div className={'flex gap-2'}>
+      <Button
+        onClick={() =>
+          toast({
+            icon: <Info />,
+            title: '通知提醒',
+            description: '全局展示通知提醒，将信息及时有效的传达给用户。',
+            onClose: () => {
+              alert('通知提醒关闭回调');
+            },
+          })
+        }
+      >
+        提醒
+      </Button>
+    </div>
+  );
+}
+```
+
+## 处理承诺
+
+```tsx preview editable
+function ToastDemo() {
+  const toast = useToast();
+
+  const promise = () => {
+    return Math.floor(Math.random() * 10) > 5
+      ? new Promise((resolve) => setTimeout(resolve, 3000))
+      : new Promise((resolve, reject) => setTimeout(reject, 3000));
+  };
+
+  const handleClick = () => {
+    toast.promise(promise(), {
+      pending: {
+        icon: <Spinner size={'lg'} />,
+        title: '通知提醒',
+        description: '开始处理承诺。',
+      },
+      success: {
+        icon: <Check size={6} />,
+        color: 'green',
+        title: '通知提醒',
+        description: '处理承诺成功。',
+      },
+      error: {
+        icon: <Error size={6} />,
+        color: 'red',
+        title: '通知提醒',
+        description: '处理承诺失败。',
+      },
+    });
+  };
+
+  return (
+    <div className={'flex gap-2'}>
+      <Button onClick={handleClick}>处理承诺</Button>
     </div>
   );
 }
@@ -113,7 +251,7 @@ function ToastDemo() {
             onClick={() =>
               toast({
                 position: placement,
-                icon: <Info />,
+                icon: <Info size={6} />,
                 title: '通知提醒',
                 description: '全局展示通知提醒，将信息及时有效的传达给用户。',
               })
@@ -130,4 +268,4 @@ function ToastDemo() {
 
 ## 属性
 
-<PropsTable componentName="Toast" />
+<PropsTable componentName="useToast" />
