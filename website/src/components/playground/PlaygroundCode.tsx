@@ -5,7 +5,7 @@ import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
 
 export const PlaygroundCode = ({ code }: { code: string }) => {
-  const darkMode = useColorModeState();
+  const { darkMode } = useColorModeState();
 
   return (
     <div className={'relative'}>

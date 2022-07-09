@@ -21,12 +21,12 @@ type CodeLiveProps = {
 export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   const { code, preview = false, editable = false, language = 'tsx', className, ...rest } = props;
 
-  const colorModeState = useColorModeState();
+  const { darkMode } = useColorModeState();
 
   if (!preview) {
     return (
       <div className={`relative`} {...rest}>
-        <CodeBlock theme={colorModeState ? darkTheme : lightTheme} code={code} language={language}></CodeBlock>
+        <CodeBlock theme={darkMode ? darkTheme : lightTheme} code={code} language={language}></CodeBlock>
         <CopyIcon content={code} />
       </div>
     );
@@ -35,7 +35,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   return (
     <div className={cx('flex flex-col', className)} {...rest}>
       <LiveProvider
-        theme={colorModeState ? darkTheme : lightTheme}
+        theme={darkMode ? darkTheme : lightTheme}
         code={code}
         language={language}
         scope={{ ...AgileReact, ...AgileReactIcons, FormDemo }}

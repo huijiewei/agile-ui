@@ -1,27 +1,35 @@
 import { Tooltip, useColorModeDispatch, useColorModeState } from '@agile-ui/react';
-import { Moon, Sun } from '@agile-ui/react-icons';
+import { Computer, Moon, Sun } from '@agile-ui/react-icons';
 import { useEffect } from 'react';
 
 export const ThemeSwitcher = () => {
-  const colorModeState = useColorModeState();
-  const colorModeDispatch = useColorModeDispatch();
+  const { darkMode, colorMode } = useColorModeState();
+  const toggleColorMode = useColorModeDispatch();
 
   useEffect(() => {
-    if (colorModeState) {
+    if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [colorModeState]);
+  }, [darkMode]);
+
+  const colorModeTitle = {
+    dark: '黑暗模式',
+    light: '亮色模式',
+    system: '跟随系统',
+  };
 
   return (
-    <Tooltip placement={'bottom'} content={colorModeState ? '进入亮色模式' : '进入暗色模式'}>
+    <Tooltip placement={'bottom'} content={colorModeTitle[colorMode]}>
       <button
-        aria-label={colorModeState ? '黑暗模式' : '亮色模式'}
-        onClick={() => colorModeDispatch((prev) => !prev)}
+        aria-label={colorModeTitle[colorMode]}
+        onClick={() => toggleColorMode()}
         className={'block border-gray-300 rounded select-none p-1 border text-gray-400 hover:text-gray-500'}
       >
-        {colorModeState ? <Sun size={5} /> : <Moon size={5} />}
+        {colorMode == 'system' && <Computer size={5} />}
+        {colorMode == 'light' && <Sun size={5} />}
+        {colorMode == 'dark' && <Moon size={5} />}
       </button>
     </Tooltip>
   );
