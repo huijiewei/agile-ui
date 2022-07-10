@@ -31,12 +31,12 @@ const View = () => {
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    let isActive = true;
+    let mounted = true;
 
     (async () => {
       const [error, mdx] = await to(import(`../../docs/components/${componentName}.mdx`));
 
-      if (!isActive) {
+      if (!mounted) {
         return;
       }
 
@@ -54,7 +54,7 @@ const View = () => {
     })();
 
     return () => {
-      isActive = false;
+      mounted = false;
       setMdx(null);
       setError(false);
     };

@@ -26,6 +26,9 @@ export default () => {
       body {
         @apply text-base;
       }
+      .dark {
+        color-scheme: dark;
+      }
     `,
     theme: {
       screens,

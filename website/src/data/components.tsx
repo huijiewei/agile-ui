@@ -1,5 +1,6 @@
 import * as AgileReact from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
+import { isString } from '@agile-ui/utils';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
@@ -71,6 +72,17 @@ export const components = {
       <h5 className={`text-lg font-bold`} {...rest}>
         {children}
       </h5>
+    );
+  },
+  a: (props: Props) => {
+    return (
+      <a
+        className={'text-blue-500 hover:(text-blue-600 underline)'}
+        href={props.href as string}
+        title={isString(props.children) ? props.children : ''}
+      >
+        {props.children}
+      </a>
     );
   },
   code: (props: Props) => {

@@ -37,6 +37,10 @@ export const menus: Menu[] = [
             path: '/components/icon',
           },
           {
+            label: '图片',
+            path: '/components/image',
+          },
+          {
             label: '排版',
             path: '/components/typography',
           },
@@ -97,10 +101,6 @@ export const menus: Menu[] = [
           {
             label: '描述',
             path: '/components/description',
-          },
-          {
-            label: '图片',
-            path: '/components/image',
           },
           {
             label: '空状态',
