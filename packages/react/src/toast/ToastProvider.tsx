@@ -188,6 +188,10 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
           const toastPosition = position as ToastPosition;
           const toasts = state[toastPosition];
 
+          if (toasts.length == 0) {
+            return null;
+          }
+
           return (
             <ul
               role="region"
