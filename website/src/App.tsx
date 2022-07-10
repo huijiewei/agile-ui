@@ -2,13 +2,10 @@ import { AgileProvider } from '@agile-ui/react';
 import { useEventListener } from '@agile-ui/react-hooks';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
-import { useRegisterSW } from 'virtual:pwa-register/react';
 import { ReloadPrompt } from './components/shared/ReloadPrompt';
 import { AppRoutes } from './data/routes';
 
 export const App = () => {
-  useRegisterSW();
-
   const splash = document.getElementById('appSplash');
 
   useEventListener(

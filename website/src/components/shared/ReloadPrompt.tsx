@@ -6,9 +6,7 @@ export const ReloadPrompt = () => {
   const {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
-  } = useRegisterSW({
-    immediate: true,
-  });
+  } = useRegisterSW();
 
   const handleReload = async () => {
     await updateServiceWorker(true);
