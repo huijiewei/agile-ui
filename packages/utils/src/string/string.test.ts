@@ -24,5 +24,6 @@ describe('utils/string', () => {
     expect(slugify('foo  bar--baz')).toEqual('foo-bar-baz');
     expect(slugify('Foo bAr baZ')).toEqual('foo-bar-baz');
     expect(slugify('unicode ♥ is ☢')).toEqual('unicode-is');
+    expect(slugify('测试中文')).toEqual('测试中文');
   });
 });
