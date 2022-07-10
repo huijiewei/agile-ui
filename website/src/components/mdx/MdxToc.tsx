@@ -1,3 +1,5 @@
+import { useEventListener } from '@agile-ui/react-hooks';
+import { slugify } from '@agile-ui/utils';
 import { useEffect, useRef, useState } from 'react';
 import { cx } from 'twind';
 
@@ -8,7 +10,7 @@ export type Toc = {
 };
 
 const getActiveElement = (rects: DOMRect[]) => {
-  if (rects.length === 0) {
+  if (rects.length == 0) {
     return -1;
   }
 
@@ -32,43 +34,41 @@ const getActiveElement = (rects: DOMRect[]) => {
 export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
   const [active, setActive] = useState(0);
 
-  const slugs = useRef<HTMLDivElement[]>([]);
+  const slugs = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    slugs.current = toc.map((item) => document.getElementById(item.value) as HTMLDivElement);
+    slugs.current = toc
+      .map((item) => document.getElementById(slugify(item.value)) as HTMLElement)
+      .filter((item) => item != null);
   }, [toc]);
 
-  const handleScroll = () => {
+  useEventListener('scroll', () => {
     setActive(getActiveElement(slugs.current.map((d) => d.getBoundingClientRect())));
-  };
-
-  useEffect(() => {
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  });
 
   return (
-    <>
-      <ul className={'space-y-1 border-l border-l-gray-100'}>
-        {toc.map(({ value, depth }, index) => (
-          <li key={value}>
+    <ul className={'space-y-1 border-l border-l-gray-100'}>
+      {toc.map(({ value, depth }, index) => {
+        const slug = slugify(value);
+
+        return (
+          <li key={slug}>
             <a
               className={cx(
                 '-ml-px block border-l py-1 text-sm',
-                depth == 3 ? 'pl-10' : 'pl-5',
+                depth == 3 ? 'pl-8' : 'pl-4',
                 index == active
                   ? 'border-l-blue-300 bg-blue-50 text-blue-500'
                   : 'border-l-transparent text-gray-500 hover:(border-l-gray-300 text-gray-700)'
               )}
               aria-current={index == active ? 'location' : undefined}
-              href={`#${value}`}
+              href={`#${slug}`}
             >
               {value}
             </a>
           </li>
-        ))}
-      </ul>
-    </>
+        );
+      })}
+    </ul>
   );
 };
