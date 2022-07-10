@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
 import ComponentView from '../views/components/View';
 
@@ -11,11 +11,7 @@ export const routes = [
     element: <Layout />,
     children: [
       {
-        index: true,
-        element: <Navigate to="home" replace={true} />,
-      },
-      {
-        path: 'home',
+        path: '',
         element: <Home />,
       },
       {
