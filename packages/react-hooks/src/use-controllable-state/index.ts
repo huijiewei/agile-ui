@@ -1,10 +1,10 @@
-import { runIfFn } from '@agile-ui/utils';
+import { MaybeFunction, runIfFn } from '@agile-ui/utils';
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { useCallbackRef } from '../use-callback-ref';
 
 export type UseControllableStateProps<T> = {
   value?: T;
-  defaultValue?: T | (() => T);
+  defaultValue?: MaybeFunction<T>;
   onChange?: (value: T) => void;
 };
 
