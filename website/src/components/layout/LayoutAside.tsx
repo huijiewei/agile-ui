@@ -1,6 +1,6 @@
 import { cx } from 'twind';
 import { useLayerState } from './Layout';
-import { LayoutNavMenu } from './LayoutNavMenu';
+import { LayoutAsideMenu } from './LayoutAsideMenu';
 
 export const LayoutAside = () => {
   const layer = useLayerState();
@@ -16,7 +16,7 @@ export const LayoutAside = () => {
         '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
       )}
     >
-      <LayoutNavMenu />
+      <LayoutAsideMenu />
     </aside>
   );
 };

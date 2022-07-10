@@ -1,7 +1,7 @@
 import { createContext } from '@agile-ui/react';
 import { Dispatch, ReactNode, SetStateAction, Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Loader } from '../shared/Loader';
+import { LazyLoader } from '../shared/LazyLoader';
 import { LayoutAside } from './LayoutAside';
 import { LayoutFooter } from './LayoutFooter';
 import { LayoutHeader } from './LayoutHeader';
@@ -35,7 +35,7 @@ export const Layout = () => {
         <LayoutAside />
         <div className={'tablet:pl-52'}>
           <main className={'mx-auto h-full p-5'}>
-            <Suspense fallback={<Loader className={'h-96'} />}>
+            <Suspense fallback={<LazyLoader className={'h-96'} />}>
               <Outlet />
             </Suspense>
           </main>

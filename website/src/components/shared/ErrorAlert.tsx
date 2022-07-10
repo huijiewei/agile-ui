@@ -7,7 +7,7 @@ type ErrorProps = {
   onBack?: () => void;
 };
 
-export const Error = (props: PropsWithChildren<ErrorProps>) => {
+export const ErrorAlert = (props: PropsWithChildren<ErrorProps>) => {
   const { title, onBack, children } = props;
   const navigate = useNavigate();
 

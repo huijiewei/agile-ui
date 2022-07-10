@@ -25,7 +25,7 @@ export const ThemeSwitcher = () => {
       <button
         aria-label={colorModeTitle[colorMode]}
         onClick={() => toggleColorMode()}
-        className={'block border-gray-300 rounded select-none p-1 border text-gray-400 hover:text-gray-500'}
+        className={'block select-none p-1 text-gray-400 hover:text-gray-500'}
       >
         {colorMode == 'system' && <Computer size={5} />}
         {colorMode == 'light' && <Sun size={5} />}

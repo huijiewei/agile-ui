@@ -3,7 +3,7 @@ import * as AgileReactIcons from '@agile-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
-import { MdxPropsTable, MdxPropsTableProps } from '../components/mdx/MdxPropsTable';
+import { MdxPropsTable } from '../components/mdx/MdxPropsTable';
 import { MdxShowcase } from '../components/mdx/MdxShowcase';
 
 type Props = Record<string, unknown> & { children?: ReactNode };
@@ -23,6 +23,7 @@ export const components = {
       <h2 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
+          tabIndex={-1}
           className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}
@@ -38,6 +39,7 @@ export const components = {
       <h3 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
+          tabIndex={-1}
           className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}
@@ -53,6 +55,7 @@ export const components = {
       <h4 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
         {children}
         <a
+          tabIndex={-1}
           className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
           aria-hidden={true}
           href={`#${props.id}`}

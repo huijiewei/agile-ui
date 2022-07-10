@@ -1,5 +1,5 @@
 import { Edit, Github } from '@agile-ui/react-icons';
-import { pascalCase } from '@agile-ui/utils';
+import { pascalCase, to } from '@agile-ui/utils';
 import type { MDXContent } from 'mdx/types';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 import Image500 from '../../assets/images/500.png';
 import type { Toc } from '../../components/mdx/MdxToc';
 import { MdxToc } from '../../components/mdx/MdxToc';
-import { Error } from '../../components/shared/Error';
-import { Loader } from '../../components/shared/Loader';
+import { ErrorAlert } from '../../components/shared/ErrorAlert';
+import { LazyLoader } from '../../components/shared/LazyLoader';
 import { components } from '../../data/components';
 
 type Mdx = {
@@ -25,51 +25,54 @@ type Mdx = {
 const githubUrl = 'https://github.com/huijiewei/agile-ui/blob/main';
 
 const View = () => {
-  const component = pascalCase(useParams().component || '');
+  const componentName = pascalCase(useParams().component || '');
 
-  const [mdx, setMdx] = useState<Mdx>();
-  const [error, setError] = useState<string>();
+  const [mdx, setMdx] = useState<Mdx | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    let mounted = true;
+    let isActive = true;
 
-    if (mounted) {
-      const componentName = pascalCase(component);
+    (async () => {
+      const [error, mdx] = await to(import(`../../docs/components/${componentName}.mdx`));
 
-      import(`../../docs/components/${componentName}.mdx`)
-        .then((mdx) => {
-          setMdx({
-            ...mdx,
-            sourceLink: `${githubUrl}/packages/react/src${mdx.sourcePath}`,
-            documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
-          });
-          setError(undefined);
-        })
-        .catch((error) => {
-          setError(error.message);
+      if (!isActive) {
+        return;
+      }
+
+      if (error) {
+        setError(true);
+      }
+
+      if (mdx) {
+        setMdx({
+          ...mdx,
+          sourceLink: `${githubUrl}/packages/react/src${mdx.sourcePath}`,
+          documentLink: `${githubUrl}/website/src/docs/components/${componentName}.mdx`,
         });
-    }
+      }
+    })();
 
     return () => {
-      mounted = false;
-      setMdx(undefined);
-      setError(undefined);
+      isActive = false;
+      setMdx(null);
+      setError(false);
     };
-  }, [component]);
+  }, [componentName]);
 
   if (error) {
     return (
       <>
         <Helmet title={'文档不存在 - 组件'}></Helmet>
-        <Error title={`组件文档不存在`}>
-          <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={error}></img>
-        </Error>
+        <ErrorAlert title={`组件文档不存在`}>
+          <img className={'w-[320px] aspect-[3/2] items-center'} src={Image500} alt={'组件文档不存在'}></img>
+        </ErrorAlert>
       </>
     );
   }
 
-  if (!mdx) {
-    return <Loader className={'h-96'}></Loader>;
+  if (mdx == null) {
+    return <LazyLoader className={'h-96'}></LazyLoader>;
   }
 
   return (

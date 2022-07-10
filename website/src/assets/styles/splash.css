@@ -8,11 +8,13 @@
   left: 0;
   right: 0;
 }
+
 @media (prefers-color-scheme: dark) {
   #appSplash {
     background-color: #2a3f4d;
   }
 }
+
 #appSplashStatus {
   width: 40px;
   height: 40px;
@@ -21,6 +23,7 @@
   top: 50%;
   left: 50%;
 }
+
 #appSplashSpinner {
   width: 78px;
   height: 78px;
@@ -29,6 +32,7 @@
   position: absolute;
   left: 50%;
 }
+
 #appSplashSpinner:before {
   content: '';
   width: 45px;
@@ -45,6 +49,7 @@
   top: 50%;
   left: 50%;
 }
+
 #appSplashSpinner:after {
   content: '';
   width: 12px;
@@ -68,6 +73,7 @@
     opacity: 0;
   }
 }
+
 @keyframes appSplashSpin {
   0% {
     transform: rotate(0deg);
@@ -79,6 +85,7 @@
     transform: rotate(1080deg);
   }
 }
+
 @keyframes appSplashPulse {
   0% {
     background-color: #67a8e433;
@@ -111,6 +118,7 @@
     background-color: #67a8e4e6;
   }
 }
+
 @keyframes appSplashBorderPulse {
   0% {
     box-shadow: 0 0 #fff, 0 0 0 1px #67a8e4cc;
