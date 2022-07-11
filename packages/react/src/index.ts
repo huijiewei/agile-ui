@@ -25,6 +25,8 @@ export * from './swich/Switch';
 
 export * from './checkbox/Checkbox';
 export * from './checkbox/CheckboxGroup';
+export * from './radio/Radio';
+export * from './radio/RadioGroup';
 
 export * from './tooltip/Tooltip';
 

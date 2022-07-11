@@ -5,6 +5,7 @@ import { ButtonShowcase } from './showcases/ButtonShowcase';
 import { CheckboxShowcase } from './showcases/CheckboxShowcase';
 import { InputShowcase } from './showcases/InputShowcase';
 import { ProgressBarShowcase } from './showcases/ProgressBarShowcase';
+import { RadioShowcase } from './showcases/RadioShowcase';
 import { SpinnerShowcase } from './showcases/SpinnerShowcase';
 import { TooltipShowcase } from './showcases/TooltipShowcase';
 
@@ -22,6 +23,7 @@ const showcases = {
   Checkbox: CheckboxShowcase,
   ProgressBar: ProgressBarShowcase,
   Alert: AlertShowcase,
+  Radio: RadioShowcase,
 };
 
 export const MdxShowcase = ({ componentName, componentProps }: MdxShowcaseProps) => {

@@ -1,0 +1,107 @@
+---
+title: 单选框
+description: 在一组相关且互斥数据中，用户仅能选择一个选项。
+---
+
+## 用法
+
+<Showcase componentName="Radio" />
+
+## 大小
+
+```tsx preview editable
+<RadioGroup name="form-name">
+  <div className={'flex flex-row gap-5'}>
+    <Radio size={'xs'} value={1}>
+      单选框
+    </Radio>
+    <Radio size={'sm'} value={2}>
+      单选框
+    </Radio>
+    <Radio size={'md'} value={3}>
+      单选框
+    </Radio>
+    <Radio size={'lg'} value={4}>
+      单选框
+    </Radio>
+    <Radio size={'xl'} value={5}>
+      单选框
+    </Radio>
+  </div>
+</RadioGroup>
+```
+
+## 颜色
+
+```tsx preview editable
+<RadioGroup name="form-name">
+  <div className={'flex flex-row gap-5'}>
+    <Radio color={'green'} value={1}>
+      绿色
+    </Radio>
+    <Radio color={'red'} value={2}>
+      红色
+    </Radio>
+    <Radio defaultChecked color={'yellow'} value={3}>
+      黄色
+    </Radio>
+    <Radio color={'gray'} value={4}>
+      灰色
+    </Radio>
+  </div>
+</RadioGroup>
+```
+
+## 单选框组
+
+```tsx preview editable
+function Example() {
+  const [checkedValue, setCheckedValue] = React.useState('');
+
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <RadioGroup
+        name={'demoRadio'}
+        value={checkedValue}
+        onChange={(value) => {
+          setCheckedValue(value);
+        }}
+      >
+        <div className={'flex flex-row gap-5'}>
+          <Radio value={'选择框一'}>选择框一</Radio>
+          <Radio value={'选择框二'}>选择框二</Radio>
+          <Radio value={'选择框三'}>选择框三</Radio>
+          <Radio value={'选择框四'}>选择框四</Radio>
+        </div>
+      </RadioGroup>
+      <div>你选中的值: {checkedValue}</div>
+    </div>
+  );
+}
+```
+
+## 关于名称的注意事项
+
+我们建议把名字道具传给 RadioGroup 组件，而不是传给每个 Radio 组件。默认情况下，RadioGroup 的名称道具是优先的。
+
+```tsx
+// 应该这样做 ✅
+<RadioGroup name="form-name">
+  <Radio value={1}>Radio 1</Radio>
+  <Radio value={2}>Radio 2</Radio>
+</RadioGroup>
+
+// 不要这样做 ❌
+<RadioGroup >
+  <Radio name="form-name">Radio 1</Radio>
+  <Radio name="form-name">Radio 2</Radio>
+</RadioGroup>
+```
+
+## 单选框属性
+
+<PropsTable componentName="Radio" />
+
+## 单选框组属性
+
+<PropsTable componentName="RadioGroup" />
