@@ -1,0 +1,68 @@
+---
+title: 快速开始
+description: 跟随以下的步骤，快速上手组件库的使用。
+---
+
+## 安装
+
+Agile 组件库基于 [React 18](https://reactjs.org/) 开发，CSS-IN-JS 方案使用的是 [Twind](https://twind.style/)
+
+```shell
+npm i agile-ui/react agile-ui/react-hooks agile-ui/twind
+```
+
+## 开始
+
+首先增加一个 twind.config.ts 文件，对 Twind 进行基本配置
+
+```ts
+import presetAgile from '@agile-ui/twind';
+import presetAutoprefix from '@twind/preset-autoprefix';
+import presetExt from '@twind/preset-ext';
+import presetTailwind from '@twind/preset-tailwind';
+import { css } from 'twind';
+import type { TwindUserConfig } from 'twind';
+
+export default {
+  presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
+  preflight: css`
+    body {
+      @apply antialiased text-black bg-white overflow-y-scroll;
+    }
+  `,
+} as TwindUserConfig;
+```
+
+然后在 App.tsx 文件里面，引入 AgileProvider
+
+```tsx
+import { AgileProvider } from '@agile-ui/react';
+
+export const App = () => {
+  return (
+    <AgileProvider>
+      <YourApplication />
+    </AgileProvider>
+  );
+};
+```
+
+最后在 main.tsx 或者 index.tsx 文件里面进行最后绑定
+
+```tsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
+import { setup } from 'twind';
+
+import { App } from './App';
+import twindConfig from './twind.config';
+
+setup(twindConfig);
+
+createRoot(document.getElementById('app') as HTMLElement).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```

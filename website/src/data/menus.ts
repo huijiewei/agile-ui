@@ -13,12 +13,12 @@ export const menus: Menu[] = [
         path: '/start',
       },
       {
-        label: '介绍',
-        path: '/about',
+        label: '主题指南',
+        path: '/theme',
       },
       {
-        label: '联系',
-        path: '/contact',
+        label: '暗黑模式',
+        path: '/dark-mode',
       },
     ],
   },

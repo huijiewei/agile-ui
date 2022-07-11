@@ -1,0 +1,31 @@
+---
+title: 主题指南
+description: 默认基于色板，你可以随意定制自己的主题
+---
+
+Agile 组件库的 CSS-IN-JS 方案使用的是 [Twind](https://twind.style/)，样式使用 [Tailwind CSS](https://tailwindcss.com/)
+
+## 定制色板
+
+通过 twind.config.ts 文件配置，可以灵活定制自己的主题
+
+```ts
+import presetAgile from '@agile-ui/twind';
+import presetAutoprefix from '@twind/preset-autoprefix';
+import presetExt from '@twind/preset-ext';
+import presetTailwind from '@twind/preset-tailwind';
+import { css } from 'twind';
+import type { TwindUserConfig } from 'twind';
+
+export default {
+  presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
+  preflight: css`
+    body {
+      @apply antialiased text-black bg-white overflow-y-scroll;
+    }
+  `,
+  theme: {}, // 通过修改 theme 定制自己的主题
+} as TwindUserConfig;
+```
+
+## 默认颜色

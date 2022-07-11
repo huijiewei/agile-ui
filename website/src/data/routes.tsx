@@ -1,9 +1,9 @@
 import { useRoutes } from 'react-router-dom';
 import { Layout } from '../components/layout/Layout';
 import ComponentView from '../views/components/View';
+import DocumentView from '../views/documents/View';
 
 import Home from '../views/site/Home';
-import NotFound from '../views/site/NotFound';
 
 export const routes = [
   {
@@ -19,8 +19,8 @@ export const routes = [
         element: <ComponentView />,
       },
       {
-        path: '*',
-        element: <NotFound />,
+        path: ':document',
+        element: <DocumentView />,
       },
     ],
   },
