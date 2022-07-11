@@ -23,6 +23,9 @@ export default () => {
       return theme(section as 'colors', key);
     },
     preflight: css`
+      html {
+        color-scheme: light;
+      }
       body {
         @apply text-base;
       }
