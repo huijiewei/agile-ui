@@ -4,6 +4,7 @@ import { isString } from '@agile-ui/utils';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
+import { MdxColorPlate } from '../components/mdx/MdxColorPlate';
 import { MdxPropsTable } from '../components/mdx/MdxPropsTable';
 import { MdxShowcase } from '../components/mdx/MdxShowcase';
 
@@ -93,6 +94,7 @@ export const components = {
     const childrenProps = isValidElement(children) && children.props;
     return <MdxCodeLive {...{ ...rest, ...childrenProps }} />;
   },
+  ColorPlate: MdxColorPlate,
   Showcase: MdxShowcase,
   PropsTable: MdxPropsTable,
   ...AgileReact,
