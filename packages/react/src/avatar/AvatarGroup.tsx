@@ -49,7 +49,7 @@ export const AvatarGroup = primitiveComponent<'div', AvatarGroupProps>((props, r
           )}
         >{`+${excess}`}</span>
       )}
-      {clones.map((child) => child)}
+      {clones}
     </div>
   );
 });
