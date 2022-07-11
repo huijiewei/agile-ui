@@ -1,21 +1,15 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import { cx } from 'twind';
-import { Animation } from '../animation/Animation';
 
 export type CheckboxIconProps = {
   indeterminate?: boolean;
-  checked?: boolean;
 };
 
 export const CheckboxIcon = (props: ComponentPropsWithoutRef<'svg'> & CheckboxIconProps) => {
-  const { indeterminate = false, checked = false, className, ...rest } = props;
+  const { indeterminate = false, className, ...rest } = props;
   const Icon = indeterminate ? IndeterminateIcon : CheckIcon;
 
-  return (
-    <Animation duration={200} show={checked || indeterminate}>
-      <Icon className={cx('w-[1.2em]', className)} {...rest} />
-    </Animation>
-  );
+  return <Icon className={cx('w-[1.2em]', className)} {...rest} />;
 };
 
 const CheckIcon = (props: ComponentPropsWithoutRef<'svg'>) => {

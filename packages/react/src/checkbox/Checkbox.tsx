@@ -129,8 +129,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const clonedIcon = cloneElement(icon, {
     indeterminate: indeterminate,
-    checked: isChecked,
-    className: sizeStyle.icon,
+    className: cx(sizeStyle.icon, 'transition-opacity', isChecked || indeterminate ? 'opacity-1' : 'opacity-0'),
   });
 
   return (
