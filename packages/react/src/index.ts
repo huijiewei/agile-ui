@@ -7,6 +7,10 @@ export * from './portal/Portal';
 export * from './alert/Alert';
 export * from './animation/Animation';
 
+export * from './avatar/Avatar';
+export * from './avatar/AvatarBadge';
+export * from './avatar/AvatarGroup';
+
 export * from './image/Image';
 
 export * from './visually-hidden/VisuallyHidden';

@@ -1,0 +1,108 @@
+---
+title: 头像
+description: 用作头像显示，可以为图片、图标或字符形式展示。
+---
+
+## 导入
+
+```tsx
+import { Avatar, AvatarBadge, AvatarGroup } from '@agile-ui/react';
+```
+
+## 使用
+
+```tsx preview editable
+<div className={'flex flex-row gap-3'}>
+  <Avatar src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'} />
+  <Avatar src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar'} />
+  <Avatar name={'冯凯瑞'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  <Avatar name={'宋展鹏'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  <Avatar name={'卢文博'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  <Avatar src={'https://www.huijiewei.com/images/203.jpg'} />
+</div>
+```
+
+## 头像大小
+
+```tsx preview editable
+<div className={'flex flex-row gap-3'}>
+  <Avatar
+    size={'xs'}
+    src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00446.png@!avatar'}
+  />
+  <Avatar
+    size={'sm'}
+    src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'}
+  />
+  <Avatar src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar'} />
+  <Avatar
+    size={'lg'}
+    src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00492.png@!avatar'}
+  />
+  <Avatar name={'宋展鹏'} size={'xl'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  <Avatar name={'冯凯瑞'} size={128} src={'https://www.huijiewei.com/images/203.jpg'} />
+  <Avatar size={128} src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00335.png@!avatar'} />
+</div>
+```
+
+## 头像徽章
+
+```tsx preview editable
+<div className={'flex flex-row gap-5'}>
+  <Avatar src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'}>
+    <AvatarBadge className={'w-6 h-6 border-4 border-gray-300 bg-green-300'} />
+  </Avatar>
+  <Avatar src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar'}>
+    <AvatarBadge className={'w-6 h-6 border-4 border-gray-600 bg-red-400'} />
+  </Avatar>
+  <Avatar name={'冯凯瑞'} src={'https://www.huijiewei.com/images/203.jpg'}>
+    <AvatarBadge className={'w-6 h-6 border-4 border-gray-600 bg-blue-400'} />
+  </Avatar>
+  <Avatar src={'https://www.huijiewei.com/images/203.jpg'}>
+    <AvatarBadge className={'w-6 h-6 border-4 border-gray-600 bg-yellow-400'} />
+  </Avatar>
+</div>
+```
+
+## 头像组
+
+```tsx preview editable
+<div className={'flex flex-row gap-5'}>
+  <AvatarGroup max={3}>
+    <Avatar
+      className={'w-10 h-10'}
+      src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'}
+    />
+    <Avatar
+      className={'w-10 h-10'}
+      src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar'}
+    />
+    <Avatar name={'冯凯瑞'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar name={'宋展鹏'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar name={'卢文博'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  </AvatarGroup>
+  <AvatarGroup size={'lg'} max={3}>
+    <Avatar
+      className={'w-10 h-10'}
+      src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'}
+    />
+    <Avatar
+      className={'w-10 h-10'}
+      src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar'}
+    />
+    <Avatar name={'冯凯瑞'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar name={'宋展鹏'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar name={'卢文博'} className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+    <Avatar className={'w-10 h-10'} src={'https://www.huijiewei.com/images/203.jpg'} />
+  </AvatarGroup>
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Avatar" />
+
+# 头像组属性
+
+<PropsTable componentName="AvatarGroup" />
