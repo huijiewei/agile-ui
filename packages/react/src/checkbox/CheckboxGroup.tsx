@@ -1,6 +1,6 @@
 import { useCallbackRef, useControllableState } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, isInputEvent } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
 import { createContext } from '../utils/context';
@@ -35,9 +35,9 @@ type CheckboxGroupBaseProps = CheckboxBaseProps & {
 
 type CheckboxGroupContext = CheckboxGroupBaseProps & {
   /**
-   * 当组内复选框发生变化时触发
+   * 选中任何子项复选框或未选中时触发回调
    */
-  onChange?(event: ChangeEvent<HTMLInputElement>): void;
+  onChange?: (event: ChangeEvent<HTMLInputElement> | StringOrNumber) => void;
 };
 
 const [CheckboxGroupProvider, useCheckboxGroup] = createContext<CheckboxGroupContext>({
@@ -56,7 +56,7 @@ export type CheckboxGroupProps = CheckboxGroupBaseProps & {
   /**
    * 当值发生变化时触发
    */
-  onChange?(value: StringOrNumber[]): void;
+  onChange?: (value: StringOrNumber[]) => void;
 };
 
 export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
@@ -71,14 +71,20 @@ export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
   });
 
   const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
+    (eventOrValue: ChangeEvent<HTMLInputElement> | StringOrNumber) => {
       if (!state) {
         return;
       }
 
-      const itemValue = event.currentTarget.value;
+      const isChecked = isInputEvent(eventOrValue) ? eventOrValue.target.checked : !state.includes(eventOrValue);
 
-      setState(state.includes(itemValue) ? state.filter((item) => item != itemValue) : [...state, itemValue]);
+      const selectedValue = isInputEvent(eventOrValue) ? eventOrValue.target.value : eventOrValue;
+
+      const nextValue = isChecked
+        ? [...state, selectedValue]
+        : state.filter((v) => String(v) !== String(selectedValue));
+
+      setState(nextValue);
     },
     [state, setState]
   );

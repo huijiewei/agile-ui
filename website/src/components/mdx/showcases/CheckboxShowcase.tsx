@@ -18,6 +18,6 @@ const Demo = () => {
     component={Checkbox}
     defaultProps={{ children: '复选框' }}
     componentProps={componentProps}
-    ignoreProps={['icon', 'value']}
+    ignoreProps={['icon', 'value', 'onChange']}
   />
 );

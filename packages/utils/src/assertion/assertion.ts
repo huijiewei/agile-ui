@@ -30,3 +30,8 @@ export const isArray = <T>(value: any): value is Array<T> => {
 export const isFunction = (value: unknown): value is Function => {
   return typeof value === 'function';
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isInputEvent = (value: any): value is { target: HTMLInputElement } => {
+  return value && isObject(value) && isObject(value.target);
+};

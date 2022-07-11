@@ -30,6 +30,11 @@ export type CheckboxProps = CheckboxBaseProps & {
    * @default CheckboxIcon
    */
   icon?: ReactElement;
+
+  /**
+   * 当`复选框`的复选状态发生更改时，将调用该回调。
+   */
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const checkboxSizeStyles = {
