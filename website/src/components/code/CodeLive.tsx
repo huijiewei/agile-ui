@@ -16,10 +16,11 @@ type CodeLiveProps = {
   language?: Language;
   preview?: boolean;
   editable?: boolean;
+  noInline?: boolean;
 };
 
 export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
-  const { code, preview = false, editable = false, language = 'tsx', className, ...rest } = props;
+  const { code, preview = false, editable = false, noInline = false, language = 'tsx', className, ...rest } = props;
 
   const { darkMode } = useColorModeState();
 
@@ -35,6 +36,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   return (
     <div className={cx('flex flex-col', className)} {...rest}>
       <LiveProvider
+        noInline={noInline}
         theme={darkMode ? darkTheme : lightTheme}
         code={code}
         language={language}

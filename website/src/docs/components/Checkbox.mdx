@@ -37,7 +37,7 @@ description: 复选框是。
 ## 复选框组
 
 ```tsx preview editable
-function CheckboxGroupDemo() {
+function Example() {
   const [checkedValue, setCheckedValue] = React.useState(['选择框一']);
 
   return (
@@ -64,7 +64,7 @@ function CheckboxGroupDemo() {
 ## 部分选中
 
 ```tsx preview editable
-function IndeterminateExample() {
+function Example() {
   const [checkedItems, setCheckedItems] = React.useState([true, false, false]);
 
   const allChecked = checkedItems.every(Boolean);
@@ -102,6 +102,65 @@ function IndeterminateExample() {
     </div>
   );
 }
+```
+
+## 自定义图标
+
+```tsx preview editable noInline
+/**
+ * 1. 创建一个自定义图标, 可以传递 indeterminate 参数
+ */
+const CustomIcon = (props) => {
+  const { indeterminate, ...rest } = props;
+
+  const d = indeterminate
+    ? 'M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.917,1,1,0,1,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.255a1,1,0,1,1-2,0,4,4,0,1,1,5.6,3.666Z'
+    : 'M0,12a1.5,1.5,0,0,0,1.5,1.5h8.75a.25.25,0,0,1,.25.25V22.5a1.5,1.5,0,0,0,3,0V13.75a.25.25,0,0,1,.25-.25H22.5a1.5,1.5,0,0,0,0-3H13.75a.25.25,0,0,1-.25-.25V1.5a1.5,1.5,0,0,0-3,0v8.75a.25.25,0,0,1-.25.25H1.5A1.5,1.5,0,0,0,0,12Z';
+
+  return (
+    <svg width={'1em'} height={'1em'} viewBox={'0 0 24 24'} {...rest}>
+      <path fill="currentColor" d={d} />
+    </svg>
+  );
+};
+
+function Example() {
+  const [checkedItems, setCheckedItems] = React.useState([true, false]);
+
+  const allChecked = checkedItems.every(Boolean);
+  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <Checkbox
+        icon={<CustomIcon />}
+        checked={allChecked}
+        indeterminate={isIndeterminate}
+        onChange={(e) => setCheckedItems([e.target.checked, e.target.checked, e.target.checked])}
+      >
+        选择框
+      </Checkbox>
+      <div className={'flex flex-row gap-5'}>
+        <Checkbox
+          icon={<CustomIcon />}
+          checked={checkedItems[0]}
+          onChange={(e) => setCheckedItems([e.target.checked, checkedItems[1]])}
+        >
+          选择框一
+        </Checkbox>
+        <Checkbox
+          icon={<CustomIcon />}
+          checked={checkedItems[1]}
+          onChange={(e) => setCheckedItems([checkedItems[0], e.target.checked])}
+        >
+          选择框二
+        </Checkbox>
+      </div>
+    </div>
+  );
+}
+
+render(<Example />);
 ```
 
 ## 复选框属性
