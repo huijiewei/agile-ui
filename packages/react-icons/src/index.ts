@@ -14,3 +14,4 @@ export * from './icons/Close';
 export * from './icons/Info';
 export * from './icons/Error';
 export * from './icons/Computer';
+export * from './icons/Picture';

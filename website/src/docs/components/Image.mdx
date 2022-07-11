@@ -1,0 +1,61 @@
+---
+title: 图片
+description: 展示和预览图片。
+---
+
+## 导入
+
+```tsx
+import { Image } from '@agile-ui/react';
+```
+
+## 使用说明
+
+图片的属性和 HTML 图像元素属性相同, 具体可以查看 [MDN 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img#%E5%B1%9E%E6%80%A7)
+
+图片的样式可以使用 [Tailwind CSS](https://tailwindcss.com/) 定制, 非常灵活.
+
+```tsx preview editable
+<div className={'grid grid-cols-4 gap-3'}>
+  <Image className={'w-auto'} src={'https://www.huijiewei.com/images/01.jpg'} />
+  <Image className={'w-auto rounded'} src={'https://www.huijiewei.com/images/02.jpg'} />
+  <Image className={'w-auto rounded-lg'} src={'https://www.huijiewei.com/images/03.jpg'} />
+  <Image className={'w-auto rounded'} src={'https://www.huijiewei.com/images/04.jpg'} />
+  <Image className={'w-auto rounded'} src={'https://www.huijiewei.com/images/05.jpg'} />
+  <Image className={'w-auto rounded blur'} src={'https://www.huijiewei.com/images/05.jpg'} />
+  <Image className={'w-auto rounded sepia'} src={'https://www.huijiewei.com/images/05.jpg'} />
+  <Image className={'w-auto rounded grayscale'} src={'https://www.huijiewei.com/images/05.jpg'} />
+</div>
+```
+
+## 加载失败
+
+```tsx preview editable
+<div className={'grid grid-cols-4 gap-3'}>
+  <Image
+    className={'w-auto'}
+    fallback={'https://img.temp.im/199x132'}
+    src={'https://www.huijiewei.com/images/012.jpg'}
+  />
+  <Image
+    className={'w-auto'}
+    fallback={
+      <div className={'border text-gray-400 border-gray-200 bg-gray-50 w-auto h-auto flex justify-center items-center'}>
+        图片加载失败
+      </div>
+    }
+    src={'https://www.huijiewei.com/images/012.jpg'}
+  />
+  <Image
+    className={'w-auto'}
+    fallback={
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMcAAACECAMAAAATF882AAAAOVBMVEXc4+ifsb2nuMPJ09vU3OKtvMfX3+Xa4uepusWktcGis7/P2d/F0NiywMq9ytLBzdW6x9C2xM2vvshvkV5dAAAB3klEQVR42u3V3Y6kIBQE4FOAgCD+9Ps/7HoaXcI4M9nNJMxNfRdYsTGhJLRCRERERERERERERERERERERERERERERP/NH6uobTLT6qXL31kOVx+Pc9yDqLDqc5rHcwlGl2OgZtflb+yAPS8Zb0nnurlmL8PlCXj3KDBOQsHc5S+tCe8eIaGEYA3ieTMiejnzJMMdMIv28ICXk4Ht8leAPerPFinUXdGh5dEWK0572OslbihdvpSSz9GX4u/+XibtsaZVTgEIf+cneBmv9ljwqr0Qu3zZMQeR6SzYaI/bhnQOcdHsx+9H65Gvw1Awd/kWUXSx/rMedo3QfHmNPx+tR0jY31uA1OWbT1iBLJ/1SAA2uYQCOBms9RALzC+DA6bPN3sv9tkjLyXhqNkZbTtc6yHZAPPuMHW5MUjy7NG2K9QjBeNkvNZDBV3I0efbBuB49jiivw7FUr+Nu4zWn4/ZhHqec5fbJNgE++gxYREV9bpBx9H6/Zix6lt/5CroLQu4Dz3u/zALeHHjazx7LEDcJyB3+VYQ68f/cT5MnavN1zNWTkZr52PFac7S52oBfN2V/WMP/8Ipbe+yNye/KGTru/yPfLZOiIiIiIiIiIiIiIiIiIiIiIiIiIiIiOhH/gDRLw2Nq8xTsAAAAABJRU5ErkJggg=='
+    }
+    src={'https://www.huijiewei.com/images/012.jpg'}
+  />
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Image" />

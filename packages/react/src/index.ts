@@ -7,6 +7,8 @@ export * from './portal/Portal';
 export * from './alert/Alert';
 export * from './animation/Animation';
 
+export * from './image/Image';
+
 export * from './visually-hidden/VisuallyHidden';
 
 export * from './badge/Badge';
