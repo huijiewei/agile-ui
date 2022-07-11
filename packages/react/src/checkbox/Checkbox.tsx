@@ -1,5 +1,5 @@
 import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { ChangeEvent, cloneElement, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
@@ -17,7 +17,7 @@ export type CheckboxProps = CheckboxBaseProps & {
    * 复选框和标签之间的距离
    * @default '2'
    */
-  spacing?: number;
+  spacing?: string | number;
 
   /**
    * 部分选中
@@ -32,7 +32,7 @@ export type CheckboxProps = CheckboxBaseProps & {
   icon?: ReactElement;
 
   /**
-   * 当`复选框`的复选状态发生更改时，将调用该回调。
+   * 选择状态发生更改时，将调用该回调。
    */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -75,7 +75,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));
 
-  const [isControlled, isChecked] = useControllableProp(
+  const [isControlled, controlledChecked] = useControllableProp(
     group?.value && value ? group.value.includes(value) : checked,
     checkedState
   );
@@ -88,7 +88,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       }
 
       if (!isControlled) {
-        if (isChecked) {
+        if (controlledChecked) {
           setCheckedState(event.target.checked);
         } else {
           setCheckedState(indeterminate ? true : event.target.checked);
@@ -97,7 +97,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
       onChangeRef?.(event);
     },
-    [disabled, indeterminate, readOnly, isChecked, isControlled, onChangeRef]
+    [disabled, indeterminate, readOnly, controlledChecked, isControlled, onChangeRef]
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -123,7 +123,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       return;
     }
 
-    const notInSync = inputRef.current.checked !== isChecked;
+    const notInSync = inputRef.current.checked !== controlledChecked;
 
     if (notInSync) {
       setCheckedState(inputRef.current.checked);
@@ -134,14 +134,14 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const clonedIcon = cloneElement(icon, {
     indeterminate: indeterminate,
-    className: cx(sizeStyle.icon, 'transition-opacity', isChecked || indeterminate ? 'opacity-1' : 'opacity-0'),
+    className: cx(sizeStyle.icon, 'transition-opacity', controlledChecked || indeterminate ? 'opacity-1' : 'opacity-0'),
   });
 
   return (
     <label
       className={cx(
         'inline-flex items-center align-top relative',
-        `gap-${spacing}`,
+        isNumber(spacing) ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
       )}
@@ -151,7 +151,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         className={'sr-only'}
         value={value}
         type="checkbox"
-        checked={isChecked}
+        checked={controlledChecked}
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
@@ -160,14 +160,14 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       <span
         className={cx(
           'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-1',
-          isChecked || indeterminate ? `bg-${color}-500 border-${color}-500 text-white` : 'border-inherit',
+          controlledChecked || indeterminate ? `bg-${color}-500 border-${color}-500 text-white` : 'border-inherit',
           disabled && 'opacity-40',
           sizeStyle.control
         )}
       >
         {clonedIcon}
       </span>
-      <span className={cx(sizeStyle.label, disabled && 'opacity-40')}>{children}</span>
+      {children && <span className={cx(sizeStyle.label, disabled && 'opacity-40')}>{children}</span>}
     </label>
   );
 });

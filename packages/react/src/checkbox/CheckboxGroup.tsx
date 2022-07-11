@@ -34,9 +34,6 @@ type CheckboxGroupBaseProps = CheckboxBaseProps & {
 };
 
 type CheckboxGroupContext = CheckboxGroupBaseProps & {
-  /**
-   * 选中任何子项复选框或未选中时触发回调
-   */
   onChange?: (event: ChangeEvent<HTMLInputElement> | StringOrNumber) => void;
 };
 
@@ -54,7 +51,7 @@ export type CheckboxGroupProps = CheckboxGroupBaseProps & {
   defaultValue?: StringOrNumber[];
 
   /**
-   * 当值发生变化时触发
+   * 任何子项复选框选中或未选中时触发回调
    */
   onChange?: (value: StringOrNumber[]) => void;
 };
@@ -94,10 +91,10 @@ export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
       size,
       color,
       disabled,
-      value,
+      value: state,
       onChange: handleChange,
     }),
-    [size, handleChange, color, value, disabled]
+    [size, color, disabled, state, handleChange]
   );
 
   return <CheckboxGroupProvider value={group}>{children}</CheckboxGroupProvider>;
