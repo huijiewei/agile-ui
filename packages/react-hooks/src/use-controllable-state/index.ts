@@ -2,6 +2,13 @@ import { MaybeFunction, runIfFn } from '@agile-ui/utils';
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { useCallbackRef } from '../use-callback-ref';
 
+export const useControllableProp = <T>(prop: T | undefined, state: T) => {
+  const controlled = prop !== undefined;
+  const value = controlled && typeof prop !== 'undefined' ? prop : state;
+
+  return [controlled, value] as const;
+};
+
 export type UseControllableStateProps<T> = {
   value?: T;
   defaultValue?: MaybeFunction<T>;

@@ -1,4 +1,4 @@
-import { useControllableState } from '@agile-ui/react-hooks';
+import { useCallbackRef, useControllableState } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { __DEV__ } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useMemo } from 'react';
@@ -62,10 +62,12 @@ export type CheckboxGroupProps = CheckboxGroupBaseProps & {
 export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
   const { value, defaultValue = [], onChange, children, size = 'md', color = 'blue', disabled = false } = props;
 
+  const onChangeRef = useCallbackRef(onChange);
+
   const [state, setState] = useControllableState({
     value,
     defaultValue,
-    onChange,
+    onChange: onChangeRef,
   });
 
   const handleChange = useCallback(

@@ -1,4 +1,4 @@
-import { Input } from '@agile-ui/react';
+import { Checkbox, Input } from '@agile-ui/react';
 
 export const FormDemo = () => {
   return (
@@ -36,10 +36,7 @@ export const FormDemo = () => {
         <Input className={'w-full'} placeholder={'确认密码'} id={'demoFormPasswordRepeat'} />
       </div>
       <div>
-        <label className={'flex items-center'}>
-          <input defaultChecked={true} className={'mr-2'} type={'checkbox'} />
-          <span>同意用户协议和隐私策略</span>
-        </label>
+        <Checkbox defaultChecked={true}>同意用户协议和隐私策略</Checkbox>
       </div>
     </form>
   );

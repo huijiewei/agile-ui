@@ -10,15 +10,104 @@ description: 复选框是。
 ## 大小
 
 ```tsx preview editable
-<div className={'flex flex-row gap-3'}>
-  <Checkbox size={'xs'} />
-  <Checkbox size={'sm'} />
-  <Checkbox size={'md'} />
-  <Checkbox size={'lg'} />
-  <Checkbox size={'xl'} />
+<div className={'flex flex-row gap-5'}>
+  <Checkbox size={'xs'}>选择框</Checkbox>
+  <Checkbox size={'sm'}>选择框</Checkbox>
+  <Checkbox size={'md'}>选择框</Checkbox>
+  <Checkbox size={'lg'}>选择框</Checkbox>
+  <Checkbox size={'xl'}>选择框</Checkbox>
 </div>
 ```
 
-## 属性
+## 颜色
+
+```tsx preview editable
+<div className={'flex flex-row gap-5'}>
+  <Checkbox defaultChecked color={'green'}>
+    绿色
+  </Checkbox>
+  <Checkbox color={'red'}>红色</Checkbox>
+  <Checkbox defaultChecked color={'yellow'}>
+    黄色
+  </Checkbox>
+  <Checkbox color={'gray'}>灰色</Checkbox>
+</div>
+```
+
+## 复选框组
+
+```tsx preview editable
+function CheckboxGroupDemo() {
+  const [checkedValue, setCheckedValue] = React.useState(['选择框一']);
+
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <CheckboxGroup
+        value={checkedValue}
+        onChange={(e) => {
+          setCheckedValue(e);
+        }}
+      >
+        <div className={'flex flex-row gap-5'}>
+          <Checkbox value={'选择框一'}>选择框一</Checkbox>
+          <Checkbox value={'选择框二'}>选择框二</Checkbox>
+          <Checkbox value={'选择框三'}>选择框三</Checkbox>
+          <Checkbox value={'选择框四'}>选择框四</Checkbox>
+        </div>
+      </CheckboxGroup>
+      <div>你选中的值: {checkedValue.join(', ')}</div>
+    </div>
+  );
+}
+```
+
+## 部分选中
+
+```tsx preview editable
+function IndeterminateExample() {
+  const [checkedItems, setCheckedItems] = React.useState([true, false, false]);
+
+  const allChecked = checkedItems.every(Boolean);
+  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <Checkbox
+        checked={allChecked}
+        indeterminate={isIndeterminate}
+        onChange={(e) => setCheckedItems([e.target.checked, e.target.checked, e.target.checked])}
+      >
+        选择框
+      </Checkbox>
+      <div className={'flex flex-row gap-5'}>
+        <Checkbox
+          checked={checkedItems[0]}
+          onChange={(e) => setCheckedItems([e.target.checked, checkedItems[1], checkedItems[2]])}
+        >
+          选择框一
+        </Checkbox>
+        <Checkbox
+          checked={checkedItems[1]}
+          onChange={(e) => setCheckedItems([checkedItems[0], e.target.checked, checkedItems[2]])}
+        >
+          选择框二
+        </Checkbox>
+        <Checkbox
+          checked={checkedItems[2]}
+          onChange={(e) => setCheckedItems([checkedItems[0], checkedItems[1], e.target.checked])}
+        >
+          选择框三
+        </Checkbox>
+      </div>
+    </div>
+  );
+}
+```
+
+## 复选框属性
 
 <PropsTable componentName="Checkbox" />
+
+## 复选框组属性
+
+<PropsTable componentName="CheckboxGroup" />

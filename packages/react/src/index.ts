@@ -21,8 +21,10 @@ export * from './button/Button';
 export * from './button/ButtonGroup';
 
 export * from './input/Input';
-export * from './checkbox/Checkbox';
 export * from './swich/Switch';
+
+export * from './checkbox/Checkbox';
+export * from './checkbox/CheckboxGroup';
 
 export * from './tooltip/Tooltip';
 

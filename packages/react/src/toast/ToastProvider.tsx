@@ -60,7 +60,7 @@ const [ToastContextProvider, useToastContext] = createContext<ToastDispatch>({
 export { useToastContext };
 
 export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
-  const { children, spacing = 2 } = props;
+  const { children, spacing = 3 } = props;
 
   const [state, setState] = useState<ToastState>({
     'top-left': [],
