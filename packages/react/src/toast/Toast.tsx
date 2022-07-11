@@ -1,5 +1,5 @@
 import { __DEV__ } from '@agile-ui/utils';
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { cx } from 'twind';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
 import { primitiveComponent } from '../utils/component';
@@ -17,7 +17,7 @@ export type ToastProps = {
   /**
    * 图标
    */
-  icon?: JSX.Element;
+  icon?: ReactElement;
 
   /**
    * 标题
