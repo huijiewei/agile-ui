@@ -13,6 +13,9 @@ import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
 import { viteReactDevtools } from './scripts/vite-react-devtools';
 
 export default defineConfig({
+  define: {
+    'import.meta.env.VERCEL_ANALYTICS_ID': JSON.stringify(process.env.VERCEL_ANALYTICS_ID),
+  },
   plugins: [
     react(),
     mdx({
