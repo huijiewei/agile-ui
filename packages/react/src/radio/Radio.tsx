@@ -1,6 +1,6 @@
-import { useCallbackRef, useControllableProp } from '@agile-ui/react-hooks';
+import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
 import { __DEV__, isNumber } from '@agile-ui/utils';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -18,6 +18,12 @@ export type RadioProps = RadioBaseProps & {
    * @default '2'
    */
   spacing?: string | number;
+
+  /**
+   * 是否只读
+   * @default false
+   */
+  readOnly?: boolean;
 
   /**
    * 选择状态发生更改时，将调用该回调。
@@ -65,6 +71,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     checkedState
   );
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       if (readOnly || disabled) {
@@ -81,6 +89,18 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     [disabled, isControlled, onChangeRef, readOnly]
   );
 
+  useIsomorphicLayoutEffect(() => {
+    const el = inputRef.current;
+
+    if (!el?.form) {
+      return;
+    }
+
+    el.form.onreset = () => {
+      setCheckedState(Boolean(defaultChecked));
+    };
+  }, []);
+
   const sizeStyle = radioSizeStyles[size];
 
   return (
@@ -93,7 +113,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
       )}
     >
       <input
-        ref={ref}
+        ref={mergeRefs(inputRef, ref)}
         name={name}
         className={'sr-only'}
         value={value}

@@ -7,6 +7,7 @@ import { InputShowcase } from './showcases/InputShowcase';
 import { ProgressBarShowcase } from './showcases/ProgressBarShowcase';
 import { RadioShowcase } from './showcases/RadioShowcase';
 import { SpinnerShowcase } from './showcases/SpinnerShowcase';
+import { SwitchShowcase } from './showcases/SwitchShowcase';
 import { TooltipShowcase } from './showcases/TooltipShowcase';
 
 export type MdxShowcaseProps = {
@@ -24,6 +25,7 @@ const showcases = {
   ProgressBar: ProgressBarShowcase,
   Alert: AlertShowcase,
   Radio: RadioShowcase,
+  Switch: SwitchShowcase,
 };
 
 export const MdxShowcase = ({ componentName, componentProps }: MdxShowcaseProps) => {

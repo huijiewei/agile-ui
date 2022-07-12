@@ -82,50 +82,6 @@ export const menus: Menu[] = [
             label: '徽标',
             path: '/components/badge',
           },
-          {
-            label: '卡片',
-            path: '/components/card',
-          },
-          {
-            label: '图片轮播',
-            path: '/components/carousel',
-          },
-          {
-            label: '折叠面板',
-            path: '/components/accordion',
-          },
-          {
-            label: '评论',
-            path: '/components/comment',
-          },
-          {
-            label: '描述',
-            path: '/components/description',
-          },
-          {
-            label: '空状态',
-            path: '/components/empty',
-          },
-          {
-            label: '列表',
-            path: '/components/list',
-          },
-          {
-            label: '气泡卡片',
-            path: '/components/popover',
-          },
-          {
-            label: '数值显示',
-            path: '/components/number',
-          },
-          {
-            label: '标签',
-            path: '/components/label',
-          },
-          {
-            label: '日历',
-            path: '/components/calendar',
-          },
         ],
       },
       {
@@ -146,6 +102,10 @@ export const menus: Menu[] = [
           {
             label: '单选框',
             path: '/components/radio',
+          },
+          {
+            label: '开关',
+            path: '/components/switch',
           },
         ],
       },

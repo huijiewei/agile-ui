@@ -18,6 +18,6 @@ const Demo = () => {
     component={Radio}
     defaultProps={{ children: '单选框' }}
     componentProps={componentProps}
-    ignoreProps={['value', 'onChange']}
+    ignoreProps={['value', 'onChange', 'spacing']}
   />
 );

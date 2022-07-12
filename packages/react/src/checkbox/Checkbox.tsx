@@ -26,6 +26,12 @@ export type CheckboxProps = CheckboxBaseProps & {
   indeterminate?: boolean;
 
   /**
+   * 是否只读
+   * @default false
+   */
+  readOnly?: boolean;
+
+  /**
    * 复选框图标
    * @default CheckboxIcon
    */
