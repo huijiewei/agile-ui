@@ -86,7 +86,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
   return (
     <label
       className={cx(
-        'inline-flex items-center align-top  relative',
+        'inline-flex items-center relative',
         isNumber(spacing) ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
@@ -107,13 +107,17 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
       <span
         className={cx(
           'inline-flex rounded-full items-center shrink-0 select-none justify-center border-1',
-          controlledChecked ? `bg-${color}-500 border-${color}-500 text-white` : 'border-inherit',
+          controlledChecked
+            ? `bg-${color}-500 border-${color}-500 text-white`
+            : disabled
+            ? 'bg-gray-100'
+            : 'border-gray-300',
           disabled && 'opacity-40',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
         )}
       />
-      {children && <span className={cx(sizeStyle.label, disabled && 'opacity-40')}>{children}</span>}
+      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-40')}>{children}</span>}
     </label>
   );
 });

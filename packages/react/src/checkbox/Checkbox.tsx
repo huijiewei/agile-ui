@@ -38,7 +38,7 @@ export type CheckboxProps = CheckboxBaseProps & {
 };
 
 const checkboxSizeStyles = {
-  xs: { control: 'h-3 w-3', label: 'text-xs', icon: 'text-[0.45rem]' },
+  xs: { control: 'h-3 w-3', label: 'text-xs leading-3', icon: 'text-[0.45rem]' },
   sm: { control: 'h-3.5 w-3.5', label: 'text-sm', icon: 'text-[0.5rem]' },
   md: { control: 'h-4 w-4', label: '', icon: 'text-[0.625rem]' },
   lg: { control: 'h-5 w-5', label: 'text-lg', icon: 'text-[0.75rem]' },
@@ -140,7 +140,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   return (
     <label
       className={cx(
-        'inline-flex items-center align-top relative',
+        'inline-flex items-center relative',
         isNumber(spacing) ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
@@ -160,14 +160,18 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       <span
         className={cx(
           'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-1',
-          controlledChecked || indeterminate ? `bg-${color}-500 border-${color}-500 text-white` : 'border-inherit',
+          controlledChecked || indeterminate
+            ? `bg-${color}-500 border-${color}-500 text-white`
+            : disabled
+            ? 'bg-gray-100'
+            : 'border-gray-300',
           disabled && 'opacity-40',
           sizeStyle.control
         )}
       >
         {clonedIcon}
       </span>
-      {children && <span className={cx(sizeStyle.label, disabled && 'opacity-40')}>{children}</span>}
+      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-40')}>{children}</span>}
     </label>
   );
 });
