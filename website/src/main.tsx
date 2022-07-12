@@ -8,8 +8,7 @@ import twindConfig from './twind.config';
 
 setup(twindConfig);
 
-import reportWebVitals from './reportWebVitals';
-import { sendToVercelAnalytics } from './vitals';
+import { webVitals } from './webVitals';
 
 createRoot(document.getElementById('app') as HTMLElement).render(
   <StrictMode>
@@ -17,4 +16,4 @@ createRoot(document.getElementById('app') as HTMLElement).render(
   </StrictMode>
 );
 
-reportWebVitals(sendToVercelAnalytics);
+webVitals();
