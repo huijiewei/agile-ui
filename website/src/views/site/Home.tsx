@@ -18,7 +18,7 @@ const Home = () => {
             <p className={'font-bold'}>基于 Tailwind CSS, Twind CSS-IN-JSS 方案, 自动黑色模式</p>
             <p>更多特点待你发现...</p>
           </div>
-          <p className={'flex flex-row gap-10 mt-10'}>
+          <p className={'flex flex-row gap-9 mt-10'}>
             <Link
               className={
                 'inline-flex transition-colors items-center text-lg rounded justify-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white h-12 w-32'
