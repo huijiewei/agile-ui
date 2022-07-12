@@ -13,9 +13,6 @@ import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
 import { viteReactDevtools } from './scripts/vite-react-devtools';
 
 export default defineConfig({
-  optimizeDeps: {
-    include: ['react/jsx-runtime'],
-  },
   plugins: [
     react(),
     mdx({

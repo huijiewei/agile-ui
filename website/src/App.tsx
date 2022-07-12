@@ -1,5 +1,5 @@
 import { AgileProvider } from '@agile-ui/react';
-import { useEventListener } from '@agile-ui/react-hooks';
+import { useEventListener, useTimeout } from '@agile-ui/react-hooks';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ReloadPrompt } from './components/shared/ReloadPrompt';
@@ -15,6 +15,10 @@ export const App = () => {
     },
     { target: splash }
   );
+
+  useTimeout(() => {
+    splash?.remove();
+  }, 3000);
 
   return (
     <HelmetProvider>
