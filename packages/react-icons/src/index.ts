@@ -15,3 +15,4 @@ export * from './icons/Info';
 export * from './icons/Error';
 export * from './icons/Computer';
 export * from './icons/Picture';
+export * from './icons/ArrowRight';

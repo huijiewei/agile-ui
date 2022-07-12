@@ -3,15 +3,15 @@ import { Close, Github, Menu } from '@agile-ui/react-icons';
 import { Link } from 'react-router-dom';
 import LogoImage from '../../assets/images/logo.svg';
 import { ThemeSwitcher } from '../shared/ThemeSwicher';
-import { useLayerDispatch, useLayerState } from './Layout';
+import { useLayoutDispatch, useLayoutState } from './BlankLayout';
 
 export const LayoutHeader = () => {
-  const layer = useLayerState();
-  const layerDispatch = useLayerDispatch();
+  const layer = useLayoutState();
+  const layerDispatch = useLayoutDispatch();
 
   return (
     <header className={'sticky h-16 top-0 z-30 w-full border-b border-gray-100 bg-opacity-70 py-3 backdrop-blur'}>
-      <div className={'mx-auto flex max-w-7xl items-center justify-between px-3 tablet:px-5'}>
+      <div className={'mx-auto flex max-w-7xl items-center justify-between px-3'}>
         <button
           onClick={() => layerDispatch((prev) => !prev)}
           className={'block tablet:hidden p-2 appearance-none select-none text-gray-500 hover:text-gray-700'}

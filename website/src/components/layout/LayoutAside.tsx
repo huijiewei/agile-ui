@@ -1,9 +1,9 @@
 import { cx } from 'twind';
-import { useLayerState } from './Layout';
+import { useLayoutState } from './BlankLayout';
 import { LayoutAsideMenu } from './LayoutAsideMenu';
 
 export const LayoutAside = () => {
-  const layer = useLayerState();
+  const layer = useLayoutState();
 
   return (
     <aside

@@ -1,57 +1,64 @@
-import LogoImage from '../../assets/images/logo.svg';
-import { badges } from '../../data/badges';
+import { ArrowRight, Github } from '@agile-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <>
-      <div className={'flex flex-col gap-3'}>
-        <h1 className={'text-[36px] font-bold text-blue-800 text-center'}>
-          <img
-            width={'50'}
-            height={'50'}
-            className={'inline-block align-middle -mt-[3px] mb-[3px]'}
-            alt={'Agile UI'}
-            src={LogoImage}
-          />{' '}
-          Agile UI
-        </h1>
-        <p className={'text-center text-lg'}>React + TypeScript + Twind UI Components</p>
-        <hr />
-        {badges.map((group, idx) => (
-          <p key={`bg-${idx}`} className={'flex flex-row gap-1 justify-center'}>
-            {group.map((badge) => (
-              <a key={badge.name} target={'_blank'} href={badge.href} rel="noreferrer">
-                <img
-                  width={badge.width}
-                  height={badge.height}
-                  loading={'lazy'}
-                  alt={badge.name}
-                  src={badge.image}
-                  srcSet={`${badge.image} 2x`}
-                />
-              </a>
-            ))}
+      <main className={'px-3'}>
+        <div className={'flex h-[calc(100vh-59px)] flex-col justify-center items-center'}>
+          <p
+            className={
+              'text-[6em] leading-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400'
+            }
+          >
+            Agile UI
           </p>
-        ))}
-        <hr />
-        <h2 className={'text-lg font-bold'}>特点</h2>
-        <ul className={'list-disc px-5'}>
-          <li>React 18 - 用于构建用户界面的JavaScript 库。</li>
-          <li>Tailwind CSS 3 - 一个功能类优先的CSS 框架，用于快速构建定制的用户界面。</li>
-          <li>Twind - 小、快、完整的 tailwind-in-js 解决方案。</li>
-          <li>Typescript - TypeScript 是具有类型语法的 JavaScript。</li>
-          <li>Vite - 下一代的前端工具链，为开发提供极速响应。</li>
-          <li>Vitest - 由 Vite 提供支持的极速单元测试框架。</li>
-          <li>ESLint - ESLint 静态分析你的代码以快速发现问题。</li>
-          <li>Prettier - 一个“有态度”的代码格式化工具。</li>
-          <li>Husky & Lint Staged - 在提交暂存文件之前，运行脚本。</li>
-        </ul>
-        <hr />
-        <p className={'p-2 pl-3 font-bold border-l-2 border-l-yellow-300 bg-yellow-50'}>
-          正在开发中, 目前仅供参考学习!
+          <div className={'mt-10 text-lg leading-9 text-center'}>
+            <p>一个灵活的 React 18 组件库</p>
+            <p className={'font-bold'}>基于 Tailwind CSS, Twind CSS-IN-JSS 方案, 自动黑色模式</p>
+            <p>更多特点待你发现...</p>
+          </div>
+          <p className={'flex flex-row gap-10 mt-10'}>
+            <Link
+              className={
+                'inline-flex transition-colors items-center text-lg rounded justify-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white h-12 w-32'
+              }
+              to={'/start'}
+            >
+              快速开始
+              <ArrowRight className={'ml-1.5'} />
+            </Link>
+            <a
+              className={
+                'inline-flex transition-colors items-center text-lg rounded justify-center bg-gray-100 hover:bg-gray-200 active:bg-gray-300 h-12 w-32'
+              }
+              target={'_blank'}
+              rel="noreferrer"
+              href="https://github.com/huijiewei/agile-ui"
+            >
+              <Github className={'mr-1.5'} />
+              GitHub
+            </a>
+          </p>
+        </div>
+      </main>
+      <footer className={'py-5 border-gray-100 border-t-1 gap-2 flex flex-col text-center items-center'}>
+        <p className={'bg-gray-800 w-fit rounded text-white font-medium text-sm px-3 py-1'}>
+          Deployed by{' '}
+          <span aria-label={'Vercel logo'} role={'img'}>
+            ▲
+          </span>{' '}
+          Vercel
         </p>
-        <p></p>
-      </div>
+        <p>根据 MIT 许可证发布</p>
+        <p>
+          Proudly made in
+          <span className={'mx-1'} aria-label="China" role="img">
+            🇨🇳
+          </span>
+          by Huijie, 2022
+        </p>
+      </footer>
     </>
   );
 };

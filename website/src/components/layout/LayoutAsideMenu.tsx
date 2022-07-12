@@ -1,10 +1,10 @@
 import { NavLink, NavLinkProps } from 'react-router-dom';
 import { cx } from 'twind';
 import { Menu, menus } from '../../data/menus';
-import { useLayerDispatch } from './Layout';
+import { useLayoutDispatch } from './BlankLayout';
 
 const MenuLink = (props: NavLinkProps) => {
-  const layerDispatch = useLayerDispatch();
+  const layerDispatch = useLayoutDispatch();
 
   return <NavLink onClick={() => layerDispatch(false)} {...props}></NavLink>;
 };
