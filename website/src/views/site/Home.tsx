@@ -1,14 +1,23 @@
 import { ArrowRight, Github } from '@agile-ui/react-icons';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLayoutAsideExistedDispatch } from '../../components/layout/LayoutProvider';
 
 const Home = () => {
+  const dispatch = useLayoutAsideExistedDispatch();
+
+  useEffect(() => {
+    dispatch(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <main className={'px-3'}>
-        <div className={'flex h-[calc(100vh-59px)] flex-col justify-center items-center'}>
+        <div className={'flex h-[calc(100vh-100px)] flex-col justify-center items-center'}>
           <p
             className={
-              'text-[6em] leading-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400'
+              'text-[5em] leading-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400'
             }
           >
             Agile UI

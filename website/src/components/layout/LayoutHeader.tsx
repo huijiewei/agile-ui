@@ -1,29 +1,40 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
 import { Close, Github, Menu } from '@agile-ui/react-icons';
 import { Link } from 'react-router-dom';
+import { cx } from 'twind';
 import LogoImage from '../../assets/images/logo.svg';
 import { ThemeSwitcher } from '../shared/ThemeSwicher';
-import { useLayoutDispatch, useLayoutState } from './BlankLayout';
+import { useLayoutAsideCollapsed, useLayoutAsideCollapsedDispatch, useLayoutAsideExisted } from './LayoutProvider';
 
-export const LayoutHeader = () => {
-  const layer = useLayoutState();
-  const layerDispatch = useLayoutDispatch();
+const AsideCollapsedButton = () => {
+  const existed = useLayoutAsideExisted();
+  const collapsed = useLayoutAsideCollapsed();
+  const dispatch = useLayoutAsideCollapsedDispatch();
 
   return (
-    <header className={'sticky h-16 top-0 z-30 w-full border-b border-gray-100 bg-opacity-70 py-3 backdrop-blur'}>
-      <div className={'mx-auto flex max-w-7xl items-center justify-between px-3'}>
-        <button
-          onClick={() => layerDispatch((prev) => !prev)}
-          className={'block tablet:hidden p-2 appearance-none select-none text-gray-500 hover:text-gray-700'}
-          type={'button'}
-        >
-          {layer ? <Close size={5} /> : <Menu size={5} />}
-        </button>
+    <button
+      onClick={() => dispatch((prev) => !prev)}
+      className={cx(
+        'block tablet:hidden p-2 appearance-none select-none text-gray-500 hover:text-gray-700',
+        existed ? 'visible' : 'invisible'
+      )}
+      type={'button'}
+    >
+      {collapsed ? <Close size={5} /> : <Menu size={5} />}
+    </button>
+  );
+};
+
+export const LayoutHeader = () => {
+  return (
+    <header className={'sticky top-0 z-30 w-full border-b border-gray-100 bg-opacity-70 backdrop-blur'}>
+      <div className={'flex max-w-7xl items-center justify-between mx-auto p-3'}>
+        <AsideCollapsedButton />
         <div className={'flex flex-row items-center'}>
           <Link to={'/'}>
             <img
-              width={'36'}
-              height={'36'}
+              width={36}
+              height={36}
               className={'inline-block align-middle mt-[1px] -mb-[1px]'}
               alt={'Agile UI'}
               src={LogoImage}
@@ -32,7 +43,7 @@ export const LayoutHeader = () => {
           </Link>
           <span
             className={
-              'ml-3 hidden tablet:inline-block rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-red-700'
+              'ml-3 hidden tablet:inline-block rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-yellow-600'
             }
           >
             ALPHA

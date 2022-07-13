@@ -2,6 +2,7 @@ import { AgileProvider } from '@agile-ui/react';
 import { useEventListener, useTimeout } from '@agile-ui/react-hooks';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
+import { LayoutProvider } from './components/layout/LayoutProvider';
 import { ReloadPrompt } from './components/shared/ReloadPrompt';
 import { AppRoutes } from './data/routes';
 
@@ -25,7 +26,9 @@ export const App = () => {
       <BrowserRouter>
         <Helmet defaultTitle={'Agile UI'} titleTemplate={'%s - Agile UI'} />
         <AgileProvider>
-          <AppRoutes />
+          <LayoutProvider>
+            <AppRoutes />
+          </LayoutProvider>
           <ReloadPrompt />
         </AgileProvider>
       </BrowserRouter>

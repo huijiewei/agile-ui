@@ -58,7 +58,7 @@ export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
                 '-ml-px block border-l py-1 text-sm',
                 depth == 3 ? 'pl-8' : 'pl-4',
                 index == active
-                  ? 'border-l-blue-300 bg-blue-50 text-blue-500'
+                  ? 'border-l-blue-300 text-blue-500'
                   : 'border-l-transparent text-gray-500 hover:(border-l-gray-300 text-gray-700)'
               )}
               aria-current={index == active ? 'location' : undefined}

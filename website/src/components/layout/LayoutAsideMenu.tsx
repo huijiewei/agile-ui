@@ -1,12 +1,12 @@
 import { NavLink, NavLinkProps } from 'react-router-dom';
 import { cx } from 'twind';
 import { Menu, menus } from '../../data/menus';
-import { useLayoutDispatch } from './BlankLayout';
+import { useLayoutAsideCollapsedDispatch } from './LayoutProvider';
 
 const MenuLink = (props: NavLinkProps) => {
-  const layerDispatch = useLayoutDispatch();
+  const dispatch = useLayoutAsideCollapsedDispatch();
 
-  return <NavLink onClick={() => layerDispatch(false)} {...props}></NavLink>;
+  return <NavLink onClick={() => dispatch(false)} {...props}></NavLink>;
 };
 
 const MenuItem = ({ menu, deep }: { menu: Menu; deep: number }) => {
