@@ -175,7 +175,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       >
         {clonedIcon}
       </span>
-      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-40')}>{children}</span>}
+      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-50')}>{children}</span>}
     </label>
   );
 });

@@ -127,17 +127,13 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
       <span
         className={cx(
           'inline-flex rounded-full items-center shrink-0 select-none justify-center border-2',
-          controlledChecked
-            ? `bg-${color}-500 border-${color}-500 text-white`
-            : disabled
-            ? 'bg-gray-100'
-            : 'border-gray-200',
+          controlledChecked ? `bg-${color}-500 border-${color}-500 text-white` : 'border-gray-200 bg-white',
           disabled && 'opacity-50',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
         )}
       />
-      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-40')}>{children}</span>}
+      {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-50')}>{children}</span>}
     </label>
   );
 });
