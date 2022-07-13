@@ -130,7 +130,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
           'inline-flex shrink-0 justify-start rounded-full p-[2px] transition-colors',
           sizeStyle.track,
           controlledChecked ? `bg-${color}-500` : 'bg-gray-200',
-          disabled && 'opacity-40'
+          disabled && 'opacity-50'
         )}
       >
         <span

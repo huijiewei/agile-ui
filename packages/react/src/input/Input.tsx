@@ -1,14 +1,14 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
-import type { Size } from '../utils/types';
+import type { InputBaseProps } from './InputGroup';
 
-export type InputProps = {
+export type InputProps = InputBaseProps & {
   /**
-   * 大小
-   * @default 'md'
+   * 是否可以清除内容
+   * @default false
    */
-  size?: Size;
+  clearable?: boolean;
 
   /**
    * 是否禁用
@@ -66,13 +66,10 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   return (
     <input
       className={cx(
-        'border border-gray-300 rounded outline-none appearance-none resize-none text-left leading-none',
-        'bg-white',
-        'focus:border-blue-500',
-        'transition-[border-color]',
-        fullWidth ? 'w-full' : '',
+        'border border-gray-200 bg-white relative rounded outline-none appearance-none text-left transition-colors resize-none',
+        fullWidth ? 'w-full' : 'w-auto',
         inputSizes[size],
-        disabled && 'opacity-60 cursor-not-allowed',
+        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-gray-300 focus:border-blue-500',
         className
       )}
       aria-invalid={invalid}

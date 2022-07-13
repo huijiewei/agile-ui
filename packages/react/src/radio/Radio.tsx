@@ -32,11 +32,11 @@ export type RadioProps = RadioBaseProps & {
 };
 
 const radioSizeStyles = {
-  xs: { control: 'h-3 w-3', label: 'text-xs', icon: 'text-[0.45rem]' },
-  sm: { control: 'h-3.5 w-3.5', label: 'text-sm', icon: 'text-[0.5rem]' },
-  md: { control: 'h-4 w-4', label: '', icon: 'text-[0.625rem]' },
-  lg: { control: 'h-5 w-5', label: 'text-lg', icon: 'text-[0.75rem]' },
-  xl: { control: 'h-6 w-6', label: 'text-xl', icon: 'text-[0.875rem]' },
+  xs: { control: 'h-3 w-3', label: 'text-xs' },
+  sm: { control: 'h-3.5 w-3.5', label: 'text-sm' },
+  md: { control: 'h-4 w-4', label: '' },
+  lg: { control: 'h-5 w-5', label: 'text-lg' },
+  xl: { control: 'h-6 w-6', label: 'text-xl' },
 };
 
 export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
@@ -126,13 +126,13 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
       />
       <span
         className={cx(
-          'inline-flex rounded-full items-center shrink-0 select-none justify-center border-1',
+          'inline-flex rounded-full items-center shrink-0 select-none justify-center border-2',
           controlledChecked
             ? `bg-${color}-500 border-${color}-500 text-white`
             : disabled
             ? 'bg-gray-100'
-            : 'border-gray-300',
-          disabled && 'opacity-40',
+            : 'border-gray-200',
+          disabled && 'opacity-50',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
         )}
