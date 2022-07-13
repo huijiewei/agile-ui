@@ -1,6 +1,7 @@
 import * as AgileReact from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
-import { isString } from '@agile-ui/utils';
+import { ExternalLink } from '@agile-ui/react-icons';
+import { isAbsoluteUrl, isString } from '@agile-ui/utils';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
@@ -76,13 +77,18 @@ export const components = {
     );
   },
   a: (props: Props) => {
+    const href = props.href as string;
+    const external = isAbsoluteUrl(href) && ['http', 'https'].includes(href.slice(0, href.indexOf(':')));
+
     return (
       <a
-        className={'text-blue-500 hover:(text-blue-600 underline)'}
-        href={props.href as string}
+        className={'text-blue-500 inline-flex items-center hover:(text-blue-600 underline)'}
+        href={href}
         title={isString(props.children) ? props.children : ''}
+        {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
       >
         {props.children}
+        {external && <ExternalLink size={'0.93em'} className={'ml-0.5'} />}
       </a>
     );
   },

@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <main className={'px-3'}>
-        <div className={'flex h-[calc(100vh-100px)] flex-col justify-center items-center'}>
+        <div className={'flex h-[calc(100vh-12em)] flex-col justify-center items-center'}>
           <p
             className={
               'text-[5em] leading-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400'
