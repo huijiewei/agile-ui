@@ -19,6 +19,56 @@ description: 输入框是。
 </div>
 ```
 
+## 输入框组
+
+```tsx preview editable
+<div className={'flex flex-col gap-3'}>
+  <InputGroup>
+    <Input />
+    <InputAddon>.com</InputAddon>
+  </InputGroup>
+  <InputGroup>
+    <InputAddon>https://</InputAddon>
+    <Input />
+    <InputAddon>.com</InputAddon>
+  </InputGroup>
+  <InputGroup>
+    <Input />
+    <InputAddon>@</InputAddon>
+    <Input />
+    <InputAddon>.com</InputAddon>
+  </InputGroup>
+  <InputGroup>
+    <InputAddon>姓</InputAddon>
+    <InputAddon>名</InputAddon>
+    <Input className={'w-16'} />
+    <Input />
+  </InputGroup>
+  <InputGroup>
+    <InputAddon>https://</InputAddon>
+    <Input />
+    <InputAddon>.</InputAddon>
+    <Input />
+    <InputAddon>.com</InputAddon>
+  </InputGroup>
+  <InputGroup>
+    <InputAddon as={'select'}>
+      <option value={'https'}>https</option>
+      <option value={'http'}>http</option>
+    </InputAddon>
+    <InputAddon>://</InputAddon>
+    <Input />
+    <InputAddon>.com</InputAddon>
+  </InputGroup>
+  <InputGroup>
+    <Input />
+    <InputAddon as={Button} variant={'light'} color={'gray'}>
+      搜索
+    </InputAddon>
+  </InputGroup>
+</div>
+```
+
 ## 属性
 
 <PropsTable componentName="Input" />

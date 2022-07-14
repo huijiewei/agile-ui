@@ -1,7 +1,9 @@
 import { __DEV__ } from '@agile-ui/utils';
+import { useState } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { InputBaseProps } from './InputGroup';
+import { inputSizes } from './inputSizes';
 
 export type InputProps = InputBaseProps & {
   /**
@@ -41,14 +43,6 @@ export type InputProps = InputBaseProps & {
   fullWidth?: boolean;
 };
 
-const inputSizes = {
-  xs: 'h-6 leading-6 px-2 text-sm',
-  sm: 'h-7 leading-7 px-2',
-  md: 'h-8 leading-8 px-3',
-  lg: 'h-9 leading-9 px-3',
-  xl: 'h-10 leading-10 px-3 text-lg',
-};
-
 /**
  * 输入框
  */
@@ -60,27 +54,55 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     required = false,
     readOnly = false,
     fullWidth = false,
+    clearable = false,
     className,
+    onFocus,
+    onBlur,
+    value,
+    defaultValue,
     ...rest
   } = props;
+
+  const [force, setForce] = useState<boolean>(false);
+
   return (
-    <input
+    <div
       className={cx(
-        'border border-gray-200 bg-white relative rounded outline-none appearance-none text-left transition-colors resize-none',
-        fullWidth ? 'w-full' : 'w-auto',
+        'inline-flex items-center border bg-white relative rounded transition-colors',
+        disabled ? 'opacity-50 cursor-not-allowed' : !force && 'hover:(border-gray-300 z-[2])',
+        force ? !disabled && 'border-blue-500 z-[3]' : 'border-gray-200 ',
+        fullWidth && 'w-full',
         inputSizes[size],
-        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-gray-300 focus:border-blue-500',
         className
       )}
-      aria-invalid={invalid}
-      aria-readonly={readOnly}
-      aria-required={required}
-      required={required}
-      disabled={disabled}
-      readOnly={readOnly}
-      {...rest}
-      ref={ref}
-    />
+    >
+      <input
+        className={
+          'outline-none min-w-0 bg-transparent w-full disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none'
+        }
+        aria-invalid={invalid}
+        aria-readonly={readOnly}
+        aria-required={required}
+        aria-disabled={disabled}
+        aria-multiline={'false'}
+        required={required}
+        disabled={disabled}
+        readOnly={readOnly}
+        onBlur={(e) => {
+          setForce(false);
+          onBlur && onBlur(e);
+        }}
+        onFocus={(e) => {
+          setForce(true);
+          onFocus && onFocus(e);
+        }}
+        value={value}
+        defaultValue={defaultValue}
+        {...rest}
+        ref={ref}
+      />
+      {clearable && value && <span className={''}></span>}
+    </div>
   );
 });
 

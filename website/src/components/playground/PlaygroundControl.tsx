@@ -1,4 +1,4 @@
-import { Input } from '@agile-ui/react';
+import { Checkbox, Input } from '@agile-ui/react';
 import { Check } from '@agile-ui/react-icons';
 import { cx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
@@ -16,12 +16,7 @@ export const PlaygroundControl = ({
     <label className={'inline-flex items-center justify-between gap-1'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>
       {prop.type.control == 'boolean' && (
-        <input
-          className={'rounded-sm border border-gray-200'}
-          defaultChecked={defaultValue?.toString() == 'true'}
-          type="checkbox"
-          onChange={(e) => onChange(e.target.checked)}
-        />
+        <Checkbox defaultChecked={defaultValue?.toString() == 'true'} onChange={(e) => onChange(e.target.checked)} />
       )}
       {(prop.type.control == 'string' || prop.type.control == 'number' || prop.type.control == 'ReactNode') && (
         <Input

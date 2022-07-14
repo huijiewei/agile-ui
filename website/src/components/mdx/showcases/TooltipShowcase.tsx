@@ -18,6 +18,6 @@ const Demo = () => {
     component={Tooltip}
     defaultProps={{ content: '工具提示', children: <Button>测试</Button> }}
     componentProps={componentProps}
-    ignoreProps={['children']}
+    ignoreProps={['children', 'animation']}
   />
 );

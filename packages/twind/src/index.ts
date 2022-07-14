@@ -40,6 +40,11 @@ export default () => {
       colors,
       fontWeight,
       borderRadius,
+      extend: {
+        borderWidth: {
+          3: '3px',
+        },
+      },
     },
   } as TwindPresetConfig;
 };
