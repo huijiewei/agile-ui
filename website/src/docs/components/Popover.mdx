@@ -1,0 +1,67 @@
+---
+title: 气泡卡片
+description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层。可以对卡片上的元素进行操作。
+---
+
+## 用法
+
+## 表单
+
+```tsx preview editable
+<Popover placement={'right'}>
+  <PopoverTrigger>
+    <Button>打开</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <FormDemo />
+  </PopoverContent>
+</Popover>
+```
+
+## 放置位置
+
+```tsx preview editable
+<div
+  className={'grid gap-2 mx-auto w-fit'}
+  style={{
+    gridTemplateAreas:
+      '".           top-start     top         top-end       .            "' +
+      '"left-start  .             .           .             right-start  "' +
+      '"left        .             center      .             right        "' +
+      '"left-end    .             .           .             right-end    "' +
+      '".           bottom-start  bottom      bottom-end    .            "',
+  }}
+>
+  {[
+    ['top-start', '上左'],
+    ['top', '上'],
+    ['top-end', '上右'],
+    ['left-start', '左上'],
+    ['left', '左'],
+    ['left-end', '左下'],
+    ['auto', '自动'],
+    ['right-start', '右上'],
+    ['right', '右'],
+    ['right-end', '右下'],
+    ['bottom-start', '下左'],
+    ['bottom', '下'],
+    ['bottom-end', '下右'],
+  ].map(([placement, name]) => (
+    <Popover key={placement} placement={placement}>
+      <PopoverTrigger>
+        <span
+          style={{ gridArea: placement == 'auto' ? 'center' : placement }}
+          className={'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default'}
+        >
+          {name}
+        </span>
+      </PopoverTrigger>
+      <PopoverContent>测试</PopoverContent>
+    </Popover>
+  ))}
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Popover" />

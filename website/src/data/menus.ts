@@ -125,6 +125,10 @@ export const menus: Menu[] = [
             path: '/components/tooltip',
           },
           {
+            label: '气泡卡片',
+            path: '/components/popover',
+          },
+          {
             label: '进度条',
             path: '/components/progress-bar',
           },

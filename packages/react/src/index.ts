@@ -32,6 +32,10 @@ export * from './radio/RadioGroup';
 
 export * from './tooltip/Tooltip';
 
+export * from './popover/Popover';
+export * from './popover/PopoverContent';
+export * from './popover/PopoverTrigger';
+
 export * from './overlay/Overlay';
 export * from './spinner/Spinner';
 export * from './spinner-overlay/SpinnerOverlay';
