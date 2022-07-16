@@ -1,9 +1,10 @@
 import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
-import { __DEV__, isNumber } from '@agile-ui/utils';
-import { useCallback, useRef, useState } from 'react';
+import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
+import { trackFocusVisible } from '../utils/focus-visible';
 import type { ScaleColor, Size } from '../utils/types';
 
 type SwitchProps = {
@@ -64,10 +65,10 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     onChange,
     children,
     className,
+    onBlur,
+    onFocus,
     ...rest
   } = props;
-
-  const onChangeRef = useCallbackRef(onChange);
 
   const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));
 
@@ -86,9 +87,9 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         setCheckedState(event.target.checked);
       }
 
-      onChangeRef?.(event);
+      onChange?.(event);
     },
-    [disabled, readOnly, isControlled, onChangeRef]
+    [readOnly, disabled, isControlled, onChange]
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -104,6 +105,13 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
   }, []);
 
   const sizeStyle = switchSizeStyles[size];
+
+  const [focusVisible, setFocusVisible] = useState(false);
+  const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    return trackFocusVisible(setFocusVisible);
+  }, []);
 
   return (
     <label
@@ -123,11 +131,21 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
+        onFocus={(e) => {
+          setFocus(true);
+          onFocus && onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocus(false);
+          onBlur && onBlur(e);
+        }}
         {...rest}
       />
       <span
+        data-focus-visible={dataAttr(focus && focusVisible)}
         className={cx(
           'inline-flex shrink-0 justify-start rounded-full p-[2px] transition-colors',
+          `focus-visible:(ring ring-${color}-300)`,
           sizeStyle.track,
           controlledChecked ? `bg-${color}-500` : 'bg-gray-200',
           disabled && 'opacity-50'

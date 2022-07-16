@@ -49,6 +49,7 @@ export default () => {
     variants: [
       ['active', '&[data-active], &:active'],
       ['disabled', '&[data-loading], &[disabled]'],
+      ['focus-visible', '&[data-focus-visible], &:focus-visible'],
     ],
   } as TwindPresetConfig;
 };

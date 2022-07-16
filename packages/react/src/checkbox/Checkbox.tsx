@@ -1,9 +1,10 @@
 import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
-import { __DEV__, isNumber } from '@agile-ui/utils';
+import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
-import { ChangeEvent, cloneElement, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, cloneElement, useCallback, useEffect, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
+import { trackFocusVisible } from '../utils/focus-visible';
 import { CheckboxBaseProps, useCheckboxGroup } from './CheckboxGroup';
 import { CheckboxIcon } from './CheckboxIcon';
 
@@ -145,7 +146,12 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     className: cx(sizeStyle.icon, 'transition-opacity', controlledChecked || indeterminate ? 'opacity-1' : 'opacity-0'),
   });
 
+  const [focusVisible, setFocusVisible] = useState(false);
   const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    return trackFocusVisible(setFocusVisible);
+  }, []);
 
   return (
     <label
@@ -176,12 +182,14 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         {...rest}
       />
       <div
+        data-focus-visible={dataAttr(focus && focusVisible)}
         className={cx(
           'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-2',
+          `focus-visible:(ring ring-${color}-300)`,
           controlledChecked || indeterminate
             ? `bg-${color}-500 border-${color}-500 text-white`
             : 'border-gray-200 bg-white',
-          disabled ? 'opacity-50' : focus ? `ring ring-${color}-500` : '',
+          disabled && 'opacity-50',
           sizeStyle.control
         )}
       >

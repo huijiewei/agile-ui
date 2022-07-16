@@ -139,7 +139,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
         'select-none appearance-none outline-none',
         'border whitespace-nowrap transition-colors transition-shadow',
         'disabled:(cursor-not-allowed opacity-50)',
-        `focus-visible:ring`,
+        `focus-visible:(ring ring-${color}-300)`,
         group
           ? `first:(${
               group.vertical ? `rounded-tl${rounded} rounded-tr${rounded}` : `rounded-tl${rounded} rounded-bl${rounded}`

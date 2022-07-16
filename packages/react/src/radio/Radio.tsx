@@ -1,9 +1,10 @@
 import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
-import { __DEV__, isNumber } from '@agile-ui/utils';
-import { useCallback, useRef, useState } from 'react';
+import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
+import { trackFocusVisible } from '../utils/focus-visible';
 import { useRadioGroup } from './RadioGroup';
 import type { RadioBaseProps } from './RadioGroup';
 
@@ -91,8 +92,6 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     [disabled, isControlled, onChangeRef, readOnly]
   );
 
-  const [focus, setFocus] = useState(false);
-
   useIsomorphicLayoutEffect(() => {
     const el = inputRef.current;
 
@@ -106,6 +105,13 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
   }, []);
 
   const sizeStyle = radioSizeStyles[size];
+
+  const [focusVisible, setFocusVisible] = useState(false);
+  const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    return trackFocusVisible(setFocusVisible);
+  }, []);
 
   return (
     <label
@@ -137,10 +143,12 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         {...rest}
       />
       <span
+        data-focus-visible={dataAttr(focus && focusVisible)}
         className={cx(
           'inline-flex rounded-full items-center shrink-0 select-none justify-center border-2',
+          `focus-visible:(ring ring-${color}-300)`,
           controlledChecked ? `bg-${color}-500 border-${color}-500 text-white` : 'border-gray-200 bg-white',
-          disabled ? 'opacity-50' : focus ? `ring ring-${color}-500` : '',
+          disabled && 'opacity-50',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
         )}
