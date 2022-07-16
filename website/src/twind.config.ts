@@ -6,7 +6,7 @@ import { css } from 'twind';
 import type { TwindUserConfig } from 'twind';
 
 export default {
-  presets: [presetAutoprefix(), presetTailwind(), presetExt(), presetAgile()],
+  presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
   preflight: css`
     body {
       @apply antialiased text-black bg-white overflow-y-scroll;

@@ -70,7 +70,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
       className={cx(
         'inline-flex items-center border bg-white relative rounded transition-colors',
         disabled ? 'opacity-50 cursor-not-allowed' : !force && 'hover:(border-gray-300 z-[2])',
-        force ? !disabled && 'border-blue-500 z-[3]' : 'border-gray-200 ',
+        force ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
         fullWidth && 'w-full',
         inputSizes[size],
         className

@@ -56,6 +56,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     defaultChecked,
     onChange,
     readOnly,
+    onFocus,
+    onBlur,
     ...rest
   } = props;
 
@@ -88,6 +90,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     },
     [disabled, isControlled, onChangeRef, readOnly]
   );
+
+  const [focus, setFocus] = useState(false);
 
   useIsomorphicLayoutEffect(() => {
     const el = inputRef.current;
@@ -122,13 +126,21 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
+        onFocus={(e) => {
+          setFocus(true);
+          onFocus && onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocus(false);
+          onBlur && onBlur(e);
+        }}
         {...rest}
       />
       <span
         className={cx(
           'inline-flex rounded-full items-center shrink-0 select-none justify-center border-2',
           controlledChecked ? `bg-${color}-500 border-${color}-500 text-white` : 'border-gray-200 bg-white',
-          disabled && 'opacity-50',
+          disabled ? 'opacity-50' : focus ? `ring ring-${color}-500` : '',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
         )}

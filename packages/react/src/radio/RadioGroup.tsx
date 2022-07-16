@@ -1,7 +1,7 @@
 import { useControllableProp } from '@agile-ui/react-hooks';
 import { __DEV__, isInputEvent } from '@agile-ui/utils';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { useCallback, useMemo, useState } from 'react';
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -63,8 +63,8 @@ type RadioGroupProps = RadioGroupBaseProps & {
   onChange?: (value: string) => void;
 };
 
-export const RadioGroup = primitiveComponent<'div', RadioGroupProps>((props, ref) => {
-  const { color, size, children, className, disabled, value, name, defaultValue = '', onChange, ...rest } = props;
+export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
+  const { color, size, children, disabled, value, name, defaultValue = '', onChange } = props;
 
   const [state, setState] = useState<StringOrNumber>(defaultValue);
 
@@ -95,14 +95,8 @@ export const RadioGroup = primitiveComponent<'div', RadioGroupProps>((props, ref
     [name, size, color, handleChange, controlledValue, disabled]
   );
 
-  return (
-    <RadioGroupProvider value={group}>
-      <div ref={ref} className={cx('', className)} {...rest}>
-        {children}
-      </div>
-    </RadioGroupProvider>
-  );
-});
+  return <RadioGroupProvider value={group}>{children}</RadioGroupProvider>;
+};
 
 if (__DEV__) {
   RadioGroup.displayName = 'RadioGroup';

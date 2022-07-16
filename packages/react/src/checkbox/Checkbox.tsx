@@ -69,6 +69,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     indeterminate,
     onChange,
     readOnly,
+    onFocus,
+    onBlur,
     ...rest
   } = props;
 
@@ -143,6 +145,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     className: cx(sizeStyle.icon, 'transition-opacity', controlledChecked || indeterminate ? 'opacity-1' : 'opacity-0'),
   });
 
+  const [focus, setFocus] = useState(false);
+
   return (
     <label
       className={cx(
@@ -161,20 +165,28 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
+        onFocus={(e) => {
+          setFocus(true);
+          onFocus && onFocus(e);
+        }}
+        onBlur={(e) => {
+          setFocus(false);
+          onBlur && onBlur(e);
+        }}
         {...rest}
       />
-      <span
+      <div
         className={cx(
           'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-2',
           controlledChecked || indeterminate
             ? `bg-${color}-500 border-${color}-500 text-white`
             : 'border-gray-200 bg-white',
-          disabled && 'opacity-50',
+          disabled ? 'opacity-50' : focus ? `ring ring-${color}-500` : '',
           sizeStyle.control
         )}
       >
         {clonedIcon}
-      </span>
+      </div>
       {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-50')}>{children}</span>}
     </label>
   );

@@ -46,5 +46,9 @@ export default () => {
         },
       },
     },
+    variants: [
+      ['active', '&[data-active], &:active'],
+      ['disabled', '&[data-loading], &[disabled]'],
+    ],
   } as TwindPresetConfig;
 };

@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, isNumber } from '@agile-ui/utils';
+import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
@@ -79,35 +79,25 @@ const buttonSizes = {
   xl: 'h-10 px-7 text-lg',
 };
 
-const buttonVariants = (color: string, disabled: boolean, active: boolean, group?: { vertical: boolean }) => {
+const buttonVariants = (color: string, group?: { vertical: boolean }) => {
   return {
     solid: [
-      `text-white border-transparent`,
-      active ? `bg-${color}-700` : `bg-${color}-500`,
-      !disabled && !active && `hover:bg-${color}-600 active:bg-${color}-700`,
+      `text-white border-transparent bg-${color}-500 disabled:bg-${color}-500 hover:bg-${color}-600 active:bg-${color}-700`,
       group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-current)`,
     ],
     outline: [
-      `border-current text-${color}-500`,
-      active ? `bg-${color}-100 active:bg-${color}-500/20` : 'bg-transparent',
-      !disabled && !active && `hover:bg-${color}-50 active:bg-${color}-100`,
+      `border-current text-${color}-500 bg-white disabled:bg-white hover:bg-${color}-50 active:bg-${color}-100`,
       group && `not-first-child:(-m${group.vertical ? 't' : 'l'}-[1px])`,
     ],
     light: [
-      `border-transparent text-${color}-500`,
-      active ? `bg-${color}-200` : `bg-${color}-50`,
-      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
+      `border-transparent text-${color}-500 bg-${color}-50 disabled:bg-${color}-50 hover:bg-${color}-100 active:bg-${color}-200`,
       group && `not-last-child:(border-${group.vertical ? 'b' : 'r'}-${color}-100)`,
     ],
     subtle: [
-      `border-transparent text-${color}-500`,
-      active ? `bg-${color}-200` : 'bg-transparent',
-      !disabled && !active && `hover:bg-${color}-100 active:bg-${color}-200`,
+      `border-transparent text-${color}-500 bg-transparent disabled:bg-transparent hover:bg-${color}-100 active:bg-${color}-200`,
     ],
     link: [
-      `border-transparent underline underline-offset-2`,
-      active ? `text-${color}-700` : `text-${color}-500`,
-      !disabled && !active && `hover:text-${color}-600 active:text-${color}-700`,
+      `border-transparent underline underline-offset-2 text-${color}-500 disabled:text-${color}-500 hover:text-${color}-600 active:text-${color}-700`,
     ],
   };
 };
@@ -145,7 +135,11 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
     <Component
       {...rest}
       className={cx(
-        'inline-flex select-none appearance-none items-center justify-center whitespace-nowrap border align-middle duration-300 transition-colors',
+        'inline-flex items-center justify-center ',
+        'select-none appearance-none outline-none',
+        'border whitespace-nowrap transition-colors transition-shadow',
+        'disabled:(cursor-not-allowed opacity-50)',
+        `focus-visible:ring`,
         group
           ? `first:(${
               group.vertical ? `rounded-tl${rounded} rounded-tr${rounded}` : `rounded-tl${rounded} rounded-bl${rounded}`
@@ -154,11 +148,11 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
             })`
           : `rounded${rounded}`,
         fullWidth ? 'w-full' : 'w-auto',
-        (disabled || loading) && 'cursor-not-allowed opacity-60',
         buttonSizes[size],
-        buttonVariants(color, disabled || loading, active, group && { vertical: group.vertical || false })[variant],
+        buttonVariants(color, group && { vertical: group.vertical || false })[variant],
         className
       )}
+      data-active={dataAttr(active)}
       disabled={disabled || loading}
       type={type ?? defaultType}
       ref={useMergedRefs(ref, _ref)}
