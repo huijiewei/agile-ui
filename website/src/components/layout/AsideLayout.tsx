@@ -9,7 +9,7 @@ export const AsideLayout = () => {
   const dispatch = useLayoutAsideExistedDispatch();
 
   useEffect(() => {
-    dispatch(true);
+    dispatch && dispatch(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

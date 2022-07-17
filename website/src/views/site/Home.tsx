@@ -7,7 +7,7 @@ const Home = () => {
   const dispatch = useLayoutAsideExistedDispatch();
 
   useEffect(() => {
-    dispatch(false);
+    dispatch && dispatch(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,22 +30,22 @@ const Home = () => {
           <p className={'flex flex-row gap-9 mt-10'}>
             <Link
               className={
-                'inline-flex transition-colors items-center text-lg rounded justify-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white h-12 w-32'
+                'inline-flex transition-colors gap-2 items-center text-lg rounded justify-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white h-12 w-32'
               }
               to={'/start'}
             >
               快速开始
-              <ArrowRight className={'ml-1.5'} />
+              <ArrowRight />
             </Link>
             <a
               className={
-                'inline-flex transition-colors items-center text-lg rounded justify-center bg-gray-100 hover:bg-gray-200 active:bg-gray-300 h-12 w-32'
+                'inline-flex gap-2 transition-colors items-center text-lg rounded justify-center bg-gray-100 hover:bg-gray-200 active:bg-gray-300 h-12 w-32'
               }
               target={'_blank'}
-              rel="noreferrer"
+              rel="noopener noreferrer"
               href="https://github.com/huijiewei/agile-ui"
             >
-              <Github className={'mr-1.5'} />
+              <Github />
               GitHub
             </a>
           </p>

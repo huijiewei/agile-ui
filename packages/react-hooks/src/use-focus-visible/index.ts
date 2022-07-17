@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 type Modality = 'keyboard' | 'pointer' | 'virtual';
 type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent;
 type Handler = (modality: Modality, e: HandlerEvent | null) => void;
@@ -114,14 +116,23 @@ const setupGlobalFocusEvents = () => {
   hasSetup = true;
 };
 
-export function trackFocusVisible(fn: FocusVisibleCallback) {
+export const useFocusVisible = (): {
+  focusVisible: boolean;
+} => {
   setupGlobalFocusEvents();
 
-  fn(isFocusVisible());
-  const handler = () => fn(isFocusVisible());
+  const [focusVisible, setFocusVisible] = useState(isFocusVisible());
 
-  handlers.add(handler);
-  return () => {
-    handlers.delete(handler);
-  };
-}
+  useEffect(() => {
+    const handler = () => {
+      setFocusVisible(isFocusVisible());
+    };
+
+    handlers.add(handler);
+    return () => {
+      handlers.delete(handler);
+    };
+  }, []);
+
+  return { focusVisible };
+};

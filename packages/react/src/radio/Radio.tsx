@@ -1,10 +1,15 @@
-import { mergeRefs, useCallbackRef, useControllableProp, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
+import {
+  mergeRefs,
+  useCallbackRef,
+  useControllableProp,
+  useFocusVisible,
+  useIsomorphicLayoutEffect,
+} from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
-import { trackFocusVisible } from '../utils/focus-visible';
 import { useRadioGroup } from './RadioGroup';
 import type { RadioBaseProps } from './RadioGroup';
 
@@ -106,12 +111,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
 
   const sizeStyle = radioSizeStyles[size];
 
-  const [focusVisible, setFocusVisible] = useState(false);
+  const { focusVisible } = useFocusVisible();
   const [focus, setFocus] = useState(false);
-
-  useEffect(() => {
-    return trackFocusVisible(setFocusVisible);
-  }, []);
 
   return (
     <label
