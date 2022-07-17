@@ -15,6 +15,8 @@ type PopoverContextValue = {
   animation?: AnimationBaseProps;
   labelId: string;
   descriptionId: string;
+  onClose: () => void;
+  modal: boolean;
 };
 
 const [PopoverProvider, usePopover] = createContext<PopoverContextValue>({

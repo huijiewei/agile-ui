@@ -2,6 +2,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import type { ReactElement, ReactNode } from 'react';
 import { cx } from 'twind';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
+import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
 
@@ -85,24 +86,13 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
         <AlertDescription>{description}</AlertDescription>
       </div>
       {closeable && (
-        <button
+        <CloseButton
           onClick={onClose}
           className={cx(
-            'absolute top-1 right-1 p-0.5 rounded',
+            'top-1 right-1 p-0.5 rounded',
             variant == 'solid' ? `hover:bg-${color}-600` : `hover:bg-${color}-200 text-black`
           )}
-        >
-          <svg
-            className={'h-4 w-4'}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        />
       )}
     </Alert>
   );

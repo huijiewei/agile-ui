@@ -13,7 +13,9 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
     <Button>打开</Button>
   </PopoverTrigger>
   <PopoverContent>
-    <FormDemo />
+    <PopoverBody>
+      <FormDemo />
+    </PopoverBody>
   </PopoverContent>
 </Popover>
 ```
@@ -47,7 +49,7 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
     ['bottom', '下'],
     ['bottom-end', '下右'],
   ].map(([placement, name]) => (
-    <Popover key={placement} placement={placement}>
+    <Popover closeOnBlur={false} key={placement} placement={placement}>
       <PopoverTrigger>
         <span
           style={{ gridArea: placement == 'auto' ? 'center' : placement }}
@@ -56,7 +58,12 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
           {name}
         </span>
       </PopoverTrigger>
-      <PopoverContent>测试</PopoverContent>
+      <PopoverContent>
+        <PopoverHeader>标题</PopoverHeader>
+        <PopoverCloseButton />
+        <PopoverBody>这是一个在{name}气泡卡片</PopoverBody>
+        <PopoverFooter>底部显示</PopoverFooter>
+      </PopoverContent>
     </Popover>
   ))}
 </div>

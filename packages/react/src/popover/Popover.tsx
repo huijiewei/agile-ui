@@ -12,8 +12,8 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { useId, useMemo, useState } from 'react';
 import type { PropsWithChildren } from 'react';
+import { useId, useMemo, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
 import { PopoverProvider } from './PopoverProvider';
 
@@ -47,12 +47,25 @@ export type PopoverProps = {
 
   /**
    * 是否 modal
+   * @default true
    */
   modal?: boolean;
+
+  /**
+   * 按下 Esc 键时, 气泡卡片将关闭
+   * @default true
+   */
+  closeOnEsc?: boolean;
+
+  /**
+   * 单击外部时, 气泡卡片将关闭
+   * @default true
+   */
+  closeOnBlur?: boolean;
 };
 
 export const Popover = (props: PropsWithChildren<PopoverProps>) => {
-  const { children, placement, animation } = props;
+  const { children, placement, animation, closeOnEsc = true, closeOnBlur = true, modal = true } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -71,7 +84,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useClick(context),
     useRole(context),
-    useDismiss(context),
+    useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
   ]);
 
   const value = useMemo(
@@ -87,8 +100,23 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       animation,
       labelId,
       descriptionId,
+      onClose: () => setOpen(false),
+      modal,
     }),
-    [open, x, y, context, reference, floating, getReferenceProps, getFloatingProps, animation, labelId, descriptionId]
+    [
+      open,
+      x,
+      y,
+      context,
+      reference,
+      floating,
+      getReferenceProps,
+      getFloatingProps,
+      animation,
+      labelId,
+      descriptionId,
+      modal,
+    ]
   );
 
   return <PopoverProvider value={value}>{children}</PopoverProvider>;

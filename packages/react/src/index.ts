@@ -34,6 +34,10 @@ export * from './tooltip/Tooltip';
 export * from './popover/Popover';
 export * from './popover/PopoverContent';
 export * from './popover/PopoverTrigger';
+export * from './popover/PopoverHeader';
+export * from './popover/PopoverBody';
+export * from './popover/PopoverFooter';
+export * from './popover/PopoverCloseButton';
 
 export * from './overlay/Overlay';
 export * from './spinner/Spinner';
@@ -44,4 +48,5 @@ export * from './progress/ProgressBar';
 export * from './toast/Toast';
 export * from './toast/useToast';
 
+export * from './close-button/CloseButton';
 export * from './provider/AgileProvider';
