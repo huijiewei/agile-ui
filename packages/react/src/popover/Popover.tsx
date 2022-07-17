@@ -1,4 +1,4 @@
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, runIfFn } from '@agile-ui/utils';
 import {
   autoPlacement,
   autoUpdate,
@@ -12,22 +12,12 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import type { PropsWithChildren } from 'react';
-import { useId, useMemo, useState } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
 import { PopoverProvider } from './PopoverProvider';
 
 export type PopoverProps = {
-  /**
-   * 受控开启状态
-   */
-  opened?: boolean;
-
-  /**
-   * 默认开启状态
-   */
-  defaultOpened?: boolean;
-
   /**
    * 放置位置
    * @default 'auto'
@@ -41,9 +31,19 @@ export type PopoverProps = {
   animation?: AnimationBaseProps;
 
   /**
-   * 开启状态改变时的回调
+   * 默认开启状态
    */
-  onChange?: (opened: boolean) => void;
+  opened?: boolean;
+
+  /**
+   * 开启时的回调
+   */
+  onOpen?: () => void;
+
+  /**
+   * 关闭时的回调
+   */
+  onClose?: () => void;
 
   /**
    * 是否 modal
@@ -52,27 +52,47 @@ export type PopoverProps = {
   modal?: boolean;
 
   /**
-   * 按下 Esc 键时, 气泡卡片将关闭
+   * 按下 Esc 键时, 弹出框将关闭
    * @default true
    */
   closeOnEsc?: boolean;
 
   /**
-   * 单击外部时, 气泡卡片将关闭
+   * 单击外部时, 弹出框将关闭
    * @default true
    */
   closeOnBlur?: boolean;
+
+  children?: ReactNode | ((props: { opened: boolean; handleClose?: () => void }) => ReactNode);
 };
 
 export const Popover = (props: PropsWithChildren<PopoverProps>) => {
-  const { children, placement, animation, closeOnEsc = true, closeOnBlur = true, modal = true } = props;
+  const {
+    children,
+    placement,
+    animation,
+    closeOnEsc = true,
+    closeOnBlur = true,
+    modal = true,
+    opened = false,
+    onOpen,
+    onClose,
+  } = props;
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(opened);
 
   const { x, y, reference, floating, context } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
     open,
-    onOpenChange: setOpen,
+    onOpenChange: (opened) => {
+      setOpen(opened);
+
+      if (opened) {
+        onOpen && onOpen();
+      } else {
+        onClose && onClose();
+      }
+    },
     placement: placement == 'auto' ? undefined : placement,
     whileElementsMounted: autoUpdate,
   });
@@ -87,6 +107,12 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
   ]);
 
+  const handleClose = useCallback(() => {
+    setOpen(false);
+
+    onClose && onClose();
+  }, [onClose]);
+
   const value = useMemo(
     () => ({
       open,
@@ -100,7 +126,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       animation,
       labelId,
       descriptionId,
-      onClose: () => setOpen(false),
+      onClose: handleClose,
       modal,
     }),
     [
@@ -115,11 +141,12 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       animation,
       labelId,
       descriptionId,
+      handleClose,
       modal,
     ]
   );
 
-  return <PopoverProvider value={value}>{children}</PopoverProvider>;
+  return <PopoverProvider value={value}>{runIfFn(children, { opened: open, handleClose })}</PopoverProvider>;
 };
 
 if (__DEV__) {

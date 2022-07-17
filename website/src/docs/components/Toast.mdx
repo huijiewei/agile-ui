@@ -12,7 +12,7 @@ import { useToast } from '@agile-ui/react';
 ## 颜色
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   return (
@@ -49,7 +49,7 @@ function ToastDemo() {
 ## 样式
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   return (
@@ -84,7 +84,7 @@ function ToastDemo() {
 ## 持续时间
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   return (
@@ -121,7 +121,7 @@ function ToastDemo() {
 ## 更新提醒内容
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
   const toastId = React.useRef();
 
@@ -149,7 +149,7 @@ function ToastDemo() {
 ## 关闭回调
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   return (
@@ -161,7 +161,7 @@ function ToastDemo() {
             title: '通知提醒',
             description: '全局展示通知提醒，将信息及时有效的传达给用户。',
             onClose: () => {
-              alert('通知提醒关闭回调');
+              console.log('通知提醒关闭回调');
             },
           })
         }
@@ -176,7 +176,7 @@ function ToastDemo() {
 ## 处理承诺
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   const promise = () => {
@@ -218,7 +218,7 @@ function ToastDemo() {
 ## 放置位置
 
 ```tsx preview editable
-function ToastDemo() {
+function Demo() {
   const toast = useToast();
 
   return (

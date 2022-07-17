@@ -1,4 +1,3 @@
-import { useColorModeState } from '@agile-ui/react';
 import * as AgileReact from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
 import type { Language } from 'prism-react-renderer';
@@ -22,7 +21,7 @@ type CodeLiveProps = {
 export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   const { code, preview = false, editable = false, noInline = false, language = 'tsx', className, ...rest } = props;
 
-  const { darkMode } = useColorModeState();
+  const { darkMode } = AgileReact.useColorModeState();
 
   if (!preview) {
     return (

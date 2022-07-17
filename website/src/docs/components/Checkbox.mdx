@@ -37,7 +37,7 @@ description: 在一组数据中，用户可通过复选框选择一个或多个�
 ## 复选框组
 
 ```tsx preview editable
-function Example() {
+function Demo() {
   const [checkedValue, setCheckedValue] = React.useState(['选择框一']);
 
   return (
@@ -64,7 +64,7 @@ function Example() {
 ## 部分选中
 
 ```tsx preview editable
-function Example() {
+function Demo() {
   const [checkedItems, setCheckedItems] = React.useState([true, false, false]);
 
   const allChecked = checkedItems.every(Boolean);
@@ -124,7 +124,7 @@ const CustomIcon = (props) => {
   );
 };
 
-function Example() {
+function Demo() {
   const [checkedItems, setCheckedItems] = React.useState([true, false]);
 
   const allChecked = checkedItems.every(Boolean);
@@ -160,7 +160,7 @@ function Example() {
   );
 }
 
-render(<Example />);
+render(<Demo />);
 ```
 
 ## 复选框属性

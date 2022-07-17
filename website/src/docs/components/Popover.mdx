@@ -1,22 +1,47 @@
 ---
-title: 气泡卡片
+title: 弹出框
 description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层。可以对卡片上的元素进行操作。
 ---
 
 ## 用法
 
+## 回调事件
+
+```tsx preview editable
+<Popover onOpen={() => console.log('弹出框打开回调')} onClose={() => console.log('弹出框关闭回调')} placement={'right'}>
+  <PopoverTrigger>
+    <Button>开启</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverHeader>回调弹出框</PopoverHeader>
+    <PopoverBody>这是一个回调弹出框</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
 ## 表单
 
 ```tsx preview editable
-<Popover placement={'right'}>
-  <PopoverTrigger>
-    <Button>打开</Button>
-  </PopoverTrigger>
-  <PopoverContent>
-    <PopoverBody>
-      <FormDemo />
-    </PopoverBody>
-  </PopoverContent>
+<Popover closeOnBlur={false} placement={'right'}>
+  {({ opened, handleClose }) => (
+    <>
+      <PopoverTrigger>
+        <Button>{opened ? '关闭' : '开启'}表单</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>弹出框表单</PopoverHeader>
+        <PopoverBody>
+          <FormDemo />
+        </PopoverBody>
+        <PopoverFooter className={'flex items-center justify-center gap-5'}>
+          <Button>确定</Button>
+          <Button color={'gray'} onClick={handleClose}>
+            关闭
+          </Button>
+        </PopoverFooter>
+      </PopoverContent>
+    </>
+  )}
 </Popover>
 ```
 
@@ -49,7 +74,7 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
     ['bottom', '下'],
     ['bottom-end', '下右'],
   ].map(([placement, name]) => (
-    <Popover closeOnBlur={false} key={placement} placement={placement}>
+    <Popover key={placement} placement={placement}>
       <PopoverTrigger>
         <span
           style={{ gridArea: placement == 'auto' ? 'center' : placement }}
@@ -61,7 +86,7 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
       <PopoverContent>
         <PopoverHeader>标题</PopoverHeader>
         <PopoverCloseButton />
-        <PopoverBody>这是一个在{name}气泡卡片</PopoverBody>
+        <PopoverBody>这是一个在{name}位置的弹出框</PopoverBody>
         <PopoverFooter>底部显示</PopoverFooter>
       </PopoverContent>
     </Popover>
