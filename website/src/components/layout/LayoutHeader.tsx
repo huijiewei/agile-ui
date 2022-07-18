@@ -33,8 +33,8 @@ export const LayoutHeader = () => {
         <div className={'flex flex-row items-center'}>
           <Link to={'/'}>
             <img
-              width={36}
-              height={36}
+              width={32}
+              height={32}
               className={'inline-block align-middle mt-[1px] -mb-[1px]'}
               alt={'Agile UI'}
               src={LogoImage}

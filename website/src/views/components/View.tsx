@@ -78,8 +78,8 @@ const ComponentView = () => {
   return (
     <>
       <Helmet title={`${mdx.title} - 组件`}></Helmet>
-      <div className={'relative laptop:mr-44'}>
-        <article className={'flex flex-col gap-5'}>
+      <div className={'relative flex'}>
+        <article className={'flex flex-col gap-5 w-full laptop:w-[calc(100%-9rem)]'}>
           <div className={'flex flex-row items-center justify-between'}>
             <h1 className={'text-xl font-bold'}>{mdx.title}</h1>
             <a
@@ -106,8 +106,8 @@ const ComponentView = () => {
             </a>
           </p>
         </article>
-        <nav className={'laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] hidden w-40'}>
-          <MdxToc toc={mdx.toc}></MdxToc>
+        <nav className={'laptop:block hidden w-36'}>
+          <MdxToc className={'sticky top-20 ml-9'} toc={mdx.toc}></MdxToc>
         </nav>
       </div>
     </>
