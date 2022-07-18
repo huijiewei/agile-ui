@@ -5,6 +5,7 @@ import { primitiveComponent } from '../utils/component';
 import { usePopover } from './PopoverProvider';
 
 type PopoverTriggerProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: ReactNode | ComponentProps<any>;
 };
 

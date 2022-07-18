@@ -13,7 +13,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { useCallback, useId, useMemo, useState } from 'react';
+import { MutableRefObject, useCallback, useId, useMemo, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
 import { PopoverProvider } from './PopoverProvider';
 
@@ -39,6 +39,11 @@ export type PopoverProps = {
    * 关闭时的回调
    */
   onClose?: () => void;
+
+  /**
+   * 开启后焦点目标
+   */
+  initialFocus?: number | MutableRefObject<HTMLElement | null>;
 
   /**
    * 是否 modal
@@ -71,6 +76,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     modal = true,
     opened = false,
     onClose,
+    initialFocus,
   } = props;
 
   const [open, setOpen] = useState(opened);
@@ -120,6 +126,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       descriptionId,
       onClose: handleClose,
       modal,
+      initialFocus,
     }),
     [
       open,
@@ -135,6 +142,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       descriptionId,
       handleClose,
       modal,
+      initialFocus,
     ]
   );
 

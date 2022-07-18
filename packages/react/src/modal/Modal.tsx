@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react-dom-interactions';
-import type { PropsWithChildren } from 'react';
+import type { MutableRefObject, PropsWithChildren } from 'react';
 import { useCallback, useId, useMemo } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
 import { Portal } from '../portal/Portal';
@@ -31,10 +31,14 @@ export type ModalProps = {
 
   /**
    * 模态框开启后锁定滚动条
-   *
    * @default true
    */
   lockScroll?: boolean;
+
+  /**
+   * 模态框开启后焦点目标
+   */
+  initialFocus?: number | MutableRefObject<HTMLElement | null>;
 
   /**
    * 动画
@@ -44,7 +48,16 @@ export type ModalProps = {
 };
 
 export const Modal = (props: PropsWithChildren<ModalProps>) => {
-  const { children, animation = {}, closeOnEsc = true, closeOnBlur = true, opened, onClose, lockScroll = true } = props;
+  const {
+    children,
+    animation,
+    closeOnEsc = true,
+    closeOnBlur = true,
+    opened,
+    onClose,
+    lockScroll = true,
+    initialFocus,
+  } = props;
 
   const { floating, context } = useFloating<HTMLElement>({
     open: opened,
@@ -76,12 +89,24 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       floating,
       getFloatingProps,
       animation,
+      initialFocus,
       lockScroll,
       labelId,
       descriptionId,
       onClose: handleClose,
     }),
-    [opened, context, floating, getFloatingProps, animation, lockScroll, labelId, descriptionId, handleClose]
+    [
+      opened,
+      context,
+      floating,
+      getFloatingProps,
+      animation,
+      initialFocus,
+      lockScroll,
+      labelId,
+      descriptionId,
+      handleClose,
+    ]
   );
 
   return (

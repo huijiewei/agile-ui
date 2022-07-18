@@ -19,6 +19,7 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
     labelId,
     descriptionId,
     modal,
+    initialFocus,
   } = usePopover();
 
   const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
@@ -30,7 +31,7 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <Portal>
       {shouldMount && (
-        <FloatingFocusManager modal={modal} context={context}>
+        <FloatingFocusManager modal={modal} initialFocus={initialFocus} context={context}>
           <div
             className={cx('absolute z-30', `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
             {...getFloatingProps({

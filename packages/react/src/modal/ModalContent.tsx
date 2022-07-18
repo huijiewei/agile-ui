@@ -7,7 +7,16 @@ import { useModal } from './ModalProvider';
 
 export const ModalContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
-  const { open, floating, context, getFloatingProps, animation = {}, labelId, descriptionId } = useModal();
+  const {
+    open,
+    floating,
+    context,
+    getFloatingProps,
+    animation = {},
+    labelId,
+    descriptionId,
+    initialFocus,
+  } = useModal();
 
   const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
 
@@ -19,7 +28,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
 
   return (
     <div className={'flex fixed w-screen h-screen left-0 top-0 z-40 justify-center items-center'}>
-      <FloatingFocusManager modal={true} context={context}>
+      <FloatingFocusManager modal={true} initialFocus={initialFocus} context={context}>
         <div
           className={cx(
             'relative flex flex-col shadow rounded border border-gray-200 bg-white dark:bg-gray-700',

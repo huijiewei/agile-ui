@@ -62,7 +62,7 @@ function Demo() {
   return (
     <>
       <Button onClick={() => setOpened(true)}>打开模态框</Button>
-      <Modal opened={opened} onClose={() => setOpened(false)}>
+      <Modal initialFocus={1} opened={opened} onClose={() => setOpened(false)}>
         <ModalOverlay />
         <ModalContent className={''}>
           <ModalHeader>模态框</ModalHeader>
