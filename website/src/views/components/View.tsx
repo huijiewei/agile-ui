@@ -106,9 +106,7 @@ const ComponentView = () => {
             </a>
           </p>
         </article>
-        <nav
-          className={'laptop:z-50 laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] z-20 hidden w-40'}
-        >
+        <nav className={'laptop:block fixed top-20 bottom-0 right-[max(0px,calc(50%-40rem))] hidden w-40'}>
           <MdxToc toc={mdx.toc}></MdxToc>
         </nav>
       </div>

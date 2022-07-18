@@ -1,0 +1,85 @@
+---
+title: 模态框
+description: 在当前页面打开一个浮层，承载相关操作。
+---
+
+## 用法
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>打开模态框</Button>
+      <Modal opened={opened} onClose={() => setOpened(false)}>
+        <ModalOverlay />
+        <ModalContent className={'w-1/3'}>
+          <ModalHeader>模态框</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>这是一个模态框</ModalBody>
+          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+## 不锁定滚动条
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>打开模态框</Button>
+      <Modal opened={opened} onClose={() => setOpened(false)} lockScroll={false}>
+        <ModalOverlay />
+        <ModalContent className={'w-1/3'}>
+          <ModalHeader>模态框</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>这是一个模态框</ModalBody>
+          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+## 表单
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>打开模态框</Button>
+      <Modal opened={opened} onClose={() => setOpened(false)}>
+        <ModalOverlay />
+        <ModalContent className={''}>
+          <ModalHeader>模态框</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormDemo />
+          </ModalBody>
+          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
+## 属性
+
+<PropsTable componentName="Modal" />

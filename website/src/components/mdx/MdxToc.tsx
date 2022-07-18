@@ -1,3 +1,4 @@
+import type { PrimitiveComponentProps } from '@agile-ui/react';
 import { useEventListener } from '@agile-ui/react-hooks';
 import { slugify } from '@agile-ui/utils';
 import { useEffect, useRef, useState } from 'react';
@@ -31,7 +32,13 @@ const getActiveElement = (rects: DOMRect[]) => {
   return closest.index;
 };
 
-export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
+type MdxToxProps = {
+  toc?: Toc[];
+};
+
+export const MdxToc = (props: PrimitiveComponentProps<'ul', MdxToxProps>) => {
+  const { className, toc = [], ...rest } = props;
+
   const [active, setActive] = useState(0);
 
   const slugs = useRef<HTMLElement[]>([]);
@@ -47,7 +54,7 @@ export const MdxToc = ({ toc = [] }: { toc?: Toc[] }) => {
   });
 
   return (
-    <ul className={'space-y-1 border-l border-l-gray-100'}>
+    <ul className={cx('space-y-1 border-l border-l-gray-100', className)} {...rest}>
       {toc.map(({ value, depth }, index) => {
         const slug = slugify(value);
 

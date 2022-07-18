@@ -36,11 +36,6 @@ export type PopoverProps = {
   opened?: boolean;
 
   /**
-   * 开启时的回调
-   */
-  onOpen?: () => void;
-
-  /**
    * 关闭时的回调
    */
   onClose?: () => void;
@@ -75,7 +70,6 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     closeOnBlur = true,
     modal = true,
     opened = false,
-    onOpen,
     onClose,
   } = props;
 
@@ -87,9 +81,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     onOpenChange: (opened) => {
       setOpen(opened);
 
-      if (opened) {
-        onOpen && onOpen();
-      } else {
+      if (!opened) {
         onClose && onClose();
       }
     },

@@ -8,7 +8,7 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
 ## 回调事件
 
 ```tsx preview editable
-<Popover onOpen={() => console.log('弹出框打开回调')} onClose={() => console.log('弹出框关闭回调')} placement={'right'}>
+<Popover onClose={() => console.log('弹出框关闭回调')} placement={'right'}>
   <PopoverTrigger>
     <Button>开启</Button>
   </PopoverTrigger>

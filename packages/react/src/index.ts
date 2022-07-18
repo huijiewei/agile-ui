@@ -39,6 +39,14 @@ export * from './popover/PopoverBody';
 export * from './popover/PopoverFooter';
 export * from './popover/PopoverCloseButton';
 
+export * from './modal/Modal';
+export * from './modal/ModalOverlay';
+export * from './modal/ModalContent';
+export * from './modal/ModalHeader';
+export * from './modal/ModalBody';
+export * from './modal/ModalFooter';
+export * from './modal/ModalCloseButton';
+
 export * from './overlay/Overlay';
 export * from './spinner/Spinner';
 export * from './spinner-overlay/SpinnerOverlay';
