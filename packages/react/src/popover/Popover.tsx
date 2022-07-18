@@ -81,7 +81,14 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const [open, setOpen] = useState(opened);
 
-  const { x, y, reference, floating, context } = useFloating<HTMLElement>({
+  const {
+    x,
+    y,
+    reference,
+    floating,
+    context,
+    placement: placementState,
+  } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
     open,
     onOpenChange: (opened) => {
@@ -121,6 +128,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       floating,
       getReferenceProps,
       getFloatingProps,
+      placement: placementState,
       animation,
       labelId,
       descriptionId,
@@ -137,6 +145,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       floating,
       getReferenceProps,
       getFloatingProps,
+      placementState,
       animation,
       labelId,
       descriptionId,

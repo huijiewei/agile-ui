@@ -37,6 +37,7 @@ export * from './popover/PopoverTrigger';
 export * from './popover/PopoverHeader';
 export * from './popover/PopoverBody';
 export * from './popover/PopoverFooter';
+export * from './popover/PopoverArrow';
 export * from './popover/PopoverCloseButton';
 
 export * from './modal/Modal';

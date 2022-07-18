@@ -5,6 +5,21 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
 
 ## 用法
 
+## 带有箭头
+
+```tsx preview editable
+<Popover>
+  <PopoverTrigger>
+    <Button>开启</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverArrow />
+    <PopoverHeader>带有箭头弹出框</PopoverHeader>
+    <PopoverBody>这是一个带有箭头弹出框</PopoverBody>
+  </PopoverContent>
+</Popover>
+```
+
 ## 回调事件
 
 ```tsx preview editable
@@ -84,8 +99,9 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
         </span>
       </PopoverTrigger>
       <PopoverContent>
-        <PopoverHeader>标题</PopoverHeader>
+        <PopoverArrow />
         <PopoverCloseButton />
+        <PopoverHeader>标题</PopoverHeader>
         <PopoverBody>这是一个在{name}位置的弹出框</PopoverBody>
         <PopoverFooter>底部显示</PopoverFooter>
       </PopoverContent>

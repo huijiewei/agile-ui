@@ -1,4 +1,4 @@
-import type { FloatingContext } from '@floating-ui/react-dom-interactions';
+import type { FloatingContext, Placement } from '@floating-ui/react-dom-interactions';
 import type { MutableRefObject } from 'react';
 import type { HTMLProps } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
@@ -9,6 +9,7 @@ type PopoverContextValue = {
   y: number | null;
   open: boolean;
   context: FloatingContext<HTMLElement>;
+  placement: Placement;
   reference: (node: HTMLElement) => void;
   floating: (node: HTMLElement) => void;
   getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Record<string, unknown>;
