@@ -53,6 +53,91 @@ function Demo() {
 }
 ```
 
+## 内容滚动行为
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+  const [scrollBehavior, setScrollBehavior] = React.useState('inside');
+
+  return (
+    <>
+      <RadioGroup value={scrollBehavior} onChange={setScrollBehavior}>
+        <div className={'flex flex-row gap-5 mb-3'}>
+          <Radio value="inside">内部</Radio>
+          <Radio value="outside">外部</Radio>
+        </div>
+      </RadioGroup>
+      <Button onClick={() => setOpened(true)}>打开模态框</Button>
+      <Modal scrollBehavior={scrollBehavior} opened={opened} onClose={() => setOpened(false)}>
+        <ModalOverlay />
+        <ModalContent className={'w-1/3'}>
+          <ModalHeader>模态框</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody className={'flex flex-col gap-3'}>
+            <p>
+              3 月 29 日，React 团队宣布 React 18 正式发布。该版本的主要更新包括开箱即用的功能改进，如自动批处理、新的
+              AIP（如 startTransition）和支持 Suspense 的流式服务器端渲染。
+            </p>
+            <p>
+              官方博客指出，此版本许多功能都建立在新的并发渲染器之上，这是一个解锁强大新功能的幕后更改。Concurrent React
+              是可选的，它仅在用户使用并发功能时启用，但开发团队认为它将会对大众构建应用程序的方式产生重大影响。
+            </p>
+            <p>
+              “我们花了数年时间研究和开发对 React
+              并发的支持，并且我们特别注意为现有用户提供逐步采用的路径。去年夏天，我们成立了 React 18
+              工作组，收集社区专家的反馈，确保整个 React 生态系统的顺利升级体验。”
+            </p>
+            <p>React 18 的新功能如下：</p>
+            <h5 className={'font-bold'}>自动批处理功能</h5>
+            <p>
+              React 将多个状态，更新到单一的重新渲染作业中，以获得更好的性能，过去没有自动批处理，开发者只能在 React
+              事件处理程序中批处理更新，而在默认状态下，Promise、setTimeout、原生事件处理程序，或任何 React
+              内部事件的更新不会在 React 中批处理，而在 React 18 中，这些更新都将可以自动批处理。
+            </p>
+            <h5 className={'font-bold'}>Transitions 功能</h5>
+            <p>
+              React 18 引入了 Transition
+              的新概念，用来区分紧急和非紧急更新。紧急更新表现在直接交互像是输入、点击和按下等操作，非紧急的过渡更新，则是将
+              UI
+            </p>
+            <p>
+              从视图过渡到另一个视图。官方表示，之所以打字、点击和按下等紧急更新需要立即回应，是因为对用户来说，如果这些行为没有立刻获得回应，用户会觉得应用程序发生问题，但是并非所有过渡都是相同的，因为用户并不会期望在屏幕增至到每个中间值。
+            </p>
+            <p>
+              因此开发者应该将单一用户的输入，区分为紧急更新与非紧急过渡更新，以提供最佳的用户体验，开发者可以在输入事件中，使用
+              startTransition API，来告知 React 紧急与非紧急过渡更新。
+            </p>
+            <h5 className={'font-bold'}>新的 Suspense 功能</h5>
+            <p>
+              开发者现在可以在 React 18 中结合使用 Suspense 与过渡 API，以获得最佳的效果。Suspense
+              可以让还没准备好渲染的
+              UI，显示为加载状态，来解决程序代码分割（Code-splitting）和资料截取的问题。在这次更新中，React
+              会推延渲染，直到应用程序加载足够的资料，以异步操作避免错误的加载状态出现。
+            </p>
+            <h5 className={'font-bold'}>新的客户端和服务器渲染 API</h5>
+            <p>
+              在这个版本中，开发团队重新设计了他们为在客户端和服务器上呈现而公开的 API。这些更改允许用户在升级到 React
+              18 中的新 API 时继续使用 React 17 模式下的旧 API。
+            </p>
+            <h5 className={'font-bold'}>新的严格模式行为 (Strict Mode Behaviors) </h5>
+            <p>
+              此功能将为 React
+              应用程序提供更好的开箱即用性能，但要求组件能够对多次挂载和销毁的效果具有弹性。大多数效果无需任何更改即可工作，但有些效果假定它们只挂载或销毁一次。为了帮助解决这些问题，React
+              18 为严格模式引入了一个新的仅限开发的检查。
+            </p>
+            <p>每当第一次安装组件时，此新检查将自动卸载并重新安装每个组件，并在第二次安装时恢复先前的状态。</p>
+          </ModalBody>
+          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
 ## 表单
 
 ```tsx preview editable

@@ -16,6 +16,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
     labelId,
     descriptionId,
     initialFocus,
+    scrollBehavior,
   } = useModal();
 
   const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
@@ -27,11 +28,17 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
   }
 
   return (
-    <div className={'flex fixed w-screen h-screen left-0 top-0 z-40 justify-center items-center'}>
+    <div
+      className={cx(
+        'flex fixed w-screen left-0 top-0 z-40 justify-center',
+        scrollBehavior == 'inside' ? 'h-screen items-center' : 'overflow-y-auto h-full items-start'
+      )}
+    >
       <FloatingFocusManager modal={true} initialFocus={initialFocus} context={context}>
         <div
           className={cx(
-            'relative flex flex-col shadow rounded border border-gray-200 bg-white dark:bg-gray-700',
+            'relative flex flex-col shadow-lg rounded border border-gray-200 bg-white dark:bg-gray-700',
+            scrollBehavior == 'inside' ? 'max-h-[calc(100%-9rem)] ' : 'my-10',
             `duration-[${duration}ms] ${transition}`,
             stage == 'enter' ? enter : exit,
             className

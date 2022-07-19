@@ -12,6 +12,7 @@ type ModalContextValue = {
   animation?: AnimationBaseProps;
   lockScroll?: boolean;
   initialFocus?: number | MutableRefObject<HTMLElement | null>;
+  scrollBehavior?: 'inside' | 'outside';
   labelId: string;
   descriptionId: string;
   onClose: () => void;

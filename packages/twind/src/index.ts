@@ -44,6 +44,9 @@ export default () => {
         borderWidth: {
           3: '3px',
         },
+        flex: {
+          0: '0 1 0%',
+        },
       },
     },
     variants: [

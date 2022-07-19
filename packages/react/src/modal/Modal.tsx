@@ -41,6 +41,12 @@ export type ModalProps = {
   initialFocus?: number | MutableRefObject<HTMLElement | null>;
 
   /**
+   * 滚动行为
+   * @default 'inside'
+   */
+  scrollBehavior?: 'inside' | 'outside';
+
+  /**
    * 动画
    * @default 'hover'
    */
@@ -57,6 +63,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     onClose,
     lockScroll = true,
     initialFocus,
+    scrollBehavior = 'inside',
   } = props;
 
   const { floating, context } = useFloating<HTMLElement>({
@@ -90,6 +97,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       getFloatingProps,
       animation,
       initialFocus,
+      scrollBehavior,
       lockScroll,
       labelId,
       descriptionId,
@@ -102,6 +110,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       getFloatingProps,
       animation,
       initialFocus,
+      scrollBehavior,
       lockScroll,
       labelId,
       descriptionId,
