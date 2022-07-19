@@ -158,8 +158,12 @@ export const menus: Menu[] = [
             path: '/components/breadcrumb',
           },
           {
-            label: '菜单',
-            path: '/components/menu',
+            label: '下拉菜单',
+            path: '/components/dropdown-menu',
+          },
+          {
+            label: '右键菜单',
+            path: '/components/context-menu',
           },
           {
             label: '步骤',

@@ -48,6 +48,13 @@ export * from './modal/ModalBody';
 export * from './modal/ModalFooter';
 export * from './modal/ModalCloseButton';
 
+export * from './dropdown-menu/DropdownMenu';
+export * from './dropdown-menu/DropdownMenuContent';
+export * from './dropdown-menu/DropdownMenuArrow';
+export * from './dropdown-menu/DropdownMenuTrigger';
+export * from './dropdown-menu/DropdownMenuItem';
+export * from './dropdown-menu/DropdownMenuDivider';
+
 export * from './overlay/Overlay';
 export * from './spinner/Spinner';
 export * from './spinner-overlay/SpinnerOverlay';

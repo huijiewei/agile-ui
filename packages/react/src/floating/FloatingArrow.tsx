@@ -30,7 +30,7 @@ export const FloatingArrow = (props: PrimitiveComponentProps<'span', FloatingArr
     <span
       className={cx(
         'absolute h-[8px] w-[8px] rotate-45',
-        `-${floatingArrowOpposites[side]}-[4px]`,
+        `-${floatingArrowOpposites[side]}-[5px]`,
         position == 'center'
           ? `${horizontal ? 'top' : 'left'}-[calc(50%-4px)]`
           : position == 'start'

@@ -13,11 +13,11 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { MutableRefObject, useCallback, useId, useMemo, useState } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
-import { PopoverProvider } from './PopoverProvider';
+import { DropdownMenuProvider } from './DropdownMenuProvider';
 
-export type PopoverProps = {
+export type DropdownMenuProps = {
   /**
    * 放置位置
    * @default 'auto'
@@ -41,27 +41,22 @@ export type PopoverProps = {
   onClose?: () => void;
 
   /**
-   * 开启后焦点目标
-   */
-  initialFocus?: number | MutableRefObject<HTMLElement | null>;
-
-  /**
-   * 是否 modal
-   * @default true
-   */
-  modal?: boolean;
-
-  /**
-   * 按下 Esc 键时, 弹出框将关闭
+   * 按下 Esc 键时, 弹出菜单将关闭
    * @default true
    */
   closeOnEsc?: boolean;
 
   /**
-   * 单击外部时, 弹出框将关闭
+   * 单击外部时, 弹出菜单将关闭
    * @default true
    */
   closeOnBlur?: boolean;
+
+  /**
+   * 选择项目后, 弹出菜单将关闭
+   * @default true
+   */
+  closeOnSelect?: boolean;
 
   /**
    * @ignore
@@ -69,18 +64,8 @@ export type PopoverProps = {
   children?: ReactNode | ((props: { opened: boolean; handleClose?: () => void }) => ReactNode);
 };
 
-export const Popover = (props: PropsWithChildren<PopoverProps>) => {
-  const {
-    children,
-    placement,
-    animation,
-    closeOnEsc = true,
-    closeOnBlur = true,
-    modal = true,
-    opened = false,
-    onClose,
-    initialFocus,
-  } = props;
+export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
+  const { children, placement, animation, closeOnEsc = true, closeOnBlur = true, opened = false, onClose } = props;
 
   const [open, setOpen] = useState(opened);
 
@@ -111,7 +96,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useClick(context),
-    useRole(context),
+    useRole(context, { role: 'menu' }),
     useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
   ]);
 
@@ -136,8 +121,6 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       labelId,
       descriptionId,
       onClose: handleClose,
-      modal,
-      initialFocus,
     }),
     [
       open,
@@ -153,14 +136,12 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       labelId,
       descriptionId,
       handleClose,
-      modal,
-      initialFocus,
     ]
   );
 
-  return <PopoverProvider value={value}>{runIfFn(children, { opened: open, handleClose })}</PopoverProvider>;
+  return <DropdownMenuProvider value={value}>{runIfFn(children, { opened: open, handleClose })}</DropdownMenuProvider>;
 };
 
 if (__DEV__) {
-  Popover.displayName = 'Popover';
+  DropdownMenu.displayName = 'DropdownMenu';
 }

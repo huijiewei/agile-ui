@@ -133,6 +133,10 @@ const docgenParser = withCustomConfig('tsconfig.json', {
       return false;
     }
 
+    if (prop.description.includes('@ignore')) {
+      return false;
+    }
+
     if (prop.declarations && prop.declarations.length > 0) {
       return Boolean(prop.declarations.find((declaration) => !declaration.fileName.includes('node_modules')));
     }

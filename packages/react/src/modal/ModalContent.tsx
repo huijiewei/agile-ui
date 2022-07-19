@@ -37,7 +37,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
       <FloatingFocusManager modal={true} initialFocus={initialFocus} context={context}>
         <div
           className={cx(
-            'relative flex flex-col shadow-lg rounded border border-gray-200 bg-white dark:bg-gray-700',
+            'relative flex flex-col shadow rounded border border-gray-200 bg-white dark:bg-gray-700',
             scrollBehavior == 'inside' ? 'max-h-[calc(100%-9rem)] ' : 'my-10',
             `duration-[${duration}ms] ${transition}`,
             stage == 'enter' ? enter : exit,

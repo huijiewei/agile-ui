@@ -1,0 +1,95 @@
+---
+title: 下拉菜单
+description: 页面上的命令过多时，可将备选命令收纳到向下展开的浮层容器中。
+---
+
+## 用法
+
+```tsx preview editable
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button>下拉菜单</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuArrow />
+    <DropdownMenuItem>
+      新标签页<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+T</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      打开新窗口<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+N</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>
+      打开新的无痕式窗口<span className={'ml-auto pl-5 text-sm'}>⇧+⌘+N</span>
+    </DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenuItem>
+      关闭窗口<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⇧+⌘+W</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      关闭标签页<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+W</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      页面存储为...<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+S</span>
+    </DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenuItem>分享</DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenuItem>
+      打印<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+P</span>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## 放置位置
+
+```tsx preview editable
+<div
+  className={'grid gap-2 mx-auto w-fit'}
+  style={{
+    gridTemplateAreas:
+      '".           top-start     top         top-end       .            "' +
+      '"left-start  .             .           .             right-start  "' +
+      '"left        .             center      .             right        "' +
+      '"left-end    .             .           .             right-end    "' +
+      '".           bottom-start  bottom      bottom-end    .            "',
+  }}
+>
+  {[
+    ['top-start', '上左'],
+    ['top', '上'],
+    ['top-end', '上右'],
+    ['left-start', '左上'],
+    ['left', '左'],
+    ['left-end', '左下'],
+    ['auto', '自动'],
+    ['right-start', '右上'],
+    ['right', '右'],
+    ['right-end', '右下'],
+    ['bottom-start', '下左'],
+    ['bottom', '下'],
+    ['bottom-end', '下右'],
+  ].map(([placement, name]) => (
+    <DropdownMenu key={placement} placement={placement}>
+      <DropdownMenuTrigger>
+        <span
+          style={{ gridArea: placement == 'auto' ? 'center' : placement }}
+          className={'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default'}
+        >
+          {name}
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuArrow />
+        <DropdownMenuItem>菜单一</DropdownMenuItem>
+        <DropdownMenuItem>菜单二</DropdownMenuItem>
+        <DropdownMenuItem>菜单三</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ))}
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="DropdownMenu" />

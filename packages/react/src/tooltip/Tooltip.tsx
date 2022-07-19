@@ -86,7 +86,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
           show={open}
           {...animation}
           className={cx(
-            'absolute inline-block rounded py-1 px-2 text-sm border z-50',
+            'absolute shadow inline-block rounded py-1 px-2 text-sm border z-50',
             `border-${color}-600 bg-${color}-600 text-${color}-50`,
             className
           )}

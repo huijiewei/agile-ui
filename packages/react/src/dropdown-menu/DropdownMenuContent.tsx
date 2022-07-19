@@ -4,23 +4,11 @@ import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
-import { usePopover } from './PopoverProvider';
+import { useDropdownMenu } from './DropdownMenuProvider';
 
-export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
+export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
-  const {
-    open,
-    x,
-    y,
-    floating,
-    context,
-    getFloatingProps,
-    animation = {},
-    labelId,
-    descriptionId,
-    modal,
-    initialFocus,
-  } = usePopover();
+  const { open, x, y, floating, context, getFloatingProps, animation = {}, labelId, descriptionId } = useDropdownMenu();
 
   const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
 
@@ -31,7 +19,7 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <Portal>
       {shouldMount && (
-        <FloatingFocusManager modal={modal} initialFocus={initialFocus} context={context}>
+        <FloatingFocusManager context={context}>
           <div
             className={cx('absolute z-30', `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
             {...getFloatingProps({
@@ -45,7 +33,12 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
               },
             })}
           >
-            <div className={cx('relative shadow rounded border border-gray-200 bg-white dark:bg-gray-700', className)}>
+            <div
+              className={cx(
+                'relative p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
+                className
+              )}
+            >
               {children}
             </div>
           </div>
@@ -56,5 +49,5 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
 });
 
 if (__DEV__) {
-  PopoverContent.displayName = 'PopoverContent';
+  DropdownMenuContent.displayName = 'DropdownMenuContent';
 }
