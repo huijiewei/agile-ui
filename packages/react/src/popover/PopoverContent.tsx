@@ -4,13 +4,14 @@ import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
-import { usePopover } from './PopoverProvider';
+import { usePopoverAria, usePopoverFloating } from './PopoverProvider';
 
 export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { open, x, y, floating, context, getFloatingProps, animation, modal, initialFocus, labelId, descriptionId } =
-    usePopover();
+  const { open, x, y, floating, context, getFloatingProps, animation, modal, initialFocus } = usePopoverFloating();
+
+  const { labelId, descriptionId } = usePopoverAria();
 
   const { duration, transition, enter, exit } = animation;
 

@@ -2,12 +2,12 @@ import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { FloatingArrow } from '../floating/FloatingArrow';
 import type { PrimitiveComponentProps } from '../utils/component';
-import { usePopover } from './PopoverProvider';
+import { usePopoverPlacement } from './PopoverProvider';
 
 export const PopoverArrow = (props: PrimitiveComponentProps<'span'>) => {
   const { className, ...rest } = props;
 
-  const { placement } = usePopover();
+  const placement = usePopoverPlacement();
 
   return (
     <FloatingArrow

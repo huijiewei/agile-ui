@@ -2,12 +2,13 @@ import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
-import { usePopover } from './PopoverProvider';
+import { usePopoverDispatch } from './PopoverProvider';
 
 export const PopoverCloseButton = primitiveComponent<'button'>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { handleClose } = usePopover();
+  const { handleClose } = usePopoverDispatch();
+
   return (
     <CloseButton
       onClick={handleClose}

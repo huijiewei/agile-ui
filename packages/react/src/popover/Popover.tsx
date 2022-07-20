@@ -15,7 +15,13 @@ import {
 import type { PropsWithChildren, ReactNode } from 'react';
 import { MutableRefObject, useCallback, useId, useMemo, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
-import { PopoverProvider } from './PopoverProvider';
+import {
+  PopoverAriaProvider,
+  PopoverDispatchProvider,
+  PopoverFloatingProvider,
+  PopoverPlacementProvider,
+  PopoverReferenceProvider,
+} from './PopoverProvider';
 
 export type PopoverProps = {
   /**
@@ -121,7 +127,23 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     onClose && onClose();
   }, [onClose]);
 
-  const value = useMemo(
+  const ariaContextValue = useMemo(
+    () => ({
+      labelId,
+      descriptionId,
+    }),
+    [descriptionId, labelId]
+  );
+
+  const referenceContextValue = useMemo(
+    () => ({
+      reference,
+      getReferenceProps,
+    }),
+    [getReferenceProps, reference]
+  );
+
+  const floatingContextValue = useMemo(
     () => ({
       x,
       y,
@@ -138,37 +160,23 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       },
       modal,
       initialFocus,
-
-      reference,
-      getReferenceProps,
-
-      placement: placementState,
-
-      labelId,
-      descriptionId,
-
-      handleClose,
     }),
-    [
-      open,
-      x,
-      y,
-      context,
-      floating,
-      getFloatingProps,
-      reference,
-      getReferenceProps,
-      placementState,
-      animation,
-      labelId,
-      descriptionId,
-      handleClose,
-      modal,
-      initialFocus,
-    ]
+    [animation, context, floating, getFloatingProps, initialFocus, modal, open, x, y]
   );
 
-  return <PopoverProvider value={value}>{runIfFn(children, { opened: open, handleClose })}</PopoverProvider>;
+  return (
+    <PopoverAriaProvider value={ariaContextValue}>
+      <PopoverPlacementProvider value={placementState}>
+        <PopoverDispatchProvider value={{ handleClose }}>
+          <PopoverReferenceProvider value={referenceContextValue}>
+            <PopoverFloatingProvider value={floatingContextValue}>
+              {runIfFn(children, { opened: open, handleClose })}
+            </PopoverFloatingProvider>
+          </PopoverReferenceProvider>
+        </PopoverDispatchProvider>
+      </PopoverPlacementProvider>
+    </PopoverAriaProvider>
+  );
 };
 
 if (__DEV__) {
