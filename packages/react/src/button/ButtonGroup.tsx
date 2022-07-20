@@ -64,8 +64,8 @@ export const ButtonGroup = primitiveComponent<'div', ButtonGroupProps>((props, r
       <div
         role={'group'}
         className={cx('inline-flex', vertical ? 'flex-col' : 'flex-row', className)}
-        {...rest}
         ref={ref}
+        {...rest}
       >
         {children}
       </div>

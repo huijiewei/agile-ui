@@ -133,7 +133,6 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
 
   return (
     <Component
-      {...rest}
       className={cx(
         'inline-flex items-center justify-center ',
         'select-none appearance-none outline-none',
@@ -156,6 +155,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       disabled={disabled || loading}
       type={type ?? defaultType}
       ref={useMergedRefs(ref, _ref)}
+      {...rest}
     >
       {loading && spinnerPlacement === 'start' && (
         <ButtonSpinner size={size} label={loadingText} placement="start">
