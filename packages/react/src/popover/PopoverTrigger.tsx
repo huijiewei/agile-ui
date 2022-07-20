@@ -18,8 +18,8 @@ export const PopoverTrigger = primitiveComponent<'div', PopoverTriggerProps>((pr
 
   return cloneElement(children, {
     ...getReferenceProps({
-      ...rest,
       ref: refs,
+      ...rest,
     }),
   });
 });

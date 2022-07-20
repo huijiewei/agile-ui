@@ -8,21 +8,11 @@ import { usePopover } from './PopoverProvider';
 
 export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
-  const {
-    open,
-    x,
-    y,
-    floating,
-    context,
-    getFloatingProps,
-    animation = {},
-    labelId,
-    descriptionId,
-    modal,
-    initialFocus,
-  } = usePopover();
 
-  const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
+  const { open, x, y, floating, context, getFloatingProps, animation, modal, initialFocus, labelId, descriptionId } =
+    usePopover();
+
+  const { duration, transition, enter, exit } = animation;
 
   const refs = useMergedRefs(floating, ref);
 
@@ -31,9 +21,14 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <Portal>
       {shouldMount && (
-        <FloatingFocusManager modal={modal} initialFocus={initialFocus} context={context}>
+        <FloatingFocusManager
+          modal={modal}
+          order={['content', 'reference']}
+          initialFocus={initialFocus}
+          context={context}
+        >
           <div
-            className={cx('absolute z-30', `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
+            className={cx('absolute z-10', `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
             {...getFloatingProps({
               ...rest,
               ref: refs,

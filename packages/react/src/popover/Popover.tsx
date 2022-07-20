@@ -123,31 +123,41 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const value = useMemo(
     () => ({
-      open,
       x,
       y,
+      open,
       context,
-      reference,
       floating,
-      getReferenceProps,
       getFloatingProps,
-      placement: placementState,
-      animation,
-      labelId,
-      descriptionId,
-      onClose: handleClose,
+      animation: {
+        duration: 200,
+        enter: 'opacity-100',
+        exit: 'opacity-0',
+        transition: 'transition-opacity',
+        ...animation,
+      },
       modal,
       initialFocus,
+
+      reference,
+      getReferenceProps,
+
+      placement: placementState,
+
+      labelId,
+      descriptionId,
+
+      handleClose,
     }),
     [
       open,
       x,
       y,
       context,
-      reference,
       floating,
-      getReferenceProps,
       getFloatingProps,
+      reference,
+      getReferenceProps,
       placementState,
       animation,
       labelId,
