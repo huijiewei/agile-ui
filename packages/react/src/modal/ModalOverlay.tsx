@@ -22,7 +22,7 @@ export const ModalOverlay = primitiveComponent<'div'>((props, ref) => {
       lockScroll={lockScroll}
       ref={ref}
       className={cx(
-        'bg-black z-40',
+        'z-30 bg-black dark:bg-black',
         `duration-[${duration}ms] transition-opacity`,
         stage == 'enter' ? 'opacity-60' : 'opacity-0',
         className

@@ -41,7 +41,7 @@ export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
       <div
         ref={ref}
         className={cx(
-          'absolute inset-0 z-20',
+          'absolute inset-0 z-10',
           colorClass,
           opacity > 1 ? `opacity-${opacity}` : `opacity-[${opacity}]`,
           isBoolean(radius) && radius ? 'rounded' : isNumber(radius) ? `rounded-[${radius}px]` : `rounded-${radius}`,

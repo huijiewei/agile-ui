@@ -34,7 +34,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
         scrollBehavior == 'inside' ? 'h-screen items-center' : 'overflow-y-auto h-full items-start'
       )}
     >
-      <FloatingFocusManager modal={true} initialFocus={initialFocus} context={context}>
+      <FloatingFocusManager modal={true} order={['content', 'reference']} initialFocus={initialFocus} context={context}>
         <div
           className={cx(
             'relative flex flex-col shadow rounded border border-gray-200 bg-white dark:bg-gray-700',
