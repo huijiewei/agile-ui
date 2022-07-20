@@ -91,12 +91,12 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
   ].map(([placement, name]) => (
     <Popover key={placement} placement={placement}>
       <PopoverTrigger>
-        <span
+        <button
           style={{ gridArea: placement == 'auto' ? 'center' : placement }}
           className={'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default'}
         >
           {name}
-        </span>
+        </button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
