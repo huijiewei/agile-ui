@@ -12,3 +12,4 @@ export * from './use-animation/useSwitchAnimation';
 export * from './use-timeout';
 export * from './use-const';
 export * from './use-focus-visible';
+export * from './use-allow-hover';

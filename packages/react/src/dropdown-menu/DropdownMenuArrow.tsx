@@ -2,12 +2,12 @@ import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { FloatingArrow } from '../floating/FloatingArrow';
 import type { PrimitiveComponentProps } from '../utils/component';
-import { useDropdownMenu } from './DropdownMenuProvider';
+import { useDropdownMenuPlacement } from './DropdownMenuProvider';
 
 export const DropdownMenuArrow = (props: PrimitiveComponentProps<'span'>) => {
   const { className, ...rest } = props;
 
-  const { placement } = useDropdownMenu();
+  const placement = useDropdownMenuPlacement();
 
   return (
     <FloatingArrow

@@ -50,6 +50,7 @@ export default () => {
       },
     },
     variants: [
+      ['opened', '&[data-opened]'],
       ['active', '&[data-active], &:active'],
       ['disabled', '&[data-loading], &[disabled]'],
       ['focus-visible', '&[data-focus-visible], &:focus-visible'],

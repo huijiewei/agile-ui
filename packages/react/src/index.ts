@@ -53,6 +53,7 @@ export * from './dropdown-menu/DropdownMenuContent';
 export * from './dropdown-menu/DropdownMenuArrow';
 export * from './dropdown-menu/DropdownMenuTrigger';
 export * from './dropdown-menu/DropdownMenuItem';
+export * from './dropdown-menu/DropdownMenuTriggerItem';
 export * from './dropdown-menu/DropdownMenuDivider';
 
 export * from './overlay/Overlay';

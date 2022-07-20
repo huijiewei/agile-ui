@@ -1,29 +1,35 @@
-import { __DEV__, runIfFn } from '@agile-ui/utils';
+import { useAllowHover } from '@agile-ui/react-hooks';
+import { __DEV__ } from '@agile-ui/utils';
 import {
-  autoPlacement,
   autoUpdate,
   flip,
+  FloatingNode,
+  FloatingTree,
   offset,
-  Placement,
+  safePolygon,
   shift,
   useClick,
   useDismiss,
   useFloating,
+  useFloatingNodeId,
+  useFloatingParentNodeId,
+  useFloatingTree,
+  useHover,
   useInteractions,
+  useListNavigation,
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { useCallback, useId, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AnimationBaseProps } from '../animation/Animation';
-import { DropdownMenuProvider } from './DropdownMenuProvider';
+import {
+  DropdownMenuDispatchProvider,
+  DropdownMenuFloatingProvider,
+  DropdownMenuPlacementProvider,
+  DropdownMenuReferenceProvider,
+} from './DropdownMenuProvider';
 
 export type DropdownMenuProps = {
-  /**
-   * 放置位置
-   * @default 'auto'
-   */
-  placement?: 'auto' | Placement;
-
   /**
    * 动画
    * @default 'hover'
@@ -61,13 +67,30 @@ export type DropdownMenuProps = {
   /**
    * @ignore
    */
-  children?: ReactNode | ((props: { opened: boolean; handleClose?: () => void }) => ReactNode);
+  children?: ReactNode;
 };
 
-export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
-  const { children, placement, animation, closeOnEsc = true, closeOnBlur = true, opened = false, onClose } = props;
+const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
+  const {
+    children,
+    animation = { duration: 200 },
+    closeOnEsc = true,
+    closeOnBlur = true,
+    opened = false,
+    onClose,
+  } = props;
+
+  const tree = useFloatingTree();
+  const nodeId = useFloatingNodeId();
+  const parentId = useFloatingParentNodeId();
+  const nested = parentId != null;
 
   const [open, setOpen] = useState(opened);
+
+  const listItemsRef = useRef<(HTMLElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const allowHover = useAllowHover();
 
   const {
     x,
@@ -75,9 +98,10 @@ export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
     reference,
     floating,
     context,
+    refs,
     placement: placementState,
   } = useFloating<HTMLElement>({
-    middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
+    middleware: [offset({ mainAxis: 8, alignmentAxis: nested ? -5 : 0 }), flip(), shift({ padding: 8 })],
     open,
     onOpenChange: (opened) => {
       setOpen(opened);
@@ -86,18 +110,25 @@ export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
         onClose && onClose();
       }
     },
-    placement: placement == 'auto' ? undefined : placement,
+    nodeId,
+    placement: nested ? 'right-start' : 'bottom-start',
     whileElementsMounted: autoUpdate,
   });
 
-  const id = useId();
-  const labelId = `${id}-label`;
-  const descriptionId = `${id}-description`;
-
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    useClick(context),
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
+    useHover(context, {
+      enabled: nested && allowHover,
+      handleClose: safePolygon(),
+    }),
+    useClick(context, { toggle: !nested, pointerDown: true, ignoreMouse: nested }),
     useRole(context, { role: 'menu' }),
     useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
+    useListNavigation(context, {
+      listRef: listItemsRef,
+      activeIndex,
+      nested,
+      onNavigate: setActiveIndex,
+    }),
   ]);
 
   const handleClose = useCallback(() => {
@@ -106,40 +137,86 @@ export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
     onClose && onClose();
   }, [onClose]);
 
-  const value = useMemo(
+  useEffect(() => {
+    const handleClick = () => {
+      handleClose();
+
+      if (parentId == null) {
+        refs.reference.current?.focus();
+      }
+    };
+
+    tree?.events.on('click', handleClick);
+
+    return () => {
+      tree?.events.off('click', handleClick);
+    };
+  }, [parentId, tree, refs, handleClose]);
+
+  const referenceContextValue = useMemo(
+    () => ({
+      open,
+      reference,
+      getReferenceProps,
+    }),
+    [getReferenceProps, open, reference]
+  );
+
+  const floatingContextValue = useMemo(
     () => ({
       open,
       x,
       y,
       context,
-      reference,
       floating,
-      getReferenceProps,
       getFloatingProps,
-      placement: placementState,
-      animation,
-      labelId,
-      descriptionId,
-      onClose: handleClose,
+      nested,
+      animation: {
+        duration: 200,
+        enter: 'opacity-100',
+        exit: 'opacity-0',
+        transition: 'transition-opacity',
+        ...animation,
+      },
+
+      tree,
+      allowHover,
+      getItemProps,
+      listItemsRef,
+      setActiveIndex,
     }),
-    [
-      open,
-      x,
-      y,
-      context,
-      reference,
-      floating,
-      getReferenceProps,
-      getFloatingProps,
-      placementState,
-      animation,
-      labelId,
-      descriptionId,
-      handleClose,
-    ]
+    [allowHover, animation, context, floating, getFloatingProps, getItemProps, nested, open, tree, x, y]
   );
 
-  return <DropdownMenuProvider value={value}>{runIfFn(children, { opened: open, handleClose })}</DropdownMenuProvider>;
+  return (
+    <DropdownMenuPlacementProvider value={placementState}>
+      <DropdownMenuReferenceProvider value={referenceContextValue}>
+        <DropdownMenuFloatingProvider value={floatingContextValue}>
+          <DropdownMenuDispatchProvider value={{ handleClose }}>
+            <FloatingNode id={nodeId}>{children}</FloatingNode>
+          </DropdownMenuDispatchProvider>
+        </DropdownMenuFloatingProvider>
+      </DropdownMenuReferenceProvider>
+    </DropdownMenuPlacementProvider>
+  );
+};
+
+if (__DEV__) {
+  DropdownMenuComponent.displayName = 'DropdownMenuComponent';
+}
+
+export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
+  const parentId = useFloatingParentNodeId();
+
+  if (parentId == null) {
+    return (
+      <FloatingTree>
+        <DropdownMenuComponent {...props} />
+      </FloatingTree>
+    );
+  }
+
+  return <DropdownMenuComponent {...props} />;
 };
 
 if (__DEV__) {

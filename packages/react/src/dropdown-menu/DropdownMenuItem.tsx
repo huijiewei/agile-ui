@@ -1,27 +1,49 @@
+import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
+import { useDropdownMenuContent, useDropdownMenuItemIndex } from './DropdownMenuProvider';
 
 type DropdownMenuItemProps = {
-  disabled?: boolean;
+  onClick: () => void;
 };
 
-export const DropdownMenuItem = primitiveComponent<'div', DropdownMenuItemProps>((props, ref) => {
-  const { className, children, disabled = false, ...rest } = props;
+export const DropdownMenuItem = primitiveComponent<'button', DropdownMenuItemProps>((props, ref) => {
+  const { className, children, onClick, disabled = false, ...rest } = props;
+
+  const { tree, getItemProps, listItemsRef, allowHover, setActiveIndex } = useDropdownMenuContent();
+  const itemIndex = useDropdownMenuItemIndex();
+
+  const refs = useMergedRefs(ref, (node: HTMLButtonElement) => {
+    listItemsRef.current[itemIndex] = node;
+  });
+
   return (
-    <div
-      ref={ref}
+    <button
+      ref={refs}
+      role={'menuitem'}
       data-disabled={dataAttr(disabled)}
       aria-disabled={ariaAttr(disabled)}
+      disabled={disabled}
       className={cx(
-        'select-none relative flex items-center p-1.5 leading-none rounded',
-        disabled ? 'pointer-events-none text-gray-300' : 'hover:bg-gray-100 dark:hover:bg-gray-600',
+        'w-full relative outline-none cursor-default disabled:text-gray-300 flex items-center p-1.5 leading-none rounded focus:bg-gray-100 dark:focus:bg-gray-600',
         className
       )}
+      {...getItemProps({
+        onClick: () => {
+          tree?.events.emit('click');
+          onClick && onClick();
+        },
+        onPointerEnter: () => {
+          if (allowHover) {
+            setActiveIndex(itemIndex);
+          }
+        },
+      })}
       {...rest}
     >
       {children}
-    </div>
+    </button>
   );
 });
 

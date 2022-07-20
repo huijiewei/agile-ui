@@ -1,16 +1,36 @@
 import { useAnimation, useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
+import { Children } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
-import { useDropdownMenu } from './DropdownMenuProvider';
+import {
+  DropdownMenuContentProvider,
+  DropdownMenuItemIndexProvider,
+  useDropdownMenuFloating,
+} from './DropdownMenuProvider';
 
 export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
-  const { open, x, y, floating, context, getFloatingProps, animation = {}, labelId, descriptionId } = useDropdownMenu();
 
-  const { duration = 300, enter = 'opacity-100', exit = 'opacity-0', transition = 'transition-opacity' } = animation;
+  const {
+    open,
+    x,
+    y,
+    context,
+    floating,
+    getFloatingProps,
+    animation,
+    nested,
+    tree,
+    allowHover,
+    getItemProps,
+    listItemsRef,
+    setActiveIndex,
+  } = useDropdownMenuFloating();
+
+  const { duration, enter, exit, transition } = animation;
 
   const refs = useMergedRefs(floating, ref);
 
@@ -19,18 +39,20 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <Portal>
       {shouldMount && (
-        <FloatingFocusManager context={context}>
+        <FloatingFocusManager order={['reference', 'content']} modal={!nested} preventTabbing context={context}>
           <div
-            className={cx('absolute z-30', `duration-[${duration}ms] ${transition}`, stage == 'enter' ? enter : exit)}
+            className={cx(
+              'absolute z-10 focus-visible:outline-none',
+              `duration-[${duration}ms] ${transition}`,
+              stage == 'enter' ? enter : exit
+            )}
             {...getFloatingProps({
-              ...rest,
               ref: refs,
-              'aria-labelledby': labelId,
-              'aria-describedby': descriptionId,
               style: {
                 top: y ? `${y}px` : '',
                 left: x ? `${x}px` : '',
               },
+              ...rest,
             })}
           >
             <div
@@ -39,7 +61,19 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                 className
               )}
             >
-              {children}
+              <DropdownMenuContentProvider
+                value={{
+                  tree,
+                  allowHover,
+                  getItemProps,
+                  listItemsRef,
+                  setActiveIndex,
+                }}
+              >
+                {Children.map(children, (child, index) => {
+                  return <DropdownMenuItemIndexProvider value={index}>{child}</DropdownMenuItemIndexProvider>;
+                })}{' '}
+              </DropdownMenuContentProvider>
             </div>
           </div>
         </FloatingFocusManager>
