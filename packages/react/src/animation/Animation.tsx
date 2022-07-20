@@ -41,7 +41,7 @@ export const Animation = polymorphicComponent<'div', AnimationProps>((props, ref
     className,
     enter = 'opacity-100',
     exit = 'opacity-0',
-    duration = 300,
+    duration = 200,
     transition = 'transition-opacity',
     children,
     onExit,
