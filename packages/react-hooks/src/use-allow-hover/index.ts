@@ -12,16 +12,14 @@ export const useAllowHover = () => {
       setAllowHover(false);
     };
 
-    document.addEventListener('keydown', handleKeyDown, { capture: true });
-    document.addEventListener('pointerdown', handlePointer, { capture: true, once: true });
-    document.addEventListener('pointermove', handlePointer, { capture: true, once: true });
+    window.addEventListener('pointermove', handlePointer, { capture: true, once: true });
+    window.addEventListener('keydown', handleKeyDown, true);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown, { capture: true });
-      document.removeEventListener('pointerdown', handlePointer, { capture: true });
-      document.removeEventListener('pointermove', handlePointer, { capture: true });
+      window.removeEventListener('pointermove', handlePointer, { capture: true });
+      window.removeEventListener('keydown', handleKeyDown, true);
     };
-  }, []);
+  }, [allowHover]);
 
   return allowHover;
 };

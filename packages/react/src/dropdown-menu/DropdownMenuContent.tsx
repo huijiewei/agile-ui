@@ -43,8 +43,10 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
           <div
             className={cx(
               'absolute z-10 focus-visible:outline-none',
+              'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
               `duration-[${duration}ms] ${transition}`,
-              stage == 'enter' ? enter : exit
+              stage == 'enter' ? enter : exit,
+              className
             )}
             {...getFloatingProps({
               ref: refs,
@@ -55,26 +57,19 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
               ...rest,
             })}
           >
-            <div
-              className={cx(
-                'relative p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
-                className
-              )}
+            <DropdownMenuContentProvider
+              value={{
+                tree,
+                allowHover,
+                getItemProps,
+                listItemsRef,
+                setActiveIndex,
+              }}
             >
-              <DropdownMenuContentProvider
-                value={{
-                  tree,
-                  allowHover,
-                  getItemProps,
-                  listItemsRef,
-                  setActiveIndex,
-                }}
-              >
-                {Children.map(children, (child, index) => {
-                  return <DropdownMenuItemIndexProvider value={index}>{child}</DropdownMenuItemIndexProvider>;
-                })}{' '}
-              </DropdownMenuContentProvider>
-            </div>
+              {Children.map(children, (child, index) => {
+                return <DropdownMenuItemIndexProvider value={index}>{child}</DropdownMenuItemIndexProvider>;
+              })}{' '}
+            </DropdownMenuContentProvider>
           </div>
         </FloatingFocusManager>
       )}

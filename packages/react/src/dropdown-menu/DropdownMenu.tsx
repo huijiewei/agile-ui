@@ -31,12 +31,6 @@ import {
 
 export type DropdownMenuProps = {
   /**
-   * 动画
-   * @default 'hover'
-   */
-  animation?: AnimationBaseProps;
-
-  /**
    * 默认开启状态
    */
   opened?: boolean;
@@ -65,20 +59,18 @@ export type DropdownMenuProps = {
   closeOnSelect?: boolean;
 
   /**
+   * 动画
+   */
+  animation?: AnimationBaseProps;
+
+  /**
    * @ignore
    */
   children?: ReactNode;
 };
 
 const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
-  const {
-    children,
-    animation = { duration: 200 },
-    closeOnEsc = true,
-    closeOnBlur = true,
-    opened = false,
-    onClose,
-  } = props;
+  const { children, animation, closeOnEsc = true, closeOnBlur = true, opened = false, onClose } = props;
 
   const tree = useFloatingTree();
   const nodeId = useFloatingNodeId();

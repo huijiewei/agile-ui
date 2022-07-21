@@ -7,30 +7,48 @@ description: 页面上的命令过多时，可将备选命令收纳到向下展�
 
 ```tsx preview editable
 <DropdownMenu>
-  <DropdownMenuTrigger as={Button}>下拉菜单</DropdownMenuTrigger>
+  <DropdownMenuTrigger>
+    <Button>下拉菜单</Button>
+  </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuArrow />
     <DropdownMenuItem
       onClick={() => {
-        alert('点击了新标签页');
+        console.log('选择了新标签页');
       }}
     >
       新标签页<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+T</span>
     </DropdownMenuItem>
-    <DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了打开新窗口');
+      }}
+    >
       打开新窗口<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+N</span>
     </DropdownMenuItem>
     <DropdownMenuItem disabled>
       打开新的无痕式窗口<span className={'ml-auto pl-5 text-sm'}>⇧+⌘+N</span>
     </DropdownMenuItem>
     <DropdownMenuDivider />
-    <DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了关闭窗口');
+      }}
+    >
       关闭窗口<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⇧+⌘+W</span>
     </DropdownMenuItem>
-    <DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了关闭标签页');
+      }}
+    >
       关闭标签页<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+W</span>
     </DropdownMenuItem>
-    <DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了页面存储为...');
+      }}
+    >
       页面存储为...<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+S</span>
     </DropdownMenuItem>
     <DropdownMenuDivider />
@@ -39,17 +57,33 @@ description: 页面上的命令过多时，可将备选命令收纳到向下展�
       <DropdownMenuContent>
         <DropdownMenuItem
           onClick={() => {
-            alert('点击了电子邮件');
+            console.log('选择了电子邮件');
           }}
         >
           电子邮件
         </DropdownMenuItem>
-        <DropdownMenuItem>信息</DropdownMenuItem>
-        <DropdownMenuItem>隔空投送</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了信息');
+          }}
+        >
+          信息
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了隔空投送');
+          }}
+        >
+          隔空投送
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
     <DropdownMenuDivider />
-    <DropdownMenuItem>
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了打印');
+      }}
+    >
       打印<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+P</span>
     </DropdownMenuItem>
   </DropdownMenuContent>

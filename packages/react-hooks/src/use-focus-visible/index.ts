@@ -84,7 +84,7 @@ const isFocusVisible = () => {
 };
 
 const setupGlobalFocusEvents = () => {
-  if (typeof window === 'undefined' || hasSetup) {
+  if (typeof window == 'undefined' || hasSetup) {
     return;
   }
 

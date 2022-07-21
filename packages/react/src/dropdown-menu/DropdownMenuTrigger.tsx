@@ -1,26 +1,28 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr } from '@agile-ui/utils';
-import { polymorphicComponent } from '../utils/component';
+import { cloneElement, ComponentProps, ReactNode } from 'react';
+import { primitiveComponent } from '../utils/component';
 import { useDropdownMenuReference } from './DropdownMenuProvider';
 
-export const DropdownMenuTrigger = polymorphicComponent<'button'>((props, ref) => {
-  const { as: Component = 'button', children, ...rest } = props;
+type DropdownMenuTriggerProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: ReactNode | ComponentProps<any>;
+};
+
+export const DropdownMenuTrigger = primitiveComponent<'div', DropdownMenuTriggerProps>((props, ref) => {
+  const { children, ...rest } = props;
 
   const { reference, getReferenceProps, open } = useDropdownMenuReference();
 
   const refs = useMergedRefs(reference, ref);
 
-  return (
-    <Component
-      ref={refs}
-      data-active={dataAttr(open)}
-      {...getReferenceProps({
-        ...rest,
-      })}
-    >
-      {children}
-    </Component>
-  );
+  return cloneElement(children, {
+    'data-active': dataAttr(open),
+    ...getReferenceProps({
+      ...rest,
+      ref: refs,
+    }),
+  });
 });
 
 if (__DEV__) {

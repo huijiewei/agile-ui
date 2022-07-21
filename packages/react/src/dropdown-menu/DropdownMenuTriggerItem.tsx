@@ -19,11 +19,11 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
   const itemIndex = useDropdownMenuItemIndex();
 
   const refs = useMergedRefs(
+    ref,
     (node: HTMLButtonElement) => {
       listItemsRef.current[itemIndex] = node;
     },
-    reference,
-    ref
+    reference
   );
 
   return (
