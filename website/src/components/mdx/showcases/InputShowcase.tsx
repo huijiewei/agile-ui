@@ -16,5 +16,6 @@ const Demo = () => {
     component={Input}
     defaultProps={{ placeholder: '输入框' }}
     componentProps={componentProps}
+    ignoreProps={['onChange']}
   />
 );

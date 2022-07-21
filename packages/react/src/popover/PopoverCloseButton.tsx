@@ -13,7 +13,7 @@ export const PopoverCloseButton = primitiveComponent<'button'>((props, ref) => {
     <CloseButton
       onClick={handleClose}
       ref={ref}
-      className={cx('top-1 right-1 p-0.5 rounded hover:bg-gray-200', className)}
+      className={cx('absolute top-1 right-1 p-0.5 rounded hover:bg-gray-200', className)}
       {...rest}
     >
       {children}

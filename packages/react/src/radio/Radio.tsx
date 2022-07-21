@@ -32,9 +32,9 @@ export type RadioProps = RadioBaseProps & {
   readOnly?: boolean;
 
   /**
-   * 选择状态发生更改时，将调用该回调。
+   * 选择状态发生更改时触发回调
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const radioSizeStyles = {
@@ -67,9 +67,9 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     ...rest
   } = props;
 
-  const onChangeRef = useCallbackRef((event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event);
-    group?.onChange?.(event);
+  const onChangeRef = useCallbackRef((e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.checked, e);
+    group?.onChange?.(e);
   });
 
   const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));

@@ -89,7 +89,7 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
         <CloseButton
           onClick={onClose}
           className={cx(
-            'top-1 right-1 p-0.5 rounded',
+            'absolute top-1 right-1 p-0.5 rounded',
             variant == 'solid' ? `hover:bg-${color}-600` : `hover:bg-${color}-200 text-black`
           )}
         />

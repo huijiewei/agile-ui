@@ -12,7 +12,7 @@ export const ModalCloseButton = primitiveComponent<'button'>((props, ref) => {
     <CloseButton
       onClick={onClose}
       ref={ref}
-      className={cx('top-2 right-2 p-1 rounded hover:bg-gray-200', className)}
+      className={cx('absolute top-2 right-2 p-1 rounded hover:bg-gray-200', className)}
       {...rest}
     >
       {children}

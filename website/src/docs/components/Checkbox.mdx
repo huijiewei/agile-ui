@@ -75,26 +75,26 @@ function Demo() {
       <Checkbox
         checked={allChecked}
         indeterminate={isIndeterminate}
-        onChange={(e) => setCheckedItems([e.target.checked, e.target.checked, e.target.checked])}
+        onChange={(checked) => setCheckedItems([checked, checked, checked])}
       >
         选择框
       </Checkbox>
       <div className={'flex flex-row gap-5'}>
         <Checkbox
           checked={checkedItems[0]}
-          onChange={(e) => setCheckedItems([e.target.checked, checkedItems[1], checkedItems[2]])}
+          onChange={(checked) => setCheckedItems([checked, checkedItems[1], checkedItems[2]])}
         >
           选择框一
         </Checkbox>
         <Checkbox
           checked={checkedItems[1]}
-          onChange={(e) => setCheckedItems([checkedItems[0], e.target.checked, checkedItems[2]])}
+          onChange={(checked) => setCheckedItems([checkedItems[0], checked, checkedItems[2]])}
         >
           选择框二
         </Checkbox>
         <Checkbox
           checked={checkedItems[2]}
-          onChange={(e) => setCheckedItems([checkedItems[0], checkedItems[1], e.target.checked])}
+          onChange={(checked) => setCheckedItems([checkedItems[0], checkedItems[1], checked])}
         >
           选择框三
         </Checkbox>

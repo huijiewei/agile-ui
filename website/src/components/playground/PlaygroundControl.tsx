@@ -16,7 +16,7 @@ export const PlaygroundControl = ({
     <label className={'inline-flex items-center justify-between gap-1'}>
       <div className={'whitespace-nowrap'}>{prop.description}</div>
       {prop.type.control == 'boolean' && (
-        <Checkbox defaultChecked={defaultValue?.toString() == 'true'} onChange={(e) => onChange(e.target.checked)} />
+        <Checkbox defaultChecked={defaultValue?.toString() == 'true'} onChange={(checked) => onChange(checked)} />
       )}
       {(prop.type.control == 'string' || prop.type.control == 'number' || prop.type.control == 'ReactNode') && (
         <Input
@@ -24,7 +24,7 @@ export const PlaygroundControl = ({
           type="text"
           size={'sm'}
           className={'w-1/2'}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(value) => onChange(value)}
         />
       )}
       {prop.type.control == 'select' &&

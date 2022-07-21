@@ -60,7 +60,7 @@ type RadioGroupProps = RadioGroupBaseProps & {
   /**
    * 选中任何子项单选框或未选中时触发回调
    */
-  onChange?: (value: string) => void;
+  onChange?: (value: StringOrNumber) => void;
 };
 
 export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
