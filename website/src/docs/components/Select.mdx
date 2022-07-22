@@ -1,0 +1,64 @@
+---
+title: 选择器
+description: 当用户需要从一组同类数据中选择一个或多个时，可以使用下拉选择器，点击后选择对应项。
+---
+
+## 用法
+
+```tsx preview editable
+<Select placeholder={'选择器'}>
+  <SelectOption className={'whitespace-nowrap'} value={'1'}>
+    选项一一一一一一一一一一一一一一一一一一
+  </SelectOption>
+  <SelectOption value={'2'}>选项二</SelectOption>
+  <SelectOption value={'3'}>选项三</SelectOption>
+  <SelectOption value={'4'}>选项四</SelectOption>
+  <SelectOption value={'5'}>选项五</SelectOption>
+</Select>
+```
+
+## 大小
+
+```tsx preview editable
+<div className={'flex flex-row gap-3'}>
+  <Select size={'xs'} placeholder={'选择器'}>
+    <SelectOption value={'1'}>选项一</SelectOption>
+    <SelectOption value={'2'}>选项二</SelectOption>
+    <SelectOption value={'3'}>选项三</SelectOption>
+    <SelectOption value={'4'}>选项四</SelectOption>
+    <SelectOption value={'5'}>选项五</SelectOption>
+  </Select>
+  <Select size={'sm'} placeholder={'选择器'}>
+    <SelectOption value={'1'}>选项一</SelectOption>
+    <SelectOption value={'2'}>选项二</SelectOption>
+    <SelectOption value={'3'}>选项三</SelectOption>
+    <SelectOption value={'4'}>选项四</SelectOption>
+    <SelectOption value={'5'}>选项五</SelectOption>
+  </Select>
+  <Select defaultValue={3} placeholder={'选择器'}>
+    <SelectOption value={1}>选项一</SelectOption>
+    <SelectOption value={2}>选项二</SelectOption>
+    <SelectOption value={3}>选项三</SelectOption>
+    <SelectOption value={4}>选项四</SelectOption>
+    <SelectOption value={5}>选项五</SelectOption>
+  </Select>
+  <Select size={'lg'} placeholder={'选择器'}>
+    <SelectOption value={'1'}>选项一</SelectOption>
+    <SelectOption value={'2'}>选项二</SelectOption>
+    <SelectOption value={'3'}>选项三</SelectOption>
+    <SelectOption value={'4'}>选项四</SelectOption>
+    <SelectOption value={'5'}>选项五</SelectOption>
+  </Select>
+  <Select size={'xl'} placeholder={'选择器'}>
+    <SelectOption value={'1'}>选项一</SelectOption>
+    <SelectOption value={'2'}>选项二</SelectOption>
+    <SelectOption value={'3'}>选项三</SelectOption>
+    <SelectOption value={'4'}>选项四</SelectOption>
+    <SelectOption value={'5'}>选项五</SelectOption>
+  </Select>
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Select" />

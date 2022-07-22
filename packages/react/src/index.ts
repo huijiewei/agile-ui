@@ -29,6 +29,9 @@ export * from './checkbox/CheckboxGroup';
 export * from './radio/Radio';
 export * from './radio/RadioGroup';
 
+export * from './select/Select';
+export * from './select/SelectOption';
+
 export * from './tooltip/Tooltip';
 
 export * from './popover/Popover';
@@ -66,4 +69,5 @@ export * from './toast/Toast';
 export * from './toast/useToast';
 
 export * from './close-button/CloseButton';
+
 export * from './provider/AgileProvider';

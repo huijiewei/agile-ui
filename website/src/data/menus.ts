@@ -92,7 +92,7 @@ export const menus: Menu[] = [
             path: '/components/input',
           },
           {
-            label: '选择框',
+            label: '选择器',
             path: '/components/select',
           },
           {
