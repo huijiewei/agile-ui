@@ -115,7 +115,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
       <input
         ref={mergeRefs(inputRef, ref)}
         className={cx(
-          'outline-none min-w-0 bg-transparent w-full disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+          'outline-none min-w-0 bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
           showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
         )}
         aria-invalid={invalid}
@@ -145,7 +145,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
             handleClear();
             inputRef.current?.focus();
           }}
-          className={'absolute right-1 text-xs text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100'}
+          className={'absolute right-1 text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100'}
         />
       )}
     </div>

@@ -32,7 +32,6 @@ export type PopoverProps = {
 
   /**
    * 动画
-   * @default 'hover'
    */
   animation?: AnimationBaseProps;
 

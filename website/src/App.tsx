@@ -18,7 +18,7 @@ export const App = () => {
 
   useTimeout(() => {
     splash?.remove();
-  }, 3000);
+  }, 2000);
 
   return (
     <HelmetProvider>
