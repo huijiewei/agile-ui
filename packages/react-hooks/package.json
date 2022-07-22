@@ -4,6 +4,7 @@
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
+  "author": "Huijie Wei",
   "publishConfig": {
     "access": "public"
   },

@@ -43,11 +43,11 @@
 - Prettier - 一个“有态度”的代码格式化工具。
 - Husky & Lint Staged - 在提交暂存文件之前，运行脚本。
 
-### 文档
+## 文档
 
 https://agile-ui.vercel.app
 
-### 本地运行
+## 本地运行
 
 ```shell
 npm install
