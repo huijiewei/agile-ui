@@ -28,6 +28,7 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
 
   return (
     <button
+      ref={refs}
       role={'menuitem'}
       disabled={disabled}
       data-disabled={dataAttr(disabled)}
@@ -39,9 +40,8 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
         className
       )}
       {...getReferenceProps({
+        ...rest,
         ...getItemProps({
-          ...rest,
-          ref: refs,
           onClick: (e) => {
             e.stopPropagation();
             (e.currentTarget as HTMLButtonElement).focus();

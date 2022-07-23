@@ -77,7 +77,7 @@ export type PopoverProps = {
 export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   const {
     children,
-    placement,
+    placement = 'auto',
     animation,
     closeOnEsc = true,
     closeOnBlur = true,

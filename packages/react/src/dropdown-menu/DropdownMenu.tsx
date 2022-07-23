@@ -5,6 +5,7 @@ import {
   flip,
   FloatingTree,
   offset,
+  Placement,
   safePolygon,
   shift,
   useClick,
@@ -58,6 +59,12 @@ export type DropdownMenuProps = {
   closeOnSelect?: boolean;
 
   /**
+   * 放置位置
+   * @default 'bottom-start'
+   */
+  placement?: Placement;
+
+  /**
    * 动画
    */
   animation?: AnimationBaseProps;
@@ -76,8 +83,17 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
     closeOnBlur = true,
     closeOnSelect = true,
     opened = false,
+    placement = 'bottom-start',
     onClose,
   } = props;
+
+  const { duration, transition, enter, exit } = {
+    duration: 200,
+    enter: 'opacity-100',
+    exit: 'opacity-0',
+    transition: 'transition-opacity',
+    ...animation,
+  };
 
   const tree = useFloatingTree();
   const nodeId = useFloatingNodeId();
@@ -110,7 +126,7 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
       }
     },
     nodeId,
-    placement: nested ? 'right-start' : 'bottom-start',
+    placement: nested ? 'right-start' : placement,
     whileElementsMounted: autoUpdate,
   });
 
@@ -118,6 +134,7 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
     useHover(context, {
       enabled: nested && allowHover,
       handleClose: safePolygon(),
+      restMs: 25,
     }),
     useClick(context, { toggle: !nested, pointerDown: true, ignoreMouse: nested }),
     useRole(context, { role: 'menu' }),
@@ -174,13 +191,11 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
       nested,
       nodeId,
       animation: {
-        duration: 200,
-        enter: 'opacity-100',
-        exit: 'opacity-0',
-        transition: 'transition-opacity',
-        ...animation,
+        duration,
+        enter,
+        exit,
+        transition,
       },
-
       tree,
       allowHover,
       getItemProps,

@@ -20,18 +20,17 @@ export const DropdownMenuItem = primitiveComponent<'button', DropdownMenuItemPro
 
   return (
     <button
+      ref={refs}
       role={'menuitem'}
       data-disabled={dataAttr(disabled)}
       aria-disabled={ariaAttr(disabled)}
       disabled={disabled}
       className={cx(
-        'w-full outline-none cursor-default flex justify-between items-center p-1.5 leading-none rounded',
+        'flex justify-between items-center w-full outline-none cursor-default p-1.5 leading-none rounded',
         'focus:bg-gray-100 dark:focus:bg-gray-600 disabled:text-gray-300',
         className
       )}
       {...getItemProps({
-        ...rest,
-        ref: refs,
         onClick: () => {
           tree?.events.emit('click');
           onClick && onClick();
@@ -42,6 +41,7 @@ export const DropdownMenuItem = primitiveComponent<'button', DropdownMenuItemPro
           }
         },
       })}
+      {...rest}
     >
       {children}
     </button>

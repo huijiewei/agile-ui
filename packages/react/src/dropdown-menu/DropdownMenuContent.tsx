@@ -46,7 +46,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     <FloatingNode id={nodeId}>
       <Portal>
         {shouldMount && (
-          <FloatingFocusManager order={['reference', 'content']} modal={!nested} preventTabbing context={context}>
+          <FloatingFocusManager modal={!nested} order={['reference', 'content']} preventTabbing context={context}>
             <div
               className={cx(
                 'absolute outline-none',

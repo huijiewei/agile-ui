@@ -222,6 +222,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     transition: 'transition-opacity',
     ...animation,
   };
+
   const { stage, shouldMount } = useAnimation(open, duration);
 
   return (

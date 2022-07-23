@@ -68,13 +68,13 @@ import { DropdownMenu } from '@agile-ui/react';
         <DropdownMenu>
           <DropdownMenuItemTrigger>社交媒体</DropdownMenuItemTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem
-              onClick={() => {
-                console.log('选择了微信');
-              }}
-            >
-              微信
-            </DropdownMenuItem>
+            <DropdownMenu>
+              <DropdownMenuItemTrigger>微信</DropdownMenuItemTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>聊天</DropdownMenuItem>
+                <DropdownMenuItem>朋友圈</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <DropdownMenuItem>微博</DropdownMenuItem>
             <DropdownMenuItem>抖音</DropdownMenuItem>
             <DropdownMenuItem>知乎</DropdownMenuItem>
