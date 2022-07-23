@@ -136,10 +136,11 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const referenceContextValue = useMemo(
     () => ({
+      open,
       reference,
       getReferenceProps,
     }),
-    [getReferenceProps, reference]
+    [getReferenceProps, open, reference]
   );
 
   const floatingContextValue = useMemo(

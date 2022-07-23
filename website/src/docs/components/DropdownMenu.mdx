@@ -3,7 +3,90 @@ title: 下拉菜单
 description: 页面上的命令过多时，可将备选命令收纳到向下展开的浮层容器中。
 ---
 
+## 导入
+
+```tsx
+import { DropdownMenu } from '@agile-ui/react';
+```
+
 ## 用法
+
+```tsx preview editable
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button color={'gray'}>下拉菜单</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuArrow />
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了新标签页');
+      }}
+    >
+      新标签页<span className={'ml-3 text-gray-500 text-sm'}>⌘+T</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      打开新窗口<span className={'ml-3 text-gray-500 text-sm'}>⌘+N</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>
+      打开新的无痕式窗口<span className={'ml-3 text-sm'}>⇧+⌘+N</span>
+    </DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenuItem>
+      关闭窗口<span className={'ml-3 text-gray-500 text-sm'}>⇧+⌘+W</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      关闭标签页<span className={'ml-3 text-gray-500 text-sm'}>⌘+W</span>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## 多级菜单
+
+```tsx preview editable
+<DropdownMenu>
+  <DropdownMenuTrigger>
+    <Button color={'gray'}>下拉菜单</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuArrow />
+    <DropdownMenuItem>新建</DropdownMenuItem>
+    <DropdownMenuItem>打开</DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenu>
+      <DropdownMenuItemTrigger>分享</DropdownMenuItemTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了邮件');
+          }}
+        >
+          邮件
+        </DropdownMenuItem>
+        <DropdownMenuItem>短信</DropdownMenuItem>
+        <DropdownMenu>
+          <DropdownMenuItemTrigger>社交媒体</DropdownMenuItemTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              onClick={() => {
+                console.log('选择了微信');
+              }}
+            >
+              微信
+            </DropdownMenuItem>
+            <DropdownMenuItem>微博</DropdownMenuItem>
+            <DropdownMenuItem>抖音</DropdownMenuItem>
+            <DropdownMenuItem>知乎</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## 复杂菜单
 
 ```tsx preview editable
 <DropdownMenu>
@@ -85,6 +168,32 @@ description: 页面上的命令过多时，可将备选命令收纳到向下展�
       }}
     >
       打印<span className={'ml-auto text-gray-500 pl-5 text-sm'}>⌘+P</span>
+    </DropdownMenuItem>
+    <DropdownMenuDivider />
+    <DropdownMenuLabel>账号</DropdownMenuLabel>
+    <DropdownMenuGroup>
+      <DropdownMenuItem
+        onClick={() => {
+          console.log('选择了张三');
+        }}
+      >
+        张三
+      </DropdownMenuItem>
+      <DropdownMenuItem
+        onClick={() => {
+          console.log('选择了李四');
+        }}
+      >
+        李四
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuDivider />
+    <DropdownMenuItem
+      onClick={() => {
+        console.log('选择了其他操作');
+      }}
+    >
+      其他操作
     </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>

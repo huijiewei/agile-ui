@@ -3,7 +3,6 @@ import { __DEV__ } from '@agile-ui/utils';
 import {
   autoUpdate,
   flip,
-  FloatingNode,
   FloatingTree,
   offset,
   safePolygon,
@@ -70,7 +69,15 @@ export type DropdownMenuProps = {
 };
 
 const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
-  const { children, animation, closeOnEsc = true, closeOnBlur = true, opened = false, onClose } = props;
+  const {
+    children,
+    animation,
+    closeOnEsc = true,
+    closeOnBlur = true,
+    closeOnSelect = true,
+    opened = false,
+    onClose,
+  } = props;
 
   const tree = useFloatingTree();
   const nodeId = useFloatingNodeId();
@@ -131,10 +138,12 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
 
   useEffect(() => {
     const handleClick = () => {
-      handleClose();
+      if (closeOnSelect) {
+        handleClose();
 
-      if (parentId == null) {
-        refs.reference.current?.focus();
+        if (parentId == null) {
+          refs.reference.current?.focus();
+        }
       }
     };
 
@@ -143,7 +152,7 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
     return () => {
       tree?.events.off('click', handleClick);
     };
-  }, [parentId, tree, refs, handleClose]);
+  }, [parentId, tree, refs, handleClose, closeOnSelect]);
 
   const referenceContextValue = useMemo(
     () => ({
@@ -163,6 +172,7 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
       floating,
       getFloatingProps,
       nested,
+      nodeId,
       animation: {
         duration: 200,
         enter: 'opacity-100',
@@ -177,16 +187,14 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
       listItemsRef,
       setActiveIndex,
     }),
-    [allowHover, animation, context, floating, getFloatingProps, getItemProps, nested, open, tree, x, y]
+    [allowHover, animation, context, floating, getFloatingProps, getItemProps, nested, nodeId, open, tree, x, y]
   );
 
   return (
     <DropdownMenuPlacementProvider value={placementState}>
       <DropdownMenuReferenceProvider value={referenceContextValue}>
         <DropdownMenuFloatingProvider value={floatingContextValue}>
-          <DropdownMenuDispatchProvider value={{ handleClose }}>
-            <FloatingNode id={nodeId}>{children}</FloatingNode>
-          </DropdownMenuDispatchProvider>
+          <DropdownMenuDispatchProvider value={{ handleClose }}>{children}</DropdownMenuDispatchProvider>
         </DropdownMenuFloatingProvider>
       </DropdownMenuReferenceProvider>
     </DropdownMenuPlacementProvider>

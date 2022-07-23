@@ -19,7 +19,7 @@ export const useAllowHover = () => {
       window.removeEventListener('pointermove', handlePointer, { capture: true });
       window.removeEventListener('keydown', handleKeyDown, true);
     };
-  }, []);
+  }, [allowHover]);
 
   return allowHover;
 };

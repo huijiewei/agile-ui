@@ -1,10 +1,13 @@
 import { useAnimation, useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
-import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
-import { Children } from 'react';
+import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
+import { Children, isValidElement } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
+import { DropdownMenu } from './DropdownMenu';
+import { DropdownMenuGroup } from './DropdownMenuGroup';
+import { DropdownMenuItem } from './DropdownMenuItem';
 import {
   DropdownMenuContentProvider,
   DropdownMenuItemIndexProvider,
@@ -23,6 +26,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     getFloatingProps,
     animation,
     nested,
+    nodeId,
     tree,
     allowHover,
     getItemProps,
@@ -36,44 +40,64 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
 
   const { stage, shouldMount } = useAnimation(open, duration);
 
+  let itemIndex = 0;
+
   return (
-    <Portal>
-      {shouldMount && (
-        <FloatingFocusManager order={['reference', 'content']} modal={!nested} preventTabbing context={context}>
-          <div
-            className={cx(
-              'absolute z-10 focus-visible:outline-none',
-              'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
-              `duration-[${duration}ms] ${transition}`,
-              stage == 'enter' ? enter : exit,
-              className
-            )}
-            {...getFloatingProps({
-              ref: refs,
-              style: {
-                top: y ? `${y}px` : '',
-                left: x ? `${x}px` : '',
-              },
-              ...rest,
-            })}
-          >
-            <DropdownMenuContentProvider
-              value={{
-                tree,
-                allowHover,
-                getItemProps,
-                listItemsRef,
-                setActiveIndex,
-              }}
+    <FloatingNode id={nodeId}>
+      <Portal>
+        {shouldMount && (
+          <FloatingFocusManager order={['reference', 'content']} modal={!nested} preventTabbing context={context}>
+            <div
+              className={cx(
+                'absolute outline-none',
+                'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
+                `duration-[${duration}ms] ${transition}`,
+                stage == 'enter' ? enter : exit,
+                className
+              )}
+              {...getFloatingProps({
+                ...rest,
+                ref: refs,
+                style: {
+                  top: y ? `${y}px` : '',
+                  left: x ? `${x}px` : '',
+                },
+              })}
             >
-              {Children.map(children, (child, index) => {
-                return <DropdownMenuItemIndexProvider value={index}>{child}</DropdownMenuItemIndexProvider>;
-              })}{' '}
-            </DropdownMenuContentProvider>
-          </div>
-        </FloatingFocusManager>
-      )}
-    </Portal>
+              <DropdownMenuContentProvider
+                value={{
+                  tree,
+                  allowHover,
+                  getItemProps,
+                  listItemsRef,
+                  setActiveIndex,
+                }}
+              >
+                {Children.map(children, (child) => {
+                  if (isValidElement(child)) {
+                    if (child.type == DropdownMenuGroup) {
+                      return Children.map(child.props.children, (groupChild) => {
+                        return (
+                          <DropdownMenuItemIndexProvider value={itemIndex++}>
+                            {groupChild}
+                          </DropdownMenuItemIndexProvider>
+                        );
+                      });
+                    }
+
+                    if (child.type == DropdownMenuItem || child.type == DropdownMenu) {
+                      return <DropdownMenuItemIndexProvider value={itemIndex++}>{child}</DropdownMenuItemIndexProvider>;
+                    }
+                  }
+
+                  return child;
+                })}
+              </DropdownMenuContentProvider>
+            </div>
+          </FloatingFocusManager>
+        )}
+      </Portal>
+    </FloatingNode>
   );
 });
 

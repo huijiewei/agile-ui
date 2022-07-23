@@ -93,7 +93,9 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
       <PopoverTrigger>
         <button
           style={{ gridArea: placement == 'auto' ? 'center' : placement }}
-          className={'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default'}
+          className={
+            'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default hover:bg-gray-100 active:bg-gray-300'
+          }
         >
           {name}
         </button>

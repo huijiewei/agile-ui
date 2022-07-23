@@ -28,39 +28,39 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
 
   return (
     <button
-      ref={refs}
       role={'menuitem'}
+      disabled={disabled}
       data-disabled={dataAttr(disabled)}
       aria-disabled={ariaAttr(disabled)}
-      disabled={disabled}
       data-opened={dataAttr(open)}
       className={cx(
-        'relative w-full cursor-default outline-none flex items-center p-1.5 leading-none rounded',
+        'w-full cursor-default outline-none flex justify-between items-center p-1.5 leading-none rounded',
         'disabled:text-gray-300 focus:bg-gray-100 dark:focus:bg-gray-600 opened:not-focus:bg-gray-50 dark:opened:not-focus:bg-gray-500',
         className
       )}
       {...getReferenceProps({
-        ...rest,
+        ...getItemProps({
+          ...rest,
+          ref: refs,
+          onClick: (e) => {
+            e.stopPropagation();
+            (e.currentTarget as HTMLButtonElement).focus();
+          },
+          onPointerEnter: () => {
+            if (allowHover) {
+              setActiveIndex(itemIndex);
+            }
+          },
+        }),
         onKeyDown: (e) => {
           if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
             handleClose();
           }
         },
       })}
-      {...getItemProps({
-        onClick: (e) => {
-          e.stopPropagation();
-          (e.currentTarget as HTMLButtonElement).focus();
-        },
-        onPointerEnter: () => {
-          if (allowHover) {
-            setActiveIndex(itemIndex);
-          }
-        },
-      })}
     >
       {children}
-      <span className={cx('ml-auto pl-5', disabled ? 'text-gray-300' : 'text-gray-500')}>
+      <span className={cx('ml-3', disabled ? 'text-gray-300' : 'text-gray-500')}>
         <svg
           className={'w-4 h-4'}
           xmlns="http://www.w3.org/2000/svg"

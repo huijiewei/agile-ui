@@ -39,7 +39,7 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom-interactions": "^0.8.0"
+    "@floating-ui/react-dom-interactions": "^0.8.1"
   },
   "devDependencies": {
     "@agile-ui/twind": "*",

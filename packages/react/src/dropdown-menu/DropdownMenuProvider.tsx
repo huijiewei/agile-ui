@@ -54,6 +54,7 @@ type DropdownMenuFloatingContextValue = DropdownMenuContentContextValue & {
 
   animation: Required<AnimationBaseProps>;
   nested: boolean;
+  nodeId: string;
 };
 
 const [DropdownMenuFloatingProvider, useDropdownMenuFloating] = createContext<DropdownMenuFloatingContextValue>({

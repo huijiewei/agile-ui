@@ -34,6 +34,7 @@ const [PopoverDispatchProvider, usePopoverDispatch] = createContext<PopoverDispa
 export { PopoverDispatchProvider, usePopoverDispatch };
 
 type PopoverReferenceContextValue = {
+  open: boolean;
   reference: (node: HTMLElement) => void;
   getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Record<string, unknown>;
 };

@@ -253,7 +253,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           ref: reference,
         })}
       >
-        {selectedIndex ? listContentRef.current[selectedIndex + 1] : placeholder}
+        {selectedIndex >= 0 ? listContentRef.current[selectedIndex + 1] : placeholder}
         <span className={'ml-1'}>
           <svg
             width={'1em'}
