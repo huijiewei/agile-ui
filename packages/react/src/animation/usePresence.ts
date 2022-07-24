@@ -1,5 +1,5 @@
 import { useContext, useEffect, useId } from 'react';
-import { PresenceContext, PresenceContextProps } from './PresenceContext';
+import { PresenceContext } from './PresenceContext';
 
 export type SafeToRemove = () => void;
 
@@ -19,12 +19,4 @@ export const usePresence = (): [true, null] | [true] | [false, SafeToRemove] => 
   const safeToRemove = () => onExitComplete?.(id);
 
   return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
-};
-
-export const useIsPresent = () => {
-  return isPresent(useContext(PresenceContext));
-};
-
-export const isPresent = (context: PresenceContextProps | null) => {
-  return context == null ? true : context.isPresent;
 };

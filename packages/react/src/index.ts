@@ -4,7 +4,9 @@ export * from './utils/component';
 export * from './portal/Portal';
 
 export * from './alert/Alert';
+
 export * from './animation/Animation';
+export * from './animation/Presence';
 
 export * from './avatar/Avatar';
 export * from './avatar/AvatarBadge';
@@ -73,4 +75,3 @@ export * from './toast/useToast';
 export * from './close-button/CloseButton';
 
 export * from './provider/AgileProvider';
-export * from './motion/Motion';

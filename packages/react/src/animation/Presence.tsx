@@ -112,7 +112,6 @@ export const Presence = ({
           const removeIndex = presentChildren.current.findIndex((presentChild) => presentChild.key === key);
           presentChildren.current.splice(removeIndex, 1);
 
-          // Defer re-rendering until all exiting children have indeed left
           if (!exiting.size) {
             presentChildren.current = filteredChildren;
 

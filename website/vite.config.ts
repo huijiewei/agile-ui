@@ -67,16 +67,6 @@ export default defineConfig({
             }
 
             if (
-              id.includes('/node_modules/framer-motion') ||
-              id.includes('/node_modules/@motionone') ||
-              id.includes('/node_modules/popmotion') ||
-              id.includes('/node_modules/hey-listen') ||
-              id.includes('/node_modules/framesync')
-            ) {
-              return 'framer-motion';
-            }
-
-            if (
               id.includes('/node_modules/twind') ||
               id.includes('/node_modules/@twind') ||
               id.includes('/node_modules/style-vendorizer')

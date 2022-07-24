@@ -1,10 +1,10 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
-import { AnimatePresence } from 'framer-motion';
 import { Children, isValidElement } from 'react';
 import { cx } from 'twind';
-import { Motion } from '../motion/Motion';
+import { Presence } from '../animation/Presence';
+import { Animation } from '../animation/Animation';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import { DropdownMenu } from './DropdownMenu';
@@ -29,6 +29,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     nested,
     nodeId,
     tree,
+    animation,
     allowHover,
     getItemProps,
     listItemsRef,
@@ -42,14 +43,11 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <FloatingNode id={nodeId}>
       <Portal>
-        <AnimatePresence>
+        <Presence>
           {open && (
             <FloatingFocusManager modal={!nested} order={['reference', 'content']} preventTabbing context={context}>
-              <Motion
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
+              <Animation
+                {...animation}
                 className={cx(
                   'absolute outline-none',
                   'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
@@ -95,10 +93,10 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                     return child;
                   })}
                 </DropdownMenuContentProvider>
-              </Motion>
+              </Animation>
             </FloatingFocusManager>
           )}
-        </AnimatePresence>
+        </Presence>
       </Portal>
     </FloatingNode>
   );

@@ -21,7 +21,7 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { AnimationBaseProps } from '../animation/Animation';
+import type { AnimationProps } from '../animation/Animation';
 import {
   DropdownMenuDispatchProvider,
   DropdownMenuFloatingProvider,
@@ -67,7 +67,7 @@ export type DropdownMenuProps = {
   /**
    * 动画
    */
-  animation?: AnimationBaseProps;
+  animation?: AnimationProps;
 
   /**
    * @ignore
@@ -86,14 +86,6 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
     placement = 'bottom-start',
     onClose,
   } = props;
-
-  const { duration, transition, enter, exit } = {
-    duration: 200,
-    enter: 'opacity-100',
-    exit: 'opacity-0',
-    transition: 'transition-opacity',
-    ...animation,
-  };
 
   const tree = useFloatingTree();
   const nodeId = useFloatingNodeId();
@@ -190,10 +182,11 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
       nested,
       nodeId,
       animation: {
-        duration,
-        enter,
-        exit,
-        transition,
+        enter: 'opacity-100',
+        exit: 'opacity-0',
+        transition: 'opacity',
+        duration: 200,
+        ...animation,
       },
       tree,
       allowHover,

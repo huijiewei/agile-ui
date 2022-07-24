@@ -34,8 +34,7 @@
     "@agile-ui/twind": "*",
     "react": ">=18",
     "react-dom": ">=18",
-    "twind": "next",
-    "framer-motion": ">=6"
+    "twind": "next"
   },
   "dependencies": {
     "@agile-ui/react-hooks": "*",

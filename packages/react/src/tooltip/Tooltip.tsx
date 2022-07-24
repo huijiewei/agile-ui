@@ -15,7 +15,8 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import { cloneElement, ReactElement, ReactNode, useState } from 'react';
 import { cx } from 'twind';
-import { Animation, AnimationBaseProps } from '../animation/Animation';
+import { Animation, AnimationProps } from '../animation/Animation';
+import { Presence } from '../animation/Presence';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
@@ -41,9 +42,8 @@ type TooltipProps = {
 
   /**
    * 动画
-   * @default 'hover'
    */
-  animation?: AnimationBaseProps;
+  animation?: AnimationProps;
 };
 
 /**
@@ -82,26 +82,29 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
     <>
       {cloneElement(target, getReferenceProps({ ref: reference, ...target.props }))}
       <Portal>
-        <Animation
-          show={open}
-          {...animation}
-          className={cx(
-            'absolute shadow inline-block rounded py-1 px-2 text-sm border z-50',
-            `border-${color}-600 bg-${color}-600 text-${color}-50`,
-            className
+        <Presence>
+          {open && (
+            <Animation
+              {...animation}
+              className={cx(
+                'absolute shadow inline-block rounded py-1 px-2 text-sm border z-50',
+                `border-${color}-600 bg-${color}-600 text-${color}-50`,
+                className
+              )}
+              {...getFloatingProps({
+                ...rest,
+                ref: floating,
+                style: {
+                  top: y ? `${y}px` : '',
+                  left: x ? `${x}px` : '',
+                },
+              })}
+            >
+              {content}
+              <TooltipArrow color={color} placement={placementState} />
+            </Animation>
           )}
-          {...getFloatingProps({
-            ...rest,
-            ref: floating,
-            style: {
-              top: y ? `${y}px` : '',
-              left: x ? `${x}px` : '',
-            },
-          })}
-        >
-          {content}
-          <TooltipArrow color={color} placement={placementState} />
-        </Animation>
+        </Presence>
       </Portal>
     </>
   );

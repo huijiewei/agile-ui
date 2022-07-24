@@ -23,6 +23,7 @@ export type ToastOptions = ToastProps & {
   position?: ToastPosition;
 
   remove: boolean;
+
   onRemove?: () => void;
 };
 

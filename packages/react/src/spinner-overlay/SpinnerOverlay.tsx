@@ -2,6 +2,7 @@ import { __DEV__ } from '@agile-ui/utils';
 import { cloneElement, ReactElement } from 'react';
 import { cx } from 'twind';
 import { Animation } from '../animation/Animation';
+import { Presence } from '../animation/Presence';
 import { Overlay } from '../overlay/Overlay';
 import { Spinner } from '../spinner/Spinner';
 import { primitiveComponent } from '../utils/component';
@@ -50,16 +51,19 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
   const spinner = (children as ReactElement) || <Spinner size={'xl'} color={'blue'} />;
 
   return (
-    <Animation
-      duration={duration}
-      show={visible}
-      ref={ref}
-      className={cx('absolute inset-0 z-10 flex items-center justify-center overflow-hidden', className)}
-      {...rest}
-    >
-      {cloneElement(spinner, { className: 'z-20' })}
-      <Overlay radius={radius} opacity={opacity} color={color} blur={blur}></Overlay>
-    </Animation>
+    <Presence>
+      {visible && (
+        <Animation
+          duration={duration}
+          ref={ref}
+          className={cx('absolute inset-0 z-10 flex items-center justify-center overflow-hidden', className)}
+          {...rest}
+        >
+          {cloneElement(spinner, { className: 'z-20' })}
+          <Overlay radius={radius} opacity={opacity} color={color} blur={blur}></Overlay>
+        </Animation>
+      )}
+    </Presence>
   );
 });
 

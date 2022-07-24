@@ -14,7 +14,7 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode } from 'react';
 import { MutableRefObject, useCallback, useId, useMemo, useState } from 'react';
-import type { AnimationBaseProps } from '../animation/Animation';
+import type { AnimationProps } from '../animation/Animation';
 import {
   PopoverAriaProvider,
   PopoverDispatchProvider,
@@ -33,7 +33,7 @@ export type PopoverProps = {
   /**
    * 动画
    */
-  animation?: AnimationBaseProps;
+  animation?: AnimationProps;
 
   /**
    * 默认开启状态
@@ -155,7 +155,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
         duration: 200,
         enter: 'opacity-100',
         exit: 'opacity-0',
-        transition: 'transition-opacity',
+        transition: 'opacity',
         ...animation,
       },
       modal,

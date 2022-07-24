@@ -1,7 +1,7 @@
 import type { FloatingContext } from '@floating-ui/react-dom-interactions';
 import type { MutableRefObject } from 'react';
 import type { HTMLProps } from 'react';
-import type { AnimationBaseProps } from '../animation/Animation';
+import type { AnimationProps } from '../animation/Animation';
 import { createContext } from '../utils/context';
 
 type ModalContextValue = {
@@ -9,7 +9,7 @@ type ModalContextValue = {
   context: FloatingContext<HTMLElement>;
   floating: (node: HTMLElement) => void;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
-  animation?: AnimationBaseProps;
+  animation: Required<AnimationProps>;
   lockScroll?: boolean;
   initialFocus?: number | MutableRefObject<HTMLElement | null>;
   scrollBehavior?: 'inside' | 'outside';

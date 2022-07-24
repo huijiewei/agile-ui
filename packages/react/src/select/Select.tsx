@@ -1,4 +1,4 @@
-import { useAnimation, useControllableProp, usePrevious } from '@agile-ui/react-hooks';
+import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { dataAttr } from '@agile-ui/utils';
 import {
@@ -16,9 +16,10 @@ import {
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
 import { Children, cloneElement, isValidElement, ReactNode, useLayoutEffect, useRef, useState } from 'react';
-import { render } from 'react-dom';
 import { cx } from 'twind';
-import type { AnimationBaseProps } from '../animation/Animation';
+import { Animation } from '../animation/Animation';
+import type { AnimationProps } from '../animation/Animation';
+import { Presence } from '../animation/Presence';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
@@ -91,7 +92,7 @@ export type SelectProps = {
   /**
    * 动画
    */
-  animation?: AnimationBaseProps;
+  animation?: AnimationProps;
 };
 
 const selectSizes = {
@@ -215,16 +216,6 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     }
   }, [open, selectedIndex, refs.floating, refs.reference, middlewareData]);
 
-  const { duration, transition, enter, exit } = {
-    duration: 200,
-    enter: 'opacity-100',
-    exit: 'opacity-0',
-    transition: 'transition-opacity',
-    ...animation,
-  };
-
-  const { stage, shouldMount } = useAnimation(open, duration);
-
   return (
     <SelectProvider
       value={{
@@ -270,33 +261,41 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         </span>
       </button>
       <Portal>
-        {shouldMount && (
-          <FloatingFocusManager context={context} preventTabbing>
-            <ul
-              className={cx(
-                'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
-                '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])',
-                `duration-[${duration}ms] ${transition}`,
-                stage == 'enter' ? enter : exit
-              )}
-              {...getFloatingProps({
-                ref: floating,
-                style: {
-                  top: y ?? 0,
-                  left: x ?? 0,
-                },
-              })}
-            >
-              {Children.map(children, (child, index) => {
-                if (isValidElement(child)) {
-                  return cloneElement(child, { index });
-                }
+        <Presence>
+          {open && (
+            <FloatingFocusManager context={context} preventTabbing>
+              <Animation
+                as={'ul'}
+                {...{
+                  duration: 200,
+                  enter: 'opacity-100',
+                  exit: 'opacity-0',
+                  transition: 'opacity',
+                  ...animation,
+                }}
+                className={cx(
+                  'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
+                  '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
+                )}
+                {...getFloatingProps({
+                  ref: floating,
+                  style: {
+                    top: y ?? 0,
+                    left: x ?? 0,
+                  },
+                })}
+              >
+                {Children.map(children, (child, index) => {
+                  if (isValidElement(child)) {
+                    return cloneElement(child, { index });
+                  }
 
-                return child;
-              })}
-            </ul>
-          </FloatingFocusManager>
-        )}
+                  return child;
+                })}
+              </Animation>
+            </FloatingFocusManager>
+          )}
+        </Presence>
       </Portal>
     </SelectProvider>
   );
