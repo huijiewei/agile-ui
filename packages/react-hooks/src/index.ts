@@ -14,3 +14,5 @@ export * from './use-const';
 export * from './use-focus-visible';
 export * from './use-allow-hover';
 export * from './use-previous';
+export * from './use-force-update';
+export * from './use-is-mounted';

@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src", "vite.config.ts"],
+  "include": ["src"],
   "compilerOptions": {
     "paths": {
-      "@agile-ui/utils": ["../utils/src"],
       "@agile-ui/react-hooks": ["../react-hooks/src"],
+      "@agile-ui/utils": ["../utils/src"],
       "@agile-ui/twind": ["../twind/src"],
       "@agile-ui/test-utils": ["../../tooling/test-utils/src"]
     }

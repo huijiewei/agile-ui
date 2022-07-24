@@ -134,7 +134,6 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
     useHover(context, {
       enabled: nested && allowHover,
       handleClose: safePolygon(),
-      restMs: 25,
     }),
     useClick(context, { toggle: !nested, pointerDown: true, ignoreMouse: nested }),
     useRole(context, { role: 'menu' }),

@@ -1,5 +1,5 @@
 {
-  "name": "@agile-ui/react",
+  "name": "@agile-ui/react-motion",
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": false,
@@ -28,23 +28,18 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/huijiewei/agile-ui.git",
-    "directory": "packages/react"
+    "directory": "packages/react-motion"
   },
   "peerDependencies": {
-    "@agile-ui/twind": "*",
-    "react": ">=18",
-    "react-dom": ">=18",
-    "twind": "next",
-    "framer-motion": ">=6"
+    "react": ">=18"
   },
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom-interactions": "^0.8.1"
+    "@motionone/dom": "^10.13.1"
   },
   "devDependencies": {
-    "@agile-ui/test-utils": "*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@agile-ui/test-utils": "*"
   }
 }

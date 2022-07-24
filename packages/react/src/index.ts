@@ -73,3 +73,4 @@ export * from './toast/useToast';
 export * from './close-button/CloseButton';
 
 export * from './provider/AgileProvider';
+export * from './motion/Motion';
