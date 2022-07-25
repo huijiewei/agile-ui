@@ -25,12 +25,6 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
   const [colorMode, setColorMode] = useLocalStorage<ColorMode>('ag:color-mode', 'system');
   const [darkMode, setDarkMode] = useState<boolean>(darkOS);
 
-  useUpdateEffect(() => {
-    if (colorMode == 'system') {
-      setDarkMode(darkOS);
-    }
-  }, [darkOS]);
-
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');

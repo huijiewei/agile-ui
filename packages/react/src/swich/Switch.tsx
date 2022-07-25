@@ -112,7 +112,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     <label
       className={cx(
         'inline-flex items-center relative',
-        isNumber(spacing) ? `gap-${spacing}` : `gap-[${spacing}]`,
+        isNumber(spacing) || spacing == 'px' ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
       )}

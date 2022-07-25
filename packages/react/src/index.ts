@@ -74,4 +74,9 @@ export * from './toast/useToast';
 
 export * from './close-button/CloseButton';
 
+export * from './breadcrumb/Breadcrumb';
+export * from './breadcrumb/BreadcrumbItem';
+export * from './breadcrumb/BreadcrumbLink';
+export * from './breadcrumb/BreadcrumbSeparator';
+
 export * from './provider/AgileProvider';

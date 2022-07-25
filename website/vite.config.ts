@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
-import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import { remarkMdxToc } from 'remark-mdx-toc';
 import { defineConfig } from 'vite';

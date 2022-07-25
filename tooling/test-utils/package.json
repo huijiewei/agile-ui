@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "axe-core": "^4.4.2",
+    "@testing-library/user-event": "^14.3.0",
+    "axe-core": "^4.4.3",
     "twind": "next"
   },
   "devDependencies": {

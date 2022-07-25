@@ -1,0 +1,68 @@
+---
+title: 面包屑
+description: 面包屑是辅助导航模式，用于识别页面在层次结构内的位置，并根据需要向上返回。
+---
+
+## 导入
+
+```tsx
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@agile-ui/react';
+```
+
+## 用法
+
+```tsx preview editable
+<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">Docs</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="#">Breadcrumb</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+## 分隔符
+
+```tsx preview editable
+<Breadcrumb separator="-">
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">About</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="#">Contact</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+## 图标分隔符
+
+```tsx preview editable
+<Breadcrumb separator={<ChevronRight className={'text-gray-500'} size={'0.875em'} />}>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href="#">About</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="#">Contact</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+## 属性
+
+<PropsTable componentName="Breadcrumb" />
