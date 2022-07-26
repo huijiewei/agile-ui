@@ -1,11 +1,13 @@
-import { MutableRefObject, Ref, RefCallback, useCallback } from 'react';
+import { isFunction } from '@agile-ui/utils';
+import type { MutableRefObject, Ref, RefCallback } from 'react';
+import { useCallback } from 'react';
 
 type PossibleRef<T> = Ref<T> | undefined;
 
 export const mergeRefs = <T>(...refs: PossibleRef<T>[]) => {
   return (node: T) =>
     refs.forEach((ref) => {
-      if (typeof ref == 'function') {
+      if (isFunction(ref)) {
         ref(node);
       } else if (ref != null) {
         (ref as MutableRefObject<T>).current = node;

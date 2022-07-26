@@ -35,6 +35,7 @@
     "remark-mdx-toc": "^0.3.0",
     "vite-plugin-pwa": "^0.12.3",
     "workbox-window": "^6.5.3",
-    "react-docgen-typescript": "^2.2.2"
+    "react-docgen-typescript": "^2.2.2",
+    "terser": "^5.14.2"
   }
 }

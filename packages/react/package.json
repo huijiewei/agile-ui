@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
+    "build": "tsup src/index.ts --format esm,cjs --inject react-shim.js --target esnext --treeshake --dts --minify --clean",
     "prepublishOnly": "npm run build"
   },
   "main": "./dist/index.cjs",
@@ -43,7 +43,9 @@
   },
   "devDependencies": {
     "@agile-ui/test-utils": "*",
+    "@agile-ui/twind": "*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "twind": "next"
   }
 }

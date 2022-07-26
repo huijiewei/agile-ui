@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
+    "build": "tsup src/index.ts --format cjs,esm  --inject react-shim.js --target esnext --treeshake --dts --minify --clean",
     "prepublishOnly": "npm run build"
   },
   "main": "./dist/index.cjs.js",
@@ -31,12 +31,14 @@
     "directory": "packages/react-icons"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@agile-ui/utils": "*"
   },
   "devDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
