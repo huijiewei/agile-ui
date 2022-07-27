@@ -12,8 +12,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --inject react-shim.js --target esnext --treeshake --dts --minify --clean",
-    "prepublishOnly": "npm run build"
+    "build": "tsup",
+    "vite-build": "vite build"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

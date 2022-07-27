@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --target esnext --treeshake --dts --minify --clean",
+    "build": "tsup",
     "prepublishOnly": "npm run build"
   },
   "main": "./dist/index.cjs",

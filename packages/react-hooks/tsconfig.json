@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["src", "tsup.config.ts"],
   "compilerOptions": {
     "paths": {
       "@agile-ui/utils": ["../utils/src"],

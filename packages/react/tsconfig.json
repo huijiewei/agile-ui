@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["src"],
+  "include": ["src", "tsup.config.ts"],
   "compilerOptions": {
     "paths": {
       "@agile-ui/react-hooks": ["../react-hooks/src"],
