@@ -1,6 +1,5 @@
 import type { FloatingContext, Placement } from '@floating-ui/react-dom-interactions';
 import type { HTMLProps, MutableRefObject } from 'react';
-import type { AnimationProps } from '../animation/Animation';
 import { createContext } from '../utils/context';
 
 type PopoverAriaContextValue = {
@@ -57,8 +56,6 @@ type PopoverFloatingContextValue = {
 
   modal: boolean;
   initialFocus?: number | MutableRefObject<HTMLElement | null>;
-
-  animation: Required<AnimationProps>;
 };
 
 const [PopoverFloatingProvider, usePopoverFloating] = createContext<PopoverFloatingContextValue>({

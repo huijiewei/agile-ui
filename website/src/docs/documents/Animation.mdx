@@ -1,0 +1,107 @@
+---
+title: 动画效果
+description: 跟随以下的步骤，快速上手组件库的使用。
+---
+
+Agile 引入了强大的动画库
+framer-motion，可以做出很多令人惊叹的动画效果。具体可以查看 [framer-motion 的文档](https://www.framer.com/motion/)
+
+## 动画演示
+
+```tsx preview
+function Demo() {
+  const [activeColor, setActiveColor] = React.useState(null);
+  const colors = ['#FF87DD', '#8AE28D', '#FFE870', '#01ACFD'];
+
+  return (
+    <div className={'flex items-center justify-center h-20 gap-2 relative'}>
+      <AnimatePresence>
+        {activeColor && (
+          <Motion
+            layout
+            layoutId={activeColor}
+            transition={{ duration: 1 }}
+            as={'button'}
+            className={`h-16 w-16 rounded-full absolute z-10 bg-[${activeColor}]`}
+            onClick={() => setActiveColor(null)}
+          />
+        )}
+        {!activeColor &&
+          colors.map((color) => (
+            <Motion
+              layout
+              layoutId={color}
+              transition={{ duration: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              as={'button'}
+              className={`h-16 w-16 rounded-full bg-[${color}]`}
+              key={color}
+              onClick={() => setActiveColor(activeColor == color ? null : color)}
+            />
+          ))}
+      </AnimatePresence>
+    </div>
+  );
+}
+```
+
+## 图片切换
+
+```tsx preview
+function Demo() {
+  const images = [
+    'https://www.huijiewei.com/images/01.jpg',
+    'https://www.huijiewei.com/images/02.jpg',
+    'https://www.huijiewei.com/images/03.jpg',
+    'https://www.huijiewei.com/images/04.jpg',
+    'https://www.huijiewei.com/images/05.jpg',
+  ];
+
+  const [[page, direction], setPage] = React.useState([0, 0]);
+
+  const rangeSize = images.length;
+  const imageIndex = ((page % rangeSize) + rangeSize) % rangeSize;
+
+  return (
+    <div className={'flex w-full h-96 items-center justify-center relative overflow-hidden'}>
+      <AnimatePresence initial={false}>
+        <Motion
+          initial={{ x: direction > 0 ? 1000 : -1000, opacity: 0 }}
+          animate={{
+            zIndex: 1,
+            x: 0,
+            opacity: 1,
+          }}
+          exit={{
+            zIndex: 0,
+            x: direction < 0 ? 1000 : -1000,
+            opacity: 0,
+          }}
+          transition={{
+            x: { type: 'spring', stiffness: 200, damping: 30 },
+            opacity: { duration: 0.5 },
+          }}
+          as={Image}
+          key={page}
+          className={`object-cover absolute`}
+          src={images[imageIndex]}
+        />
+      </AnimatePresence>
+      <button
+        className={'absolute flex z-20 items-center justify-center top-1/2 left-3 bg-gray-100 w-10 h-10 rounded-full'}
+        onClick={() => setPage([page + 1, 1])}
+      >
+        <ChevronRight className={'rotate-180'} />
+      </button>
+      <button
+        className={'absolute flex z-20 items-center justify-center top-1/2 right-3 bg-gray-100 w-10 h-10 rounded-full'}
+        onClick={() => setPage([page - 1, -1])}
+      >
+        <ChevronRight />
+      </button>
+    </div>
+  );
+}
+```

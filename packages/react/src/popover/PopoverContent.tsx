@@ -2,16 +2,16 @@ import { useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
-import { Animation } from '../animation/Animation';
-import { Presence } from '../animation/Presence';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import { usePopoverAria, usePopoverFloating } from './PopoverProvider';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { open, x, y, floating, context, getFloatingProps, modal, initialFocus, animation } = usePopoverFloating();
+  const { open, x, y, floating, context, getFloatingProps, modal, initialFocus } = usePopoverFloating();
 
   const { labelId, descriptionId } = usePopoverAria();
 
@@ -19,11 +19,14 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
 
   return (
     <Portal>
-      <Presence>
+      <AnimatePresence>
         {open && (
           <FloatingFocusManager modal={modal} initialFocus={initialFocus} context={context}>
-            <Animation
-              {...animation}
+            <Motion
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className={'absolute z-10 outline-none'}
               {...getFloatingProps({
                 ...rest,
@@ -41,10 +44,10 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
               >
                 {children}
               </div>
-            </Animation>
+            </Motion>
           </FloatingFocusManager>
         )}
-      </Presence>
+      </AnimatePresence>
     </Portal>
   );
 });

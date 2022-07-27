@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ReloadPrompt } from './components/shared/ReloadPrompt';
 import { AppRoutes } from './data/routes';
+import { domAnimation, domMax, LazyMotion } from 'framer-motion';
 
 export const App = () => {
   const splash = document.getElementById('appSplash');
@@ -24,10 +25,12 @@ export const App = () => {
     <HelmetProvider>
       <BrowserRouter>
         <Helmet defaultTitle={'Agile UI'} titleTemplate={'%s - Agile UI'} />
-        <AgileProvider>
-          <AppRoutes />
-          <ReloadPrompt />
-        </AgileProvider>
+        <LazyMotion strict features={domMax}>
+          <AgileProvider>
+            <AppRoutes />
+            <ReloadPrompt />
+          </AgileProvider>
+        </LazyMotion>
       </BrowserRouter>
     </HelmetProvider>
   );

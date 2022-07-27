@@ -2,7 +2,6 @@ import { __DEV__ } from '@agile-ui/utils';
 import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react-dom-interactions';
 import type { MutableRefObject, PropsWithChildren } from 'react';
 import { useCallback, useId, useMemo } from 'react';
-import type { AnimationProps } from '../animation/Animation';
 import { Portal } from '../portal/Portal';
 import { ModalProvider } from './ModalProvider';
 
@@ -45,17 +44,11 @@ export type ModalProps = {
    * @default 'inside'
    */
   scrollBehavior?: 'inside' | 'outside';
-
-  /**
-   * 动画
-   */
-  animation?: AnimationProps;
 };
 
 export const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
     children,
-    animation,
     closeOnEsc = true,
     closeOnBlur = true,
     opened,
@@ -94,13 +87,6 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       context,
       floating,
       getFloatingProps,
-      animation: {
-        duration: 200,
-        enter: 'opacity-100',
-        exit: 'opacity-0',
-        transition: 'opacity',
-        ...animation,
-      },
       initialFocus,
       scrollBehavior,
       lockScroll,
@@ -113,7 +99,6 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       context,
       floating,
       getFloatingProps,
-      animation,
       initialFocus,
       scrollBehavior,
       lockScroll,

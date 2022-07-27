@@ -15,12 +15,12 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import { cloneElement, ReactElement, ReactNode, useState } from 'react';
 import { cx } from 'twind';
-import { Animation, AnimationProps } from '../animation/Animation';
-import { Presence } from '../animation/Presence';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
 import { TooltipArrow } from './TooltipArrow';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 type TooltipProps = {
   /**
@@ -39,18 +39,13 @@ type TooltipProps = {
    * @default 'auto'
    */
   placement?: 'auto' | Placement;
-
-  /**
-   * 动画
-   */
-  animation?: AnimationProps;
 };
 
 /**
  * 工具提示
  */
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
-  const { className, children, content, placement = 'auto', animation, color = 'gray', ...rest } = props;
+  const { className, children, content, placement = 'auto', color = 'gray', ...rest } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -82,10 +77,13 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
     <>
       {cloneElement(target, getReferenceProps({ ref: reference, ...target.props }))}
       <Portal>
-        <Presence>
+        <AnimatePresence>
           {open && (
-            <Animation
-              {...animation}
+            <Motion
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className={cx(
                 'absolute shadow inline-block rounded py-1 px-2 text-sm border z-50',
                 `border-${color}-600 bg-${color}-600 text-${color}-50`,
@@ -102,9 +100,9 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
             >
               {content}
               <TooltipArrow color={color} placement={placementState} />
-            </Animation>
+            </Motion>
           )}
-        </Presence>
+        </AnimatePresence>
       </Portal>
     </>
   );

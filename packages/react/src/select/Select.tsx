@@ -17,13 +17,12 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import { Children, cloneElement, isValidElement, ReactNode, useLayoutEffect, useRef, useState } from 'react';
 import { cx } from 'twind';
-import { Animation } from '../animation/Animation';
-import type { AnimationProps } from '../animation/Animation';
-import { Presence } from '../animation/Presence';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
 import { SelectProvider } from './SelectProvider';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 export type SelectProps = {
   /**
@@ -88,11 +87,6 @@ export type SelectProps = {
   defaultValue?: Readonly<StringOrNumber[]> | StringOrNumber | null;
 
   onChange?: (value: Readonly<StringOrNumber[]> | StringOrNumber | null) => void;
-
-  /**
-   * 动画
-   */
-  animation?: AnimationProps;
 };
 
 const selectSizes = {
@@ -116,7 +110,6 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     clearable = false,
     multiple = false,
     opened = false,
-    animation,
     className,
     fullWidth = false,
     ...rest
@@ -261,18 +254,15 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         </span>
       </button>
       <Portal>
-        <Presence>
+        <AnimatePresence>
           {open && (
             <FloatingFocusManager context={context} preventTabbing>
-              <Animation
+              <Motion
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 as={'ul'}
-                {...{
-                  duration: 200,
-                  enter: 'opacity-100',
-                  exit: 'opacity-0',
-                  transition: 'opacity',
-                  ...animation,
-                }}
                 className={cx(
                   'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
                   '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
@@ -292,10 +282,10 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
 
                   return child;
                 })}
-              </Animation>
+              </Motion>
             </FloatingFocusManager>
           )}
-        </Presence>
+        </AnimatePresence>
       </Portal>
     </SelectProvider>
   );

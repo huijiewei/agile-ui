@@ -20,6 +20,10 @@ export const menus: Menu[] = [
         label: '暗黑模式',
         path: '/dark-mode',
       },
+      {
+        label: '动画效果',
+        path: '/animation',
+      },
     ],
   },
   {

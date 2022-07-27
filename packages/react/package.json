@@ -32,6 +32,7 @@
   },
   "peerDependencies": {
     "@agile-ui/twind": "*",
+    "framer-motion": ">=6",
     "react": ">=18",
     "react-dom": ">=18",
     "twind": "next"
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@agile-ui/test-utils": "*",
     "@agile-ui/twind": "*",
+    "framer-motion": "^6.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "twind": "next"

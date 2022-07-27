@@ -1,35 +1,31 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { FloatingOverlay } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
-import { Animation } from '../animation/Animation';
-import { Presence } from '../animation/Presence';
 import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 export const ModalOverlay = primitiveComponent<'div'>((props, ref) => {
   const { className, ...rest } = props;
-  const {
-    open,
-    animation: { duration, transition },
-    lockScroll,
-  } = useModal();
+  const { open, lockScroll } = useModal();
 
   return (
-    <Presence>
+    <AnimatePresence>
       {open && (
-        <Animation
+        <Motion
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.75 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           as={FloatingOverlay}
           lockScroll={lockScroll}
           ref={ref}
-          enter={'opacity-60'}
-          exit={'opacity-0'}
-          transition={transition}
-          duration={duration}
           className={cx('z-30 bg-black dark:bg-black', className)}
           {...rest}
         />
       )}
-    </Presence>
+    </AnimatePresence>
   );
 });
 

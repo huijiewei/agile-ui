@@ -1,10 +1,10 @@
 import { useTimeout, useUpdateEffect } from '@agile-ui/react-hooks';
 import { __DEV__ } from '@agile-ui/utils';
 import { useEffect, useState } from 'react';
-import { Animation } from '../animation/Animation';
-import { Presence } from '../animation/Presence';
 import { Toast } from './Toast';
 import type { ToastOptions } from './ToastProvider';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 type ToastContainerProps = Omit<ToastOptions, 'position'>;
 
@@ -44,11 +44,14 @@ export const ToastContainer = (props: ToastContainerProps) => {
   useTimeout(handleClose, delay);
 
   return (
-    <Presence onExitComplete={handleExit}>
+    <AnimatePresence onExitComplete={handleExit}>
       {show && (
-        <Animation
+        <Motion
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           as={'li'}
-          duration={200}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           className={'flex flex-col items-center'}
@@ -56,9 +59,9 @@ export const ToastContainer = (props: ToastContainerProps) => {
           aria-atomic="true"
         >
           <Toast id={id} onClose={handleClose} className={'pointer-events-auto'} {...rest}></Toast>
-        </Animation>
+        </Motion>
       )}
-    </Presence>
+    </AnimatePresence>
   );
 };
 

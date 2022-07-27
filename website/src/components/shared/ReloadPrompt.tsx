@@ -1,6 +1,7 @@
-import { Alert, AlertDescription, Animation, Button, Portal, Presence } from '@agile-ui/react';
+import { Alert, AlertDescription, Button, Motion, Portal } from '@agile-ui/react';
 
 import { useRegisterSW } from 'virtual:pwa-register/react';
+import { AnimatePresence } from 'framer-motion';
 
 export const ReloadPrompt = () => {
   const {
@@ -18,9 +19,9 @@ export const ReloadPrompt = () => {
 
   return (
     <Portal>
-      <Presence>
+      <AnimatePresence>
         {needRefresh && (
-          <Animation className={'fixed z-50 right-5 bottom-5 shadow-md'}>
+          <Motion className={'fixed z-50 right-5 bottom-5 shadow-md'}>
             <Alert className={'flex-col items-start p-4 gap-3'} variant={'outline'} color={'gray'}>
               <AlertDescription className={'text-lg'}>新内容可用，单击重新加载按钮进行更新。</AlertDescription>
               <div className={'flex gap-2'}>
@@ -32,9 +33,9 @@ export const ReloadPrompt = () => {
                 </Button>
               </div>
             </Alert>
-          </Animation>
+          </Motion>
         )}
-      </Presence>
+      </AnimatePresence>
     </Portal>
   );
 };

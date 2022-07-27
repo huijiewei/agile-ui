@@ -5,7 +5,6 @@ import type {
   ReferenceElement,
 } from '@floating-ui/react-dom-interactions';
 import type { Dispatch, HTMLProps, MutableRefObject, SetStateAction } from 'react';
-import type { AnimationProps } from '../animation/Animation';
 import { createContext } from '../utils/context';
 
 const [DropdownMenuPlacementProvider, useDropdownMenuPlacement] = createContext<Placement>({
@@ -52,7 +51,6 @@ type DropdownMenuFloatingContextValue = DropdownMenuContentContextValue & {
   floating: (node: HTMLElement) => void;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
 
-  animation: Required<AnimationProps>;
   nested: boolean;
   nodeId: string;
 };

@@ -5,8 +5,8 @@ export * from './portal/Portal';
 
 export * from './alert/Alert';
 
-export * from './animation/Animation';
-export * from './animation/Presence';
+export * from './box/Box';
+export * from './motion/Motion';
 
 export * from './avatar/Avatar';
 export * from './avatar/AvatarBadge';

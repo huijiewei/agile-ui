@@ -35,14 +35,19 @@ export default {
 
 然后在 App.tsx 文件里面，引入 AgileProvider
 
+Agile UI 的动画使用了 framer-motion，为了更好的摇树减少代码引入，我们需要在 AgileProvider 的外层包裹一个 LazyMotion，详见 [framer-motion 的说明](https://www.framer.com/docs/guide-reduce-bundle-size/)
+
 ```tsx
 import { AgileProvider } from '@agile-ui/react';
+import { domAnimation, LazyMotion } from 'framer-motion';
 
 export const App = () => {
   return (
-    <AgileProvider>
-      <YourApplication />
-    </AgileProvider>
+    <LazyMotion strict features={domAnimation}>
+      <AgileProvider>
+        <YourApplication />
+      </AgileProvider>
+    </LazyMotion>
   );
 };
 ```

@@ -3,8 +3,6 @@ import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
 import { Children, isValidElement } from 'react';
 import { cx } from 'twind';
-import { Presence } from '../animation/Presence';
-import { Animation } from '../animation/Animation';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import { DropdownMenu } from './DropdownMenu';
@@ -15,6 +13,8 @@ import {
   DropdownMenuItemIndexProvider,
   useDropdownMenuFloating,
 } from './DropdownMenuProvider';
+import { AnimatePresence } from 'framer-motion';
+import { Motion } from '../motion/Motion';
 
 export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
@@ -29,7 +29,6 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     nested,
     nodeId,
     tree,
-    animation,
     allowHover,
     getItemProps,
     listItemsRef,
@@ -43,11 +42,14 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   return (
     <FloatingNode id={nodeId}>
       <Portal>
-        <Presence>
+        <AnimatePresence>
           {open && (
             <FloatingFocusManager modal={!nested} order={['reference', 'content']} preventTabbing context={context}>
-              <Animation
-                {...animation}
+              <Motion
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className={cx(
                   'absolute outline-none',
                   'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
@@ -93,10 +95,10 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                     return child;
                   })}
                 </DropdownMenuContentProvider>
-              </Animation>
+              </Motion>
             </FloatingFocusManager>
           )}
-        </Presence>
+        </AnimatePresence>
       </Portal>
     </FloatingNode>
   );
