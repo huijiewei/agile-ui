@@ -136,7 +136,7 @@ function Demo() {
         icon={<CustomIcon />}
         checked={allChecked}
         indeterminate={isIndeterminate}
-        onChange={(e) => setCheckedItems([e.target.checked, e.target.checked, e.target.checked])}
+        onChange={(checked) => setCheckedItems([checked, checked])}
       >
         选择框
       </Checkbox>
@@ -144,14 +144,14 @@ function Demo() {
         <Checkbox
           icon={<CustomIcon />}
           checked={checkedItems[0]}
-          onChange={(e) => setCheckedItems([e.target.checked, checkedItems[1]])}
+          onChange={(checked) => setCheckedItems([checked, checkedItems[1]])}
         >
           选择框一
         </Checkbox>
         <Checkbox
           icon={<CustomIcon />}
           checked={checkedItems[1]}
-          onChange={(e) => setCheckedItems([checkedItems[0], e.target.checked])}
+          onChange={(checked) => setCheckedItems([checkedItems[0], checked])}
         >
           选择框二
         </Checkbox>
