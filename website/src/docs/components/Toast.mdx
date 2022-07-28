@@ -179,14 +179,14 @@ function Demo() {
 function Demo() {
   const toast = useToast();
 
-  const promise = () => {
-    return Math.floor(Math.random() * 10) > 5
+  const promise = (state) => {
+    return state == 'success'
       ? new Promise((resolve) => setTimeout(resolve, 3000))
       : new Promise((resolve, reject) => setTimeout(reject, 3000));
   };
 
-  const handleClick = () => {
-    toast.promise(promise(), {
+  const handleClick = (state) => {
+    toast.promise(promise(state), {
       pending: {
         icon: <Spinner size={'lg'} />,
         title: '通知提醒',
@@ -209,7 +209,22 @@ function Demo() {
 
   return (
     <div className={'flex gap-2'}>
-      <Button onClick={handleClick}>处理承诺</Button>
+      <Button
+        color={'green'}
+        onClick={() => {
+          handleClick('success');
+        }}
+      >
+        处理承诺成功
+      </Button>
+      <Button
+        color={'gray'}
+        onClick={() => {
+          handleClick('error');
+        }}
+      >
+        处理承诺失败
+      </Button>
     </div>
   );
 }

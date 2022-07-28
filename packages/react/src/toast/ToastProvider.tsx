@@ -124,10 +124,10 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
 
       runIfFn(promise)
         .then((data) => {
-          update(toastId, { duration: 5000, ...runIfFn(options.success, data) });
+          update(toastId, { duration: 5000, closeable: true, ...runIfFn(options.success, data) });
         })
         .catch((error) => {
-          update(toastId, { duration: 5000, ...runIfFn(options.error, error) });
+          update(toastId, { duration: 5000, closeable: true, ...runIfFn(options.error, error) });
         });
     };
 
