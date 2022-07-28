@@ -54,6 +54,14 @@ export const menus: Menu[] = [
         label: '布局',
         children: [
           {
+            label: '布局',
+            path: '/components/layout',
+          },
+          {
+            label: '栅格',
+            path: '/components/grid',
+          },
+          {
             label: '表格',
             path: '/components/table',
           },

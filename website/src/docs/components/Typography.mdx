@@ -1,0 +1,59 @@
+---
+title: 排版
+description: 用于展示标题、段落、文本内容。
+---
+
+依托于强大的 [TailwindCSS](https://tailwindcss.com/) 原子类系统，Agile UI 可以实现各种排版，具体更多例子可以查看 TailwindCSS 的文档，这里我只举几个典型的例子。
+
+## 字体
+
+```tsx preview
+<section className={'text-lg flex flex-col gap-3'}>
+  <p class="font-sans">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="font-serif">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="font-mono">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+</section>
+```
+
+## 大小
+
+```tsx preview
+<section className={'flex flex-col gap-3'}>
+  <p class="text-xs">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="text-sm">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="text-base">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="text-lg">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="text-xl">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+</section>
+```
+
+## 粗细
+
+```tsx preview
+<section className={'text-lg flex flex-col gap-3'}>
+  <p class="font-light">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="font-normal">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="font-medium">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="font-bold">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+</section>
+```
+
+## 样式
+
+```tsx preview
+<section className={'text-lg flex flex-col gap-3'}>
+  <p class="italic">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="not-italic">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+</section>
+```
+
+## 文字装饰
+
+```tsx preview
+<section className={'text-lg flex flex-col gap-3'}>
+  <p class="underline">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="overline">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="line-through">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+  <p class="no-underline">The quick brown fox jumps over the lazy dog. 敏捷的棕色狐狸跨过懒狗。</p>
+</section>
+```
