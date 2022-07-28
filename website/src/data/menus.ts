@@ -54,24 +54,12 @@ export const menus: Menu[] = [
         label: '布局',
         children: [
           {
-            label: '布局',
-            path: '/components/layout',
-          },
-          {
             label: '表格',
             path: '/components/table',
           },
           {
             label: '分割线',
             path: '/components/divider',
-          },
-          {
-            label: '栅格',
-            path: '/components/grid',
-          },
-          {
-            label: '间距',
-            path: '/components/spacing',
           },
         ],
       },
@@ -168,14 +156,6 @@ export const menus: Menu[] = [
           {
             label: '右键菜单',
             path: '/components/context-menu',
-          },
-          {
-            label: '步骤',
-            path: '/components/steps',
-          },
-          {
-            label: '标签页',
-            path: '/components/tab',
           },
         ],
       },
