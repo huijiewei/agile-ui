@@ -88,7 +88,7 @@ export const components = {
         {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
       >
         {props.children}
-        {external && <ExternalLink size={'0.93em'} className={'ml-0.5'} />}
+        {external && <ExternalLink className={'ml-0.5'} />}
       </a>
     );
   },

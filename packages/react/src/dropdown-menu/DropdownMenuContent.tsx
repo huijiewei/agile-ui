@@ -76,13 +76,19 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                   {Children.map(children, (child) => {
                     if (isValidElement(child)) {
                       if (child.type == DropdownMenuGroup) {
-                        return Children.map(child.props.children, (groupChild) => {
-                          return (
-                            <DropdownMenuItemIndexProvider value={itemIndex++}>
-                              {groupChild}
-                            </DropdownMenuItemIndexProvider>
-                          );
-                        });
+                        const { children: groupChildren, ...groupRest } = child.props;
+
+                        return (
+                          <DropdownMenuGroup {...groupRest}>
+                            {Children.map(groupChildren, (groupChild) => {
+                              return (
+                                <DropdownMenuItemIndexProvider value={itemIndex++}>
+                                  {groupChild}
+                                </DropdownMenuItemIndexProvider>
+                              );
+                            })}
+                          </DropdownMenuGroup>
+                        );
                       }
 
                       if (child.type == DropdownMenuItem || child.type == DropdownMenu) {

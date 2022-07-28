@@ -6,7 +6,7 @@ export const DropdownMenuGroup = (props: PrimitiveComponentProps) => {
   const { className, children, ...rest } = props;
 
   return (
-    <div className={cx('', className)} {...rest}>
+    <div role={'group'} className={cx('', className)} {...rest}>
       {children}
     </div>
   );
