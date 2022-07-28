@@ -6,6 +6,7 @@ export * from './portal/Portal';
 export * from './alert/Alert';
 
 export * from './box/Box';
+export * from './divider/Divider';
 export * from './motion/Motion';
 
 export * from './avatar/Avatar';

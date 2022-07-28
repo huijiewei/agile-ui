@@ -1,0 +1,56 @@
+---
+title: 分割线
+description: 划分内容区域，对模块做分隔。
+---
+
+## 基本用法
+
+```tsx preview editable
+<div className={'flex flex-col gap-5 py-3'}>
+    <Divider/>
+    <Divider variant="dashed"/>
+    <Divider variant="dotted"/>
+    <Divider color={'blue'}/>
+    <Divider size={3} color={'green'} variant="dotted"/>
+    <Divider size={2} color={'red'} variant="dashed"/>
+</>
+```
+
+## 竖直用法
+
+```tsx preview editable
+<div className={'flex flex-row gap-5 px-3 h-6 items-center'}>
+    <span>文字</span>
+    <Divider orientation="vertical"/>
+    <span>文字</span>
+    <Divider orientation="vertical" variant="dashed"/>
+    <span>文字</span>
+    <Divider orientation="vertical" variant="dotted"/>
+    <span>文字</span>
+    <Divider orientation="vertical" color={'blue'}/>
+    <span>文字</span>
+    <Divider orientation="vertical" size={3} color={'green'} variant="dotted"/>
+    <span>文字</span>
+    <Divider orientation="vertical" size={2} color={'red'} variant="dashed"/>
+    <span>文字</span>
+</>
+```
+
+## 文字标签
+
+```tsx preview editable
+<div className={'flex flex-col gap-5 py-3'}>
+    <Divider>分割线</Divider>
+    <Divider position={'left'} variant="dashed">分割线</Divider>
+    <Divider variant="dotted">分割线</Divider>
+    <Divider color={'blue'}><Info className={'mr-1'}/> 分割线</Divider>
+    <Divider position={'right'} size={3} color={'green'} variant="dotted">分割线</Divider>
+    <Divider size={2} color={'red'} variant="dashed">
+        <a href={'#文字标签'} className={'text-blue-500 hover:underline'}>链接分割线</a>
+    </Divider>
+</>
+```
+
+## 属性
+
+<PropsTable componentName="Divider" />

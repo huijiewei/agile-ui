@@ -13,7 +13,7 @@ export const Icon = (props: IconProps) => {
     strokeLinejoin = 'round',
     children,
     className = '',
-    size = '1rem',
+    size = '1em',
     ...rest
   } = props;
 
