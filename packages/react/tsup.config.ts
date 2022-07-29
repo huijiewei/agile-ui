@@ -4,7 +4,6 @@ import { dependencies, devDependencies, peerDependencies } from './package.json'
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
-  inject: ['react-shim.js'],
   external: [...Object.keys(peerDependencies), ...Object.keys(devDependencies)],
   noExternal: Object.keys(dependencies),
   target: 'esnext',
