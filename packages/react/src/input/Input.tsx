@@ -1,5 +1,5 @@
 import { mergeRefs, useControllableProp } from '@agile-ui/react-hooks';
-import { __DEV__, StringOrNumber } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
@@ -105,7 +105,9 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     <div
       className={cx(
         'inline-flex items-center border bg-white relative rounded transition-colors',
-        disabled ? 'opacity-50 cursor-not-allowed' : !force && 'hover:(border-gray-300 z-[2])',
+        invalid && !force && 'border-red-500',
+        disabled && 'opacity-50 cursor-not-allowed',
+        !disabled && !invalid && !force && 'hover:(border-gray-300 z-[2])',
         force ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
         fullWidth && 'w-full',
         inputSizes[size],
@@ -115,14 +117,13 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
       <input
         ref={mergeRefs(inputRef, ref)}
         className={cx(
-          'outline-none min-w-0 bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+          'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
           showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
         )}
-        aria-invalid={invalid}
-        aria-readonly={readOnly}
-        aria-required={required}
-        aria-disabled={disabled}
-        aria-multiline={'false'}
+        aria-invalid={ariaAttr(invalid)}
+        aria-readonly={ariaAttr(readOnly)}
+        aria-required={ariaAttr(required)}
+        aria-disabled={ariaAttr(disabled)}
         required={required}
         disabled={disabled}
         readOnly={readOnly}
