@@ -21,6 +21,7 @@ import type { ScaleColor } from '../utils/types';
 import { TooltipArrow } from './TooltipArrow';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
+import { useMergedRefs } from '@agile-ui/react-hooks';
 
 type TooltipProps = {
   /**
@@ -39,6 +40,11 @@ type TooltipProps = {
    * @default 'auto'
    */
   placement?: 'auto' | Placement;
+
+  /**
+   * @ignore
+   */
+  children: JSX.Element;
 };
 
 /**
@@ -71,11 +77,12 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
     useDismiss(context),
   ]);
 
-  const target = children as ReactElement;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const refs = useMergedRefs((children as any).ref, reference);
 
   return (
     <>
-      {cloneElement(target, getReferenceProps({ ref: reference, ...target.props }))}
+      {cloneElement(children, getReferenceProps({ ref: refs, ...children.props }))}
       <Portal>
         <AnimatePresence>
           {open && (
