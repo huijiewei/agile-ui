@@ -8,8 +8,10 @@ import type { TwindUserConfig } from 'twind';
 export default {
   presets: [presetAutoprefix(), presetTailwind(), presetAgile(), presetExt()],
   preflight: css`
-    body {
-      @apply antialiased text-black bg-white overflow-y-scroll;
+    @layer base {
+      body {
+        @apply antialiased text-black bg-white overflow-y-scroll;
+      }
     }
   `,
   rules: [

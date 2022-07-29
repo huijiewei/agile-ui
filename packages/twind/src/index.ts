@@ -23,14 +23,27 @@ export default () => {
       return theme(section as 'colors', key);
     },
     preflight: css`
-      html {
-        color-scheme: light;
+      @layer base {
+        html {
+          color-scheme: light;
+        }
+        body {
+          @apply text-base;
+        }
+        .dark {
+          color-scheme: dark;
+        }
       }
-      body {
-        @apply text-base;
-      }
-      .dark {
-        color-scheme: dark;
+
+      @layer utilities {
+        input[type='number']::-webkit-inner-spin-button,
+        input[type='number']::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type='number'] {
+          -moz-appearance: textfield;
+        }
       }
     `,
     theme: {
@@ -52,7 +65,7 @@ export default () => {
     variants: [
       ['opened', '&[data-opened]'],
       ['active', '&[data-active], &:active'],
-      ['disabled', '&[data-loading], &[disabled]'],
+      ['disabled', '&[data-loading], &[data-disabled], &[disabled]'],
       ['selected', '&[data-selected]'],
       ['focus-visible', '&[data-focus-visible], &:focus-visible'],
     ],
