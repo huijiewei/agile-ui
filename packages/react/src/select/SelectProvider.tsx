@@ -15,6 +15,7 @@ type SelectContextValue = {
   getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
 
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
+  contentRef: MutableRefObject<string[]>;
   dataRef: ContextData;
   selectSize: string;
 };
@@ -25,3 +26,10 @@ const [SelectProvider, useSelect] = createContext<SelectContextValue>({
 });
 
 export { SelectProvider, useSelect };
+
+const [SelectOptionIndexProvider, useSelectOptionIndex] = createContext<number>({
+  strict: true,
+  name: 'SelectOptionIndexContext',
+});
+
+export { SelectOptionIndexProvider, useSelectOptionIndex };

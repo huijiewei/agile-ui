@@ -15,14 +15,16 @@ import {
   useRole,
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
-import { Children, cloneElement, isValidElement, ReactNode, useLayoutEffect, useRef, useState } from 'react';
+import { Children, isValidElement, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
-import { SelectProvider } from './SelectProvider';
+import { SelectOptionIndexProvider, SelectProvider } from './SelectProvider';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
+import { SelectOptionGroup } from './SelectOptionGroup';
+import { SelectOption } from './SelectOption';
 
 export type SelectProps = {
   /**
@@ -46,7 +48,7 @@ export type SelectProps = {
   /**
    * 占位符
    */
-  placeholder?: ReactNode;
+  placeholder?: string;
   /**
    * 是否禁用
    * @default false
@@ -100,7 +102,7 @@ const selectSizes = {
 export const Select = primitiveComponent<'select', SelectProps>((props, ref) => {
   const {
     size = 'md',
-    placeholder,
+    placeholder = '选择器',
     value,
     defaultValue,
     children,
@@ -120,28 +122,28 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
   const [isControlled, controlledValue] = useControllableProp(value, valueState);
 
   const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const listContentRef = useRef([
-    placeholder,
-    ...(Children.map(children, (child) => isValidElement(child) && child.props.value) ?? []),
-  ]);
+  const listContentRef = useRef([placeholder]);
 
   const [open, setOpen] = useState(opened);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(Math.max(0, listContentRef.current.indexOf(controlledValue) - 1));
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  useEffect(() => {
+    //setSelectedIndex(listContentRef.current.indexOf(controlledValue?.toString()));
+  }, [controlledValue, listContentRef]);
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
   const prevActiveIndex = usePrevious<number | null>(activeIndex);
 
-  const { x, y, reference, floating, context, refs, middlewareData } = useFloating({
+  const { x, y, reference, floating, context, refs, middlewareData } = useFloating<HTMLElement>({
     middleware: [
       offset(4),
       flip({ padding: 8 }),
       floatingSize({
-        apply({ availableWidth, availableHeight, elements }) {
+        apply({ availableWidth, elements }) {
           Object.assign(elements.floating.style, {
             maxWidth: `${availableWidth}px`,
-            maxHeight: `${availableHeight}px`,
           });
         },
         padding: 8,
@@ -209,6 +211,8 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     }
   }, [open, selectedIndex, refs.floating, refs.reference, middlewareData]);
 
+  let optionIndex = 0;
+
   return (
     <SelectProvider
       value={{
@@ -217,6 +221,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         activeIndex,
         setActiveIndex,
         listRef: listItemsRef,
+        contentRef: listContentRef,
         setOpen,
         onChange,
         getItemProps,
@@ -230,15 +235,18 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           'inline-flex items-center border bg-white relative rounded transition-colors cursor-default outline-none',
           disabled ? 'opacity-50 cursor-not-allowed' : !open && 'hover:(border-gray-300 z-[2])',
           open ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
-          fullWidth ? 'w-full' : 'w-fit',
+          fullWidth ? 'w-full' : '',
           selectSizes[size],
           className
         )}
         {...getReferenceProps({
+          ...rest,
           ref: reference,
         })}
       >
-        {selectedIndex >= 0 ? listContentRef.current[selectedIndex + 1] : placeholder}
+        <span className={'flex flex-1'}>
+          {selectedIndex >= 0 ? listContentRef.current[selectedIndex + 1] : placeholder}
+        </span>
         <span className={'ml-1'}>
           <svg
             width={'1em'}
@@ -262,9 +270,8 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                as={'ul'}
                 className={cx(
-                  'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
+                  'overflow-y-auto absolute z-10 shadow max-h-80 rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
                   '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
                 )}
                 {...getFloatingProps({
@@ -275,9 +282,19 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
                   },
                 })}
               >
-                {Children.map(children, (child, index) => {
+                {Children.map(children, (child) => {
                   if (isValidElement(child)) {
-                    return cloneElement(child, { index });
+                    if (child.type == SelectOptionGroup) {
+                      return Children.map(child.props.children, (groupChild) => {
+                        return (
+                          <SelectOptionIndexProvider value={optionIndex++}>{groupChild}</SelectOptionIndexProvider>
+                        );
+                      });
+                    }
+
+                    if (child.type == SelectOption) {
+                      return <SelectOptionIndexProvider value={optionIndex++}>{child}</SelectOptionIndexProvider>;
+                    }
                   }
 
                   return child;

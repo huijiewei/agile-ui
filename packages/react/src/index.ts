@@ -34,6 +34,9 @@ export * from './radio/RadioGroup';
 
 export * from './select/Select';
 export * from './select/SelectOption';
+export * from './select/SelectOptionGroup';
+export * from './select/SelectDivider';
+export * from './select/SelectLabel';
 
 export * from './tooltip/Tooltip';
 
