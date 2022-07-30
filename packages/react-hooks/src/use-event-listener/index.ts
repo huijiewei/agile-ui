@@ -1,9 +1,7 @@
-import { getTargetElement } from '@agile-ui/utils';
-import type { BasicTarget } from '@agile-ui/utils';
 import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
 import { useEffect, useRef } from 'react';
 
-export type Target = BasicTarget<HTMLElement | Element | Window | Document>;
+export type Target = HTMLElement | Element | Window | Document;
 
 type Options<T extends Target = Target> = {
   target?: T | null;
@@ -49,7 +47,7 @@ export const useEventListener: UseEventListener = (
   }, [handler]);
 
   useEffect(() => {
-    const targetElement = getTargetElement(options?.target, window);
+    const targetElement = options?.target || window;
 
     if (!targetElement?.addEventListener) {
       return;
