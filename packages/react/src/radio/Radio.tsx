@@ -2,6 +2,7 @@ import {
   mergeRefs,
   useCallbackRef,
   useControllableProp,
+  useFocus,
   useFocusVisible,
   useIsomorphicLayoutEffect,
 } from '@agile-ui/react-hooks';
@@ -112,7 +113,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
   const sizeStyle = radioSizeStyles[size];
 
   const { focusVisible } = useFocusVisible();
-  const [focus, setFocus] = useState(false);
+  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
 
   return (
     <label
@@ -133,14 +134,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
-        onFocus={(e) => {
-          setFocus(true);
-          onFocus && onFocus(e);
-        }}
-        onBlur={(e) => {
-          setFocus(false);
-          onBlur && onBlur(e);
-        }}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         {...rest}
       />
       <span

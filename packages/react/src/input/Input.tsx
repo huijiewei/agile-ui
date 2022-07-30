@@ -1,4 +1,4 @@
-import { mergeRefs, useControllableProp } from '@agile-ui/react-hooks';
+import { mergeRefs, useControllableProp, useFocus } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
@@ -45,7 +45,7 @@ export type InputProps = InputBaseProps & {
   fullWidth?: boolean;
 
   /**
-   * 输入框值改变时触发回调
+   * 值改变时触发回调
    */
   onChange?: (value: StringOrNumber, event?: ChangeEvent<HTMLInputElement>) => void;
 
@@ -77,7 +77,6 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     ...rest
   } = props;
 
-  const [force, setForce] = useState<boolean>(false);
   const [valueState, setValueState] = useState(defaultValue);
 
   const [isControlled, controlledValue] = useControllableProp(value, valueState);
@@ -108,14 +107,16 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
 
   const showClearButton = clearable && controlledValue;
 
+  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+
   return (
     <div
       className={cx(
         'inline-flex items-center border bg-white relative rounded transition-colors',
-        invalid && !force && 'border-red-500',
+        invalid && !focus && 'border-red-500',
         disabled && 'opacity-50 cursor-not-allowed',
-        !disabled && !invalid && !force && 'hover:(border-gray-300 z-[2])',
-        force ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
+        !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
+        focus ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
         fullWidth && 'w-full',
         inputSizes[size],
         className
@@ -134,14 +135,8 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
         required={required}
         disabled={disabled}
         readOnly={readOnly}
-        onBlur={(e) => {
-          setForce(false);
-          onBlur && onBlur(e);
-        }}
-        onFocus={(e) => {
-          setForce(true);
-          onFocus && onFocus(e);
-        }}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         onChange={handleChange}
         value={controlledValue}
         {...rest}

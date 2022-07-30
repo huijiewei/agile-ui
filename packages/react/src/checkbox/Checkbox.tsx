@@ -2,6 +2,7 @@ import {
   mergeRefs,
   useCallbackRef,
   useControllableProp,
+  useFocus,
   useFocusVisible,
   useIsomorphicLayoutEffect,
 } from '@agile-ui/react-hooks';
@@ -152,7 +153,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   });
 
   const { focusVisible } = useFocusVisible();
-  const [focus, setFocus] = useState(false);
+  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
 
   return (
     <label
@@ -172,14 +173,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
-        onFocus={(e) => {
-          setFocus(true);
-          onFocus && onFocus(e);
-        }}
-        onBlur={(e) => {
-          setFocus(false);
-          onBlur && onBlur(e);
-        }}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         {...rest}
       />
       <div

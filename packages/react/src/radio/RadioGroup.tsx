@@ -1,10 +1,8 @@
-import { useControllableProp } from '@agile-ui/react-hooks';
+import { useControllableState } from '@agile-ui/react-hooks';
 import { __DEV__, isInputEvent } from '@agile-ui/utils';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import { PropsWithChildren, useCallback, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
-import { cx } from 'twind';
-import { primitiveComponent } from '../utils/component';
 import { createContext } from '../utils/context';
 import type { ScaleColor, Size } from '../utils/types';
 
@@ -66,21 +64,19 @@ type RadioGroupProps = RadioGroupBaseProps & {
 export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
   const { color, size, children, disabled, value, name, defaultValue = '', onChange } = props;
 
-  const [state, setState] = useState<StringOrNumber>(defaultValue);
-
-  const [isControlled, controlledValue] = useControllableProp(value, state);
+  const [state, setState] = useControllableState({
+    value,
+    defaultValue,
+    onChange,
+  });
 
   const handleChange = useCallback(
     (eventOrValue: ChangeEvent<HTMLInputElement> | StringOrNumber) => {
       const nextValue = isInputEvent(eventOrValue) ? eventOrValue.target.value : eventOrValue;
 
-      if (!isControlled) {
-        setState(nextValue);
-      }
-
-      onChange?.(String(nextValue));
+      setState(nextValue);
     },
-    [isControlled, onChange]
+    [setState]
   );
 
   const group = useMemo(
@@ -89,10 +85,10 @@ export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
       size,
       color,
       onChange: handleChange,
-      value: controlledValue,
+      value: state,
       disabled,
     }),
-    [name, size, color, handleChange, controlledValue, disabled]
+    [name, size, color, handleChange, state, disabled]
   );
 
   return <RadioGroupProvider value={group}>{children}</RadioGroupProvider>;

@@ -1,4 +1,10 @@
-import { mergeRefs, useControllableProp, useFocusVisible, useIsomorphicLayoutEffect } from '@agile-ui/react-hooks';
+import {
+  mergeRefs,
+  useControllableProp,
+  useFocus,
+  useFocusVisible,
+  useIsomorphicLayoutEffect,
+} from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
@@ -106,7 +112,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
   const sizeStyle = switchSizeStyles[size];
 
   const { focusVisible } = useFocusVisible();
-  const [focus, setFocus] = useState(false);
+  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
 
   return (
     <label
@@ -126,14 +132,8 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
-        onFocus={(e) => {
-          setFocus(true);
-          onFocus && onFocus(e);
-        }}
-        onBlur={(e) => {
-          setFocus(false);
-          onBlur && onBlur(e);
-        }}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
         {...rest}
       />
       <span

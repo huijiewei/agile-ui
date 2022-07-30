@@ -9,6 +9,7 @@ export * from './use-media-query';
 export * from './use-event-listener';
 export * from './use-timeout';
 export * from './use-const';
+export * from './use-focus';
 export * from './use-focus-visible';
 export * from './use-allow-hover';
 export * from './use-previous';
