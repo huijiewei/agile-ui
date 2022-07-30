@@ -48,6 +48,11 @@ export type InputProps = InputBaseProps & {
    * 输入框值改变时触发回调
    */
   onChange?: (value: StringOrNumber, event?: ChangeEvent<HTMLInputElement>) => void;
+
+  /**
+   * 点击清除按钮的回调
+   */
+  onClear?: () => void;
 };
 
 /**
@@ -68,6 +73,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     value,
     defaultValue = '',
     onChange,
+    onClear,
     ...rest
   } = props;
 
@@ -97,6 +103,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   const handleClear = () => {
     setValueState('');
     onChange?.('');
+    onClear?.();
   };
 
   const showClearButton = clearable && controlledValue;
