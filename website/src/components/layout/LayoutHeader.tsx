@@ -59,7 +59,7 @@ export const LayoutHeader = () => {
               target="_blank"
             >
               <VisuallyHidden>Github 上的 Agile UI</VisuallyHidden>
-              <Github className={'h-5 w-5'} />
+              <Github size={5} />
             </a>
           </Tooltip>
         </div>

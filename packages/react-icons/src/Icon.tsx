@@ -6,7 +6,7 @@ export type IconProps = SVGAttributes<SVGElement> & { size?: number | string };
 export const Icon = (props: IconProps) => {
   const {
     fill = 'none',
-    viewBox = '0 0 24 24',
+    viewBox = '1 1 22 22',
     stroke = 'currentColor',
     strokeWidth = 2,
     strokeLinecap = 'round',
