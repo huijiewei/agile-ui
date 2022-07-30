@@ -25,6 +25,7 @@ export * from './button/ButtonGroup';
 export * from './input/Input';
 export * from './input/InputAddon';
 export * from './input/InputGroup';
+export * from './input/NumberInput';
 
 export * from './swich/Switch';
 export * from './checkbox/Checkbox';

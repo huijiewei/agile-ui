@@ -1,0 +1,42 @@
+---
+title: 数字输入框
+description: 仅允许输入数字格式的输入框。
+---
+
+## 导入
+
+```tsx
+import { NumberInput } from '@agile-ui/react';
+```
+
+## 用法
+
+```tsx preview editable
+<div className={'flex flex-row items-center gap-3'}>
+  <NumberInput />
+</div>
+```
+
+## 大小
+
+```tsx preview editable
+<div className={'flex flex-row items-center gap-3'}>
+  <NumberInput size={'xs'} />
+  <NumberInput size={'sm'} />
+  <NumberInput size={'md'} />
+  <NumberInput size={'lg'} />
+  <NumberInput size={'xl'} />
+</div>
+```
+
+## 滚轮改变
+
+```tsx preview editable
+<div className={'flex flex-row items-center gap-3'}>
+  <NumberInput mouseWheel />
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="NumberInput" />

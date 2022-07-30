@@ -92,6 +92,10 @@ export const menus: Menu[] = [
             path: '/components/input',
           },
           {
+            label: '数字输入框',
+            path: '/components/number-input',
+          },
+          {
             label: '选择器',
             path: '/components/select',
           },

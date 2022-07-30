@@ -9,6 +9,17 @@ import { inputSizes } from './inputSizes';
 
 export type InputProps = InputBaseProps & {
   /**
+   * 当前值
+   */
+  value?: StringOrNumber;
+
+  /**
+   * 默认值
+   * @default ''
+   */
+  defaultValue?: StringOrNumber;
+
+  /**
    * 是否可以清除内容
    * @default false
    */
