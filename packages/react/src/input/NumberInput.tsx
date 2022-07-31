@@ -1,8 +1,8 @@
 import { primitiveComponent } from '../utils/component';
-import { ChangeEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState } from 'react';
 import type { InputBaseProps } from './InputGroup';
 import { mergeRefs, useControllableProp, useEventListener, useFocus } from '@agile-ui/react-hooks';
-import { __DEV__, ariaAttr } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { inputSizes } from './inputSizes';
 
@@ -43,7 +43,7 @@ export type NumberInputProps = InputBaseProps & {
   /**
    * 自定义显示格式
    */
-  format?: (value: number) => string;
+  format?: (value: string) => string;
 
   /**
    * 如果使用自定义显示格式，转换为 parseFloat 可以处理的格式
@@ -89,7 +89,15 @@ export type NumberInputProps = InputBaseProps & {
   /**
    * 值改变时触发回调
    */
-  onChange?: (value: number) => void;
+  onChange?: (value: number | undefined) => void;
+};
+
+const numberInputSize = {
+  xs: { input: 'pr-4', control: 'w-4 text-[0.75em]' },
+  sm: { input: 'pr-5', control: 'w-5 text-[0.875em]' },
+  md: { input: 'pr-5', control: 'w-5' },
+  lg: { input: 'pr-6', control: 'w-6' },
+  xl: { input: 'pr-6', control: 'w-6' },
 };
 
 export const NumberInput = primitiveComponent<'input', NumberInputProps>((props, ref) => {
@@ -106,28 +114,30 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     value,
     defaultValue,
     step = 1,
-    min = Number.MIN_SAFE_INTEGER,
-    max = Number.MAX_SAFE_INTEGER,
+    min,
+    max,
     precision,
     mouseWheel = false,
     parse = (value) => value,
-    format = (value) => (isNaN(value) ? '' : value.toString()),
+    format = (value) => value,
     onChange,
     ...rest
   } = props;
 
+  const minValue = isNumber(min) ? min : -Infinity;
+  const maxValue = isNumber(max) ? max : Infinity;
+
   const [valueState, setValueState] = useState(defaultValue);
-  const [isControlled, controlledValue] = useControllableProp(
-    value ? parseFloat(parse(value.toString())) : undefined,
-    valueState
-  );
+  const [isControlled, controlledValue] = useControllableProp(value, valueState);
+
+  const [inputValue, setInputValue] = useState(controlledValue?.toFixed(precision) ?? '');
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
 
   const update = useCallback(
-    (next: number) => {
+    (next: number | undefined) => {
       if (next == controlledValue) {
         return;
       }
@@ -147,30 +157,57 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         return;
       }
 
-      console.log(event.target.value);
-
       if (readOnly || disabled) {
         event.preventDefault();
         return;
       }
 
-      update(parseFloat(parse(event.target.value)));
+      const value = event.target.value;
+      const parsed = parse(value);
+
+      setInputValue(parsed);
+
+      if (value == '' || value == '-') {
+        update(undefined);
+      } else {
+        const number = parseFloat(parsed);
+
+        if (!Number.isNaN(number)) {
+          update(number);
+        }
+      }
     },
     [disabled, parse, readOnly, update]
   );
 
   const increment = useCallback(
     (incrementStep = step) => {
-      update((controlledValue || 0) + incrementStep);
+      if (controlledValue == undefined) {
+        update(min ?? 0);
+        setInputValue(min?.toFixed(precision) ?? '0');
+      } else {
+        const value = clamp(controlledValue + incrementStep, [minValue, maxValue]).toFixed(precision);
+
+        update(parseFloat(value));
+        setInputValue(value);
+      }
     },
-    [controlledValue, step, update]
+    [controlledValue, maxValue, min, minValue, precision, step, update]
   );
 
   const decrement = useCallback(
     (decrementStep = step) => {
-      update((controlledValue || 0) - decrementStep);
+      if (controlledValue == undefined) {
+        update(min ?? 0);
+        setInputValue(min?.toFixed(precision) ?? '0');
+      } else {
+        const value = clamp(controlledValue - decrementStep, [minValue, maxValue]).toFixed(precision);
+
+        update(parseFloat(value));
+        setInputValue(value);
+      }
     },
-    [controlledValue, step, update]
+    [controlledValue, maxValue, min, minValue, precision, step, update]
   );
 
   const handleKeyDown = useCallback(
@@ -211,6 +248,28 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     [decrement, increment, max, min, step, update]
   );
 
+  const handleInputBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      if (event.target.value === '') {
+        setInputValue('');
+        update(undefined);
+      } else {
+        const parsed = parse(event.target.value[0] == '.' ? `0${event.target.value}` : event.target.value);
+        const value = clamp(parseFloat(parsed), [minValue, maxValue]);
+
+        if (!Number.isNaN(value)) {
+          setInputValue(value.toFixed(precision));
+          update(parseFloat(value.toFixed(precision)));
+        } else {
+          setInputValue(controlledValue?.toFixed(precision) ?? '');
+        }
+      }
+
+      handleBlur(event);
+    },
+    [controlledValue, handleBlur, maxValue, minValue, parse, precision, update]
+  );
+
   useEventListener(
     'wheel',
     (event) => {
@@ -222,19 +281,21 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
 
       const direction = Math.sign(event.deltaY);
 
-      if (direction === -1) {
+      if (direction == -1) {
         increment();
-      } else if (direction === 1) {
+      } else if (direction == 1) {
         decrement();
       }
     },
     { target: inputRef.current, passive: false }
   );
 
+  const formattedValue = format(inputValue);
+
   return (
     <div
       className={cx(
-        'inline-flex items-center border bg-white relative rounded transition-colors',
+        'inline-flex pr-0 items-center border bg-white relative rounded transition-colors',
         invalid && !focus && 'border-red-500',
         disabled && 'opacity-50 cursor-not-allowed',
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
@@ -246,27 +307,71 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     >
       <input
         ref={mergeRefs(inputRef, ref)}
-        className={
-          'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none'
-        }
-        min={min}
-        max={max}
+        className={cx(
+          'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+          numberInputSize[size]['input']
+        )}
         type={'text'}
         inputMode={'decimal'}
+        role={'spinbutton'}
+        aria-valuemin={min}
+        aria-valuemax={max}
+        autoComplete={'off'}
+        autoCorrect={'off'}
         aria-invalid={ariaAttr(invalid)}
         aria-readonly={ariaAttr(readOnly)}
         aria-required={ariaAttr(required)}
         aria-disabled={ariaAttr(disabled)}
+        aria-valuenow={controlledValue}
+        aria-valuetext={formattedValue != '' ? formattedValue : undefined}
         required={required}
         disabled={disabled}
         readOnly={readOnly}
-        onBlur={handleBlur}
+        onBlur={handleInputBlur}
         onFocus={handleFocus}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        value={format(controlledValue ?? NaN)}
+        value={formattedValue}
         {...rest}
       />
+      <div className={cx('absolute right-0 h-full flex flex-col', numberInputSize[size]['control'])}>
+        <button
+          tabIndex={-1}
+          onClick={() => {
+            increment();
+          }}
+          disabled={(controlledValue || 0) >= maxValue}
+          className={
+            'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+          }
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+        <button
+          tabIndex={-1}
+          onClick={() => {
+            decrement();
+          }}
+          disabled={(controlledValue || 0) <= minValue}
+          className={
+            'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+          }
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 });

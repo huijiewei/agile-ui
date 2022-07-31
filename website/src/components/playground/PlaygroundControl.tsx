@@ -20,11 +20,11 @@ export const PlaygroundControl = ({
       )}
       {prop.type.control == 'number' && (
         <Input
-          defaultValue={defaultValue?.toString()}
+          defaultValue={defaultValue != 'Infinity' && defaultValue != '-Infinity' ? defaultValue?.toString() : ''}
           type="text"
           size={'sm'}
           className={'w-1/2'}
-          onChange={(value) => onChange(value)}
+          onChange={(value) => onChange(value == '' ? undefined : value)}
         />
       )}
       {(prop.type.control == 'string' || prop.type.control == 'ReactNode') && (

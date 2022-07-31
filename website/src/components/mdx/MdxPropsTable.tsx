@@ -25,7 +25,7 @@ export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentPro
             }
             key={`${prop.name}-${i}`}
           >
-            <td className={'w-full block tablet:(table-cell w-auto p-2)'}>
+            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2)'}>
               <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">参数名</span>
               {prop.name}
             </td>
@@ -33,11 +33,11 @@ export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentPro
               <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">描述</span>
               {prop.description || '-'}
             </td>
-            <td className={'w-full block tablet:(table-cell w-auto p-2 text-center)'}>
+            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2 text-center)'}>
               <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">默认值</span>
               {prop.defaultValue?.value || '-'}
             </td>
-            <td className={'w-full block tablet:(table-cell w-auto p-2 text-center)'}>
+            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2 text-center)'}>
               <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">是否必须</span>
               {prop.required ? 'true' : 'false'}
             </td>

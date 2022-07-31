@@ -9,6 +9,7 @@ import { RadioShowcase } from './showcases/RadioShowcase';
 import { SpinnerShowcase } from './showcases/SpinnerShowcase';
 import { SwitchShowcase } from './showcases/SwitchShowcase';
 import { TooltipShowcase } from './showcases/TooltipShowcase';
+import { NumberInputShowcase } from './showcases/NumberInputShowcase';
 
 export type MdxShowcaseProps = {
   componentName: string;
@@ -20,6 +21,7 @@ const showcases = {
   Badge: BadgeShowcase,
   Spinner: SpinnerShowcase,
   Input: InputShowcase,
+  NumberInput: NumberInputShowcase,
   Tooltip: TooltipShowcase,
   Checkbox: CheckboxShowcase,
   ProgressBar: ProgressBarShowcase,
