@@ -1,5 +1,5 @@
 import { primitiveComponent } from '../utils/component';
-import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, ReactNode } from 'react';
 import type { InputBaseProps } from './InputGroup';
 import { mergeRefs, useControllableProp, useEventListener, useFocus } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
@@ -16,6 +16,11 @@ export type NumberInputProps = InputBaseProps & {
    * 默认值
    */
   defaultValue?: number;
+
+  /**
+   * 前缀文字或者图标
+   */
+  prefix?: ReactNode;
 
   /**
    * 计数器步长
@@ -121,6 +126,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     parse = (value) => value,
     format = (value) => value,
     onChange,
+    prefix,
     ...rest
   } = props;
 
@@ -301,10 +307,15 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
         focus ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
         fullWidth && 'w-full',
-        inputSizes[size],
+        inputSizes(!!prefix, false)[size],
         className
       )}
     >
+      {prefix && (
+        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
+          {prefix}
+        </div>
+      )}
       <input
         ref={mergeRefs(inputRef, ref)}
         className={cx(

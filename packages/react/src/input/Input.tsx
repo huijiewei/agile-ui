@@ -1,6 +1,6 @@
 import { mergeRefs, useControllableProp, useFocus } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
@@ -18,6 +18,16 @@ export type InputProps = InputBaseProps & {
    * @default ''
    */
   defaultValue?: StringOrNumber;
+
+  /**
+   * 前缀文字或者图标
+   */
+  prefix?: ReactNode;
+
+  /**
+   * 后缀文字或者图标
+   */
+  suffix?: ReactNode;
 
   /**
    * 是否可以清除内容
@@ -85,6 +95,8 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     defaultValue = '',
     onChange,
     onClear,
+    prefix,
+    suffix,
     ...rest
   } = props;
 
@@ -123,44 +135,59 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   return (
     <div
       className={cx(
-        'inline-flex items-center border bg-white relative rounded transition-colors',
+        'inline-flex items-center relative border bg-white rounded transition-colors',
         invalid && !focus && 'border-red-500',
         disabled && 'opacity-50 cursor-not-allowed',
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
         focus ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
         fullWidth && 'w-full',
-        inputSizes[size],
+        inputSizes(!!prefix, !!suffix)[size],
         className
       )}
     >
-      <input
-        ref={mergeRefs(inputRef, ref)}
-        className={cx(
-          'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
-          showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
-        )}
-        aria-invalid={ariaAttr(invalid)}
-        aria-readonly={ariaAttr(readOnly)}
-        aria-required={ariaAttr(required)}
-        aria-disabled={ariaAttr(disabled)}
-        required={required}
-        disabled={disabled}
-        readOnly={readOnly}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        onChange={handleChange}
-        value={controlledValue}
-        {...rest}
-      />
-      {showClearButton && (
-        <CloseButton
-          onClick={(e) => {
-            e.stopPropagation();
-            handleClear();
-            inputRef.current?.focus();
-          }}
-          className={'absolute right-1 text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100'}
+      {prefix && (
+        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
+          {prefix}
+        </div>
+      )}
+      <div className={'inline-flex relative grow items-center'}>
+        <input
+          ref={mergeRefs(inputRef, ref)}
+          className={cx(
+            'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+            showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
+          )}
+          aria-invalid={ariaAttr(invalid)}
+          aria-readonly={ariaAttr(readOnly)}
+          aria-required={ariaAttr(required)}
+          aria-disabled={ariaAttr(disabled)}
+          required={required}
+          disabled={disabled}
+          readOnly={readOnly}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onChange={handleChange}
+          value={controlledValue}
+          {...rest}
         />
+        {showClearButton && (
+          <CloseButton
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClear();
+              inputRef.current?.focus();
+            }}
+            className={cx(
+              'absolute text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100',
+              size == 'xs' || size == 'sm' ? '-right-1' : '-right-2'
+            )}
+          />
+        )}
+      </div>
+      {suffix && (
+        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'ml-1' : 'ml-2')}>
+          {suffix}
+        </div>
       )}
     </div>
   );

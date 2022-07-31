@@ -19,3 +19,4 @@ export * from './icons/Picture';
 export * from './icons/ArrowRight';
 export * from './icons/ChevronRight';
 export * from './icons/ExternalLink';
+export * from './icons/UserCircle';
