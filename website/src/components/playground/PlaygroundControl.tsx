@@ -18,7 +18,16 @@ export const PlaygroundControl = ({
       {prop.type.control == 'boolean' && (
         <Checkbox defaultChecked={defaultValue?.toString() == 'true'} onChange={(checked) => onChange(checked)} />
       )}
-      {(prop.type.control == 'string' || prop.type.control == 'number' || prop.type.control == 'ReactNode') && (
+      {prop.type.control == 'number' && (
+        <Input
+          defaultValue={defaultValue?.toString()}
+          type="text"
+          size={'sm'}
+          className={'w-1/2'}
+          onChange={(value) => onChange(value)}
+        />
+      )}
+      {(prop.type.control == 'string' || prop.type.control == 'ReactNode') && (
         <Input
           defaultValue={defaultValue?.toString()}
           type="text"
@@ -30,19 +39,20 @@ export const PlaygroundControl = ({
       {prop.type.control == 'select' &&
         (prop.description == '颜色' ? (
           <div className={'inline-flex flex-row w-36 flex-wrap gap-1 justify-right'}>
-            {prop.type.values?.map((value, i) => {
+            {prop.type.values?.map((value) => {
               const valueString = value.toString().slice(1, -1);
+
               return (
                 <button
                   title={valueString}
-                  key={`${valueString}-${i}`}
+                  key={`${valueString}`}
                   className={cx(
                     'rounded-sm h-6 text-gray-50 w-6 outline-none justify-center flex items-center leading-6',
                     valueString == 'black' || valueString == 'white' ? `bg-${valueString}` : `bg-${valueString}-500`
                   )}
                   onClick={() => onChange(valueString)}
                 >
-                  {defaultValue?.toString() == valueString ? <Check className={'h-4 w-4'} /> : ' '}
+                  {defaultValue?.toString().slice(1, -1) == valueString ? <Check className={'h-4 w-4'} /> : ' '}
                 </button>
               );
             })}
@@ -51,13 +61,17 @@ export const PlaygroundControl = ({
           <select
             onChange={(e) => onChange(e.target.value)}
             className={'rounded-sm border bg-white border-gray-300 px-1.5 py-0.5'}
-            defaultValue={defaultValue?.toString()}
+            defaultValue={defaultValue?.toString().slice(1, -1)}
           >
-            {prop.type.values?.map((value, i) => {
+            {prop.type.values?.map((value) => {
+              if (value == 'number' || value == 'string') {
+                return null;
+              }
+
               const valueString = value.toString().slice(1, -1);
 
               return (
-                <option value={valueString} key={`${valueString}-${i}`}>
+                <option value={valueString} key={`${valueString}`}>
                   {valueString}
                 </option>
               );

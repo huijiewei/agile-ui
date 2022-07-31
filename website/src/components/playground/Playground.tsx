@@ -76,7 +76,7 @@ export const Playground = (props: PlaygroundProps) => {
                 <PlaygroundControl
                   key={prop.name}
                   prop={prop}
-                  defaultValue={state[prop.name] ? state[prop.name] : prop.defaultValue?.value.toString().slice(1, -1)}
+                  defaultValue={state[prop.name] ? state[prop.name] : prop.defaultValue?.value}
                   onChange={(value) => setState((current) => ({ ...current, [prop.name]: value }))}
                 />
               );
