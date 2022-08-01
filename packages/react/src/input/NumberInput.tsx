@@ -216,6 +216,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         update(parseFloat(value));
         setInputValue(value);
       }
+
+      inputRef.current?.focus();
     },
     [controlledValue, maxValue, min, minValue, precision, step, update]
   );
@@ -231,6 +233,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         update(parseFloat(value));
         setInputValue(value);
       }
+
+      inputRef.current?.focus();
     },
     [controlledValue, maxValue, min, minValue, precision, step, update]
   );
