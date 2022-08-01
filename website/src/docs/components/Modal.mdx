@@ -14,7 +14,7 @@ function Demo() {
       <Button onClick={() => setOpened(true)}>打开模态框</Button>
       <Modal opened={opened} onClose={() => setOpened(false)}>
         <ModalOverlay />
-        <ModalContent className={'w-1/3'}>
+        <ModalContent className={'w-11/12 tablet:w-3/5 laptop:w-1/3'}>
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
           <ModalBody>这是一个模态框</ModalBody>
@@ -39,7 +39,7 @@ function Demo() {
       <Button onClick={() => setOpened(true)}>打开模态框</Button>
       <Modal opened={opened} onClose={() => setOpened(false)} lockScroll={false}>
         <ModalOverlay />
-        <ModalContent className={'w-1/3'}>
+        <ModalContent className={'w-11/12 tablet:w-3/5 laptop:w-1/3'}>
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
           <ModalBody>这是一个模态框</ModalBody>
@@ -71,7 +71,7 @@ function Demo() {
       <Button onClick={() => setOpened(true)}>打开模态框</Button>
       <Modal scrollBehavior={scrollBehavior} opened={opened} onClose={() => setOpened(false)}>
         <ModalOverlay />
-        <ModalContent className={'w-1/3'}>
+        <ModalContent className={'w-11/12 tablet:w-3/5 laptop:w-1/3'}>
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
           <ModalBody className={'flex flex-col gap-3'}>

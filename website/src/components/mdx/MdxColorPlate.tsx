@@ -1,6 +1,7 @@
 import agileTwindConfig from '@agile-ui/twind';
 import { isString } from '@agile-ui/utils';
 import { useMemo } from 'react';
+import { tw } from 'twind';
 
 export const MdxColorPlate = () => {
   const agileColors = agileTwindConfig().theme?.colors;
@@ -28,7 +29,12 @@ export const MdxColorPlate = () => {
           <div key={color.name} className={'flex flex-row gap-3'}>
             {isString(color.value) ? (
               <div className={'flex flex-row gap-3'}>
-                <div className={`h-10 w-10 rounded shadow-inner bg-${color.name}`}></div>
+                <div
+                  className={'h-10 w-10 rounded dark:(ring-1 ring-inset ring-white/10)'}
+                  style={{
+                    backgroundColor: tw.theme('colors', `${color.name}`, '#000').toString(),
+                  }}
+                ></div>
                 <div className={''}>
                   <div className={'font-medium capitalize'}>{color.name}</div>
                   <div className={'text-xs uppercase font-mono'}>{color.value}</div>
@@ -45,7 +51,12 @@ export const MdxColorPlate = () => {
 
                     return (
                       <div className={'flex flex-col gap-1'} key={key}>
-                        <div className={`h-10 w-full rounded shadow-inner bg-${color.name}-${key}`}></div>
+                        <div
+                          className={'h-10 w-full rounded dark:(ring-1 ring-inset ring-white/10)'}
+                          style={{
+                            backgroundColor: tw.theme('colors', `${color.name}-${key}`, '#000').toString(),
+                          }}
+                        ></div>
                         <div>
                           <div className={'font-medium capitalize'}>{key}</div>
                           <div className={'text-xs font-mono'}>{value}</div>
