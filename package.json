@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "vitest",
+    "lint": "eslint --cache --ext .js,.jsx,.cjs,.mjs,.ts,.tsx .",
     "build": "npm run build --workspace packages",
     "website:dev": "npm run dev --workspace website",
     "website:build": "npm run build --workspace website",
