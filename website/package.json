@@ -33,7 +33,7 @@
     "remark-gfm": "^3.0.1",
     "remark-mdx-code-meta": "^2.0.0",
     "remark-mdx-frontmatter": "^2.0.3",
-    "remark-mdx-toc": "^0.3.0",
+    "remark-mdx-toc": "^0.3.1",
     "vite-plugin-pwa": "^0.12.3",
     "workbox-window": "^6.5.4",
     "react-docgen-typescript": "^2.2.2"
