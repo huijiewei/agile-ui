@@ -13,7 +13,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { cloneElement, ReactElement, ReactNode, useState } from 'react';
+import { cloneElement, ReactNode, useState } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';

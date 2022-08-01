@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ReloadPrompt } from './components/shared/ReloadPrompt';
 import { AppRoutes } from './data/routes';
-import { domAnimation, domMax, LazyMotion } from 'framer-motion';
+import { domMax, LazyMotion } from 'framer-motion';
 
 export const App = () => {
   const splash = document.getElementById('appSplash');

@@ -1,4 +1,4 @@
-import { useLocalStorage, useMediaQuery, useUpdateEffect } from '@agile-ui/react-hooks';
+import { useLocalStorage, useMediaQuery } from '@agile-ui/react-hooks';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { createContext } from '../utils/context';
