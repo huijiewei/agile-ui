@@ -9,8 +9,5 @@ export default defineConfig({
   target: 'esnext',
   dts: true,
   treeshake: true,
-  splitting: false,
-  sourcemap: false,
   clean: true,
-  minify: true,
 });
