@@ -64,6 +64,38 @@ description: 仅允许输入数字格式的输入框。
 </div>
 ```
 
+## 自定义控件
+
+```tsx preview editable
+function Demo() {
+  const controls = React.useRef();
+
+  return (
+    <div className={'flex flex-row items-center gap-3'}>
+      <Button
+        onClick={() => controls.current.decrement()}
+        color={'gray'}
+        variant={'light'}
+        className={'!px-0 aspect-square'}
+      >
+        <Minus />
+      </Button>
+
+      <NumberInput hideControls controlsRef={controls} onChange={(value) => console.log(value)} />
+
+      <Button
+        onClick={() => controls.current.increment()}
+        color={'gray'}
+        variant={'light'}
+        className={'!px-0 aspect-square'}
+      >
+        <Plus />
+      </Button>
+    </div>
+  );
+}
+```
+
 ## 属性
 
 <PropsTable componentName="NumberInput" />

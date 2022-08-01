@@ -4,14 +4,18 @@ import { useCallback } from 'react';
 
 type PossibleRef<T> = Ref<T> | undefined;
 
+export const assignRef = <T>(ref: PossibleRef<T>, value: T) => {
+  if (isFunction(ref)) {
+    ref(value);
+  } else if (ref != null) {
+    (ref as MutableRefObject<T>).current = value;
+  }
+};
+
 export const mergeRefs = <T>(...refs: PossibleRef<T>[]) => {
   return (node: T) =>
     refs.forEach((ref) => {
-      if (isFunction(ref)) {
-        ref(node);
-      } else if (ref != null) {
-        (ref as MutableRefObject<T>).current = node;
-      }
+      assignRef(ref, node);
     });
 };
 

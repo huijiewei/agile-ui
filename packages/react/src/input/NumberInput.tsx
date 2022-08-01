@@ -1,10 +1,15 @@
 import { primitiveComponent } from '../utils/component';
-import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, ReactNode } from 'react';
+import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, ReactNode, ForwardedRef } from 'react';
 import type { InputBaseProps } from './InputGroup';
-import { mergeRefs, useControllableProp, useEventListener, useFocus } from '@agile-ui/react-hooks';
+import { assignRef, mergeRefs, useControllableProp, useEventListener, useFocus } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { inputSizes } from './inputSizes';
+
+export type NumberInputHandlers = {
+  increment: () => void;
+  decrement: () => void;
+};
 
 export type NumberInputProps = InputBaseProps & {
   /**
@@ -42,6 +47,7 @@ export type NumberInputProps = InputBaseProps & {
 
   /**
    * 数字精度
+   * @default 0
    */
   precision?: number;
 
@@ -95,14 +101,25 @@ export type NumberInputProps = InputBaseProps & {
    * 值改变时触发回调
    */
   onChange?: (value: number | undefined) => void;
+
+  /**
+   * 隐藏控制器
+   * @default false
+   */
+  hideControls?: boolean;
+
+  /**
+   * 控制器引用
+   */
+  controlsRef?: ForwardedRef<NumberInputHandlers | undefined>;
 };
 
 const numberInputSize = {
-  xs: { input: 'pr-4', control: 'w-4 text-[0.75em]' },
-  sm: { input: 'pr-5', control: 'w-5 text-[0.875em]' },
-  md: { input: 'pr-5', control: 'w-5' },
-  lg: { input: 'pr-6', control: 'w-6' },
-  xl: { input: 'pr-6', control: 'w-6' },
+  xs: { input: 'pr-3', control: 'w-4 text-[0.75em]' },
+  sm: { input: 'pr-4', control: 'w-5 text-[0.875em]' },
+  md: { input: 'pr-4', control: 'w-5' },
+  lg: { input: 'pr-5', control: 'w-6' },
+  xl: { input: 'pr-5', control: 'w-6' },
 };
 
 export const NumberInput = primitiveComponent<'input', NumberInputProps>((props, ref) => {
@@ -121,11 +138,13 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     step = 1,
     min,
     max,
-    precision,
+    precision = 0,
     mouseWheel = false,
     parse = (value) => value,
     format = (value) => value,
     onChange,
+    hideControls = false,
+    controlsRef,
     prefix,
     ...rest
   } = props;
@@ -216,6 +235,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     [controlledValue, maxValue, min, minValue, precision, step, update]
   );
 
+  assignRef(controlsRef, { increment, decrement });
+
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.nativeEvent.isComposing) {
@@ -298,6 +319,47 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
 
   const formattedValue = format(inputValue);
 
+  const controls = (
+    <div className={cx('absolute right-0 h-full flex flex-col', numberInputSize[size]['control'])}>
+      <button
+        tabIndex={-1}
+        onClick={() => {
+          increment();
+        }}
+        disabled={(controlledValue || 0) >= maxValue}
+        className={
+          'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+        }
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fillRule="evenodd"
+            d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+      <button
+        tabIndex={-1}
+        onClick={() => {
+          decrement();
+        }}
+        disabled={(controlledValue || 0) <= minValue}
+        className={
+          'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+        }
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fillRule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+  );
+
   return (
     <div
       className={cx(
@@ -345,44 +407,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         value={formattedValue}
         {...rest}
       />
-      <div className={cx('absolute right-0 h-full flex flex-col', numberInputSize[size]['control'])}>
-        <button
-          tabIndex={-1}
-          onClick={() => {
-            increment();
-          }}
-          disabled={(controlledValue || 0) >= maxValue}
-          className={
-            'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
-          }
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fillRule="evenodd"
-              d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        <button
-          tabIndex={-1}
-          onClick={() => {
-            decrement();
-          }}
-          disabled={(controlledValue || 0) <= minValue}
-          className={
-            'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
-          }
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
+      {!hideControls && controls}
     </div>
   );
 });
