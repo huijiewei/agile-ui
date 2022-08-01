@@ -13,13 +13,10 @@ export const assignRef = <T>(ref: PossibleRef<T>, value: T) => {
 };
 
 export const mergeRefs = <T>(...refs: PossibleRef<T>[]) => {
-  return (node: T) =>
-    refs.forEach((ref) => {
-      assignRef(ref, node);
-    });
+  return (node: T) => refs.forEach((ref) => assignRef(ref, node));
 };
 
-export const useMergedRefs = <T>(...refs: PossibleRef<T>[]): RefCallback<T> => {
+export const useMergedRefs = <T>(...refs: PossibleRef<T>[]) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useCallback(mergeRefs(...refs), refs);
+  return useCallback(mergeRefs(...refs), refs) as RefCallback<T>;
 };
