@@ -1,6 +1,7 @@
 import type { Color } from '../utils/types';
 import { primitiveComponent } from '../utils/component';
 import { cx } from 'twind';
+import { __DEV__ } from '@agile-ui/utils';
 
 export type DividerProps = {
   /**
@@ -10,10 +11,10 @@ export type DividerProps = {
   color?: Color;
 
   /**
-   * 分割线方向
-   * @default "horizontal"
+   * 垂直分割线
+   * @default false
    */
-  orientation?: 'horizontal' | 'vertical';
+  vertical?: boolean;
 
   /**
    * 分割线大小
@@ -37,7 +38,7 @@ export type DividerProps = {
 export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
   const {
     color = 'gray',
-    orientation = 'horizontal',
+    vertical = false,
     size = 1,
     variant = 'solid',
     position = 'center',
@@ -46,13 +47,12 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
     ...rest
   } = props;
 
-  const horizontal = orientation === 'horizontal';
-  const hasLabel = !!children && horizontal;
+  const hasLabel = !!children && !vertical;
 
   return (
     <div
       role={'separator'}
-      aria-orientation={orientation}
+      aria-orientation={vertical ? 'vertical' : 'horizontal'}
       ref={ref}
       className={cx(
         'border-0 m-0',
@@ -62,9 +62,9 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
             } border-${variant} border-t-[${size}px] border-t-${color}-300) after:(content-[""] ml-2 shrink ${
               position == 'right' ? 'basis-5 grow-0' : 'basis-0 grow'
             } h-0 border-${variant} border-t-[${size}px] border-t-${color}-300)`
-          : horizontal
-          ? `border-${variant} border-t-[${size}px] border-t-${color}-300`
-          : `border-${variant} border-l-[${size}px] border-l-${color}-300 h-full self-stretch`,
+          : vertical
+          ? `border-${variant} border-l-[${size}px] border-l-${color}-300 h-full self-stretch`
+          : `border-${variant} border-t-[${size}px] border-t-${color}-300`,
 
         className
       )}
@@ -74,3 +74,7 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
     </div>
   );
 });
+
+if (__DEV__) {
+  Divider.displayName = 'Divider';
+}
