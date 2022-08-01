@@ -1,0 +1,95 @@
+---
+title: 分页
+description: 采用分页控制单页内的信息数量，也可进行页面跳转。
+---
+
+## 导入
+
+```tsx
+import { Pagination } from '@agile-ui/react';
+```
+
+## 使用
+
+```tsx preview editable
+<Pagination
+  onChange={(page) => {
+    console.log(page);
+  }}
+  total={2120}
+/>
+```
+
+## 禁用状态
+
+```tsx preview editable
+<Pagination
+  disabled
+  onChange={(page) => {
+    console.log(page);
+  }}
+  total={2120}
+/>
+```
+
+## 颜色
+
+```tsx preview editable
+function Demo() {
+  const [color, setColor] = React.useState();
+
+  return (
+    <div className={'flex flex-col gap-3'}>
+      <div className={'flex gap-3'}>
+        <Button
+          color={'green'}
+          onClick={() => {
+            setColor('green');
+          }}
+          variant={'light'}
+        >
+          绿色
+        </Button>
+        <Button
+          color={'gray'}
+          onClick={() => {
+            setColor('gray');
+          }}
+          variant={'light'}
+        >
+          灰色
+        </Button>
+        <Button
+          color={'red'}
+          onClick={() => {
+            setColor('red');
+          }}
+          variant={'light'}
+        >
+          红色
+        </Button>
+        <Button
+          color={'yellow'}
+          onClick={() => {
+            setColor('yellow');
+          }}
+          variant={'light'}
+        >
+          黄色
+        </Button>
+      </div>
+      <Pagination
+        color={color}
+        onChange={(page) => {
+          console.log(page);
+        }}
+        total={2120}
+      />
+    </div>
+  );
+}
+```
+
+## 属性
+
+<PropsTable componentName="Pagination" />

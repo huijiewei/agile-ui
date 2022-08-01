@@ -84,4 +84,8 @@ export * from './breadcrumb/BreadcrumbItem';
 export * from './breadcrumb/BreadcrumbLink';
 export * from './breadcrumb/BreadcrumbSeparator';
 
+export * from './pagination/Pagination';
+export * from './pagination/PaginationItem';
+export * from './pagination/usePagination';
+
 export * from './provider/AgileProvider';

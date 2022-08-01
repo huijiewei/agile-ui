@@ -162,6 +162,10 @@ export const menus: Menu[] = [
             path: '/components/breadcrumb',
           },
           {
+            label: '分页',
+            path: '/components/pagination',
+          },
+          {
             label: '下拉菜单',
             path: '/components/dropdown-menu',
           },
