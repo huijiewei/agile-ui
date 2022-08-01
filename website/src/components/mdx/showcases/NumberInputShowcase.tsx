@@ -16,6 +16,6 @@ const Demo = () => {
     component={NumberInput}
     defaultProps={{ placeholder: '数字输入框', defaultValue: undefined }}
     componentProps={componentProps}
-    ignoreProps={['onChange', 'format', 'parse', 'value', 'defaultValue']}
+    ignoreProps={['onChange', 'format', 'parse', 'value', 'defaultValue', 'controlsRef', 'prefix']}
   />
 );
