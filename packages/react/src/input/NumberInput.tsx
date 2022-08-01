@@ -386,7 +386,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         ref={mergeRefs(inputRef, ref)}
         className={cx(
           'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
-          numberInputSize[size]['input']
+          !hideControls && numberInputSize[size]['input']
         )}
         type={'text'}
         inputMode={'decimal'}
