@@ -72,7 +72,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
     value,
     checked,
-    defaultChecked,
+    defaultChecked = false,
     indeterminate,
     onChange,
     readOnly,
@@ -88,7 +88,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));
+  const [checkedState, setCheckedState] = useState(defaultChecked);
 
   const [isControlled, controlledChecked] = useControllableProp(
     group?.value && value ? group.value.includes(value) : checked,
@@ -129,7 +129,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     }
 
     el.form.onreset = () => {
-      setCheckedState(Boolean(defaultChecked));
+      setCheckedState(defaultChecked);
     };
   }, []);
 

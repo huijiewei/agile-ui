@@ -60,7 +60,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
 
     value,
     checked,
-    defaultChecked,
+    defaultChecked = false,
     onChange,
     readOnly,
     onFocus,
@@ -73,7 +73,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     group?.onChange?.(e);
   });
 
-  const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));
+  const [checkedState, setCheckedState] = useState(defaultChecked);
 
   const [isControlled, controlledChecked] = useControllableProp(
     group?.value && value ? group.value == value : checked,
@@ -106,7 +106,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     }
 
     el.form.onreset = () => {
-      setCheckedState(Boolean(defaultChecked));
+      setCheckedState(defaultChecked);
     };
   }, []);
 

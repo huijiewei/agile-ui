@@ -46,7 +46,7 @@ type SwitchProps = {
   /**
    * 开关状态发生更改时，将调用该回调。
    */
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const switchSizeStyles = {
@@ -64,8 +64,8 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     spacing = 2,
     disabled,
     readOnly,
-    defaultChecked,
     checked,
+    defaultChecked = false,
     value,
     onChange,
     children,
@@ -75,7 +75,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     ...rest
   } = props;
 
-  const [checkedState, setCheckedState] = useState(Boolean(defaultChecked));
+  const [checkedState, setCheckedState] = useState(defaultChecked);
 
   const [isControlled, controlledChecked] = useControllableProp(checked, checkedState);
 
@@ -92,7 +92,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         setCheckedState(event.target.checked);
       }
 
-      onChange?.(event);
+      onChange?.(event.target.checked, event);
     },
     [readOnly, disabled, isControlled, onChange]
   );
@@ -105,7 +105,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     }
 
     el.form.onreset = () => {
-      setCheckedState(Boolean(defaultChecked));
+      setCheckedState(defaultChecked);
     };
   }, []);
 
