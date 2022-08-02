@@ -64,7 +64,9 @@ const range = (start: number, end: number) => {
   return Array.from({ length }, (_, i) => start + i);
 };
 
-export const usePagination = (options: UsePaginationOptions): { pages: PaginationItemProps[] } => {
+export const usePagination = (
+  options: UsePaginationOptions
+): { pages: PaginationItemProps[]; totalPage: number; page: number; setPage: (page: number) => void } => {
   const {
     page,
     defaultPage = 1,
@@ -156,5 +158,5 @@ export const usePagination = (options: UsePaginationOptions): { pages: Paginatio
         };
   });
 
-  return { pages };
+  return { pages, totalPage, page: pageState, setPage: setPageState };
 };

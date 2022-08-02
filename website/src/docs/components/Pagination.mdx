@@ -32,51 +32,46 @@ import { Pagination } from '@agile-ui/react';
 />
 ```
 
+## 显示跳转
+
+```tsx preview editable
+<Pagination
+  showJumper
+  onChange={(page) => {
+    console.log(page);
+  }}
+  total={2120}
+/>
+```
+
 ## 颜色
 
 ```tsx preview editable
 function Demo() {
-  const [color, setColor] = React.useState();
+  const [color, setColor] = React.useState('blue');
 
   return (
     <div className={'flex flex-col gap-3'}>
       <div className={'flex gap-3'}>
-        <Button
-          color={'green'}
-          onClick={() => {
-            setColor('green');
-          }}
-          variant={'light'}
-        >
-          绿色
-        </Button>
-        <Button
-          color={'gray'}
-          onClick={() => {
-            setColor('gray');
-          }}
-          variant={'light'}
-        >
-          灰色
-        </Button>
-        <Button
-          color={'red'}
-          onClick={() => {
-            setColor('red');
-          }}
-          variant={'light'}
-        >
-          红色
-        </Button>
-        <Button
-          color={'yellow'}
-          onClick={() => {
-            setColor('yellow');
-          }}
-          variant={'light'}
-        >
-          黄色
-        </Button>
+        {[
+          { color: 'blue', name: '蓝色' },
+          { color: 'green', name: '绿色' },
+          { color: 'gray', name: '灰色' },
+          { color: 'red', name: '红色' },
+          { color: 'yellow', name: '黄色' },
+        ].map((item) => (
+          <Button
+            key={item.color}
+            color={item.color}
+            active={color == item.color}
+            onClick={() => {
+              setColor(item.color);
+            }}
+            variant={'light'}
+          >
+            {item.name}
+          </Button>
+        ))}
       </div>
       <Pagination
         color={color}
