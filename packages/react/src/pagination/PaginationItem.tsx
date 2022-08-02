@@ -1,7 +1,7 @@
 import { polymorphicComponent } from '../utils/component';
 import type { PaginationItemProps } from './usePagination';
 import { cx } from 'twind';
-import { __DEV__, dataAttr } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
 
 export const PaginationItem = polymorphicComponent<'button', PaginationItemProps & { color?: ScaleColor }>(
@@ -15,7 +15,9 @@ export const PaginationItem = polymorphicComponent<'button', PaginationItemProps
         ref={ref}
         title={title}
         disabled={disabled}
+        aria-disabled={ariaAttr(disabled)}
         data-disabled={dataAttr(disabled)}
+        aria-current={selected ? 'page' : undefined}
         className={cx(
           'min-w-[1.75rem] h-7 px-2 rounded flex items-center justify-center transition-colors select-none appearance-none disabled:(cursor-not-allowed opacity-50)',
           selected ? `bg-${color}-500 text-white` : 'bg-gray-100',
