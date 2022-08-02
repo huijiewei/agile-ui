@@ -35,7 +35,7 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
       aria-disabled={ariaAttr(disabled)}
       data-opened={dataAttr(open)}
       className={cx(
-        'w-full cursor-default outline-none flex justify-between items-center p-1.5 leading-none rounded',
+        'w-full cursor-default outline-none flex justify-between items-center transition-colors p-1.5 leading-none rounded',
         'disabled:text-gray-300 focus:bg-gray-100 dark:focus:bg-gray-600 opened:not-focus:bg-gray-50 dark:opened:not-focus:bg-gray-500',
         className
       )}

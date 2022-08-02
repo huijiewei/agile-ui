@@ -26,7 +26,7 @@ export const DropdownMenuItem = primitiveComponent<'button', DropdownMenuItemPro
       aria-disabled={ariaAttr(disabled)}
       disabled={disabled}
       className={cx(
-        'flex justify-between items-center w-full outline-none cursor-default p-1.5 leading-none rounded',
+        'flex justify-between items-center w-full transition-colors outline-none cursor-default p-1.5 leading-none rounded',
         'focus:bg-gray-100 dark:focus:bg-gray-600 disabled:text-gray-300',
         className
       )}

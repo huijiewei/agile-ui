@@ -332,7 +332,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         }}
         disabled={(controlledValue || 0) >= maxValue}
         className={
-          'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+          'w-full select-none appearance-none transition-colors disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
         }
       >
         <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
@@ -350,7 +350,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         }}
         disabled={(controlledValue || 0) <= minValue}
         className={
-          'w-full select-none appearance-none disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
+          'w-full select-none appearance-none transition-colors disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
         }
       >
         <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">

@@ -17,7 +17,7 @@ export const PaginationItem = polymorphicComponent<'button', PaginationItemProps
         disabled={disabled}
         data-disabled={dataAttr(disabled)}
         className={cx(
-          'min-w-[1.75rem] h-7 px-2 rounded flex items-center justify-center select-none appearance-none disabled:(cursor-not-allowed opacity-50)',
+          'min-w-[1.75rem] h-7 px-2 rounded flex items-center justify-center transition-colors select-none appearance-none disabled:(cursor-not-allowed opacity-50)',
           selected ? `bg-${color}-500 text-white` : 'bg-gray-100',
           !disabled && (selected ? `hover:bg-${color}-600` : 'hover:bg-gray-200'),
           className
