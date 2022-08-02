@@ -1,6 +1,6 @@
 import { mergeRefs, useControllableProp, useFocus } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
-import { ChangeEvent, ReactNode, useCallback, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
@@ -74,6 +74,11 @@ export type InputProps = InputBaseProps & {
    * 点击清除按钮的回调
    */
   onClear?: () => void;
+
+  /**
+   * 按下回车键的回调
+   */
+  onPressEnter?: () => void;
 };
 
 /**
@@ -95,6 +100,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     defaultValue = '',
     onChange,
     onClear,
+    onPressEnter,
     prefix,
     suffix,
     ...rest
@@ -127,6 +133,19 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     onChange?.('');
     onClear?.();
   };
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.nativeEvent.isComposing) {
+        return;
+      }
+
+      if (event.key == 'Enter') {
+        onPressEnter && onPressEnter();
+      }
+    },
+    [onPressEnter]
+  );
 
   const showClearButton = clearable && controlledValue;
 
@@ -167,6 +186,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
           onBlur={handleBlur}
           onFocus={handleFocus}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           value={controlledValue}
           {...rest}
         />
