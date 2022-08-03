@@ -8,7 +8,7 @@ import { useSelect, useSelectOptionIndex } from './SelectProvider';
 
 export type SelectOptionProps = {
   value: StringOrNumber;
-  label: ReactNode;
+  label?: ReactNode;
   disabled?: boolean;
 };
 
@@ -32,7 +32,7 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
 
   const handleSelect = () => {
     setSelectedIndex(optionIndex);
-    onChange(value);
+    onChange && onChange(value);
     setOpen(false);
     setActiveIndex(null);
   };
@@ -44,7 +44,9 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
     }
   };
 
-  const refs = useMergedRefs(ref, (node) => (listRef.current[optionIndex] = node));
+  const refs = useMergedRefs(ref, (node) => {
+    listRef.current[optionIndex] = node;
+  });
 
   return (
     <li

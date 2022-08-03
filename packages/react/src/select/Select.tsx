@@ -1,6 +1,6 @@
-import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
+import { useControllableProp, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { dataAttr } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, dataAttr, isArray } from '@agile-ui/utils';
 import {
   autoUpdate,
   flip,
@@ -15,7 +15,19 @@ import {
   useRole,
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
-import { Children, isValidElement, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+  Children,
+  cloneElement,
+  Fragment,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
@@ -25,6 +37,8 @@ import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
 import { SelectOption } from './SelectOption';
+import { CloseButton } from '../close-button/CloseButton';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 export type SelectProps = {
   /**
@@ -92,45 +106,96 @@ export type SelectProps = {
 };
 
 const selectSizes = {
-  xs: 'h-6 leading-6 px-2 text-sm',
-  sm: 'h-7 leading-7 px-2',
-  md: 'h-8 leading-8 px-3',
-  lg: 'h-9 leading-9 px-3',
-  xl: 'h-10 leading-10 px-3 text-lg',
+  xs: 'h-6 leading-6 pl-2 pr-1 text-sm',
+  sm: 'h-7 leading-7 pl-2 pr-1',
+  md: 'h-8 leading-8 pl-3 pr-1.5',
+  lg: 'h-9 leading-9 pl-3 pr-1.5',
+  xl: 'h-10 leading-10 pl-3 pr-1.5 text-lg',
 };
 
 export const Select = primitiveComponent<'select', SelectProps>((props, ref) => {
   const {
     size = 'md',
     placeholder = '选择器',
-    value,
-    defaultValue,
     children,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onChange = () => {},
+    onChange,
     disabled = false,
-    clearable = false,
+    readOnly = false,
+    invalid = false,
     multiple = false,
+    clearable = false,
     opened = false,
     className,
     fullWidth = false,
+    value,
+    defaultValue = multiple ? [] : null,
     ...rest
   } = props;
+
+  const cacheData = useMemo(() => {
+    let optionIndex = 0;
+
+    const cacheData: {
+      elements: ReactNode[];
+      options: { value: StringOrNumber | undefined; label: ReactNode }[];
+    } = {
+      elements: [],
+      options: [{ value: undefined, label: placeholder }],
+    };
+
+    Children.forEach(children, (child) => {
+      if (isValidElement(child)) {
+        if (child.type == SelectOptionGroup) {
+          Children.forEach(child.props.children, (groupChild: ReactNode) => {
+            if (isValidElement(groupChild) && groupChild.type == SelectOption) {
+              optionIndex++;
+              cacheData.elements.push(
+                <SelectOptionIndexProvider value={optionIndex}>{groupChild}</SelectOptionIndexProvider>
+              );
+              cacheData.options[optionIndex] = {
+                value: groupChild.props.value,
+                label: groupChild.props.label ? groupChild.props.label : groupChild.props.children,
+              };
+            } else {
+              cacheData.elements.push(groupChild);
+            }
+          });
+        } else if (child.type == SelectOption) {
+          optionIndex++;
+          cacheData.elements.push(<SelectOptionIndexProvider value={optionIndex}>{child}</SelectOptionIndexProvider>);
+          cacheData.options[optionIndex] = {
+            value: child.props.value,
+            label: child.props.label ? child.props.label : child.props.children,
+          };
+        } else {
+          cacheData.elements.push(child);
+        }
+      } else {
+        cacheData.elements.push(child);
+      }
+    });
+
+    return cacheData;
+  }, [children, placeholder]);
 
   const [valueState, setValueState] = useState(defaultValue);
 
   const [isControlled, controlledValue] = useControllableProp(value, valueState);
 
   const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const listContentRef = useRef([placeholder]);
+  const listContentRef = useRef<string[]>(cacheData.options.map((option) => option.value?.toString() || ''));
 
   const [open, setOpen] = useState(opened);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    //setSelectedIndex(listContentRef.current.indexOf(controlledValue?.toString()));
-  }, [controlledValue, listContentRef]);
+    setSelectedIndex(
+      listContentRef.current.indexOf(
+        controlledValue ? (isArray(controlledValue) ? '' : controlledValue?.toString()) : ''
+      )
+    );
+  }, [controlledValue]);
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
@@ -141,9 +206,11 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
       offset(4),
       flip({ padding: 8 }),
       floatingSize({
-        apply({ availableWidth, elements }) {
+        apply({ availableWidth, availableHeight, elements, rects }) {
           Object.assign(elements.floating.style, {
             maxWidth: `${availableWidth}px`,
+            minWidth: `${rects.reference.width}px`,
+            maxHeight: `${availableHeight}px`,
           });
         },
         padding: 8,
@@ -203,15 +270,17 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
 
   useLayoutEffect(() => {
     const floating = refs.floating.current;
+
     if (open && floating && floating.offsetHeight < floating.scrollHeight) {
       const item = listItemsRef.current[selectedIndex];
+
       if (item) {
         floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
       }
     }
   }, [open, selectedIndex, refs.floating, refs.reference, middlewareData]);
 
-  let optionIndex = 0;
+  const showClearButton = clearable && controlledValue;
 
   return (
     <SelectProvider
@@ -221,7 +290,6 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         activeIndex,
         setActiveIndex,
         listRef: listItemsRef,
-        contentRef: listContentRef,
         setOpen,
         onChange,
         getItemProps,
@@ -229,38 +297,57 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         selectSize: selectSizes[size],
       }}
     >
-      <button
+      <div
+        aria-haspopup={'listbox'}
+        aria-expanded={open}
+        tabIndex={disabled ? -1 : 0}
         data-active={dataAttr(open)}
+        data-disabled={dataAttr(disabled)}
+        aria-disabled={ariaAttr(disabled)}
         className={cx(
-          'inline-flex items-center border bg-white relative rounded transition-colors cursor-default outline-none',
-          disabled ? 'opacity-50 cursor-not-allowed' : !open && 'hover:(border-gray-300 z-[2])',
-          open ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
+          'inline-flex items-center border border-gray-200 bg-white relative rounded transition-colors outline-none',
+          disabled
+            ? 'opacity-50 cursor-not-allowed pointer-events-none'
+            : 'cursor-default active:(border-blue-500 z-[1]) focus-visible:(border-blue-500) hover:(border-gray-300 z-[2])',
           fullWidth ? 'w-full' : '',
           selectSizes[size],
           className
         )}
         {...getReferenceProps({
           ...rest,
+          role: 'combobox',
           ref: reference,
+          onPointerEnter() {
+            setControlledScrolling(false);
+          },
+          onPointerMove() {
+            setControlledScrolling(false);
+          },
+          onKeyDown() {
+            setControlledScrolling(true);
+          },
         })}
       >
         <span className={'flex flex-1'}>
-          {selectedIndex >= 0 ? listContentRef.current[selectedIndex + 1] : placeholder}
+          {selectedIndex > 0 ? cacheData.options[selectedIndex].label : placeholder}
         </span>
-        <span className={'ml-1'}>
-          <svg
-            width={'1em'}
-            height={'1em'}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        {showClearButton && (
+          <CloseButton
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className={cx(
+              'absolute text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100',
+              size == 'xs' || size == 'sm' ? '-right-1' : '-right-2'
+            )}
+          />
+        )}
+        <span className={'ml-1 text-gray-500'}>
+          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
+            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
           </svg>
         </span>
-      </button>
+      </div>
       <Portal>
         <AnimatePresence>
           {open && (
@@ -271,7 +358,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className={cx(
-                  'overflow-y-auto absolute z-10 shadow max-h-80 rounded border outline-none w-auto p-1.5 w-auto border-gray-200 bg-white dark:bg-gray-700',
+                  'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 border-gray-200 bg-white dark:bg-gray-700',
                   '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
                 )}
                 {...getFloatingProps({
@@ -282,23 +369,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
                   },
                 })}
               >
-                {Children.map(children, (child) => {
-                  if (isValidElement(child)) {
-                    if (child.type == SelectOptionGroup) {
-                      return Children.map(child.props.children, (groupChild) => {
-                        return (
-                          <SelectOptionIndexProvider value={optionIndex++}>{groupChild}</SelectOptionIndexProvider>
-                        );
-                      });
-                    }
-
-                    if (child.type == SelectOption) {
-                      return <SelectOptionIndexProvider value={optionIndex++}>{child}</SelectOptionIndexProvider>;
-                    }
-                  }
-
-                  return child;
-                })}
+                {cacheData.elements}
               </Motion>
             </FloatingFocusManager>
           )}
@@ -307,3 +378,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     </SelectProvider>
   );
 });
+
+if (__DEV__) {
+  Select.displayName = 'Select';
+}

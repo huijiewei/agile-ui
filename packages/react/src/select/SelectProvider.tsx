@@ -10,12 +10,11 @@ type SelectContextValue = {
   setActiveIndex: (index: number | null) => void;
 
   setOpen: (open: boolean) => void;
-  onChange: (value: Readonly<StringOrNumber> | StringOrNumber | null) => void;
+  onChange?: (value: Readonly<StringOrNumber> | StringOrNumber | null) => void;
 
   getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
 
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
-  contentRef: MutableRefObject<string[]>;
   dataRef: ContextData;
   selectSize: string;
 };
