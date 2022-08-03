@@ -15,19 +15,7 @@ import {
   useRole,
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
-import {
-  Children,
-  cloneElement,
-  Fragment,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Children, isValidElement, ReactNode, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
@@ -38,7 +26,6 @@ import { Motion } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
 import { SelectOption } from './SelectOption';
 import { CloseButton } from '../close-button/CloseButton';
-import { useVirtualizer } from '@tanstack/react-virtual';
 
 export type SelectProps = {
   /**
