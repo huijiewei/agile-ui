@@ -10,7 +10,7 @@ export const CodeView = (props: CodeBlockProps) => {
       )}
       style={props.style}
     >
-      <CodeBlock theme={props.theme} language={props.language}>
+      <CodeBlock translate={'no'} theme={props.theme} language={props.language}>
         {props.children}
       </CodeBlock>
     </div>
