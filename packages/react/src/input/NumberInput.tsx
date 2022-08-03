@@ -5,6 +5,7 @@ import { assignRef, mergeRefs, useControllableProp, useEventListener, useFocus }
 import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { inputSizes } from './inputSizes';
+import { NumberInputControl } from './NumberInputControl';
 
 export type NumberInputHandlers = {
   increment: () => void;
@@ -323,47 +324,6 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
 
   const formattedValue = format(inputValue);
 
-  const controls = (
-    <div className={cx('absolute right-0 h-full flex flex-col', numberInputSize[size]['control'])}>
-      <button
-        tabIndex={-1}
-        onClick={() => {
-          increment();
-        }}
-        disabled={(controlledValue || 0) >= maxValue}
-        className={
-          'w-full select-none appearance-none transition-colors disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-tr flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
-        }
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fillRule="evenodd"
-            d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
-      <button
-        tabIndex={-1}
-        onClick={() => {
-          decrement();
-        }}
-        disabled={(controlledValue || 0) <= minValue}
-        className={
-          'w-full select-none appearance-none transition-colors disabled:(opacity-50 cursor-not-allowed bg-gray-50) rounded-br flex flex-1 justify-center items-center bg-gray-50 hover:bg-gray-200'
-        }
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fillRule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
-    </div>
-  );
-
   return (
     <div
       className={cx(
@@ -411,7 +371,24 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         value={formattedValue}
         {...rest}
       />
-      {!hideControls && controls}
+      {!hideControls && (
+        <div className={cx('absolute right-0 h-full flex flex-col gap-px', numberInputSize[size]['control'])}>
+          <NumberInputControl
+            stepper={'increment'}
+            onClick={() => {
+              increment();
+            }}
+            disabled={(controlledValue || 0) >= maxValue}
+          />
+          <NumberInputControl
+            stepper={'decrement'}
+            onClick={() => {
+              decrement();
+            }}
+            disabled={(controlledValue || 0) <= minValue}
+          />
+        </div>
+      )}
     </div>
   );
 });
