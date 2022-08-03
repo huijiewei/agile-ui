@@ -71,10 +71,11 @@ export default defineConfig(() => {
               if (
                 id.includes('/node_modules/sucrase/') ||
                 id.includes('/node_modules/prismjs/') ||
-                id.includes('/node_modules/react-live/') ||
                 id.includes('/node_modules/prism-react-renderer/') ||
-                id.includes('/node_modules/use-editable/') ||
                 id.includes('/node_modules/ts-interface-checker/') ||
+                id.includes('/node_modules/react-live-runner/') ||
+                id.includes('/node_modules/react-runner/') ||
+                id.includes('/node_modules/react-simple-code-editor/') ||
                 id.includes('/node_modules/lines-and-columns/')
               ) {
                 return 'react-live';

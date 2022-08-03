@@ -5,7 +5,6 @@ type MdxCodeLiveProps = {
   children?: string;
   preview?: boolean;
   editable?: boolean;
-  noInline?: boolean;
   className?: string;
 };
 
@@ -14,13 +13,5 @@ export const MdxCodeLive = (props: MdxCodeLiveProps) => {
 
   const language = (props.className?.replace('language-', '') || 'tsx') as Language;
 
-  return (
-    <CodeLive
-      code={code}
-      language={language}
-      preview={props.preview}
-      editable={props.editable}
-      noInline={props.noInline}
-    />
-  );
+  return <CodeLive code={code} language={language} preview={props.preview} editable={props.editable} />;
 };

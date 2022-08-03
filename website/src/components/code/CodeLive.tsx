@@ -4,10 +4,10 @@ import type { Language } from 'prism-react-renderer';
 import darkTheme from 'prism-react-renderer/themes/nightOwl';
 import lightTheme from 'prism-react-renderer/themes/nightOwlLight';
 import type { ComponentProps } from 'react';
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live-runner';
 import { cx } from 'twind';
 import { FormDemo } from '../demo/FormDemo';
-import { CodeBlock } from './CodeBlock';
+import { CodeView } from './CodeView';
 import { CopyIcon } from './CopyIcon';
 
 type CodeLiveProps = {
@@ -15,18 +15,19 @@ type CodeLiveProps = {
   language?: Language;
   preview?: boolean;
   editable?: boolean;
-  noInline?: boolean;
 };
 
 export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
-  const { code, preview = false, editable = false, noInline = false, language = 'tsx', className, ...rest } = props;
+  const { code, preview = false, editable = false, language = 'tsx', className, ...rest } = props;
 
   const { darkMode } = AgileReact.useColorModeState();
 
   if (!preview) {
     return (
       <div className={`relative`} {...rest}>
-        <CodeBlock theme={darkMode ? darkTheme : lightTheme} code={code} language={language}></CodeBlock>
+        <CodeView theme={darkMode ? darkTheme : lightTheme} language={language}>
+          {code}
+        </CodeView>
         <CopyIcon content={code} />
       </div>
     );
@@ -35,7 +36,6 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
   return (
     <div className={cx('flex flex-col', className)} {...rest}>
       <LiveProvider
-        noInline={noInline}
         theme={darkMode ? darkTheme : lightTheme}
         code={code}
         language={language}
@@ -49,8 +49,13 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
         />
         <div className={'relative'}>
           <LiveEditor
+            translate={'no'}
+            readOnly={!editable}
             className={'overflow-x-auto border border-gray-200 font-mono text-[92%] leading-snug rounded-b border-t-0'}
-            disabled={!editable}
+            ignoreTabKey={false}
+            insertSpaces
+            padding={10}
+            tabSize={2}
           />
           <CopyIcon content={code} />
         </div>
