@@ -33,12 +33,6 @@ export type CheckboxProps = CheckboxBaseProps & {
   indeterminate?: boolean;
 
   /**
-   * 是否只读
-   * @default false
-   */
-  readOnly?: boolean;
-
-  /**
    * 复选框图标
    * @default CheckboxIcon
    */
@@ -75,7 +69,6 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     defaultChecked = false,
     indeterminate,
     onChange,
-    readOnly,
     onFocus,
     onBlur,
     ...rest
@@ -97,11 +90,6 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      if (readOnly || disabled) {
-        event.preventDefault();
-        return;
-      }
-
       if (!isControlled) {
         if (controlledChecked) {
           setCheckedState(event.target.checked);
@@ -112,7 +100,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
       onChangeRef?.(event);
     },
-    [disabled, indeterminate, readOnly, controlledChecked, isControlled, onChangeRef]
+    [indeterminate, controlledChecked, isControlled, onChangeRef]
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -171,7 +159,6 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         type="checkbox"
         checked={controlledChecked}
         disabled={disabled}
-        readOnly={readOnly}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}

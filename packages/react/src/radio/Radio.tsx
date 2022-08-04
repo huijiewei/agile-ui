@@ -27,12 +27,6 @@ export type RadioProps = RadioBaseProps & {
   spacing?: string | number;
 
   /**
-   * 是否只读
-   * @default false
-   */
-  readOnly?: boolean;
-
-  /**
    * 选择状态发生更改时触发回调
    */
   onChange?: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void;
@@ -62,7 +56,6 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     checked,
     defaultChecked = false,
     onChange,
-    readOnly,
     onFocus,
     onBlur,
     ...rest
@@ -84,18 +77,13 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      if (readOnly || disabled) {
-        event.preventDefault();
-        return;
-      }
-
       if (!isControlled) {
         setCheckedState(event.target.checked);
       }
 
       onChangeRef?.(event);
     },
-    [disabled, isControlled, onChangeRef, readOnly]
+    [isControlled, onChangeRef]
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -132,7 +120,6 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         type={'radio'}
         checked={controlledChecked}
         disabled={disabled}
-        readOnly={readOnly}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
