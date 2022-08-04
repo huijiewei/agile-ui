@@ -57,6 +57,22 @@ description: 输入框是。
 </div>
 ```
 
+## 可控
+
+```tsx preview editable
+function Example() {
+  const [value, setValue] = React.useState('');
+  const handleChange = (value) => setValue(value);
+
+  return (
+    <>
+      <div className="mb-2">值: {value}</div>
+      <Input value={value} onChange={handleChange} placeholder="输入框" />
+    </>
+  );
+}
+```
+
 ## 输入框组
 
 ```tsx preview editable
