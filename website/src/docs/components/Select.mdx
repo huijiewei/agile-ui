@@ -17,9 +17,35 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
         </SelectOption>
       ))}
   </Select>
-
-  <Select disabled placeholder={'选择器'}>
+  <Select defaultValue={[10, 16, 12]} multiple placeholder={'选择器'}>
     {Array(20)
+      .fill(null)
+      .map((_, idx) => idx + 1)
+      .map((eve) => (
+        <SelectOption key={eve} value={eve}>
+          选项 {eve}
+        </SelectOption>
+      ))}
+  </Select>
+</div>
+```
+
+## 状态
+
+```tsx preview editable
+<div className={'flex flex-row gap-3'}>
+  <Select disabled placeholder={'选择器'}>
+    {Array(5)
+      .fill(null)
+      .map((_, idx) => idx + 1)
+      .map((eve) => (
+        <SelectOption key={eve} value={eve}>
+          选项 {eve}
+        </SelectOption>
+      ))}
+  </Select>
+  <Select invalid placeholder={'选择器'}>
+    {Array(5)
       .fill(null)
       .map((_, idx) => idx + 1)
       .map((eve) => (

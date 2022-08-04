@@ -90,11 +90,11 @@ export type SelectProps = {
    */
   opened?: boolean;
 
-  value?: Readonly<StringOrNumber[]> | StringOrNumber | null;
+  value?: StringOrNumber[] | StringOrNumber;
 
-  defaultValue?: Readonly<StringOrNumber[]> | StringOrNumber | null;
+  defaultValue?: StringOrNumber[] | StringOrNumber;
 
-  onChange?: (value: Readonly<StringOrNumber[]> | StringOrNumber | null) => void;
+  onChange?: (value: StringOrNumber[] | StringOrNumber | undefined) => void;
 };
 
 const selectSizes = {
@@ -105,8 +105,9 @@ const selectSizes = {
   xl: 'h-10 leading-10 pl-3 pr-1.5 text-lg',
 };
 
-export const Select = primitiveComponent<'select', SelectProps>((props, ref) => {
+export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   const {
+    id,
     size = 'md',
     placeholder = '选择器',
     children,
@@ -120,7 +121,8 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     className,
     fullWidth = false,
     value,
-    defaultValue = multiple ? [] : null,
+    defaultValue = multiple ? [] : undefined,
+    style,
     ...rest
   } = props;
 
@@ -200,14 +202,42 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
 
   const [open, setOpen] = useState(opened);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(
-    Math.max(
-      0,
-      listContentRef.current.indexOf(
-        controlledValue ? (isArray(controlledValue) ? '' : controlledValue?.toString()) : ''
-      )
-    )
-  );
+  const [selectedIndex, setSelectedIndex] = useState<number[]>(() => {
+    if (isArray(controlledValue)) {
+      return controlledValue.map((v) => listContentRef.current.indexOf(v.toString())).sort();
+    } else {
+      return [listContentRef.current.indexOf(controlledValue?.toString() || '')];
+    }
+  });
+
+  const handleSelected = (index: number, value: StringOrNumber) => {
+    if (multiple) {
+      setSelectedIndex((prev) => {
+        if (prev.includes(index)) {
+          return prev.filter((p) => p != index);
+        } else {
+          return [...prev, index];
+        }
+      });
+      const prevValue = controlledValue as StringOrNumber[];
+
+      const nextValue = prevValue.includes(value) ? prevValue.filter((p) => p != value) : [...prevValue, value];
+
+      if (!isControlled) {
+        setValueState(nextValue);
+      }
+
+      onChange && onChange(nextValue);
+    } else {
+      setSelectedIndex([index]);
+
+      if (!isControlled) {
+        setValueState(value);
+      }
+
+      onChange && onChange(value);
+    }
+  };
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
@@ -233,8 +263,6 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     whileElementsMounted: autoUpdate,
   });
 
-  const floatingRef = refs.floating;
-
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
     useClick(context),
     useRole(context, { role: 'listbox' }),
@@ -242,26 +270,26 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     useListNavigation(context, {
       listRef: listItemsRef,
       activeIndex,
-      selectedIndex,
+      selectedIndex: selectedIndex[0],
       onNavigate: setActiveIndex,
     }),
     useTypeahead(context, {
       listRef: listContentRef,
-      onMatch: open ? setActiveIndex : setSelectedIndex,
+      onMatch: setActiveIndex,
       activeIndex,
-      selectedIndex,
+      selectedIndex: selectedIndex[0],
     }),
   ]);
 
   useLayoutEffect(() => {
-    const floating = floatingRef.current;
+    const floating = refs.floating.current;
 
     if (open && controlledScrolling && floating) {
       const item =
         activeIndex != null
           ? listItemsRef.current[activeIndex]
           : selectedIndex != null
-          ? listItemsRef.current[selectedIndex]
+          ? listItemsRef.current[selectedIndex[0]]
           : null;
 
       if (item && prevActiveIndex != null) {
@@ -278,19 +306,19 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         }
       }
     }
-  }, [open, controlledScrolling, prevActiveIndex, activeIndex, floatingRef, selectedIndex]);
+  }, [open, controlledScrolling, prevActiveIndex, activeIndex, refs.floating, selectedIndex]);
 
   useLayoutEffect(() => {
     const floating = refs.floating.current;
 
     if (open && floating && floating.offsetHeight < floating.scrollHeight) {
-      const item = listItemsRef.current[selectedIndex];
+      const item = listItemsRef.current[selectedIndex[0]];
 
       if (item) {
         floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
       }
     }
-  }, [open, selectedIndex, refs.floating, refs.reference, middlewareData]);
+  }, [open, selectedIndex, refs.floating, middlewareData]);
 
   const showClearButton = clearable && controlledValue;
 
@@ -298,24 +326,25 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     <SelectProvider
       value={{
         selectedIndex,
-        setSelectedIndex,
+        onSelected: handleSelected,
         activeIndex,
         setActiveIndex,
         listRef: listItemsRef,
         setOpen,
-        onChange,
         getItemProps,
         dataRef: context.dataRef,
         selectSize: selectSizes[size],
       }}
     >
       <div
+        id={id}
         aria-haspopup={'listbox'}
         aria-expanded={open}
         tabIndex={disabled ? -1 : 0}
         data-active={dataAttr(open)}
         data-disabled={dataAttr(disabled)}
         aria-disabled={ariaAttr(disabled)}
+        aria-required={ariaAttr(required)}
         className={cx(
           'inline-flex items-center border border-gray-200 bg-white relative rounded transition-colors outline-none',
           invalid && 'border-red-500',
@@ -328,8 +357,8 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           className
         )}
         {...getReferenceProps({
-          ...rest,
           role: 'combobox',
+          style: style,
           ref: reference,
           onPointerEnter() {
             setControlledScrolling(false);
@@ -342,7 +371,24 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           },
         })}
       >
-        <span className={'flex flex-1'}>{selectedIndex > 0 ? options[selectedIndex].label : placeholder}</span>
+        <div className={'flex flex-1 gap-1 items-center'}>
+          {multiple
+            ? selectedIndex.map((index) => (
+                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1 appearance-none'} key={index}>
+                  {options[index].label}
+                  <CloseButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelected(index, options[index].value as StringOrNumber);
+                    }}
+                    className={'hover:bg-gray-50 rounded-full'}
+                  />
+                </span>
+              ))
+            : selectedIndex[0] > 0
+            ? options[selectedIndex[0]].label
+            : placeholder}
+        </div>
         {showClearButton && (
           <CloseButton
             onClick={(e) => {
@@ -354,11 +400,16 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
             )}
           />
         )}
-        <span className={'ml-1 text-gray-500'}>
+        <span className={cx('text-gray-500', size == 'xs' || size == 'sm' ? 'ml-1' : 'ml-2')}>
           <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
             <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
           </svg>
         </span>
+        {isArray(controlledValue) ? (
+          controlledValue.map((v, i) => <input key={i} type={'hidden'} ref={ref} value={v} {...rest} />)
+        ) : (
+          <input type={'hidden'} ref={ref} value={controlledValue} {...rest} />
+        )}
       </div>
       <Portal>
         <AnimatePresence>

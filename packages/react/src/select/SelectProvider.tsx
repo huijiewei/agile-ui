@@ -1,16 +1,16 @@
-import type { StringOrNumber } from '@agile-ui/utils';
 import type { ContextData } from '@floating-ui/react-dom-interactions';
 import type { HTMLProps, MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
+import type { StringOrNumber } from '@agile-ui/utils';
 
 type SelectContextValue = {
-  selectedIndex: number;
-  setSelectedIndex: (index: number) => void;
+  selectedIndex: number[];
   activeIndex: number | null;
   setActiveIndex: (index: number | null) => void;
 
+  onSelected: (index: number, value: StringOrNumber) => void;
+
   setOpen: (open: boolean) => void;
-  onChange?: (value: Readonly<StringOrNumber> | StringOrNumber | null) => void;
 
   getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
 

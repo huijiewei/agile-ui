@@ -18,10 +18,9 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
 
   const {
     selectedIndex,
-    setSelectedIndex,
+    onSelected,
     listRef,
     setOpen,
-    onChange,
     activeIndex,
     setActiveIndex,
     getItemProps,
@@ -30,8 +29,7 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
   } = useSelect();
 
   const handleSelect = () => {
-    setSelectedIndex(index);
-    onChange && onChange(value);
+    onSelected(index, value);
     setOpen(false);
     setActiveIndex(null);
   };
@@ -51,8 +49,8 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
     <li
       ref={refs}
       role="option"
-      aria-selected={ariaAttr(activeIndex == index && selectedIndex == index)}
-      data-selected={dataAttr(selectedIndex == index)}
+      aria-selected={ariaAttr(activeIndex == index && selectedIndex.includes(index))}
+      data-selected={dataAttr(selectedIndex.includes(index))}
       data-disabled={dataAttr(disabled)}
       aria-disabled={ariaAttr(disabled)}
       tabIndex={activeIndex === index ? 0 : 1}
