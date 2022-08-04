@@ -6,7 +6,7 @@ import {
   useFocusVisible,
   useIsomorphicLayoutEffect,
 } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { ChangeEvent, cloneElement, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
@@ -19,6 +19,18 @@ export type CheckboxProps = CheckboxBaseProps & {
    * 值
    */
   value?: string | number;
+
+  /**
+   * 是否必填
+   * @default false
+   */
+  required?: boolean;
+
+  /**
+   * 是否未通过验证
+   * @default false
+   */
+  invalid?: boolean;
 
   /**
    * 复选框和标签之间的距离
@@ -71,6 +83,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     onChange,
     onFocus,
     onBlur,
+    required = false,
+    invalid = false,
     ...rest
   } = props;
 
@@ -159,6 +173,9 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         type="checkbox"
         checked={controlledChecked}
         disabled={disabled}
+        aria-disabled={ariaAttr(disabled)}
+        required={required}
+        aria-invalid={ariaAttr(invalid)}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
@@ -169,9 +186,8 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         className={cx(
           'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-2',
           `focus-visible:(ring ring-${color}-300)`,
-          controlledChecked || indeterminate
-            ? `bg-${color}-500 border-${color}-500 text-white`
-            : 'border-gray-200 bg-white',
+          invalid ? 'border-red-300' : controlledChecked || indeterminate ? `border-${color}-500` : 'border-gray-200',
+          controlledChecked || indeterminate ? `bg-${color}-500 text-white` : 'bg-white',
           disabled && 'opacity-50',
           sizeStyle.control
         )}

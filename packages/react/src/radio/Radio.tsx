@@ -6,7 +6,7 @@ import {
   useFocusVisible,
   useIsomorphicLayoutEffect,
 } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
@@ -19,6 +19,18 @@ export type RadioProps = RadioBaseProps & {
    * 值
    */
   value?: string | number;
+
+  /**
+   * 是否必选
+   * @default false
+   */
+  required?: boolean;
+
+  /**
+   * 是否未通过验证
+   * @default false
+   */
+  invalid?: boolean;
 
   /**
    * 单选框和标签之间的距离
@@ -58,6 +70,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     onChange,
     onFocus,
     onBlur,
+    required = false,
+    invalid = false,
     ...rest
   } = props;
 
@@ -120,6 +134,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         type={'radio'}
         checked={controlledChecked}
         disabled={disabled}
+        aria-disabled={ariaAttr(disabled)}
+        required={required}
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
@@ -130,7 +146,8 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         className={cx(
           'inline-flex rounded-full items-center shrink-0 select-none justify-center border-2',
           `focus-visible:(ring ring-${color}-300)`,
-          controlledChecked ? `bg-${color}-500 border-${color}-500 text-white` : 'border-gray-200 bg-white',
+          invalid ? 'border-red-300' : controlledChecked ? `border-${color}-500` : 'border-gray-200',
+          controlledChecked ? `bg-${color}-500 text-white` : 'bg-white',
           disabled && 'opacity-50',
           sizeStyle.control,
           controlledChecked && `&:before:(inline-block w-1/2 h-1/2 rounded-[50%] bg-current relative content-[''])`
