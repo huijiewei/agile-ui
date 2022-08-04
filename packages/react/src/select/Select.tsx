@@ -379,7 +379,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <div className={'flex flex-1 gap-1 items-center'}>
           {multiple
             ? selectedIndex.map((index) => (
-                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1 appearance-none'} key={index}>
+                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
                   {options[index].label}
                   <CloseButton
                     onClick={(e) => {
