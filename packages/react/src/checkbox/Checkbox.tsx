@@ -85,6 +85,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     onBlur,
     required = false,
     invalid = false,
+    style,
     ...rest
   } = props;
 
@@ -165,6 +166,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
       )}
+      style={style}
     >
       <input
         ref={mergeRefs(inputRef, ref)}

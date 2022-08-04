@@ -72,6 +72,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     onBlur,
     required = false,
     invalid = false,
+    style,
     ...rest
   } = props;
 
@@ -125,6 +126,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
       )}
+      style={style}
     >
       <input
         ref={mergeRefs(inputRef, ref)}
