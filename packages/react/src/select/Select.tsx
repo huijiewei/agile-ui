@@ -1,4 +1,4 @@
-import { useControllableProp, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
+import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { __DEV__, ariaAttr, dataAttr, isArray } from '@agile-ui/utils';
 import {
@@ -15,12 +15,23 @@ import {
   useRole,
   useTypeahead,
 } from '@floating-ui/react-dom-interactions';
-import { Children, isValidElement, ReactNode, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  Key,
+  ReactElement,
+  ReactNode,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
-import { SelectOptionIndexProvider, SelectProvider } from './SelectProvider';
+import { SelectProvider } from './SelectProvider';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
@@ -57,7 +68,7 @@ export type SelectProps = {
   disabled?: boolean;
 
   /**
-   * 是否必填
+   * 是否必选
    * @default false
    */
   required?: boolean;
@@ -67,12 +78,6 @@ export type SelectProps = {
    * @default false
    */
   invalid?: boolean;
-
-  /**
-   * 是否只读
-   * @default false
-   */
-  readOnly?: boolean;
 
   /**
    * 是否全宽度
@@ -107,7 +112,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     children,
     onChange,
     disabled = false,
-    readOnly = false,
+    required = false,
     invalid = false,
     multiple = false,
     clearable = false,
@@ -119,37 +124,60 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
     ...rest
   } = props;
 
-  const cacheData = useMemo(() => {
+  const { elements, options } = useMemo(() => {
     let optionIndex = 0;
 
     const cacheData: {
-      elements: ReactNode[];
+      elements: ReactElement[];
       options: { value: StringOrNumber | undefined; label: ReactNode }[];
     } = {
       elements: [],
       options: [{ value: undefined, label: placeholder }],
     };
 
+    const getChildKey = (value: StringOrNumber, key: Key | null) => {
+      if (key) {
+        return key;
+      }
+
+      if (value) {
+        return value;
+      }
+
+      return Math.random().toString(36).slice(-6);
+    };
+
     Children.forEach(children, (child) => {
       if (isValidElement(child)) {
         if (child.type == SelectOptionGroup) {
           Children.forEach(child.props.children, (groupChild: ReactNode) => {
-            if (isValidElement(groupChild) && groupChild.type == SelectOption) {
-              optionIndex++;
-              cacheData.elements.push(
-                <SelectOptionIndexProvider value={optionIndex}>{groupChild}</SelectOptionIndexProvider>
-              );
-              cacheData.options[optionIndex] = {
-                value: groupChild.props.value,
-                label: groupChild.props.label ? groupChild.props.label : groupChild.props.children,
-              };
-            } else {
-              cacheData.elements.push(groupChild);
+            if (isValidElement(groupChild)) {
+              if (groupChild.type == SelectOption) {
+                optionIndex++;
+
+                cacheData.elements.push(
+                  cloneElement(groupChild, {
+                    index: optionIndex,
+                    key: getChildKey(groupChild.props.value, groupChild.key),
+                  })
+                );
+
+                cacheData.options[optionIndex] = {
+                  value: groupChild.props.value,
+                  label: groupChild.props.label ? groupChild.props.label : groupChild.props.children,
+                };
+              } else {
+                cacheData.elements.push(groupChild);
+              }
             }
           });
         } else if (child.type == SelectOption) {
           optionIndex++;
-          cacheData.elements.push(<SelectOptionIndexProvider value={optionIndex}>{child}</SelectOptionIndexProvider>);
+
+          cacheData.elements.push(
+            cloneElement(child, { index: optionIndex, key: getChildKey(child.props.value, child.key) })
+          );
+
           cacheData.options[optionIndex] = {
             value: child.props.value,
             label: child.props.label ? child.props.label : child.props.children,
@@ -157,8 +185,6 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         } else {
           cacheData.elements.push(child);
         }
-      } else {
-        cacheData.elements.push(child);
       }
     });
 
@@ -170,19 +196,18 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
   const [isControlled, controlledValue] = useControllableProp(value, valueState);
 
   const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const listContentRef = useRef<string[]>(cacheData.options.map((option) => option.value?.toString() || ''));
+  const listContentRef = useRef<string[]>(options.map((option) => option.value?.toString() || ''));
 
   const [open, setOpen] = useState(opened);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  useEffect(() => {
-    setSelectedIndex(
+  const [selectedIndex, setSelectedIndex] = useState(
+    Math.max(
+      0,
       listContentRef.current.indexOf(
         controlledValue ? (isArray(controlledValue) ? '' : controlledValue?.toString()) : ''
       )
-    );
-  }, [controlledValue]);
+    )
+  );
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
@@ -293,9 +318,11 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
         aria-disabled={ariaAttr(disabled)}
         className={cx(
           'inline-flex items-center border border-gray-200 bg-white relative rounded transition-colors outline-none',
+          invalid && 'border-red-500',
           disabled
             ? 'opacity-50 cursor-not-allowed pointer-events-none'
-            : 'cursor-default active:(border-blue-500 z-[1]) focus-visible:(border-blue-500) hover:(border-gray-300 z-[2])',
+            : 'cursor-default active:(border-blue-500 z-[1]) focus-visible:(border-blue-500)',
+          !invalid && !disabled && 'hover:(border-gray-300 z-[2])',
           fullWidth ? 'w-full' : '',
           selectSizes[size],
           className
@@ -315,9 +342,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           },
         })}
       >
-        <span className={'flex flex-1'}>
-          {selectedIndex > 0 ? cacheData.options[selectedIndex].label : placeholder}
-        </span>
+        <span className={'flex flex-1'}>{selectedIndex > 0 ? options[selectedIndex].label : placeholder}</span>
         {showClearButton && (
           <CloseButton
             onClick={(e) => {
@@ -340,14 +365,14 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
           {open && (
             <FloatingFocusManager context={context} preventTabbing>
               <Motion
+                as={'ul'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className={cx(
-                  'overflow-y-auto absolute z-10 shadow rounded border outline-none w-auto p-1.5 border-gray-200 bg-white dark:bg-gray-700',
-                  '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
-                )}
+                className={
+                  'absolute z-10 shadow rounded border outline-none w-auto border-gray-200 bg-white dark:bg-gray-700 p-1.5 overflow-y-auto &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
+                }
                 {...getFloatingProps({
                   ref: floating,
                   style: {
@@ -356,7 +381,7 @@ export const Select = primitiveComponent<'select', SelectProps>((props, ref) => 
                   },
                 })}
               >
-                {cacheData.elements}
+                {elements}
               </Motion>
             </FloatingFocusManager>
           )}

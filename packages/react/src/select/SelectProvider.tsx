@@ -25,10 +25,3 @@ const [SelectProvider, useSelect] = createContext<SelectContextValue>({
 });
 
 export { SelectProvider, useSelect };
-
-const [SelectOptionIndexProvider, useSelectOptionIndex] = createContext<number>({
-  strict: true,
-  name: 'SelectOptionIndexContext',
-});
-
-export { SelectOptionIndexProvider, useSelectOptionIndex };
