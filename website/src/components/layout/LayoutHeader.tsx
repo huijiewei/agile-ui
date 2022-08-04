@@ -15,7 +15,7 @@ const AsideCollapsedButton = () => {
     <button
       onClick={() => dispatch((prev) => !prev)}
       className={cx(
-        'block tablet:hidden p-2 appearance-none select-none text-gray-500 hover:text-gray-700',
+        'block tablet:hidden p-2 appearance-none transition-colors select-none text-gray-500 hover:text-gray-700',
         existed ? 'visible' : 'invisible'
       )}
       type={'button'}
