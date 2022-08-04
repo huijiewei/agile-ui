@@ -204,7 +204,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number[]>(() => {
     if (isArray(controlledValue)) {
-      return controlledValue.map((v) => listContentRef.current.indexOf(v.toString())).sort();
+      return controlledValue.map((v) => listContentRef.current.indexOf(v.toString()));
     } else {
       return [listContentRef.current.indexOf(controlledValue?.toString() || '')];
     }
@@ -219,6 +219,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           return [...prev, index];
         }
       });
+
       const prevValue = controlledValue as StringOrNumber[];
 
       const nextValue = prevValue.includes(value) ? prevValue.filter((p) => p != value) : [...prevValue, value];
@@ -263,6 +264,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     whileElementsMounted: autoUpdate,
   });
 
+  const minSelectedIndex = useMemo(() => {
+    return Math.min(...selectedIndex);
+  }, [selectedIndex]);
+
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
     useClick(context),
     useRole(context, { role: 'listbox' }),
@@ -270,14 +275,14 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     useListNavigation(context, {
       listRef: listItemsRef,
       activeIndex,
-      selectedIndex: selectedIndex[0],
+      selectedIndex: minSelectedIndex,
       onNavigate: setActiveIndex,
     }),
     useTypeahead(context, {
       listRef: listContentRef,
       onMatch: setActiveIndex,
       activeIndex,
-      selectedIndex: selectedIndex[0],
+      selectedIndex: minSelectedIndex,
     }),
   ]);
 
@@ -288,8 +293,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       const item =
         activeIndex != null
           ? listItemsRef.current[activeIndex]
-          : selectedIndex != null
-          ? listItemsRef.current[selectedIndex[0]]
+          : minSelectedIndex != null
+          ? listItemsRef.current[minSelectedIndex]
           : null;
 
       if (item && prevActiveIndex != null) {
@@ -306,19 +311,19 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         }
       }
     }
-  }, [open, controlledScrolling, prevActiveIndex, activeIndex, refs.floating, selectedIndex]);
+  }, [open, controlledScrolling, prevActiveIndex, activeIndex, refs.floating, minSelectedIndex]);
 
   useLayoutEffect(() => {
     const floating = refs.floating.current;
 
     if (open && floating && floating.offsetHeight < floating.scrollHeight) {
-      const item = listItemsRef.current[selectedIndex[0]];
+      const item = listItemsRef.current[minSelectedIndex];
 
       if (item) {
         floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
       }
     }
-  }, [open, selectedIndex, refs.floating, middlewareData]);
+  }, [open, refs.floating, middlewareData, minSelectedIndex]);
 
   const showClearButton = clearable && controlledValue;
 
