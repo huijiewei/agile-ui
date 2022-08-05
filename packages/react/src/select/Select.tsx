@@ -18,6 +18,7 @@ import {
 import {
   Children,
   cloneElement,
+  forwardRef,
   isValidElement,
   Key,
   ReactElement,
@@ -38,6 +39,7 @@ import { Motion } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
 import { SelectOption } from './SelectOption';
 import { CloseButton } from '../close-button/CloseButton';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 export type SelectProps = {
   /**
@@ -275,22 +277,16 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const prevActiveIndex = usePrevious<number | null>(activeIndex);
 
-  const { x, y, reference, floating, context, refs, middlewareData } = useFloating<HTMLElement>({
+  const { x, y, reference, floating, context, middlewareData } = useFloating<HTMLElement>({
     middleware: [
       offset(4),
       flip({ padding: 8 }),
       floatingSize({
-        apply({ availableWidth, availableHeight, elements, rects }) {
+        apply({ availableWidth, elements, rects }) {
           Object.assign(elements.floating.style, {
             maxWidth: `${availableWidth}px`,
             minWidth: `${rects.reference.width}px`,
           });
-
-          const ul = elements.floating.querySelector('ul');
-
-          if (ul) {
-            ul.style.maxHeight = `${availableHeight}px`;
-          }
         },
         padding: 8,
       }),
@@ -322,10 +318,19 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }),
   ]);
 
-  useLayoutEffect(() => {
-    const floating = refs.floating.current;
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
 
-    if (open && controlledScrolling && floating) {
+  useLayoutEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    if (!controlledScrolling) {
+      return;
+    }
+
+    if (scrollerRef.current) {
       const item =
         activeIndex != null
           ? listItemsRef.current[activeIndex]
@@ -336,30 +341,36 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       if (item && prevActiveIndex != null) {
         const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
 
-        const floatingHeight = floating.offsetHeight;
+        const floatingHeight = scrollerRef.current.offsetHeight;
         const top = item.offsetTop;
         const bottom = top + itemHeight;
 
-        if (top < floating.scrollTop) {
-          floating.scrollTop -= floating.scrollTop - top + 5;
-        } else if (bottom > floatingHeight + floating.scrollTop) {
-          floating.scrollTop += bottom - floatingHeight - floating.scrollTop + 5;
+        if (top < scrollerRef.current.scrollTop) {
+          scrollerRef.current.scrollTop -= scrollerRef.current.scrollTop - top + 5;
+        } else if (bottom > floatingHeight + scrollerRef.current.scrollTop) {
+          scrollerRef.current.scrollTop += bottom - floatingHeight - scrollerRef.current.scrollTop + 5;
         }
       }
     }
-  }, [open, controlledScrolling, prevActiveIndex, activeIndex, refs.floating, minSelectedIndex]);
+  }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex]);
 
   useLayoutEffect(() => {
-    const floating = refs.floating.current;
-
-    if (open && floating && floating.offsetHeight < floating.scrollHeight) {
-      const item = listItemsRef.current[minSelectedIndex];
-
-      if (item) {
-        floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
-      }
+    if (!open) {
+      return;
     }
-  }, [open, refs.floating, middlewareData, minSelectedIndex]);
+
+    if (virtuosoRef.current) {
+      virtuosoRef.current.scrollToIndex({ index: minSelectedIndex, align: 'start', behavior: 'auto' });
+
+      return;
+    }
+
+    const item = listItemsRef.current[minSelectedIndex];
+
+    if (item && scrollerRef.current && scrollerRef.current.offsetHeight < scrollerRef.current.scrollHeight) {
+      scrollerRef.current.scrollTop = item.offsetTop - scrollerRef.current.offsetHeight / 2 + item.offsetHeight / 2;
+    }
+  }, [open, minSelectedIndex, middlewareData]);
 
   const showClearButton =
     clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue !== undefined);
@@ -402,18 +413,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           role: 'combobox',
           style: style,
           ref: reference,
-          onPointerEnter() {
-            setControlledScrolling(false);
-          },
-          onPointerMove() {
-            setControlledScrolling(false);
-          },
-          onKeyDown() {
-            setControlledScrolling(true);
-          },
         })}
       >
-        <div className={'flex flex-1 gap-1 items-center'}>
+        <div className={'flex flex-1 gap-1 items-center select-none'}>
           {multiple ? (
             selectedIndex.length > 0 ? (
               selectedIndex.map((index) => (
@@ -483,15 +485,49 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                     top: y ?? 0,
                     left: x ?? 0,
                   },
+                  onPointerEnter() {
+                    setControlledScrolling(false);
+                  },
+                  onPointerMove() {
+                    setControlledScrolling(false);
+                  },
+                  onKeyDown() {
+                    setControlledScrolling(true);
+                  },
                 })}
               >
-                <ul
-                  className={
-                    'relative p-1.5 overflow-y-auto overscroll-contain &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
-                  }
-                >
-                  {elements}
-                </ul>
+                {elements.length > 30 ? (
+                  <Virtuoso
+                    ref={virtuosoRef}
+                    className={'scrollbar-thin overscroll-contain'}
+                    style={{ height: '320px' }}
+                    totalCount={elements.length}
+                    components={{
+                      Header: () => <div className={'h-1.5'}></div>,
+                      Footer: () => <div className={'h-1.5'}></div>,
+                      // eslint-disable-next-line react/display-name
+                      List: forwardRef(({ children, ...rest }, ref) => (
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
+                        <ul className={'px-1.5'} ref={ref} {...rest}>
+                          {children}
+                        </ul>
+                      )),
+                      // eslint-disable-next-line react/display-name
+                      Item: forwardRef(({ children, ...rest }, ref) =>
+                        cloneElement(children as ReactElement, { ref, ...rest })
+                      ),
+                    }}
+                    itemContent={(index) => elements[index]}
+                  />
+                ) : (
+                  <ul
+                    ref={scrollerRef}
+                    className={'relative p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'}
+                  >
+                    {elements}
+                  </ul>
+                )}
               </Motion>
             </FloatingFocusManager>
           )}
