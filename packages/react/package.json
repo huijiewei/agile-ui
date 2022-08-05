@@ -40,7 +40,8 @@
   "dependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react-dom-interactions": "^0.9.1"
+    "@floating-ui/react-dom-interactions": "^0.9.1",
+    "react-virtuoso": "^2.16.6"
   },
   "devDependencies": {
     "@agile-ui/test-utils": "*",
