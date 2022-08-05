@@ -16,17 +16,8 @@ export type SelectOptionProps = {
 export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, ref) => {
   const { children, value, className, disabled = false, index = 0, ...rest } = props;
 
-  const {
-    selectedIndex,
-    onSelected,
-    listRef,
-    setOpen,
-    activeIndex,
-    setActiveIndex,
-    getItemProps,
-    dataRef,
-    selectSize,
-  } = useSelect();
+  const { selectedIndex, onSelected, listRef, setOpen, activeIndex, setActiveIndex, getItemProps, dataRef, sizeClass } =
+    useSelect();
 
   const handleSelect = () => {
     onSelected(index, value);
@@ -56,7 +47,7 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
       tabIndex={activeIndex === index ? 0 : 1}
       className={cx(
         'flex select-none w-full outline-none transition-colors whitespace-nowrap items-center rounded focus:bg-gray-100 dark:focus:bg-gray-600 selected:text-blue-500',
-        selectSize,
+        sizeClass,
         className
       )}
       {...getItemProps({

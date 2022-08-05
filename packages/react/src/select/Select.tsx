@@ -1,4 +1,4 @@
-import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
+import { useControllableProp, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
@@ -18,7 +18,6 @@ import {
 import {
   Children,
   cloneElement,
-  forwardRef,
   isValidElement,
   Key,
   ReactElement,
@@ -39,7 +38,7 @@ import { Motion } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
 import { SelectOption } from './SelectOption';
 import { CloseButton } from '../close-button/CloseButton';
-import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 export type SelectProps = {
   /**
@@ -138,6 +137,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     ...rest
   } = props;
 
+  const [virtual, setVirtual] = useState(false);
+
   const { elements, options } = useMemo(() => {
     let optionIndex = 0;
 
@@ -201,6 +202,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         }
       }
     });
+
+    setVirtual(cacheData.elements.length > 30 && cacheData.elements.length == cacheData.options.length - 1);
 
     return cacheData;
   }, [children, placeholder]);
@@ -277,7 +280,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const prevActiveIndex = usePrevious<number | null>(activeIndex);
 
-  const { x, y, reference, floating, context, middlewareData } = useFloating<HTMLElement>({
+  const { x, y, reference, floating, context, refs, middlewareData } = useFloating<HTMLElement>({
     middleware: [
       offset(4),
       flip({ padding: 8 }),
@@ -318,8 +321,17 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }),
   ]);
 
-  const virtuosoRef = useRef<VirtuosoHandle>(null);
-  const scrollerRef = useRef<HTMLUListElement>(null);
+  const parentRef = useRef();
+
+  const rowVirtual = useVirtualizer({
+    count: elements.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 32,
+    overscan: 2,
+    enableSmoothScroll: false,
+  });
+
+  const floatingRefs = useMergedRefs(parentRef, floating);
 
   useLayoutEffect(() => {
     if (!open) {
@@ -330,47 +342,62 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       return;
     }
 
-    if (scrollerRef.current) {
-      const item =
-        activeIndex != null
-          ? listItemsRef.current[activeIndex]
-          : minSelectedIndex != null
-          ? listItemsRef.current[minSelectedIndex]
-          : null;
+    if (virtual) {
+      const scrollIndex =
+        activeIndex != null ? activeIndex : minSelectedIndex != null && minSelectedIndex > 0 ? minSelectedIndex - 1 : 0;
 
-      if (item && prevActiveIndex != null) {
-        const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
+      if (scrollIndex > 0 && prevActiveIndex != null) {
+        rowVirtual.scrollToIndex(scrollIndex, { align: 'auto', smoothScroll: false });
+      }
+    } else {
+      const floating = refs.floating.current;
 
-        const floatingHeight = scrollerRef.current.offsetHeight;
-        const top = item.offsetTop;
-        const bottom = top + itemHeight;
+      if (floating) {
+        const item =
+          activeIndex != null
+            ? listItemsRef.current[activeIndex]
+            : minSelectedIndex != null
+            ? listItemsRef.current[minSelectedIndex]
+            : null;
 
-        if (top < scrollerRef.current.scrollTop) {
-          scrollerRef.current.scrollTop -= scrollerRef.current.scrollTop - top + 5;
-        } else if (bottom > floatingHeight + scrollerRef.current.scrollTop) {
-          scrollerRef.current.scrollTop += bottom - floatingHeight - scrollerRef.current.scrollTop + 5;
+        if (item && prevActiveIndex != null) {
+          const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
+
+          const floatingHeight = floating.offsetHeight;
+          const top = item.offsetTop - itemHeight;
+          const bottom = top + itemHeight * 3;
+
+          if (top < floating.scrollTop) {
+            floating.scrollTop -= floating.scrollTop - top + 6;
+          } else if (bottom > floatingHeight + floating.scrollTop) {
+            floating.scrollTop += bottom - floatingHeight - floating.scrollTop + 6;
+          }
         }
       }
     }
-  }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex]);
+  }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex, refs.floating, virtual, rowVirtual]);
 
   useLayoutEffect(() => {
     if (!open) {
       return;
     }
 
-    if (virtuosoRef.current) {
-      virtuosoRef.current.scrollToIndex({ index: minSelectedIndex, align: 'start', behavior: 'auto' });
+    if (virtual) {
+      if (minSelectedIndex > 0) {
+        rowVirtual.scrollToIndex(minSelectedIndex - 1, { align: 'center', smoothScroll: false });
+      }
+    } else {
+      const floating = refs.floating.current;
 
-      return;
+      if (floating && floating.offsetHeight < floating.scrollHeight) {
+        const item = listItemsRef.current[minSelectedIndex];
+
+        if (item) {
+          floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
+        }
+      }
     }
-
-    const item = listItemsRef.current[minSelectedIndex];
-
-    if (item && scrollerRef.current && scrollerRef.current.offsetHeight < scrollerRef.current.scrollHeight) {
-      scrollerRef.current.scrollTop = item.offsetTop - scrollerRef.current.offsetHeight / 2 + item.offsetHeight / 2;
-    }
-  }, [open, minSelectedIndex, middlewareData]);
+  }, [open, minSelectedIndex, middlewareData, refs.floating, virtual, rowVirtual]);
 
   const showClearButton =
     clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue !== undefined);
@@ -386,7 +413,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         setOpen,
         getItemProps,
         dataRef: context.dataRef,
-        selectSize: selectSizes[size],
+        sizeClass: selectSizes[size],
       }}
     >
       <div
@@ -478,12 +505,15 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className={'absolute z-10 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700'}
+                className={
+                  'absolute z-10 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'
+                }
                 {...getFloatingProps({
-                  ref: floating,
+                  ref: virtual ? floatingRefs : floating,
                   style: {
                     top: y ?? 0,
                     left: x ?? 0,
+                    height: virtual ? '320px' : undefined,
                   },
                   onPointerEnter() {
                     setControlledScrolling(false);
@@ -496,37 +526,22 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                   },
                 })}
               >
-                {elements.length > 30 ? (
-                  <Virtuoso
-                    ref={virtuosoRef}
-                    className={'scrollbar-thin overscroll-contain'}
-                    style={{ height: '320px' }}
-                    totalCount={elements.length}
-                    components={{
-                      Header: () => <div className={'h-1.5'}></div>,
-                      Footer: () => <div className={'h-1.5'}></div>,
-                      // eslint-disable-next-line react/display-name
-                      List: forwardRef(({ children, ...rest }, ref) => (
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-ignore
-                        <ul className={'px-1.5'} ref={ref} {...rest}>
-                          {children}
-                        </ul>
-                      )),
-                      // eslint-disable-next-line react/display-name
-                      Item: forwardRef(({ children, ...rest }, ref) =>
-                        cloneElement(children as ReactElement, { ref, ...rest })
-                      ),
-                    }}
-                    itemContent={(index) => elements[index]}
-                  />
-                ) : (
-                  <ul
-                    ref={scrollerRef}
-                    className={'relative p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'}
-                  >
-                    {elements}
+                {virtual ? (
+                  <ul style={{ height: `${rowVirtual.getTotalSize()}px`, width: '100%', position: 'relative' }}>
+                    {rowVirtual.getVirtualItems().map((row) =>
+                      cloneElement(elements[row.index], {
+                        ref: row.measureElement,
+                        style: {
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          transform: `translateY(${row.start}px)`,
+                        },
+                      })
+                    )}
                   </ul>
+                ) : (
+                  elements
                 )}
               </Motion>
             </FloatingFocusManager>

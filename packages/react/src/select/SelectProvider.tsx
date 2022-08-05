@@ -4,10 +4,10 @@ import { createContext } from '../utils/context';
 import type { StringOrNumber } from '@agile-ui/utils';
 
 type SelectContextValue = {
-  selectedIndex: number[];
   activeIndex: number | null;
   setActiveIndex: (index: number | null) => void;
 
+  selectedIndex: number[];
   onSelected: (index: number, value: StringOrNumber) => void;
 
   setOpen: (open: boolean) => void;
@@ -16,7 +16,7 @@ type SelectContextValue = {
 
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
   dataRef: ContextData;
-  selectSize: string;
+  sizeClass: string;
 };
 
 const [SelectProvider, useSelect] = createContext<SelectContextValue>({

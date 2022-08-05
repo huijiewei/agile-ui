@@ -41,7 +41,7 @@
     "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
     "@floating-ui/react-dom-interactions": "^0.9.1",
-    "react-virtuoso": "^2.16.6"
+    "@tanstack/react-virtual": "^3.0.0-beta.17"
   },
   "devDependencies": {
     "@agile-ui/test-utils": "*",
