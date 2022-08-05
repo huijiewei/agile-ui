@@ -41,12 +41,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
         language={language}
         scope={{ ...AgileReact, ...AgileReactIcons, FormDemo }}
       >
-        <LivePreview
-          className={cx(
-            'overflow-x-auto rounded-t border border-gray-200 p-3',
-            '&::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
-          )}
-        />
+        <LivePreview className={'overflow-x-auto rounded-t border border-gray-200 p-3 scrollbar'} />
         <div className={'relative'}>
           <LiveEditor
             translate={'no'}
