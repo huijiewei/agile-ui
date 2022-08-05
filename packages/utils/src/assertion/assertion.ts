@@ -12,18 +12,9 @@ export const isString = (value: unknown): value is string => {
   return typeof value === 'string';
 };
 
-export const isUndefined = (value: unknown): value is undefined => {
-  return typeof value === 'undefined';
-};
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isObject = (value: unknown): value is Record<any, any> => {
   return value !== null && typeof value === 'object';
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isArray = <T>(value: any): value is Array<T> => {
-  return Array.isArray(value);
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types

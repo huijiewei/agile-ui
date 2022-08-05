@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isFunction, isNumber, isObject, isString, isUndefined } from './assertion';
+import { isBoolean, isFunction, isNumber, isObject, isString } from './assertion';
 import { describe, test, expect } from 'vitest';
 
 describe('utils/assertion', () => {
@@ -29,15 +29,6 @@ describe('utils/assertion', () => {
     expect(isString({})).toBeFalsy();
   });
 
-  test('isUndefined', () => {
-    expect(isUndefined(undefined)).toBeTruthy();
-
-    expect(isUndefined(0)).toBeFalsy();
-    expect(isUndefined(null)).toBeFalsy();
-    expect(isUndefined(NaN)).toBeFalsy();
-    expect(isUndefined('')).toBeFalsy();
-  });
-
   test('isObject', () => {
     expect(isObject({})).toBeTruthy();
     expect(isObject([])).toBeTruthy();
@@ -48,10 +39,6 @@ describe('utils/assertion', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     expect(isObject(function foo() {})).toBeFalsy();
     expect(isObject(123)).toBeFalsy();
-  });
-
-  test('isArray', () => {
-    expect(isArray([1])).toBeTruthy();
   });
 
   test('isFunction', () => {

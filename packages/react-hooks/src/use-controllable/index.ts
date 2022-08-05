@@ -4,7 +4,7 @@ import { useCallbackRef } from '../use-callback-ref';
 
 export const useControllableProp = <T>(prop: T | undefined, state: T) => {
   const controlled = prop !== undefined;
-  const value = controlled && typeof prop !== 'undefined' ? prop : state;
+  const value = controlled ? prop : state;
 
   return [controlled, value] as const;
 };

@@ -1,6 +1,6 @@
 import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { __DEV__, ariaAttr, dataAttr, isArray } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
   autoUpdate,
   flip,
@@ -213,42 +213,45 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   const [open, setOpen] = useState(opened);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number[]>(() => {
-    if (isArray(controlledValue)) {
+    if (Array.isArray(controlledValue)) {
       return controlledValue.map((v) => listContentRef.current.indexOf(v.toString()));
     } else {
       return [listContentRef.current.indexOf(controlledValue?.toString() || '')];
     }
   });
 
-  const handleSelected = (index: number, value: StringOrNumber) => {
-    if (multiple) {
-      setSelectedIndex((prev) => {
-        if (prev.includes(index)) {
-          return prev.filter((p) => p != index);
-        } else {
-          return [...prev, index];
+  const handleSelected = useCallback(
+    (index: number, value: StringOrNumber) => {
+      if (multiple) {
+        setSelectedIndex((prev) => {
+          if (prev.includes(index)) {
+            return prev.filter((p) => p != index);
+          } else {
+            return [...prev, index];
+          }
+        });
+
+        const prevValue = valueState as StringOrNumber[];
+
+        const nextValue = prevValue.includes(value) ? prevValue.filter((p) => p != value) : [...prevValue, value];
+
+        if (!isControlled) {
+          setValueState(nextValue);
         }
-      });
 
-      const prevValue = controlledValue as StringOrNumber[];
+        onChange && onChange(nextValue);
+      } else {
+        setSelectedIndex([index]);
 
-      const nextValue = prevValue.includes(value) ? prevValue.filter((p) => p != value) : [...prevValue, value];
+        if (!isControlled) {
+          setValueState(value);
+        }
 
-      if (!isControlled) {
-        setValueState(nextValue);
+        onChange && onChange(value);
       }
-
-      onChange && onChange(nextValue);
-    } else {
-      setSelectedIndex([index]);
-
-      if (!isControlled) {
-        setValueState(value);
-      }
-
-      onChange && onChange(value);
-    }
-  };
+    },
+    [isControlled, multiple, onChange, valueState]
+  );
 
   const handleClear = useCallback(() => {
     if (multiple) {
@@ -281,8 +284,13 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           Object.assign(elements.floating.style, {
             maxWidth: `${availableWidth}px`,
             minWidth: `${rects.reference.width}px`,
-            maxHeight: `${availableHeight}px`,
           });
+
+          const ul = elements.floating.querySelector('ul');
+
+          if (ul) {
+            ul.style.maxHeight = `${availableHeight}px`;
+          }
         },
         padding: 8,
       }),
@@ -354,7 +362,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   }, [open, refs.floating, middlewareData, minSelectedIndex]);
 
   const showClearButton =
-    clearable && (isArray(controlledValue) ? controlledValue.length > 0 : controlledValue != undefined);
+    clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue !== undefined);
 
   return (
     <SelectProvider
@@ -406,24 +414,28 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         })}
       >
         <div className={'flex flex-1 gap-1 items-center'}>
-          {multiple
-            ? selectedIndex.length > 0
-              ? selectedIndex.map((index) => (
-                  <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
-                    {options[index].label}
-                    <CloseButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleSelected(index, options[index].value as StringOrNumber);
-                      }}
-                      className={'hover:bg-gray-50 rounded-full'}
-                    />
-                  </span>
-                ))
-              : placeholder
-            : selectedIndex[0] > 0
-            ? options[selectedIndex[0]].label
-            : placeholder}
+          {multiple ? (
+            selectedIndex.length > 0 ? (
+              selectedIndex.map((index) => (
+                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
+                  {options[index].label}
+                  <CloseButton
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelected(index, options[index].value as StringOrNumber);
+                    }}
+                    className={'hover:bg-gray-50 rounded-full'}
+                  />
+                </span>
+              ))
+            ) : (
+              <span className={'text-gray-500'}>{placeholder}</span>
+            )
+          ) : selectedIndex[0] > 0 ? (
+            options[selectedIndex[0]].label
+          ) : (
+            <span className={'text-gray-500'}>{placeholder}</span>
+          )}
         </div>
         <div className={'flex gap-1 items-center'}>
           {showClearButton && (
@@ -449,10 +461,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
             </svg>
           </span>
         </div>
-        {isArray(controlledValue) ? (
+        {Array.isArray(controlledValue) ? (
           controlledValue.map((v, i) => <input key={i} type={'hidden'} ref={ref} value={v} {...rest} />)
         ) : (
-          <input type={'hidden'} ref={ref} value={controlledValue} {...rest} />
+          <input type={'hidden'} ref={ref} value={controlledValue || ''} {...rest} />
         )}
       </div>
       <Portal>
@@ -460,14 +472,11 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           {open && (
             <FloatingFocusManager context={context} preventTabbing>
               <Motion
-                as={'ul'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className={
-                  'absolute z-10 shadow rounded border outline-none w-auto border-gray-200 bg-white dark:bg-gray-700 p-1.5 overflow-y-auto overscroll-contain &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
-                }
+                className={'absolute z-10 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700'}
                 {...getFloatingProps({
                   ref: floating,
                   style: {
@@ -476,7 +485,13 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                   },
                 })}
               >
-                {elements}
+                <ul
+                  className={
+                    'relative p-1.5 overflow-y-auto overscroll-contain &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
+                  }
+                >
+                  {elements}
+                </ul>
               </Motion>
             </FloatingFocusManager>
           )}
