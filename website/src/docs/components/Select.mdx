@@ -17,7 +17,7 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
         </SelectOption>
       ))}
   </Select>
-  <Select defaultValue={[10, 16, 12]} multiple placeholder={'选择器'}>
+  <Select defaultValue={[]} multiple placeholder={'选择器'}>
     {Array(20)
       .fill(null)
       .map((_, idx) => idx + 1)

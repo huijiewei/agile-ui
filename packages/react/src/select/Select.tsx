@@ -22,6 +22,7 @@ import {
   Key,
   ReactElement,
   ReactNode,
+  useCallback,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -94,15 +95,23 @@ export type SelectProps = {
 
   defaultValue?: StringOrNumber[] | StringOrNumber;
 
+  /**
+   * 值改变时触发回调
+   */
   onChange?: (value: StringOrNumber[] | StringOrNumber | undefined) => void;
+
+  /**
+   * 点击清除按钮的回调
+   */
+  onClear?: () => void;
 };
 
 const selectSizes = {
-  xs: 'h-6 leading-6 pl-2 pr-1 text-sm',
-  sm: 'h-7 leading-7 pl-2 pr-1',
-  md: 'h-8 leading-8 pl-3 pr-1.5',
-  lg: 'h-9 leading-9 pl-3 pr-1.5',
-  xl: 'h-10 leading-10 pl-3 pr-1.5 text-lg',
+  xs: 'h-6 leading-6 pl-2 pr-1 text-sm gap-2',
+  sm: 'h-7 leading-7 pl-2 pr-1 gap-2',
+  md: 'h-8 leading-8 pl-3 pr-1.5 gap-3',
+  lg: 'h-9 leading-9 pl-3 pr-1.5 gap-3',
+  xl: 'h-10 leading-10 pl-3 pr-1.5 text-lg gap-3',
 };
 
 export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
@@ -112,6 +121,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     placeholder = '选择器',
     children,
     onChange,
+    onClear,
     disabled = false,
     required = false,
     invalid = false,
@@ -240,6 +250,24 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
   };
 
+  const handleClear = useCallback(() => {
+    if (multiple) {
+      setSelectedIndex([]);
+
+      if (!isControlled) {
+        setValueState([]);
+      }
+    } else {
+      setSelectedIndex([0]);
+
+      if (!isControlled) {
+        setValueState(undefined);
+      }
+    }
+
+    onClear && onClear();
+  }, [isControlled, multiple, onClear]);
+
   const [controlledScrolling, setControlledScrolling] = useState(false);
 
   const prevActiveIndex = usePrevious<number | null>(activeIndex);
@@ -325,7 +353,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
   }, [open, refs.floating, middlewareData, minSelectedIndex]);
 
-  const showClearButton = clearable && controlledValue;
+  const showClearButton =
+    clearable && (isArray(controlledValue) ? controlledValue.length > 0 : controlledValue != undefined);
 
   return (
     <SelectProvider
@@ -378,38 +407,48 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       >
         <div className={'flex flex-1 gap-1 items-center'}>
           {multiple
-            ? selectedIndex.map((index) => (
-                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
-                  {options[index].label}
-                  <CloseButton
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSelected(index, options[index].value as StringOrNumber);
-                    }}
-                    className={'hover:bg-gray-50 rounded-full'}
-                  />
-                </span>
-              ))
+            ? selectedIndex.length > 0
+              ? selectedIndex.map((index) => (
+                  <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
+                    {options[index].label}
+                    <CloseButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelected(index, options[index].value as StringOrNumber);
+                      }}
+                      className={'hover:bg-gray-50 rounded-full'}
+                    />
+                  </span>
+                ))
+              : placeholder
             : selectedIndex[0] > 0
             ? options[selectedIndex[0]].label
             : placeholder}
         </div>
-        {showClearButton && (
-          <CloseButton
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className={cx(
-              'absolute text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100',
-              size == 'xs' || size == 'sm' ? '-right-1' : '-right-2'
-            )}
-          />
-        )}
-        <span className={cx('text-gray-500', size == 'xs' || size == 'sm' ? 'ml-1' : 'ml-2')}>
-          <svg xmlns="http://www.w3.org/2000/svg" width={'1em'} height={'1em'} viewBox="0 0 20 20" fill="currentColor">
-            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-          </svg>
-        </span>
+        <div className={'flex gap-1 items-center'}>
+          {showClearButton && (
+            <CloseButton
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClear();
+              }}
+              className={'text-gray-500 rounded-full p-0.5 hover:bg-gray-100'}
+            />
+          )}
+          <span className={'text-gray-500'}>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              xmlns="http://www.w3.org/2000/svg"
+              width={'1em'}
+              height={'1em'}
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
         {isArray(controlledValue) ? (
           controlledValue.map((v, i) => <input key={i} type={'hidden'} ref={ref} value={v} {...rest} />)
         ) : (
@@ -427,7 +466,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className={
-                  'absolute z-10 shadow rounded border outline-none w-auto border-gray-200 bg-white dark:bg-gray-700 p-1.5 overflow-y-auto &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
+                  'absolute z-10 shadow rounded border outline-none w-auto border-gray-200 bg-white dark:bg-gray-700 p-1.5 overflow-y-auto overscroll-contain &::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])'
                 }
                 {...getFloatingProps({
                   ref: floating,
