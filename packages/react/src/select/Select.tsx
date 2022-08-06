@@ -97,6 +97,12 @@ export type SelectProps = {
   defaultValue?: StringOrNumber[] | StringOrNumber;
 
   /**
+   * 选择后关闭
+   * @default true
+   */
+  closeOnSelect?: boolean;
+
+  /**
    * 值改变时触发回调
    */
   onChange?: (value: StringOrNumber[] | StringOrNumber | undefined) => void;
@@ -133,6 +139,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     fullWidth = false,
     value,
     defaultValue = multiple ? [] : undefined,
+    closeOnSelect = true,
     style,
     ...rest
   } = props;
@@ -413,6 +420,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         getItemProps,
         dataRef: context.dataRef,
         sizeClass: selectSizes[size],
+        closeOnSelect,
       }}
     >
       <div
@@ -441,11 +449,11 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           ref: reference,
         })}
       >
-        <div className={'flex flex-1 gap-1 flex-wrap items-center select-none'}>
+        <div className={'flex flex-1 gap-1 flex-wrap select-none'}>
           {multiple ? (
             selectedIndex.length > 0 ? (
               selectedIndex.map((index) => (
-                <span className={'bg-gray-100 leading-none rounded-sm flex gap-1 pl-2 p-1'} key={index}>
+                <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={index}>
                   {options[index].label}
                   <CloseButton
                     onClick={(e) => {

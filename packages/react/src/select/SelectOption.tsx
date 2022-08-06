@@ -16,12 +16,22 @@ export type SelectOptionProps = {
 export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, ref) => {
   const { children, value, className, disabled = false, index = 0, ...rest } = props;
 
-  const { selectedIndex, onSelected, listRef, setOpen, activeIndex, setActiveIndex, getItemProps, dataRef, sizeClass } =
-    useSelect();
+  const {
+    selectedIndex,
+    onSelected,
+    listRef,
+    setOpen,
+    activeIndex,
+    setActiveIndex,
+    getItemProps,
+    dataRef,
+    sizeClass,
+    closeOnSelect,
+  } = useSelect();
 
   const handleSelect = () => {
     onSelected(index, value);
-    setOpen(false);
+    closeOnSelect && setOpen(false);
     setActiveIndex(null);
   };
 

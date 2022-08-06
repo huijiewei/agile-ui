@@ -16,6 +16,7 @@ type SelectContextValue = {
 
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
   dataRef: ContextData;
+  closeOnSelect: boolean;
   sizeClass: string;
 };
 
