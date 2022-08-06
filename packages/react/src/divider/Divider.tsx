@@ -63,7 +63,7 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
               position == 'right' ? 'basis-5 grow-0' : 'basis-0 grow'
             } h-0 border-${variant} border-t-[${size}px] border-t-${color}-300)`
           : vertical
-          ? `border-${variant} border-l-[${size}px] border-l-${color}-300 h-full self-stretch`
+          ? `border-${variant} border-l-[${size}px] border-l-${color}-300 h-auto self-stretch`
           : `border-${variant} border-t-[${size}px] border-t-${color}-300`,
 
         className
