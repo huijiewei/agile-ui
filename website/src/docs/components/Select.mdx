@@ -6,7 +6,7 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 ## 用法
 
 ```tsx preview editable
-<div className={'flex flex-row gap-3'}>
+<div className={'flex flex-row flex-wrap gap-3'}>
   <Select defaultValue={16} placeholder={'选择器'}>
     {Array(20)
       .fill(null)
@@ -68,7 +68,7 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 ## 大小
 
 ```tsx preview editable
-<div className={'flex flex-row gap-3'}>
+<div className={'flex flex-row flex-wrap gap-3'}>
   <Select size={'xs'} placeholder={'选择器'}>
     <SelectOption value={'1'}>选项一</SelectOption>
     <SelectOption value={'2'}>选项二</SelectOption>

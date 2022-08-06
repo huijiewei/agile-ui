@@ -343,8 +343,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
 
     if (virtual) {
-      const scrollIndex =
-        activeIndex != null ? activeIndex : minSelectedIndex != null && minSelectedIndex > 0 ? minSelectedIndex - 1 : 0;
+      const scrollIndex = activeIndex != null ? activeIndex : minSelectedIndex != null ? minSelectedIndex - 1 : 0;
 
       if (scrollIndex > 0 && prevActiveIndex != null) {
         rowVirtual.scrollToIndex(scrollIndex, { align: 'auto', smoothScroll: false });
@@ -442,7 +441,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           ref: reference,
         })}
       >
-        <div className={'flex flex-1 gap-1 items-center select-none'}>
+        <div className={'flex flex-1 gap-1 flex-wrap items-center select-none'}>
           {multiple ? (
             selectedIndex.length > 0 ? (
               selectedIndex.map((index) => (
