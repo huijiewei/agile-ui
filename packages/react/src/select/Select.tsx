@@ -338,6 +338,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     estimateSize: () => 32,
     overscan: 3,
     enableSmoothScroll: false,
+    paddingStart: 6,
+    paddingEnd: 6,
+    scrollPaddingStart: 6,
+    scrollPaddingEnd: 6,
   });
 
   const [controlledScrolling, setControlledScrolling] = useState(false);
@@ -352,6 +356,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
 
     if (virtual) {
+      console.log(prevActiveIndex);
       const scrollIndex = activeIndex != null ? activeIndex : minSelectedIndex != null ? minSelectedIndex - 1 : 0;
 
       if (scrollIndex > 0 && prevActiveIndex != null) {
@@ -394,8 +399,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
 
     if (virtual) {
-      if (minSelectedIndex > 0) {
-        rowVirtual.scrollToIndex(minSelectedIndex - 1, { align: 'center' });
+      if (minSelectedIndex > 1) {
+        rowVirtual.scrollToIndex(minSelectedIndex, { align: 'center' });
       }
     } else {
       const floating = refs.floating.current;
@@ -404,7 +409,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         const item = listItemsRef.current[minSelectedIndex];
 
         if (item) {
-          floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2;
+          floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2 + 9;
         }
       }
     }
@@ -540,9 +545,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className={
-                  'absolute z-50 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'
-                }
+                className={cx(
+                  'absolute z-50 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin',
+                  virtual ? 'px-1.5' : 'p-1.5'
+                )}
                 ref={floating}
                 style={{
                   top: y ?? 0,
