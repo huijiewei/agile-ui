@@ -1,4 +1,4 @@
-import { useControllableProp, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
+import { useControllableProp, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
@@ -186,7 +186,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
                 cacheData.options[optionIndex] = {
                   value: groupChild.props.value,
-                  label: groupChild.props.label ? groupChild.props.label : groupChild.props.children,
+                  label: groupChild.props.label ?? groupChild.props.children,
                 };
               } else {
                 cacheData.elements.push(groupChild);
@@ -197,12 +197,15 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           optionIndex++;
 
           cacheData.elements.push(
-            cloneElement(child, { index: optionIndex, key: getChildKey(child.props.value, child.key) })
+            cloneElement(child, {
+              index: optionIndex,
+              key: getChildKey(child.props.value, child.key),
+            })
           );
 
           cacheData.options[optionIndex] = {
             value: child.props.value,
-            label: child.props.label ? child.props.label : child.props.children,
+            label: child.props.label ?? child.props.children,
           };
         } else {
           cacheData.elements.push(child);
@@ -217,9 +220,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const [valueState, setValueState] = useState(defaultValue);
 
-  const [isControlled, controlledValue] = useControllableProp(value, valueState);
+  const [controlled, controlledValue] = useControllableProp(value, valueState);
 
-  const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
+  const listItemsRef = useRef<(HTMLLIElement | null)[]>([...Array(options.length).fill(null)]);
   const listContentRef = useRef<string[]>(options.map((option) => option.value?.toString() || ''));
 
   const [open, setOpen] = useState(opened);
@@ -247,7 +250,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
         const nextValue = prevValue.includes(value) ? prevValue.filter((p) => p != value) : [...prevValue, value];
 
-        if (!isControlled) {
+        if (!controlled) {
           setValueState(nextValue);
         }
 
@@ -255,35 +258,33 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       } else {
         setSelectedIndex([index]);
 
-        if (!isControlled) {
+        if (!controlled) {
           setValueState(value);
         }
 
         onChange && onChange(value);
       }
     },
-    [isControlled, multiple, onChange, valueState]
+    [controlled, multiple, onChange, valueState]
   );
 
   const handleClear = useCallback(() => {
     if (multiple) {
       setSelectedIndex([]);
 
-      if (!isControlled) {
+      if (!controlled) {
         setValueState([]);
       }
     } else {
       setSelectedIndex([0]);
 
-      if (!isControlled) {
+      if (!controlled) {
         setValueState(undefined);
       }
     }
 
     onClear && onClear();
-  }, [isControlled, multiple, onClear]);
-
-  const [controlledScrolling, setControlledScrolling] = useState(false);
+  }, [controlled, multiple, onClear]);
 
   const prevActiveIndex = usePrevious<number | null>(activeIndex);
 
@@ -319,6 +320,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       activeIndex,
       selectedIndex: minSelectedIndex,
       onNavigate: setActiveIndex,
+      loop: true,
+      virtual,
+      disabledIndices: virtual ? [0] : undefined,
     }),
     useTypeahead(context, {
       listRef: listContentRef,
@@ -328,17 +332,15 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }),
   ]);
 
-  const parentRef = useRef();
-
   const rowVirtual = useVirtualizer({
     count: elements.length,
-    getScrollElement: () => parentRef.current,
+    getScrollElement: () => refs.floating.current,
     estimateSize: () => 32,
-    overscan: 2,
+    overscan: 3,
     enableSmoothScroll: false,
   });
 
-  const floatingRefs = useMergedRefs(parentRef, floating);
+  const [controlledScrolling, setControlledScrolling] = useState(false);
 
   useLayoutEffect(() => {
     if (!open) {
@@ -353,7 +355,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       const scrollIndex = activeIndex != null ? activeIndex : minSelectedIndex != null ? minSelectedIndex - 1 : 0;
 
       if (scrollIndex > 0 && prevActiveIndex != null) {
-        rowVirtual.scrollToIndex(scrollIndex, { align: 'auto', smoothScroll: false });
+        rowVirtual.scrollToIndex(scrollIndex > prevActiveIndex ? scrollIndex : scrollIndex - 2, {
+          align: 'auto',
+        });
       }
     } else {
       const floating = refs.floating.current;
@@ -381,7 +385,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         }
       }
     }
-  }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex, refs.floating, virtual, rowVirtual]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex, refs.floating, virtual]);
 
   useLayoutEffect(() => {
     if (!open) {
@@ -390,7 +395,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
     if (virtual) {
       if (minSelectedIndex > 0) {
-        rowVirtual.scrollToIndex(minSelectedIndex - 1, { align: 'center', smoothScroll: false });
+        rowVirtual.scrollToIndex(minSelectedIndex - 1, { align: 'center' });
       }
     } else {
       const floating = refs.floating.current;
@@ -403,10 +408,33 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         }
       }
     }
-  }, [open, minSelectedIndex, middlewareData, refs.floating, virtual, rowVirtual]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, minSelectedIndex, middlewareData, refs.floating, virtual]);
 
   const showClearButton =
     clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue !== undefined);
+
+  const { id: floatingId, ...floatingRest } = getFloatingProps({
+    tabIndex: 0,
+    onPointerMove() {
+      setControlledScrolling(false);
+    },
+    onKeyDown(e) {
+      setControlledScrolling(true);
+
+      if (virtual) {
+        if (e.key === 'Enter' || (e.key === ' ' && !context.dataRef.current.typing)) {
+          e.preventDefault();
+
+          if (activeIndex) {
+            handleSelected(activeIndex, elements[activeIndex].props.value);
+            closeOnSelect && setOpen(false);
+            setActiveIndex(null);
+          }
+        }
+      }
+    },
+  });
 
   return (
     <SelectProvider
@@ -506,50 +534,47 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       <Portal>
         <AnimatePresence>
           {open && (
-            <FloatingFocusManager context={context} preventTabbing>
+            <FloatingFocusManager context={context} preventTabbing={!virtual}>
               <Motion
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className={
-                  'absolute z-10 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'
+                  'absolute z-50 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 p-1.5 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin'
                 }
-                {...getFloatingProps({
-                  ref: virtual ? floatingRefs : floating,
-                  style: {
-                    top: y ?? 0,
-                    left: x ?? 0,
-                    height: virtual ? '320px' : undefined,
-                  },
-                  onPointerEnter() {
-                    setControlledScrolling(false);
-                  },
-                  onPointerMove() {
-                    setControlledScrolling(false);
-                  },
-                  onKeyDown() {
-                    setControlledScrolling(true);
-                  },
-                })}
+                ref={floating}
+                style={{
+                  top: y ?? 0,
+                  left: x ?? 0,
+                  height: virtual ? '320px' : undefined,
+                }}
               >
-                {virtual ? (
-                  <ul style={{ height: `${rowVirtual.getTotalSize()}px`, width: '100%', position: 'relative' }}>
-                    {rowVirtual.getVirtualItems().map((row) =>
-                      cloneElement(elements[row.index], {
-                        ref: row.measureElement,
-                        style: {
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          transform: `translateY(${row.start}px)`,
-                        },
-                      })
-                    )}
-                  </ul>
-                ) : (
-                  elements
-                )}
+                <ul
+                  id={floatingId as string}
+                  className={'outline-none'}
+                  style={
+                    virtual
+                      ? { height: `${rowVirtual.getTotalSize()}px`, width: '100%', position: 'relative' }
+                      : undefined
+                  }
+                  {...floatingRest}
+                >
+                  {virtual
+                    ? rowVirtual.getVirtualItems().map((row) =>
+                        cloneElement(elements[row.index], {
+                          id: `${floatingId}-${row.index}`,
+                          ref: row.measureElement,
+                          style: {
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            transform: `translateY(${row.start}px)`,
+                          },
+                        })
+                      )
+                    : elements}
+                </ul>
               </Motion>
             </FloatingFocusManager>
           )}

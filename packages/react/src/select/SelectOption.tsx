@@ -5,6 +5,7 @@ import type { KeyboardEvent, ReactNode } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { useSelect } from './SelectProvider';
+import { useCallback } from 'react';
 
 export type SelectOptionProps = {
   value: StringOrNumber;
@@ -29,18 +30,21 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
     closeOnSelect,
   } = useSelect();
 
-  const handleSelect = () => {
+  const handleSelect = useCallback(() => {
     onSelected(index, value);
     closeOnSelect && setOpen(false);
     setActiveIndex(null);
-  };
+  }, [closeOnSelect, index, onSelected, setActiveIndex, setOpen, value]);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'Enter' || (e.key === ' ' && !dataRef.current.typing)) {
-      e.preventDefault();
-      handleSelect();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLElement>) => {
+      if (e.key === 'Enter' || (e.key === ' ' && !dataRef.current.typing)) {
+        e.preventDefault();
+        handleSelect();
+      }
+    },
+    [dataRef, handleSelect]
+  );
 
   const refs = useMergedRefs(ref, (node) => {
     listRef.current[index] = node;
@@ -50,13 +54,14 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
     <li
       ref={refs}
       role="option"
+      data-active={dataAttr(activeIndex == index)}
       aria-selected={ariaAttr(activeIndex == index && selectedIndex.includes(index))}
       data-selected={dataAttr(selectedIndex.includes(index))}
       data-disabled={dataAttr(disabled)}
       aria-disabled={ariaAttr(disabled)}
       tabIndex={activeIndex == index ? 0 : 1}
       className={cx(
-        'flex select-none w-full outline-none transition-colors whitespace-nowrap items-center rounded focus:bg-gray-100 dark:focus:bg-gray-600 selected:text-blue-500',
+        'flex select-none w-full outline-none transition-colors whitespace-nowrap items-center rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
         sizeClass,
         className
       )}
