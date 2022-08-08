@@ -356,7 +356,6 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
 
     if (virtual) {
-      console.log(prevActiveIndex);
       const scrollIndex = activeIndex != null ? activeIndex : minSelectedIndex != null ? minSelectedIndex - 1 : 0;
 
       if (scrollIndex > 0 && prevActiveIndex != null) {
