@@ -5,7 +5,6 @@ import { usePagination } from './usePagination';
 import { cx } from 'twind';
 import { PaginationItem } from './PaginationItem';
 import { __DEV__ } from '@agile-ui/utils';
-import { Input } from '../input/Input';
 import { PaginationJumper } from './PaginationJumper';
 
 export type PaginationProps = UsePaginationOptions & {
