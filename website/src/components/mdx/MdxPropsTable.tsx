@@ -1,13 +1,16 @@
 import type { ComponentProp } from '../playground/PlaygroundHelper';
 
 export type MdxPropsTableProps = {
+  tableTitle?: string;
   componentName: string;
   componentProps: ComponentProp[];
 };
 
-export const MdxPropsTable = ({ componentProps }: { componentProps: ComponentProp[] }) => {
+export const MdxPropsTable = ({ componentProps, tableTitle }: MdxPropsTableProps) => {
+  console.log(tableTitle);
   return (
     <table className={'w-full table-auto border-separate rounded border border-gray-200'}>
+      {tableTitle && <caption className={'text-left text-gray-500 mb-1.5 font-bold'}>{tableTitle}</caption>}
       <thead>
         <tr className={'bg-gray-50'}>
           <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>参数名</th>

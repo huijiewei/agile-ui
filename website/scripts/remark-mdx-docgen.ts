@@ -3,7 +3,7 @@ import { valueToEstree } from 'estree-util-value-to-estree';
 import fs from 'fast-glob';
 import type { Root } from 'mdast';
 import { fromMarkdown } from 'mdast-util-from-markdown';
-import type { MdxjsEsm, MdxJsxAttribute, MdxJsxFlowElement } from 'mdast-util-mdx';
+import type { MdxjsEsm, MdxJsxFlowElement } from 'mdast-util-mdx';
 import { mdxFromMarkdown } from 'mdast-util-mdx';
 import { mdxjs } from 'micromark-extension-mdxjs';
 import path from 'path';
@@ -54,8 +54,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
       const elem = node as MdxJsxFlowElement;
 
       if (elem.name == 'PropsTable' || elem.name == 'Showcase') {
-        const nodeComponentName = elem.attributes?.find((attr) => (attr as MdxJsxAttribute).name == 'componentName')
-          ?.value as string;
+        const nodeComponentName = getEtreeAttributeValue(elem, 'componentName');
 
         if (!nodeComponentName) {
           throw new Error(`Invalid componentName for PropsTable.`);
@@ -70,8 +69,10 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
         }
 
         if (propsTables[componentName]) {
+          const tableTitle = getEtreeAttributeValue(elem, 'tableTitle');
+
           const tree = fromMarkdown(
-            `<${elem.name} componentName='${nodeComponentName}' componentProps={propsTables['${nodeComponentName}']} />`,
+            `<${elem.name} componentName='${nodeComponentName}' tableTitle='${tableTitle}' componentProps={propsTables['${nodeComponentName}']} />`,
             {
               extensions: [mdxjs()],
               mdastExtensions: [mdxFromMarkdown()],
@@ -88,6 +89,20 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
     mdast.children.unshift(getExportEtree(sourcePathName, sourcePath));
     mdast.children.unshift(getExportEtree(propsTablesName, propsTables));
   };
+};
+
+const getEtreeAttributeValue = (elem: MdxJsxFlowElement, attribute: string): string | undefined => {
+  const attr = elem.attributes.find((attr) => 'name' in attr && attr['name'] == attribute);
+
+  if (!attr) {
+    return '';
+  }
+
+  if (typeof attr.value == 'string') {
+    return attr.value as string;
+  }
+
+  return attr.value?.value.slice(1, -1) || '';
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
