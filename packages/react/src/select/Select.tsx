@@ -114,11 +114,31 @@ export type SelectProps = {
 };
 
 const selectSizes = {
-  xs: 'h-6 leading-6 pl-2 pr-1 text-sm gap-2',
-  sm: 'h-7 leading-7 pl-2 pr-1 gap-2',
-  md: 'h-8 leading-8 pl-3 pr-1.5 gap-3',
-  lg: 'h-9 leading-9 pl-3 pr-1.5 gap-3',
-  xl: 'h-10 leading-10 pl-3 pr-1.5 text-lg gap-3',
+  xs: {
+    base: 'h-6 leading-6 text-sm',
+    select: 'pl-2 pr-1 gap-2',
+    option: 'px-2',
+  },
+  sm: {
+    base: 'h-7 leading-7',
+    select: 'pl-2 pr-1 gap-2',
+    option: 'px-2',
+  },
+  md: {
+    base: 'h-8 leading-8',
+    select: 'pl-3 pr-1.5 gap-3',
+    option: 'px-3',
+  },
+  lg: {
+    base: 'h-9 leading-9',
+    select: 'pl-3 pr-1.5 gap-3',
+    option: 'px-3',
+  },
+  xl: {
+    base: 'h-10 leading-10 text-lg',
+    select: 'pl-3 pr-1.5 gap-3',
+    option: 'px-3',
+  },
 };
 
 export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
@@ -440,6 +460,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     },
   });
 
+  const sizeClass = selectSizes[size];
+
   return (
     <SelectProvider
       value={{
@@ -451,7 +473,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         setOpen,
         getItemProps,
         dataRef: context.dataRef,
-        sizeClass: selectSizes[size],
+        sizeClass: [sizeClass['base'], sizeClass['option']],
         closeOnSelect,
       }}
     >
@@ -472,7 +494,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
             : 'cursor-default active:(border-blue-500 z-[1]) focus-visible:(border-blue-500)',
           !invalid && !disabled && 'hover:(border-gray-300 z-[2])',
           fullWidth ? 'w-full' : '',
-          selectSizes[size],
+          sizeClass['base'],
+          sizeClass['select'],
           className
         )}
         {...getReferenceProps({
@@ -481,21 +504,23 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           ref: reference,
         })}
       >
-        <div className={'flex flex-1 gap-1 flex-wrap select-none'}>
+        <div className={'flex-1 select-none'}>
           {multiple ? (
             selectedIndex.length > 0 ? (
-              selectedIndex.map((index) => (
-                <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={index}>
-                  {options[index].label}
-                  <CloseButton
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSelected(index, options[index].value as StringOrNumber);
-                    }}
-                    className={'hover:bg-gray-50 rounded-full'}
-                  />
-                </span>
-              ))
+              <div className={'flex flex-wrap gap-1'}>
+                {selectedIndex.map((index) => (
+                  <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={index}>
+                    {options[index].label}
+                    <CloseButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelected(index, options[index].value as StringOrNumber);
+                      }}
+                      className={'hover:bg-gray-50 rounded-full'}
+                    />
+                  </span>
+                ))}
+              </div>
             ) : (
               <span className={'text-gray-500'}>{placeholder}</span>
             )

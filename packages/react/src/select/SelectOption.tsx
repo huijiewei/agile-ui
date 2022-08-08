@@ -6,12 +6,34 @@ import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { useSelect } from './SelectProvider';
 import { useCallback } from 'react';
+import type { Size } from '../utils/types';
 
 export type SelectOptionProps = {
+  /**
+   * 选项值
+   */
   value: StringOrNumber;
+
+  /**
+   * 选项回显内容
+   */
   label?: ReactNode;
+
+  /**
+   * 是否禁用
+   * @default false
+   */
   disabled?: boolean;
+
+  /**
+   * @ignore
+   */
   index?: number;
+
+  /**
+   * @ignore
+   */
+  size?: Size;
 };
 
 export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, ref) => {
@@ -61,7 +83,7 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
       aria-disabled={ariaAttr(disabled)}
       tabIndex={activeIndex == index ? 0 : 1}
       className={cx(
-        'flex select-none w-full outline-none transition-colors whitespace-nowrap items-center rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
+        'select-none w-full outline-none transition-colors rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
         sizeClass,
         className
       )}

@@ -131,17 +131,45 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 ## 定制内容
 
 ```tsx preview editable
-<div className={'flex flex-row flex-wrap gap-3'}>
-  <Select placeholder={'选择内容'}>
-    <SelectOption>
-      <Avatar
-        size={'xs'}
-        src={'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar'}
-      />
-      约翰
-    </SelectOption>
-  </Select>
-</div>
+function Demo() {
+  const users = [
+    { name: '白居易', avatar: '' },
+    {
+      name: '陶渊明',
+      avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar',
+    },
+    { name: '刘禹锡', avatar: '' },
+    {
+      name: '司马相如',
+      avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00446.png@!avatar',
+    },
+    {
+      name: '李清照',
+      avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar',
+    },
+    { name: '苏轼', avatar: '' },
+    { name: '辛弃疾', avatar: '' },
+    {
+      name: '屈原',
+      avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00335.png@!avatar',
+    },
+  ];
+
+  return (
+    <div className={'flex flex-row flex-wrap gap-3'}>
+      <Select clearable placeholder={'选择内容'}>
+        {users.map((user) => (
+          <SelectOption key={user.name} value={user.name}>
+            <div className={'flex items-center gap-2'}>
+              <Avatar name={user.name} size={'xs'} src={user.avatar} />
+              {user.name}
+            </div>
+          </SelectOption>
+        ))}
+      </Select>
+    </div>
+  );
+}
 ```
 
 ## 大数据

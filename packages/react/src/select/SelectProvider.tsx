@@ -17,7 +17,7 @@ type SelectContextValue = {
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
   dataRef: ContextData;
   closeOnSelect: boolean;
-  sizeClass: string;
+  sizeClass: string | string[];
 };
 
 const [SelectProvider, useSelect] = createContext<SelectContextValue>({
