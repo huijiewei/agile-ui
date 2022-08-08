@@ -138,7 +138,7 @@ function Demo() {
       name: '陶渊明',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar',
     },
-    { name: '刘禹锡', avatar: '' },
+    { name: '苏轼', avatar: '' },
     {
       name: '司马相如',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00446.png@!avatar',
@@ -146,12 +146,6 @@ function Demo() {
     {
       name: '李清照',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar',
-    },
-    { name: '苏轼', avatar: '' },
-    { name: '辛弃疾', avatar: '' },
-    {
-      name: '屈原',
-      avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00335.png@!avatar',
     },
   ];
 
@@ -161,7 +155,7 @@ function Demo() {
         {users.map((user) => (
           <SelectOption key={user.name} value={user.name}>
             <div className={'flex items-center gap-2'}>
-              <Avatar name={user.name} size={'xs'} src={user.avatar} />
+              <Avatar name={user.name} size={20} src={user.avatar} />
               {user.name}
             </div>
           </SelectOption>

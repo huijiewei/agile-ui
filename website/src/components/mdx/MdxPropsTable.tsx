@@ -7,7 +7,6 @@ export type MdxPropsTableProps = {
 };
 
 export const MdxPropsTable = ({ componentProps, tableTitle }: MdxPropsTableProps) => {
-  console.log(tableTitle);
   return (
     <table className={'w-full table-auto border-separate rounded border border-gray-200'}>
       {tableTitle && <caption className={'text-left text-gray-500 mb-1.5 font-bold'}>{tableTitle}</caption>}
