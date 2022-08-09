@@ -133,19 +133,26 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 ```tsx preview editable
 function Demo() {
   const users = [
-    { name: '白居易', avatar: '' },
+    { name: '白居易', avatar: '', description: '字乐天，号香山居士，又号醉吟先生。' },
     {
       name: '陶渊明',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00430.png@!avatar',
+      description: '名潜，字元亮，别号五柳先生，卒后私谥靖节，世称靖节先生。',
     },
-    { name: '苏轼', avatar: '' },
+    {
+      name: '苏轼',
+      avatar: '',
+      description: '字子瞻，一字和仲，号铁冠道人、东坡居士，北宋文学家、书法家、美食家、画家，历史治水名人。',
+    },
     {
       name: '司马相如',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00446.png@!avatar',
+      description: '本名犬子，因慕蔺相如之人，故更名相如，字长卿。',
     },
     {
       name: '李清照',
       avatar: 'https://yuncars-other.oss-cn-shanghai.aliyuncs.com/boilerplate/avatar/a00345.png@!avatar',
+      description: '北宋齐州人，为中国历史上最著名的女词人。自号易安居士。',
     },
   ];
 
@@ -157,6 +164,28 @@ function Demo() {
             <div className={'flex items-center gap-2'}>
               <Avatar name={user.name} size={20} src={user.avatar} />
               {user.name}
+            </div>
+          </SelectOption>
+        ))}
+      </Select>
+      <Select clearable placeholder={'选择内容'}>
+        {users.map((user) => (
+          <SelectOption
+            label={
+              <div className={'flex items-center gap-2'}>
+                <Avatar name={user.name} size={20} src={user.avatar} />
+                {user.name}
+              </div>
+            }
+            key={user.name}
+            value={user.name}
+          >
+            <div className={'flex items-center gap-2'}>
+              <Avatar name={user.name} size={20} src={user.avatar} />
+              <div>
+                <div>{user.name}</div>
+                <div className={'text-gray-500'}>{user.description}</div>
+              </div>
             </div>
           </SelectOption>
         ))}
