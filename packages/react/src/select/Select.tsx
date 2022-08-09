@@ -115,27 +115,27 @@ export type SelectProps = {
 
 const selectSizes = {
   xs: {
-    base: 'h-6 leading-6 text-sm',
+    base: 'py-px text-sm',
     select: 'pl-2 pr-1 gap-2',
     option: 'px-2',
   },
   sm: {
-    base: 'h-7 leading-7',
+    base: 'py-0.5',
     select: 'pl-2 pr-1 gap-2',
     option: 'px-2',
   },
   md: {
-    base: 'h-8 leading-8',
+    base: 'py-1',
     select: 'pl-3 pr-1.5 gap-3',
     option: 'px-3',
   },
   lg: {
-    base: 'h-9 leading-9',
+    base: 'py-1.5',
     select: 'pl-3 pr-1.5 gap-3',
     option: 'px-3',
   },
   xl: {
-    base: 'h-10 leading-10 text-lg',
+    base: 'py-[7px] text-lg',
     select: 'pl-3 pr-1.5 gap-3',
     option: 'px-3',
   },
@@ -487,7 +487,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         aria-disabled={ariaAttr(disabled)}
         aria-required={ariaAttr(required)}
         className={cx(
-          'inline-flex items-center border border-gray-200 bg-white relative rounded transition-colors outline-none',
+          'inline-flex items-center h-fit border border-gray-200 bg-white relative rounded transition-colors outline-none',
           invalid && 'border-red-500',
           disabled
             ? 'opacity-50 cursor-not-allowed pointer-events-none'
@@ -507,7 +507,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <div className={'flex-1 select-none'}>
           {multiple ? (
             selectedIndex.length > 0 ? (
-              <div className={'flex flex-wrap gap-1'}>
+              <div className={cx('flex flex-wrap gap-1', (size == 'xs' || size == 'sm') && 'gap-y-0.5')}>
                 {selectedIndex.map((index) => (
                   <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={index}>
                     {options[index].label}

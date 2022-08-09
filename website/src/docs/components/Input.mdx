@@ -10,23 +10,21 @@ description: 输入框是。
 ## 事件
 
 ```tsx preview editable
-<div className={'flex flex-row items-center gap-3'}>
-  <Input
-    clearable
-    onChange={(value) => {
-      console.log(value);
-    }}
-    onClear={() => {
-      console.log('输入框清空');
-    }}
-  />
-</div>
+<Input
+  clearable
+  onChange={(value) => {
+    console.log(value);
+  }}
+  onClear={() => {
+    console.log('输入框清空');
+  }}
+/>
 ```
 
 ## 前后缀
 
 ```tsx preview editable
-<div className={'flex flex-row items-center gap-3'}>
+<div className={'flex flex-row gap-3'}>
   <Input clearable prefix={<UserCircle />} />
   <Input clearable suffix={<Info />} />
   <Input clearable prefix={'用户名'} />
@@ -48,7 +46,7 @@ description: 输入框是。
 ## 大小
 
 ```tsx preview editable
-<div className={'flex flex-row items-center gap-3'}>
+<div className={'flex flex-row gap-3'}>
   <Input size={'xs'} />
   <Input size={'sm'} />
   <Input size={'md'} />

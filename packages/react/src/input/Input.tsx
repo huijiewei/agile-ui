@@ -154,7 +154,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   return (
     <div
       className={cx(
-        'inline-flex items-center relative border bg-white rounded transition-colors',
+        'inline-flex h-fit items-center relative border bg-white rounded transition-colors',
         invalid && !focus && 'border-red-500',
         disabled && 'opacity-50 cursor-not-allowed',
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
@@ -198,8 +198,8 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
               inputRef.current?.focus();
             }}
             className={cx(
-              'absolute text-gray-500 rounded-full p-0.5 bg-gray-50 hover:bg-gray-100',
-              size == 'xs' || size == 'sm' ? '-right-1' : '-right-2'
+              'absolute text-gray-500 rounded-full p-px bg-gray-50 hover:bg-gray-100',
+              size == 'xs' || size == 'sm' ? '-right-1' : '-right-1.5'
             )}
           />
         )}
