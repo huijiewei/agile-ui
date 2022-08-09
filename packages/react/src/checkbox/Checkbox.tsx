@@ -98,14 +98,14 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
   const [checkedState, setCheckedState] = useState(defaultChecked);
 
-  const [isControlled, controlledChecked] = useControllableProp(
+  const [controlled, controlledChecked] = useControllableProp(
     group?.value && value ? group.value.includes(value) : checked,
     checkedState
   );
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      if (!isControlled) {
+      if (!controlled) {
         if (controlledChecked) {
           setCheckedState(event.target.checked);
         } else {
@@ -115,7 +115,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
 
       onChangeRef?.(event);
     },
-    [indeterminate, controlledChecked, isControlled, onChangeRef]
+    [indeterminate, controlledChecked, controlled, onChangeRef]
   );
 
   useIsomorphicLayoutEffect(() => {

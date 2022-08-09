@@ -108,7 +108,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
 
   const [valueState, setValueState] = useState(defaultValue);
 
-  const [isControlled, controlledValue] = useControllableProp(value, valueState);
+  const [controlled, controlledValue] = useControllableProp(value, valueState);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -119,13 +119,13 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
         return;
       }
 
-      if (!isControlled) {
+      if (!controlled) {
         setValueState(event.target.value);
       }
 
       onChange?.(event.target.value, event);
     },
-    [disabled, isControlled, onChange, readOnly]
+    [disabled, controlled, onChange, readOnly]
   );
 
   const handleClear = () => {

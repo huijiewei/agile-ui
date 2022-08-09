@@ -83,7 +83,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
 
   const [checkedState, setCheckedState] = useState(defaultChecked);
 
-  const [isControlled, controlledChecked] = useControllableProp(
+  const [controlled, controlledChecked] = useControllableProp(
     group?.value && value ? group.value == value : checked,
     checkedState
   );
@@ -92,13 +92,13 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      if (!isControlled) {
+      if (!controlled) {
         setCheckedState(event.target.checked);
       }
 
       onChangeRef?.(event);
     },
-    [isControlled, onChangeRef]
+    [controlled, onChangeRef]
   );
 
   useIsomorphicLayoutEffect(() => {

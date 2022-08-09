@@ -154,7 +154,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   const maxValue = isNumber(max) ? max : Infinity;
 
   const [valueState, setValueState] = useState(defaultValue);
-  const [isControlled, controlledValue] = useControllableProp(value, valueState);
+  const [controlled, controlledValue] = useControllableProp(value, valueState);
 
   const [inputValue, setInputValue] = useState(controlledValue?.toFixed(precision) ?? '');
 
@@ -168,13 +168,13 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         return;
       }
 
-      if (!isControlled) {
+      if (!controlled) {
         setValueState(next);
       }
 
       onChange?.(next);
     },
-    [controlledValue, isControlled, onChange]
+    [controlledValue, controlled, onChange]
   );
 
   const handleChange = useCallback(

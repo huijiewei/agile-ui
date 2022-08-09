@@ -77,7 +77,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
 
   const [checkedState, setCheckedState] = useState(defaultChecked);
 
-  const [isControlled, controlledChecked] = useControllableProp(checked, checkedState);
+  const [controlled, controlledChecked] = useControllableProp(checked, checkedState);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -88,13 +88,13 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         return;
       }
 
-      if (!isControlled) {
+      if (!controlled) {
         setCheckedState(event.target.checked);
       }
 
       onChange?.(event.target.checked, event);
     },
-    [readOnly, disabled, isControlled, onChange]
+    [readOnly, disabled, controlled, onChange]
   );
 
   useIsomorphicLayoutEffect(() => {
