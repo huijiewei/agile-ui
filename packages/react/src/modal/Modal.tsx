@@ -7,7 +7,7 @@ import { ModalProvider } from './ModalProvider';
 
 export type ModalProps = {
   /**
-   * 开启状态
+   * 控制打开状态
    */
   opened: boolean;
 
