@@ -21,7 +21,7 @@ import type { ScaleColor } from '../utils/types';
 import { TooltipArrow } from './TooltipArrow';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
-import { useMergedRefs } from '@agile-ui/react-hooks';
+import { useControllableProp, useMergedRefs } from '@agile-ui/react-hooks';
 
 type TooltipProps = {
   /**
@@ -42,6 +42,11 @@ type TooltipProps = {
   placement?: 'auto' | Placement;
 
   /**
+   * 控制打开状态
+   */
+  opened?: boolean;
+
+  /**
    * @ignore
    */
   children: JSX.Element;
@@ -51,9 +56,10 @@ type TooltipProps = {
  * 工具提示
  */
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
-  const { className, children, content, placement = 'auto', color = 'gray', ...rest } = props;
+  const { className, children, content, opened, placement = 'auto', color = 'gray', ...rest } = props;
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(opened);
+  const [controlled, controlledOpen] = useControllableProp(opened, open);
 
   const {
     x,
@@ -64,8 +70,12 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
     placement: placementState,
   } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
-    open,
-    onOpenChange: setOpen,
+    open: controlledOpen,
+    onOpenChange: (opened) => {
+      if (!controlled) {
+        setOpen(opened);
+      }
+    },
     placement: placement == 'auto' ? undefined : placement,
     whileElementsMounted: autoUpdate,
   });
@@ -85,7 +95,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
       {cloneElement(children, getReferenceProps({ ref: refs, ...children.props }))}
       <Portal>
         <AnimatePresence>
-          {open && (
+          {controlledOpen && (
             <Motion
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
