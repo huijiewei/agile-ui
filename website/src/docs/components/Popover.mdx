@@ -34,6 +34,28 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
 </Popover>
 ```
 
+## 可控
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+
+  return (
+    <Popover opened={opened} placement={'right'}>
+      <PopoverTrigger>
+        <Button onMouseEnter={() => setOpened(true)} onMouseLeave={() => setOpened(false)}>
+          开启
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>回调弹出框</PopoverHeader>
+        <PopoverBody>这是一个回调弹出框</PopoverBody>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
 ## 表单
 
 ```tsx preview editable

@@ -21,6 +21,7 @@ import {
   PopoverPlacementProvider,
   PopoverReferenceProvider,
 } from './PopoverProvider';
+import { useControllableProp } from '@agile-ui/react-hooks';
 
 export type PopoverProps = {
   /**
@@ -30,7 +31,7 @@ export type PopoverProps = {
   placement?: 'auto' | Placement;
 
   /**
-   * 默认开启状态
+   * 控制打开状态
    */
   opened?: boolean;
 
@@ -75,12 +76,13 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     closeOnEsc = true,
     closeOnBlur = true,
     modal = true,
-    opened = false,
+    opened,
     onClose,
     initialFocus,
   } = props;
 
-  const [open, setOpen] = useState(opened);
+  const [open, setOpen] = useState(false);
+  const [controlled, controlledOpen] = useControllableProp(opened, open);
 
   const {
     x,
@@ -91,9 +93,11 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     placement: placementState,
   } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
-    open,
+    open: controlledOpen,
     onOpenChange: (opened) => {
-      setOpen(opened);
+      if (!controlled) {
+        setOpen(opened);
+      }
 
       if (!opened) {
         onClose && onClose();
@@ -129,25 +133,25 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const referenceContextValue = useMemo(
     () => ({
-      open,
+      open: controlledOpen,
       reference,
       getReferenceProps,
     }),
-    [getReferenceProps, open, reference]
+    [controlledOpen, getReferenceProps, reference]
   );
 
   const floatingContextValue = useMemo(
     () => ({
       x,
       y,
-      open,
+      open: controlledOpen,
       context,
       floating,
       getFloatingProps,
       modal,
       initialFocus,
     }),
-    [context, floating, getFloatingProps, initialFocus, modal, open, x, y]
+    [context, controlledOpen, floating, getFloatingProps, initialFocus, modal, x, y]
   );
 
   return (
