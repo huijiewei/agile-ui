@@ -39,6 +39,10 @@ export * from './select/SelectOptionGroup';
 export * from './select/SelectDivider';
 export * from './select/SelectLabel';
 
+export * from './slider/Slider';
+export * from './slider/SliderThumb';
+export * from './slider/SliderTrack';
+
 export * from './tooltip/Tooltip';
 
 export * from './popover/Popover';

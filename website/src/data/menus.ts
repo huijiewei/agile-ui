@@ -100,6 +100,10 @@ export const menus: Menu[] = [
             path: '/components/select',
           },
           {
+            label: '滑动输入条',
+            path: '/components/slider',
+          },
+          {
             label: '复选框',
             path: '/components/checkbox',
           },

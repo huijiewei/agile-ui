@@ -1,0 +1,89 @@
+---
+title: 滑动输入条
+description: 滑动型输入器，展示当前值和可选范围。
+---
+
+## 用法
+
+```tsx preview editable
+<div className={'flex flex-col tablet:flex-row gap-5'}>
+  <Slider className={'w-full tablet:w-1/2'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+</div>
+```
+
+## 状态
+
+```tsx preview editable
+<div className={'flex flex-col tablet:flex-row gap-5'}>
+  <Slider disabled className={'w-full tablet:w-1/2'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+</div>
+```
+
+## 刻度
+
+```tsx preview editable
+<div className={'flex flex-col tablet:flex-row gap-5'}>
+  <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+</div>
+```
+
+## 竖直模式
+
+```tsx preview editable
+<div className={'flex flex-col tablet:flex-row gap-5'}>
+  <Slider vertical className={'h-52'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+  <Slider vertical className={'h-52'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb className={'border p-0.5 text-sm'}>
+      {(index) => (index == 0 ? <Heart /> : <HeartBroken />)}
+    </SliderThumb>
+  </Slider>
+</div>
+```
+
+## 自定义
+
+```tsx preview editable
+<div className={'flex flex-col tablet:flex-row gap-5'}>
+  <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb className={'border p-0.5 text-sm'}>
+      <Heart />
+    </SliderThumb>
+  </Slider>
+  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb className={'border p-0.5 text-sm'}>
+      {(index) => (index == 0 ? <Heart /> : <HeartBroken />)}
+    </SliderThumb>
+  </Slider>
+</div>
+```
+
+## 属性
+
+<PropsTable componentName="Slider" />
