@@ -1,6 +1,6 @@
 import { primitiveComponent, primitiveOmitComponent } from '../utils/component';
 import { cx } from 'twind';
-import { useSlider, useSliderValue, ValueType } from './SliderProvider';
+import { useSlider, useSliderThumb, useSliderValue, ValueType } from './SliderProvider';
 import { Tooltip } from '../tooltip/Tooltip';
 import { __DEV__, ariaAttr, clamp, runIfFn } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
@@ -23,9 +23,10 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
   const [hoverRef, hover] = useHover();
 
   const refs = useMergedRefs(ref, hoverRef, focusRef);
+  const { dragging, onThumbMouseDown } = useSliderThumb();
 
   return (
-    <Tooltip opened={focus || hover} placement={vertical ? 'right' : 'top'} content={value}>
+    <Tooltip opened={focus || hover || dragging} placement={vertical ? 'right' : 'top'} content={value}>
       <button
         disabled={disabled}
         tabIndex={0}
@@ -35,10 +36,18 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         aria-valuenow={value}
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         role={'slider'}
+        onMouseDown={(e) => {
+          if (e.cancelable) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          onThumbMouseDown(index);
+        }}
         ref={refs}
         onClick={(e) => e.stopPropagation()}
         className={cx(
-          'absolute select-none touch-none outline-none rounded-full bg-white transition-transform',
+          'absolute select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
           `focus-visible:(ring ring-${color}-300 z-10)`,
           !disabled && 'hover:scale-110',

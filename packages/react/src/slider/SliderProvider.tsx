@@ -86,3 +86,15 @@ const [SliderValueProvider, useSliderValue] = createContext<SliderValueContextVa
 });
 
 export { SliderValueProvider, useSliderValue };
+
+type SliderThumbContextValue = {
+  dragging: boolean;
+  onThumbMouseDown: (index?: number) => void;
+};
+
+const [SliderThumbProvider, useSliderThumb] = createContext<SliderThumbContextValue>({
+  strict: true,
+  name: 'SliderThumbContext',
+});
+
+export { SliderThumbProvider, useSliderThumb };

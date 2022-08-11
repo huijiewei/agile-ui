@@ -1,9 +1,9 @@
 import { primitiveComponent } from '../utils/component';
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, clamp } from '@agile-ui/utils';
 import { cx } from 'twind';
-import { useMemo, useState } from 'react';
-import { SliderBaseProps, SliderProvider, SliderValueProvider, ValueType } from './SliderProvider';
-import { useControllableProp } from '@agile-ui/react-hooks';
+import { useCallback, useMemo, useState, MouseEvent, TouchEvent } from 'react';
+import { SliderBaseProps, SliderProvider, SliderThumbProvider, SliderValueProvider, ValueType } from './SliderProvider';
+import { useControllableProp, useMove } from '@agile-ui/react-hooks';
 
 export type SliderProps = SliderBaseProps & {
   /**
@@ -88,27 +88,114 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
     [controlled, onChange, onChangeEnd, valueState]
   );
 
+  const [thumbIndex, setThumbIndex] = useState<number | undefined>(undefined);
+
+  const handleMoveChange = useCallback(
+    ({ x, y }: { x: number; y: number }) => {
+      if (!disabled) {
+        const dx = (vertical ? y : x) * (max - min);
+        const next = (dx !== 0 ? Math.round(dx / step) * step : 0) + min;
+
+        const value: ValueType = Array.isArray(controlledValue)
+          ? thumbIndex == 1
+            ? [controlledValue[0], clamp(next, [controlledValue[0], max])]
+            : [clamp(next, [min, controlledValue[1]]), controlledValue[1]]
+          : clamp(next, [min, max]);
+
+        if (!controlled) {
+          setValueState(value);
+        }
+
+        onChange && onChange(value);
+      }
+    },
+    [disabled, vertical, max, min, step, controlledValue, thumbIndex, controlled, onChange]
+  );
+
+  const [moveRef, active] = useMove(handleMoveChange, { onScrubEnd: () => onChangeEnd?.(controlledValue) });
+
+  const thumbContext = useMemo(
+    () => ({
+      dragging: active,
+      onThumbMouseDown: (index?: number) => setThumbIndex(index),
+    }),
+    [active]
+  );
+
+  const handleTrackMouseDownCapture = useCallback(
+    (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+      if (!Array.isArray(controlledValue)) {
+        return;
+      }
+
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+
+      const element = moveRef.current;
+
+      if (element) {
+        element.focus();
+
+        const rect = element.getBoundingClientRect();
+
+        const changePosition =
+          e.type == 'mousedown'
+            ? vertical
+              ? (e as MouseEvent).nativeEvent.clientY
+              : (e as MouseEvent).nativeEvent.clientX
+            : vertical
+            ? (e as TouchEvent).nativeEvent.touches[0].clientY
+            : (e as TouchEvent).nativeEvent.touches[0].clientX;
+
+        const rw = vertical ? rect.height : rect.width;
+
+        const dx = (Math.min(Math.max(changePosition - (vertical ? rect.top : rect.left), 0), rw) / rw) * (max - min);
+
+        const changeValue = (dx !== 0 ? Math.round(dx / step) * step : 0) + min;
+
+        const nearestHandle =
+          Math.abs(controlledValue[0] - changeValue) > Math.abs(controlledValue[1] - changeValue) ? 1 : 0;
+
+        setThumbIndex(nearestHandle);
+      }
+    },
+    [controlledValue, max, min, moveRef, step, vertical]
+  );
+
   return (
     <SliderProvider value={context}>
       <SliderValueProvider value={valueContext}>
-        <div
-          className={cx(
-            'relative select-none outline-0 touch-none items-center flex',
-            vertical ? 'px-3' : 'py-3',
-            marks && (vertical ? 'mr-3' : 'mb-3'),
-            className
-          )}
-        >
-          {children}
-          {Array.isArray(controlledValue) ? (
-            <>
-              <input readOnly value={controlledValue[0]} className={'sr-only'} ref={ref} {...rest} />
-              <input readOnly value={controlledValue[1]} className={'sr-only'} ref={ref} {...rest} />
-            </>
-          ) : (
-            <input readOnly value={controlledValue} className={'sr-only'} ref={ref} {...rest} />
-          )}
-        </div>
+        <SliderThumbProvider value={thumbContext}>
+          <div
+            ref={moveRef}
+            tabIndex={-1}
+            className={cx(
+              'relative select-none outline-0 items-center flex',
+              vertical ? 'px-3' : 'py-3',
+              marks && (vertical ? 'mr-3' : 'mb-3'),
+              className
+            )}
+            onTouchStartCapture={handleTrackMouseDownCapture}
+            onTouchEndCapture={() => {
+              setThumbIndex(undefined);
+            }}
+            onMouseDownCapture={handleTrackMouseDownCapture}
+            onMouseUpCapture={() => {
+              setThumbIndex(undefined);
+            }}
+          >
+            {children}
+            {Array.isArray(controlledValue) ? (
+              <>
+                <input readOnly value={controlledValue[0]} className={'sr-only'} ref={ref} {...rest} />
+                <input readOnly value={controlledValue[1]} className={'sr-only'} ref={ref} {...rest} />
+              </>
+            ) : (
+              <input readOnly value={controlledValue} className={'sr-only'} ref={ref} {...rest} />
+            )}
+          </div>
+        </SliderThumbProvider>
       </SliderValueProvider>
     </SliderProvider>
   );

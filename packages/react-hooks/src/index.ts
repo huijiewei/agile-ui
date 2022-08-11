@@ -14,3 +14,4 @@ export * from './use-hover';
 export * from './use-focus-visible';
 export * from './use-allow-hover';
 export * from './use-previous';
+export * from './use-move';
