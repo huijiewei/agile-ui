@@ -36,18 +36,16 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         aria-valuenow={value}
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         role={'slider'}
-        onMouseDown={(e) => {
-          if (e.cancelable) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-
+        ref={refs}
+        onMouseDown={() => {
           onThumbMouseDown(index);
         }}
-        ref={refs}
+        onTouchStart={() => {
+          onThumbMouseDown(index);
+        }}
         onClick={(e) => e.stopPropagation()}
         className={cx(
-          'absolute appearance-none select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
+          'absolute select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
           `focus-visible:(ring ring-${color}-300 z-10)`,
           !disabled && 'hover:scale-110',

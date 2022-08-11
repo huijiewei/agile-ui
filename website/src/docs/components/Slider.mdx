@@ -75,6 +75,63 @@ function Demo() {
 }
 ```
 
+## 事件
+
+```tsx preview editable
+function Demo() {
+  const [changeValue, setChangeValue] = React.useState();
+  const [changeEndValue, setChangeEndValue] = React.useState();
+  const [changeRangeValue, setChangeRangeValue] = React.useState();
+  const [changeEndRangeValue, setChangeEndRangeValue] = React.useState();
+
+  return (
+    <div className={'flex flex-col tablet:flex-row gap-5'}>
+      <div className={'w-full tablet:w-1/2 flex flex-col gap-3'}>
+        <div>
+          <p>
+            onChange value: <strong>{changeValue}</strong>
+          </p>
+          <p>
+            onChangeEnd value: <strong>{changeEndValue}</strong>
+          </p>
+        </div>
+        <Slider
+          className={'w-full'}
+          value={changeValue}
+          onChange={(v) => setChangeValue(v)}
+          onChangeEnd={(v) => setChangeEndValue(v)}
+          defaultValue={20}
+        >
+          <SliderTrack />
+          <SliderThumb />
+        </Slider>
+      </div>
+      <div className={'w-full tablet:w-1/2  flex flex-col gap-3'}>
+        <div>
+          <p>
+            onChange value: <strong>{changeRangeValue && changeRangeValue.join(', ')}</strong>
+          </p>
+          <p>
+            onChangeEnd value: <strong>{changeEndRangeValue && changeEndRangeValue.join(', ')}</strong>
+          </p>
+        </div>
+        <Slider
+          color={'green'}
+          className={'w-full'}
+          value={changeRangeValue}
+          onChange={(v) => setChangeRangeValue(v)}
+          onChangeEnd={(v) => setChangeEndRangeValue(v)}
+          defaultValue={[20, 60]}
+        >
+          <SliderTrack />
+          <SliderThumb />
+        </Slider>
+      </div>
+    </div>
+  );
+}
+```
+
 ## 垂直模式
 
 ```tsx preview editable

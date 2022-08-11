@@ -1,7 +1,7 @@
 import { primitiveComponent } from '../utils/component';
 import { __DEV__, clamp } from '@agile-ui/utils';
 import { cx } from 'twind';
-import { useCallback, useMemo, useState, MouseEvent, TouchEvent } from 'react';
+import { useCallback, useMemo, useState, MouseEvent, TouchEvent, useRef } from 'react';
 import { SliderBaseProps, SliderProvider, SliderThumbProvider, SliderValueProvider, ValueType } from './SliderProvider';
 import { useControllableProp, useMove } from '@agile-ui/react-hooks';
 
@@ -69,7 +69,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
 
   const valueContext = useMemo(
     () => ({
-      value: valueState,
+      value: controlledValue,
       onChange: (value: ValueType) => {
         if (!controlled) {
           setValueState(value);
@@ -78,17 +78,15 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
         onChange && onChange(value);
       },
       onChangeEnd: (value: ValueType) => {
-        if (!controlled) {
-          setValueState(value);
-        }
-
         onChangeEnd && onChangeEnd(value);
       },
     }),
-    [controlled, onChange, onChangeEnd, valueState]
+    [controlled, controlledValue, onChange, onChangeEnd]
   );
 
   const [thumbIndex, setThumbIndex] = useState<number | undefined>(undefined);
+
+  const valueRef = useRef(controlledValue);
 
   const handleMoveChange = useCallback(
     ({ x, y }: { x: number; y: number }) => {
@@ -106,13 +104,15 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
           setValueState(value);
         }
 
+        valueRef.current = value;
+
         onChange && onChange(value);
       }
     },
     [disabled, vertical, max, min, step, controlledValue, thumbIndex, controlled, onChange]
   );
 
-  const [moveRef, active] = useMove(handleMoveChange, { onScrubEnd: () => onChangeEnd?.(controlledValue) });
+  const [moveRef, active] = useMove(handleMoveChange, { onScrubEnd: () => onChangeEnd?.(valueRef.current) });
 
   const thumbContext = useMemo(
     () => ({
