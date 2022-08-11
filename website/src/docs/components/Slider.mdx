@@ -48,11 +48,55 @@ description: 滑动型输入器，展示当前值和可选范围。
 </div>
 ```
 
+## 标记
+
+```tsx preview editable
+function Demo() {
+  const marks = [
+    { value: 0, label: '0KM' },
+    { value: 25, label: '25KM' },
+    { value: 50, label: '50KM' },
+    { value: 75, label: '75KM' },
+    { value: 100, label: '100KM' },
+  ];
+
+  return (
+    <div className={'flex flex-col tablet:flex-row gap-5'}>
+      <Slider marks={marks.map((mark) => ({ value: mark.value }))} className={'w-full tablet:w-1/2'} defaultValue={10}>
+        <SliderTrack />
+        <SliderThumb />
+      </Slider>
+      <Slider color={'green'} marks={marks} className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+        <SliderTrack />
+        <SliderThumb />
+      </Slider>
+    </div>
+  );
+}
+```
+
 ## 垂直模式
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-10'}>
+<div className={'flex gap-10'}>
   <Slider vertical className={'h-52'} defaultValue={10}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+
+  <Slider
+    color={'green'}
+    vertical
+    marks={[
+      { value: 0, label: '0%' },
+      { value: 25, label: '25%' },
+      { value: 50, label: '50%' },
+      { value: 75, label: '75%' },
+      { value: 100, label: '100%' },
+    ]}
+    className={'h-52'}
+    defaultValue={[20, 60]}
+  >
     <SliderTrack />
     <SliderThumb />
   </Slider>

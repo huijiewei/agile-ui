@@ -95,6 +95,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
           className={cx(
             'relative select-none outline-0 touch-none items-center flex',
             vertical ? 'px-3' : 'py-3',
+            marks && (vertical ? 'mr-3' : 'mb-3'),
             className
           )}
         >

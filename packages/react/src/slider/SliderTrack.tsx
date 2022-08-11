@@ -44,6 +44,58 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
           )}
           style={trackStyle}
         />
+        {marks && (
+          <div className={cx('absolute', vertical ? 'h-full' : 'w-full')}>
+            {marks.map((mark) => (
+              <div
+                key={mark.value}
+                className={cx('absolute z-[1] flex', vertical ? 'flex-col' : 'flex-row')}
+                style={{
+                  [vertical ? (reverse ? 'bottom' : 'top') : reverse ? 'right' : 'left']:
+                    (mark.value / max) * 100 + '%',
+                }}
+              >
+                <div
+                  className={cx(
+                    'bg-white border-2 h-2 w-2 rounded-full',
+                    vertical ? '-translate-x-1/4' : '-translate-y-1/4',
+                    (Array.isArray(value) ? mark.value > value[0] && mark.value <= value[1] : mark.value < value)
+                      ? `border-${color}-500`
+                      : 'border-gray-100',
+                    mark.value == min
+                      ? ''
+                      : mark.value == max
+                      ? vertical
+                        ? '-translate-y-full'
+                        : '-translate-x-full'
+                      : vertical
+                      ? '-translate-y-1/2'
+                      : '-translate-x-1/2'
+                  )}
+                />
+                {mark.label && (
+                  <div
+                    className={cx(
+                      'absolute text-gray-500 text-sm leading-none',
+                      vertical ? 'left-3' : 'top-3',
+                      mark.value == min
+                        ? ''
+                        : mark.value == max
+                        ? vertical
+                          ? '-translate-y-full'
+                          : '-translate-x-full'
+                        : vertical
+                        ? '-translate-y-1/2'
+                        : '-translate-x-1/2'
+                    )}
+                  >
+                    {mark.label}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
