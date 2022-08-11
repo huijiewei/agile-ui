@@ -1,35 +1,31 @@
 import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
-import { useEffect, useRef } from 'react';
-
-export type Target = HTMLElement | Element | Window | Document;
-
-type Options<T extends Target = Target> = {
-  target?: T | null;
-  capture?: boolean;
-  once?: boolean;
-  passive?: boolean;
-};
+import { RefObject, useEffect, useRef } from 'react';
+import { isBrowser } from '@agile-ui/utils';
 
 type UseEventListener = {
-  <K extends keyof HTMLElementEventMap>(
+  <K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLDivElement>(
     eventName: K,
     handler: (event: HTMLElementEventMap[K]) => void,
-    options?: Options<HTMLElement>
+    element: RefObject<T> | T | null,
+    options?: boolean | AddEventListenerOptions
   ): void;
-  <K extends keyof ElementEventMap>(
+  <K extends keyof ElementEventMap, T extends Element>(
     eventName: K,
     handler: (event: ElementEventMap[K]) => void,
-    options?: Options<Element>
+    element: RefObject<T> | T | null,
+    options?: boolean | AddEventListenerOptions
   ): void;
   <K extends keyof DocumentEventMap>(
     eventName: K,
     handler: (event: DocumentEventMap[K]) => void,
-    options?: Options<Document>
+    element: RefObject<Document> | Document,
+    options?: boolean | AddEventListenerOptions
   ): void;
   <K extends keyof WindowEventMap>(
     eventName: K,
     handler: (event: WindowEventMap[K]) => void,
-    options?: Options<Window>
+    element?: undefined,
+    options?: boolean | AddEventListenerOptions
   ): void;
 };
 
@@ -38,7 +34,9 @@ export const useEventListener: UseEventListener = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handler: (event: any) => void,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  options: Options = {}
+  element?: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options?: boolean | AddEventListenerOptions
 ) => {
   const handlerRef = useRef(handler);
 
@@ -47,26 +45,22 @@ export const useEventListener: UseEventListener = (
   }, [handler]);
 
   useEffect(() => {
-    const targetElement = options?.target || window;
+    if (!isBrowser()) {
+      return;
+    }
+
+    const targetElement = !element ? window : 'current' in element ? element.current : element;
 
     if (!targetElement?.addEventListener) {
       return;
     }
 
-    const eventListener: typeof handler = (event) => {
-      return handlerRef.current(event);
-    };
+    const eventListener: typeof handler = (event) => handlerRef.current(event);
 
-    targetElement.addEventListener(eventName, eventListener, {
-      capture: options.capture,
-      once: options.once,
-      passive: options.passive,
-    });
+    targetElement.addEventListener(eventName, eventListener, options);
 
     return () => {
-      targetElement.removeEventListener(eventName, eventListener, {
-        capture: options.capture,
-      });
+      targetElement.removeEventListener(eventName, eventListener);
     };
-  }, [eventName, options]);
+  }, [element, eventName, options]);
 };

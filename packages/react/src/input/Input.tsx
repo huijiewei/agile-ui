@@ -1,4 +1,4 @@
-import { mergeRefs, useControllableProp, useFocus } from '@agile-ui/react-hooks';
+import { useControllableProp, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
 import { ChangeEvent, KeyboardEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
@@ -94,8 +94,6 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     fullWidth = false,
     clearable = false,
     className,
-    onFocus,
-    onBlur,
     value,
     defaultValue = '',
     onChange,
@@ -149,7 +147,9 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
 
   const showClearButton = clearable && controlledValue;
 
-  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+  const [focusRef, focus] = useFocus();
+
+  const refs = useMergedRefs(inputRef, focusRef, ref);
 
   return (
     <div
@@ -171,7 +171,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
       )}
       <div className={'inline-flex relative grow items-center'}>
         <input
-          ref={mergeRefs(inputRef, ref)}
+          ref={refs}
           className={cx(
             'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
             showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
@@ -183,8 +183,6 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
           required={required}
           disabled={disabled}
           readOnly={readOnly}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           value={controlledValue}

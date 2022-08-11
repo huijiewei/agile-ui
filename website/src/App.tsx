@@ -14,12 +14,12 @@ export const App = () => {
     () => {
       splash?.remove();
     },
-    { target: splash }
+    splash
   );
 
   useTimeout(() => {
     splash?.remove();
-  }, 2000);
+  }, 1500);
 
   return (
     <HelmetProvider>

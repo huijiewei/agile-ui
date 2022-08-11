@@ -2,9 +2,10 @@ import { primitiveComponent, primitiveOmitComponent } from '../utils/component';
 import { cx } from 'twind';
 import { useSlider, useSliderValue, ValueType } from './SliderProvider';
 import { Tooltip } from '../tooltip/Tooltip';
-import { __DEV__, ariaAttr, runIfFn } from '@agile-ui/utils';
+import { __DEV__, ariaAttr, clamp, runIfFn } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
 import { KeyboardEvent, useCallback } from 'react';
+import { useFocus, useHover, useMergedRefs } from '@agile-ui/react-hooks';
 
 type SliderThumbButtonProps = {
   value: number;
@@ -18,8 +19,13 @@ type SliderThumbButtonProps = {
 const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((props, ref) => {
   const { className, disabled, color, value, max, min, vertical, children, index, ...rest } = props;
 
+  const [focusRef, focus] = useFocus();
+  const [hoverRef, hover] = useHover();
+
+  const refs = useMergedRefs(ref, hoverRef, focusRef);
+
   return (
-    <Tooltip placement={'top'} content={value}>
+    <Tooltip opened={focus || hover} placement={vertical ? 'right' : 'top'} content={value}>
       <button
         disabled={disabled}
         tabIndex={0}
@@ -29,12 +35,12 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         aria-valuenow={value}
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         role={'slider'}
-        ref={ref}
+        ref={refs}
         onClick={(e) => e.stopPropagation()}
         className={cx(
-          'absolute select-none touch-none z-10 outline-none rounded-full bg-white transition-transform',
+          'absolute select-none touch-none outline-none rounded-full bg-white transition-transform',
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
-          `focus-visible:(ring ring-${color}-300)`,
+          `focus-visible:(ring ring-${color}-300 z-10)`,
           !disabled && 'hover:scale-110',
           vertical ? 'left-1/2 -translate-x-1/2 -translate-y-1/2' : 'top-1/2 -translate-y-1/2 -translate-x-1/2',
           !children && ['border-3 aspect-square', vertical ? 'w-1/2' : 'h-1/2'],
@@ -62,11 +68,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
 
         const next: ValueType = Array.isArray(value)
           ? index == 0
-            ? [reverse ? value[0] - step : value[0] + step, value[1]]
-            : [value[0], reverse ? value[1] - step : value[1] + step]
-          : reverse
-          ? value - step
-          : value + step;
+            ? [clamp(reverse ? value[0] - step : value[0] + step, [min, value[1]]), value[1]]
+            : [value[0], clamp(reverse ? value[1] - step : value[1] + step, [value[0], max])]
+          : clamp(reverse ? value - step : value + step, [min, max]);
 
         onChange(next);
         onChangeEnd(next);
@@ -80,20 +84,40 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
 
         const next: ValueType = Array.isArray(value)
           ? index == 0
-            ? [reverse ? value[0] + step : value[0] - step, value[1]]
-            : [value[0], reverse ? value[1] + step : value[1] - step]
-          : reverse
-          ? value + step
-          : value - step;
+            ? [clamp(reverse ? value[0] + step : value[0] - step, [min, value[1]]), value[1]]
+            : [value[0], clamp(reverse ? value[1] + step : value[1] - step, [value[0], max])]
+          : clamp(reverse ? value + step : value - step, [min, max]);
 
         onChange(next);
         onChangeEnd(next);
 
         return;
       }
+
+      if (e.code == 'Home') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const next: ValueType = Array.isArray(value) ? (index == 0 ? [min, value[1]] : [value[0], value[0]]) : min;
+
+        onChange(next);
+        onChangeEnd(next);
+      }
+
+      if (e.code == 'End') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const next: ValueType = Array.isArray(value) ? (index == 0 ? [value[1], value[1]] : [value[0], max]) : max;
+
+        onChange(next);
+        onChangeEnd(next);
+      }
     },
-    [value, reverse, step, onChange, onChangeEnd]
+    [value, reverse, step, min, max, onChange, onChangeEnd]
   );
+
+  const styleAttr = vertical ? (reverse ? 'bottom' : 'top') : reverse ? 'right' : 'left';
 
   if (Array.isArray(value)) {
     return (
@@ -107,15 +131,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           index={0}
           min={min}
           vertical={vertical}
-          style={
-            vertical
-              ? {
-                  top: (value[0] / max) * 100 + '%',
-                }
-              : {
-                  left: (value[0] / max) * 100 + '%',
-                }
-          }
+          style={{
+            [styleAttr]: (value[0] / max) * 100 + '%',
+          }}
           onKeyDown={(e) => {
             handelKeyDown(e, 0);
           }}
@@ -131,15 +149,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           min={value[0]}
           index={1}
           vertical={vertical}
-          style={
-            vertical
-              ? {
-                  top: (value[1] / max) * 100 + '%',
-                }
-              : {
-                  left: (value[1] / max) * 100 + '%',
-                }
-          }
+          style={{
+            [styleAttr]: (value[1] / max) * 100 + '%',
+          }}
           onKeyDown={(e) => {
             handelKeyDown(e, 1);
           }}
@@ -158,15 +170,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         max={max}
         min={min}
         vertical={vertical}
-        style={
-          vertical
-            ? {
-                top: (value / max) * 100 + '%',
-              }
-            : {
-                left: (value / max) * 100 + '%',
-              }
-        }
+        style={{
+          [styleAttr]: (value / max) * 100 + '%',
+        }}
         onKeyDown={(e) => {
           handelKeyDown(e);
         }}

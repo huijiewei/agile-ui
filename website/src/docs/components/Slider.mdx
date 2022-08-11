@@ -41,17 +41,17 @@ description: 滑动型输入器，展示当前值和可选范围。
     <SliderTrack />
     <SliderThumb />
   </Slider>
-  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+  <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
     <SliderTrack />
     <SliderThumb />
   </Slider>
 </div>
 ```
 
-## 竖直模式
+## 垂直模式
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-5'}>
+<div className={'flex flex-col tablet:flex-row gap-10'}>
   <Slider vertical className={'h-52'} defaultValue={10}>
     <SliderTrack />
     <SliderThumb />

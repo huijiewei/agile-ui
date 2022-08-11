@@ -1,9 +1,9 @@
 import {
-  mergeRefs,
   useControllableProp,
   useFocus,
   useFocusVisible,
   useIsomorphicLayoutEffect,
+  useMergedRefs,
 } from '@agile-ui/react-hooks';
 import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
@@ -70,8 +70,6 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
     onChange,
     children,
     className,
-    onBlur,
-    onFocus,
     ...rest
   } = props;
 
@@ -112,7 +110,9 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
   const sizeStyle = switchSizeStyles[size];
 
   const { focusVisible } = useFocusVisible();
-  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+  const [focusRef, focus] = useFocus();
+
+  const refs = useMergedRefs(inputRef, focusRef, ref);
 
   return (
     <label
@@ -127,13 +127,11 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         className={'sr-only'}
         value={value}
         type="checkbox"
-        ref={mergeRefs(inputRef, ref)}
+        ref={refs}
         checked={controlledChecked}
         disabled={disabled}
         readOnly={readOnly}
         onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
         {...rest}
       />
       <span

@@ -1,7 +1,7 @@
 import { primitiveComponent } from '../utils/component';
 import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, ReactNode, ForwardedRef } from 'react';
 import type { InputBaseProps } from './InputGroup';
-import { assignRef, mergeRefs, useControllableProp, useEventListener, useFocus } from '@agile-ui/react-hooks';
+import { assignRef, useControllableProp, useEventListener, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { inputSizes } from './inputSizes';
@@ -132,8 +132,6 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     readOnly = false,
     fullWidth = false,
     className,
-    onFocus,
-    onBlur,
     value,
     defaultValue,
     step = 1,
@@ -144,6 +142,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
     parse = (value) => value,
     format = (value) => value,
     onChange,
+    onBlur,
     hideControls = false,
     controlsRef,
     prefix,
@@ -159,8 +158,9 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   const [inputValue, setInputValue] = useState(controlledValue?.toFixed(precision) ?? '');
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [focusRef, focus] = useFocus<HTMLInputElement>();
 
-  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+  const refs = useMergedRefs(inputRef, focusRef, ref);
 
   const update = useCallback(
     (next: number | undefined) => {
@@ -297,9 +297,9 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         }
       }
 
-      handleBlur(event);
+      onBlur && onBlur(event);
     },
-    [controlledValue, handleBlur, maxValue, minValue, parse, precision, update]
+    [controlledValue, maxValue, minValue, onBlur, parse, precision, update]
   );
 
   useEventListener(
@@ -319,7 +319,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         decrement();
       }
     },
-    { target: inputRef.current, passive: false }
+    inputRef,
+    { passive: false }
   );
 
   const formattedValue = format(inputValue);
@@ -343,7 +344,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         </div>
       )}
       <input
-        ref={mergeRefs(inputRef, ref)}
+        ref={refs}
         className={cx(
           'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
           !hideControls && numberInputSize[size]['input']
@@ -365,7 +366,6 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         disabled={disabled}
         readOnly={readOnly}
         onBlur={handleInputBlur}
-        onFocus={handleFocus}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         value={formattedValue}

@@ -1,32 +1,24 @@
-import { useCallback, useState } from 'react';
-import type { FocusEvent } from 'react';
+import { Ref, useRef, useState } from 'react';
+import { useEventListener } from '../use-event-listener';
 
-export type UseFocusOptions<T> = {
-  state?: boolean;
-  onBlur?: (e: FocusEvent<T>) => void;
-  onFocus?: (e: FocusEvent<T>) => void;
-};
+export const useHover = <T extends HTMLElement>(): [Ref<T>, boolean] => {
+  const ref = useRef<T>(null);
+  const [hover, setHover] = useState(false);
 
-export const useFocus = <T>(options: UseFocusOptions<T>) => {
-  const { state = false, onBlur, onFocus } = options;
-
-  const [focus, setFocus] = useState(state);
-
-  const handleBlur = useCallback(
-    (e: FocusEvent<T>) => {
-      setFocus(false);
-      onBlur && onBlur(e);
+  useEventListener(
+    'mouseenter',
+    () => {
+      setHover(true);
     },
-    [onBlur]
+    ref
+  );
+  useEventListener(
+    'mouseleave',
+    () => {
+      setHover(false);
+    },
+    ref
   );
 
-  const handleFocus = useCallback(
-    (e: FocusEvent<T>) => {
-      setFocus(true);
-      onFocus && onFocus(e);
-    },
-    [onFocus]
-  );
-
-  return { focus, handleBlur, handleFocus };
+  return [ref, hover];
 };

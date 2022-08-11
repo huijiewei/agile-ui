@@ -1,10 +1,10 @@
 import {
-  mergeRefs,
   useCallbackRef,
   useControllableProp,
   useFocus,
   useFocusVisible,
   useIsomorphicLayoutEffect,
+  useMergedRefs,
 } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
@@ -81,8 +81,6 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
     defaultChecked = false,
     indeterminate,
     onChange,
-    onFocus,
-    onBlur,
     required = false,
     invalid = false,
     style,
@@ -156,7 +154,9 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   });
 
   const { focusVisible } = useFocusVisible();
-  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+  const [focusRef, focus] = useFocus();
+
+  const refs = useMergedRefs(inputRef, focusRef, ref);
 
   return (
     <label
@@ -169,7 +169,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       style={style}
     >
       <input
-        ref={mergeRefs(inputRef, ref)}
+        ref={refs}
         className={'sr-only'}
         value={value}
         type="checkbox"
@@ -179,8 +179,6 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
         required={required}
         aria-invalid={ariaAttr(invalid)}
         onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
         {...rest}
       />
       <div

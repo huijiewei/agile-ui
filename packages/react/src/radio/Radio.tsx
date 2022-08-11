@@ -1,10 +1,10 @@
 import {
-  mergeRefs,
   useCallbackRef,
   useControllableProp,
   useFocus,
   useFocusVisible,
   useIsomorphicLayoutEffect,
+  useMergedRefs,
 } from '@agile-ui/react-hooks';
 import { __DEV__, ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
@@ -68,8 +68,6 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     checked,
     defaultChecked = false,
     onChange,
-    onFocus,
-    onBlur,
     required = false,
     invalid = false,
     style,
@@ -116,7 +114,9 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
   const sizeStyle = radioSizeStyles[size];
 
   const { focusVisible } = useFocusVisible();
-  const { focus, handleBlur, handleFocus } = useFocus({ onBlur, onFocus });
+  const [focusRef, focus] = useFocus();
+
+  const refs = useMergedRefs(inputRef, focusRef, ref);
 
   return (
     <label
@@ -129,7 +129,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
       style={style}
     >
       <input
-        ref={mergeRefs(inputRef, ref)}
+        ref={refs}
         name={name}
         className={'sr-only'}
         value={value}
@@ -139,8 +139,6 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
         aria-disabled={ariaAttr(disabled)}
         required={required}
         onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
         {...rest}
       />
       <span

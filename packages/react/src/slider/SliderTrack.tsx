@@ -2,7 +2,7 @@ import { primitiveComponent } from '../utils/component';
 import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { useSlider, useSliderValue } from './SliderProvider';
-import { useCallback, useMemo, KeyboardEvent } from 'react';
+import { useMemo } from 'react';
 
 export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
   const { className, ...rest } = props;
@@ -23,12 +23,11 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
   }, [ticks]);
 
   const trackStyle = Array.isArray(value)
-    ? vertical
-      ? { top: (value[0] / max) * 100 + '%', height: ((value[1] - value[0]) / max) * 100 + '%' }
-      : { left: (value[0] / max) * 100 + '%', width: ((value[1] - value[0]) / max) * 100 + '%' }
-    : vertical
-    ? { height: (value / max) * 100 + '%' }
-    : { width: (value / max) * 100 + '%' };
+    ? {
+        [vertical ? (reverse ? 'bottom' : 'top') : reverse ? 'right' : 'left']: (value[0] / max) * 100 + '%',
+        [vertical ? 'height' : 'width']: ((value[1] - value[0]) / max) * 100 + '%',
+      }
+    : { [vertical ? 'height' : 'width']: (value / max) * 100 + '%' };
 
   return (
     <>
