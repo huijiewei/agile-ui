@@ -47,12 +47,12 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         ref={refs}
         onClick={(e) => e.stopPropagation()}
         className={cx(
-          'absolute select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
+          'absolute appearance-none select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
           `focus-visible:(ring ring-${color}-300 z-10)`,
           !disabled && 'hover:scale-110',
           vertical ? 'left-1/2 -translate-x-1/2 -translate-y-1/2' : 'top-1/2 -translate-y-1/2 -translate-x-1/2',
-          !children && ['border-3 aspect-square', vertical ? 'w-1/2' : 'h-1/2'],
+          !children && ['border-3 aspect-square', vertical ? 'w-1/2' : 'h-1/2 w-fit'],
           className
         )}
         {...rest}
