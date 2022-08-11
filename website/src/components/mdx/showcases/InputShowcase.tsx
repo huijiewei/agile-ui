@@ -16,6 +16,6 @@ const Demo = () => {
     component={Input}
     defaultProps={{ placeholder: '输入框' }}
     componentProps={componentProps}
-    ignoreProps={['onChange', 'onClear', 'value', 'defaultValue', 'prefix', 'suffix']}
+    ignoreProps={['onChange', 'onClear', 'value', 'defaultValue', 'onPressEnter', 'prefix', 'suffix']}
   />
 );

@@ -38,6 +38,7 @@ export * from './select/SelectOption';
 export * from './select/SelectOptionGroup';
 export * from './select/SelectDivider';
 export * from './select/SelectLabel';
+export * from './select/NativeSelect';
 
 export * from './slider/Slider';
 export * from './slider/SliderThumb';

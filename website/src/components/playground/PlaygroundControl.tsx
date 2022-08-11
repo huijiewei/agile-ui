@@ -1,4 +1,4 @@
-import { Checkbox, Input } from '@agile-ui/react';
+import { Checkbox, Input, NativeSelect } from '@agile-ui/react';
 import { Check } from '@agile-ui/react-icons';
 import { cx } from 'twind';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
@@ -58,9 +58,9 @@ export const PlaygroundControl = ({
             })}
           </div>
         ) : (
-          <select
+          <NativeSelect
+            size={'sm'}
             onChange={(e) => onChange(e.target.value)}
-            className={'rounded-sm border bg-white border-gray-300 px-1.5 py-0.5'}
             defaultValue={defaultValue?.toString().slice(1, -1)}
           >
             {prop.type.values?.map((value) => {
@@ -76,7 +76,7 @@ export const PlaygroundControl = ({
                 </option>
               );
             })}
-          </select>
+          </NativeSelect>
         ))}
     </label>
   );
