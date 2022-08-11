@@ -128,15 +128,9 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
         return;
       }
 
-      if (e.cancelable) {
-        e.preventDefault();
-      }
-
       const element = moveRef.current;
 
       if (element) {
-        element.focus();
-
         const rect = element.getBoundingClientRect();
 
         const changePosition =
@@ -171,8 +165,8 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
             ref={moveRef}
             tabIndex={-1}
             className={cx(
-              'relative select-none outline-0 items-center flex',
-              vertical ? 'px-3' : 'py-3',
+              'relative select-none outline-none items-center flex',
+              vertical ? 'px-3 touch-pan-y' : 'py-3 touch-pan-x',
               marks && (vertical ? 'mr-3' : 'mb-3'),
               className
             )}

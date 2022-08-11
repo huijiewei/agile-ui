@@ -102,9 +102,7 @@ function Demo() {
   </Slider>
   <Slider vertical className={'h-52'} defaultValue={[20, 60]}>
     <SliderTrack />
-    <SliderThumb className={'border p-0.5 text-sm'}>
-      {(index) => (index == 0 ? <Heart /> : <HeartBroken />)}
-    </SliderThumb>
+    <SliderThumb />
   </Slider>
 </div>
 ```
