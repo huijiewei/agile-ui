@@ -7,3 +7,4 @@ export * from './number/number';
 export * from './string/string';
 export * from './function/function';
 export * from './url/url';
+export * from './array/array';
