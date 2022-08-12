@@ -26,7 +26,7 @@ description: 滑动型输入器，展示当前值和可选范围。
     <SliderTrack />
     <SliderThumb />
   </Slider>
-  <Slider className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+  <Slider disabled className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
     <SliderTrack />
     <SliderThumb />
   </Slider>
@@ -37,11 +37,20 @@ description: 滑动型输入器，展示当前值和可选范围。
 
 ```tsx preview editable
 <div className={'flex flex-col tablet:flex-row gap-5'}>
-  <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={10}>
+  <Slider
+    marks={[
+      { value: 0, label: '0%' },
+      { value: 50, label: '50%' },
+      { value: 100, label: '100%' },
+    ]}
+    ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
+    className={'w-full tablet:w-1/2'}
+    defaultValue={10}
+  >
     <SliderTrack />
     <SliderThumb />
   </Slider>
-  <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
+  <Slider step={2} ticks className={'w-full tablet:w-1/2'} defaultValue={[20, 60]}>
     <SliderTrack />
     <SliderThumb />
   </Slider>
@@ -157,7 +166,42 @@ function Demo() {
     <SliderTrack />
     <SliderThumb />
   </Slider>
-  <Slider vertical className={'h-52'} defaultValue={[20, 60]}>
+  <Slider ticks vertical className={'h-52'} defaultValue={[20, 60]}>
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+</div>
+```
+
+## 反向
+
+```tsx preview editable
+<div className={'flex gap-5'}>
+  <Slider
+    reverse
+    marks={[
+      { value: 0, label: '0%' },
+      { value: 50, label: '50%' },
+      { value: 100, label: '100%' },
+    ]}
+    ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
+    className={'w-full tablet:w-1/2'}
+    defaultValue={30}
+  >
+    <SliderTrack />
+    <SliderThumb />
+  </Slider>
+  <Slider
+    reverse
+    marks={[
+      { value: 0, label: '0%' },
+      { value: 50, label: '50%' },
+      { value: 100, label: '100%' },
+    ]}
+    ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90]}
+    className={'w-full tablet:w-1/2'}
+    defaultValue={[20, 60]}
+  >
     <SliderTrack />
     <SliderThumb />
   </Slider>

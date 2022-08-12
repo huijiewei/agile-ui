@@ -13,11 +13,12 @@ type SliderThumbButtonProps = {
   min: number;
   color: ScaleColor;
   vertical: boolean;
+  reverse: boolean;
   index?: number;
 };
 
 const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((props, ref) => {
-  const { className, disabled, color, value, max, min, vertical, children, index, ...rest } = props;
+  const { className, disabled, color, value, max, min, vertical, reverse, children, index, ...rest } = props;
 
   const [focusRef, focus] = useFocus();
   const [hoverRef, hover] = useHover();
@@ -49,7 +50,9 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
           `focus-visible:(ring ring-${color}-300 z-10)`,
           !disabled && 'hover:scale-110',
-          vertical ? 'left-1/2 -translate-x-1/2 -translate-y-1/2' : 'top-1/2 -translate-y-1/2 -translate-x-1/2',
+          vertical
+            ? ['left-1/2 -translate-x-1/2', reverse ? 'translate-y-1/2' : '-translate-y-1/2']
+            : ['top-1/2 -translate-y-1/2', reverse ? 'translate-x-1/2' : '-translate-x-1/2'],
           !children && ['border-3 aspect-square', vertical ? 'w-1/2' : 'h-1/2 w-fit'],
           className
         )}
@@ -138,6 +141,7 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           index={0}
           min={min}
           vertical={vertical}
+          reverse={reverse}
           style={{
             [styleAttr]: (value[0] / max) * 100 + '%',
           }}
@@ -156,6 +160,7 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           min={value[0]}
           index={1}
           vertical={vertical}
+          reverse={reverse}
           style={{
             [styleAttr]: (value[1] / max) * 100 + '%',
           }}
@@ -177,6 +182,7 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         max={max}
         min={min}
         vertical={vertical}
+        reverse={reverse}
         style={{
           [styleAttr]: (value / max) * 100 + '%',
         }}

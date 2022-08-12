@@ -92,7 +92,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
     ({ x, y }: { x: number; y: number }) => {
       if (!disabled) {
         const dx = (vertical ? y : x) * (max - min);
-        const next = (dx !== 0 ? Math.round(dx / step) * step : 0) + min;
+        const next = (dx != 0 ? Math.round((reverse ? max - dx : dx) / step) * step : reverse ? max : 0) + min;
 
         const value: ValueType = Array.isArray(controlledValue)
           ? thumbIndex == 1
@@ -109,7 +109,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
         onChange && onChange(value);
       }
     },
-    [disabled, vertical, max, min, step, controlledValue, thumbIndex, controlled, onChange]
+    [disabled, vertical, reverse, max, min, step, controlledValue, thumbIndex, controlled, onChange]
   );
 
   const [moveRef, active] = useMove(handleMoveChange, { onScrubEnd: () => onChangeEnd?.(valueRef.current) });
@@ -146,7 +146,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
 
         const dx = (Math.min(Math.max(changePosition - (vertical ? rect.top : rect.left), 0), rw) / rw) * (max - min);
 
-        const changeValue = (dx !== 0 ? Math.round(dx / step) * step : 0) + min;
+        const changeValue = (dx != 0 ? Math.round((reverse ? max - dx : dx) / step) * step : reverse ? max : 0) + min;
 
         const nearestHandle =
           Math.abs(controlledValue[0] - changeValue) > Math.abs(controlledValue[1] - changeValue) ? 1 : 0;
@@ -154,7 +154,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
         setThumbIndex(nearestHandle);
       }
     },
-    [controlledValue, max, min, moveRef, step, vertical]
+    [controlledValue, max, min, moveRef, reverse, step, vertical]
   );
 
   return (
@@ -166,8 +166,8 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
             tabIndex={-1}
             className={cx(
               'relative select-none outline-none items-center flex',
-              vertical ? 'px-3 touch-pan-y' : 'py-3 touch-pan-x',
-              marks && (vertical ? 'mr-3' : 'mb-3'),
+              vertical ? 'px-3 touch-pan-y w-fit' : 'py-3 touch-pan-x h-fit',
+              marks && (vertical ? 'mr-3 my-2' : 'mb-3 mx-2'),
               className
             )}
             onTouchStartCapture={handleTrackMouseDownCapture}
