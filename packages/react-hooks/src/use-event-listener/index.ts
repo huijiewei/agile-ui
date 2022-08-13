@@ -1,6 +1,6 @@
-import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect';
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useEffect } from 'react';
 import { isBrowser } from '@agile-ui/utils';
+import { useCallbackRef } from '../use-callback-ref';
 
 type UseEventListener = {
   <K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLDivElement>(
@@ -38,11 +38,7 @@ export const useEventListener: UseEventListener = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options?: boolean | AddEventListenerOptions
 ) => {
-  const handlerRef = useRef(handler);
-
-  useIsomorphicLayoutEffect(() => {
-    handlerRef.current = handler;
-  }, [handler]);
+  const listener = useCallbackRef(handler);
 
   useEffect(() => {
     if (!isBrowser()) {
@@ -55,12 +51,10 @@ export const useEventListener: UseEventListener = (
       return;
     }
 
-    const eventListener: typeof handler = (event) => handlerRef.current(event);
-
-    targetElement.addEventListener(eventName, eventListener, options);
+    targetElement.addEventListener(eventName, listener, options);
 
     return () => {
-      targetElement.removeEventListener(eventName, eventListener);
+      targetElement.removeEventListener(eventName, listener);
     };
-  }, [element, eventName, options]);
+  }, [element, eventName, listener, options]);
 };
