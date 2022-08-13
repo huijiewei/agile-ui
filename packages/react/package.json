@@ -11,9 +11,19 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "react",
+    "ui",
+    "uikit",
+    "components",
+    "react-components",
+    "design-system",
+    "tailwindcss",
+    "twind"
+  ],
   "scripts": {
     "build": "tsup",
-    "vite-build": "vite build"
+    "prepublishOnly": "npm run build"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -30,6 +40,7 @@
     "url": "git+https://github.com/huijiewei/agile-ui.git",
     "directory": "packages/react"
   },
+  "homepage": "https://agile-ui.vercel.app/",
   "peerDependencies": {
     "@agile-ui/twind": "*",
     "framer-motion": ">=7",
