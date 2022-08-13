@@ -57,38 +57,37 @@ export default defineConfig(() => {
       rollupOptions: {
         output: {
           manualChunks: (id) => {
+            if (
+              id.includes('/node_modules/react/') ||
+              id.includes('/node_modules/react-dom/') ||
+              id.includes('/node_modules/react-is/') ||
+              id.includes('/node_modules/scheduler/') ||
+              id.includes('/node_modules/prop-types/')
+            ) {
+              return 'react';
+            }
+
+            if (
+              id.includes('/packages/react-live/') ||
+              id.includes('/node_modules/sucrase/') ||
+              id.includes('/node_modules/prismjs/') ||
+              id.includes('/node_modules/prism-react-renderer/') ||
+              id.includes('/node_modules/ts-interface-checker/') ||
+              id.includes('/node_modules/react-simple-code-editor/') ||
+              id.includes('/node_modules/lines-and-columns/')
+            ) {
+              return 'react-live';
+            }
+
+            if (
+              id.includes('/node_modules/twind/') ||
+              id.includes('/node_modules/@twind/') ||
+              id.includes('/node_modules/style-vendorizer/')
+            ) {
+              return 'twind';
+            }
+
             if (id.includes('/node_modules/')) {
-              if (
-                id.includes('/node_modules/react/') ||
-                id.includes('/node_modules/react-dom/') ||
-                id.includes('/node_modules/react-is/') ||
-                id.includes('/node_modules/scheduler/') ||
-                id.includes('/node_modules/prop-types/')
-              ) {
-                return 'react';
-              }
-
-              if (
-                id.includes('/node_modules/sucrase/') ||
-                id.includes('/node_modules/prismjs/') ||
-                id.includes('/node_modules/prism-react-renderer/') ||
-                id.includes('/node_modules/ts-interface-checker/') ||
-                id.includes('/node_modules/react-live-runner/') ||
-                id.includes('/node_modules/react-runner/') ||
-                id.includes('/node_modules/react-simple-code-editor/') ||
-                id.includes('/node_modules/lines-and-columns/')
-              ) {
-                return 'react-live';
-              }
-
-              if (
-                id.includes('/node_modules/twind/') ||
-                id.includes('/node_modules/@twind/') ||
-                id.includes('/node_modules/style-vendorizer/')
-              ) {
-                return 'twind';
-              }
-
               return 'vendor';
             }
 
@@ -107,6 +106,7 @@ export default defineConfig(() => {
         '@agile-ui/react': resolve(__dirname, '../packages/react/src'),
         '@agile-ui/react-hooks': resolve(__dirname, '../packages/react-hooks/src'),
         '@agile-ui/react-icons': resolve(__dirname, '../packages/react-icons/src'),
+        '@agile-ui/react-live': resolve(__dirname, '../packages/react-live/src'),
         '@agile-ui/twind': resolve(__dirname, '../packages/twind/src'),
         '@agile-ui/utils': resolve(__dirname, '../packages/utils/src'),
       },
