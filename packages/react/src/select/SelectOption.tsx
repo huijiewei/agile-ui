@@ -83,7 +83,7 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
       aria-disabled={ariaAttr(disabled)}
       tabIndex={activeIndex == index ? 0 : 1}
       className={cx(
-        'select-none w-full h-fit outline-none transition-colors rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
+        'select-none w-full outline-none transition-colors rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
         sizeClass,
         className
       )}
