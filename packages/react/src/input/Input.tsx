@@ -190,8 +190,8 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
         />
         {showClearButton && (
           <CloseButton
-            onClick={(e) => {
-              e.stopPropagation();
+            onClick={(event) => {
+              event.stopPropagation();
               handleClear();
               inputRef.current?.focus();
             }}

@@ -38,15 +38,15 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         role={'slider'}
         ref={refs}
-        onMouseDown={(e) => {
-          e.stopPropagation();
+        onMouseDown={(event) => {
+          event.stopPropagation();
           onThumbMouseDown(index);
         }}
-        onTouchStart={(e) => {
-          e.stopPropagation();
+        onTouchStart={(event) => {
+          event.stopPropagation();
           onThumbMouseDown(index);
         }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         className={cx(
           'absolute select-none touch-none z-[2] outline-none rounded-full bg-white transition-transform',
           `border-${color}-500 text-${color}-500 disabled:border-gray-300`,
@@ -73,10 +73,10 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
   const { value, onChange, onChangeEnd } = useSliderValue();
 
   const handelKeyDown = useCallback(
-    (e: KeyboardEvent, index?: number) => {
-      if (e.code == 'ArrowDown' || e.key == 'ArrowRight') {
-        e.preventDefault();
-        e.stopPropagation();
+    (event: KeyboardEvent, index?: number) => {
+      if (event.code == 'ArrowDown' || event.key == 'ArrowRight') {
+        event.preventDefault();
+        event.stopPropagation();
 
         const next: ValueType = Array.isArray(value)
           ? index == 0
@@ -90,9 +90,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         return;
       }
 
-      if (e.code == 'ArrowUp' || e.key == 'ArrowLeft') {
-        e.preventDefault();
-        e.stopPropagation();
+      if (event.code == 'ArrowUp' || event.key == 'ArrowLeft') {
+        event.preventDefault();
+        event.stopPropagation();
 
         const next: ValueType = Array.isArray(value)
           ? index == 0
@@ -106,9 +106,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         return;
       }
 
-      if (e.code == 'Home') {
-        e.preventDefault();
-        e.stopPropagation();
+      if (event.code == 'Home') {
+        event.preventDefault();
+        event.stopPropagation();
 
         const next: ValueType = Array.isArray(value) ? (index == 0 ? [min, value[1]] : [value[0], value[0]]) : min;
 
@@ -116,9 +116,9 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         onChangeEnd(next);
       }
 
-      if (e.code == 'End') {
-        e.preventDefault();
-        e.stopPropagation();
+      if (event.code == 'End') {
+        event.preventDefault();
+        event.stopPropagation();
 
         const next: ValueType = Array.isArray(value) ? (index == 0 ? [value[1], value[1]] : [value[0], max]) : max;
 
@@ -147,8 +147,8 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           style={{
             [styleAttr]: (value[0] / max) * 100 + '%',
           }}
-          onKeyDown={(e) => {
-            handelKeyDown(e, 0);
+          onKeyDown={(event) => {
+            handelKeyDown(event, 0);
           }}
           color={color}
           {...rest}
@@ -166,8 +166,8 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
           style={{
             [styleAttr]: (value[1] / max) * 100 + '%',
           }}
-          onKeyDown={(e) => {
-            handelKeyDown(e, 1);
+          onKeyDown={(event) => {
+            handelKeyDown(event, 1);
           }}
           color={color}
           {...rest}
@@ -188,8 +188,8 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
         style={{
           [styleAttr]: (value / max) * 100 + '%',
         }}
-        onKeyDown={(e) => {
-          handelKeyDown(e);
+        onKeyDown={(event) => {
+          handelKeyDown(event);
         }}
         color={color}
         {...rest}

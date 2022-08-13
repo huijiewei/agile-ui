@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 type Modality = 'keyboard' | 'pointer' | 'virtual';
 type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent;
-type Handler = (modality: Modality, e: HandlerEvent | null) => void;
+type Handler = (modality: Modality, event: HandlerEvent | null) => void;
 
 let hasSetup = false;
 let modality: Modality | null = null;
@@ -41,20 +41,28 @@ const handlePointerEvent = (event: PointerEvent | MouseEvent) => {
 
   if (event.type == 'mousedown' || event.type == 'pointerdown') {
     hasEventBeforeFocus = true;
+
     const target = event.composedPath ? event.composedPath()[0] : event.target;
-    if ((target as HTMLElement).matches(':focus-visible')) return;
+
+    if ((target as HTMLElement).matches(':focus-visible')) {
+      return;
+    }
+
     trigger('pointer', event);
   }
 };
 
 const isVirtualClick = (event: MouseEvent | PointerEvent): boolean => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if ((event as any).mozInputSource === 0 && event.isTrusted) return true;
+  if ((event as any).mozInputSource === 0 && event.isTrusted) {
+    return true;
+  }
+
   return event.detail == 0 && !(event as PointerEvent).pointerType;
 };
 
-const handleClickEvent = (e: MouseEvent) => {
-  if (isVirtualClick(e)) {
+const handleClickEvent = (event: MouseEvent) => {
+  if (isVirtualClick(event)) {
     hasEventBeforeFocus = true;
     modality = 'virtual';
   }

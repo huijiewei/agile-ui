@@ -1,10 +1,10 @@
 import { __DEV__ } from '@agile-ui/utils';
-import { ToastOptions, useToastContext } from './ToastProvider';
+import { ToastOptions, useToastDispatch } from './ToastProvider';
 
 export type UseToastOptions = Omit<ToastOptions, 'remove' | 'onRemove'>;
 
 export const useToast = (defaultOptions?: UseToastOptions) => {
-  const context = useToastContext();
+  const context = useToastDispatch();
 
   const toast = (options: UseToastOptions) => {
     return context.notify({

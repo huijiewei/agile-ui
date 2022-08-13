@@ -74,9 +74,9 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
     ...rest
   } = props;
 
-  const onChangeRef = useCallbackRef((e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.checked, e);
-    group?.onChange?.(e);
+  const onChangeRef = useCallbackRef((event: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(event.target.checked, event);
+    group?.onChange?.(event);
   });
 
   const [checkedState, setCheckedState] = useState(defaultChecked);

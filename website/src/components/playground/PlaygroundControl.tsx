@@ -60,7 +60,7 @@ export const PlaygroundControl = ({
         ) : (
           <NativeSelect
             size={'sm'}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(event) => onChange(event.target.value)}
             defaultValue={defaultValue?.toString().slice(1, -1)}
           >
             {prop.type.values?.map((value) => {

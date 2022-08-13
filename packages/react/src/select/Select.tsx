@@ -443,12 +443,12 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     onPointerMove() {
       setControlledScrolling(false);
     },
-    onKeyDown(e) {
+    onKeyDown(event) {
       setControlledScrolling(true);
 
       if (virtual) {
-        if (e.key === 'Enter' || (e.key === ' ' && !context.dataRef.current.typing)) {
-          e.preventDefault();
+        if (event.key === 'Enter' || (event.key === ' ' && !context.dataRef.current.typing)) {
+          event.preventDefault();
 
           if (activeIndex) {
             handleSelected(activeIndex, elements[activeIndex].props.value);
@@ -512,8 +512,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                   <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={index}>
                     {options[index].label}
                     <CloseButton
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={(event) => {
+                        event.stopPropagation();
                         handleSelected(index, options[index].value as StringOrNumber);
                       }}
                       className={'hover:bg-gray-50 rounded-full'}
@@ -533,8 +533,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <div className={'flex gap-1 items-center'}>
           {showClearButton && (
             <CloseButton
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={(event) => {
+                event.stopPropagation();
                 handleClear();
               }}
               className={'text-gray-500 rounded-full p-0.5 hover:bg-gray-100'}

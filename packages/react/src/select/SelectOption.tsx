@@ -59,9 +59,9 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
   }, [closeOnSelect, index, onSelected, setActiveIndex, setOpen, value]);
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLElement>) => {
-      if (e.key === 'Enter' || (e.key === ' ' && !dataRef.current.typing)) {
-        e.preventDefault();
+    (event: KeyboardEvent<HTMLElement>) => {
+      if (event.key === 'Enter' || (event.key === ' ' && !dataRef.current.typing)) {
+        event.preventDefault();
         handleSelect();
       }
     },

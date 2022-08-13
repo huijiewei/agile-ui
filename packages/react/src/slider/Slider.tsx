@@ -123,7 +123,7 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
   );
 
   const handleTrackMouseDownCapture = useCallback(
-    (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    (event: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
       if (!Array.isArray(controlledValue)) {
         return;
       }
@@ -134,13 +134,13 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
         const rect = element.getBoundingClientRect();
 
         const changePosition =
-          e.type == 'mousedown'
+          event.type == 'mousedown'
             ? vertical
-              ? (e as MouseEvent).nativeEvent.clientY
-              : (e as MouseEvent).nativeEvent.clientX
+              ? (event as MouseEvent).nativeEvent.clientY
+              : (event as MouseEvent).nativeEvent.clientX
             : vertical
-            ? (e as TouchEvent).nativeEvent.touches[0].clientY
-            : (e as TouchEvent).nativeEvent.touches[0].clientX;
+            ? (event as TouchEvent).nativeEvent.touches[0].clientY
+            : (event as TouchEvent).nativeEvent.touches[0].clientX;
 
         const rw = vertical ? rect.height : rect.width;
 

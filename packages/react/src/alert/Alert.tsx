@@ -18,10 +18,9 @@ type AlertContextValue = {
   variant?: 'solid' | 'outline' | 'light';
 };
 
-const [AlertProvider, useAlertContext] = createContext<AlertContextValue>({
+const [AlertProvider, useAlert] = createContext<AlertContextValue>({
   name: 'AlertContext',
   strict: true,
-  errorMessage: 'useAlertContext: `context` is undefined. Seems you forgot to wrap alert components in `<Alert />`',
 });
 
 export type AlertProps = AlertContextValue;
@@ -70,7 +69,7 @@ if (__DEV__) {
 }
 
 export const AlertDescription = primitiveComponent<'div'>((props, ref) => {
-  const { variant } = useAlertContext();
+  const { variant } = useAlert();
   const { className, ...rest } = props;
 
   return <div className={cx(variant != 'solid' && 'text-black', className)} ref={ref} {...rest} />;

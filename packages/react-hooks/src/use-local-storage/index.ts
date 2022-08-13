@@ -35,12 +35,12 @@ export const useLocalStorage = <T>(key: string, initialValue: MaybeFunction<T>):
     }
   };
 
-  useEventListener('storage', (e: StorageEvent) => {
-    if (e.key !== key || e.storageArea !== window.localStorage) {
+  useEventListener('storage', (event: StorageEvent) => {
+    if (event.key !== key || event.storageArea !== window.localStorage) {
       return;
     }
 
-    setState(e.newValue ? JSON.parse(e.newValue) : undefined);
+    setState(event.newValue ? JSON.parse(event.newValue) : undefined);
   });
 
   return [state, setValue];

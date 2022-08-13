@@ -41,16 +41,16 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
       )}
       {...getReferenceProps({
         ...rest,
-        onKeyDown: (e) => {
-          if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        onKeyDown: (event) => {
+          if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
             handleClose();
           }
         },
       })}
       {...getItemProps({
-        onClick: (e) => {
-          e.stopPropagation();
-          (e.currentTarget as HTMLButtonElement).focus();
+        onClick: (event) => {
+          event.stopPropagation();
+          (event.currentTarget as HTMLButtonElement).focus();
         },
         onPointerEnter: () => {
           if (allowHover) {

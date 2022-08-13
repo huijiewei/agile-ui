@@ -34,7 +34,7 @@ type ToastState = {
 type ToastCreateOptions = Partial<ToastOptions>;
 type ToastUpdateOptions = Omit<ToastCreateOptions, 'id' | 'position' | 'remove' | 'onRemove'>;
 
-type ToastDispatch = {
+type ToastDispatchContextValue = {
   notify: (options: ToastCreateOptions) => ToastId;
   update: (id: ToastId, options: ToastUpdateOptions) => void;
   promise: <T = unknown, E extends Error = Error>(
@@ -53,12 +53,12 @@ export type ToastProviderProps = {
   spacing?: string | null;
 };
 
-const [ToastContextProvider, useToastContext] = createContext<ToastDispatch>({
-  name: 'ToastContext',
+const [ToastDispatchProvider, useToastDispatch] = createContext<ToastDispatchContextValue>({
+  name: 'ToastDispatchContext',
   strict: true,
 });
 
-export { useToastContext };
+export { useToastDispatch };
 
 export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
   const { children, spacing = 3 } = props;
@@ -73,7 +73,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
   });
 
   const value = useMemo(() => {
-    const notify: ToastDispatch['notify'] = (options) => {
+    const notify: ToastDispatchContextValue['notify'] = (options) => {
       const toastId = options.id ?? (`toast-${Math.random().toString(36).slice(2, 9)}` as ToastId);
 
       const { position = 'bottom', ...toast } = options;
@@ -101,7 +101,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       return toastId;
     };
 
-    const update: ToastDispatch['update'] = (id, options) => {
+    const update: ToastDispatchContextValue['update'] = (id, options) => {
       if (!id) return;
 
       setState((prevState) => {
@@ -119,7 +119,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       });
     };
 
-    const promise: ToastDispatch['promise'] = (promise, options) => {
+    const promise: ToastDispatchContextValue['promise'] = (promise, options) => {
       const toastId = notify({ ...options.pending, duration: null, closeable: false });
 
       runIfFn(promise)
@@ -131,7 +131,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
         });
     };
 
-    const close: ToastDispatch['close'] = (id) => {
+    const close: ToastDispatchContextValue['close'] = (id) => {
       setState((prevState) => {
         const position = getToastPosition(prevState, id);
 
@@ -153,7 +153,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
       });
     };
 
-    const clean: ToastDispatch['clean'] = (options?) => {
+    const clean: ToastDispatchContextValue['clean'] = (options?) => {
       setState((prev) => {
         const positions = options?.positions || [
           'bottom',
@@ -182,7 +182,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
   }, []);
 
   return (
-    <ToastContextProvider value={value}>
+    <ToastDispatchProvider value={value}>
       {children}
       <Portal>
         {Object.keys(state).map((position) => {
@@ -212,7 +212,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
           );
         })}
       </Portal>
-    </ToastContextProvider>
+    </ToastDispatchProvider>
   );
 };
 
