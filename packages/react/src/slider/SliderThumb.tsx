@@ -38,10 +38,12 @@ const SliderThumbButton = primitiveComponent<'button', SliderThumbButtonProps>((
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         role={'slider'}
         ref={refs}
-        onMouseDown={() => {
+        onMouseDown={(e) => {
+          e.stopPropagation();
           onThumbMouseDown(index);
         }}
-        onTouchStart={() => {
+        onTouchStart={(e) => {
+          e.stopPropagation();
           onThumbMouseDown(index);
         }}
         onClick={(e) => e.stopPropagation()}
