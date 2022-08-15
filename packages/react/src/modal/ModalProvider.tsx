@@ -1,5 +1,5 @@
 import type { FloatingContext } from '@floating-ui/react-dom-interactions';
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 import type { HTMLProps } from 'react';
 import { createContext } from '../utils/context';
 
@@ -9,7 +9,8 @@ type ModalContextValue = {
   floating: (node: HTMLElement) => void;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
   lockScroll?: boolean;
-  initialFocus?: number | MutableRefObject<HTMLElement | null>;
+  initialFocus?: number | RefObject<HTMLElement>;
+  finalFocus?: RefObject<HTMLElement>;
   scrollBehavior?: 'inside' | 'outside';
   labelId: string;
   descriptionId: string;

@@ -140,24 +140,50 @@ function Demo() {
 
 ## 表单
 
+模态框打开会自动将焦点设置在第一个可用的元素上(一般默认是关闭按钮)，关闭时会自动返回焦点，你可以通过设置 `initialFocus` 和 `finalFocus` 属性来自定义焦点目标
+
 ```tsx preview editable
 function Demo() {
   const [opened, setOpened] = React.useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
 
   return (
-    <>
+    <div className={'flex flex-row gap-3'}>
       <Button onClick={() => setOpened(true)}>打开模态框</Button>
-      <Modal initialFocus={1} opened={opened} onClose={() => setOpened(false)}>
+      <Button color={'gray'} ref={finalRef}>关闭时获得焦点</Button>
+      <Modal initialFocus={initialRef} finalFocus={finalRef} opened={opened} onClose={() => setOpened(false)}>
         <ModalOverlay />
-        <ModalContent className={''}>
+        <ModalContent className={'w-11/12 tablet:w-3/5 laptop:w-1/5'}>
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <FormDemo />
-          </ModalBody>
-          <ModalFooter className={'flex gap-5 items-center justify-center'}>
-            <Button onClick={() => setOpened(false)}>关闭</Button>
-          </ModalFooter>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log('提交');
+            }}
+          >
+            <ModalBody className={'flex flex-col gap-3'}>
+              <div className={'flex flex-row items-center'}>
+                <label htmlFor={'demoFormName'} className={'w-28'}>
+                  姓名 <span className={'text-red-500'}>*</span>
+                </label>
+                <Input ref={initialRef} className={'w-full'} placeholder={'姓'} id={'demoFormName'} />
+              </div>
+              <div className={'flex flex-row items-center'}>
+                <label htmlFor={'demoFormEmail'} className={'w-28'}>
+                  电子邮箱 <span className={'text-red-500'}>*</span>
+                </label>
+                <Input className={'w-full'} placeholder={'电子邮箱'} id={'demoFormEmail'} />
+              </div>
+            </ModalBody>
+            <ModalFooter className={'flex gap-3 items-center justify-end'}>
+              <Button type={'submit'}>确定</Button>
+              <Button color={'gray'} variant={'light'} onClick={() => setOpened(false)}>
+                取消
+              </Button>
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>

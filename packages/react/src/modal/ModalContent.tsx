@@ -6,11 +6,27 @@ import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
+import { useEffect } from 'react';
 
 export const ModalContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
-  const { open, floating, context, getFloatingProps, labelId, descriptionId, initialFocus, scrollBehavior } =
-    useModal();
+  const {
+    open,
+    floating,
+    context,
+    getFloatingProps,
+    labelId,
+    descriptionId,
+    initialFocus,
+    finalFocus,
+    scrollBehavior,
+  } = useModal();
+
+  useEffect(() => {
+    if (!open) {
+      finalFocus && finalFocus.current?.focus();
+    }
+  }, [open, finalFocus]);
 
   return (
     <AnimatePresence>
@@ -21,12 +37,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
             scrollBehavior == 'inside' ? 'h-screen items-center' : 'overflow-y-auto h-full items-start'
           )}
         >
-          <FloatingFocusManager
-            modal={true}
-            order={['content', 'reference']}
-            initialFocus={initialFocus}
-            context={context}
-          >
+          <FloatingFocusManager initialFocus={initialFocus} returnFocus={finalFocus == undefined} context={context}>
             <Motion
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

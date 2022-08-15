@@ -1,6 +1,6 @@
 import { __DEV__ } from '@agile-ui/utils';
 import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react-dom-interactions';
-import type { MutableRefObject, PropsWithChildren } from 'react';
+import type { PropsWithChildren, RefObject } from 'react';
 import { useCallback, useId, useMemo } from 'react';
 import { Portal } from '../portal/Portal';
 import { ModalProvider } from './ModalProvider';
@@ -37,7 +37,12 @@ export type ModalProps = {
   /**
    * 模态框开启后焦点目标
    */
-  initialFocus?: number | MutableRefObject<HTMLElement | null>;
+  initialFocus?: number | RefObject<HTMLElement>;
+
+  /**
+   * 模态框关闭后焦点目标
+   */
+  finalFocus?: RefObject<HTMLElement>;
 
   /**
    * 滚动行为
@@ -55,6 +60,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     onClose,
     lockScroll = true,
     initialFocus,
+    finalFocus,
     scrollBehavior = 'inside',
   } = props;
 
@@ -88,6 +94,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       floating,
       getFloatingProps,
       initialFocus,
+      finalFocus,
       scrollBehavior,
       lockScroll,
       labelId,
@@ -100,6 +107,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       floating,
       getFloatingProps,
       initialFocus,
+      finalFocus,
       scrollBehavior,
       lockScroll,
       labelId,
