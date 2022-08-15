@@ -1,4 +1,4 @@
-import { __DEV__, isBoolean, isNumber } from '@agile-ui/utils';
+import { __DEV__, Dict, isBoolean, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { Color } from '../utils/types';
@@ -35,8 +35,7 @@ export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
   const colorClass =
     color == 'white' ? 'bg-white dark:bg-gray-700' : color == 'black' ? 'bg-black dark:bg-gray-200' : `bg-${color}-50`;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const overlay = (other?: Record<string, any>) => {
+  const overlay = (other?: Dict) => {
     return (
       <div
         ref={ref}

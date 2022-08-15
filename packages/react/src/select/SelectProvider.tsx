@@ -1,7 +1,7 @@
 import type { ContextData } from '@floating-ui/react-dom-interactions';
 import type { HTMLProps, MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
-import type { StringOrNumber } from '@agile-ui/utils';
+import type { Dict, StringOrNumber } from '@agile-ui/utils';
 
 type SelectContextValue = {
   activeIndex: number | null;
@@ -12,7 +12,7 @@ type SelectContextValue = {
 
   setOpen: (open: boolean) => void;
 
-  getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
+  getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
 
   listRef: MutableRefObject<(HTMLLIElement | null)[]>;
   dataRef: ContextData;

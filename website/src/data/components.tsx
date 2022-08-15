@@ -1,7 +1,7 @@
 import * as AgileReact from '@agile-ui/react';
 import * as AgileReactIcons from '@agile-ui/react-icons';
 import { ExternalLink } from '@agile-ui/react-icons';
-import { isAbsoluteUrl, isString } from '@agile-ui/utils';
+import { Dict, isAbsoluteUrl, isString } from '@agile-ui/utils';
 import type { MDXComponents } from 'mdx/types';
 import { isValidElement, ReactNode } from 'react';
 import { MdxCodeLive } from '../components/mdx/MdxCodeLive';
@@ -9,7 +9,7 @@ import { MdxColorPlate } from '../components/mdx/MdxColorPlate';
 import { MdxPropsTable } from '../components/mdx/MdxPropsTable';
 import { MdxShowcase } from '../components/mdx/MdxShowcase';
 
-type Props = Record<string, unknown> & { children?: ReactNode };
+type Props = Dict<unknown> & { children?: ReactNode };
 
 export const components = {
   h1: (props: Props) => {

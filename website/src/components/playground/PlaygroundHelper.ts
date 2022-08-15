@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { Dict } from '@agile-ui/utils';
 
 export type PropValue = string | number | boolean | ReactNode;
 
@@ -64,7 +65,7 @@ export const propsToString = ({
   multiline,
 }: {
   props: ComponentProp[];
-  values: Record<string, PropValue>;
+  values: Dict<PropValue>;
   multiline: boolean;
 }) => {
   return props

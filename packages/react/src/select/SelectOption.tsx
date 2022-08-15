@@ -37,7 +37,7 @@ export type SelectOptionProps = {
 };
 
 export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, ref) => {
-  const { children, value, className, disabled = false, index = 0, ...rest } = props;
+  const { children, value, label: _label, className, disabled = false, index = 0, ...rest } = props;
 
   const {
     selectedIndex,

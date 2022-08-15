@@ -1,4 +1,4 @@
-import { pascalCase } from '@agile-ui/utils';
+import { Dict, pascalCase } from '@agile-ui/utils';
 import { ElementType, useState } from 'react';
 import { cx } from 'twind';
 import { PlaygroundCode } from './PlaygroundCode';
@@ -9,7 +9,7 @@ type PlaygroundProps = {
   component: ElementType;
   componentProps: ComponentProp[];
   ignoreProps?: string[];
-  defaultProps?: Record<string, PropValue>;
+  defaultProps?: Dict<PropValue>;
   includeCode?: boolean;
   codePropsMultiline?: boolean;
   codeTemplate: (props: string, children?: PropValue) => string;

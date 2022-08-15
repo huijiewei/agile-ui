@@ -1,5 +1,5 @@
 import { Edit, Github } from '@agile-ui/react-icons';
-import { pascalCase, to } from '@agile-ui/utils';
+import { Dict, pascalCase, to } from '@agile-ui/utils';
 import type { MDXContent } from 'mdx/types';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -18,8 +18,7 @@ type Mdx = {
   documentLink: string;
   default: MDXContent;
   toc: Toc[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  propsTables: Record<string, any>;
+  propsTables: Dict;
 };
 
 const githubUrl = 'https://github.com/huijiewei/agile-ui/blob/main';

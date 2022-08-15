@@ -2,12 +2,13 @@ import type { FloatingContext } from '@floating-ui/react-dom-interactions';
 import type { RefObject } from 'react';
 import type { HTMLProps } from 'react';
 import { createContext } from '../utils/context';
+import type { Dict } from '@agile-ui/utils';
 
 type ModalContextValue = {
   open: boolean;
   context: FloatingContext<HTMLElement>;
   floating: (node: HTMLElement) => void;
-  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
+  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
   lockScroll?: boolean;
   initialFocus?: number | RefObject<HTMLElement>;
   finalFocus?: RefObject<HTMLElement>;

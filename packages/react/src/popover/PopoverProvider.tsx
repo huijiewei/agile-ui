@@ -1,6 +1,7 @@
 import type { FloatingContext, Placement } from '@floating-ui/react-dom-interactions';
 import type { HTMLProps, MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
+import type { Dict } from '@agile-ui/utils';
 
 type PopoverAriaContextValue = {
   labelId: string;
@@ -35,7 +36,7 @@ export { PopoverDispatchProvider, usePopoverDispatch };
 type PopoverReferenceContextValue = {
   open: boolean;
   reference: (node: HTMLElement) => void;
-  getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Record<string, unknown>;
+  getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Dict<unknown>;
 };
 
 const [PopoverReferenceProvider, usePopoverReference] = createContext<PopoverReferenceContextValue>({
@@ -52,7 +53,7 @@ type PopoverFloatingContextValue = {
   context: FloatingContext<HTMLElement>;
 
   floating: (node: HTMLElement) => void;
-  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
+  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
 
   modal: boolean;
   initialFocus?: number | MutableRefObject<HTMLElement | null>;

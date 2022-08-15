@@ -6,6 +6,7 @@ import type {
 } from '@floating-ui/react-dom-interactions';
 import type { Dispatch, HTMLProps, MutableRefObject, SetStateAction } from 'react';
 import { createContext } from '../utils/context';
+import type { Dict } from '@agile-ui/utils';
 
 const [DropdownMenuPlacementProvider, useDropdownMenuPlacement] = createContext<Placement>({
   strict: true,
@@ -17,7 +18,7 @@ export { DropdownMenuPlacementProvider, useDropdownMenuPlacement };
 type DropdownMenuReferenceContextValue = {
   open: boolean;
   reference: (node: HTMLElement) => void;
-  getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Record<string, unknown>;
+  getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Dict<unknown>;
 };
 
 const [DropdownMenuReferenceProvider, useDropdownMenuReference] = createContext<DropdownMenuReferenceContextValue>({
@@ -30,7 +31,7 @@ export { DropdownMenuReferenceProvider, useDropdownMenuReference };
 type DropdownMenuContentContextValue = {
   tree: FloatingTreeType<ReferenceElement> | null;
   allowHover: boolean;
-  getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
+  getItemProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
   listItemsRef: MutableRefObject<(HTMLElement | null)[]>;
   setActiveIndex: Dispatch<SetStateAction<number | null>>;
 };
@@ -49,7 +50,7 @@ type DropdownMenuFloatingContextValue = DropdownMenuContentContextValue & {
 
   context: FloatingContext<HTMLElement>;
   floating: (node: HTMLElement) => void;
-  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Record<string, unknown>;
+  getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
 
   nested: boolean;
   nodeId: string;

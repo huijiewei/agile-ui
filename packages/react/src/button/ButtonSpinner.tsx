@@ -1,4 +1,4 @@
-import { __DEV__ } from '@agile-ui/utils';
+import { __DEV__, Dict } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
 import type { PrimitiveComponentProps } from '../utils/component';
@@ -10,7 +10,7 @@ export type ButtonSpinnerProps = {
   placement?: 'start' | 'end';
 };
 
-const SpinnerSizes: Record<string, Size> = {
+const SpinnerSizes: Dict<Size> = {
   xs: 'xs',
   sm: 'sm',
   md: 'sm',
