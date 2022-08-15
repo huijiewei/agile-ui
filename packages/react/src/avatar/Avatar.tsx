@@ -43,6 +43,7 @@ export type AvatarProps = {
   /**
    * 头像加载失败也没有设置头像名称时候显示
    * @default 'DefaultIcon'
+   * @type ReactElement
    */
   fallback?: ReactElement;
 

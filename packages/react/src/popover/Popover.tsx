@@ -12,8 +12,8 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import type { PropsWithChildren, ReactNode } from 'react';
-import { MutableRefObject, useCallback, useId, useMemo, useState } from 'react';
+import type { PropsWithChildren, ReactNode, RefObject } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
 import {
   PopoverAriaProvider,
   PopoverDispatchProvider,
@@ -43,7 +43,7 @@ export type PopoverProps = {
   /**
    * 开启后焦点目标
    */
-  initialFocus?: number | MutableRefObject<HTMLElement | null>;
+  initialFocus?: number | RefObject<HTMLElement>;
 
   /**
    * 是否 modal

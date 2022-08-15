@@ -17,6 +17,7 @@ export type ToastProps = {
 
   /**
    * 图标
+   * @type ReactElement
    */
   icon?: ReactElement;
 

@@ -47,6 +47,7 @@ export type CheckboxProps = CheckboxBaseProps & {
   /**
    * 复选框图标
    * @default CheckboxIcon
+   * @type ReactElement
    */
   icon?: ReactElement;
 

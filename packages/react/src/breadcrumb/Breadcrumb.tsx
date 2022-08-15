@@ -8,6 +8,7 @@ export type BreadcrumbProps = {
   /**
    * 指定分隔符
    * @default "/"
+   * @type string | ReactElement
    */
   separator?: string | ReactElement;
 
