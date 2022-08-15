@@ -44,7 +44,7 @@ type RadioGroupContextValue = RadioGroupBaseProps & {
 
 const [RadioGroupProvider, useRadioGroup] = createContext<RadioGroupContextValue>({
   name: 'RadioGroupContext',
-  strict: true,
+  strict: false,
 });
 
 export { useRadioGroup };
