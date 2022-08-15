@@ -7,12 +7,12 @@ import { useControllableProp, useMove } from '@agile-ui/react-hooks';
 
 export type SliderProps = SliderBaseProps & {
   /**
-   * 当前值
+   * 可控值
    */
   value?: ValueType;
 
   /**
-   * 默认值
+   * 非可控默认值
    */
   defaultValue?: ValueType;
 

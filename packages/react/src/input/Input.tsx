@@ -9,13 +9,12 @@ import { inputSizes } from './inputSizes';
 
 export type InputProps = InputBaseProps & {
   /**
-   * 当前值
+   * 可控值
    */
   value?: StringOrNumber;
 
   /**
-   * 默认值
-   * @default ''
+   * 非可控默认值
    */
   defaultValue?: StringOrNumber;
 
@@ -95,7 +94,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     clearable = false,
     className,
     value,
-    defaultValue = '',
+    defaultValue,
     onChange,
     onClear,
     onPressEnter,
@@ -104,7 +103,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
     ...rest
   } = props;
 
-  const [valueState, setValueState] = useState(defaultValue);
+  const [valueState, setValueState] = useState(defaultValue || '');
 
   const [controlled, controlledValue] = useControllableProp(value, valueState);
 

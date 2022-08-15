@@ -10,8 +10,8 @@ export type CodeEditorProps = Omit<
   EditorProps,
   'defaultValue' | 'value' | 'onValueChange' | 'highlight' | 'onChange'
 > & {
-  defaultValue?: string;
   value?: string;
+  defaultValue?: string;
   language?: Language;
   padding?: string | number;
   theme: PrismTheme;

@@ -14,12 +14,12 @@ export type NumberInputHandlers = {
 
 export type NumberInputProps = InputBaseProps & {
   /**
-   * 当前值
+   * 可控值
    */
   value?: number;
 
   /**
-   * 默认值
+   * 非可控默认值
    */
   defaultValue?: number;
 

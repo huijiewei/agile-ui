@@ -54,15 +54,22 @@ export type SelectProps = {
   multiple?: boolean;
 
   /**
-   * 是否可以清除内容
+   * 是否可清除内容
    * @default false
    */
   clearable?: boolean;
 
   /**
+   * 是否可搜索
+   * @default false
+   */
+  searchable?: boolean;
+
+  /**
    * 占位符
    */
   placeholder?: string;
+
   /**
    * 是否禁用
    * @default false
@@ -92,8 +99,14 @@ export type SelectProps = {
    */
   opened?: boolean;
 
+  /**
+   * 可控值
+   */
   value?: StringOrNumber[] | StringOrNumber;
 
+  /**
+   * 非可控默认值
+   */
   defaultValue?: StringOrNumber[] | StringOrNumber;
 
   /**
@@ -159,6 +172,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     invalid = false,
     multiple = false,
     clearable = false,
+    searchable = false,
     opened = false,
     className,
     fullWidth = false,
