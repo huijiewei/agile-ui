@@ -83,7 +83,6 @@ function Demo() {
       <Select
         className={'w-56'}
         filter={(keyword, option) => {
-          console.log(option);
           return (
             option.props.extra.value.toLowerCase().indexOf(keyword.toLowerCase()) != -1 ||
             option.props.extra.name.toLowerCase().indexOf(keyword.toLowerCase()) != -1

@@ -184,7 +184,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     clearable = false,
     searchable = false,
     filter = (keyword, option) => {
-      return option.props.value.toLowerCase().indexOf(keyword.toLowerCase()) != -1;
+      return option.props.value.toString().toLowerCase().indexOf(keyword.toLowerCase()) != -1;
     },
     opened = false,
     className,
@@ -215,6 +215,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
     const pushChild = (child: ReactElement) => {
       let index = -1;
+
+      console.log(child);
 
       if (!searchable || searchValue == '' || filterRef(searchValue, child)) {
         index = optionIndex;
