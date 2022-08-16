@@ -1,4 +1,4 @@
-import { useCallbackRef, useControllableProp, usePrevious } from '@agile-ui/react-hooks';
+import { useCallbackRef, useControllableProp, useFocus, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
@@ -20,6 +20,7 @@ import {
   ReactElement,
   ReactNode,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -200,6 +201,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState('');
+  const [searchInputHidden, setSearchInputHidden] = useState(false);
+
   const filterRef = useCallbackRef(filter);
 
   const { elements, options } = useMemo(() => {
@@ -215,8 +218,6 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
     const pushChild = (child: ReactElement) => {
       let index = -1;
-
-      console.log(child);
 
       if (!searchable || searchValue == '' || filterRef(searchValue, child)) {
         index = optionIndex;
@@ -308,31 +309,37 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   });
 
   const handleSelected = useCallback(
-    (value: StringOrNumber) => {
-      if (Array.isArray(controlledValue)) {
-        const nextValue = controlledValue.includes(value)
+    (value: StringOrNumber, close = true) => {
+      const multiple = Array.isArray(controlledValue);
+
+      const nextValue = multiple
+        ? controlledValue.includes(value)
           ? controlledValue.filter((p) => p != value)
-          : [...controlledValue, value];
+          : [...controlledValue, value]
+        : value;
 
-        if (!controlled) {
-          setValueState(nextValue);
-        }
-
-        onChange && onChange(nextValue);
-      } else {
-        if (!controlled) {
-          setValueState(value);
-        }
-
-        onChange && onChange(value);
+      if (!controlled) {
+        setValueState(nextValue);
       }
 
-      closeOnSelect && setOpen(false);
+      if (closeOnSelect && close) {
+        setOpen(false);
+
+        if (!multiple) {
+          setSearchInputHidden(true);
+        }
+      }
+
       setActiveIndex(null);
-      setSearchValue('');
-      refs.reference.current?.focus();
+      searchable && setSearchValue('');
+
+      onChange && onChange(nextValue);
+
+      requestAnimationFrame(() => {
+        refs.reference.current?.focus();
+      });
     },
-    [closeOnSelect, controlled, controlledValue, onChange, refs.reference]
+    [closeOnSelect, controlled, controlledValue, onChange, refs.reference, searchable]
   );
 
   const handleClear = useCallback(() => {
@@ -433,30 +440,32 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   }, [open, controlledScrolling, prevActiveIndex, activeIndex, minSelectedIndex, refs.floating, virtual]);
 
   useLayoutEffect(() => {
-    if (!open) {
+    if (!open || !closeOnSelect) {
       return;
     }
 
-    if (virtual) {
-      if (minSelectedIndex > -1) {
-        rowVirtual.scrollToIndex(minSelectedIndex + 1, { align: 'center' });
-      }
-    } else {
-      const floating = refs.floating.current;
+    requestAnimationFrame(() => {
+      if (virtual) {
+        if (minSelectedIndex > -1) {
+          rowVirtual.scrollToIndex(minSelectedIndex + 1, { align: 'center' });
+        }
+      } else {
+        const floating = refs.floating.current;
 
-      if (floating && floating.offsetHeight < floating.scrollHeight) {
-        const item = listItemsRef.current[minSelectedIndex];
+        if (floating && floating.offsetHeight < floating.scrollHeight) {
+          const item = listItemsRef.current[minSelectedIndex];
 
-        if (item) {
-          floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2 + 9;
+          if (item) {
+            floating.scrollTop = item.offsetTop - floating.offsetHeight / 2 + item.offsetHeight / 2 + 9;
+          }
         }
       }
-    }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, minSelectedIndex, middlewareData, refs.floating, virtual]);
 
   const showClearButton =
-    clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue !== undefined);
+    clearable && (Array.isArray(controlledValue) ? controlledValue.length > 0 : controlledValue != undefined);
 
   const { id: floatingId, ...floatingRest } = getFloatingProps({
     tabIndex: 0,
@@ -467,6 +476,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       setControlledScrolling(true);
     },
   });
+
+  const [searchInputFocusRef, searchInputFocus] = useFocus();
+  const searchInputRefs = useMergedRefs(searchInputRef, searchInputFocusRef);
 
   const renderSingleValue = (controlledValue: StringOrNumber | undefined) => {
     return (
@@ -479,12 +491,14 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           ))}
         {searchable && (
           <SelectSearch
-            ref={searchInputRef}
+            ref={searchInputRefs}
             open={open}
             setOpen={setOpen}
             setActiveIndex={setActiveIndex}
             value={searchValue}
             onChange={(event) => setSearchValue(event.target.value)}
+            hidden={searchInputHidden}
+            setHidden={setSearchInputHidden}
           />
         )}
       </div>
@@ -505,6 +519,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
               <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={value}>
                 {options.get(value)?.label}
                 <CloseButton
+                  aria-label={`Remove ${value}`}
                   onClick={(event) => {
                     event.stopPropagation();
                     handleSelected(value);
@@ -518,17 +533,27 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
             )}
         {searchable && (
           <SelectSearch
-            ref={searchInputRef}
+            ref={searchInputRefs}
             open={open}
             setOpen={setOpen}
             setActiveIndex={setActiveIndex}
             value={searchValue}
             onChange={(event) => setSearchValue(event.target.value)}
+            hidden={searchInputHidden}
+            setHidden={setSearchInputHidden}
           />
         )}
       </div>
     );
   };
+
+  useEffect(() => {
+    open && setSearchInputHidden(false);
+  }, [open]);
+
+  const [focusRef, focus] = useFocus();
+
+  const referenceRef = useMergedRefs(reference, focusRef);
 
   return (
     <SelectProvider
@@ -546,7 +571,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         aria-haspopup={'listbox'}
         aria-expanded={open}
         tabIndex={disabled ? -1 : 0}
-        data-active={dataAttr(open)}
+        data-active={dataAttr(open || focus || searchInputFocus)}
         data-disabled={dataAttr(disabled)}
         aria-disabled={ariaAttr(disabled)}
         aria-required={ariaAttr(required)}
@@ -555,7 +580,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
           invalid && 'border-red-500',
           disabled
             ? 'opacity-50 cursor-not-allowed pointer-events-none'
-            : 'cursor-default active:(border-blue-500 z-[1]) focus-visible:(border-blue-500)',
+            : 'cursor-default active:(border-blue-500 z-[1])',
           !invalid && !disabled && 'hover:(border-gray-300 z-[2])',
           fullWidth ? 'w-full' : '',
           sizeClass['base'],
@@ -565,7 +590,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         {...getReferenceProps({
           role: 'combobox',
           style: style,
-          ref: reference,
+          ref: referenceRef,
           onFocus: () => {
             searchable && searchInputRef.current && searchInputRef.current.focus();
           },
@@ -576,7 +601,39 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
             setControlledScrolling(true);
 
             if (activeIndex != null) {
-              if (event.key == 'Enter' || (!searchValue && event.key == ' ' && !context.dataRef.current.typing)) {
+              if (event.key == 'Enter') {
+                event.preventDefault();
+                handleSelected(elements[activeIndex].props.value);
+              }
+            }
+
+            if (!searchValue && event.key == ' ') {
+              event.preventDefault();
+            }
+
+            if (event.key == 'Tab') {
+              setOpen(false);
+            }
+
+            if (event.key == 'Delete' || event.key == 'Backspace') {
+              if (Array.isArray(controlledValue)) {
+                const lastValue = controlledValue.at(-1);
+
+                if (lastValue != undefined) {
+                  handleSelected(lastValue, false);
+                }
+              } else {
+                if (controlledValue != undefined) {
+                  handleClear();
+                }
+              }
+            }
+          },
+          onKeyUp(event) {
+            setControlledScrolling(true);
+
+            if (activeIndex != null) {
+              if (!searchValue && event.key == ' ') {
                 event.preventDefault();
                 handleSelected(elements[activeIndex].props.value);
               }
@@ -590,6 +647,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <div className={'flex gap-1 items-center'}>
           {showClearButton && (
             <CloseButton
+              aria-hidden={true}
               onClick={(event) => {
                 event.stopPropagation();
                 handleClear();

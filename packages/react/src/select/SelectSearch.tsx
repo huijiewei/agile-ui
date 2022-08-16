@@ -1,13 +1,16 @@
 import { primitiveComponent } from '../utils/component';
+import { cx } from 'twind';
 
 type SelectSearchProps = {
   open: boolean;
   setOpen: (opened: boolean) => void;
   setActiveIndex: (index: number) => void;
+  hidden: boolean;
+  setHidden: (hidden: boolean) => void;
 };
 
 export const SelectSearch = primitiveComponent<'input', SelectSearchProps>((props, ref) => {
-  const { value, onChange, open, setOpen, setActiveIndex, ...rest } = props;
+  const { value, onChange, open, setOpen, setActiveIndex, hidden, setHidden, ...rest } = props;
 
   return (
     <div
@@ -24,20 +27,36 @@ export const SelectSearch = primitiveComponent<'input', SelectSearchProps>((prop
         tabIndex={0}
         type={'text'}
         ref={ref}
-        className={
-          'appearance-none select-none outline-none w-full min-w-[2px] row-start-1 row-end-auto col-start-2 col-end-auto'
-        }
+        className={cx(
+          'appearance-none select-none outline-none w-full min-w-[2px] row-start-1 row-end-auto col-start-2 col-end-auto',
+          hidden && 'opacity-0'
+        )}
         style={{
           background: 0,
         }}
         value={value}
+        onKeyDown={(event) => {
+          if (
+            event.key != 'Enter' &&
+            event.key != 'ArrowUp' &&
+            event.key != 'ArrowDown' &&
+            event.key != 'Escape' &&
+            event.key != 'Home' &&
+            event.key != 'End' &&
+            event.key != 'Tab' &&
+            (value != '' || event.key != 'Delete') &&
+            (value != '' || event.key != 'Backspace') &&
+            (value != '' || event.key != 'ArrowLeft') &&
+            (value != '' || event.key != 'ArrowRight')
+          ) {
+            event.stopPropagation();
+          }
+        }}
         onChange={(event) => {
           onChange && onChange(event);
           !open && setOpen(true);
           setActiveIndex(0);
-        }}
-        onClick={(event) => {
-          open && event.stopPropagation();
+          setHidden(false);
         }}
         {...rest}
       />
