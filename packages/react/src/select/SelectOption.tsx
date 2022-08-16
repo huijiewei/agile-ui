@@ -1,11 +1,10 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import type { StringOrNumber } from '@agile-ui/utils';
+import type { Dict, StringOrNumber } from '@agile-ui/utils';
 import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
-import type { KeyboardEvent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { useSelect } from './SelectProvider';
-import { useCallback } from 'react';
 import type { Size } from '../utils/types';
 
 export type SelectOptionProps = {
@@ -15,15 +14,20 @@ export type SelectOptionProps = {
   value: StringOrNumber;
 
   /**
+   * 是否禁用
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
    * 选项回显内容
    */
   label?: ReactNode;
 
   /**
-   * 是否禁用
-   * @default false
+   * 携带任意数据
    */
-  disabled?: boolean;
+  extra?: Dict;
 
   /**
    * @ignore
@@ -37,36 +41,9 @@ export type SelectOptionProps = {
 };
 
 export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, ref) => {
-  const { children, value, label: _label, className, disabled = false, index = 0, ...rest } = props;
+  const { children, value, className, disabled = false, index = 0, ...rest } = props;
 
-  const {
-    selectedIndex,
-    onSelected,
-    listRef,
-    setOpen,
-    activeIndex,
-    setActiveIndex,
-    getItemProps,
-    dataRef,
-    sizeClass,
-    closeOnSelect,
-  } = useSelect();
-
-  const handleSelect = useCallback(() => {
-    onSelected(index, value);
-    closeOnSelect && setOpen(false);
-    setActiveIndex(null);
-  }, [closeOnSelect, index, onSelected, setActiveIndex, setOpen, value]);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLElement>) => {
-      if (event.key === 'Enter' || (event.key === ' ' && !dataRef.current.typing)) {
-        event.preventDefault();
-        handleSelect();
-      }
-    },
-    [dataRef, handleSelect]
-  );
+  const { selectedIndex, onSelected, listRef, activeIndex, getItemProps, sizeClass } = useSelect();
 
   const refs = useMergedRefs(ref, (node) => {
     listRef.current[index] = node;
@@ -83,13 +60,19 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
       aria-disabled={ariaAttr(disabled)}
       tabIndex={activeIndex == index ? 0 : 1}
       className={cx(
-        'select-none w-full outline-none transition-colors rounded active:bg-gray-100 dark:active:bg-gray-600 selected:text-blue-500',
+        'select-none w-full outline-none transition-colors rounded selected:text-blue-500',
+        disabled ? 'opacity-60' : 'active:bg-gray-100 dark:active:bg-gray-600',
         sizeClass,
         className
       )}
       {...getItemProps({
-        onClick: handleSelect,
-        onKeyDown: handleKeyDown,
+        onClick: () => {
+          if (disabled) {
+            return;
+          }
+
+          onSelected(value);
+        },
       })}
       {...rest}
     >

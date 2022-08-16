@@ -9,6 +9,14 @@ import { cx } from 'twind';
 import { FormDemo } from '../demo/FormDemo';
 import { CodeView } from './CodeView';
 import { CopyIcon } from './CopyIcon';
+import { InternetExplorer } from '../icons/InternetExplorer';
+import { GoogleChrome } from '../icons/GoogleChrome';
+import { Firefox } from '../icons/Firefox';
+import { Safari } from '../icons/Safari';
+import { MicrosoftEdge } from '../icons/MicrosoftEdge';
+import { Opera } from '../icons/Opera';
+import { Brave } from '../icons/Brave';
+import { Vivaldi } from '../icons/Vivaldi';
 
 type CodeLiveProps = {
   code: string;
@@ -39,7 +47,19 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
         theme={darkMode ? darkTheme : lightTheme}
         code={code}
         language={language}
-        scope={{ ...AgileReact, ...AgileReactIcons, FormDemo }}
+        scope={{
+          ...AgileReact,
+          ...AgileReactIcons,
+          FormDemo,
+          GoogleChrome,
+          Firefox,
+          Safari,
+          MicrosoftEdge,
+          Opera,
+          Brave,
+          Vivaldi,
+          InternetExplorer,
+        }}
       >
         <LivePreview className={'overflow-x-auto rounded-t border border-gray-200 p-3 scrollbar'} />
         <div className={'relative'}>

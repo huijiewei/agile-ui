@@ -30,6 +30,92 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
 </div>
 ```
 
+## 搜索
+
+```tsx preview editable
+<Select className={'w-56'} searchable placeholder={'前端框架'}>
+  <SelectOption value={'react'}>React</SelectOption>
+  <SelectOption value={'angular'}>Angular</SelectOption>
+  <SelectOption value={'vue'}>Vue</SelectOption>
+  <SelectOption value={'svelte'}>Svelte</SelectOption>
+  <SelectOption value={'solid'}>Solid</SelectOption>
+  <SelectOption value={'preact'}>Preact</SelectOption>
+</Select>
+```
+
+## 自定义搜索
+
+```tsx preview editable
+function Demo() {
+  const browsers = [
+    {
+      value: 'chrome',
+      name: 'Google Chrome',
+      icon: <GoogleChrome />,
+      description: '谷歌浏览器',
+    },
+    { value: 'firefox', name: 'Firefox', icon: <Firefox />, description: '火狐浏览器' },
+    {
+      value: 'safari',
+      name: 'Safari',
+      icon: <Safari />,
+      description: '苹果浏览器',
+    },
+    {
+      value: 'edge',
+      name: 'Microsoft Edge',
+      icon: <MicrosoftEdge />,
+      description: '一款快速而安全的浏览器，可帮助您保护数据，节省时间和金钱。',
+    },
+    { value: 'opera', name: 'Opera', icon: <Opera />, description: '比默认浏览器更快、更安全、更智能。' },
+    {
+      value: 'brave',
+      name: 'Brave',
+      icon: <Brave />,
+      description: '一款快速、私密且安全的网络浏览器。',
+    },
+    { value: 'vivaldi', name: 'Vivaldi', icon: <Vivaldi />, description: '' },
+    { value: 'ie', name: 'Internet Explorer', icon: <InternetExplorer />, description: '' },
+  ];
+
+  return (
+    <div className={'flex flex-col gap-2'}>
+      <Select
+        className={'w-56'}
+        filter={(keyword, option) => {
+          console.log(option);
+          return (
+            option.props.extra.value.toLowerCase().indexOf(keyword.toLowerCase()) != -1 ||
+            option.props.extra.name.toLowerCase().indexOf(keyword.toLowerCase()) != -1
+          );
+        }}
+        searchable
+        placeholder={'浏览器'}
+      >
+        {browsers.map((browser) => (
+          <SelectOption extra={browser} key={browser.value} value={browser.value}>
+            <div className={'flex flex-row gap-1.5 items-center'}>
+              {browser.icon}
+              {browser.name}
+            </div>
+          </SelectOption>
+        ))}
+      </Select>
+      <Select className={'w-full'} searchable multiple placeholder={'浏览器'}>
+        {browsers.map((browser) => (
+          <SelectOption extra={browser} key={browser.value} value={browser.value}>
+            <div className={'flex flex-row gap-1.5 items-center'}>
+              {browser.icon}
+              {browser.name}
+            </div>
+          </SelectOption>
+        ))}
+      </Select>
+    </div>
+  );
+}
+```
+
 ## 状态
 
 ```tsx preview editable
@@ -79,7 +165,9 @@ description: 当用户需要从一组同类数据中选择一个或多个时，�
     <SelectOption value={1}>选项一</SelectOption>
     <SelectOption value={2}>选项二</SelectOption>
     <SelectOption value={3}>选项三</SelectOption>
-    <SelectOption value={4}>选项四</SelectOption>
+    <SelectOption disabled value={4}>
+      选项四
+    </SelectOption>
     <SelectOption value={5}>选项五</SelectOption>
   </Select>
   <Select size={'lg'} placeholder={'选择器'}>
@@ -200,7 +288,7 @@ function Demo() {
 
   return (
     <div className={'flex flex-row flex-wrap gap-3'}>
-      <Select clearable placeholder={'选择内容'}>
+      <Select className={'w-56'} clearable placeholder={'选择内容'}>
         {users.map((user) => (
           <SelectOption key={user.name} value={user.name}>
             <div className={'flex items-center gap-2'}>
@@ -210,7 +298,7 @@ function Demo() {
           </SelectOption>
         ))}
       </Select>
-      <Select clearable placeholder={'选择内容'}>
+      <Select className={'w-56'} clearable placeholder={'选择内容'}>
         {users.map((user) => (
           <SelectOption
             label={
@@ -222,6 +310,19 @@ function Demo() {
             key={user.name}
             value={user.name}
           >
+            <div className={'flex items-center gap-2'}>
+              <Avatar name={user.name} size={20} src={user.avatar} />
+              <div>
+                <div>{user.name}</div>
+                <div className={'text-gray-500'}>{user.description}</div>
+              </div>
+            </div>
+          </SelectOption>
+        ))}
+      </Select>
+      <Select className={'w-56'} defaultValue={'司马相如'} clearable placeholder={'选择内容'}>
+        {users.map((user) => (
+          <SelectOption key={user.name} value={user.name}>
             <div className={'flex items-center gap-2'}>
               <Avatar name={user.name} size={20} src={user.avatar} />
               <div>
@@ -244,6 +345,16 @@ function Demo() {
 ```tsx preview editable
 <div className={'flex flex-row gap-3'}>
   <Select className={'w-60'} placeholder={'选择器'}>
+    {Array(1000)
+      .fill(null)
+      .map((_, idx) => idx + 1)
+      .map((eve) => (
+        <SelectOption key={eve} value={eve}>
+          选项 {eve}
+        </SelectOption>
+      ))}
+  </Select>
+  <Select className={'w-60'} searchable placeholder={'选择器'}>
     {Array(1000)
       .fill(null)
       .map((_, idx) => idx + 1)
