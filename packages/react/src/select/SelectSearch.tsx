@@ -28,7 +28,7 @@ export const SelectSearch = primitiveComponent<'input', SelectSearchProps>((prop
         type={'text'}
         ref={ref}
         className={cx(
-          'appearance-none select-none outline-none w-full min-w-[2px] row-start-1 row-end-auto col-start-2 col-end-auto',
+          'appearance-none outline-none w-full min-w-[2px] row-start-1 row-end-auto col-start-2 col-end-auto',
           hidden && 'opacity-0'
         )}
         style={{
