@@ -6,7 +6,7 @@ import {
   useIsomorphicLayoutEffect,
   useMergedRefs,
 } from '@agile-ui/react-hooks';
-import { __DEV__, ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
+import { ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { ChangeEvent, cloneElement, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
@@ -200,6 +200,4 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   );
 });
 
-if (__DEV__) {
-  Checkbox.displayName = 'Checkbox';
-}
+Checkbox.displayName = 'Checkbox';

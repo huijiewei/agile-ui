@@ -1,4 +1,4 @@
-import { __DEV__, omit } from '@agile-ui/utils';
+import { omit } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { isValidElement } from 'react';
 import { primitiveComponent } from '../utils/component';
@@ -39,6 +39,4 @@ export const Image = primitiveComponent<'img', ImageProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Image.displayName = 'Image';
-}
+Image.displayName = 'Image';

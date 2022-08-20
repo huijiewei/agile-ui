@@ -5,7 +5,7 @@ import {
   useIsomorphicLayoutEffect,
   useMergedRefs,
 } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { cx } from 'twind';
@@ -156,6 +156,4 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Switch.displayName = 'Switch';
-}
+Switch.displayName = 'Switch';

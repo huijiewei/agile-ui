@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cloneElement, ReactElement } from 'react';
 import { cx } from 'twind';
 import { Overlay } from '../overlay/Overlay';
@@ -64,6 +63,4 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
   );
 });
 
-if (__DEV__) {
-  SpinnerOverlay.displayName = 'SpinnerOverlay';
-}
+SpinnerOverlay.displayName = 'SpinnerOverlay';

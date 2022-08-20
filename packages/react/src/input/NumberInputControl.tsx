@@ -1,6 +1,5 @@
 import type { PrimitiveComponentProps } from '../utils/component';
 import { cx } from 'twind';
-import { __DEV__ } from '@agile-ui/utils';
 
 const IncrementIcon = () => {
   return (
@@ -40,7 +39,3 @@ export const NumberInputControl = (
     </button>
   );
 };
-
-if (__DEV__) {
-  NumberInputControl.displayName = 'NumberInputControl';
-}

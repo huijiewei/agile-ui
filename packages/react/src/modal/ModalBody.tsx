@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';
@@ -23,6 +22,4 @@ export const ModalBody = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  ModalBody.displayName = 'ModalBody';
-}
+ModalBody.displayName = 'ModalBody';

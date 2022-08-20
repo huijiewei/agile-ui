@@ -1,5 +1,3 @@
-export const __DEV__ = process.env.NODE_ENV !== 'production';
-
 export const isBoolean = (value: unknown): value is boolean => {
   return typeof value === 'boolean';
 };

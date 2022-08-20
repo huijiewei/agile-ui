@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { FloatingOverlay } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -29,6 +28,4 @@ export const ModalOverlay = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  ModalOverlay.displayName = 'ModalOverlay';
-}
+ModalOverlay.displayName = 'ModalOverlay';

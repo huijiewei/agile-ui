@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr } from '@agile-ui/utils';
+import { dataAttr } from '@agile-ui/utils';
 import { cloneElement, ComponentProps, ReactNode } from 'react';
 import { primitiveComponent } from '../utils/component';
 import { useDropdownMenuReference } from './DropdownMenuProvider';
@@ -25,6 +25,4 @@ export const DropdownMenuTrigger = primitiveComponent<'div', DropdownMenuTrigger
   });
 });
 
-if (__DEV__) {
-  DropdownMenuTrigger.displayName = 'DropdownMenuTrigger';
-}
+DropdownMenuTrigger.displayName = 'DropdownMenuTrigger';

@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr } from '@agile-ui/utils';
+import { dataAttr } from '@agile-ui/utils';
 import { cloneElement, ComponentProps, ReactNode } from 'react';
 import { primitiveComponent } from '../utils/component';
 import { usePopoverReference } from './PopoverProvider';
@@ -25,6 +25,4 @@ export const PopoverTrigger = primitiveComponent<'div', PopoverTriggerProps>((pr
   });
 });
 
-if (__DEV__) {
-  PopoverTrigger.displayName = 'PopoverTrigger';
-}
+PopoverTrigger.displayName = 'PopoverTrigger';

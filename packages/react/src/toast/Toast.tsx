@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { ReactElement, ReactNode } from 'react';
 import { cx } from 'twind';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
@@ -99,6 +98,4 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Toast.displayName = 'Toast';
-}
+Toast.displayName = 'Toast';

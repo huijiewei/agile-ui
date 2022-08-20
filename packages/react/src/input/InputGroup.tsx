@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { Children, cloneElement, isValidElement, ReactElement } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -45,6 +44,4 @@ export const InputGroup = primitiveComponent<'div', InputGroupProps>((props, ref
   );
 });
 
-if (__DEV__) {
-  InputGroup.displayName = 'InputGroup';
-}
+InputGroup.displayName = 'InputGroup';

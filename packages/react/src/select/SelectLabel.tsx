@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import type { PrimitiveComponentProps } from '../utils/component';
 import { useSelect } from './SelectProvider';
@@ -18,6 +17,4 @@ export const SelectLabel = (props: PrimitiveComponentProps) => {
   );
 };
 
-if (__DEV__) {
-  SelectLabel.displayName = 'SelectLabel';
-}
+SelectLabel.displayName = 'SelectLabel';

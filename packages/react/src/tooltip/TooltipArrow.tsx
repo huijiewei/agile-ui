@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { Placement } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { FloatingArrow } from '../floating/FloatingArrow';
@@ -22,6 +21,4 @@ export const TooltipArrow = (props: PrimitiveComponentProps<'span', TooltipArrow
   );
 };
 
-if (__DEV__) {
-  TooltipArrow.displayName = 'TooltipArrow';
-}
+TooltipArrow.displayName = 'TooltipArrow';

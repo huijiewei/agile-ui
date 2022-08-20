@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, dataAttr, isNumber } from '@agile-ui/utils';
+import { dataAttr, isNumber } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
@@ -174,6 +174,4 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
   );
 });
 
-if (__DEV__) {
-  Button.displayName = 'Button';
-}
+Button.displayName = 'Button';

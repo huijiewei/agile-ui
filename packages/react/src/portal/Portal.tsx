@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { FloatingPortal } from '@floating-ui/react-dom-interactions';
 import type { ReactNode } from 'react';
 
@@ -16,6 +15,4 @@ export const Portal = ({ children, id = 'agile-ui-root', root = null }: PortalPr
   );
 };
 
-if (__DEV__) {
-  Portal.displayName = 'Portal';
-}
+Portal.displayName = 'Portal';

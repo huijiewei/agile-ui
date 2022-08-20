@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
@@ -55,6 +54,4 @@ export const Spinner = polymorphicComponent<'span', SpinnerProps>((props, ref) =
   );
 });
 
-if (__DEV__) {
-  Spinner.displayName = 'Spinner';
-}
+Spinner.displayName = 'Spinner';

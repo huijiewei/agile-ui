@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
+import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import {
@@ -76,6 +76,4 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
   );
 });
 
-if (__DEV__) {
-  DropdownMenuItemTrigger.displayName = 'DropdownMenuItemTrigger';
-}
+DropdownMenuItemTrigger.displayName = 'DropdownMenuItemTrigger';

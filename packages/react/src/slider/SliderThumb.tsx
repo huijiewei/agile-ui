@@ -2,7 +2,7 @@ import { primitiveComponent, primitiveOmitComponent } from '../utils/component';
 import { cx } from 'twind';
 import { useSlider, useSliderThumb, useSliderValue, ValueType } from './SliderProvider';
 import { Tooltip } from '../tooltip/Tooltip';
-import { __DEV__, ariaAttr, clamp, runIfFn } from '@agile-ui/utils';
+import { ariaAttr, clamp, runIfFn } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
 import { KeyboardEvent, useCallback } from 'react';
 import { useFocus, useHover, useMergedRefs } from '@agile-ui/react-hooks';
@@ -198,6 +198,4 @@ export const SliderThumb = primitiveOmitComponent<'button', 'value' | 'color'>((
   }
 });
 
-if (__DEV__) {
-  SliderThumb.displayName = 'SliderThumb';
-}
+SliderThumb.displayName = 'SliderThumb';

@@ -1,5 +1,4 @@
 import { mergeRefs } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -64,6 +63,4 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  ModalContent.displayName = 'ModalContent';
-}
+ModalContent.displayName = 'ModalContent';

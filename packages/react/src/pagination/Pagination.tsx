@@ -4,7 +4,6 @@ import type { PaginationItemProps, UsePaginationOptions } from './usePagination'
 import { usePagination } from './usePagination';
 import { cx } from 'twind';
 import { PaginationItem } from './PaginationItem';
-import { __DEV__ } from '@agile-ui/utils';
 import { PaginationJumper } from './PaginationJumper';
 
 export type PaginationProps = UsePaginationOptions & {
@@ -86,6 +85,4 @@ export const Pagination = primitiveComponent<'div', PaginationProps>((props, ref
   );
 });
 
-if (__DEV__) {
-  Pagination.displayName = 'Pagination';
-}
+Pagination.displayName = 'Pagination';

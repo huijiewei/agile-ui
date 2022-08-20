@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { Placement } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import type { PrimitiveComponentProps } from '../utils/component';
@@ -45,7 +44,3 @@ export const FloatingArrow = (props: PrimitiveComponentProps<'span', FloatingArr
     </span>
   );
 };
-
-if (__DEV__) {
-  FloatingArrow.displayName = 'FloatingArrow';
-}

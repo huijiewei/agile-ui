@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import type { PrimitiveComponentProps } from '../utils/component';
 
@@ -12,6 +11,4 @@ export const DropdownMenuGroup = (props: PrimitiveComponentProps) => {
   );
 };
 
-if (__DEV__) {
-  DropdownMenuGroup.displayName = 'DropdownMenuGroup';
-}
+DropdownMenuGroup.displayName = 'DropdownMenuGroup';

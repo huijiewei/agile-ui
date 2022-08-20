@@ -1,5 +1,5 @@
 import { useControllableState } from '@agile-ui/react-hooks';
-import { __DEV__, isInputEvent } from '@agile-ui/utils';
+import { isInputEvent } from '@agile-ui/utils';
 import type { StringOrNumber } from '@agile-ui/utils';
 import { PropsWithChildren, useCallback, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
@@ -94,6 +94,4 @@ export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
   return <RadioGroupProvider value={group}>{children}</RadioGroupProvider>;
 };
 
-if (__DEV__) {
-  RadioGroup.displayName = 'RadioGroup';
-}
+RadioGroup.displayName = 'RadioGroup';

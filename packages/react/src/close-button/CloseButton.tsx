@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 
@@ -30,6 +29,4 @@ export const CloseButton = primitiveComponent<'button'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  CloseButton.displayName = 'CloseButton';
-}
+CloseButton.displayName = 'CloseButton';

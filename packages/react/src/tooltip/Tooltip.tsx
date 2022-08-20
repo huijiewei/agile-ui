@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import {
   autoPlacement,
   autoUpdate,
@@ -125,6 +124,4 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
   );
 };
 
-if (__DEV__) {
-  Tooltip.displayName = 'Tooltip';
-}
+Tooltip.displayName = 'Tooltip';

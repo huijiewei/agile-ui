@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { ComponentPropsWithoutRef } from 'react';
 import { cx } from 'twind';
 
@@ -12,6 +11,4 @@ export const VisuallyHidden = (props: ComponentPropsWithoutRef<'span'>) => {
   );
 };
 
-if (__DEV__) {
-  VisuallyHidden.displayName = 'VisuallyHidden';
-}
+VisuallyHidden.displayName = 'VisuallyHidden';

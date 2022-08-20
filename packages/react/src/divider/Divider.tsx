@@ -1,7 +1,6 @@
 import type { Color } from '../utils/types';
 import { primitiveComponent } from '../utils/component';
 import { cx } from 'twind';
-import { __DEV__ } from '@agile-ui/utils';
 
 export type DividerProps = {
   /**
@@ -75,6 +74,4 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Divider.displayName = 'Divider';
-}
+Divider.displayName = 'Divider';

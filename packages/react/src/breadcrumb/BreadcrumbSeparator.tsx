@@ -1,4 +1,4 @@
-import { __DEV__, isNumber } from '@agile-ui/utils';
+import { isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 
@@ -22,6 +22,4 @@ export const BreadcrumbSeparator = primitiveComponent<'span', BreadcrumbSeparato
   );
 });
 
-if (__DEV__) {
-  BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';
-}
+BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';

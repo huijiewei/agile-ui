@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
@@ -21,6 +20,4 @@ export const PopoverCloseButton = primitiveComponent<'button'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  PopoverCloseButton.displayName = 'PopoverCloseButton';
-}
+PopoverCloseButton.displayName = 'PopoverCloseButton';

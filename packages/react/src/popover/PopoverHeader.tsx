@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import { usePopoverAria } from './PopoverProvider';
@@ -15,6 +14,4 @@ export const PopoverHeader = primitiveComponent<'header'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  PopoverHeader.displayName = 'PopoverHeader';
-}
+PopoverHeader.displayName = 'PopoverHeader';

@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { ToastOptions, useToastDispatch } from './ToastProvider';
 
 export type UseToastOptions = Omit<ToastOptions, 'remove' | 'onRemove'>;
@@ -20,7 +19,3 @@ export const useToast = (defaultOptions?: UseToastOptions) => {
 
   return toast;
 };
-
-if (__DEV__) {
-  useToast.displayName = 'useToast';
-}

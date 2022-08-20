@@ -1,5 +1,5 @@
 import { useControllableProp, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, ariaAttr, StringOrNumber } from '@agile-ui/utils';
+import { ariaAttr, StringOrNumber } from '@agile-ui/utils';
 import { ChangeEvent, KeyboardEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
@@ -210,6 +210,4 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Input.displayName = 'Input';
-}
+Input.displayName = 'Input';

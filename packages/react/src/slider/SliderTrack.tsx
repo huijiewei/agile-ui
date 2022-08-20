@@ -1,5 +1,5 @@
 import { primitiveComponent } from '../utils/component';
-import { __DEV__, clamp } from '@agile-ui/utils';
+import { clamp } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { useSlider, useSliderValue } from './SliderProvider';
 import { useCallback, useMemo } from 'react';
@@ -144,6 +144,4 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  SliderTrack.displayName = 'SliderTrack';
-}
+SliderTrack.displayName = 'SliderTrack';

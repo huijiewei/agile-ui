@@ -1,4 +1,4 @@
-import { __DEV__, Dict } from '@agile-ui/utils';
+import type { Dict } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { Spinner } from '../spinner/Spinner';
 import type { PrimitiveComponentProps } from '../utils/component';
@@ -36,6 +36,4 @@ export const ButtonSpinner = (props: PrimitiveComponentProps<'span', ButtonSpinn
   );
 };
 
-if (__DEV__) {
-  ButtonSpinner.displayName = 'ButtonSpinner';
-}
+ButtonSpinner.displayName = 'ButtonSpinner';

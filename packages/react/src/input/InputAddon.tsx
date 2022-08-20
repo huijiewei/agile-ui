@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 import type { InputBaseProps } from './InputGroup';
@@ -24,6 +23,4 @@ export const InputAddon = polymorphicComponent<'div', InputAddonProps>((props, r
   );
 });
 
-if (__DEV__) {
-  InputAddon.displayName = 'InputAddon';
-}
+InputAddon.displayName = 'InputAddon';

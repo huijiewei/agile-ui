@@ -1,5 +1,4 @@
 import { polymorphicComponent } from '../utils/component';
-import { __DEV__ } from '@agile-ui/utils';
 
 export const Box = polymorphicComponent((props, ref) => {
   const { as: Component = 'div', ...rest } = props;
@@ -7,6 +6,4 @@ export const Box = polymorphicComponent((props, ref) => {
   return <Component ref={ref} {...rest} />;
 });
 
-if (__DEV__) {
-  Box.displayName = 'Box';
-}
+Box.displayName = 'Box';

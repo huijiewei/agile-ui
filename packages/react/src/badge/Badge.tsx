@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
@@ -58,6 +57,4 @@ export const Badge = primitiveComponent<'span', BadgeProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Badge.displayName = 'Badge';
-}
+Badge.displayName = 'Badge';

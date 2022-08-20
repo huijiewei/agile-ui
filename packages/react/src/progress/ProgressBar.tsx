@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
 import { cx } from 'twind';
@@ -74,6 +73,4 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
   );
 });
 
-if (__DEV__) {
-  ProgressBar.displayName = 'ProgressBar';
-}
+ProgressBar.displayName = 'ProgressBar';

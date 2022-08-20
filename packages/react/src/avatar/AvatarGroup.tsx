@@ -1,4 +1,4 @@
-import { __DEV__, isNumber } from '@agile-ui/utils';
+import { isNumber } from '@agile-ui/utils';
 import { Children, cloneElement, isValidElement, ReactElement } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -54,6 +54,4 @@ export const AvatarGroup = primitiveComponent<'div', AvatarGroupProps>((props, r
   );
 });
 
-if (__DEV__) {
-  AvatarGroup.displayName = 'AvatarGroup';
-}
+AvatarGroup.displayName = 'AvatarGroup';

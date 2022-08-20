@@ -1,6 +1,6 @@
 import { useControllableState } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { __DEV__, isInputEvent } from '@agile-ui/utils';
+import { isInputEvent } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
 import { createContext } from '../utils/context';
@@ -98,6 +98,4 @@ export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
   return <CheckboxGroupProvider value={group}>{children}</CheckboxGroupProvider>;
 };
 
-if (__DEV__) {
-  CheckboxGroup.displayName = 'CheckboxGroup';
-}
+CheckboxGroup.displayName = 'CheckboxGroup';

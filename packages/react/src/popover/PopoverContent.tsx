@@ -1,5 +1,4 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
@@ -52,6 +51,4 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  PopoverContent.displayName = 'PopoverContent';
-}
+PopoverContent.displayName = 'PopoverContent';

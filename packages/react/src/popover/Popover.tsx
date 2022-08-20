@@ -1,4 +1,4 @@
-import { __DEV__, runIfFn } from '@agile-ui/utils';
+import { runIfFn } from '@agile-ui/utils';
 import {
   autoPlacement,
   autoUpdate,
@@ -169,6 +169,4 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   );
 };
 
-if (__DEV__) {
-  Popover.displayName = 'Popover';
-}
+Popover.displayName = 'Popover';

@@ -1,5 +1,4 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
 import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
 import { Children, isValidElement } from 'react';
 import { cx } from 'twind';
@@ -110,6 +109,4 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  DropdownMenuContent.displayName = 'DropdownMenuContent';
-}
+DropdownMenuContent.displayName = 'DropdownMenuContent';

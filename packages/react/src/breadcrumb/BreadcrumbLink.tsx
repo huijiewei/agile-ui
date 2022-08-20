@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { polymorphicComponent } from '../utils/component';
 
@@ -16,6 +15,4 @@ export const BreadcrumbLink = polymorphicComponent<'a', BreadcrumbLinkProps>((pr
   return <Component ref={ref} className={cx('cursor-pointer hover:underline', className)} {...rest} />;
 });
 
-if (__DEV__) {
-  BreadcrumbLink.displayName = 'BreadcrumbLink';
-}
+BreadcrumbLink.displayName = 'BreadcrumbLink';

@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent, PrimitiveComponentProps } from '../utils/component';
 import { createContext } from '../utils/context';
@@ -54,9 +53,7 @@ export const Alert = primitiveComponent<'div', AlertProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Alert.displayName = 'Alert';
-}
+Alert.displayName = 'Alert';
 
 export const AlertTitle = primitiveComponent<'div'>((props, ref) => {
   const { className, ...rest } = props;
@@ -64,9 +61,7 @@ export const AlertTitle = primitiveComponent<'div'>((props, ref) => {
   return <div className={cx('font-medium', className)} ref={ref} {...rest} />;
 });
 
-if (__DEV__) {
-  AlertTitle.displayName = 'AlertTitle';
-}
+AlertTitle.displayName = 'AlertTitle';
 
 export const AlertDescription = primitiveComponent<'div'>((props, ref) => {
   const { variant } = useAlert();
@@ -75,9 +70,7 @@ export const AlertDescription = primitiveComponent<'div'>((props, ref) => {
   return <div className={cx(variant != 'solid' && 'text-black', className)} ref={ref} {...rest} />;
 });
 
-if (__DEV__) {
-  AlertDescription.displayName = 'AlertDescription';
-}
+AlertDescription.displayName = 'AlertDescription';
 
 export const AlertIcon = (props: PrimitiveComponentProps<'span'>) => {
   const { className, ...rest } = props;

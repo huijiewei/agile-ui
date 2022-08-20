@@ -1,4 +1,4 @@
-import { __DEV__, isNumber, MaybeFunction, runIfFn } from '@agile-ui/utils';
+import { isNumber, MaybeFunction, runIfFn } from '@agile-ui/utils';
 import type { PropsWithChildren } from 'react';
 import { useMemo, useState } from 'react';
 import { cx } from 'twind';
@@ -216,9 +216,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
   );
 };
 
-if (__DEV__) {
-  ToastProvider.displayName = 'ToastProvider';
-}
+ToastProvider.displayName = 'ToastProvider';
 
 const getToastListStyles = (position: ToastPosition) => {
   const styles = [];

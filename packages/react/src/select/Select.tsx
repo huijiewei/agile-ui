@@ -1,6 +1,6 @@
 import { useCallbackRef, useControllableProp, useFocus, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
 import type { StringOrNumber } from '@agile-ui/utils';
-import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
+import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
   autoUpdate,
   flip,
@@ -721,6 +721,4 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Select.displayName = 'Select';
-}
+Select.displayName = 'Select';

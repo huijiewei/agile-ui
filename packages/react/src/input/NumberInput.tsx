@@ -2,7 +2,7 @@ import { primitiveComponent } from '../utils/component';
 import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, ReactNode, ForwardedRef } from 'react';
 import type { InputBaseProps } from './InputGroup';
 import { assignRef, useControllableProp, useEventListener, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
-import { __DEV__, ariaAttr, clamp, isNumber } from '@agile-ui/utils';
+import { ariaAttr, clamp, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { inputSizes } from './inputSizes';
 import { NumberInputControl } from './NumberInputControl';
@@ -393,6 +393,4 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   );
 });
 
-if (__DEV__) {
-  NumberInput.displayName = 'NumberInput';
-}
+NumberInput.displayName = 'NumberInput';

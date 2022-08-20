@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import type { PrimitiveComponentProps } from '../utils/component';
 
@@ -12,6 +11,4 @@ export const PopoverFooter = (props: PrimitiveComponentProps<'footer'>) => {
   );
 };
 
-if (__DEV__) {
-  PopoverFooter.displayName = 'PopoverFooter';
-}
+PopoverFooter.displayName = 'PopoverFooter';

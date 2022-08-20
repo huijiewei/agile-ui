@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { FloatingArrow } from '../floating/FloatingArrow';
 import type { PrimitiveComponentProps } from '../utils/component';
@@ -18,6 +17,4 @@ export const DropdownMenuArrow = (props: PrimitiveComponentProps<'span'>) => {
   );
 };
 
-if (__DEV__) {
-  DropdownMenuArrow.displayName = 'DropdownMenuArrow';
-}
+DropdownMenuArrow.displayName = 'DropdownMenuArrow';

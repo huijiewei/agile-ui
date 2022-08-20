@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { ReactNode } from 'react';
 import type { ToastProviderProps } from '../toast/ToastProvider';
 import { ToastProvider } from '../toast/ToastProvider';
@@ -18,7 +17,3 @@ export const AgileProvider = ({ children, toastOptions }: AgileProviderProps) =>
     </ColorModeProvider>
   );
 };
-
-if (__DEV__) {
-  AgileProvider.displayName = 'AgileProvider';
-}

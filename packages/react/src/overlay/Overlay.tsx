@@ -1,4 +1,4 @@
-import { __DEV__, Dict, isBoolean, isNumber } from '@agile-ui/utils';
+import { Dict, isBoolean, isNumber } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 import type { Color } from '../utils/types';
@@ -70,6 +70,4 @@ export const Overlay = primitiveComponent<'div', OverlayProps>((props, ref) => {
   return overlay(rest);
 });
 
-if (__DEV__) {
-  Overlay.displayName = 'Overlay';
-}
+Overlay.displayName = 'Overlay';

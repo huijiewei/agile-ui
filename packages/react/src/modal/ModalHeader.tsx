@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
 
@@ -11,6 +10,4 @@ export const ModalHeader = primitiveComponent<'header'>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  ModalHeader.displayName = 'ModalHeader';
-}
+ModalHeader.displayName = 'ModalHeader';

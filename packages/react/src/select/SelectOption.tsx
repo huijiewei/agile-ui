@@ -1,6 +1,6 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import type { Dict, StringOrNumber } from '@agile-ui/utils';
-import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
+import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import type { ReactNode } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
@@ -81,6 +81,4 @@ export const SelectOption = primitiveComponent<'li', SelectOptionProps>((props, 
   );
 });
 
-if (__DEV__) {
-  SelectOption.displayName = 'SelectOption';
-}
+SelectOption.displayName = 'SelectOption';

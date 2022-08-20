@@ -1,5 +1,4 @@
 import { useAllowHover } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
 import {
   autoUpdate,
   flip,
@@ -194,9 +193,7 @@ const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
   );
 };
 
-if (__DEV__) {
-  DropdownMenuComponent.displayName = 'DropdownMenuComponent';
-}
+DropdownMenuComponent.displayName = 'DropdownMenuComponent';
 
 export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
   const parentId = useFloatingParentNodeId();
@@ -212,6 +209,4 @@ export const DropdownMenu = (props: PropsWithChildren<DropdownMenuProps>) => {
   return <DropdownMenuComponent {...props} />;
 };
 
-if (__DEV__) {
-  DropdownMenu.displayName = 'DropdownMenu';
-}
+DropdownMenu.displayName = 'DropdownMenu';

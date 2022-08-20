@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { Children, cloneElement, isValidElement } from 'react';
 import { cx } from 'twind';
@@ -42,6 +41,4 @@ export const BreadcrumbItem = primitiveComponent<'li', BreadcrumbItemProps>((pro
   );
 });
 
-if (__DEV__) {
-  BreadcrumbItem.displayName = 'BreadcrumbItem';
-}
+BreadcrumbItem.displayName = 'BreadcrumbItem';

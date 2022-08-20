@@ -1,5 +1,5 @@
 import { primitiveComponent } from '../utils/component';
-import { __DEV__, clamp } from '@agile-ui/utils';
+import { clamp } from '@agile-ui/utils';
 import { cx } from 'twind';
 import { useCallback, useMemo, useState, MouseEvent, TouchEvent, useRef } from 'react';
 import { SliderBaseProps, SliderProvider, SliderThumbProvider, SliderValueProvider, ValueType } from './SliderProvider';
@@ -195,6 +195,4 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
   );
 });
 
-if (__DEV__) {
-  Slider.displayName = 'Slider';
-}
+Slider.displayName = 'Slider';

@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, RefObject } from 'react';
 import { useCallback, useId, useMemo } from 'react';
@@ -123,6 +122,4 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
   );
 };
 
-if (__DEV__) {
-  Modal.displayName = 'Modal';
-}
+Modal.displayName = 'Modal';

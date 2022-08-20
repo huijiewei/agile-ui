@@ -1,4 +1,3 @@
-import { __DEV__ } from '@agile-ui/utils';
 import { useMemo } from 'react';
 import { cx } from 'twind';
 import { createContext } from '../utils/context';
@@ -73,6 +72,4 @@ export const ButtonGroup = primitiveComponent<'div', ButtonGroupProps>((props, r
   );
 });
 
-if (__DEV__) {
-  ButtonGroup.displayName = 'ButtonGroup';
-}
+ButtonGroup.displayName = 'ButtonGroup';

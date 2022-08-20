@@ -1,5 +1,4 @@
 import { primitiveComponent } from '../utils/component';
-import { __DEV__ } from '@agile-ui/utils';
 import type { Size } from '../utils/types';
 import { cx } from 'twind';
 
@@ -72,6 +71,4 @@ export const NativeSelect = primitiveComponent<'select', NativeSelectProps>((pro
   );
 });
 
-if (__DEV__) {
-  NativeSelect.displayName = 'NativeSelect';
-}
+NativeSelect.displayName = 'NativeSelect';

@@ -1,7 +1,6 @@
 import { Tooltip } from '@agile-ui/react';
 import { useClipboard } from '@agile-ui/react-hooks';
 import { Clipboard, ClipboardCheck } from '@agile-ui/react-icons';
-import { __DEV__ } from '@agile-ui/utils';
 
 export const CopyIcon = ({ content }: { content: string }) => {
   const { copied, onCopy } = useClipboard();
@@ -21,6 +20,4 @@ export const CopyIcon = ({ content }: { content: string }) => {
   );
 };
 
-if (__DEV__) {
-  CopyIcon.displayName = 'CopyButton';
-}
+CopyIcon.displayName = 'CopyButton';

@@ -1,7 +1,7 @@
 import { polymorphicComponent } from '../utils/component';
 import type { PaginationItemProps } from './usePagination';
 import { cx } from 'twind';
-import { __DEV__, ariaAttr, dataAttr } from '@agile-ui/utils';
+import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
 
 export const PaginationItem = polymorphicComponent<'button', PaginationItemProps & { color?: ScaleColor }>(
@@ -59,7 +59,3 @@ export const PaginationItem = polymorphicComponent<'button', PaginationItemProps
     );
   }
 );
-
-if (__DEV__) {
-  PaginationItem.displayName = 'PaginationItem';
-}

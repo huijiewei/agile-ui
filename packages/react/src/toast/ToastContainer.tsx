@@ -1,5 +1,4 @@
 import { useTimeout, useUpdateEffect } from '@agile-ui/react-hooks';
-import { __DEV__ } from '@agile-ui/utils';
 import { useEffect, useState } from 'react';
 import { Toast } from './Toast';
 import type { ToastOptions } from './ToastProvider';
@@ -65,6 +64,4 @@ export const ToastContainer = (props: ToastContainerProps) => {
   );
 };
 
-if (__DEV__) {
-  ToastContainer.displayName = 'ToastComponent';
-}
+ToastContainer.displayName = 'ToastComponent';
