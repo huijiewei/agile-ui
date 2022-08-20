@@ -304,7 +304,13 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       }),
     ],
     open,
-    onOpenChange: setOpen,
+    onOpenChange: (opened) => {
+      if (opened) {
+        setSearchInputHidden(false);
+      }
+
+      setOpen(opened);
+    },
     whileElementsMounted: autoUpdate,
   });
 
@@ -546,10 +552,6 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       </div>
     );
   };
-
-  useEffect(() => {
-    open && setSearchInputHidden(false);
-  }, [open]);
 
   const [focusRef, focus] = useFocus();
 
