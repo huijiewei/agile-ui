@@ -33,7 +33,7 @@ export const Breadcrumb = primitiveComponent<'nav', BreadcrumbProps>((props, ref
   });
 
   return (
-    <nav ref={ref} className={cx('block', className)} {...rest}>
+    <nav ref={ref} aria-label="breadcrumb" className={cx('block', className)} {...rest}>
       <ol>{clones}</ol>
     </nav>
   );
