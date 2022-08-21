@@ -38,12 +38,12 @@ description: 鼠标点击在某个组件时，弹出的气泡式的卡片浮层�
 
 ```tsx preview editable
 function Demo() {
-  const [opened, setOpened] = React.useState(false);
+  const { open, handleOpen, handleClose } = useDisclosure();
 
   return (
-    <Popover opened={opened} placement={'right'}>
+    <Popover opened={open} placement={'right'}>
       <PopoverTrigger>
-        <Button onMouseEnter={() => setOpened(true)} onMouseLeave={() => setOpened(false)}>
+        <Button onMouseEnter={handleOpen} onMouseLeave={handleClose}>
           开启
         </Button>
       </PopoverTrigger>

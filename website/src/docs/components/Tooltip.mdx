@@ -11,11 +11,11 @@ description: 工具提示是用户与元素交互时出现的简短、信息丰�
 
 ```tsx preview editable
 function Demo() {
-  const [opened, setOpened] = React.useState(false);
+  const { open, handleToggle } = useDisclosure();
 
   return (
-    <Tooltip opened={opened} content={'可控工具提示'}>
-      <Button onClick={() => setOpened((o) => !o)}>开启</Button>
+    <Tooltip opened={open} content={'可控工具提示'}>
+      <Button onClick={handleToggle}>开启</Button>
     </Tooltip>
   );
 }
