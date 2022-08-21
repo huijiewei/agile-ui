@@ -153,7 +153,7 @@ const docgenParser = withCustomConfig('tsconfig.json', {
     }
 
     if (prop.declarations && prop.declarations.length > 0) {
-      return Boolean(prop.declarations.find((declaration) => !declaration.fileName.includes('node_modules')));
+      return prop.declarations.find((declaration) => !declaration.fileName.includes('node_modules')) != undefined;
     }
 
     return true;
