@@ -6,7 +6,6 @@ import {
   flip,
   offset,
   size as floatingSize,
-  useClick,
   useDismiss,
   useFloating,
   useInteractions,
@@ -38,6 +37,7 @@ import { CloseButton } from '../close-button/CloseButton';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { SelectChevron } from './SelectChevron';
 import { SelectSearch } from './SelectSearch';
+import { useClick } from '../floating/useClick';
 
 export type SelectProps = {
   /**
@@ -333,9 +333,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         if (!multiple) {
           setSearchInputHidden(true);
         }
+
+        setActiveIndex(null);
       }
 
-      setActiveIndex(null);
       searchable && setSearchValue('');
 
       onChange && onChange(nextValue);
@@ -368,7 +369,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   }, [selectedIndex]);
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
-    useClick(context),
+    useClick(context, { ignoreKeyboard: !closeOnSelect }),
     useRole(context, { role: 'listbox' }),
     useDismiss(context),
     useListNavigation(context, {
