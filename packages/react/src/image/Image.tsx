@@ -7,6 +7,7 @@ import { useImage, useImageProps } from './useImage';
 export type ImageProps = useImageProps & {
   /**
    * 图片加载失败时的显示, 可以是 URL 或者 ReactElement
+   * @type string | ReactElement
    */
   fallback?: string | ReactElement;
 };
