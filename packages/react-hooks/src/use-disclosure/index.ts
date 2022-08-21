@@ -9,7 +9,9 @@ export type UseDisclosureOptions = {
   onClose?: () => void;
 };
 
-export function useDisclosure({ opened, defaultOpened, onOpen, onClose }: UseDisclosureOptions) {
+export function useDisclosure(options: UseDisclosureOptions = {}) {
+  const { opened, defaultOpened, onOpen, onClose } = options;
+
   const onOpenRef = useCallbackRef(onOpen);
   const onCloseRef = useCallbackRef(onClose);
 

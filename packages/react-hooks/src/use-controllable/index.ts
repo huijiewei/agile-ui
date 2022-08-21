@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useCallbackRef } from '../use-callback-ref';
 
 export const useControllableProp = <T>(prop: T | undefined, state: T) => {
-  const controlled = prop !== undefined;
+  const controlled = prop != undefined;
   const value = controlled ? prop : state;
 
   return [controlled, value] as const;
