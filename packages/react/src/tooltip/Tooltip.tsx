@@ -12,7 +12,7 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react-dom-interactions';
-import { cloneElement, ReactNode, useState } from 'react';
+import { cloneElement, ReactNode } from 'react';
 import { cx } from 'twind';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
@@ -20,7 +20,7 @@ import type { ScaleColor } from '../utils/types';
 import { TooltipArrow } from './TooltipArrow';
 import { AnimatePresence } from 'framer-motion';
 import { Motion } from '../motion/Motion';
-import { useControllableProp, useMergedRefs } from '@agile-ui/react-hooks';
+import { useDisclosure, useMergedRefs } from '@agile-ui/react-hooks';
 
 type TooltipProps = {
   /**
@@ -57,8 +57,7 @@ type TooltipProps = {
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
   const { className, children, content, opened, placement = 'auto', color = 'gray', ...rest } = props;
 
-  const [open, setOpen] = useState(opened);
-  const [controlled, controlledOpen] = useControllableProp(opened, open);
+  const { open, handleOpen, handleClose } = useDisclosure({ opened });
 
   const {
     x,
@@ -69,11 +68,9 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
     placement: placementState,
   } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
-    open: controlledOpen,
+    open,
     onOpenChange: (opened) => {
-      if (!controlled) {
-        setOpen(opened);
-      }
+      opened ? handleOpen() : handleClose();
     },
     placement: placement == 'auto' ? undefined : placement,
     whileElementsMounted: autoUpdate,
@@ -94,7 +91,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
       {cloneElement(children, getReferenceProps({ ref: refs, ...children.props }))}
       <Portal>
         <AnimatePresence>
-          {controlledOpen && (
+          {open && (
             <Motion
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

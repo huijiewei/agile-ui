@@ -13,7 +13,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import type { PropsWithChildren, ReactNode, RefObject } from 'react';
-import { useCallback, useId, useMemo, useState } from 'react';
+import { useId, useMemo } from 'react';
 import {
   PopoverAriaProvider,
   PopoverDispatchProvider,
@@ -21,7 +21,7 @@ import {
   PopoverPlacementProvider,
   PopoverReferenceProvider,
 } from './PopoverProvider';
-import { useControllableProp } from '@agile-ui/react-hooks';
+import { useDisclosure } from '@agile-ui/react-hooks';
 
 export type PopoverProps = {
   /**
@@ -81,8 +81,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     initialFocus,
   } = props;
 
-  const [open, setOpen] = useState(false);
-  const [controlled, controlledOpen] = useControllableProp(opened, open);
+  const { open, handleOpen, handleClose } = useDisclosure({ opened, onClose });
 
   const {
     x,
@@ -93,15 +92,9 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     placement: placementState,
   } = useFloating<HTMLElement>({
     middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
-    open: controlledOpen,
+    open,
     onOpenChange: (opened) => {
-      if (!controlled) {
-        setOpen(opened);
-      }
-
-      if (!opened) {
-        onClose && onClose();
-      }
+      opened ? handleOpen() : handleClose();
     },
     placement: placement == 'auto' ? undefined : placement,
     whileElementsMounted: autoUpdate,
@@ -117,12 +110,6 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
   ]);
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
-
-    onClose && onClose();
-  }, [onClose]);
-
   const ariaContextValue = useMemo(
     () => ({
       labelId,
@@ -133,25 +120,25 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
 
   const referenceContextValue = useMemo(
     () => ({
-      open: controlledOpen,
+      open,
       reference,
       getReferenceProps,
     }),
-    [controlledOpen, getReferenceProps, reference]
+    [getReferenceProps, open, reference]
   );
 
   const floatingContextValue = useMemo(
     () => ({
       x,
       y,
-      open: controlledOpen,
+      open,
       context,
       floating,
       getFloatingProps,
       modal,
       initialFocus,
     }),
-    [context, controlledOpen, floating, getFloatingProps, initialFocus, modal, x, y]
+    [context, floating, getFloatingProps, initialFocus, modal, open, x, y]
   );
 
   return (
