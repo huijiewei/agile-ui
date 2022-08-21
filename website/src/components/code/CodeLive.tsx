@@ -1,4 +1,5 @@
 import * as AgileReact from '@agile-ui/react';
+import * as AgileReactHooks from '@agile-ui/react-hooks';
 import * as AgileReactIcons from '@agile-ui/react-icons';
 import type { Language } from 'prism-react-renderer';
 import darkTheme from 'prism-react-renderer/themes/nightOwl';
@@ -49,6 +50,7 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
         language={language}
         scope={{
           ...AgileReact,
+          ...AgileReactHooks,
           ...AgileReactIcons,
           FormDemo,
           GoogleChrome,
