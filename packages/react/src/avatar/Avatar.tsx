@@ -87,6 +87,7 @@ export const Avatar = primitiveComponent<'div', AvatarProps>((props, ref) => {
     referrerPolicy,
     radius = 'full',
     size = 'md',
+    onError,
     ...rest
   } = props;
 
@@ -121,6 +122,7 @@ export const Avatar = primitiveComponent<'div', AvatarProps>((props, ref) => {
         referrerPolicy={referrerPolicy}
         srcSet={srcSet}
         loading={loading}
+        onError={onError}
       />
       {children}
     </div>
