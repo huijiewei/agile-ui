@@ -1,6 +1,5 @@
 import { Input } from '../input/Input';
 import { useState } from 'react';
-import type { StringOrNumber } from '@agile-ui/utils';
 
 export type PaginationJumperProps = {
   page: number;
@@ -13,7 +12,7 @@ export const PaginationJumper = (props: PaginationJumperProps) => {
 
   const [inputValue, setInputValue] = useState<number>();
 
-  const handleChange = (value: StringOrNumber) => {
+  const handleChange = (value: string | number) => {
     const parsed = parseInt(value.toString(), 10);
 
     setInputValue(Number.isNaN(parsed) ? undefined : parsed);

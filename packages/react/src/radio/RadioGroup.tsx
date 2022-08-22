@@ -1,6 +1,5 @@
 import { useControllableState } from '@agile-ui/react-hooks';
 import { isInputEvent } from '@agile-ui/utils';
-import type { StringOrNumber } from '@agile-ui/utils';
 import { PropsWithChildren, useCallback, useMemo } from 'react';
 import type { ChangeEvent } from 'react';
 import { createContext } from '../utils/context';
@@ -35,11 +34,11 @@ type RadioGroupBaseProps = RadioBaseProps & {
   /**
    * 值
    */
-  value?: StringOrNumber;
+  value?: string | number;
 };
 
 type RadioGroupContextValue = RadioGroupBaseProps & {
-  onChange?: (event: ChangeEvent<HTMLInputElement> | StringOrNumber) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement> | string | number) => void;
 };
 
 const [RadioGroupProvider, useRadioGroup] = createContext<RadioGroupContextValue>({
@@ -53,12 +52,12 @@ type RadioGroupProps = RadioGroupBaseProps & {
   /**
    * 默认值
    */
-  defaultValue?: StringOrNumber;
+  defaultValue?: string | number;
 
   /**
    * 选中任何子项单选框或未选中时触发回调
    */
-  onChange?: (value: StringOrNumber) => void;
+  onChange?: (value: string | number) => void;
 };
 
 export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
@@ -71,7 +70,7 @@ export const RadioGroup = (props: PropsWithChildren<RadioGroupProps>) => {
   });
 
   const handleChange = useCallback(
-    (eventOrValue: ChangeEvent<HTMLInputElement> | StringOrNumber) => {
+    (eventOrValue: ChangeEvent<HTMLInputElement> | string | number) => {
       const nextValue = isInputEvent(eventOrValue) ? eventOrValue.target.value : eventOrValue;
 
       setState(nextValue);

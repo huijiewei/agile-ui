@@ -1,5 +1,4 @@
 import { useCallbackRef, useControllableProp, useFocus, useMergedRefs, usePrevious } from '@agile-ui/react-hooks';
-import type { StringOrNumber } from '@agile-ui/utils';
 import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import {
   autoUpdate,
@@ -107,12 +106,12 @@ export type SelectProps = {
   /**
    * 可控值
    */
-  value?: StringOrNumber[] | StringOrNumber;
+  value?: (string | number)[] | string | number;
 
   /**
    * 非可控默认值
    */
-  defaultValue?: StringOrNumber[] | StringOrNumber;
+  defaultValue?: (string | number)[] | string | number;
 
   /**
    * 选择后关闭
@@ -123,7 +122,7 @@ export type SelectProps = {
   /**
    * 值改变时触发回调
    */
-  onChange?: (value: StringOrNumber[] | StringOrNumber) => void;
+  onChange?: (value: (string | number)[] | string | number) => void;
 
   /**
    * 点击清除按钮的回调
@@ -209,7 +208,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
     const cacheData: {
       elements: ReactElement[];
-      options: Map<StringOrNumber, { label: ReactNode; index: number }>;
+      options: Map<string | number, { label: ReactNode; index: number }>;
     } = {
       elements: [],
       options: new Map(),
@@ -314,7 +313,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   });
 
   const handleSelected = useCallback(
-    (value: StringOrNumber, close = true) => {
+    (value: string | number, close = true) => {
       const multiple = Array.isArray(controlledValue);
 
       const nextValue = multiple
@@ -486,7 +485,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   const [searchInputFocusRef, searchInputFocus] = useFocus();
   const searchInputRefs = useMergedRefs(searchInputRef, searchInputFocusRef);
 
-  const renderSingleValue = (controlledValue: StringOrNumber | undefined) => {
+  const renderSingleValue = (controlledValue: string | number | undefined) => {
     return (
       <div className={'flex-wrap flex-1 grid'}>
         {searchValue == '' &&
@@ -511,7 +510,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     );
   };
 
-  const renderMultipleValue = (controlledValue: StringOrNumber[]) => {
+  const renderMultipleValue = (controlledValue: (string | number)[]) => {
     return (
       <div
         className={cx(

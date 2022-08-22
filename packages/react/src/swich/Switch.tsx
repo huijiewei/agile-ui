@@ -46,7 +46,7 @@ type SwitchProps = {
   /**
    * 开关状态发生更改时，将调用该回调。
    */
-  onChange?: (value: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: boolean) => void;
 };
 
 const switchSizeStyles = {
@@ -90,7 +90,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
         setCheckedState(event.target.checked);
       }
 
-      onChange?.(event.target.checked, event);
+      onChange?.(event.target.checked);
     },
     [readOnly, disabled, controlled, onChange]
   );

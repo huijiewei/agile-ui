@@ -1,5 +1,5 @@
 import { useControllableProp, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
-import { ariaAttr, StringOrNumber } from '@agile-ui/utils';
+import { ariaAttr } from '@agile-ui/utils';
 import { ChangeEvent, KeyboardEvent, ReactNode, useCallback, useRef, useState } from 'react';
 import { cx } from 'twind';
 import { CloseButton } from '../close-button/CloseButton';
@@ -11,12 +11,12 @@ export type InputProps = InputBaseProps & {
   /**
    * 可控值
    */
-  value?: StringOrNumber;
+  value?: string | number;
 
   /**
    * 非可控默认值
    */
-  defaultValue?: StringOrNumber;
+  defaultValue?: string | number;
 
   /**
    * 前缀文字或者图标
@@ -67,7 +67,7 @@ export type InputProps = InputBaseProps & {
   /**
    * 值改变时触发回调
    */
-  onChange?: (value: StringOrNumber, event?: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string | number) => void;
 
   /**
    * 点击清除按钮的回调
@@ -120,7 +120,7 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
         setValueState(event.target.value);
       }
 
-      onChange?.(event.target.value, event);
+      onChange?.(event.target.value);
     },
     [disabled, controlled, onChange, readOnly]
   );

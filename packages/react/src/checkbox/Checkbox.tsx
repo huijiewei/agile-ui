@@ -54,7 +54,7 @@ export type CheckboxProps = CheckboxBaseProps & {
   /**
    * 选择状态发生更改时触发回调
    */
-  onChange?: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (checked: boolean) => void;
 };
 
 const checkboxSizeStyles = {
@@ -89,7 +89,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   } = props;
 
   const onChangeRef = useCallbackRef((event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.checked, event);
+    onChange?.(event.target.checked);
     group?.onChange?.(event);
   });
 

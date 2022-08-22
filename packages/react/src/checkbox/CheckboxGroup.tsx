@@ -1,5 +1,4 @@
 import { useControllableState } from '@agile-ui/react-hooks';
-import type { StringOrNumber } from '@agile-ui/utils';
 import { isInputEvent } from '@agile-ui/utils';
 import { ChangeEvent, useCallback, useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
@@ -30,11 +29,11 @@ type CheckboxGroupBaseProps = CheckboxBaseProps & {
   /**
    * 值
    */
-  value?: StringOrNumber[];
+  value?: (string | number)[];
 };
 
 type CheckboxGroupContext = CheckboxGroupBaseProps & {
-  onChange?: (event: ChangeEvent<HTMLInputElement> | StringOrNumber) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement> | string | number) => void;
 };
 
 const [CheckboxGroupProvider, useCheckboxGroup] = createContext<CheckboxGroupContext>({
@@ -48,12 +47,12 @@ export type CheckboxGroupProps = CheckboxGroupBaseProps & {
   /**
    * 默认值
    */
-  defaultValue?: StringOrNumber[];
+  defaultValue?: (string | number)[];
 
   /**
    * 任何子项复选框选中或未选中时触发回调
    */
-  onChange?: (value: StringOrNumber[]) => void;
+  onChange?: (value: (string | number)[]) => void;
 };
 
 export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
@@ -66,7 +65,7 @@ export const CheckboxGroup = (props: PropsWithChildren<CheckboxGroupProps>) => {
   });
 
   const handleChange = useCallback(
-    (eventOrValue: ChangeEvent<HTMLInputElement> | StringOrNumber) => {
+    (eventOrValue: ChangeEvent<HTMLInputElement> | string | number) => {
       if (!state) {
         return;
       }

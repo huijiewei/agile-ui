@@ -41,7 +41,7 @@ export type RadioProps = RadioBaseProps & {
   /**
    * 选择状态发生更改时触发回调
    */
-  onChange?: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (checked: boolean) => void;
 };
 
 const radioSizeStyles = {
@@ -75,7 +75,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
   } = props;
 
   const onChangeRef = useCallbackRef((event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.checked, event);
+    onChange?.(event.target.checked);
     group?.onChange?.(event);
   });
 
