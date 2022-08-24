@@ -57,7 +57,7 @@
   "devDependencies": {
     "@agile-ui/test-utils": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": "^7.2.0",
+    "framer-motion": "^7.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "twind": "next"
