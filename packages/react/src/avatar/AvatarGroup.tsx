@@ -2,8 +2,8 @@ import { isNumber } from '@agile-ui/utils';
 import { Children, cloneElement, isValidElement, ReactElement } from 'react';
 import { cx } from 'twind';
 import { primitiveComponent } from '../utils/component';
-import { getAvatarSizeStyle } from './Avatar';
 import type { AvatarProps } from './Avatar';
+import { avatarSizes } from './avatarSizes';
 
 export type AvatarGroupProps = Pick<AvatarProps, 'radius' | 'size'> & {
   /**
@@ -43,7 +43,7 @@ export const AvatarGroup = primitiveComponent<'div', AvatarGroupProps>((props, r
         <span
           className={cx(
             'shrink-0 inline-flex justify-center items-center text-black text-center uppercase relative font-medium bg-gray-100',
-            getAvatarSizeStyle(size),
+            avatarSizes(size),
             `rounded${rounded}`,
             `ml-[${spacing}]`
           )}

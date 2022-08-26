@@ -56,7 +56,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
       if (elem.name == 'PropsTable' || elem.name == 'Showcase') {
         const nodeComponentName = getEtreeAttributeValue(elem, 'componentName');
 
-        if (!nodeComponentName) {
+        if (nodeComponentName == '') {
           throw new Error(`Invalid componentName for PropsTable.`);
         }
 
@@ -91,7 +91,7 @@ export const remarkMdxDocgen: Plugin<[RemarkMdxDocgenOptions]> = (options) => {
   };
 };
 
-const getEtreeAttributeValue = (elem: MdxJsxFlowElement, attribute: string): string | undefined => {
+const getEtreeAttributeValue = (elem: MdxJsxFlowElement, attribute: string): string => {
   const attr = elem.attributes.find((attr) => 'name' in attr && attr['name'] == attribute);
 
   if (!attr) {
