@@ -51,7 +51,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                 transition={{ duration: 0.2 }}
                 className={cx(
                   'absolute outline-none',
-                  'p-1.5 min-w-[10em] rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
+                  'p-1.5 rounded shadow border border-gray-200 bg-white dark:bg-gray-700',
                   className
                 )}
                 {...getFloatingProps({
