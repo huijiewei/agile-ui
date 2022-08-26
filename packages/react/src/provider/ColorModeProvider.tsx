@@ -1,16 +1,23 @@
 import { useLocalStorage, useMediaQuery } from '@agile-ui/react-hooks';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { createContext } from '../utils/context';
 
 export type ColorMode = 'system' | 'light' | 'dark';
 
-const [ColorModeStateProvider, useColorModeState] = createContext<{ darkMode: boolean; colorMode: ColorMode }>({
+type ColorModeStateValue = { darkMode: boolean; colorMode: ColorMode };
+
+const [ColorModeStateProvider, useColorModeState] = createContext<ColorModeStateValue>({
   name: 'ColorModeStateContext',
   strict: true,
 });
 
-const [ColorModeDispatchProvider, useColorModeDispatch] = createContext<() => void>({
+type ColorModeDispatch = {
+  setColorMode: Dispatch<SetStateAction<ColorMode>>;
+  toggleColorMode: () => void;
+};
+
+const [ColorModeDispatchProvider, useColorModeDispatch] = createContext<ColorModeDispatch>({
   name: 'ColorModeDispatchContext',
   strict: true,
 });
@@ -58,7 +65,7 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <ColorModeDispatchProvider value={toggleColorMode}>
+    <ColorModeDispatchProvider value={{ setColorMode, toggleColorMode }}>
       <ColorModeStateProvider value={{ darkMode, colorMode }}>{children}</ColorModeStateProvider>
     </ColorModeDispatchProvider>
   );
