@@ -10,6 +10,7 @@ import {
   useInteractions,
   useListNavigation,
   useRole,
+  useClick,
 } from '@floating-ui/react-dom-interactions';
 import {
   Children,
@@ -36,7 +37,6 @@ import { CloseButton } from '../close-button/CloseButton';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { SelectChevron } from './SelectChevron';
 import { SelectSearch } from './SelectSearch';
-import { useClick } from '../floating/useClick';
 
 export type SelectProps = {
   /**
@@ -368,7 +368,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
   }, [selectedIndex]);
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
-    useClick(context, { ignoreKeyboard: !closeOnSelect }),
+    useClick(context, { keyboardHandlers: closeOnSelect }),
     useRole(context, { role: 'listbox' }),
     useDismiss(context),
     useListNavigation(context, {
