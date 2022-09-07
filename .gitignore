@@ -9,7 +9,4 @@ dist-ssr
 .eslintcache
 .docgen
 .next
-
-
-# Contentlayer
-.contentlayer
+.fleet
