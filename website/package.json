@@ -35,7 +35,6 @@
     "remark-mdx-frontmatter": "^2.0.3",
     "remark-mdx-toc": "^0.3.1",
     "vite-plugin-pwa": "^0.13.1",
-    "@perfsee/rollup": "^1.0.0",
     "workbox-window": "^6.5.4",
     "react-docgen-typescript": "^2.2.2"
   }
