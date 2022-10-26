@@ -53,7 +53,7 @@ export default defineConfig({
       },
     }),
     viteReactDevtools(),
-    PerfseePlugin({ failIfNotPass: true }),
+    PerfseePlugin({ project: 'agile-ui', failIfNotPass: true }),
   ],
   build: {
     minify: 'terser',
