@@ -18,9 +18,9 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/jest-dom": "^5.16.5",
-    "axe-core": "^4.4.3",
+    "axe-core": "^4.5.0",
     "chalk": "^5.1.2",
-    "pretty-format": "^29.1.2",
+    "pretty-format": "^29.2.1",
     "lodash-es": "^4.17.21",
     "twind": "next"
   },

@@ -11,6 +11,7 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { remarkMdxDocgen } from './scripts/remark-mdx-docgen';
 import { viteReactDevtools } from './scripts/vite-react-devtools';
+import { PerfseePlugin } from '@perfsee/rollup';
 
 export default defineConfig({
   define: {
@@ -52,6 +53,7 @@ export default defineConfig({
       },
     }),
     viteReactDevtools(),
+    PerfseePlugin({ failIfNotPass: true }),
   ],
   build: {
     minify: 'terser',
