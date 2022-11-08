@@ -697,7 +697,6 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                   rowVirtual.getVirtualItems().map((row) =>
                     cloneElement(elements[row.index], {
                       id: `${floatingId}-${row.index}`,
-                      ref: row.measureElement,
                       style: {
                         position: 'absolute',
                         top: 0,
