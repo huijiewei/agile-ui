@@ -117,9 +117,9 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       enabled: nested && allowHover,
       handleClose: safePolygon(),
     }),
-    useClick(context, { toggle: !nested, pointerDown: true, ignoreMouse: nested }),
+    useClick(context, { toggle: !nested, event: 'mousedown', ignoreMouse: nested }),
     useRole(context, { role: 'menu' }),
-    useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
+    useDismiss(context, { escapeKey: closeOnEsc, outsidePress: closeOnBlur }),
     useListNavigation(context, {
       listRef: listItemsRef,
       activeIndex,

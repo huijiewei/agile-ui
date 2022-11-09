@@ -43,7 +43,12 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
       <Portal>
         <AnimatePresence>
           {open && (
-            <FloatingFocusManager modal={!nested} order={['reference', 'content']} preventTabbing context={context}>
+            <FloatingFocusManager
+              modal={!nested}
+              order={['reference', 'content']}
+              returnFocus={!nested}
+              context={context}
+            >
               <Motion
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

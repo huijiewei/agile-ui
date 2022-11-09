@@ -107,7 +107,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useClick(context),
     useRole(context),
-    useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
+    useDismiss(context, { escapeKey: closeOnEsc, outsidePress: closeOnBlur }),
   ]);
 
   const ariaContextValue = useMemo(

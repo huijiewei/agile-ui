@@ -79,7 +79,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
   const { getFloatingProps } = useInteractions([
     useClick(context),
     useRole(context),
-    useDismiss(context, { escapeKey: closeOnEsc, outsidePointerDown: closeOnBlur }),
+    useDismiss(context, { escapeKey: closeOnEsc, outsidePress: closeOnBlur }),
   ]);
 
   const handleClose = useCallback(() => {
