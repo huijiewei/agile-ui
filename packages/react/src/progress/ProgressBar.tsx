@@ -41,6 +41,29 @@ export type ProgressProps = {
   label?: string;
 };
 
+const progressBarSizes = {
+  xs: {
+    bar: 'h-1',
+    text: 'text-[2px]',
+  },
+  sm: {
+    bar: 'h-2',
+    text: 'text-[6px]',
+  },
+  md: {
+    bar: 'h-3',
+    text: 'text-xs',
+  },
+  lg: {
+    bar: 'h-4',
+    text: 'text-sm',
+  },
+  xl: {
+    bar: 'h-5',
+    text: 'text-sm',
+  },
+};
+
 export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref) => {
   const {
     color = 'blue',
@@ -56,18 +79,23 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
   } = props;
 
   return (
-    <div className="relative bg-gray-100 w-full overflow-hidden h-2 rounded">
+    <div className={cx('relative bg-gray-100 w-full overflow-hidden rounded', progressBarSizes[size]['bar'])}>
       <div
         ref={ref}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={value}
         role="progressbar"
-        {...rest}
-        className={cx('rounded h-full transition-[width]', `bg-${color}-500`, className)}
+        className={cx(
+          'rounded-none h-full flex text-white items-center justify-center transition-[width]',
+          `bg-${color}-500`,
+          progressBarSizes[size]['text'],
+          className
+        )}
         style={{ width: `${value}%` }}
+        {...rest}
       >
-        {children}
+        {children || label}
       </div>
     </div>
   );

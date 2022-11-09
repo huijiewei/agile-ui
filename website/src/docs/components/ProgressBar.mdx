@@ -19,11 +19,33 @@ description: 用于展示用户操作的当前进度和状态，一般在操作�
 
 ```tsx preview editable
 <div className={'flex flex-col gap-3 justify-center'}>
-  <ProgressBar color="green" value="50" />
+  <ProgressBar color="green" value="30" />
   <ProgressBar color="red" value="50" />
-  <ProgressBar color="yellow" value="50" />
+  <ProgressBar color="yellow" value="70" />
   <ProgressBar color="gray" value="50" />
-  <ProgressBar color="purple" value="50" />
+  <ProgressBar color="purple" value="90" />
+</div>
+```
+
+## 大小
+
+```tsx preview editable
+<div className={'flex flex-col gap-3 justify-center'}>
+  <ProgressBar color="green" value="50" size={'xs'}>
+    50%
+  </ProgressBar>
+  <ProgressBar color="red" value="50" size={'sm'}>
+    50%
+  </ProgressBar>
+  <ProgressBar color="yellow" value="50" size={'md'}>
+    50%
+  </ProgressBar>
+  <ProgressBar color="gray" value="50" size={'lg'}>
+    50%
+  </ProgressBar>
+  <ProgressBar color="purple" value="50" size={'xl'}>
+    50%
+  </ProgressBar>
 </div>
 ```
 
