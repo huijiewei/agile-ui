@@ -52,7 +52,7 @@ export const PlaygroundControl = ({
                   )}
                   onClick={() => onChange(valueString)}
                 >
-                  {defaultValue?.toString().slice(1, -1) == valueString ? <Check className={'h-4 w-4'} /> : ' '}
+                  {defaultValue?.toString() == valueString ? <Check className={'h-4 w-4'} /> : ' '}
                 </button>
               );
             })}
@@ -61,7 +61,7 @@ export const PlaygroundControl = ({
           <NativeSelect
             size={'sm'}
             onChange={(event) => onChange(event.target.value)}
-            defaultValue={defaultValue?.toString().slice(1, -1)}
+            defaultValue={defaultValue?.toString()}
           >
             {prop.type.values?.map((value) => {
               if (value == 'number' || value == 'string') {
