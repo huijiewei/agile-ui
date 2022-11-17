@@ -18,11 +18,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/jest-dom": "^5.16.5",
-    "axe-core": "^4.5.0",
+    "axe-core": "^4.5.2",
     "chalk": "^5.1.2",
-    "pretty-format": "^29.2.1",
+    "pretty-format": "^29.3.1",
     "lodash-es": "^4.17.21",
-    "twind": "next"
+    "twind": "^1.0.0-next.39"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
