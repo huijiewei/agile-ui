@@ -1,6 +1,6 @@
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export type NativeSelectProps = {
   /**

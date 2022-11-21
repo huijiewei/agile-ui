@@ -1,5 +1,5 @@
 import { FloatingOverlay } from '@floating-ui/react-dom-interactions';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';
 import { AnimatePresence } from 'framer-motion';

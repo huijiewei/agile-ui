@@ -1,6 +1,6 @@
 import { primitiveComponent } from '../utils/component';
 import { clamp } from '@agile-ui/utils';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { useSlider, useSliderValue } from './SliderProvider';
 import { useCallback, useMemo } from 'react';
 import { ticks as arrayTicks } from '@agile-ui/utils';

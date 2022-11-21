@@ -9,7 +9,7 @@ import {
 import { ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useRadioGroup } from './RadioGroup';
 import type { RadioBaseProps } from './RadioGroup';

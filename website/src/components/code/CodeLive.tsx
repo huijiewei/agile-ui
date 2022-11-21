@@ -6,7 +6,7 @@ import darkTheme from 'prism-react-renderer/themes/nightOwl';
 import lightTheme from 'prism-react-renderer/themes/nightOwlLight';
 import type { ComponentProps } from 'react';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from '@agile-ui/react-live';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { FormDemo } from '../demo/FormDemo';
 import { CodeView } from './CodeView';
 import { CopyIcon } from './CopyIcon';

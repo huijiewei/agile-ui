@@ -1,6 +1,6 @@
 import { isNumber } from '@agile-ui/utils';
 import { Children, cloneElement, isValidElement, ReactElement } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import type { AvatarProps } from './Avatar';
 import { avatarSizes } from './avatarSizes';

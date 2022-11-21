@@ -1,5 +1,5 @@
 import { primitiveComponent, primitiveOmitComponent } from '../utils/component';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { useSlider, useSliderThumb, useSliderValue, ValueType } from './SliderProvider';
 import { Tooltip } from '../tooltip/Tooltip';
 import { ariaAttr, clamp, runIfFn } from '@agile-ui/utils';

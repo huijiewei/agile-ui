@@ -2,7 +2,7 @@ import { useMergedRefs } from '@agile-ui/react-hooks';
 import type { Dict } from '@agile-ui/utils';
 import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import type { ReactNode } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useSelect } from './SelectProvider';
 import type { Size } from '../utils/types';

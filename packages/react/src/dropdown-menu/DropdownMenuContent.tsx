@@ -1,7 +1,7 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
 import { Children, isValidElement } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import { DropdownMenu } from './DropdownMenu';

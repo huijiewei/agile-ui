@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export const VisuallyHidden = (props: ComponentPropsWithoutRef<'span'>) => {
   const { children, className, ...rest } = props;

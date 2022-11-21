@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '../alert/Alert';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';

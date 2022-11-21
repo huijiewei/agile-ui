@@ -1,7 +1,7 @@
 import { useControllableProp, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
 import { ariaAttr } from '@agile-ui/utils';
 import { ChangeEvent, KeyboardEvent, ReactNode, useCallback, useRef, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
 import type { InputBaseProps } from './InputGroup';

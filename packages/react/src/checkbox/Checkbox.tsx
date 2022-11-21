@@ -9,7 +9,7 @@ import {
 import { ariaAttr, dataAttr, isNumber } from '@agile-ui/utils';
 import type { ReactElement } from 'react';
 import { ChangeEvent, cloneElement, useCallback, useRef, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { CheckboxBaseProps, useCheckboxGroup } from './CheckboxGroup';
 import { CheckboxIcon } from './CheckboxIcon';

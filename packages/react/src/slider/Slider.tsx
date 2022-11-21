@@ -1,6 +1,6 @@
 import { primitiveComponent } from '../utils/component';
 import { clamp } from '@agile-ui/utils';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { useCallback, useMemo, useState, MouseEvent, TouchEvent, useRef } from 'react';
 import { SliderBaseProps, SliderProvider, SliderThumbProvider, SliderValueProvider, ValueType } from './SliderProvider';
 import { useControllableProp, useMove } from '@agile-ui/react-hooks';

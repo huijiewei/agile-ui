@@ -2,8 +2,8 @@ import presetAgile from '@agile-ui/twind';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
-import { css } from 'twind';
-import type { TwindUserConfig } from 'twind';
+import { css } from '@twind/core';
+import type { TwindUserConfig } from '@twind/core';
 
 export default {
   presets: [presetAutoprefix(), presetTailwind(), presetAgile(), presetExt()],

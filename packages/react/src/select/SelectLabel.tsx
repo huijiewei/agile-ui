@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import type { PrimitiveComponentProps } from '../utils/component';
 import { useSelect } from './SelectProvider';
 

@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { FloatingArrow } from '../floating/FloatingArrow';
 import type { PrimitiveComponentProps } from '../utils/component';
 import { usePopoverPlacement } from './PopoverProvider';

@@ -1,5 +1,5 @@
 import { NavLink, NavLinkProps } from 'react-router-dom';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Menu, menus } from '../../data/menus';
 import { useLayoutAsideCollapsedDispatch } from './LayoutProvider';
 

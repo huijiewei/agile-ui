@@ -2,7 +2,7 @@ import type { PrimitiveComponentProps } from '@agile-ui/react';
 import { useEventListener } from '@agile-ui/react-hooks';
 import { slugify } from '@agile-ui/utils';
 import { useEffect, useRef, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export type Toc = {
   depth: number;

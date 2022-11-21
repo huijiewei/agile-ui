@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { createContext } from '../utils/context';
 import { primitiveComponent } from '../utils/component';
 import type { Size, ScaleColor } from '../utils/types';

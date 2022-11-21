@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { CodeBlock, CodeBlockProps } from '@agile-ui/react-live';
 
 export const CodeView = (props: CodeBlockProps) => {

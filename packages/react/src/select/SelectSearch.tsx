@@ -1,5 +1,5 @@
 import { primitiveComponent } from '../utils/component';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 type SelectSearchProps = {
   open: boolean;

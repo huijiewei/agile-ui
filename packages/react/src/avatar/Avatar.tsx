@@ -1,6 +1,6 @@
 import { isNumber } from '@agile-ui/utils';
 import { HTMLAttributeReferrerPolicy, ReactElement, useMemo } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { isDarkColor, randomColor } from '../utils/color';
 import { primitiveComponent } from '../utils/component';
 import type { NumberSize } from '../utils/types';

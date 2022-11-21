@@ -3,7 +3,7 @@ import { ChangeEvent, KeyboardEvent, FocusEvent, useCallback, useRef, useState, 
 import type { InputBaseProps } from './InputGroup';
 import { assignRef, useControllableProp, useEventListener, useFocus, useMergedRefs } from '@agile-ui/react-hooks';
 import { ariaAttr, clamp, isNumber } from '@agile-ui/utils';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { inputSizes } from './inputSizes';
 import { NumberInputControl } from './NumberInputControl';
 

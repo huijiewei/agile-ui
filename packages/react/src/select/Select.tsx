@@ -24,7 +24,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { Children, cloneElement, isValidElement } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import type { BreadcrumbProps } from './Breadcrumb';
 import { BreadcrumbLink } from './BreadcrumbLink';

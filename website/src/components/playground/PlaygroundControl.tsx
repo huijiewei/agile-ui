@@ -1,6 +1,6 @@
 import { Checkbox, Input, NativeSelect } from '@agile-ui/react';
 import { Check } from '@agile-ui/react-icons';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import type { ComponentProp, PropValue } from './PlaygroundHelper';
 
 export const PlaygroundControl = ({

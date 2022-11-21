@@ -8,7 +8,7 @@ import {
   useColorModeState,
 } from '@agile-ui/react';
 import { Moon, Sun, System } from '@agile-ui/react-icons';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export const ThemeSwitcher = () => {
   const { colorMode } = useColorModeState();

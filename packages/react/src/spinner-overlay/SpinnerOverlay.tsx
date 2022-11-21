@@ -1,5 +1,5 @@
 import { cloneElement, ReactElement } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Overlay } from '../overlay/Overlay';
 import { Spinner } from '../spinner/Spinner';
 import { primitiveComponent } from '../utils/component';

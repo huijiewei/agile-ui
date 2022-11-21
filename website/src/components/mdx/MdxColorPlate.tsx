@@ -1,7 +1,7 @@
 import agileTwindConfig from '@agile-ui/twind';
 import { isString } from '@agile-ui/utils';
 import { useMemo } from 'react';
-import { tw } from 'twind';
+import { tw } from '@twind/core';
 
 export const MdxColorPlate = () => {
   const agileColors = agileTwindConfig().theme?.colors;

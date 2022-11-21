@@ -8,7 +8,7 @@ import {
 import { dataAttr, isNumber } from '@agile-ui/utils';
 import { useCallback, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
 

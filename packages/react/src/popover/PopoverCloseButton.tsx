@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { CloseButton } from '../close-button/CloseButton';
 import { primitiveComponent } from '../utils/component';
 import { usePopoverDispatch } from './PopoverProvider';

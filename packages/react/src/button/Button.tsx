@@ -1,7 +1,7 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { dataAttr, isNumber } from '@agile-ui/utils';
 import { ElementType, ReactNode, useCallback, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { polymorphicComponent } from '../utils/component';
 import type { NumberSize } from '../utils/types';
 import { ButtonBaseProps, useButtonGroup } from './ButtonGroup';

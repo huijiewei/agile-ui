@@ -20,8 +20,8 @@ import presetAgile from '@agile-ui/twind';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetExt from '@twind/preset-ext';
 import presetTailwind from '@twind/preset-tailwind';
-import { css } from 'twind';
-import type { TwindUserConfig } from 'twind';
+import { css } from '@twind/core';
+import type { TwindUserConfig } from '@twind/core';
 
 export default {
   presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
@@ -58,7 +58,7 @@ export const App = () => {
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { setup } from 'twind';
+import { setup } from '@twind/core';
 
 import { App } from './App';
 import twindConfig from './twind.config';

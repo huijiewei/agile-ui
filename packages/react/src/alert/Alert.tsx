@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent, PrimitiveComponentProps } from '../utils/component';
 import { createContext } from '../utils/context';
 import type { ScaleColor } from '../utils/types';

@@ -1,6 +1,6 @@
 import { polymorphicComponent } from '../utils/component';
 import type { PaginationItemProps } from './usePagination';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { ariaAttr, dataAttr } from '@agile-ui/utils';
 import type { ScaleColor } from '../utils/types';
 

@@ -1,6 +1,6 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
 import { ariaAttr, dataAttr } from '@agile-ui/utils';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useDropdownMenuContent, useDropdownMenuItemIndex } from './DropdownMenuProvider';
 

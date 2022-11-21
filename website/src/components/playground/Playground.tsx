@@ -1,6 +1,6 @@
 import { Dict, pascalCase } from '@agile-ui/utils';
 import { ElementType, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { PlaygroundCode } from './PlaygroundCode';
 import { PlaygroundControl } from './PlaygroundControl';
 import { ComponentProp, propsToString, PropValue } from './PlaygroundHelper';

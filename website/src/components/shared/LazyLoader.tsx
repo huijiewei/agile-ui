@@ -1,6 +1,6 @@
 import { Spinner } from '@agile-ui/react';
 import type { HTMLProps } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export const LazyLoader = (props: HTMLProps<HTMLDivElement>) => {
   const { className, ...rest } = props;

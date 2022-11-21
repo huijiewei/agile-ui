@@ -1,5 +1,5 @@
 import type { Dict } from '@agile-ui/utils';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Spinner } from '../spinner/Spinner';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { Size } from '../utils/types';

@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { useLayoutAsideCollapsed } from './LayoutProvider';
 import { LayoutAsideMenu } from './LayoutAsideMenu';
 

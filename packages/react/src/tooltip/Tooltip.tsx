@@ -13,7 +13,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import { cloneElement, ReactNode } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';

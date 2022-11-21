@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 
 export const AvatarBadge = primitiveComponent<'span'>((props, ref) => {

@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { polymorphicComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
 import { VisuallyHidden } from '../visually-hidden/VisuallyHidden';

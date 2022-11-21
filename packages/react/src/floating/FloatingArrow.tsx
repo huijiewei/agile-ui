@@ -1,5 +1,5 @@
 import type { Placement } from '@floating-ui/react-dom-interactions';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import type { PrimitiveComponentProps } from '../utils/component';
 
 type FloatingArrowSide = 'top' | 'left' | 'bottom' | 'right';

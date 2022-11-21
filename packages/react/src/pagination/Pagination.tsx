@@ -2,7 +2,7 @@ import type { ScaleColor } from '../utils/types';
 import { primitiveComponent } from '../utils/component';
 import type { PaginationItemProps, UsePaginationOptions } from './usePagination';
 import { usePagination } from './usePagination';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { PaginationItem } from './PaginationItem';
 import { PaginationJumper } from './PaginationJumper';
 

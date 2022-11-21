@@ -1,4 +1,4 @@
-import { css, TwindPresetConfig } from 'twind';
+import { css, TwindPresetConfig } from '@twind/core';
 import borderRadius from './presets/border-radius';
 import colors from './presets/colors';
 import fontFamily from './presets/font-family';

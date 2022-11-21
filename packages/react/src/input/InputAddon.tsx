@@ -1,4 +1,4 @@
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { polymorphicComponent } from '../utils/component';
 import type { InputBaseProps } from './InputGroup';
 import { inputSizes } from './inputSizes';

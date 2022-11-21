@@ -1,5 +1,5 @@
 import type { PrimitiveComponentProps } from '../utils/component';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export const SelectDivider = (props: PrimitiveComponentProps) => {
   const { className, ...rest } = props;

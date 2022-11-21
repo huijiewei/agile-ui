@@ -1,7 +1,7 @@
 import { isNumber, MaybeFunction, runIfFn } from '@agile-ui/utils';
 import type { PropsWithChildren } from 'react';
 import { useMemo, useState } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import { createContext } from '../utils/context';
 import type { ToastId, ToastProps } from './Toast';

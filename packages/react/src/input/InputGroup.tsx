@@ -1,5 +1,5 @@
 import { Children, cloneElement, isValidElement, ReactElement } from 'react';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
 

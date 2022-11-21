@@ -1,7 +1,7 @@
 import { Tooltip, VisuallyHidden } from '@agile-ui/react';
 import { Close, Github, Menu } from '@agile-ui/react-icons';
 import { Link } from 'react-router-dom';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 import LogoImage from '../../assets/images/logo.svg';
 import { ThemeSwitcher } from '../shared/ThemeSwicher';
 import { useLayoutAsideCollapsed, useLayoutAsideCollapsedDispatch, useLayoutAsideExisted } from './LayoutProvider';

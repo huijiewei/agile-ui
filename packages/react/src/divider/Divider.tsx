@@ -1,6 +1,6 @@
 import type { Color } from '../utils/types';
 import { primitiveComponent } from '../utils/component';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export type DividerProps = {
   /**

@@ -1,6 +1,6 @@
 import { primitiveComponent } from '../utils/component';
 import type { ScaleColor, Size } from '../utils/types';
-import { cx } from 'twind';
+import { cx } from '@twind/core';
 
 export type ProgressProps = {
   /**
