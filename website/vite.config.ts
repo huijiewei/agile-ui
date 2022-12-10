@@ -81,8 +81,8 @@ export default defineConfig({
           }
 
           if (
-            id.includes('/node_modules/twind/') ||
             id.includes('/node_modules/@twind/') ||
+            id.includes('/node_modules/csstype/') ||
             id.includes('/node_modules/style-vendorizer/')
           ) {
             return 'twind';
