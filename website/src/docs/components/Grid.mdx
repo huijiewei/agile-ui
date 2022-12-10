@@ -1,6 +1,33 @@
 ---
-title: 栅格
-description: 栅格可以有效的保证页面的一致性、逻辑性、加强团队协作和统一。
+title: 网格
+description: CSS 网格布局引入了二维网格布局系统，可用于布局页面主要的区域布局或小型组件。
 ---
 
-依托于强大的 [TailwindCSS](https://tailwindcss.com/) 原子类系统，Agile UI 栅格十分灵活
+## 用法
+
+```tsx preview editable
+<div className={'grid grid-cols-5 gap-3'}>
+  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map((i) => (
+    <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>{i}</div>
+  ))}
+</div>
+```
+
+## 跨越
+
+```tsx preview editable
+<div className={'grid grid-cols-5 gap-3'}>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>1</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>2</div>
+  <div className={'col-span-2 p-4 rounded bg-blue-400 text-white text-lg text-center'}>3</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>4</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>5</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>6</div>
+  <div className={'col-span-3 p-4 rounded bg-blue-400 text-white text-lg text-center'}>7</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>8</div>
+  <div className={'col-span-3 p-4 rounded bg-blue-400 text-white text-lg text-center'}>9</div>
+  <div className={'p-4 rounded bg-blue-400 text-white text-lg text-center'}>10</div>
+</div>
+```
+
+依托于强大的 [TailwindCSS](https://tailwindcss.com/) 原子类系统，Agile UI 网格十分灵活

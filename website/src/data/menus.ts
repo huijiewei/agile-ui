@@ -58,7 +58,11 @@ export const menus: Menu[] = [
             path: '/components/layout',
           },
           {
-            label: '栅格',
+            label: '弹性布局',
+            path: '/components/flex',
+          },
+          {
+            label: '网格',
             path: '/components/grid',
           },
           {
