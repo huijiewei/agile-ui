@@ -7,7 +7,7 @@ export const LazyLoader = (props: HTMLProps<HTMLDivElement>) => {
 
   return (
     <div
-      className={cx('justify-center text-lg transition-opacity text-gray-500 flex h-32 items-center w-full', className)}
+      className={cx('flex h-32 w-full items-center justify-center text-lg text-gray-500 transition-opacity', className)}
       {...rest}
     >
       <Spinner color={'gray'} className={'mr-2'} />

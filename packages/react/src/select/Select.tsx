@@ -486,12 +486,12 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const renderSingleValue = (controlledValue: string | number | undefined) => {
     return (
-      <div className={'flex-wrap flex-1 grid'}>
+      <div className={'grid flex-1 flex-wrap'}>
         {searchValue == '' &&
           (controlledValue != undefined ? (
-            <div className={'row-start-1 row-end-2 col-start-1 col-end-3'}>{options.get(controlledValue)?.label}</div>
+            <div className={'col-start-1 col-end-3 row-start-1 row-end-2'}>{options.get(controlledValue)?.label}</div>
           ) : (
-            <span className={'text-gray-500 row-start-1 row-end-2 col-start-1 col-end-3'}>{placeholder}</span>
+            <span className={'col-start-1 col-end-3 row-start-1 row-end-2 text-gray-500'}>{placeholder}</span>
           ))}
         {searchable && (
           <SelectSearch
@@ -513,14 +513,14 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     return (
       <div
         className={cx(
-          'flex-wrap flex-1 gap-1',
+          'flex-1 flex-wrap gap-1',
           controlledValue.length > 0 ? 'flex' : 'grid',
           (size == 'xs' || size == 'sm') && 'gap-y-0.5'
         )}
       >
         {controlledValue.length > 0
           ? controlledValue.map((value) => (
-              <span className={'bg-gray-100 leading-none items-center rounded-sm flex gap-1 pl-2 p-1'} key={value}>
+              <span className={'flex items-center gap-1 rounded-sm bg-gray-100 p-1 pl-2 leading-none'} key={value}>
                 {options.get(value)?.label}
                 <CloseButton
                   aria-label={`Remove ${value}`}
@@ -528,12 +528,12 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                     event.stopPropagation();
                     handleSelected(value);
                   }}
-                  className={'hover:bg-gray-50 rounded-full'}
+                  className={'rounded-full hover:bg-gray-50'}
                 />
               </span>
             ))
           : searchValue == '' && (
-              <span className={'text-gray-500 row-start-1 row-end-2 col-start-1 col-end-3'}>{placeholder}</span>
+              <span className={'col-start-1 col-end-3 row-start-1 row-end-2 text-gray-500'}>{placeholder}</span>
             )}
         {searchable && (
           <SelectSearch
@@ -576,11 +576,11 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         aria-disabled={ariaAttr(disabled)}
         aria-required={ariaAttr(required)}
         className={cx(
-          'inline-flex items-center h-fit border border-gray-200 bg-white relative rounded transition-colors outline-none',
+          'relative inline-flex h-fit items-center rounded border border-gray-200 bg-white outline-none transition-colors',
           invalid && 'border-red-500',
           disabled
-            ? 'opacity-50 cursor-not-allowed pointer-events-none'
-            : 'cursor-default active:(border-blue-500 z-[1])',
+            ? 'pointer-events-none cursor-not-allowed opacity-50'
+            : 'active:(border-blue-500 z-[1]) cursor-default',
           !invalid && !disabled && 'hover:(border-gray-300 z-[2])',
           fullWidth ? 'w-full' : '',
           sizeClass['base'],
@@ -644,7 +644,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <div className={'flex-1 select-none'}>
           {Array.isArray(controlledValue) ? renderMultipleValue(controlledValue) : renderSingleValue(controlledValue)}
         </div>
-        <div className={'flex gap-1 items-center'}>
+        <div className={'flex items-center gap-1'}>
           {showClearButton && (
             <CloseButton
               aria-hidden={true}
@@ -652,7 +652,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                 event.stopPropagation();
                 handleClear();
               }}
-              className={'text-gray-500 rounded-full p-0.5 hover:bg-gray-100'}
+              className={'rounded-full p-0.5 text-gray-500 hover:bg-gray-100'}
             />
           )}
           <SelectChevron />
@@ -672,7 +672,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className={cx(
-                'absolute z-50 shadow rounded border outline-none border-gray-200 bg-white dark:bg-gray-700 max-h-80 overflow-y-auto overscroll-contain scrollbar-thin',
+                'scrollbar-thin absolute z-50 max-h-80 overflow-y-auto overscroll-contain rounded border border-gray-200 bg-white shadow outline-none dark:bg-gray-700',
                 virtual ? 'px-1.5' : 'p-1.5'
               )}
               ref={floating}

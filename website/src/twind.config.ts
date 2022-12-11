@@ -10,7 +10,7 @@ export default {
   preflight: css`
     @layer base {
       body {
-        @apply antialiased text-black bg-white overflow-y-scroll;
+        @apply overflow-y-scroll bg-white text-black antialiased;
       }
     }
   `,

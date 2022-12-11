@@ -54,12 +54,12 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
       aria-orientation={vertical ? 'vertical' : 'horizontal'}
       ref={ref}
       className={cx(
-        'border-0 m-0',
+        'm-0 border-0',
         hasLabel
-          ? `flex items-center text-xs before:(content-[""] mr-2 h-0 shrink ${
-              position == 'left' ? 'basis-5 grow-0' : 'basis-0 grow'
+          ? `before:(content-[""] mr-2 flex h-0 shrink items-center text-xs ${
+              position == 'left' ? 'grow-0 basis-5' : 'grow basis-0'
             } border-${variant} border-t-[${size}px] border-t-${color}-300) after:(content-[""] ml-2 shrink ${
-              position == 'right' ? 'basis-5 grow-0' : 'basis-0 grow'
+              position == 'right' ? 'grow-0 basis-5' : 'grow basis-0'
             } h-0 border-${variant} border-t-[${size}px] border-t-${color}-300)`
           : vertical
           ? `border-${variant} border-l-[${size}px] border-l-${color}-300 h-auto self-stretch`

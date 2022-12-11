@@ -90,7 +90,7 @@ export const Avatar = primitiveComponent<'div', AvatarProps>((props, ref) => {
     <div
       ref={ref}
       className={cx(
-        'inline-flex items-center justify-center text-center font-medium uppercase relative shrink-0 align-top',
+        'relative inline-flex shrink-0 items-center justify-center text-center align-top font-medium uppercase',
         `rounded${rounded}`,
         colorsStyles,
         avatarSizes(size),

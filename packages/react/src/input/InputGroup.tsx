@@ -38,7 +38,7 @@ export const InputGroup = primitiveComponent<'div', InputGroupProps>((props, ref
   });
 
   return (
-    <div ref={ref} className={cx('w-full relative flex items-stretch', className)} {...rest}>
+    <div ref={ref} className={cx('relative flex w-full items-stretch', className)} {...rest}>
       {clones}
     </div>
   );

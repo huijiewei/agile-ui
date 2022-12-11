@@ -16,9 +16,9 @@ const MenuItem = ({ menu, deep }: { menu: Menu; deep: number }) => {
         <MenuLink
           className={({ isActive }) => {
             return cx(
-              'py-1 block',
+              'block py-1',
               `pl-${deep * 2}`,
-              isActive ? 'text-blue-500 bg-blue-50' : 'text-gray-600 hover:(text-gray-500 bg-gray-50)'
+              isActive ? 'bg-blue-50 text-blue-500' : 'hover:(text-gray-500 bg-gray-50) text-gray-600'
             );
           }}
           to={menu.path}
@@ -26,7 +26,7 @@ const MenuItem = ({ menu, deep }: { menu: Menu; deep: number }) => {
           {menu.label}
         </MenuLink>
       ) : (
-        <h5 className={deep > 1 ? `text-gray-400 font-normal mb-1 pl-${deep * 2}` : 'mb-2'}>{menu.label}</h5>
+        <h5 className={deep > 1 ? `mb-1 font-normal text-gray-400 pl-${deep * 2}` : 'mb-2'}>{menu.label}</h5>
       )}
       {menu.children && (
         <ul className={'space-y-1'}>

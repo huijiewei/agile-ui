@@ -18,7 +18,7 @@ function Demo() {
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
           <ModalBody>这是一个模态框</ModalBody>
-          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+          <ModalFooter className={'flex items-center justify-center gap-5'}>
             <Button onClick={() => setOpened(false)}>关闭</Button>
           </ModalFooter>
         </ModalContent>
@@ -43,7 +43,7 @@ function Demo() {
           <ModalHeader>模态框</ModalHeader>
           <ModalCloseButton />
           <ModalBody>这是一个模态框</ModalBody>
-          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+          <ModalFooter className={'flex items-center justify-center gap-5'}>
             <Button onClick={() => setOpened(false)}>关闭</Button>
           </ModalFooter>
         </ModalContent>
@@ -63,7 +63,7 @@ function Demo() {
   return (
     <>
       <RadioGroup value={scrollBehavior} onChange={setScrollBehavior}>
-        <div className={'flex flex-row gap-5 mb-3'}>
+        <div className={'mb-3 flex flex-row gap-5'}>
           <Radio value="inside">内部</Radio>
           <Radio value="outside">外部</Radio>
         </div>
@@ -128,7 +128,7 @@ function Demo() {
             </p>
             <p>每当第一次安装组件时，此新检查将自动卸载并重新安装每个组件，并在第二次安装时恢复先前的状态。</p>
           </ModalBody>
-          <ModalFooter className={'flex gap-5 items-center justify-center'}>
+          <ModalFooter className={'flex items-center justify-center gap-5'}>
             <Button onClick={() => setOpened(false)}>关闭</Button>
           </ModalFooter>
         </ModalContent>

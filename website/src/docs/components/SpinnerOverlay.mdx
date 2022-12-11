@@ -17,12 +17,12 @@ function SpinnerOverlayDemo() {
 
   return (
     <>
-      <div className={'relative w-fit mx-auto p-5 shadow-md'}>
+      <div className={'relative mx-auto w-fit p-5 shadow-md'}>
         <SpinnerOverlay visible={visible} />
         <FormDemo />
       </div>
 
-      <div className={'flex mt-3 justify-center'}>
+      <div className={'mt-3 flex justify-center'}>
         <Button onClick={() => setVisible((v) => !v)}>切换覆盖层</Button>
       </div>
     </>
@@ -33,7 +33,7 @@ function SpinnerOverlayDemo() {
 ## 自定义加载器
 
 ```tsx preview editable
-<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+<div className={'relative mx-auto w-fit p-5 shadow-md'}>
   <SpinnerOverlay visible={true}>
     <Spinner color={'green'} size={'xl'} />
   </SpinnerOverlay>
@@ -44,7 +44,7 @@ function SpinnerOverlayDemo() {
 ## 圆角
 
 ```tsx preview editable
-<div className={'relative w-fit p-5 mx-auto shadow-md rounded'}>
+<div className={'relative mx-auto w-fit rounded p-5 shadow-md'}>
   <SpinnerOverlay visible={true} radius />
   <FormDemo />
 </div>
@@ -53,7 +53,7 @@ function SpinnerOverlayDemo() {
 ## 颜色
 
 ```tsx preview editable
-<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+<div className={'relative mx-auto w-fit p-5 shadow-md'}>
   <SpinnerOverlay visible={true} color={'yellow'} />
   <FormDemo />
 </div>
@@ -62,7 +62,7 @@ function SpinnerOverlayDemo() {
 ## 模糊
 
 ```tsx preview editable
-<div className={'relative w-fit p-5 mx-auto shadow-md'}>
+<div className={'relative mx-auto w-fit p-5 shadow-md'}>
   <SpinnerOverlay visible={true} blur={1} />
   <FormDemo />
 </div>

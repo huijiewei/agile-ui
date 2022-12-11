@@ -11,8 +11,8 @@ export const ModalBody = primitiveComponent<'div'>((props, ref) => {
     <div
       ref={ref}
       className={cx(
-        'px-3 py-2 flex-1',
-        scrollBehavior == 'inside' && 'overflow-y-auto overscroll-contain scrollbar-thin',
+        'flex-1 px-3 py-2',
+        scrollBehavior == 'inside' && 'scrollbar-thin overflow-y-auto overscroll-contain',
         className
       )}
       {...rest}

@@ -86,7 +86,7 @@ function Demo() {
 
 ```tsx preview editable
 <div
-  className={'grid gap-2 mx-auto w-fit'}
+  className={'mx-auto grid w-fit gap-2'}
   style={{
     gridTemplateAreas:
       '".           top-start     top         top-end       .            "' +
@@ -116,7 +116,7 @@ function Demo() {
         <button
           style={{ gridArea: placement == 'auto' ? 'center' : placement }}
           className={
-            'flex justify-center w-12 h-12 items-center bg-gray-200 rounded cursor-default hover:bg-gray-100 active:bg-gray-300'
+            'flex h-12 w-12 cursor-default items-center justify-center rounded bg-gray-200 hover:bg-gray-100 active:bg-gray-300'
           }
         >
           {name}

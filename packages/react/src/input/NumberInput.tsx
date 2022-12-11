@@ -328,25 +328,25 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   return (
     <div
       className={cx(
-        'inline-flex pr-0 items-center border bg-white relative rounded transition-colors',
+        'relative inline-flex items-center rounded border bg-white pr-0 transition-colors',
         invalid && !focus && 'border-red-500',
-        disabled && 'opacity-50 cursor-not-allowed',
+        disabled && 'cursor-not-allowed opacity-50',
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
-        focus ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
+        focus ? !disabled && 'z-[1] border-blue-500' : 'border-gray-200 ',
         fullWidth && 'w-full',
         inputSizes(!!prefix, false)[size],
         className
       )}
     >
       {prefix && (
-        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
+        <div className={cx('whitespace-nowrap text-gray-500', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
           {prefix}
         </div>
       )}
       <input
         ref={refs}
         className={cx(
-          'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+          'resize-none appearance-none border-none bg-transparent p-0 text-left outline-none disabled:cursor-not-allowed',
           !hideControls && numberInputSize[size]['input']
         )}
         type={'text'}
@@ -372,7 +372,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
         {...rest}
       />
       {!hideControls && (
-        <div className={cx('absolute right-0 h-full flex flex-col gap-px', numberInputSize[size]['control'])}>
+        <div className={cx('absolute right-0 flex h-full flex-col gap-px', numberInputSize[size]['control'])}>
           <NumberInputControl
             stepper={'increment'}
             onClick={() => {

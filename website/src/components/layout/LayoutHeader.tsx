@@ -15,7 +15,7 @@ const AsideCollapsedButton = () => {
     <button
       onClick={() => dispatch((prev) => !prev)}
       className={cx(
-        'block tablet:hidden p-2 appearance-none transition-colors select-none text-gray-500 hover:text-gray-700',
+        'block select-none appearance-none p-2 text-gray-500 transition-colors hover:text-gray-700 tablet:hidden',
         existed ? 'visible' : 'invisible'
       )}
       type={'button'}
@@ -28,14 +28,14 @@ const AsideCollapsedButton = () => {
 export const LayoutHeader = () => {
   return (
     <header className={'sticky top-0 z-30 w-full border-b border-gray-100 bg-opacity-70 backdrop-blur'}>
-      <div className={'flex max-w-7xl items-center justify-between mx-auto p-3'}>
+      <div className={'mx-auto flex max-w-7xl items-center justify-between p-3'}>
         <AsideCollapsedButton />
         <div className={'flex flex-row items-center'}>
           <Link to={'/'}>
             <img
               width={32}
               height={32}
-              className={'inline-block align-middle mt-[1px] -mb-[1px]'}
+              className={'mt-[1px] -mb-[1px] inline-block align-middle'}
               alt={'Agile UI'}
               src={LogoImage}
             />
@@ -43,7 +43,7 @@ export const LayoutHeader = () => {
           </Link>
           <span
             className={
-              'ml-3 hidden tablet:inline-block rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-yellow-600'
+              'ml-3 hidden rounded-sm bg-gray-100 px-1.5 py-0.5 align-middle text-xs font-bold text-yellow-600 tablet:inline-block'
             }
           >
             ALPHA
@@ -53,7 +53,7 @@ export const LayoutHeader = () => {
           <ThemeSwitcher />
           <Tooltip placement={'bottom'} content={'Github 上的 Agile UI'}>
             <a
-              className={'block p-1 text-gray-400 select-none hover:text-gray-500'}
+              className={'block select-none p-1 text-gray-400 hover:text-gray-500'}
               rel="noreferrer"
               href="https://github.com/huijiewei/agile-ui"
               target="_blank"

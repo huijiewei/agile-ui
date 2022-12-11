@@ -66,7 +66,7 @@ export const MdxToc = (props: PrimitiveComponentProps<'ul', MdxToxProps>) => {
                 depth == 3 ? 'pl-8' : 'pl-4',
                 index == active
                   ? 'border-l-blue-300 text-blue-500'
-                  : 'border-l-transparent text-gray-500 hover:(border-l-gray-300 text-gray-700)'
+                  : 'hover:(border-l-gray-300 text-gray-700) border-l-transparent text-gray-500'
               )}
               aria-current={index == active ? 'location' : undefined}
               href={`#${slug}`}

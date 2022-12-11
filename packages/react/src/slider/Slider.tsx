@@ -165,9 +165,9 @@ export const Slider = primitiveComponent<'input', SliderProps>((props, ref) => {
             ref={moveRef}
             tabIndex={-1}
             className={cx(
-              'relative select-none touch-none outline-none items-center flex',
-              vertical ? 'px-3 touch-pan-y w-fit' : 'py-3 touch-pan-x h-fit',
-              marks && (vertical ? 'mr-3 my-2' : 'mb-3 mx-2'),
+              'relative flex touch-none select-none items-center outline-none',
+              vertical ? 'w-fit touch-pan-y px-3' : 'h-fit touch-pan-x py-3',
+              marks && (vertical ? 'my-2 mr-3' : 'mx-2 mb-3'),
               className
             )}
             onTouchStartCapture={handleTrackMouseDownCapture}

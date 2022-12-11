@@ -23,11 +23,11 @@ export const components = {
   h2: (props: Props) => {
     const { children, ...rest } = props;
     return (
-      <h2 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
+      <h2 className={`group scroll-mt-20 text-lg font-bold`} {...rest}>
         {children}
         <a
           tabIndex={-1}
-          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
+          className={'ml-2 text-green-500 opacity-0 transition-opacity group-hover:opacity-100'}
           aria-hidden={true}
           href={`#${props.id}`}
         >
@@ -39,11 +39,11 @@ export const components = {
   h3: (props: Props) => {
     const { children, ...rest } = props;
     return (
-      <h3 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
+      <h3 className={`group scroll-mt-20 text-lg font-bold`} {...rest}>
         {children}
         <a
           tabIndex={-1}
-          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
+          className={'ml-2 text-green-500 opacity-0 transition-opacity group-hover:opacity-100'}
           aria-hidden={true}
           href={`#${props.id}`}
         >
@@ -55,11 +55,11 @@ export const components = {
   h4: (props: Props) => {
     const { children, ...rest } = props;
     return (
-      <h4 className={`group text-lg font-bold scroll-mt-20`} {...rest}>
+      <h4 className={`group scroll-mt-20 text-lg font-bold`} {...rest}>
         {children}
         <a
           tabIndex={-1}
-          className={'group-hover:opacity-100 opacity-0 text-green-500 ml-2 transition-opacity'}
+          className={'ml-2 text-green-500 opacity-0 transition-opacity group-hover:opacity-100'}
           aria-hidden={true}
           href={`#${props.id}`}
         >
@@ -82,7 +82,7 @@ export const components = {
 
     return (
       <a
-        className={'text-blue-500 inline-flex items-center hover:(text-blue-600 underline)'}
+        className={'hover:(text-blue-600 underline) inline-flex items-center text-blue-500'}
         href={href}
         title={isString(props.children) ? props.children : ''}
         {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
@@ -93,7 +93,7 @@ export const components = {
     );
   },
   code: (props: Props) => {
-    return <code className={'m-0 px-[0.4em] py-[0.2em] bg-gray-100 rounded text-sm'} {...props} />;
+    return <code className={'m-0 rounded bg-gray-100 px-[0.4em] py-[0.2em] text-sm'} {...props} />;
   },
   pre: (props: Props) => {
     const { children, ...rest } = props;

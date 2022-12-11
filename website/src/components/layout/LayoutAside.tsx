@@ -9,10 +9,10 @@ export const LayoutAside = () => {
     <aside
       role={collapsed ? 'dialog' : undefined}
       className={cx(
-        collapsed ? 'w-full translate-x-0' : '-translate-x-full tablet:(translate-x-0 w-52)',
+        collapsed ? 'w-full translate-x-0' : 'tablet:(translate-x-0 w-52) -translate-x-full',
         'transition-transform duration-300',
-        'fixed top-16 bottom-0 z-30 tablet:z-0 border-r border-r-gray-100 bg-white',
-        'overscroll-contain overflow-y-auto overflow-x-hidden scrollbar-thin'
+        'fixed top-16 bottom-0 z-30 border-r border-r-gray-100 bg-white tablet:z-0',
+        'scrollbar-thin overflow-y-auto overflow-x-hidden overscroll-contain'
       )}
     >
       <LayoutAsideMenu />

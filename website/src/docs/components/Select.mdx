@@ -93,7 +93,7 @@ function Demo() {
       >
         {browsers.map((browser) => (
           <SelectOption extra={browser} key={browser.value} value={browser.value}>
-            <div className={'flex flex-row gap-1.5 items-center'}>
+            <div className={'flex flex-row items-center gap-1.5'}>
               {browser.icon}
               {browser.name}
             </div>
@@ -103,7 +103,7 @@ function Demo() {
       <Select className={'w-full'} searchable multiple placeholder={'浏览器'}>
         {browsers.map((browser) => (
           <SelectOption extra={browser} key={browser.value} value={browser.value}>
-            <div className={'flex flex-row gap-1.5 items-center'}>
+            <div className={'flex flex-row items-center gap-1.5'}>
               {browser.icon}
               {browser.name}
             </div>

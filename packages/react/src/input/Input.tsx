@@ -153,26 +153,26 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
   return (
     <div
       className={cx(
-        'inline-flex h-fit items-center relative border bg-white rounded transition-colors',
+        'relative inline-flex h-fit items-center rounded border bg-white transition-colors',
         invalid && !focus && 'border-red-500',
-        disabled && 'opacity-50 cursor-not-allowed',
+        disabled && 'cursor-not-allowed opacity-50',
         !disabled && !invalid && !focus && 'hover:(border-gray-300 z-[2])',
-        focus ? !disabled && 'border-blue-500 z-[1]' : 'border-gray-200 ',
+        focus ? !disabled && 'z-[1] border-blue-500' : 'border-gray-200 ',
         fullWidth && 'w-full',
         inputSizes(!!prefix, !!suffix)[size],
         className
       )}
     >
       {prefix && (
-        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
+        <div className={cx('whitespace-nowrap text-gray-500', size == 'xs' || size == 'sm' ? 'mr-1' : 'mr-2')}>
           {prefix}
         </div>
       )}
-      <div className={'inline-flex relative grow items-center'}>
+      <div className={'relative inline-flex grow items-center'}>
         <input
           ref={refs}
           className={cx(
-            'outline-none bg-transparent disabled:cursor-not-allowed appearance-none text-left resize-none p-0 border-none',
+            'resize-none appearance-none border-none bg-transparent p-0 text-left outline-none disabled:cursor-not-allowed',
             showClearButton ? 'w-[calc(100%-1em)]' : 'w-full'
           )}
           aria-invalid={ariaAttr(invalid)}
@@ -195,14 +195,14 @@ export const Input = primitiveComponent<'input', InputProps>((props, ref) => {
               inputRef.current?.focus();
             }}
             className={cx(
-              'absolute text-gray-500 rounded-full p-px bg-gray-50 hover:bg-gray-100',
+              'absolute rounded-full bg-gray-50 p-px text-gray-500 hover:bg-gray-100',
               size == 'xs' || size == 'sm' ? '-right-1' : '-right-1.5'
             )}
           />
         )}
       </div>
       {suffix && (
-        <div className={cx('text-gray-500 whitespace-nowrap', size == 'xs' || size == 'sm' ? 'ml-1' : 'ml-2')}>
+        <div className={cx('whitespace-nowrap text-gray-500', size == 'xs' || size == 'sm' ? 'ml-1' : 'ml-2')}>
           {suffix}
         </div>
       )}

@@ -79,7 +79,7 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
   } = props;
 
   return (
-    <div className={cx('relative bg-gray-100 w-full overflow-hidden rounded', progressBarSizes[size]['bar'])}>
+    <div className={cx('relative w-full overflow-hidden rounded bg-gray-100', progressBarSizes[size]['bar'])}>
       <div
         ref={ref}
         aria-valuemax={100}
@@ -87,7 +87,7 @@ export const ProgressBar = primitiveComponent<'div', ProgressProps>((props, ref)
         aria-valuenow={value}
         role="progressbar"
         className={cx(
-          'rounded-none h-full flex text-white items-center justify-center transition-[width]',
+          'flex h-full items-center justify-center rounded-none text-white transition-[width]',
           `bg-${color}-500`,
           progressBarSizes[size]['text'],
           className

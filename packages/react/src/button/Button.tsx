@@ -136,7 +136,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       className={cx(
         'inline-flex items-center justify-center ',
         'select-none appearance-none outline-none',
-        'border whitespace-nowrap transition-colors',
+        'whitespace-nowrap border transition-colors',
         'disabled:(cursor-not-allowed opacity-50)',
         `focus-visible:(ring ring-${color}-300)`,
         group

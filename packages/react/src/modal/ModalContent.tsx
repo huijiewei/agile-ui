@@ -32,8 +32,8 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
       {open && (
         <div
           className={cx(
-            'flex fixed w-screen left-0 top-0 z-40 justify-center',
-            scrollBehavior == 'inside' ? 'h-screen items-center' : 'overflow-y-auto h-full items-start'
+            'fixed left-0 top-0 z-40 flex w-screen justify-center',
+            scrollBehavior == 'inside' ? 'h-screen items-center' : 'h-full items-start overflow-y-auto'
           )}
         >
           <FloatingFocusManager initialFocus={initialFocus} returnFocus={finalFocus == undefined} context={context}>
@@ -43,7 +43,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className={cx(
-                'relative flex flex-col shadow rounded border border-gray-200 bg-white dark:bg-gray-700',
+                'relative flex flex-col rounded border border-gray-200 bg-white shadow dark:bg-gray-700',
                 scrollBehavior == 'inside' ? 'max-h-[calc(100%-9rem)] ' : 'my-10',
                 className
               )}

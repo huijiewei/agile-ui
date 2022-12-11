@@ -35,8 +35,8 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
       aria-disabled={ariaAttr(disabled)}
       data-opened={dataAttr(open)}
       className={cx(
-        'w-full cursor-default outline-none flex justify-between items-center transition-colors p-1.5 leading-none rounded',
-        'disabled:text-gray-300 focus:bg-gray-100 dark:focus:bg-gray-600 opened:not-focus:bg-gray-50 dark:opened:not-focus:bg-gray-500',
+        'flex w-full cursor-default items-center justify-between rounded p-1.5 leading-none outline-none transition-colors',
+        'opened:not-focus:bg-gray-50 dark:opened:not-focus:bg-gray-500 focus:bg-gray-100 disabled:text-gray-300 dark:focus:bg-gray-600',
         className
       )}
       {...getReferenceProps({
@@ -62,7 +62,7 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
       {children}
       <span className={cx('ml-3', disabled ? 'text-gray-300' : 'text-gray-500')}>
         <svg
-          className={'w-4 h-4'}
+          className={'h-4 w-4'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

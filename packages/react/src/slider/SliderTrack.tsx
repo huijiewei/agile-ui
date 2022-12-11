@@ -55,7 +55,7 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
     <>
       <div
         ref={ref}
-        className={cx('bg-gray-100 relative rounded', vertical ? 'h-full w-1' : 'w-full h-1', className)}
+        className={cx('relative rounded bg-gray-100', vertical ? 'h-full w-1' : 'h-1 w-full', className)}
         {...rest}
       >
         <div
@@ -84,7 +84,7 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
                   className={cx(
                     'absolute',
                     inValueRange(tick) ? `bg-${color}-500` : 'bg-gray-100',
-                    vertical ? 'w-1.5 h-px -left-3/4' : 'h-1.5 w-px -top-3/4',
+                    vertical ? '-left-3/4 h-px w-1.5' : '-top-3/4 h-1.5 w-px',
                     tickTranslate
                   )}
                   style={{
@@ -117,7 +117,7 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
                 >
                   <div
                     className={cx(
-                      'bg-white border-2 h-2 w-2 rounded-full',
+                      'h-2 w-2 rounded-full border-2 bg-white',
                       vertical ? '-translate-x-1/4' : '-translate-y-1/4',
                       inValueRange(mark.value) ? `border-${color}-500` : 'border-gray-100',
                       markTranslate
@@ -126,7 +126,7 @@ export const SliderTrack = primitiveComponent<'div'>((props, ref) => {
                   {mark.label && (
                     <div
                       className={cx(
-                        'absolute text-gray-500 text-sm leading-none',
+                        'absolute text-sm leading-none text-gray-500',
                         vertical ? 'left-3' : 'top-3',
                         markTranslate
                       )}

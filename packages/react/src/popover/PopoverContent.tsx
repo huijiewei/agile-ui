@@ -39,7 +39,7 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
               })}
             >
               <div
-                className={cx('relative shadow rounded border border-gray-200 bg-white dark:bg-gray-700', className)}
+                className={cx('relative rounded border border-gray-200 bg-white shadow dark:bg-gray-700', className)}
               >
                 {children}
               </div>

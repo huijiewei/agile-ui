@@ -35,7 +35,7 @@ export const PaginationJumper = (props: PaginationJumperProps) => {
   };
 
   return (
-    <div className={'flex gap-2 items-center'}>
+    <div className={'flex items-center gap-2'}>
       <span className={'text-gray-500'}>前往</span>
       <Input
         size={'sm'}

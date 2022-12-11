@@ -30,36 +30,36 @@ export const MdxColorPlate = () => {
             {isString(color.value) ? (
               <div className={'flex flex-row gap-3'}>
                 <div
-                  className={'h-10 w-10 rounded dark:(ring-1 ring-inset ring-white/10)'}
+                  className={'dark:(ring-1 ring-white/10) h-10 w-10 rounded ring-inset'}
                   style={{
                     backgroundColor: tw.theme('colors', `${color.name}`, '#000').toString(),
                   }}
                 ></div>
                 <div className={''}>
                   <div className={'font-medium capitalize'}>{color.name}</div>
-                  <div className={'text-xs uppercase font-mono'}>{color.value}</div>
+                  <div className={'font-mono text-xs uppercase'}>{color.value}</div>
                 </div>
               </div>
             ) : (
               <>
-                <div className={'shrink-0 w-16'}>
-                  <div className={'font-medium capitalize h-10 flex flex-col justify-center'}>{color.name}</div>
+                <div className={'w-16 shrink-0'}>
+                  <div className={'flex h-10 flex-col justify-center font-medium capitalize'}>{color.name}</div>
                 </div>
-                <div className={'min-w-0 flex-1 grid grid-cols-5 gap-3 tablet:grid-cols-10'}>
+                <div className={'grid min-w-0 flex-1 grid-cols-5 gap-3 tablet:grid-cols-10'}>
                   {Object.keys(color.value).map((key) => {
                     const value = (color.value as Record<string, string>)[key];
 
                     return (
                       <div className={'flex flex-col gap-1'} key={key}>
                         <div
-                          className={'h-10 w-full rounded dark:(ring-1 ring-inset ring-white/10)'}
+                          className={'dark:(ring-1 ring-white/10) h-10 w-full rounded ring-inset'}
                           style={{
                             backgroundColor: tw.theme('colors', `${color.name}-${key}`, '#000').toString(),
                           }}
                         ></div>
                         <div>
                           <div className={'font-medium capitalize'}>{key}</div>
-                          <div className={'text-xs font-mono'}>{value}</div>
+                          <div className={'font-mono text-xs'}>{value}</div>
                         </div>
                       </div>
                     );

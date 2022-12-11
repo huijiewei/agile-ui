@@ -14,23 +14,23 @@ const Home = () => {
   return (
     <>
       <main className={'px-3'}>
-        <div className={'flex h-[calc(100vh-12em)] flex-col justify-center items-center'}>
+        <div className={'flex h-[calc(100vh-12em)] flex-col items-center justify-center'}>
           <p
             className={
-              'text-[5em] leading-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400'
+              'bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400 bg-clip-text text-[5em] font-bold leading-normal text-transparent'
             }
           >
             Agile UI
           </p>
-          <div className={'mt-10 text-lg leading-9 text-center'}>
+          <div className={'mt-10 text-center text-lg leading-9'}>
             <p>一个灵活的 React 18 组件库</p>
             <p className={'font-bold'}>基于 Tailwind CSS, Twind CSS-IN-JSS 方案, 自动黑色模式</p>
             <p>更多特点待你发现...</p>
           </div>
-          <p className={'flex flex-row gap-9 mt-10'}>
+          <p className={'mt-10 flex flex-row gap-9'}>
             <Link
               className={
-                'inline-flex transition-colors gap-2 items-center text-lg rounded justify-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white h-12 w-32'
+                'inline-flex h-12 w-32 items-center justify-center gap-2 rounded bg-blue-500 text-lg text-white transition-colors hover:bg-blue-600 active:bg-blue-700'
               }
               to={'/start'}
             >
@@ -39,7 +39,7 @@ const Home = () => {
             </Link>
             <a
               className={
-                'inline-flex gap-2 transition-colors items-center text-lg rounded justify-center bg-gray-100 hover:bg-gray-200 active:bg-gray-300 h-12 w-32'
+                'inline-flex h-12 w-32 items-center justify-center gap-2 rounded bg-gray-100 text-lg transition-colors hover:bg-gray-200 active:bg-gray-300'
               }
               target={'_blank'}
               rel="noopener noreferrer"
@@ -51,8 +51,8 @@ const Home = () => {
           </p>
         </div>
       </main>
-      <footer className={'py-5 border-gray-100 border-t-1 gap-2 flex flex-col text-center items-center'}>
-        <p className={'bg-gray-800 w-fit rounded text-white font-medium text-sm px-3 py-1'}>
+      <footer className={'border-t-1 flex flex-col items-center gap-2 border-gray-100 py-5 text-center'}>
+        <p className={'w-fit rounded bg-gray-800 px-3 py-1 text-sm font-medium text-white'}>
           Deployed by{' '}
           <span aria-label={'Vercel logo'} role={'img'}>
             ▲

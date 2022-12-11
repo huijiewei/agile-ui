@@ -3,7 +3,7 @@ import { Checkbox, Input } from '@agile-ui/react';
 export const FormDemo = () => {
   return (
     <form className={'flex flex-col gap-4'}>
-      <div className={'flex flex-row justify-start items-center gap-4'}>
+      <div className={'flex flex-row items-center justify-start gap-4'}>
         <div className={'flex flex-col'}>
           <label htmlFor={'demoFormFirstName'} className={''}>
             姓 <span className={'text-red-500'}>*</span>

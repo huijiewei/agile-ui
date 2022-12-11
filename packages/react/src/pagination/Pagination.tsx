@@ -74,7 +74,7 @@ export const Pagination = primitiveComponent<'div', PaginationProps>((props, ref
 
   return (
     <div role={'navigation'} ref={ref} className={cx('flex gap-3', className)} {...rest}>
-      {showTotal && <div className={'px-2 rounded bg-gray-100 flex items-center justify-center'}>共 {total} 条</div>}
+      {showTotal && <div className={'flex items-center justify-center rounded bg-gray-100 px-2'}>共 {total} 条</div>}
       <ul className={'flex gap-2'}>
         {pages.map((page) => (
           <li key={`${page.type}-${page.page}`}>{itemRender({ ...page })}</li>

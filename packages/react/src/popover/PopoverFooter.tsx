@@ -5,7 +5,7 @@ export const PopoverFooter = (props: PrimitiveComponentProps<'footer'>) => {
   const { children, className, ...rest } = props;
 
   return (
-    <footer className={cx('px-3 py-2 border-t border-t-gray-200', className)} {...rest}>
+    <footer className={cx('border-t border-t-gray-200 px-3 py-2', className)} {...rest}>
       {children}
     </footer>
   );

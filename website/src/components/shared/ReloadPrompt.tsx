@@ -21,8 +21,8 @@ export const ReloadPrompt = () => {
     <Portal>
       <AnimatePresence>
         {needRefresh && (
-          <Motion className={'fixed z-50 right-5 bottom-5 shadow-md'}>
-            <Alert className={'flex-col items-start p-4 gap-3'} variant={'outline'} color={'gray'}>
+          <Motion className={'fixed right-5 bottom-5 z-50 shadow-md'}>
+            <Alert className={'flex-col items-start gap-3 p-4'} variant={'outline'} color={'gray'}>
               <AlertDescription className={'text-lg'}>新内容可用，单击重新加载按钮进行更新。</AlertDescription>
               <div className={'flex gap-2'}>
                 <Button onClick={handleReload} size={'sm'}>

@@ -38,7 +38,7 @@ export const PlaygroundControl = ({
       )}
       {prop.type.control == 'select' &&
         (prop.description == '颜色' ? (
-          <div className={'inline-flex flex-row w-36 flex-wrap gap-1 justify-right'}>
+          <div className={'justify-right inline-flex w-36 flex-row flex-wrap gap-1'}>
             {prop.type.values?.map((value) => {
               const valueString = value.toString().slice(1, -1);
 
@@ -47,7 +47,7 @@ export const PlaygroundControl = ({
                   title={valueString}
                   key={`${valueString}`}
                   className={cx(
-                    'rounded-sm h-6 text-gray-50 w-6 outline-none justify-center flex items-center leading-6',
+                    'flex h-6 w-6 items-center justify-center rounded-sm leading-6 text-gray-50 outline-none',
                     valueString == 'black' || valueString == 'white' ? `bg-${valueString}` : `bg-${valueString}-500`
                   )}
                   onClick={() => onChange(valueString)}

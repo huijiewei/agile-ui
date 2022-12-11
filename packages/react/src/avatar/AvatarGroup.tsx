@@ -38,11 +38,11 @@ export const AvatarGroup = primitiveComponent<'div', AvatarGroupProps>((props, r
   const rounded = radius ? (isNumber(radius) ? `-[${radius}px]` : `-${radius}`) : '';
 
   return (
-    <div ref={ref} role="group" className={cx('flex items-center justify-end flex-row-reverse', className)} {...rest}>
+    <div ref={ref} role="group" className={cx('flex flex-row-reverse items-center justify-end', className)} {...rest}>
       {excess > 0 && (
         <span
           className={cx(
-            'shrink-0 inline-flex justify-center items-center text-black text-center uppercase relative font-medium bg-gray-100',
+            'relative inline-flex shrink-0 items-center justify-center bg-gray-100 text-center font-medium uppercase text-black',
             avatarSizes(size),
             `rounded${rounded}`,
             `ml-[${spacing}]`

@@ -45,7 +45,7 @@ export const Badge = primitiveComponent<'span', BadgeProps>((props, ref) => {
     <span
       ref={ref}
       className={cx(
-        'inline-block align-middle border whitespace-nowrap rounded font-bold uppercase',
+        'inline-block whitespace-nowrap rounded border align-middle font-bold uppercase',
         badgeSizes[size],
         badgeVariants(color)[variant],
         className

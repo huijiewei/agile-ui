@@ -25,7 +25,7 @@ export const ThemeSwitcher = () => {
       <DropdownMenuTrigger>
         <button
           aria-label={colorModeTitle[colorMode]}
-          className={'block select-none transition-colors p-1 text-gray-400 hover:text-gray-500'}
+          className={'block select-none p-1 text-gray-400 transition-colors hover:text-gray-500'}
         >
           {colorMode == 'system' && <System size={5} />}
           {colorMode == 'light' && <Sun size={5} />}
@@ -40,7 +40,7 @@ export const ThemeSwitcher = () => {
             setColorMode('light');
           }}
         >
-          <div className={'flex gap-1 items-center'}>
+          <div className={'flex items-center gap-1'}>
             <Sun /> 亮色模式
           </div>
         </DropdownMenuItem>
@@ -50,7 +50,7 @@ export const ThemeSwitcher = () => {
             setColorMode('dark');
           }}
         >
-          <div className={'flex gap-1 items-center'}>
+          <div className={'flex items-center gap-1'}>
             <Moon /> 暗色模式
           </div>
         </DropdownMenuItem>
@@ -60,7 +60,7 @@ export const ThemeSwitcher = () => {
             setColorMode('system');
           }}
         >
-          <div className={'flex gap-1 items-center'}>
+          <div className={'flex items-center gap-1'}>
             <System /> 跟随系统
           </div>
         </DropdownMenuItem>

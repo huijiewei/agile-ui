@@ -60,7 +60,7 @@ export const Playground = (props: PlaygroundProps) => {
       >
         <div
           className={
-            'bg-[16px_16px] flex flex-1 items-center justify-center rounded bg-gray-50 bg-gradient-radial-dot from-gray-100 to-transparent p-3'
+            'bg-gradient-radial-dot flex flex-1 items-center justify-center rounded bg-gray-50 from-gray-100 to-transparent bg-[16px_16px] p-3'
           }
         >
           <Component {...state} />

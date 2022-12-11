@@ -12,7 +12,7 @@ export const InputAddon = polymorphicComponent<'div', InputAddonProps>((props, r
     <Component
       ref={ref}
       className={cx(
-        'rounded border !border-gray-200 bg-gray-50 flex items-center',
+        'flex items-center rounded border !border-gray-200 bg-gray-50',
         inputSizes(false, false)[size],
         className
       )}

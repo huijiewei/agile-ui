@@ -41,7 +41,7 @@ export const NativeSelect = primitiveComponent<'select', NativeSelectProps>((pro
       <select
         disabled={disabled}
         className={cx(
-          'appearance-none outline-none rounded border border-gray-200 bg-white transition-colors focus:(border-blue-500)',
+          'focus:(border-blue-500) appearance-none rounded border border-gray-200 bg-white outline-none transition-colors',
           selectSizes[size]['select']
         )}
         ref={ref}
@@ -51,7 +51,7 @@ export const NativeSelect = primitiveComponent<'select', NativeSelectProps>((pro
       </select>
       <div
         className={cx(
-          'absolute flex items-center justify-center pointer-events-none top-0 bottom-0 right-0 text-gray-500',
+          'pointer-events-none absolute top-0 bottom-0 right-0 flex items-center justify-center text-gray-500',
           selectSizes[size]['chevron']
         )}
       >

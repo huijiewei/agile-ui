@@ -162,7 +162,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
   return (
     <label
       className={cx(
-        'inline-flex items-center relative',
+        'relative inline-flex items-center',
         isNumber(spacing) ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
@@ -185,7 +185,7 @@ export const Checkbox = primitiveComponent<'input', CheckboxProps>((props, ref) 
       <div
         data-focus-visible={dataAttr(focus && focusVisible)}
         className={cx(
-          'shrink-0 select-none rounded inline-flex items-center transition-colors justify-center border-2',
+          'inline-flex shrink-0 select-none items-center justify-center rounded border-2 transition-colors',
           `focus-visible:(ring ring-${color}-300)`,
           invalid ? 'border-red-300' : controlledChecked || indeterminate ? `border-${color}-500` : 'border-gray-200',
           controlledChecked || indeterminate ? `bg-${color}-500 text-white` : 'bg-white',

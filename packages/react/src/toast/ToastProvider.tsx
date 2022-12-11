@@ -198,7 +198,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
               role="region"
               aria-live="polite"
               className={cx(
-                'fixed z-50 pointer-events-none flex flex-col',
+                'pointer-events-none fixed z-50 flex flex-col',
                 isNumber(spacing) ? `gap-${spacing} m-${spacing}` : `gap-[${spacing}] m-[${spacing}]`,
                 getToastListStyles(toastPosition)
               )}

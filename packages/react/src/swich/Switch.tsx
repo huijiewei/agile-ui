@@ -117,7 +117,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
   return (
     <label
       className={cx(
-        'inline-flex items-center relative',
+        'relative inline-flex items-center',
         isNumber(spacing) || spacing == 'px' ? `gap-${spacing}` : `gap-[${spacing}]`,
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className
@@ -146,7 +146,7 @@ export const Switch = primitiveComponent<'input', SwitchProps>((props, ref) => {
       >
         <span
           className={cx(
-            'bg-white rounded-[inherit] transition-transform h-full aspect-square',
+            'aspect-square h-full rounded-[inherit] bg-white transition-transform',
             controlledChecked && sizeStyle.thumb
           )}
         />

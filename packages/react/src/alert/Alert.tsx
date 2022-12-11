@@ -41,7 +41,7 @@ export const Alert = primitiveComponent<'div', AlertProps>((props, ref) => {
         role="alert"
         ref={ref}
         className={cx(
-          'relative flex rounded p-3 border overflow-hidden items-center gap-2',
+          'relative flex items-center gap-2 overflow-hidden rounded border p-3',
           alertVariants(color)[variant],
           className
         )}

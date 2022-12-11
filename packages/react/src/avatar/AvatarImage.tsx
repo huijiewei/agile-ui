@@ -46,7 +46,7 @@ export const AvatarImage = (props: PrimitiveComponentProps<'img', AvatarImagePro
       srcSet={srcSet}
       loading={loading}
       referrerPolicy={referrerPolicy}
-      className={`rounded${rounded} w-full h-full object-cover`}
+      className={`rounded${rounded} h-full w-full object-cover`}
     />
   );
 };

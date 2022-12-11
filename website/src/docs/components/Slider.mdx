@@ -6,7 +6,7 @@ description: 滑动型输入器，展示当前值和可选范围。
 ## 用法
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-5'}>
+<div className={'flex flex-col gap-5 tablet:flex-row'}>
   <Slider className={'w-full tablet:w-1/2'} defaultValue={10}>
     <SliderTrack />
     <SliderThumb />
@@ -21,7 +21,7 @@ description: 滑动型输入器，展示当前值和可选范围。
 ## 状态
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-5'}>
+<div className={'flex flex-col gap-5 tablet:flex-row'}>
   <Slider disabled className={'w-full tablet:w-1/2'} defaultValue={10}>
     <SliderTrack />
     <SliderThumb />
@@ -36,7 +36,7 @@ description: 滑动型输入器，展示当前值和可选范围。
 ## 刻度
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-5'}>
+<div className={'flex flex-col gap-5 tablet:flex-row'}>
   <Slider
     marks={[
       { value: 0, label: '0%' },
@@ -70,7 +70,7 @@ function Demo() {
   ];
 
   return (
-    <div className={'flex flex-col tablet:flex-row gap-5'}>
+    <div className={'flex flex-col gap-5 tablet:flex-row'}>
       <Slider marks={marks.map((mark) => ({ value: mark.value }))} className={'w-full tablet:w-1/2'} defaultValue={10}>
         <SliderTrack />
         <SliderThumb />
@@ -94,8 +94,8 @@ function Demo() {
   const [changeEndRangeValue, setChangeEndRangeValue] = React.useState();
 
   return (
-    <div className={'flex flex-col tablet:flex-row gap-5'}>
-      <div className={'w-full tablet:w-1/2 flex flex-col gap-3'}>
+    <div className={'flex flex-col gap-5 tablet:flex-row'}>
+      <div className={'flex w-full flex-col gap-3 tablet:w-1/2'}>
         <div>
           <p>
             onChange value: <strong>{changeValue}</strong>
@@ -115,7 +115,7 @@ function Demo() {
           <SliderThumb />
         </Slider>
       </div>
-      <div className={'w-full tablet:w-1/2  flex flex-col gap-3'}>
+      <div className={'flex w-full  flex-col gap-3 tablet:w-1/2'}>
         <div>
           <p>
             onChange value: <strong>{changeRangeValue && changeRangeValue.join(', ')}</strong>
@@ -211,7 +211,7 @@ function Demo() {
 ## 自定义
 
 ```tsx preview editable
-<div className={'flex flex-col tablet:flex-row gap-5'}>
+<div className={'flex flex-col gap-5 tablet:flex-row'}>
   <Slider ticks className={'w-full tablet:w-1/2'} defaultValue={10}>
     <SliderTrack />
     <SliderThumb className={'border p-0.5 text-sm'}>

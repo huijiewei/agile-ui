@@ -98,7 +98,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               className={cx(
-                'absolute shadow inline-block rounded py-1 px-2 text-sm border z-50',
+                'absolute z-50 inline-block rounded border py-1 px-2 text-sm shadow',
                 `border-${color}-600 bg-${color}-600 text-${color}-50`,
                 className
               )}

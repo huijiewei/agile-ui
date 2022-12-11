@@ -74,14 +74,14 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
     <Alert
       id={String(id)}
       ref={ref}
-      className={cx('w-auto max-w-lg min-w-[20em] shadow-lg pr-8', className)}
+      className={cx('w-auto min-w-[20em] max-w-lg pr-8 shadow-lg', className)}
       color={color}
       variant={variant}
       aria-labelledby={titleId}
       {...rest}
     >
       {icon && <AlertIcon>{icon}</AlertIcon>}
-      <div className={'flex-1 max-w-full'}>
+      <div className={'max-w-full flex-1'}>
         {title && <AlertTitle id={titleId}>{title}</AlertTitle>}
         <AlertDescription>{description}</AlertDescription>
       </div>
@@ -89,7 +89,7 @@ export const Toast = primitiveComponent<'div', ToastProps>((props, ref) => {
         <CloseButton
           onClick={onClose}
           className={cx(
-            'absolute top-1 right-1 p-0.5 rounded',
+            'absolute top-1 right-1 rounded p-0.5',
             variant == 'solid' ? `hover:bg-${color}-600` : `hover:bg-${color}-200 text-black`
           )}
         />

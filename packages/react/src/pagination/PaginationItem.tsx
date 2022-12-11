@@ -19,7 +19,7 @@ export const PaginationItem = polymorphicComponent<'button', PaginationItemProps
         data-disabled={dataAttr(disabled)}
         aria-current={selected ? 'page' : undefined}
         className={cx(
-          'min-w-[1.75rem] h-7 px-2 rounded flex items-center justify-center transition-colors select-none appearance-none disabled:(cursor-not-allowed opacity-50)',
+          'disabled:(cursor-not-allowed opacity-50) flex h-7 min-w-[1.75rem] select-none appearance-none items-center justify-center rounded px-2 transition-colors',
           selected ? `bg-${color}-500 text-white` : 'bg-gray-100',
           !disabled && (selected ? `hover:bg-${color}-600` : 'hover:bg-gray-200'),
           className

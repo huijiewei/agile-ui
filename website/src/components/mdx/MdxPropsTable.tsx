@@ -9,42 +9,42 @@ export type MdxPropsTableProps = {
 export const MdxPropsTable = ({ componentProps, tableTitle }: MdxPropsTableProps) => {
   return (
     <table className={'w-full table-auto border-separate rounded border border-gray-200'}>
-      {tableTitle && <caption className={'text-left text-gray-500 mb-1.5 font-bold'}>{tableTitle}</caption>}
+      {tableTitle && <caption className={'mb-1.5 text-left font-bold text-gray-500'}>{tableTitle}</caption>}
       <thead>
         <tr className={'bg-gray-50'}>
-          <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>参数名</th>
-          <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>描述</th>
-          <th className={'p-2 text-center whitespace-nowrap hidden tablet:table-cell'}>默认值</th>
-          <th className={'p-2 text-center whitespace-nowrap hidden tablet:table-cell'}>是否必须</th>
-          <th className={'p-2 text-left whitespace-nowrap hidden tablet:table-cell'}>类型</th>
+          <th className={'hidden whitespace-nowrap p-2 text-left tablet:table-cell'}>参数名</th>
+          <th className={'hidden whitespace-nowrap p-2 text-left tablet:table-cell'}>描述</th>
+          <th className={'hidden whitespace-nowrap p-2 text-center tablet:table-cell'}>默认值</th>
+          <th className={'hidden whitespace-nowrap p-2 text-center tablet:table-cell'}>是否必须</th>
+          <th className={'hidden whitespace-nowrap p-2 text-left tablet:table-cell'}>类型</th>
         </tr>
       </thead>
       <tbody>
         {componentProps.map((prop, i) => (
           <tr
             className={
-              'flex flex-row flex-wrap border-b border-b-gray-200 pb-[1px] mb-[1px] last:(border-none pb-0 mb-0) tablet:(table-row flex-no-wrap border-none mb-0)'
+              'last:(border-none mb-0) tablet:(table-row flex-no-wrap mb-0) mb-[1px] flex flex-row flex-wrap border-b border-none border-b-gray-200 pb-[1px] pb-0'
             }
             key={`${prop.name}-${i}`}
           >
-            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2)'}>
-              <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">参数名</span>
+            <td className={'tablet:(table-cell p-2) block w-full w-auto whitespace-nowrap'}>
+              <span className="mr-3 inline-block w-1/5 bg-gray-50 p-2 text-sm font-bold tablet:hidden">参数名</span>
               {prop.name}
             </td>
-            <td className={'w-full block tablet:(table-cell w-auto p-2)'}>
-              <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">描述</span>
+            <td className={'tablet:(table-cell p-2) block w-full w-auto'}>
+              <span className="mr-3 inline-block w-1/5 bg-gray-50 p-2 text-sm font-bold tablet:hidden">描述</span>
               {prop.description || '-'}
             </td>
-            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2 text-center)'}>
-              <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">默认值</span>
+            <td className={'tablet:(table-cell text-center) block w-full w-auto whitespace-nowrap p-2'}>
+              <span className="mr-3 inline-block w-1/5 bg-gray-50 p-2 text-sm font-bold tablet:hidden">默认值</span>
               {prop.defaultValue?.value || '-'}
             </td>
-            <td className={'w-full block whitespace-nowrap tablet:(table-cell w-auto p-2 text-center)'}>
-              <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">是否必须</span>
+            <td className={'tablet:(table-cell text-center) block w-full w-auto whitespace-nowrap p-2'}>
+              <span className="mr-3 inline-block w-1/5 bg-gray-50 p-2 text-sm font-bold tablet:hidden">是否必须</span>
               {prop.required ? 'true' : 'false'}
             </td>
-            <td className={'w-full block tablet:(table-cell w-auto p-2)'}>
-              <span className="tablet:hidden inline-block mr-3 w-1/5 bg-gray-50 p-2 text-sm font-bold">类型</span>
+            <td className={'tablet:(table-cell p-2) block w-full w-auto'}>
+              <span className="mr-3 inline-block w-1/5 bg-gray-50 p-2 text-sm font-bold tablet:hidden">类型</span>
               {prop.type.name}
             </td>
           </tr>

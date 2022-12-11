@@ -63,12 +63,12 @@ export const CodeLive = (props: ComponentProps<'div'> & CodeLiveProps) => {
           InternetExplorer,
         }}
       >
-        <LivePreview className={'overflow-x-auto rounded-t border border-gray-200 p-3 scrollbar'} />
+        <LivePreview className={'scrollbar overflow-x-auto rounded-t border border-gray-200 p-3'} />
         <div className={'relative'}>
           <LiveEditor
             translate={'no'}
             readOnly={!editable}
-            className={'overflow-x-auto border border-gray-200 font-mono text-[92%] leading-snug rounded-b border-t-0'}
+            className={'overflow-x-auto rounded-b border border-t-0 border-gray-200 font-mono text-[92%] leading-snug'}
             ignoreTabKey={false}
             insertSpaces
             padding={10}
