@@ -15,7 +15,7 @@ import {
   useInteractions,
   useListNavigation,
   useRole,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import { PropsWithChildren, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAllowHover } from '@agile-ui/react-hooks';
 import {

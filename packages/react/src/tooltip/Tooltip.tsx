@@ -11,7 +11,7 @@ import {
   useHover,
   useInteractions,
   useRole,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import { cloneElement, ReactNode } from 'react';
 import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';

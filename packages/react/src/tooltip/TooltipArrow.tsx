@@ -1,4 +1,4 @@
-import type { Placement } from '@floating-ui/react-dom-interactions';
+import type { Placement } from '@floating-ui/react';
 import { cx } from '@twind/core';
 import { FloatingArrow } from '../floating/FloatingArrow';
 import type { PrimitiveComponentProps } from '../utils/component';

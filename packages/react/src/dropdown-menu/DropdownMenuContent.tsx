@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { FloatingFocusManager, FloatingNode } from '@floating-ui/react-dom-interactions';
+import { FloatingFocusManager, FloatingNode } from '@floating-ui/react';
 import { Children, isValidElement } from 'react';
 import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';

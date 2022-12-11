@@ -1,4 +1,4 @@
-import { FloatingPortal } from '@floating-ui/react-dom-interactions';
+import { FloatingPortal } from '@floating-ui/react';
 import type { ReactNode } from 'react';
 
 export type PortalProps = {

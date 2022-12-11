@@ -11,7 +11,7 @@ import {
   useListNavigation,
   useRole,
   useClick,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import {
   Children,
   cloneElement,
@@ -389,7 +389,6 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     getScrollElement: () => refs.floating.current,
     estimateSize: () => sizeClass.height,
     overscan: 3,
-    enableSmoothScroll: false,
     paddingStart: 6,
     paddingEnd: 6,
     scrollPaddingStart: 6,

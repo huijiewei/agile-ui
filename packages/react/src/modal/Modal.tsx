@@ -1,4 +1,4 @@
-import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react-dom-interactions';
+import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react';
 import type { PropsWithChildren, RefObject } from 'react';
 import { useCallback, useId, useMemo } from 'react';
 import { Portal } from '../portal/Portal';

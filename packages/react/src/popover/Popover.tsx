@@ -11,7 +11,7 @@ import {
   useFloating,
   useInteractions,
   useRole,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import type { PropsWithChildren, ReactNode, RefObject } from 'react';
 import { useId, useMemo } from 'react';
 import {

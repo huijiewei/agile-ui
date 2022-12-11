@@ -1,4 +1,4 @@
-import type { FloatingContext } from '@floating-ui/react-dom-interactions';
+import type { FloatingContext } from '@floating-ui/react';
 import type { RefObject } from 'react';
 import type { HTMLProps } from 'react';
 import { createContext } from '../utils/context';

@@ -3,7 +3,7 @@ import type {
   FloatingTreeType,
   Placement,
   ReferenceElement,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import type { Dispatch, HTMLProps, MutableRefObject, SetStateAction } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';

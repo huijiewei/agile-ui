@@ -1,5 +1,5 @@
 import { mergeRefs } from '@agile-ui/react-hooks';
-import { FloatingFocusManager } from '@floating-ui/react-dom-interactions';
+import { FloatingFocusManager } from '@floating-ui/react';
 import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';

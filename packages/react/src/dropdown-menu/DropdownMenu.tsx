@@ -1,4 +1,4 @@
-import { FloatingTree, useFloatingParentNodeId } from '@floating-ui/react-dom-interactions';
+import { FloatingTree, useFloatingParentNodeId } from '@floating-ui/react';
 import type { PropsWithChildren } from 'react';
 import { DropdownMenuComponent, DropdownMenuProps } from './DropdownMenuComponent';
 
