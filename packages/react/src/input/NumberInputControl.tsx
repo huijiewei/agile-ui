@@ -27,7 +27,7 @@ export const NumberInputControl = (
       tabIndex={-1}
       disabled={disabled}
       className={cx(
-        'disabled:(opacity-50 bg-gray-50) flex w-full flex-1 cursor-not-allowed select-none appearance-none items-center justify-center bg-gray-50 transition-colors hover:bg-gray-200',
+        'disabled:(opacity-50 bg-gray-50 cursor-not-allowed) flex w-full flex-1 select-none appearance-none items-center justify-center bg-gray-50 transition-colors hover:bg-gray-200',
         stepper == 'increment' && 'rounded-tr',
         stepper == 'decrement' && 'rounded-br',
         className

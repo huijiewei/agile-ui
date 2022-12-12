@@ -150,7 +150,7 @@ export const Radio = primitiveComponent<'input', RadioProps>((props, ref) => {
           controlledChecked ? `bg-${color}-500 text-white` : 'bg-white',
           disabled && 'opacity-50',
           sizeStyle.control,
-          controlledChecked && `&:before:(inline-block content-['']) relative h-1/2 w-1/2 rounded-[50%] bg-current`
+          controlledChecked && `&:before:(inline-block content-[''] relative h-1/2 w-1/2 rounded-[50%] bg-current)`
         )}
       />
       {children && <span className={cx(sizeStyle.label, 'leading-none', disabled && 'opacity-50')}>{children}</span>}

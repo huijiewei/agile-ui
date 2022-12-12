@@ -30,7 +30,7 @@ export const MdxColorPlate = () => {
             {isString(color.value) ? (
               <div className={'flex flex-row gap-3'}>
                 <div
-                  className={'dark:(ring-1 ring-white/10) h-10 w-10 rounded ring-inset'}
+                  className={'dark:(ring-1 ring-inset ring-white/10) h-10 w-10 rounded'}
                   style={{
                     backgroundColor: tw.theme('colors', `${color.name}`, '#000').toString(),
                   }}

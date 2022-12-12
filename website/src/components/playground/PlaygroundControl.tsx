@@ -52,7 +52,7 @@ export const PlaygroundControl = ({
                   )}
                   onClick={() => onChange(valueString)}
                 >
-                  {defaultValue?.toString() == valueString ? <Check className={'h-4 w-4'} /> : ' '}
+                  {defaultValue?.toString() == valueString ? <Check /> : ' '}
                 </button>
               );
             })}

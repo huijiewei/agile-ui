@@ -378,14 +378,14 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
             onClick={() => {
               increment();
             }}
-            disabled={(controlledValue || 0) >= maxValue}
+            disabled={disabled || (controlledValue || 0) >= maxValue}
           />
           <NumberInputControl
             stepper={'decrement'}
             onClick={() => {
               decrement();
             }}
-            disabled={(controlledValue || 0) <= minValue}
+            disabled={disabled || (controlledValue || 0) <= minValue}
           />
         </div>
       )}
