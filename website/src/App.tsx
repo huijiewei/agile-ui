@@ -23,7 +23,7 @@ export const App = () => {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Helmet defaultTitle={'Agile UI'} titleTemplate={'%s - Agile UI'} />
         <LazyMotion strict features={domMax}>
           <AgileProvider>
