@@ -1,0 +1,41 @@
+name: AgileUI Deploy
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install
+        shell: 'bash'
+        run: npm install
+
+      - name: Build
+        shell: 'bash'
+        run: npm run website:build:ui
+
+      - name: Deploy
+        uses: Burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr --delete
+          path: website/dist/
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_port: ${{ secrets.REMOTE_PORT }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_path: /home/websites/agile/ui/

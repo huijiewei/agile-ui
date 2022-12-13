@@ -11,6 +11,7 @@
     "build": "npm run build --workspace packages",
     "website:dev": "npm run dev --workspace website",
     "website:build": "npm run build --workspace website",
+    "website:build:ui": "npm run build:ui --workspace website",
     "website:preview": "npm run preview --workspace website"
   },
   "devDependencies": {
