@@ -38,4 +38,4 @@ jobs:
           remote_port: ${{ secrets.REMOTE_PORT }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          remote_path: /home/websites/agile/ui/
+          remote_path: /home/websites/ui/
