@@ -1,6 +1,7 @@
 import { useClick, useDismiss, useFloating, useInteractions, useRole } from '@floating-ui/react';
 import type { PropsWithChildren, RefObject } from 'react';
 import { useCallback, useId, useMemo } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { Portal } from '../portal/Portal';
 import { ModalProvider } from './ModalProvider';
 
@@ -16,30 +17,35 @@ export type ModalProps = {
   onClose: () => void;
 
   /**
-   * 按下 Esc 键时, 模态框将关闭
+   * 关闭完成后的回调
+   */
+  onCloseComplete: () => void;
+
+  /**
+   * 按下 Esc 键时, 将关闭
    * @default true
    */
   closeOnEsc?: boolean;
 
   /**
-   * 单击外部时, 模态框将关闭
+   * 单击外部时, 将关闭
    * @default true
    */
   closeOnBlur?: boolean;
 
   /**
-   * 模态框开启后锁定滚动条
+   * 开启后锁定滚动条
    * @default true
    */
   lockScroll?: boolean;
 
   /**
-   * 模态框开启后焦点目标
+   * 开启后焦点目标
    */
   initialFocus?: number | RefObject<HTMLElement>;
 
   /**
-   * 模态框关闭后焦点目标
+   * 关闭后焦点目标
    */
   finalFocus?: RefObject<HTMLElement>;
 
@@ -57,6 +63,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     closeOnBlur = true,
     opened,
     onClose,
+    onCloseComplete,
     lockScroll = true,
     initialFocus,
     finalFocus,
@@ -117,7 +124,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   return (
     <ModalProvider value={value}>
-      <Portal>{children}</Portal>
+      <AnimatePresence onExitComplete={onCloseComplete}>{value.open && <Portal>{children}</Portal>}</AnimatePresence>
     </ModalProvider>
   );
 };
