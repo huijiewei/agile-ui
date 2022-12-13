@@ -1,0 +1,127 @@
+---
+title: 抽屉
+description: 触发命令后，从屏幕一侧滑出的抽屉式的面板。
+---
+
+## 用法
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpened(true)}>打开抽屉</Button>
+      <Drawer opened={opened} onClose={() => setOpened(false)}>
+        <DrawerOverlay />
+        <DrawerContent className={'w-11/12 tablet:w-3/5 laptop:w-1/3'}>
+          <DrawerHeader>抽屉</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>这是一个抽屉</DrawerBody>
+          <DrawerFooter className={'flex items-center justify-center gap-5'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## 位置
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+  const [placement, setPlacement] = React.useState('right');
+
+  return (
+    <>
+      <RadioGroup name="placement" value={placement} onChange={setPlacement}>
+        <div className={'flex flex-row gap-5'}>
+          <Radio value="top">Top</Radio>
+          <Radio value="bottom">Bottom</Radio>
+          <Radio value="left">Left</Radio>
+          <Radio value="right">Right</Radio>
+        </div>
+      </RadioGroup>
+      <br />
+      <Button onClick={() => setOpened(true)}>打开抽屉</Button>
+      <Drawer opened={opened} placement={placement} onClose={() => setOpened(false)}>
+        <DrawerOverlay />
+        <DrawerContent
+          className={
+            placement == 'left' || placement == 'right'
+              ? 'w-11/12 tablet:w-3/5 laptop:w-1/3'
+              : 'h-11/12 tablet:h-3/5 laptop:h-1/3'
+          }
+        >
+          <DrawerHeader>抽屉</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerBody>这是一个抽屉</DrawerBody>
+          <DrawerFooter className={'flex items-center justify-center gap-5'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## 表单
+
+抽屉打开会自动将焦点设置在第一个可用的元素上(一般默认是关闭按钮)，关闭时会自动返回焦点，你可以通过设置 `initialFocus` 和 `finalFocus` 属性来自定义焦点目标
+
+```tsx preview editable
+function Demo() {
+  const [opened, setOpened] = React.useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+
+  return (
+    <div className={'flex flex-row gap-3'}>
+      <Button onClick={() => setOpened(true)}>打开抽屉</Button>
+      <Button color={'gray'} ref={finalRef}>关闭时获得焦点</Button>
+      <Drawer initialFocus={initialRef} finalFocus={finalRef} opened={opened} onClose={() => setOpened(false)}>
+        <DrawerOverlay />
+        <DrawerContent className={'w-11/12 tablet:w-3/5 laptop:w-1/5'}>
+          <DrawerHeader>抽屉</DrawerHeader>
+          <DrawerCloseButton />
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log('提交');
+            }}
+          >
+            <DrawerBody className={'flex flex-col gap-3'}>
+              <div className={'flex flex-row items-center'}>
+                <label htmlFor={'demoFormName'} className={'w-28'}>
+                  姓名 <span className={'text-red-500'}>*</span>
+                </label>
+                <Input ref={initialRef} className={'w-full'} placeholder={'姓'} id={'demoFormName'} />
+              </div>
+              <div className={'flex flex-row items-center'}>
+                <label htmlFor={'demoFormEmail'} className={'w-28'}>
+                  电子邮箱 <span className={'text-red-500'}>*</span>
+                </label>
+                <Input className={'w-full'} placeholder={'电子邮箱'} id={'demoFormEmail'} />
+              </div>
+            </DrawerBody>
+            <DrawerFooter className={'flex gap-3 items-center justify-end'}>
+              <Button type={'submit'}>确定</Button>
+              <Button color={'gray'} variant={'light'} onClick={() => setOpened(false)}>
+                取消
+              </Button>
+            </DrawerFooter>
+          </form>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## 属性
+
+<PropsTable componentName="Modal" />

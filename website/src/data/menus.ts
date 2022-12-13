@@ -145,6 +145,10 @@ export const menus: Menu[] = [
             path: '/components/modal',
           },
           {
+            label: '抽屉',
+            path: '/components/drawer',
+          },
+          {
             label: '进度条',
             path: '/components/progress-bar',
           },

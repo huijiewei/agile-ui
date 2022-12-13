@@ -55,6 +55,9 @@ export * from './popover/PopoverFooter';
 export * from './popover/PopoverArrow';
 export * from './popover/PopoverCloseButton';
 
+export * from './drawer/Drawer';
+export * from './drawer/DrawerContent';
+
 export * from './modal/Modal';
 export * from './modal/ModalOverlay';
 export * from './modal/ModalContent';
