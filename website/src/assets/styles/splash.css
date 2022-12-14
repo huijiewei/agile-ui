@@ -48,7 +48,7 @@
   border-radius: 50%;
   margin-top: -23px;
   margin-left: -23px;
-  animation: appSplashSpin 3.45s infinite;
+  animation: appSplashSpin 3s infinite;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -63,7 +63,7 @@
   border-radius: 50%;
   margin-top: -6px;
   margin-left: -6px;
-  animation: appSplashPulse 6.9s infinite, appSplashBorderPulse 6.9s infinite;
+  animation: appSplashPulse 5s infinite, appSplashBorderPulse 5s infinite;
   position: absolute;
   top: 50%;
   left: 50%;
