@@ -153,7 +153,7 @@ export const Button = polymorphicComponent<'button', ButtonProps>((props, ref) =
       )}
       data-active={dataAttr(active)}
       disabled={disabled || loading}
-      type={type ?? defaultType}
+      type={type || defaultType}
       ref={useMergedRefs(ref, _ref)}
       {...rest}
     >

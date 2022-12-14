@@ -20,7 +20,7 @@ export const createContext = <ContextValueType>(options: CreateContextOptions) =
 
     if (context == undefined && strict) {
       const error = new Error(
-        errorMessage ??
+        errorMessage ||
           `use${name.replace(
             'Context',
             ''

@@ -155,7 +155,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   const [valueState, setValueState] = useState(defaultValue);
   const [controlled, controlledValue] = useControllableProp(value, valueState);
 
-  const [inputValue, setInputValue] = useState(controlledValue?.toFixed(precision) ?? '');
+  const [inputValue, setInputValue] = useState(controlledValue?.toFixed(precision) || '');
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [focusRef, focus] = useFocus<HTMLInputElement>();
@@ -209,8 +209,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   const increment = useCallback(
     (incrementStep = step) => {
       if (controlledValue == undefined) {
-        update(min ?? 0);
-        setInputValue(min?.toFixed(precision) ?? '0');
+        update(min || 0);
+        setInputValue(min != undefined ? min.toFixed(precision) : '0');
       } else {
         const value = clamp(controlledValue + incrementStep, [minValue, maxValue]).toFixed(precision);
 
@@ -226,8 +226,8 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
   const decrement = useCallback(
     (decrementStep = step) => {
       if (controlledValue == undefined) {
-        update(min ?? 0);
-        setInputValue(min?.toFixed(precision) ?? '0');
+        update(min || 0);
+        setInputValue(min != undefined ? min.toFixed(precision) : '0');
       } else {
         const value = clamp(controlledValue - decrementStep, [minValue, maxValue]).toFixed(precision);
 
@@ -293,7 +293,7 @@ export const NumberInput = primitiveComponent<'input', NumberInputProps>((props,
           setInputValue(value.toFixed(precision));
           update(parseFloat(value.toFixed(precision)));
         } else {
-          setInputValue(controlledValue?.toFixed(precision) ?? '');
+          setInputValue(controlledValue != undefined ? controlledValue?.toFixed(precision) : '');
         }
       }
 

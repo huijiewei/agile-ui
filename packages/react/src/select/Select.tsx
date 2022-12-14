@@ -222,7 +222,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
         cacheData.elements.push(
           cloneElement(child, {
-            key: child.key ?? child.props.value ?? Math.random().toString(36).slice(-6),
+            key: child.key || child.props.value || Math.random().toString(36).slice(-6),
             index: optionIndex,
             label: undefined,
             extra: undefined,
@@ -233,7 +233,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       }
 
       cacheData.options.set(child.props.value, {
-        label: child.props.label ?? child.props.children,
+        label: child.props.label || child.props.children,
         index,
       });
     };
@@ -281,9 +281,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const selectedIndex = useMemo(() => {
     if (Array.isArray(controlledValue)) {
-      return controlledValue.map((value) => options.get(value)?.index ?? -1);
+      return controlledValue.map((value) => options.get(value)?.index || -1);
     } else {
-      return [controlledValue != undefined ? options.get(controlledValue)?.index ?? -1 : -1];
+      return [controlledValue != undefined ? options.get(controlledValue)?.index || -1 : -1];
     }
   }, [controlledValue, options]);
 
@@ -426,7 +426,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
             : null;
 
         if (item && prevActiveIndex != null) {
-          const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight ?? 0;
+          const itemHeight = listItemsRef.current[prevActiveIndex]?.offsetHeight || 0;
 
           const floatingHeight = floating.offsetHeight;
           const top = item.offsetTop - itemHeight;
@@ -677,8 +677,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
               )}
               ref={floating}
               style={{
-                top: y ?? 0,
-                left: x ?? 0,
+                top: y || 0,
+                left: x || 0,
                 height: virtual ? '320px' : undefined,
               }}
             >

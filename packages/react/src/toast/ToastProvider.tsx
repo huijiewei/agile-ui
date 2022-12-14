@@ -74,7 +74,7 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
 
   const value = useMemo(() => {
     const notify: ToastDispatchContextValue['notify'] = (options) => {
-      const toastId = options.id ?? (`toast-${Math.random().toString(36).slice(2, 9)}` as ToastId);
+      const toastId = options.id || (`toast-${Math.random().toString(36).slice(2, 9)}` as ToastId);
 
       const { position = 'bottom', ...toast } = options;
 
@@ -89,8 +89,8 @@ export const ToastProvider = (props: PropsWithChildren<ToastProviderProps>) => {
 
       setState((prevToasts) => {
         const toasts = position.includes('top')
-          ? [toast, ...(prevToasts[position] ?? [])]
-          : [...(prevToasts[position] ?? []), toast];
+          ? [toast, ...(prevToasts[position] || [])]
+          : [...(prevToasts[position] || []), toast];
 
         return {
           ...prevToasts,
