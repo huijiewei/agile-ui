@@ -3,6 +3,8 @@ import type { RefObject } from 'react';
 import type { HTMLProps } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';
+import type { MotionPreset } from '../motion/Motion';
+import type { MotionProps } from 'framer-motion';
 
 type ModalContextValue = {
   open: boolean;
@@ -16,6 +18,8 @@ type ModalContextValue = {
   labelId: string;
   descriptionId: string;
   onClose: () => void;
+  motionPreset: MotionPreset;
+  motionProps?: MotionProps;
 };
 
 const [ModalProvider, useModal] = createContext<ModalContextValue>({

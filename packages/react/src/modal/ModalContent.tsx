@@ -3,7 +3,7 @@ import { FloatingFocusManager } from '@floating-ui/react';
 import { cx } from '@twind/core';
 import { primitiveComponent } from '../utils/component';
 import { useModal } from './ModalProvider';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion } from '../motion/Motion';
 import { useEffect } from 'react';
 
 export const ModalContent = primitiveComponent<'div'>((props, ref) => {
@@ -18,6 +18,8 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
     initialFocus,
     finalFocus,
     scrollBehavior,
+    motionPreset,
+    motionProps,
   } = useModal();
 
   useEffect(() => {
@@ -35,10 +37,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
     >
       <FloatingFocusManager initialFocus={initialFocus} returnFocus={finalFocus == undefined} context={context}>
         <Motion
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          {...getMotionProps(motionPreset, motionProps)}
           className={cx(
             'relative flex flex-col rounded border border-gray-200 bg-white shadow dark:bg-gray-700',
             scrollBehavior == 'inside' ? 'max-h-[calc(100%-9rem)] ' : 'my-10',

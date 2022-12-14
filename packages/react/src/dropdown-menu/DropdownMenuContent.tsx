@@ -13,7 +13,7 @@ import {
   useDropdownMenuFloating,
 } from './DropdownMenuProvider';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion } from '../motion/Motion';
 
 export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
@@ -32,6 +32,8 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     getItemProps,
     listItemsRef,
     setActiveIndex,
+    motionPreset,
+    motionProps,
   } = useDropdownMenuFloating();
 
   const refs = useMergedRefs(floating, ref);
@@ -50,10 +52,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
               context={context}
             >
               <Motion
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                {...getMotionProps(motionPreset, motionProps)}
                 className={cx(
                   'absolute outline-none',
                   'rounded border border-gray-200 bg-white p-1.5 shadow dark:bg-gray-700',

@@ -191,6 +191,55 @@ function Demo() {
 }
 ```
 
+## 自定义背景样式
+
+```tsx preview editable
+function Demo() {
+  const OverlayOne = () => <ModalOverlay className="backdrop-blur-sm" />;
+
+  const OverlayTwo = () => <ModalOverlay className="backdrop-hue-rotate-30" />;
+
+  const [opened, setOpened] = React.useState(false);
+  const [overlay, setOverlay] = React.useState(<OverlayOne />);
+
+  return (
+    <>
+      <div className="flex gap-3">
+        <Button
+          onClick={() => {
+            setOverlay(<OverlayOne />);
+            setOpened(true);
+          }}
+        >
+          第一种样式
+        </Button>
+        <Button
+          onClick={() => {
+            setOverlay(<OverlayTwo />);
+            setOpened(true);
+          }}
+        >
+          第二种样式
+        </Button>
+      </div>
+      <Modal opened={opened} onClose={() => setOpened(false)}>
+        {overlay}
+        <ModalContent className={'w-11/12 tablet:w-3/5 laptop:w-1/3'}>
+          <ModalHeader>模态框</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>这是一个模态框</ModalBody>
+          <ModalFooter className={'flex items-center justify-center gap-5'}>
+            <Button onClick={() => setOpened(false)}>关闭</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+```
+
 ## 属性
 
-<PropsTable componentName="Modal" />
+<PropsTable tableTitle="Modal" componentName="Modal" />
+
+<PropsTable tableTitle="ModalOverlay" componentName="ModalOverlay" />

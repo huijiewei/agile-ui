@@ -19,7 +19,7 @@ import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
 import { TooltipArrow } from './TooltipArrow';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion, MotionComponentProps } from '../motion/Motion';
 import { useDisclosure, useMergedRefs } from '@agile-ui/react-hooks';
 
 type TooltipProps = {
@@ -49,13 +49,23 @@ type TooltipProps = {
    * @ignore
    */
   children: JSX.Element;
-};
+} & MotionComponentProps;
 
 /**
  * 工具提示
  */
 export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => {
-  const { className, children, content, opened, placement = 'auto', color = 'gray', ...rest } = props;
+  const {
+    className,
+    children,
+    content,
+    opened,
+    placement = 'auto',
+    color = 'gray',
+    motionPreset = 'fade',
+    motionProps,
+    ...rest
+  } = props;
 
   const { open, handleOpen, handleClose } = useDisclosure({ opened });
 
@@ -93,10 +103,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
         <AnimatePresence>
           {open && (
             <Motion
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              {...getMotionProps(motionPreset, motionProps)}
               className={cx(
                 'absolute z-50 inline-block rounded border py-1 px-2 text-sm shadow',
                 `border-${color}-600 bg-${color}-600 text-${color}-50`,

@@ -24,6 +24,7 @@ import {
   DropdownMenuPlacementProvider,
   DropdownMenuReferenceProvider,
 } from './DropdownMenuProvider';
+import type { MotionComponentProps } from '../motion/Motion';
 
 export type DropdownMenuProps = {
   /**
@@ -64,7 +65,7 @@ export type DropdownMenuProps = {
    * @ignore
    */
   children?: ReactNode;
-};
+} & MotionComponentProps;
 
 export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps>) => {
   const {
@@ -75,6 +76,8 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
     opened = false,
     placement = 'bottom-start',
     onClose,
+    motionPreset = 'fade',
+    motionProps,
   } = props;
 
   const tree = useFloatingTree();
@@ -176,8 +179,24 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       getItemProps,
       listItemsRef,
       setActiveIndex,
+      motionPreset,
+      motionProps,
     }),
-    [allowHover, context, floating, getFloatingProps, getItemProps, nested, nodeId, open, tree, x, y]
+    [
+      allowHover,
+      context,
+      floating,
+      getFloatingProps,
+      getItemProps,
+      motionPreset,
+      motionProps,
+      nested,
+      nodeId,
+      open,
+      tree,
+      x,
+      y,
+    ]
   );
 
   return (

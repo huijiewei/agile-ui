@@ -2,6 +2,8 @@ import type { FloatingContext, FloatingTreeType, Placement, ReferenceElement } f
 import type { Dispatch, HTMLProps, MutableRefObject, SetStateAction } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';
+import type { MotionPreset } from '../motion/Motion';
+import type { MotionProps } from 'framer-motion';
 
 const [DropdownMenuPlacementProvider, useDropdownMenuPlacement] = createContext<Placement>({
   strict: true,
@@ -49,6 +51,9 @@ type DropdownMenuFloatingContextValue = DropdownMenuContentContextValue & {
 
   nested: boolean;
   nodeId: string;
+
+  motionPreset: MotionPreset;
+  motionProps?: MotionProps;
 };
 
 const [DropdownMenuFloatingProvider, useDropdownMenuFloating] = createContext<DropdownMenuFloatingContextValue>({

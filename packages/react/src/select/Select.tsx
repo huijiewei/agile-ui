@@ -30,7 +30,7 @@ import { primitiveComponent } from '../utils/component';
 import type { Size } from '../utils/types';
 import { SelectProvider } from './SelectProvider';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion, MotionComponentProps } from '../motion/Motion';
 import { SelectOptionGroup } from './SelectOptionGroup';
 import { SelectOption } from './SelectOption';
 import { CloseButton } from '../close-button/CloseButton';
@@ -133,7 +133,7 @@ export type SelectProps = {
    * 搜索框框值变化时回调
    */
   onSearch?: (value: string) => void;
-};
+} & MotionComponentProps;
 
 const selectSizes = {
   xs: {
@@ -192,6 +192,8 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     defaultValue = multiple ? [] : undefined,
     closeOnSelect = true,
     style,
+    motionPreset = 'fade',
+    motionProps,
     ...rest
   } = props;
 
@@ -667,10 +669,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         <AnimatePresence>
           {open && (
             <Motion
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              {...getMotionProps(motionPreset, motionProps)}
               className={cx(
                 'scrollbar-thin absolute z-50 max-h-80 overflow-y-auto overscroll-contain rounded border border-gray-200 bg-white shadow outline-none dark:bg-gray-700',
                 virtual ? 'px-1.5' : 'p-1.5'

@@ -4,6 +4,7 @@ import { useCallback, useId, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Portal } from '../portal/Portal';
 import { ModalProvider } from './ModalProvider';
+import type { MotionComponentProps } from '../motion/Motion';
 
 export type ModalProps = {
   /**
@@ -54,7 +55,7 @@ export type ModalProps = {
    * @default 'inside'
    */
   scrollBehavior?: 'inside' | 'outside';
-};
+} & MotionComponentProps;
 
 export const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
@@ -68,6 +69,8 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     initialFocus,
     finalFocus,
     scrollBehavior = 'inside',
+    motionPreset = 'fade',
+    motionProps,
   } = props;
 
   const { floating, context } = useFloating<HTMLElement>({
@@ -106,6 +109,8 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       labelId,
       descriptionId,
       onClose: handleClose,
+      motionPreset,
+      motionProps,
     }),
     [
       opened,
@@ -119,6 +124,8 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
       labelId,
       descriptionId,
       handleClose,
+      motionPreset,
+      motionProps,
     ]
   );
 

@@ -5,12 +5,13 @@ import { Portal } from '../portal/Portal';
 import { primitiveComponent } from '../utils/component';
 import { usePopoverAria, usePopoverFloating } from './PopoverProvider';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion } from '../motion/Motion';
 
 export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { open, x, y, floating, context, getFloatingProps, modal, initialFocus } = usePopoverFloating();
+  const { open, x, y, floating, context, getFloatingProps, modal, initialFocus, motionPreset, motionProps } =
+    usePopoverFloating();
 
   const { labelId, descriptionId } = usePopoverAria();
 
@@ -22,10 +23,7 @@ export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
         {open && (
           <FloatingFocusManager modal={modal} initialFocus={initialFocus} context={context}>
             <Motion
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              {...getMotionProps(motionPreset, motionProps)}
               className={'absolute z-10 outline-none'}
               {...getFloatingProps({
                 ...rest,

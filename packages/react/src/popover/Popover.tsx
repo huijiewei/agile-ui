@@ -22,6 +22,7 @@ import {
   PopoverReferenceProvider,
 } from './PopoverProvider';
 import { useDisclosure } from '@agile-ui/react-hooks';
+import type { MotionComponentProps } from '../motion/Motion';
 
 export type PopoverProps = {
   /**
@@ -67,7 +68,7 @@ export type PopoverProps = {
    * @ignore
    */
   children?: ReactNode | ((props: { opened: boolean; handleClose?: () => void }) => ReactNode);
-};
+} & MotionComponentProps;
 
 export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   const {
@@ -79,6 +80,8 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     opened,
     onClose,
     initialFocus,
+    motionPreset = 'fade',
+    motionProps,
   } = props;
 
   const { open, handleOpen, handleClose } = useDisclosure({ opened, onClose });
@@ -110,7 +113,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     useDismiss(context, { escapeKey: closeOnEsc, outsidePress: closeOnBlur }),
   ]);
 
-  const ariaContextValue = useMemo(
+  const contextValue = useMemo(
     () => ({
       labelId,
       descriptionId,
@@ -137,12 +140,14 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       getFloatingProps,
       modal,
       initialFocus,
+      motionPreset,
+      motionProps,
     }),
-    [context, floating, getFloatingProps, initialFocus, modal, open, x, y]
+    [context, floating, getFloatingProps, initialFocus, modal, motionPreset, motionProps, open, x, y]
   );
 
   return (
-    <PopoverAriaProvider value={ariaContextValue}>
+    <PopoverAriaProvider value={contextValue}>
       <PopoverPlacementProvider value={placementState}>
         <PopoverDispatchProvider value={{ handleClose }}>
           <PopoverReferenceProvider value={referenceContextValue}>

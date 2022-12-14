@@ -5,7 +5,7 @@ import { Spinner } from '../spinner/Spinner';
 import { primitiveComponent } from '../utils/component';
 import type { Color } from '../utils/types';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../motion/Motion';
+import { getMotionProps, Motion, MotionComponentProps } from '../motion/Motion';
 
 export type SpinnerOverlayProps = {
   /**
@@ -36,10 +36,21 @@ export type SpinnerOverlayProps = {
    * 是否可见
    */
   visible: boolean;
-};
+} & MotionComponentProps;
 
 export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((props, ref) => {
-  const { visible, className, radius, opacity = 75, color = 'white', blur, children, ...rest } = props;
+  const {
+    visible,
+    className,
+    radius,
+    opacity = 75,
+    color = 'white',
+    blur,
+    children,
+    motionPreset = 'fade',
+    motionProps,
+    ...rest
+  } = props;
 
   const spinner = (children as ReactElement) || <Spinner size={'xl'} color={'blue'} />;
 
@@ -47,10 +58,7 @@ export const SpinnerOverlay = primitiveComponent<'div', SpinnerOverlayProps>((pr
     <AnimatePresence>
       {visible && (
         <Motion
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          {...getMotionProps(motionPreset, motionProps)}
           ref={ref}
           className={cx('absolute inset-0 z-10 flex items-center justify-center overflow-hidden', className)}
           {...rest}
