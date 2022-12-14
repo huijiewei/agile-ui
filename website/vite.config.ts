@@ -38,7 +38,6 @@ export default defineConfig({
         name: 'Agile UI',
         description: 'React + TypeScript UI Components',
         short_name: 'agile-ui',
-        start_url: '/home',
         lang: 'zh-CN',
         icons: [
           { src: 'icons/pwa-192.png', sizes: '192x192', type: 'image/png' },
