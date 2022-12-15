@@ -18,7 +18,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/jest-dom": "^5.16.5",
-    "axe-core": "^4.6.0",
+    "axe-core": "^4.6.1",
     "chalk": "^5.2.0",
     "pretty-format": "^29.3.1",
     "lodash-es": "^4.17.21",
