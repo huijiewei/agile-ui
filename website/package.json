@@ -15,16 +15,15 @@
     "@agile-ui/react-icons": "*",
     "@agile-ui/react-live": "*",
     "@agile-ui/twind": "*",
-    "@twind/core": "^1.0.3",
-    "@twind/preset-autoprefix": "^1.0.3",
-    "@twind/preset-ext": "^1.0.3",
-    "@twind/preset-tailwind": "^1.0.3",
+    "@twind/core": "^1.1.0",
+    "@twind/preset-autoprefix": "^1.0.4",
+    "@twind/preset-ext": "^1.0.4",
+    "@twind/preset-tailwind": "^1.1.0",
     "framer-motion": "^7.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
-    "react-router-dom": "^6.4.5",
-    "web-vitals": "^3.1.0"
+    "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.2.1",
