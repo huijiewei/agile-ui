@@ -8,12 +8,8 @@ import twindConfig from './twind.config';
 
 setup(twindConfig);
 
-import { webVitals } from './webVitals';
-
 createRoot(document.getElementById('app') as HTMLElement).render(
   <StrictMode>
     <App />
   </StrictMode>
 );
-
-webVitals();
