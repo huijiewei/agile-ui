@@ -1,15 +1,23 @@
-import { css, TwindPresetConfig } from '@twind/core';
+import type { Preset } from '@twind/core';
 import borderRadius from './presets/border-radius';
 import colors from './presets/colors';
 import fontFamily from './presets/font-family';
 import fontSize from './presets/font-size';
 import fontWeight from './presets/font-weight';
 import screens from './presets/screens';
+import preflight from './presets/preflight';
+import variants from './presets/variants';
+import rules from './presets/rules';
+import { defineConfig } from '@twind/core';
+import presetAutoprefix from '@twind/preset-autoprefix';
+import presetTailwind from '@twind/preset-tailwind/base';
+import presetExt from '@twind/preset-ext';
+import type { TailwindTheme } from '@twind/preset-tailwind';
 
 export * from './types/Color';
 export * from './types/Tuple';
 
-export default () => {
+const presetAgile = (): Preset<TailwindTheme> => {
   return {
     darkMode: 'class',
     darkColor: (section, key, { theme }) => {
@@ -23,35 +31,11 @@ export default () => {
 
       return theme(section as 'colors', key);
     },
-    preflight: css`
-      @layer base {
-        html {
-          color-scheme: light;
-        }
-        body {
-          @apply text-base;
-        }
-        .dark {
-          color-scheme: dark;
-        }
-      }
-
-      @layer utilities {
-        input[type='number']::-webkit-inner-spin-button,
-        input[type='number']::-webkit-outer-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        input[type='number'] {
-          -moz-appearance: textfield;
-        }
-      }
-    `,
+    preflight: preflight,
     theme: {
       screens,
       fontFamily,
       fontSize,
-      colors,
       fontWeight,
       borderRadius,
       extend: {
@@ -63,22 +47,14 @@ export default () => {
         },
       },
     },
-    variants: [
-      ['opened', '&[data-opened]'],
-      ['active', '&[data-active], &:active'],
-      ['disabled', '&[data-loading], &[data-disabled], &[disabled]'],
-      ['selected', '&[data-selected]'],
-      ['focus-visible', '&[data-focus-visible], &:focus-visible'],
-    ],
-    rules: [
-      [
-        'scrollbar',
-        '&::-webkit-scrollbar:(w-[12px] h-[12px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])',
-      ],
-      [
-        'scrollbar-thin',
-        '&::-webkit-scrollbar:(w-[9px] h-[9px]) &::-webkit-scrollbar-thumb:(border-([3px] solid transparent) bg-clip-padding bg-gray-200 rounded-[5px])',
-      ],
-    ],
-  } as TwindPresetConfig;
+    variants: variants,
+    rules: rules,
+  };
+};
+
+export const twindConfig = ({ presets = [], ...userConfig }) => {
+  return defineConfig({
+    presets: [presetAutoprefix(), presetExt(), presetTailwind({ colors: colors }), presetAgile(), ...presets],
+    ...userConfig,
+  });
 };

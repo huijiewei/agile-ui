@@ -10,22 +10,17 @@ Agile 组件库的 CSS-IN-JS 方案使用的是 [Twind](https://twind.style/)，
 通过 twind.config.ts 文件配置，可以灵活定制自己的主题
 
 ```ts
-import presetAgile from '@agile-ui/twind';
-import presetAutoprefix from '@twind/preset-autoprefix';
-import presetExt from '@twind/preset-ext';
-import presetTailwind from '@twind/preset-tailwind';
+import { twindConfig } from '@agile-ui/twind';
 import { css } from '@twind/core';
-import type { TwindUserConfig } from '@twind/core';
 
-export default {
-  presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetAgile()],
+export default twindConfig({
   preflight: css`
     body {
       @apply overflow-y-scroll bg-white text-black antialiased;
     }
   `,
   theme: {}, // 通过修改 theme 定制自己的主题
-} as TwindUserConfig;
+});
 ```
 
 ## 默认颜色

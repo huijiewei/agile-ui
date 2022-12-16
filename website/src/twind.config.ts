@@ -1,17 +1,10 @@
-import presetAgile from '@agile-ui/twind';
-import presetAutoprefix from '@twind/preset-autoprefix';
-import presetExt from '@twind/preset-ext';
-import presetTailwind from '@twind/preset-tailwind';
+import { twindConfig } from '@agile-ui/twind';
 import { css } from '@twind/core';
-import type { TwindUserConfig } from '@twind/core';
 
-export default {
-  presets: [presetAutoprefix(), presetTailwind(), presetAgile(), presetExt()],
+export default twindConfig({
   preflight: css`
-    @layer base {
-      body {
-        @apply overflow-y-scroll bg-white text-black antialiased;
-      }
+    body {
+      @apply overflow-y-scroll bg-white text-black antialiased;
     }
   `,
   rules: [
@@ -39,4 +32,4 @@ export default {
       },
     },
   },
-} as TwindUserConfig;
+});
