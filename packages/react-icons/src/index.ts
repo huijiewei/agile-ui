@@ -2,6 +2,7 @@ export * from './Icon';
 
 export * from './icons/Config';
 export * from './icons/Github';
+export * from './icons/Dot';
 export * from './icons/Edit';
 export * from './icons/Check';
 export * from './icons/Clipboard';

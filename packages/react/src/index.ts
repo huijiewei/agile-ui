@@ -72,9 +72,13 @@ export * from './dropdown-menu/DropdownMenuArrow';
 export * from './dropdown-menu/DropdownMenuTrigger';
 export * from './dropdown-menu/DropdownMenuItem';
 export * from './dropdown-menu/DropdownMenuItemTrigger';
+export * from './dropdown-menu/DropdownMenuItemIndicator';
 export * from './dropdown-menu/DropdownMenuDivider';
 export * from './dropdown-menu/DropdownMenuLabel';
 export * from './dropdown-menu/DropdownMenuGroup';
+export * from './dropdown-menu/DropdownMenuRadioGroup';
+export * from './dropdown-menu/DropdownMenuRadioItem';
+export * from './dropdown-menu/DropdownMenuCheckboxItem';
 
 export * from './overlay/Overlay';
 export * from './spinner/Spinner';

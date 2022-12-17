@@ -14,6 +14,10 @@ import {
 } from './DropdownMenuProvider';
 import { AnimatePresence } from 'framer-motion';
 import { getMotionProps, Motion } from '../motion/Motion';
+import { Box } from '../box/Box';
+import { DropdownMenuCheckboxItem } from './DropdownMenuCheckboxItem';
+import { DropdownMenuRadioGroup } from './DropdownMenuRadioGroup';
+import { DropdownMenuRadioItem } from './DropdownMenuRadioItem';
 
 export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
@@ -78,11 +82,11 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                 >
                   {Children.map(children, (child) => {
                     if (isValidElement(child)) {
-                      if (child.type == DropdownMenuGroup) {
+                      if (child.type == DropdownMenuGroup || child.type == DropdownMenuRadioGroup) {
                         const { children: groupChildren, ...groupRest } = child.props;
 
                         return (
-                          <DropdownMenuGroup {...groupRest}>
+                          <Box as={child.type} {...groupRest}>
                             {Children.map(groupChildren, (groupChild) => {
                               return (
                                 <DropdownMenuItemIndexProvider value={itemIndex++}>
@@ -90,11 +94,16 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
                                 </DropdownMenuItemIndexProvider>
                               );
                             })}
-                          </DropdownMenuGroup>
+                          </Box>
                         );
                       }
 
-                      if (child.type == DropdownMenuItem || child.type == DropdownMenu) {
+                      if (
+                        child.type == DropdownMenuItem ||
+                        child.type == DropdownMenu ||
+                        child.type == DropdownMenuRadioItem ||
+                        child.type == DropdownMenuCheckboxItem
+                      ) {
                         return (
                           <DropdownMenuItemIndexProvider value={itemIndex++}>{child}</DropdownMenuItemIndexProvider>
                         );

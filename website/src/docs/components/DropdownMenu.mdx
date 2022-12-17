@@ -23,20 +23,20 @@ import { DropdownMenu } from '@agile-ui/react';
         console.log('选择了新标签页');
       }}
     >
-      新标签页<span className={'ml-3 text-sm text-gray-500'}>⌘+T</span>
+      新标签页<span className={'ml-auto text-sm text-gray-500'}>⌘+T</span>
     </DropdownMenuItem>
     <DropdownMenuItem>
-      打开新窗口<span className={'ml-3 text-sm text-gray-500'}>⌘+N</span>
+      打开新窗口<span className={'ml-auto text-sm text-gray-500'}>⌘+N</span>
     </DropdownMenuItem>
     <DropdownMenuItem disabled>
-      打开新的无痕式窗口<span className={'ml-3 text-sm'}>⇧+⌘+N</span>
+      打开新的无痕式窗口<span className={'ml-auto pl-5 text-sm'}>⇧+⌘+N</span>
     </DropdownMenuItem>
     <DropdownMenuDivider />
     <DropdownMenuItem>
-      关闭窗口<span className={'ml-3 text-sm text-gray-500'}>⇧+⌘+W</span>
+      关闭窗口<span className={'ml-auto text-sm text-gray-500'}>⇧+⌘+W</span>
     </DropdownMenuItem>
     <DropdownMenuItem>
-      关闭标签页<span className={'ml-3 text-sm text-gray-500'}>⌘+W</span>
+      关闭标签页<span className={'ml-auto text-sm text-gray-500'}>⌘+W</span>
     </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
@@ -89,114 +89,133 @@ import { DropdownMenu } from '@agile-ui/react';
 ## 复杂菜单
 
 ```tsx preview editable
-<DropdownMenu>
-  <DropdownMenuTrigger>
-    <Button>下拉菜单</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuArrow />
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了新标签页');
-      }}
-    >
-      新标签页<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+T</span>
-    </DropdownMenuItem>
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了打开新窗口');
-      }}
-    >
-      打开新窗口<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+N</span>
-    </DropdownMenuItem>
-    <DropdownMenuItem disabled>
-      打开新的无痕式窗口<span className={'ml-auto pl-5 text-sm'}>⇧+⌘+N</span>
-    </DropdownMenuItem>
-    <DropdownMenuDivider />
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了关闭窗口');
-      }}
-    >
-      关闭窗口<span className={'ml-auto pl-5 text-sm text-gray-500'}>⇧+⌘+W</span>
-    </DropdownMenuItem>
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了关闭标签页');
-      }}
-    >
-      关闭标签页<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+W</span>
-    </DropdownMenuItem>
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了页面存储为...');
-      }}
-    >
-      页面存储为...<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+S</span>
-    </DropdownMenuItem>
-    <DropdownMenuDivider />
+function Demo() {
+  const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
+  const [urlsChecked, setUrlsChecked] = React.useState(false);
+  const [account, setAccount] = React.useState('张三');
+
+  return (
     <DropdownMenu>
-      <DropdownMenuItemTrigger>分享</DropdownMenuItemTrigger>
+      <DropdownMenuTrigger>
+        <Button>下拉菜单</Button>
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuArrow />
         <DropdownMenuItem
           onClick={() => {
-            console.log('选择了电子邮件');
+            console.log('选择了新标签页');
           }}
         >
-          电子邮件
+          新标签页<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+T</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            console.log('选择了信息');
+            console.log('选择了打开新窗口');
           }}
         >
-          信息
+          打开新窗口<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+N</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled>
+          打开新的无痕式窗口<span className={'ml-auto pl-5 text-sm'}>⇧+⌘+N</span>
+        </DropdownMenuItem>
+        <DropdownMenuDivider />
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了关闭窗口');
+          }}
+        >
+          关闭窗口<span className={'ml-auto pl-5 text-sm text-gray-500'}>⇧+⌘+W</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            console.log('选择了隔空投送');
+            console.log('选择了关闭标签页');
           }}
         >
-          隔空投送
+          关闭标签页<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+W</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了页面存储为...');
+          }}
+        >
+          页面存储为...<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+S</span>
+        </DropdownMenuItem>
+        <DropdownMenuDivider />
+        <DropdownMenu>
+          <DropdownMenuItemTrigger>分享</DropdownMenuItemTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              onClick={() => {
+                console.log('选择了电子邮件');
+              }}
+            >
+              电子邮件
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                console.log('选择了信息');
+              }}
+            >
+              信息
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                console.log('选择了隔空投送');
+              }}
+            >
+              隔空投送
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenuDivider />
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了打印');
+          }}
+        >
+          打印<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+P</span>
+        </DropdownMenuItem>
+        <DropdownMenuDivider />
+        <DropdownMenuCheckboxItem className={'relative pl-6'} checked={bookmarksChecked} onChange={setBookmarksChecked}>
+          <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+            <Check />
+          </DropdownMenuItemIndicator>
+          显示书签栏<div className="ml-auto pl-5 text-sm text-gray-500">⌘+B</div>
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem className={'relative pl-6'} checked={urlsChecked} onChange={setUrlsChecked}>
+          <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+            <Check />
+          </DropdownMenuItemIndicator>
+          显示路径
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuDivider />
+        <DropdownMenuRadioGroup value={account} onChange={setAccount}>
+          <DropdownMenuLabel>账号</DropdownMenuLabel>
+          <DropdownMenuRadioItem className={'relative pl-6'} value={'张三'}>
+            <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+              <Dot />
+            </DropdownMenuItemIndicator>
+            张三
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem className={'relative pl-6'} value={'李四'}>
+            <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+              <Dot />
+            </DropdownMenuItemIndicator>
+            李四
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+        <DropdownMenuDivider />
+        <DropdownMenuItem
+          onClick={() => {
+            console.log('选择了其他操作');
+          }}
+        >
+          其他操作
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-    <DropdownMenuDivider />
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了打印');
-      }}
-    >
-      打印<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+P</span>
-    </DropdownMenuItem>
-    <DropdownMenuDivider />
-    <DropdownMenuGroup>
-      <DropdownMenuLabel>账号</DropdownMenuLabel>
-      <DropdownMenuItem
-        onClick={() => {
-          console.log('选择了张三');
-        }}
-      >
-        张三
-      </DropdownMenuItem>
-      <DropdownMenuItem
-        onClick={() => {
-          console.log('选择了李四');
-        }}
-      >
-        李四
-      </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuDivider />
-    <DropdownMenuItem
-      onClick={() => {
-        console.log('选择了其他操作');
-      }}
-    >
-      其他操作
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
+  );
+}
 ```
 
 ## 属性
