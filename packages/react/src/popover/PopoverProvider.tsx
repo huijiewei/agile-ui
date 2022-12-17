@@ -2,7 +2,7 @@ import type { FloatingContext, Placement } from '@floating-ui/react';
 import type { HTMLProps, MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';
-import type { MotionPreset } from '../motion/Motion';
+import type { MotionPreset } from '../motion/MotionPresets';
 import type { MotionProps } from 'framer-motion';
 
 type PopoverAriaContextValue = {

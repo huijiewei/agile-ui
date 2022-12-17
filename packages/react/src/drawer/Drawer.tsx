@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { DrawerProvider } from './DrawerProvider';
 import { Modal, ModalProps } from '../modal/Modal';
-import type { MotionPreset } from '../motion/Motion';
+import type { MotionPreset } from '../motion/MotionPresets';
 
 export type DrawerProps = Omit<ModalProps, 'scrollBehavior' | 'motionPreset'> & {
   /**

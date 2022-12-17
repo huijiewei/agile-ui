@@ -2,7 +2,7 @@ import type { FloatingContext, FloatingTreeType, Placement, ReferenceElement } f
 import type { Dispatch, HTMLProps, MutableRefObject, SetStateAction } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';
-import type { MotionPreset } from '../motion/Motion';
+import type { MotionPreset } from '../motion/MotionPresets';
 import type { MotionProps } from 'framer-motion';
 
 const [DropdownMenuPlacementProvider, useDropdownMenuPlacement] = createContext<Placement>({
