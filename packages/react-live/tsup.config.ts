@@ -6,7 +6,6 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   external: [...Object.keys(peerDependencies), ...Object.keys(devDependencies)],
   noExternal: Object.keys(dependencies),
-  target: 'esnext',
   dts: true,
   treeshake: true,
   clean: true,
