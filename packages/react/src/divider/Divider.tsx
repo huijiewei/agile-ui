@@ -56,7 +56,7 @@ export const Divider = primitiveComponent<'div', DividerProps>((props, ref) => {
       className={cx(
         'm-0 border-0',
         hasLabel
-          ? `before:(content-[""] mr-2 flex h-0 shrink items-center text-xs ${
+          ? `flex items-center text-xs before:(content-[""] mr-2 h-0 shrink ${
               position == 'left' ? 'grow-0 basis-5' : 'grow basis-0'
             } border-${variant} border-t-[${size}px] border-t-${color}-300) after:(content-[""] ml-2 shrink ${
               position == 'right' ? 'grow-0 basis-5' : 'grow basis-0'
