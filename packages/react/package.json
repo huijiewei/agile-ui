@@ -42,24 +42,28 @@
   },
   "homepage": "https://agile-ui.vercel.app/",
   "peerDependencies": {
+    "@agile-ui/react-hooks": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": ">=7",
+    "framer-motion": ">=8",
     "react": ">=18",
     "react-dom": ">=18",
     "@twind/core": ">=1"
   },
   "dependencies": {
-    "@agile-ui/react-hooks": "*",
     "@agile-ui/utils": "*",
-    "@floating-ui/react": "^0.14.0",
-    "@tanstack/react-virtual": "^3.0.0-beta.30"
+    "@floating-ui/react": "0.14.0",
+    "@floating-ui/react-dom": "1.0.1",
+    "@floating-ui/core": "1.0.4",
+    "@floating-ui/dom": "1.0.12",
+    "@tanstack/react-virtual": "^3.0.0-beta.32"
   },
   "devDependencies": {
+    "@agile-ui/react-hooks": "*",
     "@agile-ui/test-utils": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": "^7.10.2",
+    "framer-motion": "^8.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@twind/core": "^1.1.0"
+    "@twind/core": "^1.1.2"
   }
 }

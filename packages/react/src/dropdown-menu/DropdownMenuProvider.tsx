@@ -50,7 +50,6 @@ type DropdownMenuFloatingContextValue = DropdownMenuContentContextValue & {
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
 
   nested: boolean;
-  nodeId: string;
 
   motionPreset: MotionPreset;
   motionProps?: MotionProps;
@@ -76,7 +75,7 @@ type DropdownMenuDispatchContextValue = {
 
 const [DropdownMenuDispatchProvider, useDropdownMenuDispatch] = createContext<DropdownMenuDispatchContextValue>({
   strict: true,
-  name: 'PopoverDispatchContext',
+  name: 'DropdownMenuDispatchContext',
 });
 
 export { DropdownMenuDispatchProvider, useDropdownMenuDispatch };

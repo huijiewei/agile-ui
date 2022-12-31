@@ -1,5 +1,5 @@
 import { useMergedRefs } from '@agile-ui/react-hooks';
-import { FloatingFocusManager, FloatingNode } from '@floating-ui/react';
+import { FloatingFocusManager } from '@floating-ui/react';
 import { Children, isValidElement } from 'react';
 import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
@@ -30,7 +30,6 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     floating,
     getFloatingProps,
     nested,
-    nodeId,
     tree,
     allowHover,
     getItemProps,
@@ -45,80 +44,76 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
   let itemIndex = 0;
 
   return (
-    <FloatingNode id={nodeId}>
-      <Portal>
-        <AnimatePresence>
-          {open && (
-            <FloatingFocusManager
-              modal={!nested}
-              order={['reference', 'content']}
-              returnFocus={!nested}
-              context={context}
+    <Portal>
+      <AnimatePresence>
+        {open && (
+          <FloatingFocusManager
+            modal={!nested}
+            order={['reference', 'content']}
+            returnFocus={!nested}
+            context={context}
+          >
+            <Motion
+              {...getMotionProps(motionPreset, motionProps)}
+              className={cx(
+                'absolute outline-none',
+                'rounded border border-gray-200 bg-white p-1.5 shadow dark:bg-gray-700',
+                className
+              )}
+              ref={refs}
+              {...getFloatingProps({
+                ...rest,
+                style: {
+                  top: y ? `${y}px` : '',
+                  left: x ? `${x}px` : '',
+                },
+              })}
             >
-              <Motion
-                {...getMotionProps(motionPreset, motionProps)}
-                className={cx(
-                  'absolute outline-none',
-                  'rounded border border-gray-200 bg-white p-1.5 shadow dark:bg-gray-700',
-                  className
-                )}
-                {...getFloatingProps({
-                  ...rest,
-                  ref: refs,
-                  style: {
-                    top: y ? `${y}px` : '',
-                    left: x ? `${x}px` : '',
-                  },
-                })}
+              <DropdownMenuContentProvider
+                value={{
+                  tree,
+                  allowHover,
+                  getItemProps,
+                  listItemsRef,
+                  setActiveIndex,
+                }}
               >
-                <DropdownMenuContentProvider
-                  value={{
-                    tree,
-                    allowHover,
-                    getItemProps,
-                    listItemsRef,
-                    setActiveIndex,
-                  }}
-                >
-                  {Children.map(children, (child) => {
-                    if (isValidElement(child)) {
-                      if (child.type == DropdownMenuGroup || child.type == DropdownMenuRadioGroup) {
-                        const { children: groupChildren, ...groupRest } = child.props;
+                {Children.map(children, (child) => {
+                  if (isValidElement(child)) {
+                    if (child.type == DropdownMenuGroup || child.type == DropdownMenuRadioGroup) {
+                      const { children: groupChildren, ...groupRest } = child.props;
 
-                        return (
-                          <Box as={child.type} {...groupRest}>
-                            {Children.map(groupChildren, (groupChild) => {
-                              return (
-                                <DropdownMenuItemIndexProvider value={itemIndex++}>
-                                  {groupChild}
-                                </DropdownMenuItemIndexProvider>
-                              );
-                            })}
-                          </Box>
-                        );
-                      }
-
-                      if (
-                        child.type == DropdownMenuItem ||
-                        child.type == DropdownMenu ||
-                        child.type == DropdownMenuRadioItem ||
-                        child.type == DropdownMenuCheckboxItem
-                      ) {
-                        return (
-                          <DropdownMenuItemIndexProvider value={itemIndex++}>{child}</DropdownMenuItemIndexProvider>
-                        );
-                      }
+                      return (
+                        <Box as={child.type} {...groupRest}>
+                          {Children.map(groupChildren, (groupChild) => {
+                            return (
+                              <DropdownMenuItemIndexProvider value={itemIndex++}>
+                                {groupChild}
+                              </DropdownMenuItemIndexProvider>
+                            );
+                          })}
+                        </Box>
+                      );
                     }
 
-                    return child;
-                  })}
-                </DropdownMenuContentProvider>
-              </Motion>
-            </FloatingFocusManager>
-          )}
-        </AnimatePresence>
-      </Portal>
-    </FloatingNode>
+                    if (
+                      child.type == DropdownMenuItem ||
+                      child.type == DropdownMenu ||
+                      child.type == DropdownMenuRadioItem ||
+                      child.type == DropdownMenuCheckboxItem
+                    ) {
+                      return <DropdownMenuItemIndexProvider value={itemIndex++}>{child}</DropdownMenuItemIndexProvider>;
+                    }
+                  }
+
+                  return child;
+                })}
+              </DropdownMenuContentProvider>
+            </Motion>
+          </FloatingFocusManager>
+        )}
+      </AnimatePresence>
+    </Portal>
   );
 });
 

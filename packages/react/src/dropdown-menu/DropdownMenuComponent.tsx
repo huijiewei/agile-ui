@@ -1,6 +1,7 @@
 import {
   autoUpdate,
   flip,
+  FloatingNode,
   offset,
   Placement,
   safePolygon,
@@ -98,7 +99,6 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
     reference,
     floating,
     context,
-    refs,
     placement: placementState,
   } = useFloating<HTMLElement>({
     middleware: [offset({ mainAxis: 8, alignmentAxis: nested ? -5 : 0 }), flip(), shift({ padding: 8 })],
@@ -120,7 +120,7 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       enabled: nested && allowHover,
       handleClose: safePolygon(),
     }),
-    useClick(context, { toggle: !nested, event: 'mousedown', ignoreMouse: nested }),
+    useClick(context, { toggle: !nested || !allowHover, event: 'mousedown', ignoreMouse: nested }),
     useRole(context, { role: 'menu' }),
     useDismiss(context, { escapeKey: closeOnEsc, outsidePress: closeOnBlur }),
     useListNavigation(context, {
@@ -141,10 +141,6 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
     const handleClick = () => {
       if (closeOnSelect) {
         handleClose();
-
-        if (parentId == null) {
-          refs.reference.current?.focus();
-        }
       }
     };
 
@@ -153,7 +149,7 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
     return () => {
       tree?.events.off('click', handleClick);
     };
-  }, [parentId, tree, refs, handleClose, closeOnSelect]);
+  }, [tree, handleClose, closeOnSelect]);
 
   const referenceContextValue = useMemo(
     () => ({
@@ -173,7 +169,6 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       floating,
       getFloatingProps,
       nested,
-      nodeId,
       tree,
       allowHover,
       getItemProps,
@@ -182,28 +177,16 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       motionPreset,
       motionProps,
     }),
-    [
-      allowHover,
-      context,
-      floating,
-      getFloatingProps,
-      getItemProps,
-      motionPreset,
-      motionProps,
-      nested,
-      nodeId,
-      open,
-      tree,
-      x,
-      y,
-    ]
+    [allowHover, context, floating, getFloatingProps, getItemProps, motionPreset, motionProps, nested, open, tree, x, y]
   );
 
   return (
     <DropdownMenuPlacementProvider value={placementState}>
       <DropdownMenuReferenceProvider value={referenceContextValue}>
         <DropdownMenuFloatingProvider value={floatingContextValue}>
-          <DropdownMenuDispatchProvider value={{ handleClose }}>{children}</DropdownMenuDispatchProvider>
+          <DropdownMenuDispatchProvider value={{ handleClose }}>
+            <FloatingNode id={nodeId}>{children}</FloatingNode>
+          </DropdownMenuDispatchProvider>
         </DropdownMenuFloatingProvider>
       </DropdownMenuReferenceProvider>
     </DropdownMenuPlacementProvider>
