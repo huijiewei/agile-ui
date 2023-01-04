@@ -22,7 +22,7 @@
     "chalk": "^5.2.0",
     "pretty-format": "^29.3.1",
     "lodash-es": "^4.17.21",
-    "@twind/core": "^1.0.3"
+    "@twind/core": "^1.1.2"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
