@@ -50,7 +50,6 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
       {...getItemProps({
         onClick: (event) => {
           event.stopPropagation();
-          (event.currentTarget as HTMLButtonElement).focus();
         },
         onPointerEnter: () => {
           if (allowHover) {
