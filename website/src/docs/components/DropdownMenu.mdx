@@ -176,14 +176,14 @@ function Demo() {
           打印<span className={'ml-auto pl-5 text-sm text-gray-500'}>⌘+P</span>
         </DropdownMenuItem>
         <DropdownMenuDivider />
-        <DropdownMenuCheckboxItem className={'relative pl-6'} checked={bookmarksChecked} onChange={setBookmarksChecked}>
-          <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+        <DropdownMenuCheckboxItem checked={bookmarksChecked} onChange={setBookmarksChecked}>
+          <DropdownMenuItemIndicator>
             <Check />
           </DropdownMenuItemIndicator>
           显示书签栏<div className="ml-auto pl-5 text-sm text-gray-500">⌘+B</div>
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem className={'relative pl-6'} checked={urlsChecked} onChange={setUrlsChecked}>
-          <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+        <DropdownMenuCheckboxItem checked={urlsChecked} onChange={setUrlsChecked}>
+          <DropdownMenuItemIndicator>
             <Check />
           </DropdownMenuItemIndicator>
           显示路径
@@ -191,14 +191,14 @@ function Demo() {
         <DropdownMenuDivider />
         <DropdownMenuRadioGroup value={account} onChange={setAccount}>
           <DropdownMenuLabel>账号</DropdownMenuLabel>
-          <DropdownMenuRadioItem className={'relative pl-6'} value={'张三'}>
-            <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+          <DropdownMenuRadioItem value={'张三'}>
+            <DropdownMenuItemIndicator>
               <Dot />
             </DropdownMenuItemIndicator>
             张三
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem className={'relative pl-6'} value={'李四'}>
-            <DropdownMenuItemIndicator className={'absolute w-6 left-0 inline-flex items-center justify-center'}>
+          <DropdownMenuRadioItem value={'李四'}>
+            <DropdownMenuItemIndicator>
               <Dot />
             </DropdownMenuItemIndicator>
             李四

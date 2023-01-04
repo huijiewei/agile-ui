@@ -22,7 +22,7 @@ export const DropdownMenuItemIndicator = (props: PrimitiveComponentProps<'span'>
   const context = useDropdownMenuItemIndicator();
 
   return context.checked ? (
-    <span className={cx('', className)} {...rest}>
+    <span className={cx('absolute w-6 left-0 inline-flex items-center justify-center', className)} {...rest}>
       {children}
     </span>
   ) : null;

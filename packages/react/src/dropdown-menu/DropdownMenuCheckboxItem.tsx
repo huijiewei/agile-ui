@@ -1,6 +1,7 @@
 import { primitiveComponent } from '../utils/component';
 import { DropdownMenuItem } from './DropdownMenuItem';
 import { CheckedState, DropdownMenuItemIndicatorProvider } from './DropdownMenuItemIndicator';
+import { cx } from '@twind/core';
 
 type DropdownMenuCheckboxItemProps = {
   checked?: CheckedState;
@@ -10,7 +11,7 @@ type DropdownMenuCheckboxItemProps = {
 
 export const DropdownMenuCheckboxItem = primitiveComponent<typeof DropdownMenuItem, DropdownMenuCheckboxItemProps>(
   (props, ref) => {
-    const { checked = false, onChange, onClick, children, ...rest } = props;
+    const { checked = false, className, onChange, onClick, children, ...rest } = props;
 
     return (
       <DropdownMenuItemIndicatorProvider value={{ checked }}>
@@ -21,6 +22,7 @@ export const DropdownMenuCheckboxItem = primitiveComponent<typeof DropdownMenuIt
             onClick && onClick();
           }}
           aria-checked={checked == 'indeterminate' ? 'mixed' : checked}
+          className={cx('relative pl-6', className)}
           {...rest}
           ref={ref}
         >
