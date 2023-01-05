@@ -343,10 +343,10 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
       onChange && onChange(nextValue);
 
       requestAnimationFrame(() => {
-        refs.reference.current?.focus();
+        refs.domReference.current?.focus();
       });
     },
-    [closeOnSelect, controlled, controlledValue, onChange, refs.reference, searchable]
+    [closeOnSelect, controlled, controlledValue, onChange, refs.domReference, searchable]
   );
 
   const handleClear = useCallback(() => {
