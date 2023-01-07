@@ -58,7 +58,7 @@
     "@agile-ui/react-hooks": "*",
     "@agile-ui/test-utils": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": "^8.1.9",
+    "framer-motion": "^8.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@twind/core": "^1.1.2"
