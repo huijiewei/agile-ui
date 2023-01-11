@@ -1,4 +1,5 @@
 import {
+  arrow,
   autoPlacement,
   autoUpdate,
   flip,
@@ -17,10 +18,10 @@ import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
-import { TooltipArrow } from './TooltipArrow';
 import { AnimatePresence } from 'framer-motion';
 import { getMotionProps, Motion, MotionComponentProps } from '../motion/Motion';
 import { useDisclosure, useMergedRefs } from '@agile-ui/react-hooks';
+import { FloatingArrow } from '../floating/FloatingArrow';
 
 type TooltipProps = {
   /**
@@ -119,7 +120,10 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
               })}
             >
               {content}
-              <TooltipArrow color={color} placement={placementState} />
+              <FloatingArrow
+                placement={placementState}
+                className={`border-${color}-600 bg-${color}-600 text-${color}-50`}
+              />
             </Motion>
           )}
         </AnimatePresence>
