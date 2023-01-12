@@ -28,7 +28,7 @@ const AsideCollapsedButton = () => {
 export const LayoutHeader = () => {
   return (
     <header className={'sticky top-0 z-30 w-full border-b border-gray-100 bg-opacity-70 backdrop-blur'}>
-      <div className={'mx-auto flex max-w-7xl items-center justify-between p-3'}>
+      <div className={'mx-auto flex items-center justify-between p-3'}>
         <AsideCollapsedButton />
         <div className={'flex flex-row items-center'}>
           <Link to={'/'}>

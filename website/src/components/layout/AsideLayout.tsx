@@ -16,7 +16,7 @@ export const AsideLayout = () => {
   return (
     <>
       <LayoutAside />
-      <div className={'tablet:pl-52'}>
+      <div className={'tablet:pl-64'}>
         <main className={'mx-auto h-full p-5'}>
           <Suspense fallback={<LazyLoader className={'h-96'} />}>
             <Outlet />

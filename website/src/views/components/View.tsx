@@ -105,7 +105,7 @@ const ComponentView = () => {
             </a>
           </p>
         </article>
-        <nav className={'hidden w-36 laptop:block'}>
+        <nav className={'hidden w-52 laptop:block'}>
           <MdxToc className={'sticky top-20 ml-9'} toc={mdx.toc}></MdxToc>
         </nav>
       </div>

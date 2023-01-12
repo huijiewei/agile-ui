@@ -8,7 +8,7 @@ export const BlankLayout = () => {
   return (
     <LayoutProvider>
       <LayoutHeader />
-      <div className={'mx-auto max-w-7xl'}>
+      <div className={'mx-auto'}>
         <Suspense fallback={<LazyLoader className={'h-96'} />}>
           <Outlet />
         </Suspense>
