@@ -51,8 +51,8 @@
   },
   "dependencies": {
     "@agile-ui/utils": "*",
-    "@floating-ui/react": "^0.17.0",
-    "@tanstack/react-virtual": "^3.0.0-beta.36"
+    "@floating-ui/react": "^0.18.0",
+    "@tanstack/react-virtual": "^3.0.0-beta.39"
   },
   "devDependencies": {
     "@agile-ui/react-hooks": "*",
