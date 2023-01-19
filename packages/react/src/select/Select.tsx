@@ -283,9 +283,9 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const selectedIndex = useMemo(() => {
     if (Array.isArray(controlledValue)) {
-      return controlledValue.map((value) => options.get(value)?.index || -1);
+      return controlledValue.map((value) => options.get(value)?.index ?? -1);
     } else {
-      return [controlledValue != undefined ? options.get(controlledValue)?.index || -1 : -1];
+      return [controlledValue != undefined ? options.get(controlledValue)?.index ?? -1 : -1];
     }
   }, [controlledValue, options]);
 
