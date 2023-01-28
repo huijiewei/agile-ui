@@ -51,16 +51,16 @@
   },
   "dependencies": {
     "@agile-ui/utils": "*",
-    "@floating-ui/react": "^0.18.0",
-    "@tanstack/react-virtual": "^3.0.0-beta.39"
+    "@floating-ui/react": "^0.18.1",
+    "@tanstack/react-virtual": "^3.0.0-beta.41"
   },
   "devDependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/test-utils": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": "^8.5.0",
+    "framer-motion": "^8.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@twind/core": "^1.1.2"
+    "@twind/core": "^1.1.3"
   }
 }
