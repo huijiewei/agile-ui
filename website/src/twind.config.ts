@@ -4,7 +4,7 @@ import { css } from '@twind/core';
 export default twindConfig({
   preflight: css`
     body {
-      @apply overflow-y-scroll bg-white text-black antialiased;
+      @apply overflow-y-scroll bg-white text-black text-base antialiased;
     }
   `,
   rules: [

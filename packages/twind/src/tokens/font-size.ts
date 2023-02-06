@@ -1,4 +1,4 @@
-import type { TailwindTheme } from '@twind/preset-tailwind';
+import type { AgileTheme } from '../types/types';
 
 export default {
   xs: ['0.75rem', '1rem'],
@@ -6,4 +6,4 @@ export default {
   base: ['0.875rem', '1.375rem'],
   lg: ['1rem', '1.5rem'],
   xl: ['1.25rem', '1.75rem'],
-} as TailwindTheme['fontSize'];
+} satisfies AgileTheme['fontSize'];
