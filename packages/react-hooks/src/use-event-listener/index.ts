@@ -35,7 +35,6 @@ export const useEventListener: UseEventListener = (
   handler: (event: any) => void,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   element?: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options?: boolean | AddEventListenerOptions
 ) => {
   const listener = useCallbackRef(handler);
