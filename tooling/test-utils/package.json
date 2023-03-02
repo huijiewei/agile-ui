@@ -1,8 +1,8 @@
 {
   "name": "@agile-ui/test-utils",
+  "private": true,
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
   "type": "module",
   "main": "src/index.ts",
   "repository": {

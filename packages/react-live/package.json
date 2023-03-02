@@ -1,13 +1,11 @@
 {
   "name": "@agile-ui/react-live",
+  "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
   "author": "Huijie Wei",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist"
   ],
@@ -15,8 +13,6 @@
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {

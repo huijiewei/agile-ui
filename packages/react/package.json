@@ -1,6 +1,6 @@
 {
   "name": "@agile-ui/react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
@@ -25,8 +25,6 @@
     "build": "tsup",
     "prepublishOnly": "npm run build"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -44,7 +42,7 @@
   "peerDependencies": {
     "@agile-ui/react-hooks": "*",
     "@agile-ui/twind": "*",
-    "framer-motion": ">=8",
+    "framer-motion": ">=10",
     "react": ">=18",
     "react-dom": ">=18",
     "@twind/core": ">=1"

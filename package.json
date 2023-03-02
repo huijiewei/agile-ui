@@ -12,7 +12,7 @@
     "test": "vitest",
     "lint": "eslint --cache --ext .js,.jsx,.cjs,.mjs,.ts,.tsx .",
     "format": "prettier --write .",
-    "build": "npm run build --workspace packages",
+    "build": "npm run build --workspace packages --if-present",
     "website:dev": "npm run dev --workspace website",
     "website:build": "npm run build --workspace website",
     "website:build:ui": "npm run build:ui --workspace website",

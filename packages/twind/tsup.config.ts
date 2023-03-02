@@ -7,6 +7,7 @@ export default defineConfig({
   external: [...Object.keys(peerDependencies), ...Object.keys(devDependencies)],
   noExternal: Object.keys(dependencies),
   dts: true,
+  minify: true,
   treeshake: true,
   clean: true,
 });
