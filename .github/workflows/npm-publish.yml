@@ -5,22 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install
-        run: npm install
-
-      - name: Build
-        run: npm run build --workspace packages/react --workspace packages/react-hooks --workspace packages/react-icons --workspace packages/twind --workspace packages/utils
-
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,6 +13,14 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm publish --workspace packages/react --workspace packages/react-hooks --workspace packages/react-icons --workspace packages/twind --workspace packages/utils
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build --workspace packages/react --workspace packages/react-hooks --workspace packages/react-icons --workspace packages/twind --workspace packages/utils
+
+      - name: Publish
+        run: npm publish --workspace packages/react --workspace packages/react-hooks --workspace packages/react-icons --workspace packages/twind --workspace packages/utils
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

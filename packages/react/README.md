@@ -9,7 +9,7 @@
 ## 安装
 
 ```bash
-npm i agile-ui/react agile-ui/react-hooks agile-ui/twind
+npm i @agile-ui/react @agile-ui/react-hooks @agile-ui/twind
 ```
 
 ## 许可证
