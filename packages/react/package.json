@@ -22,8 +22,7 @@
     "twind"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepublishOnly": "npm run build"
+    "build": "tsup"
   },
   "types": "./dist/index.d.ts",
   "exports": {
@@ -40,22 +39,22 @@
   },
   "homepage": "https://agile-ui.vercel.app/",
   "peerDependencies": {
-    "@agile-ui/react-hooks": "*",
-    "@agile-ui/twind": "*",
+    "@agile-ui/react-hooks": ">=1",
+    "@agile-ui/twind": ">=1",
     "framer-motion": ">=10",
     "react": ">=18",
     "react-dom": ">=18",
     "@twind/core": ">=1"
   },
   "dependencies": {
-    "@agile-ui/utils": "*",
+    "@agile-ui/utils": "^1.0.1",
     "@floating-ui/react": "^0.20.1",
     "@tanstack/react-virtual": "^3.0.0-beta.52"
   },
   "devDependencies": {
-    "@agile-ui/react-hooks": "*",
+    "@agile-ui/react-hooks": "^1.0.1",
     "@agile-ui/test-utils": "*",
-    "@agile-ui/twind": "*",
+    "@agile-ui/twind": "^1.0.1",
     "framer-motion": "^10.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

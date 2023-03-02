@@ -10,8 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepublishOnly": "npm run build"
+    "build": "tsup"
   },
   "types": "./dist/index.d.ts",
   "exports": {

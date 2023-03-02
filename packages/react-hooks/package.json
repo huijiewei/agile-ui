@@ -12,8 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "prepublishOnly": "npm run build"
+    "build": "tsup"
   },
   "types": "./dist/index.d.ts",
   "exports": {
@@ -32,7 +31,7 @@
     "react": ">=18"
   },
   "dependencies": {
-    "@agile-ui/utils": "*"
+    "@agile-ui/utils": "^1.0.1"
   },
   "devDependencies": {
     "react": "^18.2.0",

@@ -17,7 +17,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build:packages
 
   publish-npm:
     needs: build
@@ -28,6 +28,6 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm publish
+      - run: npm publish workspaces
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
