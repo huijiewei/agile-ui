@@ -3,6 +3,7 @@ import {
   autoPlacement,
   autoUpdate,
   flip,
+  FloatingArrow,
   offset,
   Placement,
   shift,
@@ -13,15 +14,15 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react';
-import { cloneElement, ReactNode } from 'react';
-import { cx } from '@twind/core';
+import { cloneElement, ReactNode, useMemo, useRef } from 'react';
+import { cx, tw } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
 import { AnimatePresence } from 'framer-motion';
 import { getMotionProps, Motion, MotionComponentProps } from '../motion/Motion';
 import { useDisclosure, useMergedRefs } from '@agile-ui/react-hooks';
-import { FloatingArrow } from '../floating/FloatingArrow';
+import { FloatingArrowComponent, FloatingArrowContextValue, FloatingArrowProvider } from '../floating/FloatingArrow';
 
 type TooltipProps = {
   /**
@@ -70,15 +71,17 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
 
   const { open, handleOpen, handleClose } = useDisclosure({ opened });
 
-  const {
-    x,
-    y,
-    reference,
-    floating,
-    context,
-    placement: placementState,
-  } = useFloating<HTMLElement>({
-    middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
+  const arrowRef = useRef<SVGSVGElement>(null);
+
+  const { x, y, refs, context } = useFloating({
+    middleware: [
+      offset(8),
+      placement == 'auto' ? autoPlacement() : flip(),
+      shift({ padding: 8 }),
+      arrow({
+        element: arrowRef,
+      }),
+    ],
     open,
     onOpenChange: (opened) => {
       opened ? handleOpen() : handleClose();
@@ -95,11 +98,21 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const refs = useMergedRefs((children as any).ref, reference);
+  const referenceRefs = useMergedRefs((children as any).ref, refs.setReference);
+
+  const arrowContextValue = useMemo<FloatingArrowContextValue>(
+    () => ({
+      setArrow: arrowRef,
+      context,
+      color: `${color}.600`,
+      borderColor: `${color}.600`,
+    }),
+    [context, color]
+  );
 
   return (
-    <>
-      {cloneElement(children, getReferenceProps({ ref: refs, ...children.props }))}
+    <FloatingArrowProvider value={arrowContextValue}>
+      {cloneElement(children, getReferenceProps({ ref: referenceRefs, ...children.props }))}
       <Portal>
         <AnimatePresence>
           {open && (
@@ -110,25 +123,22 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
                 `border-${color}-600 bg-${color}-600 text-${color}-50`,
                 className
               )}
+              ref={refs.setFloating}
+              style={{
+                top: y ? `${y}px` : '',
+                left: x ? `${x}px` : '',
+              }}
               {...getFloatingProps({
                 ...rest,
-                ref: floating,
-                style: {
-                  top: y ? `${y}px` : '',
-                  left: x ? `${x}px` : '',
-                },
               })}
             >
               {content}
-              <FloatingArrow
-                placement={placementState}
-                className={`border-${color}-600 bg-${color}-600 text-${color}-50`}
-              />
+              <FloatingArrowComponent />
             </Motion>
           )}
         </AnimatePresence>
       </Portal>
-    </>
+    </FloatingArrowProvider>
   );
 };
 

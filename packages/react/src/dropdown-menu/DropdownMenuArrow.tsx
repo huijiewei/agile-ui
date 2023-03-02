@@ -1,20 +1,3 @@
-import { cx } from '@twind/core';
-import { FloatingArrow } from '../floating/FloatingArrow';
-import type { PrimitiveComponentProps } from '../utils/component';
-import { useDropdownMenuPlacement } from './DropdownMenuProvider';
+import { FloatingArrowComponent } from '../floating/FloatingArrow';
 
-export const DropdownMenuArrow = (props: PrimitiveComponentProps<'span'>) => {
-  const { className, ...rest } = props;
-
-  const placement = useDropdownMenuPlacement();
-
-  return (
-    <FloatingArrow
-      placement={placement}
-      className={cx('border-gray-200 bg-white dark:bg-gray-700', className)}
-      {...rest}
-    />
-  );
-};
-
-DropdownMenuArrow.displayName = 'DropdownMenuArrow';
+export const DropdownMenuArrow = FloatingArrowComponent;

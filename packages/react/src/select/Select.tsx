@@ -289,7 +289,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
     }
   }, [controlledValue, options]);
 
-  const { x, y, reference, floating, context, refs, middlewareData } = useFloating<HTMLElement>({
+  const { x, y, context, refs, middlewareData } = useFloating<HTMLElement>({
     middleware: [
       offset(4),
       flip({ padding: 8 }),
@@ -555,7 +555,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
 
   const [focusRef, focus] = useFocus();
 
-  const referenceRef = useMergedRefs(reference, focusRef);
+  const referenceRefs = useMergedRefs(refs.setReference, focusRef);
 
   return (
     <SelectProvider
@@ -592,7 +592,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
         {...getReferenceProps({
           role: 'combobox',
           style: style,
-          ref: referenceRef,
+          ref: referenceRefs,
           onFocus: () => {
             searchable && searchInputRef.current && searchInputRef.current.focus();
           },
@@ -674,7 +674,7 @@ export const Select = primitiveComponent<'input', SelectProps>((props, ref) => {
                 'scrollbar-thin absolute z-50 max-h-80 overflow-y-auto overscroll-contain rounded border border-gray-200 bg-white shadow outline-none dark:bg-gray-700',
                 virtual ? 'px-1.5' : 'p-1.5'
               )}
-              ref={floating}
+              ref={refs.setFloating}
               style={{
                 top: y || 0,
                 left: x || 0,

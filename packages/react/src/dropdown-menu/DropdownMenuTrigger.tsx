@@ -12,9 +12,9 @@ type DropdownMenuTriggerProps = {
 export const DropdownMenuTrigger = primitiveComponent<'div', DropdownMenuTriggerProps>((props, ref) => {
   const { children, ...rest } = props;
 
-  const { reference, getReferenceProps, open } = useDropdownMenuReference();
+  const { setReference, getReferenceProps, open } = useDropdownMenuReference();
 
-  const refs = useMergedRefs(ref, reference);
+  const refs = useMergedRefs(ref, setReference);
 
   return cloneElement(children, {
     'data-active': dataAttr(open),

@@ -12,7 +12,7 @@ import {
 export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref) => {
   const { children, className, disabled, ...rest } = props;
 
-  const { reference, getReferenceProps, open } = useDropdownMenuReference();
+  const { setReference, getReferenceProps, open } = useDropdownMenuReference();
   const { handleClose } = useDropdownMenuDispatch();
 
   const { getItemProps, listItemsRef, allowHover, setActiveIndex } = useDropdownMenuContent();
@@ -23,7 +23,7 @@ export const DropdownMenuItemTrigger = primitiveComponent<'button'>((props, ref)
     (node: HTMLButtonElement) => {
       listItemsRef.current[itemIndex] = node;
     },
-    reference
+    setReference
   );
 
   return (

@@ -73,7 +73,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     motionProps,
   } = props;
 
-  const { floating, context } = useFloating<HTMLElement>({
+  const { refs, context } = useFloating<HTMLElement>({
     open: opened,
     onOpenChange: (opened) => {
       if (!opened) {
@@ -100,7 +100,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     () => ({
       open: opened,
       context,
-      floating,
+      setFloating: refs.setFloating,
       getFloatingProps,
       initialFocus,
       finalFocus,
@@ -115,7 +115,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     [
       opened,
       context,
-      floating,
+      refs.setFloating,
       getFloatingProps,
       initialFocus,
       finalFocus,

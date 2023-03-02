@@ -15,12 +15,12 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/jest-dom": "^5.16.5",
     "axe-core": "^4.6.3",
     "chalk": "^5.2.0",
-    "pretty-format": "^29.4.1",
+    "pretty-format": "^29.4.3",
     "lodash-es": "^4.17.21",
     "@twind/core": "^1.1.3"
   },

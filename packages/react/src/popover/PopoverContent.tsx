@@ -10,12 +10,12 @@ import { getMotionProps, Motion } from '../motion/Motion';
 export const PopoverContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
 
-  const { open, x, y, floating, context, getFloatingProps, modal, initialFocus, motionPreset, motionProps } =
+  const { open, x, y, setFloating, context, getFloatingProps, modal, initialFocus, motionPreset, motionProps } =
     usePopoverFloating();
 
   const { labelId, descriptionId } = usePopoverAria();
 
-  const refs = useMergedRefs(floating, ref);
+  const refs = useMergedRefs(setFloating, ref);
 
   return (
     <Portal>

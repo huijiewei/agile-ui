@@ -4,20 +4,13 @@ import preflight from './preflight';
 import theme from './theme';
 import rules from './rules';
 import variants from './variants';
+import { autoColorKey } from '../utils/color';
 
 const presetAgile = (): Preset<AgileTheme> => {
   return {
     darkMode: 'class',
     darkColor: (section, key, { theme }) => {
-      key =
-        key == 'white'
-          ? 'black'
-          : key == 'black'
-          ? 'white'
-          : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            key.replace(/\d+$/, (shade) => ((8 - ~~(parseInt(shade, 10) / 100) || 0.5) * 100) as any);
-
-      return theme(section as 'colors', key);
+      return theme(section as 'colors', autoColorKey(key));
     },
     preflight,
     theme,

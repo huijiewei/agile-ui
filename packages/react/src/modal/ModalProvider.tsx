@@ -9,7 +9,7 @@ import type { MotionProps } from 'framer-motion';
 type ModalContextValue = {
   open: boolean;
   context: FloatingContext<HTMLElement>;
-  floating: (node: HTMLElement) => void;
+  setFloating: (node: HTMLElement) => void;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
   lockScroll?: boolean;
   initialFocus?: number | RefObject<HTMLElement>;

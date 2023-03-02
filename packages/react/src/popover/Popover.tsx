@@ -1,5 +1,6 @@
 import { runIfFn } from '@agile-ui/utils';
 import {
+  arrow,
   autoPlacement,
   autoUpdate,
   flip,
@@ -13,16 +14,16 @@ import {
   useRole,
 } from '@floating-ui/react';
 import type { PropsWithChildren, ReactNode, RefObject } from 'react';
-import { useId, useMemo } from 'react';
+import { useId, useMemo, useRef } from 'react';
 import {
   PopoverAriaProvider,
   PopoverDispatchProvider,
   PopoverFloatingProvider,
-  PopoverPlacementProvider,
   PopoverReferenceProvider,
 } from './PopoverProvider';
 import { useDisclosure } from '@agile-ui/react-hooks';
 import type { MotionComponentProps } from '../motion/Motion';
+import { FloatingArrowProvider } from '../floating/FloatingArrow';
 
 export type PopoverProps = {
   /**
@@ -84,17 +85,19 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
     motionProps,
   } = props;
 
+  const arrowRef = useRef<SVGSVGElement>(null);
+
   const { open, handleOpen, handleClose } = useDisclosure({ opened, onClose });
 
-  const {
-    x,
-    y,
-    reference,
-    floating,
-    context,
-    placement: placementState,
-  } = useFloating<HTMLElement>({
-    middleware: [offset(8), placement == 'auto' ? autoPlacement() : flip(), shift({ padding: 8 })],
+  const { x, y, refs, context } = useFloating({
+    middleware: [
+      offset(8),
+      placement == 'auto' ? autoPlacement() : flip(),
+      shift({ padding: 8 }),
+      arrow({
+        element: arrowRef,
+      }),
+    ],
     open,
     onOpenChange: (opened) => {
       opened ? handleOpen() : handleClose();
@@ -124,10 +127,10 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
   const referenceContextValue = useMemo(
     () => ({
       open,
-      reference,
+      setReference: refs.setReference,
       getReferenceProps,
     }),
-    [getReferenceProps, open, reference]
+    [getReferenceProps, open, refs.setReference]
   );
 
   const floatingContextValue = useMemo(
@@ -136,19 +139,29 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
       y,
       open,
       context,
-      floating,
+      setFloating: refs.setFloating,
       getFloatingProps,
       modal,
       initialFocus,
       motionPreset,
       motionProps,
     }),
-    [context, floating, getFloatingProps, initialFocus, modal, motionPreset, motionProps, open, x, y]
+    [context, refs.setFloating, getFloatingProps, initialFocus, modal, motionPreset, motionProps, open, x, y]
+  );
+
+  const arrowContextValue = useMemo(
+    () => ({
+      setArrow: arrowRef,
+      context,
+      color: 'white',
+      borderColor: 'gray.200',
+    }),
+    [context]
   );
 
   return (
     <PopoverAriaProvider value={contextValue}>
-      <PopoverPlacementProvider value={placementState}>
+      <FloatingArrowProvider value={arrowContextValue}>
         <PopoverDispatchProvider value={{ handleClose }}>
           <PopoverReferenceProvider value={referenceContextValue}>
             <PopoverFloatingProvider value={floatingContextValue}>
@@ -156,7 +169,7 @@ export const Popover = (props: PropsWithChildren<PopoverProps>) => {
             </PopoverFloatingProvider>
           </PopoverReferenceProvider>
         </PopoverDispatchProvider>
-      </PopoverPlacementProvider>
+      </FloatingArrowProvider>
     </PopoverAriaProvider>
   );
 };

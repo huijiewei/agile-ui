@@ -10,7 +10,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
   const { children, className, ...rest } = props;
   const {
     open,
-    floating,
+    setFloating,
     context,
     getFloatingProps,
     labelId,
@@ -45,7 +45,7 @@ export const ModalContent = primitiveComponent<'div'>((props, ref) => {
           )}
           {...getFloatingProps({
             ...rest,
-            ref: mergeRefs(floating, ref),
+            ref: mergeRefs(setFloating, ref),
             'aria-labelledby': labelId,
             'aria-describedby': descriptionId,
           })}

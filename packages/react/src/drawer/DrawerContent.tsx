@@ -19,7 +19,7 @@ export const DrawerContent = primitiveComponent<'div'>((props, ref) => {
   const { placement } = useDrawer();
   const {
     open,
-    floating,
+    setFloating,
     context,
     getFloatingProps,
     labelId,
@@ -44,7 +44,7 @@ export const DrawerContent = primitiveComponent<'div'>((props, ref) => {
           className={cx('flex flex-col fixed bg-white shadow dark:bg-gray-700', placementStyles[placement], className)}
           {...getFloatingProps({
             ...rest,
-            ref: mergeRefs(floating, ref),
+            ref: mergeRefs(setFloating, ref),
             'aria-labelledby': labelId,
             'aria-describedby': descriptionId,
           })}

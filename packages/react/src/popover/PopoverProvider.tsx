@@ -1,4 +1,4 @@
-import type { FloatingContext, Placement } from '@floating-ui/react';
+import type { FloatingContext } from '@floating-ui/react';
 import type { HTMLProps, MutableRefObject } from 'react';
 import { createContext } from '../utils/context';
 import type { Dict } from '@agile-ui/utils';
@@ -17,13 +17,6 @@ const [PopoverAriaProvider, usePopoverAria] = createContext<PopoverAriaContextVa
 
 export { PopoverAriaProvider, usePopoverAria };
 
-const [PopoverPlacementProvider, usePopoverPlacement] = createContext<Placement>({
-  strict: true,
-  name: 'PopoverPlacementContext',
-});
-
-export { PopoverPlacementProvider, usePopoverPlacement };
-
 type PopoverDispatchContextValue = {
   handleClose: () => void;
 };
@@ -37,7 +30,7 @@ export { PopoverDispatchProvider, usePopoverDispatch };
 
 type PopoverReferenceContextValue = {
   open: boolean;
-  reference: (node: HTMLElement) => void;
+  setReference: (node: HTMLElement) => void;
   getReferenceProps: (userProps?: HTMLProps<Element> | undefined) => Dict<unknown>;
 };
 
@@ -52,9 +45,9 @@ type PopoverFloatingContextValue = {
   x: number | null;
   y: number | null;
   open: boolean;
-  context: FloatingContext<HTMLElement>;
+  context: FloatingContext;
 
-  floating: (node: HTMLElement) => void;
+  setFloating: (node: HTMLElement) => void;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement> | undefined) => Dict<unknown>;
 
   modal: boolean;

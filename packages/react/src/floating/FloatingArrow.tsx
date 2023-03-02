@@ -1,46 +1,55 @@
-import type { Placement } from '@floating-ui/react';
-import { cx } from '@twind/core';
-import type { PrimitiveComponentProps } from '../utils/component';
+import type { RefObject } from 'react';
+import { useMemo } from 'react';
+import type { FloatingContext } from '@floating-ui/react';
+import { FloatingArrow, FloatingArrowProps } from '@floating-ui/react';
+import { createContext } from '../utils/context';
+import { useColorModeState } from '../provider/ColorModeProvider';
+import { tw } from '@twind/core';
+import { autoColorKey } from '@agile-ui/twind';
 
-type FloatingArrowSide = 'top' | 'left' | 'bottom' | 'right';
-type FloatingArrowPosition = 'center' | 'start' | 'end';
-
-const floatingArrowStyles = {
-  top: 'border-b border-r',
-  right: 'border-b border-l',
-  bottom: 'border-t border-l',
-  left: 'border-t border-r',
+export type FloatingArrowContextValue = {
+  setArrow: RefObject<SVGSVGElement>;
+  context: FloatingContext;
+  color: string;
+  borderColor: string;
 };
 
-const floatingArrowOpposites = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' };
+const [FloatingArrowProvider, useFloatingArrow] = createContext<FloatingArrowContextValue>({
+  strict: true,
+  name: 'FloatingArrowContext',
+});
 
-type FloatingArrowProps = {
-  placement: Placement;
-};
+export { FloatingArrowProvider, useFloatingArrow };
 
-export const FloatingArrow = (props: PrimitiveComponentProps<'span', FloatingArrowProps>) => {
-  const { placement, className, ...rest } = props;
+export const FloatingArrowComponent = (props: Omit<FloatingArrowProps, 'context' | 'stroke' | 'fill'>) => {
+  const arrow = useFloatingArrow();
 
-  const [side, position = 'center'] = placement.split('-') as [FloatingArrowSide, FloatingArrowPosition];
+  const { darkMode } = useColorModeState();
 
-  const horizontal = side == 'left' || side == 'right';
+  const color = useMemo(() => {
+    const fill = tw.theme(
+      `colors.${darkMode ? (arrow.color == 'white' ? 'gray.700' : autoColorKey(arrow.color)) : arrow.color}`
+    );
+    const stroke = tw.theme(`colors.${darkMode ? autoColorKey(arrow.borderColor) : arrow.borderColor}`);
+
+    return {
+      fill,
+      stroke,
+    };
+  }, [darkMode, arrow.color, arrow.borderColor]);
 
   return (
-    <span
-      className={cx(
-        'absolute h-[8px] w-[8px] rotate-45',
-        `-${floatingArrowOpposites[side]}-[5px]`,
-        position == 'center'
-          ? `${horizontal ? 'top' : 'left'}-[calc(50%-4px)]`
-          : position == 'start'
-          ? `${horizontal ? 'top' : 'left'}-[8px]`
-          : `${horizontal ? 'bottom' : 'right'}-[8px]`,
-        floatingArrowStyles[side],
-        className
-      )}
-      {...rest}
-    >
-      &nbsp;
-    </span>
+    <FloatingArrow
+      ref={arrow.setArrow}
+      stroke={color.stroke}
+      strokeWidth={2}
+      fill={color.fill}
+      width={11}
+      height={6}
+      context={arrow.context}
+      {...props}
+    />
   );
 };
+
+FloatingArrowComponent.displayName = 'FloatingMenuArrow';

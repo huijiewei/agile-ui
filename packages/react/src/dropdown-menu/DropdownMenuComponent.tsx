@@ -1,4 +1,5 @@
 import {
+  arrow,
   autoUpdate,
   flip,
   FloatingNode,
@@ -22,10 +23,10 @@ import { useAllowHover } from '@agile-ui/react-hooks';
 import {
   DropdownMenuDispatchProvider,
   DropdownMenuFloatingProvider,
-  DropdownMenuPlacementProvider,
   DropdownMenuReferenceProvider,
 } from './DropdownMenuProvider';
 import type { MotionComponentProps } from '../motion/Motion';
+import { FloatingArrowContextValue, FloatingArrowProvider } from '../floating/FloatingArrow';
 
 export type DropdownMenuProps = {
   /**
@@ -93,15 +94,17 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
 
   const allowHover = useAllowHover();
 
-  const {
-    x,
-    y,
-    reference,
-    floating,
-    context,
-    placement: placementState,
-  } = useFloating<HTMLElement>({
-    middleware: [offset({ mainAxis: 8, alignmentAxis: nested ? -5 : 0 }), flip(), shift({ padding: 8 })],
+  const arrowRef = useRef<SVGSVGElement>(null);
+
+  const { x, y, refs, context } = useFloating({
+    middleware: [
+      offset({ mainAxis: 8, alignmentAxis: nested ? -5 : 0 }),
+      flip(),
+      shift({ padding: 8 }),
+      arrow({
+        element: arrowRef,
+      }),
+    ],
     open,
     onOpenChange: (opened) => {
       setOpen(opened);
@@ -154,10 +157,10 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
   const referenceContextValue = useMemo(
     () => ({
       open,
-      reference,
+      setReference: refs.setReference,
       getReferenceProps,
     }),
-    [getReferenceProps, open, reference]
+    [getReferenceProps, open, refs.setReference]
   );
 
   const floatingContextValue = useMemo(
@@ -166,7 +169,7 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       x,
       y,
       context,
-      floating,
+      setFloating: refs.setFloating,
       getFloatingProps,
       nested,
       tree,
@@ -177,11 +180,34 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
       motionPreset,
       motionProps,
     }),
-    [allowHover, context, floating, getFloatingProps, getItemProps, motionPreset, motionProps, nested, open, tree, x, y]
+    [
+      allowHover,
+      context,
+      refs.setFloating,
+      getFloatingProps,
+      getItemProps,
+      motionPreset,
+      motionProps,
+      nested,
+      open,
+      tree,
+      x,
+      y,
+    ]
+  );
+
+  const arrowContextValue = useMemo<FloatingArrowContextValue>(
+    () => ({
+      setArrow: arrowRef,
+      context,
+      color: 'white',
+      borderColor: 'gray.200',
+    }),
+    [context]
   );
 
   return (
-    <DropdownMenuPlacementProvider value={placementState}>
+    <FloatingArrowProvider value={arrowContextValue}>
       <DropdownMenuReferenceProvider value={referenceContextValue}>
         <DropdownMenuFloatingProvider value={floatingContextValue}>
           <DropdownMenuDispatchProvider value={{ handleClose }}>
@@ -189,7 +215,7 @@ export const DropdownMenuComponent = (props: PropsWithChildren<DropdownMenuProps
           </DropdownMenuDispatchProvider>
         </DropdownMenuFloatingProvider>
       </DropdownMenuReferenceProvider>
-    </DropdownMenuPlacementProvider>
+    </FloatingArrowProvider>
   );
 };
 

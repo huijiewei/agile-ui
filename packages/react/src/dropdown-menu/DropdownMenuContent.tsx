@@ -27,7 +27,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     x,
     y,
     context,
-    floating,
+    setFloating,
     getFloatingProps,
     nested,
     tree,
@@ -39,7 +39,7 @@ export const DropdownMenuContent = primitiveComponent<'div'>((props, ref) => {
     motionProps,
   } = useDropdownMenuFloating();
 
-  const refs = useMergedRefs(floating, ref);
+  const refs = useMergedRefs(setFloating, ref);
 
   let itemIndex = 0;
 

@@ -12,9 +12,9 @@ type PopoverTriggerProps = {
 export const PopoverTrigger = primitiveComponent<'div', PopoverTriggerProps>((props, ref) => {
   const { children, ...rest } = props;
 
-  const { reference, getReferenceProps, open } = usePopoverReference();
+  const { setReference, getReferenceProps, open } = usePopoverReference();
 
-  const refs = useMergedRefs(reference, ref);
+  const refs = useMergedRefs(setReference, ref);
 
   return cloneElement(children, {
     'data-active': dataAttr(open),
