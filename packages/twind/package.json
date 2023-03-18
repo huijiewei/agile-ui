@@ -1,6 +1,6 @@
 {
   "name": "@agile-ui/twind",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
@@ -14,6 +14,7 @@
   "scripts": {
     "build": "tsup"
   },
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -34,7 +35,7 @@
     "@twind/preset-ext": ">=1"
   },
   "dependencies": {
-    "@agile-ui/utils": "^1.0.1"
+    "@agile-ui/utils": "^1.0.2"
   },
   "devDependencies": {
     "@twind/core": "^1.1.3",

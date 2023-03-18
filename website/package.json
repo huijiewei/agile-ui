@@ -19,11 +19,11 @@
     "@twind/preset-autoprefix": "^1.0.7",
     "@twind/preset-ext": "^1.0.7",
     "@twind/preset-tailwind": "^1.1.4",
-    "framer-motion": "^10.0.1",
+    "framer-motion": "^10.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
-    "react-router-dom": "^6.8.2"
+    "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^2.3.0",

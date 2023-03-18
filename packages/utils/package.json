@@ -1,6 +1,6 @@
 {
   "name": "@agile-ui/utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
@@ -14,6 +14,7 @@
   "scripts": {
     "build": "tsup"
   },
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
