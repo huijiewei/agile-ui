@@ -22,6 +22,8 @@ const [FloatingArrowProvider, useFloatingArrow] = createContext<FloatingArrowCon
 export { FloatingArrowProvider, useFloatingArrow };
 
 export const FloatingArrowComponent = (props: Omit<FloatingArrowProps, 'context' | 'stroke' | 'fill'>) => {
+  const { width = 11, height = 6, tipRadius = 0.5, ...rest } = props;
+
   const arrow = useFloatingArrow();
 
   const { darkMode } = useColorModeState();
@@ -42,12 +44,13 @@ export const FloatingArrowComponent = (props: Omit<FloatingArrowProps, 'context'
     <FloatingArrow
       ref={arrow.setArrow}
       stroke={color.stroke}
-      strokeWidth={2}
+      strokeWidth={1}
       fill={color.fill}
-      width={11}
-      height={6}
+      width={width}
+      height={height}
       context={arrow.context}
-      {...props}
+      tipRadius={tipRadius}
+      {...rest}
     />
   );
 };

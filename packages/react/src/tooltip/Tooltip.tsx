@@ -3,7 +3,6 @@ import {
   autoPlacement,
   autoUpdate,
   flip,
-  FloatingArrow,
   offset,
   Placement,
   shift,
@@ -15,7 +14,7 @@ import {
   useRole,
 } from '@floating-ui/react';
 import { cloneElement, ReactNode, useMemo, useRef } from 'react';
-import { cx, tw } from '@twind/core';
+import { cx } from '@twind/core';
 import { Portal } from '../portal/Portal';
 import type { PrimitiveComponentProps } from '../utils/component';
 import type { ScaleColor } from '../utils/types';
@@ -80,6 +79,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
       shift({ padding: 8 }),
       arrow({
         element: arrowRef,
+        padding: 4,
       }),
     ],
     open,
@@ -133,7 +133,7 @@ export const Tooltip = (props: PrimitiveComponentProps<'div', TooltipProps>) => 
               })}
             >
               {content}
-              <FloatingArrowComponent />
+              <FloatingArrowComponent width={10} height={5} />
             </Motion>
           )}
         </AnimatePresence>
