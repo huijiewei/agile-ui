@@ -33,24 +33,14 @@ export const ColorModeProvider = ({ children }: { children: ReactNode }) => {
   const [darkMode, setDarkMode] = useState<boolean>(darkOS);
 
   useEffect(() => {
-    if (darkMode) {
+    const isDark = colorMode == 'dark' || darkOS;
+
+    setDarkMode(isDark);
+
+    if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  useEffect(() => {
-    switch (colorMode) {
-      case 'light':
-        setDarkMode(false);
-        break;
-      case 'system':
-        setDarkMode(darkOS);
-        break;
-      case 'dark':
-        setDarkMode(true);
-        break;
     }
   }, [colorMode, darkOS]);
 

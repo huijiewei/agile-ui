@@ -1,17 +1,17 @@
-import { MaybeFunction, runIfFn } from '@agile-ui/utils';
+import { isBrowser, MaybeFunction, runIfFn } from '@agile-ui/utils';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useEventListener } from '../use-event-listener';
 
 export const useLocalStorage = <T>(key: string, initialValue: MaybeFunction<T>): [T, Dispatch<SetStateAction<T>>] => {
   const readValue = () => {
-    try {
-      const item = window.localStorage.getItem(key);
+    if (!isBrowser()) {
+      return runIfFn(initialValue);
+    }
 
-      if (item != null) {
-        return JSON.parse(item);
-      }
-    } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
+    const item = window.localStorage.getItem(key);
+
+    if (item != null) {
+      return JSON.parse(item);
     }
 
     return runIfFn(initialValue);
@@ -24,14 +24,14 @@ export const useLocalStorage = <T>(key: string, initialValue: MaybeFunction<T>):
 
     setState(newValue);
 
-    try {
-      if (newValue != undefined) {
-        window.localStorage.setItem(key, JSON.stringify(newValue));
-      } else {
-        window.localStorage.removeItem(key);
-      }
-    } catch (error) {
-      console.warn(`Error writing localStorage key “${key}”:`, error);
+    if (!isBrowser()) {
+      return;
+    }
+
+    if (newValue != undefined) {
+      window.localStorage.setItem(key, JSON.stringify(newValue));
+    } else {
+      window.localStorage.removeItem(key);
     }
   };
 
